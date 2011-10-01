@@ -1,0 +1,13 @@
+Source: pantheon-lightdm-theme
+Section: misc
+Priority: optional
+Maintainer: Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.8.4
+
+Package: pantheon-lightdm-theme
+Architecture: all
+Depends: ${misc:Depends}, lightdm-greeter-webkit
+Provides: lightdm-theme
+Description: Pantheon login screen
+ Pantheon theme for LightDM, developed by elementary project.

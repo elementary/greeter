@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ]; then
+  update-alternatives --install /usr/share/lightdm-webkit/themes/default \
+    lightdm-webkit-theme /usr/share/lightdm-webkit/themes/pantheon 50
+fi
+
+#DEBHELPER#
