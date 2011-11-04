@@ -7,7 +7,7 @@ Standards-Version: 3.8.4
 
 Package: pantheon-lightdm-theme
 Architecture: all
-Depends: ${misc:Depends}, lightdm-greeter-webkit
+Depends: ${misc:Depends}, lightdm-webkit-greeter
 Provides: lightdm-theme
 Description: Pantheon login screen
  Pantheon theme for LightDM, developed by elementary project.
