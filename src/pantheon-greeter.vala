@@ -36,15 +36,19 @@ public class TextShadowEffect : Clutter.Effect {
 }
 
 public static int main (string [] args) {
-    GtkClutter.init (ref args);
+    
+    var init = GtkClutter.init (ref args);
+    if (init != Clutter.InitError.SUCCESS)
+        error ("Clutter could not be intiailized");
     
     var greeter = new LightDM.Greeter ();
     var w = new Gtk.Window ();
     var c = new GtkClutter.Embed ();
     var l = new LoginBox (greeter);
+    var fadein = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
     
     greeter.show_message.connect ( (text, type) => {
-        warning ("***ERROR FROM LIGHTDM: %s", text);
+        warning ("ERROR FROM LIGHTDM: %s", text);
     });
     greeter.show_prompt.connect  ( (text, type) => {
         greeter.respond (l.password.text);
@@ -54,6 +58,8 @@ public static int main (string [] args) {
         if (greeter.is_authenticated) {
             warning ("Authenticated!");
             try {
+                fadein.show ();
+                fadein.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 1000, opacity:255);
                 greeter.start_session_sync (l.current_session);
             } catch (Error e) { warning (e.message); }
             Gtk.main_quit ();
@@ -90,9 +96,11 @@ public static int main (string [] args) {
     Gtk.Settings.get_default ().gtk_xft_dpi= (int) (1024 * 96);
     Gtk.Settings.get_default ().gtk_xft_antialias = 1;
     Gtk.Settings.get_default ().gtk_xft_hintstyle = "hintslight";
-    Gtk.Settings.get_default ().gtk_xft_rgba = "argb";
+    Gtk.Settings.get_default ().gtk_xft_rgba = "rgb";
     Gtk.Settings.get_default ().gtk_cursor_blink = true;
     
+    (c.get_stage () as Clutter.Stage).color = {0, 0, 0, 255};
+    c.get_stage ().realize ();
     c.get_stage ().add_child (l.background);
     c.get_stage ().add_child (l.background_s);
     c.get_stage ().add_child (l);
@@ -105,13 +113,6 @@ public static int main (string [] args) {
     Gdk.Rectangle geom;
     Gdk.Screen.get_default ().get_monitor_geometry (Gdk.Screen.get_default ().get_primary_monitor (), out geom);
     
-    w.realize ();
-    w.set_default_size (geom.width, geom.height);
-    w.move (geom.x, geom.y);
-    w.add (c);
-    w.show_all ();
-    //w.fullscreen ();
-    
     w.get_screen ().monitors_changed.connect ( () => {
         Gdk.Rectangle geometry;
         Gdk.Screen.get_default ().get_monitor_geometry (
@@ -119,10 +120,14 @@ public static int main (string [] args) {
         w.resize (geometry.width, geometry.height);
     });
     
-    l.width  = 450;
-    l.height = 230;
+    l.width  = 500;
+    l.height = 245;
     l.y      = geom.height / 2 - l.height / 2;
     l.x      = 100;
+    
+    l.set_position (Math.floorf (l.x), Math.floorf (l.y));
+    l.set_size     (Math.ceilf (l.width), Math.ceilf (l.height));
+    
     
     var current_user = 0;
     for (var i=0;i<u.users.length ();i++) {
@@ -144,10 +149,10 @@ public static int main (string [] args) {
             text.set_markup ("<span face='Open Sans Light' font='24'>Guest session</span>");
         else
             text.set_markup (LoginBox.get_user_markup (u.users.nth_data (i)));
-        text.height = 70;
+        text.height = 75;
         text.width = l.width - 100;
-        text.x = 100;
-        text.y = i * (text.height + 60) + 80;
+        text.x = 155;
+        text.y = i * (text.height + 60) + 120;
         text.add_effect (new TextShadowEffect (0, 1, 240));
         text.reactive = true;
         text.button_release_event.connect ( () => {
@@ -156,15 +161,15 @@ public static int main (string [] args) {
             message ("Setting to %i by click", idx);
             l.set_user (u.users.nth_data (idx));
             name_container.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, 
-                y:l.y-idx*130.0f);
+                y:l.y-idx*150.0f);
             return true;
         });
         name_container.add_child (text);
     }
     c.get_stage ().add_child (name_container);
     
-    w.add_events (Gdk.EventMask.BUTTON_RELEASE_MASK);
-    w.key_release_event.connect ( (e) => {
+    c.add_events (Gdk.EventMask.BUTTON_RELEASE_MASK);
+    c.key_release_event.connect ( (e) => {
         if (e.keyval == Gdk.Key.Up) {
             current_user --;
             if (current_user-1<0)
@@ -178,7 +183,7 @@ public static int main (string [] args) {
             return false;
         }
         name_container.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, 
-            y:l.y-current_user*130.0f);
+            y:l.y-current_user*150.0f);
         l.set_user (u.users.nth_data (current_user));
         return true;
     });
@@ -252,6 +257,7 @@ public static int main (string [] args) {
         ctx.fill ();
         return false;
     });
+    time.justify = Gtk.Justification.CENTER;
     try {
         time_css.load_from_data ("*{color:#fff;text-shadow:0 1 2 #000;}", -1);
     } catch (Error e) { warning (e.message); }
@@ -259,7 +265,7 @@ public static int main (string [] args) {
     
     Timeout.add (1000,  () => {
         var date = new GLib.DateTime.now_local ();
-        time.set_markup (date.format ("<span face='Open Sans Light' font='24'>%A, %B %eth</span>\n<span face='Raleway' font='72'>%X</span>"));
+        time.set_markup (date.format ("<span face='Open Sans Light' font='24'>%A, %B %est</span>\n<span face='Raleway' font='72'>%l:%M %p</span>"));
         return true;
     });
     ((Gtk.Container)time_ac.get_widget ()).add (time);
@@ -276,6 +282,23 @@ public static int main (string [] args) {
     l.set_user (u.users.nth_data (current_user));
     l.raise_top ();
     l.password.grab_focus ();
+    
+    /*black fadein thing*/
+    fadein.add_constraint (new Clutter.BindConstraint (c.get_stage (), 
+        Clutter.BindCoordinate.WIDTH, 0));
+    fadein.add_constraint (new Clutter.BindConstraint (c.get_stage (), 
+        Clutter.BindCoordinate.HEIGHT, 0));
+    c.get_stage ().add_child (fadein);
+    fadein.raise_top (); //TODO decrease optimize this
+    fadein.animate (Clutter.AnimationMode.EASE_IN_SINE, 1000, opacity:0).completed.connect ( () => {
+        fadein.hide ();
+    });
+    
+    w.add (c);
+    w.set_default_size (geom.width, geom.height);
+    w.move (geom.x, geom.y);
+    w.show_all ();
+    //c.fullscreen ();
     
     Gtk.main ();
     

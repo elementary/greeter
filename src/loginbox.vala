@@ -29,10 +29,10 @@ public class LoginBox : GtkClutter.Actor {
     public Clutter.Texture background_s; //double buffered!
     
     Granite.Drawing.BufferSurface buffer;
-    int shadow_blur = 15;
+    int shadow_blur = 30;
     int shadow_x    = 0;
     int shadow_y    = 0;
-    double shadow_alpha = 0.3;
+    double shadow_alpha = 0.5;
     
     LightDM.Greeter greeter;
     
@@ -67,15 +67,21 @@ public class LoginBox : GtkClutter.Actor {
         this.password = new Gtk.Entry ();
         this.login    = new Gtk.Button.with_label (_("Login"));
         this.settings = new Gtk.Button ();
-        var space     = new Gtk.Label ("");
         
+        /*avatar.margin_top = 15;
+        avatar.margin_left = 15;*/
+        avatar.valign = Gtk.Align.START;
         username.hexpand = true;
         username.halign  = Gtk.Align.START;
         username.ellipsize = Pango.EllipsizeMode.END;
-        space.vexpand    = true;
-        login.halign     = Gtk.Align.END;
+        username.margin_top = 10;
+        login.expand    = false;
+        login.height_request = 1;
         login.width_request = 140;
-        settings.halign  = Gtk.Align.END;
+        login.margin_top    = 30;
+        login.halign = Gtk.Align.END;
+        settings.valign  = Gtk.Align.START;
+        settings.relief  = Gtk.ReliefStyle.NONE;
         settings.add (new Gtk.Image.from_icon_name ("application-menu-symbolic", Gtk.IconSize.MENU));
         password.caps_lock_warning = true;
         password.set_visibility (false);
@@ -90,14 +96,12 @@ public class LoginBox : GtkClutter.Actor {
         var grid = new Gtk.Grid ();
         
         grid.attach (avatar,   0, 0, 1, 3);
-        grid.attach (settings, 1, 0, 1, 1);
-        grid.attach (username, 1, 1, 1, 1);
-        grid.attach (password, 1, 2, 1, 1);
-        grid.attach (space,    0, 3, 1, 1);
-        grid.attach (login,    0, 4, 2, 1);
+        grid.attach (settings, 2, 0, 1, 1);
+        grid.attach (username, 1, 0, 1, 1);
+        grid.attach (password, 1, 1, 1, 1);
+        grid.attach (login,    1, 2, 2, 1);
         
-        grid.margin = 26;
-        grid.row_spacing = 2;
+        grid.margin = shadow_blur + 12;
         grid.column_spacing = 12;
         
         /*session choose popover*/
@@ -179,10 +183,11 @@ public class LoginBox : GtkClutter.Actor {
         this.get_widget ().get_style_context ().add_class ("content-view");
     }
     
-    public static string get_user_markup (LightDM.User user) {
+    public static string get_user_markup (LightDM.User user, bool title=false) {
+        var color = (title)?"color='#808080'":"";
         var first_name = user.real_name.substring (0, user.real_name.index_of (" "));
         return "<span face='Open Sans Light' font='32'>"+first_name+"</span>"+
-            "    <span face='Open Sans Normal' font='16'>"+user.name+"</span>";
+            "    <span face='Open Sans Normal' font='16' "+color+">"+user.name+"</span>";
     }
     
     public void set_user (LightDM.User ?user) { //guest if null
@@ -197,14 +202,16 @@ public class LoginBox : GtkClutter.Actor {
             this.current_session = greeter.default_session_hint;
             this.password.set_sensitive (false);
         } else {
-            this.username.set_markup (get_user_markup (user));
+            this.username.set_markup (get_user_markup (user, true));
             
             this.avatar.set_from_file (user.image);
             this.set_wallpaper (user.background);
             
             this.current_user = user;
             this.current_session = user.session;
+            
             this.password.set_sensitive (true);
+            this.password.grab_focus ();
         }
     }
 }
