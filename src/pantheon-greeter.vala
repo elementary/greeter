@@ -181,10 +181,15 @@ public static int main (string [] args) {
     c.get_stage ().add_child (l.background_s);
     c.get_stage ().add_child (l);
     
+    var darken = new Clutter.Rectangle.with_color ({0, 0, 0, 25});
+    c.get_stage ().add_child (darken);
+    
     l.background.add_constraint (new Clutter.BindConstraint (c.get_stage (), Clutter.BindCoordinate.WIDTH, 0));
     l.background.add_constraint (new Clutter.BindConstraint (c.get_stage (), Clutter.BindCoordinate.HEIGHT, 0));
     l.background_s.add_constraint (new Clutter.BindConstraint (c.get_stage (), Clutter.BindCoordinate.WIDTH, 0));
     l.background_s.add_constraint (new Clutter.BindConstraint (c.get_stage (), Clutter.BindCoordinate.HEIGHT, 0));
+    darken.add_constraint (new Clutter.BindConstraint (c.get_stage (), Clutter.BindCoordinate.WIDTH, 0));
+    darken.add_constraint (new Clutter.BindConstraint (c.get_stage (), Clutter.BindCoordinate.HEIGHT, 0));
     
     Gdk.Rectangle geom;
     Gdk.Screen.get_default ().get_monitor_geometry (Gdk.Screen.get_default ().get_primary_monitor (), out geom);
@@ -342,7 +347,7 @@ public static int main (string [] args) {
     
     Timeout.add (1000,  () => {
         var date = new GLib.DateTime.now_local ();
-        time.set_markup (date.format ("<span face='Open Sans Light' font='24'>%A, %B %est</span>\n<span face='Raleway' font='72'>%l:%M %p</span>"));
+        time.set_markup (date.format ("<span face='Open Sans Light' font='24'>%A, %B %eth</span>\n<span face='Raleway' font='72'>%l:%M %p</span>"));
         return true;
     });
     ((Gtk.Container)time_ac.get_widget ()).add (time);
@@ -375,7 +380,7 @@ public static int main (string [] args) {
     w.set_default_size (geom.width, geom.height);
     w.move (geom.x, geom.y);
     w.show_all ();
-    //c.fullscreen ();
+    w.fullscreen ();
     
     Gtk.main ();
     

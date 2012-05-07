@@ -63,8 +63,8 @@ public class LoginBox : GtkClutter.Actor {
         this.background.load_async = true;
         this.background_s.load_async = true;
         
-        this.background.add_effect (new Clutter.BlurEffect ());
-        this.background_s.add_effect (new Clutter.BlurEffect ());
+        //this.background.add_effect (new Clutter.BlurEffect ());
+        //this.background_s.add_effect (new Clutter.BlurEffect ());
         
         this.avatar   = new Gtk.Image ();
         this.username = new Gtk.Label ("");
