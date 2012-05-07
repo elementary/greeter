@@ -35,6 +35,81 @@ public class TextShadowEffect : Clutter.Effect {
     }
 }
 
+public class PopOver : GtkClutter.Actor {
+    
+    Granite.Drawing.BufferSurface buffer;
+    Gtk.EventBox container;
+    
+    public PopOver () {
+        
+        this.container = new Gtk.EventBox ();
+        this.container.visible_window = false;
+        this.container.margin = 30;
+        this.container.margin_top = 40;
+        this.container.margin_bottom = 25;
+        this.container.get_style_context ().add_class ("content-view");
+        (this.get_widget () as Gtk.Container).add (this.container);
+        
+        this.reactive = true;
+        
+        var w = -1; var h = -1; var ARROW_HEIGHT = 10; var ARROW_WIDTH = 20;
+        this.get_widget ().size_allocate.connect ( () => {
+            if (this.contents.get_allocated_width () == -1 && 
+                this.contents.get_allocated_height () == -1)
+                return;
+            w = this.contents.get_allocated_width ();
+            h = this.contents.get_allocated_height ();
+            
+            var x = 20;
+            var y = 20;
+            
+            this.buffer = new Granite.Drawing.BufferSurface ((int)width, (int)height);
+            Granite.Drawing.Utilities.cairo_rounded_rectangle (buffer.context, x, y+ARROW_HEIGHT,
+                                                           (int)width - x*2, (int)height - y*2, 5);
+            buffer.context.move_to ((int)(width-45), y + ARROW_HEIGHT);
+            buffer.context.rel_line_to (ARROW_WIDTH / 2.0, -ARROW_HEIGHT);
+            buffer.context.rel_line_to (ARROW_WIDTH / 2.0, ARROW_HEIGHT);
+            buffer.context.close_path ();
+            
+            buffer.context.set_source_rgba (0, 0, 0, 0.8);
+            buffer.context.fill_preserve ();
+            buffer.exponential_blur (10);
+            
+            buffer.context.set_source_rgb (1, 1, 1);
+            buffer.context.fill ();
+        });
+        this.get_widget ().draw.connect ( (ctx) => {
+            ctx.rectangle (0, 0, w, h);
+            ctx.set_operator (Cairo.Operator.SOURCE);
+            ctx.set_source_rgba (0, 0, 0, 0);
+            ctx.fill ();
+            
+            ctx.set_source_surface (buffer.surface, 0, 0);
+            ctx.paint ();
+            
+            return false;
+        });
+        this.leave_event.connect ( () => {
+            this.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 200, opacity:0).
+                completed.connect ( () => {
+                this.get_stage ().remove_child (this);
+                this.destroy ();
+            });
+            return true;
+        });
+        
+        this.opacity = 0;
+        this.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 200, opacity:255);
+    }
+    
+    
+    public Gtk.Widget get_content_area () {
+        return this.container;
+    }
+    
+    
+}
+
 public static int main (string [] args) {
     
     var init = GtkClutter.init (ref args);
@@ -201,7 +276,7 @@ public static int main (string [] args) {
     shutdown.y = 10;
     shutdown.reactive = true;
     shutdown.button_press_event.connect ( () => {
-        var pop = new Granite.Widgets.PopOver ();
+        var pop = new PopOver ();
         var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
         if (LightDM.get_can_suspend ()) {
             var but = new Gtk.Button.with_label (_("Suspend"));
@@ -240,11 +315,10 @@ public static int main (string [] args) {
             box.pack_start (but, false);
         }
         ((Gtk.Container)pop.get_content_area ()).add (box);
-        pop.move_to_coords ((int)(geom.width - 100), 100);
-        pop.present ();
-        pop.show_all ();
-        pop.run ();
-        pop.destroy ();
+        pop.x =  geom.width - 110;
+        pop.y = 10;
+        c.get_stage ().add_child (pop);
+        pop.get_widget ().show_all ();
         return true;
     });
     c.get_stage ().add_child (shutdown);

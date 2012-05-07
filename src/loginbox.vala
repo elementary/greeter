@@ -63,6 +63,9 @@ public class LoginBox : GtkClutter.Actor {
         this.background.load_async = true;
         this.background_s.load_async = true;
         
+        this.background.add_effect (new Clutter.BlurEffect ());
+        this.background_s.add_effect (new Clutter.BlurEffect ());
+        
         this.avatar   = new Gtk.Image ();
         this.username = new Gtk.Label ("");
         this.password = new Gtk.Entry ();
@@ -107,9 +110,9 @@ public class LoginBox : GtkClutter.Actor {
         
         /*session choose popover*/
         this.settings.clicked.connect ( () => {
-            var pop = new Granite.Widgets.PopOver ();
+            var pop = new PopOver ();
             var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
-            ((Gtk.Box)pop.get_content_area ()).add (box);
+            ((Gtk.Container)pop.get_content_area ()).add (box);
             
             var but = new Gtk.RadioButton.with_label (null, LightDM.
                 get_sessions ().nth_data (0).name);
@@ -130,11 +133,10 @@ public class LoginBox : GtkClutter.Actor {
                 rad.toggled.connect ( () => { this.current_session = identifier; });
             }
             
-            pop.move_to_widget (this.settings);
-            pop.present ();
-            pop.show_all ();
-            pop.run ();
-            pop.destroy ();
+            this.get_stage ().add_child (pop);
+            pop.x = this.x + this.width - 265;
+            pop.y = this.y + 50;
+            pop.get_widget ().show_all ();
         });
         
         /*draw the window stylish!*/
@@ -168,7 +170,7 @@ public class LoginBox : GtkClutter.Actor {
         });
         
         this.get_widget ().draw.connect ( (ctx) => {
-            ctx.rectangle (0, 0, this.get_widget ().get_allocated_width (), this.get_widget ().get_allocated_height ());
+            ctx.rectangle (0, 0, w, h);
             ctx.set_operator (Cairo.Operator.SOURCE);
             ctx.set_source_rgba (0, 0, 0, 0);
             ctx.fill ();
