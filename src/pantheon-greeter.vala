@@ -48,7 +48,8 @@ public static int main (string [] args) {
     var fadein = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
     
     greeter.show_message.connect ( (text, type) => {
-        warning ("ERROR FROM LIGHTDM: %s", text);
+        if (type == LightDM.MessageType.ERROR)
+            l.wrong_pw ();
     });
     greeter.show_prompt.connect  ( (text, type) => {
         greeter.respond (l.password.text);
@@ -123,9 +124,11 @@ public static int main (string [] args) {
     l.width  = 500;
     l.height = 245;
     l.y      = geom.height / 2 - l.height / 2;
-    l.x      = 100;
+    l.x      = -l.width;
     
-    l.set_position (Math.floorf (l.x), Math.floorf (l.y));
+    l.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, x:100.0f).completed.connect ( () => {
+        l.set_position (Math.floorf (l.x), Math.floorf (l.y));
+    });
     l.set_size     (Math.ceilf (l.width), Math.ceilf (l.height));
     
     
@@ -137,7 +140,7 @@ public static int main (string [] args) {
     
     var name_container = new Clutter.Group ();
     name_container.y = l.y;
-    name_container.x = l.x;
+    name_container.x = 100;
     
     /*the other names*/
     for (var i=0;i<u.users.length () + 1;i++) {

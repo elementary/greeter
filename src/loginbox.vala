@@ -55,6 +55,7 @@ public class LoginBox : GtkClutter.Actor {
         this.greeter = greeter;
         
         this.reactive = true;
+        this.scale_gravity = Clutter.Gravity.CENTER;
         
         this.background = new Clutter.Texture.from_file (DEFAULT_WALLPAPER);
         this.background_s = new Clutter.Texture ();
@@ -181,6 +182,10 @@ public class LoginBox : GtkClutter.Actor {
         ((Gtk.Container)this.get_widget ()).add (grid);
         this.get_widget ().show_all ();
         this.get_widget ().get_style_context ().add_class ("content-view");
+        /*
+        var shake = new Clutter.State ();
+        shake.set_state (null, "base", this, "x", Clutter.AnimationMode.EASE_IN_BOUNCE, 100.0f);
+        shake.set_state */
     }
     
     public static string get_user_markup (LightDM.User user, bool title=false) {
@@ -188,6 +193,17 @@ public class LoginBox : GtkClutter.Actor {
         var first_name = user.real_name.substring (0, user.real_name.index_of (" "));
         return "<span face='Open Sans Light' font='32'>"+first_name+"</span>"+
             "    <span face='Open Sans Normal' font='16' "+color+">"+user.name+"</span>";
+    }
+    
+    public void wrong_pw () {
+        this.password.text = "";
+        this.animate (Clutter.AnimationMode.EASE_IN_BOUNCE, 200, scale_x:1.3f, scale_y:1.3f).
+            completed.connect ( () => {
+                Clutter.Threads.Timeout.add (1, () => {
+                this.animate (Clutter.AnimationMode.EASE_OUT_BOUNCE, 200, scale_x:1.0f, scale_y:1.0f);
+                return false;
+                });
+            });
     }
     
     public void set_user (LightDM.User ?user) { //guest if null
