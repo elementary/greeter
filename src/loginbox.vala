@@ -19,11 +19,14 @@ public class LoginBox : GtkClutter.Actor {
     public LightDM.User current_user { get; private set; }
     public string      current_session { get; private set; }
     
-    public Gtk.Image    avatar;
+    public Gtk.EventBox avatar;
     public Gtk.Label    username;
     public Gtk.Entry    password;
     public Gtk.Button   login;
     public Gtk.Button   settings;
+    Gtk.Grid             grid;
+    Gtk.Spinner          spinner;
+    Gdk.Pixbuf           image;
     
     public Clutter.Texture background;   //not added to the box
     public Clutter.Texture background_s; //double buffered!
@@ -35,6 +38,21 @@ public class LoginBox : GtkClutter.Actor {
     double shadow_alpha = 0.5;
     
     LightDM.Greeter greeter;
+    
+    bool _working;
+    public bool working {
+        get { return _working; }
+        set {
+            _working = value;
+            grid.remove ((_working)?avatar as Gtk.Widget:spinner as Gtk.Widget);
+            grid.attach ((_working)?spinner as Gtk.Widget:avatar as Gtk.Widget, 0, 0, 1, 3);
+            grid.show_all ();
+            if (_working)
+                spinner.start ();
+            else
+                spinner.stop ();
+        }
+    }
     
     public void set_wallpaper (string path) {
         this.background_s.opacity = 0;
@@ -66,7 +84,11 @@ public class LoginBox : GtkClutter.Actor {
         //this.background.add_effect (new Clutter.BlurEffect ());
         //this.background_s.add_effect (new Clutter.BlurEffect ());
         
-        this.avatar   = new Gtk.Image ();
+        try {
+            this.image   = Gtk.IconTheme.get_default ().load_icon ("avatar-default", 96, 0);
+        } catch (Error e) { warning (e.message); }
+        
+        this.avatar   = new Gtk.EventBox ();
         this.username = new Gtk.Label ("");
         this.password = new Gtk.Entry ();
         this.login    = new Gtk.Button.with_label (_("Login"));
@@ -74,7 +96,9 @@ public class LoginBox : GtkClutter.Actor {
         
         /*avatar.margin_top = 15;
         avatar.margin_left = 15;*/
+        avatar.set_size_request (97     , 97);
         avatar.valign = Gtk.Align.START;
+        avatar.visible_window = false;
         username.hexpand = true;
         username.halign  = Gtk.Align.START;
         username.ellipsize = Pango.EllipsizeMode.END;
@@ -97,7 +121,11 @@ public class LoginBox : GtkClutter.Actor {
                 return false;
         });
         
-        var grid = new Gtk.Grid ();
+        spinner = new Gtk.Spinner ();
+        spinner.valign = Gtk.Align.START;
+        spinner.set_size_request (97, 97);
+        
+        grid = new Gtk.Grid ();
         
         grid.attach (avatar,   0, 0, 1, 3);
         grid.attach (settings, 2, 0, 1, 1);
@@ -107,6 +135,17 @@ public class LoginBox : GtkClutter.Actor {
         
         grid.margin = shadow_blur + 12;
         grid.column_spacing = 12;
+        
+        avatar.draw.connect ( (ctx) => {
+            Granite.Drawing.Utilities.cairo_rounded_rectangle (ctx, 0.5, 0.5, 
+                avatar.get_allocated_width ()-1, avatar.get_allocated_height ()-1, 5);
+            Gdk.cairo_set_source_pixbuf (ctx, image, 0.5, 0.5);
+            ctx.fill_preserve ();
+            ctx.set_line_width (1);
+            ctx.set_source_rgba (0, 0, 0, 0.3);
+            ctx.stroke ();
+            return false;
+        });
         
         /*session choose popover*/
         this.settings.clicked.connect ( () => {
@@ -184,10 +223,6 @@ public class LoginBox : GtkClutter.Actor {
         ((Gtk.Container)this.get_widget ()).add (grid);
         this.get_widget ().show_all ();
         this.get_widget ().get_style_context ().add_class ("content-view");
-        /*
-        var shake = new Clutter.State ();
-        shake.set_state (null, "base", this, "x", Clutter.AnimationMode.EASE_IN_BOUNCE, 100.0f);
-        shake.set_state */
     }
     
     public static string get_user_markup (LightDM.User user, bool title=false) {
@@ -213,7 +248,6 @@ public class LoginBox : GtkClutter.Actor {
         if (user == null) {
             this.username.set_markup ("<span face='Open Sans Light' font='24'>"+
                 "Guest session</span>");
-            this.avatar.set_from_icon_name ("avatar-default", Gtk.IconSize.DIALOG);
             this.set_wallpaper (DEFAULT_WALLPAPER);
             
             this.current_user = null;
@@ -222,7 +256,10 @@ public class LoginBox : GtkClutter.Actor {
         } else {
             this.username.set_markup (get_user_markup (user, true));
             
-            this.avatar.set_from_file (user.image);
+            try {
+                this.image = new Gdk.Pixbuf.from_file (user.image);
+            } catch (Error e) { warning (e.message); }  
+            this.avatar.queue_draw ();
             this.set_wallpaper (user.background);
             
             this.current_user = user;

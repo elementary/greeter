@@ -123,27 +123,31 @@ public static int main (string [] args) {
     var fadein = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
     
     greeter.show_message.connect ( (text, type) => {
-        if (type == LightDM.MessageType.ERROR)
-            l.wrong_pw ();
+        l.wrong_pw ();
     });
     greeter.show_prompt.connect  ( (text, type) => {
         greeter.respond (l.password.text);
         warning ("Password text: %s", l.password.text);
     });
     greeter.authentication_complete.connect ( () => {
+        l.working = false   ;
         if (greeter.is_authenticated) {
-            warning ("Authenticated!");
+            fadein.show ();
+            Timeout.add (1, () => {
+                fadein.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 2000, opacity:255);
+                return false;
+            });
+            Posix.sleep (3);
             try {
-                fadein.show ();
-                fadein.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 1000, opacity:255);
                 greeter.start_session_sync (l.current_session);
             } catch (Error e) { warning (e.message); }
             Gtk.main_quit ();
         } else {
-            warning ("Authentication failed!");
+            l.wrong_pw ();
         }
     });
     l.login.clicked.connect ( () => {
+        l.working = true;
         if (l.current_user == null)
             greeter.authenticate_as_guest ();
         else
