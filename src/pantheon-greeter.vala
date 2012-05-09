@@ -130,11 +130,10 @@ public static int main (string [] args) {
         warning ("Password text: %s", l.password.text);
     });
     greeter.authentication_complete.connect ( () => {
-        l.working = false   ;
+        l.working = false;
         if (greeter.is_authenticated) {
             fadein.show ();
-            fadein.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 2000, opacity:255);
-            return false;
+            fadein.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 200, opacity:255);
             try {
                 greeter.start_session_sync (l.current_session);
             } catch (Error e) { warning (e.message); }
