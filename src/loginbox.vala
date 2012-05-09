@@ -23,7 +23,7 @@ public class LoginBox : GtkClutter.Actor {
     public Gtk.Label    username;
     public Gtk.Entry    password;
     public Gtk.Button   login;
-    public Gtk.Button   settings;
+    public Gtk.ToggleButton settings;
     Gtk.Grid             grid;
     Gtk.Spinner          spinner;
     Gdk.Pixbuf           image;
@@ -92,11 +92,11 @@ public class LoginBox : GtkClutter.Actor {
         this.username = new Gtk.Label ("");
         this.password = new Gtk.Entry ();
         this.login    = new Gtk.Button.with_label (_("Login"));
-        this.settings = new Gtk.Button ();
+        this.settings = new Gtk.ToggleButton ();
         
         /*avatar.margin_top = 15;
         avatar.margin_left = 15;*/
-        avatar.set_size_request (97     , 97);
+        avatar.set_size_request (97, 97);
         avatar.valign = Gtk.Align.START;
         avatar.visible_window = false;
         username.hexpand = true;
@@ -148,7 +148,9 @@ public class LoginBox : GtkClutter.Actor {
         });
         
         /*session choose popover*/
-        this.settings.clicked.connect ( () => {
+        this.settings.toggled.connect ( () => {
+            if (!settings.active)
+                return;
             var pop = new PopOver ();
             var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
             ((Gtk.Container)pop.get_content_area ()).add (box);
@@ -176,6 +178,9 @@ public class LoginBox : GtkClutter.Actor {
             pop.x = this.x + this.width - 265;
             pop.y = this.y + 50;
             pop.get_widget ().show_all ();
+            pop.destroy.connect ( () => {
+                this.settings.active = false;
+            });
         });
         
         /*draw the window stylish!*/
@@ -268,6 +273,9 @@ public class LoginBox : GtkClutter.Actor {
             this.password.set_sensitive (true);
             this.password.grab_focus ();
         }
+        
+        if (LightDM.get_sessions ().length () == 1)
+            settings.hide ();
     }
 }
 

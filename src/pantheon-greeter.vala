@@ -133,11 +133,8 @@ public static int main (string [] args) {
         l.working = false   ;
         if (greeter.is_authenticated) {
             fadein.show ();
-            Timeout.add (1, () => {
-                fadein.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 2000, opacity:255);
-                return false;
-            });
-            Posix.sleep (3);
+            fadein.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 2000, opacity:255);
+            return false;
             try {
                 greeter.start_session_sync (l.current_session);
             } catch (Error e) { warning (e.message); }
@@ -289,6 +286,7 @@ public static int main (string [] args) {
         var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
         if (LightDM.get_can_suspend ()) {
             var but = new Gtk.Button.with_label (_("Suspend"));
+            but.relief = Gtk.ReliefStyle.NONE;
             but.clicked.connect ( () => {
                 try {
                     LightDM.suspend ();
@@ -298,6 +296,7 @@ public static int main (string [] args) {
         }
         if (LightDM.get_can_hibernate ()) {
             var but = new Gtk.Button.with_label (_("Hibernate"));
+            but.relief = Gtk.ReliefStyle.NONE;
             but.clicked.connect ( () => {
                 try {
                     LightDM.hibernate ();
@@ -307,6 +306,7 @@ public static int main (string [] args) {
         }
         if (LightDM.get_can_restart ()) {
             var but = new Gtk.Button.with_label (_("Restart"));
+            but.relief = Gtk.ReliefStyle.NONE;
             but.clicked.connect ( () => {
                 try {
                     LightDM.restart ();
@@ -315,7 +315,8 @@ public static int main (string [] args) {
             box.pack_start (but, false);
         }
         if (LightDM.get_can_shutdown ()) {
-            var but = new Gtk.Button.with_label (_("Suspend"));
+            var but = new Gtk.Button.with_label (_("Shutdown"));
+            but.relief = Gtk.ReliefStyle.NONE;
             but.clicked.connect ( () => {
                 try {
                     LightDM.shutdown ();
