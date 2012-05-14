@@ -34,7 +34,7 @@ public class LoginBox : GtkClutter.Actor {
     Granite.Drawing.BufferSurface buffer;
     int shadow_blur = 30;
     int shadow_x    = 0;
-    int shadow_y    = 0;
+    int shadow_y    = 4;
     double shadow_alpha = 0.5;
     
     LightDM.Greeter greeter;
@@ -47,6 +47,8 @@ public class LoginBox : GtkClutter.Actor {
             grid.remove ((_working)?avatar as Gtk.Widget:spinner as Gtk.Widget);
             grid.attach ((_working)?spinner as Gtk.Widget:avatar as Gtk.Widget, 0, 0, 1, 3);
             grid.show_all ();
+            if (LightDM.get_sessions ().length () == 1)
+                settings.hide ();
             if (_working)
                 spinner.start ();
             else
@@ -130,7 +132,7 @@ public class LoginBox : GtkClutter.Actor {
         grid.attach (avatar,   0, 0, 1, 3);
         grid.attach (settings, 2, 0, 1, 1);
         grid.attach (username, 1, 0, 1, 1);
-        grid.attach (password, 1, 1, 1, 1);
+        grid.attach (password, 1, 1, 2, 1);
         grid.attach (login,    1, 2, 2, 1);
         
         grid.margin = shadow_blur + 12;
@@ -176,7 +178,8 @@ public class LoginBox : GtkClutter.Actor {
             
             this.get_stage ().add_child (pop);
             pop.x = this.x + this.width - 265;
-            pop.y = this.y + 50;
+            pop.width = 245;
+            pop.y = this.y + 53;
             pop.get_widget ().show_all ();
             pop.destroy.connect ( () => {
                 this.settings.active = false;
@@ -274,8 +277,8 @@ public class LoginBox : GtkClutter.Actor {
             this.password.grab_focus ();
         }
         
-        if (LightDM.get_sessions ().length () == 1)
-            settings.hide ();
+        //if (LightDM.get_sessions ().length () == 1)
+        //    settings.hide ();
     }
 }
 

@@ -184,15 +184,20 @@ public static int main (string [] args) {
     var darken = new Clutter.Rectangle.with_color ({0, 0, 0, 25});
     c.get_stage ().add_child (darken);
     
-    l.background.add_constraint (new Clutter.BindConstraint (c.get_stage (), Clutter.BindCoordinate.WIDTH, 0));
-    l.background.add_constraint (new Clutter.BindConstraint (c.get_stage (), Clutter.BindCoordinate.HEIGHT, 0));
-    l.background_s.add_constraint (new Clutter.BindConstraint (c.get_stage (), Clutter.BindCoordinate.WIDTH, 0));
-    l.background_s.add_constraint (new Clutter.BindConstraint (c.get_stage (), Clutter.BindCoordinate.HEIGHT, 0));
+    l.background.add_constraint (new Clutter.BindConstraint (c.get_stage (), 
+        Clutter.BindCoordinate.WIDTH, 0));
+    l.background.add_constraint (new Clutter.BindConstraint (c.get_stage (), 
+        Clutter.BindCoordinate.HEIGHT, 0));
+    l.background_s.add_constraint (new Clutter.BindConstraint (c.get_stage (), 
+        Clutter.BindCoordinate.WIDTH, 0));
+    l.background_s.add_constraint (new Clutter.BindConstraint (c.get_stage (), 
+        Clutter.BindCoordinate.HEIGHT, 0));
     darken.add_constraint (new Clutter.BindConstraint (c.get_stage (), Clutter.BindCoordinate.WIDTH, 0));
     darken.add_constraint (new Clutter.BindConstraint (c.get_stage (), Clutter.BindCoordinate.HEIGHT, 0));
     
     Gdk.Rectangle geom;
-    Gdk.Screen.get_default ().get_monitor_geometry (Gdk.Screen.get_default ().get_primary_monitor (), out geom);
+    Gdk.Screen.get_default ().get_monitor_geometry (Gdk.Screen.get_default ().get_primary_monitor (), 
+        out geom);
     
     w.get_screen ().monitors_changed.connect ( () => {
         Gdk.Rectangle geometry;
@@ -236,7 +241,7 @@ public static int main (string [] args) {
         text.width = l.width - 100;
         text.x = 155;
         text.y = i * (text.height + 60) + 120;
-        text.add_effect (new TextShadowEffect (0, 1, 240));
+        text.add_effect (new TextShadowEffect (1, 1, 200));
         text.reactive = true;
         text.button_release_event.connect ( () => {
             var idx = name_container.get_children ().index (text);
@@ -251,19 +256,28 @@ public static int main (string [] args) {
     }
     c.get_stage ().add_child (name_container);
     
+    var shutdown = new GtkClutter.Texture ();
+    
     c.add_events (Gdk.EventMask.BUTTON_RELEASE_MASK);
     c.key_release_event.connect ( (e) => {
-        if (e.keyval == Gdk.Key.Up) {
-            current_user --;
-            if (current_user-1<0)
-                current_user = 0;
-        } else if (e.keyval == Gdk.Key.Down) {
-            current_user ++;
-            var sum = (greeter.has_guest_account_hint)?u.users.length ()+1:u.users.length ();
-            if (current_user >= sum)
-                current_user = (int)((greeter.has_guest_account_hint)?u.users.length ():u.users.length ()-1);
-        } else {
-            return false;
+        switch (e.keyval) {
+            case Gdk.Key.Up:
+                current_user --;
+                if (current_user-1<0)
+                    current_user = 0;
+                break;
+            case Gdk.Key.Down:
+                current_user ++;
+                var sum = (greeter.has_guest_account_hint)?u.users.length ()+1:u.users.length ();
+                if (current_user >= sum)
+                    current_user = (int)((greeter.has_guest_account_hint)?u.users.length ():
+                        u.users.length ()-1);
+                break;
+            case Gdk.Key.Escape:
+                shutdown.button_press_event ({});
+                break;
+            default:
+                return false;
         }
         name_container.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, 
             y:l.y-current_user*150.0f);
@@ -271,63 +285,71 @@ public static int main (string [] args) {
         return true;
     });
     
-    /*shutdown and so on thing*/
-    var shutdown = new GtkClutter.Texture ();
+    /*shutdown-and-so-on thing*/
     try {
         shutdown.set_from_icon_name (new Gtk.Image (), 
             "system-shutdown-symbolic", Gtk.IconSize.MENU);
     } catch (Error e) { warning (e.message); }
-    shutdown.x = geom.width - shutdown.width - 10;
+    shutdown.x = geom.width - shutdown.width - 15;
     shutdown.y = 10;
     shutdown.reactive = true;
+    bool shutdown_shown = false;
     shutdown.button_press_event.connect ( () => {
+        if (shutdown_shown)
+            return false;
+        shutdown_shown = true;
         var pop = new PopOver ();
         var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
         if (LightDM.get_can_suspend ()) {
             var but = new Gtk.Button.with_label (_("Suspend"));
             but.relief = Gtk.ReliefStyle.NONE;
+            but.halign = Gtk.Align.START;
             but.clicked.connect ( () => {
                 try {
                     LightDM.suspend ();
                 } catch (Error e) { warning (e.message); }
             });
-            box.pack_start (but, false);
+            box.pack_start (but);
         }
         if (LightDM.get_can_hibernate ()) {
             var but = new Gtk.Button.with_label (_("Hibernate"));
             but.relief = Gtk.ReliefStyle.NONE;
+            but.halign = Gtk.Align.START;
             but.clicked.connect ( () => {
                 try {
                     LightDM.hibernate ();
                 } catch (Error e) { warning (e.message); }
             });
-            box.pack_start (but, false);
+            box.pack_start (but);
         }
         if (LightDM.get_can_restart ()) {
             var but = new Gtk.Button.with_label (_("Restart"));
             but.relief = Gtk.ReliefStyle.NONE;
+            but.halign = Gtk.Align.START;
             but.clicked.connect ( () => {
                 try {
                     LightDM.restart ();
                 } catch (Error e) { warning (e.message); }
             });
-            box.pack_start (but, false);
+            box.pack_start (but);
         }
         if (LightDM.get_can_shutdown ()) {
             var but = new Gtk.Button.with_label (_("Shutdown"));
             but.relief = Gtk.ReliefStyle.NONE;
+            but.halign = Gtk.Align.START;
             but.clicked.connect ( () => {
                 try {
                     LightDM.shutdown ();
                 } catch (Error e) { warning (e.message); }
             });
-            box.pack_start (but, false);
+            box.pack_start (but);
         }
         ((Gtk.Container)pop.get_content_area ()).add (box);
-        pop.x =  geom.width - 110;
+        pop.x =  geom.width - 120;
         pop.y = 10;
         c.get_stage ().add_child (pop);
         pop.get_widget ().show_all ();
+        pop.destroy.connect ( () => shutdown_shown = false );
         return true;
     });
     c.get_stage ().add_child (shutdown);
@@ -367,7 +389,6 @@ public static int main (string [] args) {
         y:l.y-current_user*130.0f);
     l.set_user (u.users.nth_data (current_user));
     l.raise_top ();
-    l.password.grab_focus ();
     
     /*black fadein thing*/
     fadein.add_constraint (new Clutter.BindConstraint (c.get_stage (), 
@@ -385,6 +406,8 @@ public static int main (string [] args) {
     w.move (geom.x, geom.y);
     w.show_all ();
     w.fullscreen ();
+    
+    l.password.grab_focus ();
     
     Gtk.main ();
     
