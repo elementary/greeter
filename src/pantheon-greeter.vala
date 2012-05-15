@@ -428,11 +428,11 @@ public static int main (string [] args) {
     d_left.height = d_right.height = c.get_stage ().height;
     d_right.x = c.get_stage ().width/2;
     
-    d_left.animate  (Clutter.AnimationMode.EASE_IN_QUAD, 800, x:-d_left.width);
-    d_right.animate (Clutter.AnimationMode.EASE_IN_QUAD, 800, x:c.get_stage ().width);
+    d_left.animate  (Clutter.AnimationMode.EASE_IN_CUBIC, 500, x:-d_left.width);
+    d_right.animate (Clutter.AnimationMode.EASE_IN_CUBIC, 500, x:c.get_stage ().width);
     
     greeterbox.depth = -2000;
-    greeterbox.animate (Clutter.AnimationMode.EASE_IN_CUBIC, 1000, depth:0.0f);
+    greeterbox.animate (Clutter.AnimationMode.EASE_OUT_CUBIC, 1000, depth:0.0f);
     
     Gtk.main ();
     
