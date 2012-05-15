@@ -122,6 +122,8 @@ public static int main (string [] args) {
     var l = new LoginBox (greeter);
     var fadein = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
     
+    var greeterbox = new Clutter.Group ();
+    
     greeter.show_message.connect ( (text, type) => {
         l.wrong_pw ();
     });
@@ -176,13 +178,20 @@ public static int main (string [] args) {
     Gtk.Settings.get_default ().gtk_cursor_blink = true;
     
     (c.get_stage () as Clutter.Stage).color = {0, 0, 0, 255};
+    
     c.get_stage ().realize ();
-    c.get_stage ().add_child (l.background);
-    c.get_stage ().add_child (l.background_s);
-    c.get_stage ().add_child (l);
+    greeterbox.add_child (l.background);
+    greeterbox.add_child (l.background_s);
+    greeterbox.add_child (l);
+    c.get_stage ().add_child (greeterbox);
+    
+    greeterbox.add_constraint (new Clutter.BindConstraint (c.get_stage (), 
+        Clutter.BindCoordinate.WIDTH, 0));
+    greeterbox.add_constraint (new Clutter.BindConstraint (c.get_stage (), 
+        Clutter.BindCoordinate.HEIGHT, 0));
     
     var darken = new Clutter.Rectangle.with_color ({0, 0, 0, 25});
-    c.get_stage ().add_child (darken);
+    greeterbox.add_child (darken);
     
     l.background.add_constraint (new Clutter.BindConstraint (c.get_stage (), 
         Clutter.BindCoordinate.WIDTH, 0));
@@ -209,11 +218,9 @@ public static int main (string [] args) {
     l.width  = 500;
     l.height = 245;
     l.y      = geom.height / 2 - l.height / 2;
-    l.x      = -l.width;
+    l.x      = 100;
     
-    l.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, x:100.0f).completed.connect ( () => {
-        l.set_position (Math.floorf (l.x), Math.floorf (l.y));
-    });
+    l.set_position (Math.floorf (l.x), Math.floorf (l.y));
     l.set_size     (Math.ceilf (l.width), Math.ceilf (l.height));
     
     
@@ -254,7 +261,7 @@ public static int main (string [] args) {
         });
         name_container.add_child (text);
     }
-    c.get_stage ().add_child (name_container);
+    greeterbox.add_child (name_container);
     
     var shutdown = new GtkClutter.Texture ();
     
@@ -352,7 +359,7 @@ public static int main (string [] args) {
         pop.destroy.connect ( () => shutdown_shown = false );
         return true;
     });
-    c.get_stage ().add_child (shutdown);
+    greeterbox.add_child (shutdown);
     
     /*time label*/
     var time_ac = new GtkClutter.Actor ();
@@ -382,7 +389,7 @@ public static int main (string [] args) {
     time_ac.height = 150;
     time_ac.x = geom.width - time_ac.width - 100;
     time_ac.y = geom.height / 2 - time_ac.height / 2;
-    c.get_stage ().add_child (time_ac);
+    greeterbox.add_child (time_ac);
     
     
     name_container.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, 
@@ -408,6 +415,24 @@ public static int main (string [] args) {
     w.fullscreen ();
     
     l.password.grab_focus ();
+    
+    
+    /*door animation*/
+    var d_left  = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
+    var d_right = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
+    
+    c.get_stage ().add_child (d_left);
+    c.get_stage ().add_child (d_right);
+    
+    d_left.width = d_right.width = c.get_stage ().width/2;
+    d_left.height = d_right.height = c.get_stage ().height;
+    d_right.x = c.get_stage ().width/2;
+    
+    d_left.animate  (Clutter.AnimationMode.EASE_IN_QUAD, 800, x:-d_left.width);
+    d_right.animate (Clutter.AnimationMode.EASE_IN_QUAD, 800, x:c.get_stage ().width);
+    
+    greeterbox.depth = -2000;
+    greeterbox.animate (Clutter.AnimationMode.EASE_IN_CUBIC, 1000, depth:0.0f);
     
     Gtk.main ();
     
