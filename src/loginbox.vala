@@ -136,6 +136,8 @@ public class LoginBox : GtkClutter.Actor {
         grid.attach (login,    1, 2, 2, 1);
         
         grid.margin = shadow_blur + 12;
+        grid.margin_top += 5;
+        grid.margin_bottom -= 15;
         grid.column_spacing = 12;
         
         avatar.draw.connect ( (ctx) => {
@@ -277,8 +279,8 @@ public class LoginBox : GtkClutter.Actor {
             this.password.grab_focus ();
         }
         
-        //if (LightDM.get_sessions ().length () == 1)
-        //    settings.hide ();
+        if (LightDM.get_sessions ().length () == 1)
+            settings.hide ();
     }
 }
 

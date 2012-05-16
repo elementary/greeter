@@ -1,0 +1,42 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-16 23:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:357
+msgid "Guest session"
+msgstr ""
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:424
+msgid "Suspend"
+msgstr ""
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:435
+msgid "Hibernate"
+msgstr ""
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:446
+msgid "Restart"
+msgstr ""
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:457
+msgid "Shutdown"
+msgstr ""
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:96
+msgid "Login"
+msgstr ""
