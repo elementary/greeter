@@ -58,14 +58,28 @@ public class LoginBox : GtkClutter.Actor {
     
     public void set_wallpaper (string path) {
         this.background_s.opacity = 0;
-        try {
-            this.background_s.set_from_file (path);
-        } catch (Error e) { warning (e.message); }
+        
+        if (path == "") {
+            try {
+                this.background_s.set_from_file (DEFAULT_WALLPAPER);
+            } catch (Error e) { warning (e.message); }
+        } else {
+            try {
+                this.background_s.set_from_file (path);
+            } catch (Error e) { warning (e.message); }
+        }
+        
         this.background_s.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, opacity:255).
             completed.connect ( () => {
-            try {
-                this.background.set_from_file (path);
-            } catch (Error e) { warning (e.message); }
+            if (path == "") {
+                try {
+                    this.background.set_from_file (DEFAULT_WALLPAPER);
+                } catch (Error e) { warning (e.message); }
+            } else {
+                try {
+                    this.background.set_from_file (path);
+                } catch (Error e) { warning (e.message); }
+            }
             this.background_s.opacity = 0;
         });
     }
@@ -87,7 +101,7 @@ public class LoginBox : GtkClutter.Actor {
         //this.background_s.add_effect (new Clutter.BlurEffect ());
         
         try {
-            this.image   = Gtk.IconTheme.get_default ().load_icon ("avatar-default", 96, 0);
+            this.image = Gtk.IconTheme.get_default ().load_icon ("avatar-default", 96, 0);
         } catch (Error e) { warning (e.message); }
         
         this.avatar   = new Gtk.EventBox ();
@@ -137,7 +151,7 @@ public class LoginBox : GtkClutter.Actor {
         
         grid.margin = shadow_blur + 12;
         grid.margin_top += 5;
-        grid.margin_bottom -= 15;
+        grid.margin_bottom -= 10;
         grid.column_spacing = 12;
         
         avatar.draw.connect ( (ctx) => {
@@ -212,7 +226,7 @@ public class LoginBox : GtkClutter.Actor {
                 shadow_blur + shadow_y, w - shadow_blur*2 + shadow_x, h - shadow_blur*2 + shadow_y);
             this.buffer.context.set_source_rgba (0, 0, 0, shadow_alpha);
             this.buffer.context.fill ();
-            this.buffer.exponential_blur (shadow_blur / 2);
+            this.buffer.exponential_blur (shadow_blur / 2-2);
             
             draw_ref.get_style_context ().render_activity (this.buffer.context, shadow_blur + shadow_x, 
                 shadow_blur + shadow_y, w - shadow_blur*2 + shadow_x, h - shadow_blur*2 + shadow_y);
@@ -253,11 +267,12 @@ public class LoginBox : GtkClutter.Actor {
             });
     }
     
-    public void set_user (LightDM.User ?user) { //guest if null
+    public void set_user (LightDM.User ?user, bool initial=false) { //guest if null
         this.password.text = "";
         if (user == null) {
             this.username.set_markup ("<span face='Open Sans Light' font='24'>"+
                 "Guest session</span>");
+            
             this.set_wallpaper (DEFAULT_WALLPAPER);
             
             this.current_user = null;
@@ -268,9 +283,14 @@ public class LoginBox : GtkClutter.Actor {
             
             try {
                 this.image = new Gdk.Pixbuf.from_file (user.image);
-            } catch (Error e) { warning (e.message); }  
+            } catch (Error e) {
+                try {
+                    this.image = Gtk.IconTheme.get_default ().load_icon ("avatar-default", 96, 0);
+                } catch (Error e) { warning (e.message); }
+            }
             this.avatar.queue_draw ();
-            this.set_wallpaper (user.background);
+            if (!initial)
+                this.set_wallpaper ((user.background == null)?"":user.background);
             
             this.current_user = user;
             this.current_session = user.session;
