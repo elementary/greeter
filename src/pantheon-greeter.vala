@@ -354,7 +354,7 @@ public static int main (string [] args) {
         var text = new Clutter.Text ();
         text.color = {255, 255, 255, 255};
         if (i == u.users.length ())
-            text.set_markup ("<span face='Open Sans Light' font='24'>Guest session</span>");
+            text.set_markup ("<span face='Open Sans Light' font='24'>"+_("Guest session")+"</span>");
         else
             text.set_markup (LoginBox.get_user_markup (u.users.nth_data (i)));
         text.height = 75;
