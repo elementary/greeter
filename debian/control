@@ -1,13 +1,15 @@
-Source: pantheon-lightdm-theme
-Section: misc
+Source: pantheon-greeter
+Section: x11
 Priority: optional
 Maintainer: Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>
-Build-Depends: debhelper (>= 7.0.50~)
+Build-Depends: debhelper (>= 7.0.50~), valac-0.16 | valac (>= 0.16),
+               libgranite-dev, liblightdm-gobject-1-dev, libclutter-gtk-1.0-dev
 Standards-Version: 3.8.4
 
-Package: pantheon-lightdm-theme
-Architecture: all
-Depends: ${misc:Depends}, lightdm-webkit-greeter
+Package: pantheon-greeter
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Provides: lightdm-theme
 Description: Pantheon login screen
- Pantheon theme for LightDM, developed by elementary project.
+ Clutter-powered LightDM greeter resembling Unity greeter.
+ Features smooth animations and a fancy transition from boot screen.

@@ -8,11 +8,11 @@ It was downloaded from:
 
 Upstream Author(s):
 
-    Fabian Thoma <fabian@elementaryos.org>
+    Tom Beckmann <tom@elementaryos.org>
 
 Copyright:
 
-    Copyright (C) 2011 elementary Project
+    Copyright (C) 2012 elementary Project
 
 License:
 
@@ -34,6 +34,12 @@ Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
 
 The Debian packaging is:
 
-    Copyright (C) 2011 Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>
+    Copyright (C) 2012 Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>
 
 and is licensed under the GPL version 3, see above.
+
+debian/postinst, debian/postrm are:
+
+    Copyright (C) 2011 Canonical Ltd
+
+and are licensed under the GPL version 3, see above.

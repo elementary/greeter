@@ -2,9 +2,9 @@
 set -e
 
 case "$1" in
-  configure|upgrade)
+  remove|purge)
     if [ -x /usr/lib/lightdm/lightdm-set-defaults ] ; then
-        /usr/lib/lightdm/lightdm-set-defaults --greeter=pantheon-greeter || true
+        /usr/lib/lightdm/lightdm-set-defaults --remove --greeter=pantheon-greeter || true
     fi
   ;;
 esac

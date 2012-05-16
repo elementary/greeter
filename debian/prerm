@@ -1,9 +1,0 @@
-#!/bin/sh
-
-set -e
-
-if [ "$1" = "remove" ]; then
-  update-alternatives --remove lightdm-webkit-theme /usr/share/lightdm-webkit/themes/pantheon
-fi
-
-#DEBHELPER#
