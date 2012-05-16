@@ -546,7 +546,7 @@ public static int main (string [] args) {
     d_left.animate  (Clutter.AnimationMode.EASE_IN_QUAD, 500, x:-d_left.width);
     d_right.animate (Clutter.AnimationMode.EASE_IN_QUAD, 500, x:c.get_stage ().width);
     
-    greeterbox.depth = -2000;
+    greeterbox.depth = -1500;
     greeterbox.animate (Clutter.AnimationMode.EASE_OUT_CUBIC, 1000, depth:0.0f).completed.connect ( () => {
         greeterbox.remove_effect (mirror);
     });
