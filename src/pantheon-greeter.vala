@@ -357,19 +357,24 @@ public static int main (string [] args) {
             text.set_markup ("<span face='Open Sans Light' font='24'>"+_("Guest session")+"</span>");
         else
             text.set_markup (LoginBox.get_user_markup (u.users.nth_data (i)));
+        warning ("Adding someone");
         text.height = 75;
         text.width = l.width - 100;
         text.x = 155;
         text.y = i * (text.height + 60) + 120;
         text.add_effect (new TextShadowEffect (1, 1, 200));
         text.reactive = true;
-        text.button_release_event.connect ( () => {
-            var idx = name_container.get_children ().index (text);
+        text.name = i.to_string ();
+        var texts = text;
+        text.button_release_event.connect ( (e) => {
+            var idx = name_container.get_children ().index (e.source);
+            if (idx == -1)
+                return false;
             current_user = idx;
-            message ("Setting to %i by click", idx);
-            l.set_user (u.users.nth_data (idx));
+            message ("Setting to %i by click", current_user);
+            l.set_user (u.users.nth_data (current_user));
             name_container.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, 
-                y:l.y-idx*150.0f);
+                y:l.y-current_user*150.0f);
             return true;
         });
         name_container.add_child (text);
