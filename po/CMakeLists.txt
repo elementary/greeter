@@ -1,5 +1,5 @@
 include (Translations)
-add_translations_directory (sentence)
-add_translations_catalog (sentence
+add_translations_directory (pantheon-greeter)
+add_translations_catalog (pantheon-greeter
     ../src
 )
