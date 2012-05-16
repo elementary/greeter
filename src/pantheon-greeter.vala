@@ -1,4 +1,117 @@
 
+[CCode (cname="cogl_get_modelview_matrix")]
+public extern void get_modelview_matrix (out Cogl.Matrix modelview);
+[CCode (cname="cogl_get_projection_matrix")]
+public extern void get_projection_matrix (out Cogl.Matrix modelview);
+
+
+public class MirrorEffect : Clutter.OffscreenEffect {
+    /*
+    Cogl.Matrix modelview;
+    Cogl.Matrix projection;
+    float [] viewp = new float[16];
+    */
+    public uint8 opacity = 220;
+    public float length = 0.3f;
+    
+    public MirrorEffect () {
+        
+    }
+    
+    /*public override Cogl.Handle create_texture (float w, float h) {
+        return new Cogl.Texture.with_size (uint.max ((uint)this.get_actor ().width, 1), 
+            uint.max ((uint)this.get_actor ().height, 1), 
+            Cogl.TextureFlags.NO_SLICING, Cogl.PixelFormat.RGBA_8888_PRE);
+    }
+    private void setup_viewport () {
+        var p = this.get_actor ().get_stage ().get_perspective ();
+        
+        Cogl.set_viewport (0, 0, (int)this.get_actor ().get_stage ().width, 
+            (int)this.get_actor ().get_stage ().height);
+        Cogl.perspective (p.fovy, p.aspect, p.z_near, p.z_far);
+        
+        Cogl.Matrix proj = {};
+        get_projection_matrix (out proj);
+        var z_camera = 0.5f * proj.xx;
+        
+        var width  = this.get_actor ().get_stage ().width;
+        var height = this.get_actor ().get_stage ().height;
+        
+        var mv_matrix = Cogl.Matrix.identity ();
+        mv_matrix.translate (-0.5f, -0.5f, -z_camera);
+        mv_matrix.scale (1.0f / width, -1.0f / height, 1.0f / width);
+        mv_matrix.translate (0.0f, -1.0f * height, 0.0f);
+        Cogl.set_modelview_matrix (mv_matrix);
+    }*/
+    public override bool pre_paint () {
+        if (!base.pre_paint ())
+            return false;
+        if (this.get_actor () == null)
+            return false;
+        /*Cogl.pop_matrix ();
+        get_modelview_matrix (out modelview);
+        get_projection_matrix (out projection);
+        Cogl.get_viewport (viewp);
+        //setup_viewport ();
+        Cogl.push_matrix ();
+        */
+        return true;
+    }
+    public override void post_paint () {
+        Cogl.pop_matrix ();
+        Cogl.pop_framebuffer ();
+        /*
+        setup_viewport ();
+        Cogl.set_modelview_matrix (modelview);
+        Cogl.set_projection_matrix (projection);
+        */
+        this.paint_target ();
+    }
+    public override void paint_target () {
+        if (this.get_actor () == null)
+            return;
+        
+        var material = this.get_target ();
+        Cogl.set_source (material);
+        
+        var col_original = Cogl.Color.from_4ub (255, 255, 255, 255);
+        var col_refl_top = Cogl.Color.from_4ub (opacity, opacity, opacity, opacity);
+        var col_refl_bot = Cogl.Color.from_4ub (0, 0, 0, 0);
+        
+        Cogl.TextureVertex polygon[4];
+        polygon[0].x = 0; polygon[0].y = 0; polygon[0].z = 0;
+        polygon[0].tx = 0; polygon[0].ty = 0;
+        polygon[0].color = col_original;
+        polygon[1].x = this.get_actor ().width; polygon[1].y = 0; polygon[1].z = 0;
+        polygon[1].tx = 1; polygon[1].ty = 0;
+        polygon[1].color = col_original;
+        polygon[2].x = this.get_actor ().width; polygon[2].y = this.get_actor ().height; polygon[2].z = 0;
+        polygon[2].tx = 1; polygon[2].ty = 1;
+        polygon[2].color = col_original;
+        polygon[3].x = 0; polygon[3].y = this.get_actor ().height; polygon[3].z = 0;
+        polygon[3].tx = 0; polygon[3].ty = 1;
+        polygon[3].color = col_original;
+        
+        Cogl.polygon (polygon, true);
+        
+        polygon[0].x = 0; polygon[0].y = this.get_actor ().height; polygon[0].z = this.get_actor ().depth;
+        polygon[0].tx = 0; polygon[0].ty = 1;
+        polygon[0].color = col_refl_top;
+        polygon[1].x = this.get_actor ().width; polygon[1].y = this.get_actor ().height; polygon[1].z = this.get_actor ().depth;
+        polygon[1].tx = 1; polygon[1].ty = 1;
+        polygon[1].color = col_refl_top;
+        polygon[2].x = this.get_actor ().width; polygon[2].y = (1+this.length)*this.get_actor ().height; polygon[2].z = this.get_actor ().depth;
+        polygon[2].tx = 1; polygon[2].ty = (1.0f - this.length);
+        polygon[2].color = col_refl_bot;
+        polygon[3].x = 0; polygon[3].y = (1+this.length)*this.get_actor ().height; polygon[3].z = this.get_actor ().depth;
+        polygon[3].tx = 0; polygon[3].ty = (1.0f - this.length);
+        polygon[3].color = col_refl_bot;
+        
+        Cogl.polygon (polygon, true);
+    }
+    
+}
+
 public class TextShadowEffect : Clutter.Effect {
     int _offset_y;
     public int offset_y {
@@ -416,10 +529,12 @@ public static int main (string [] args) {
     
     l.password.grab_focus ();
     
-    
     /*door animation*/
     var d_left  = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
     var d_right = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
+    
+    var mirror = new MirrorEffect ();
+    greeterbox.add_effect (mirror);
     
     c.get_stage ().add_child (d_left);
     c.get_stage ().add_child (d_right);
@@ -428,11 +543,13 @@ public static int main (string [] args) {
     d_left.height = d_right.height = c.get_stage ().height;
     d_right.x = c.get_stage ().width/2;
     
-    d_left.animate  (Clutter.AnimationMode.EASE_IN_QUAD, 800, x:-d_left.width);
-    d_right.animate (Clutter.AnimationMode.EASE_IN_QUAD, 800, x:c.get_stage ().width);
+    d_left.animate  (Clutter.AnimationMode.EASE_IN_QUAD, 500, x:-d_left.width);
+    d_right.animate (Clutter.AnimationMode.EASE_IN_QUAD, 500, x:c.get_stage ().width);
     
     greeterbox.depth = -2000;
-    greeterbox.animate (Clutter.AnimationMode.EASE_IN_CUBIC, 1000, depth:0.0f);
+    greeterbox.animate (Clutter.AnimationMode.EASE_OUT_CUBIC, 1000, depth:0.0f).completed.connect ( () => {
+        greeterbox.remove_effect (mirror);
+    });
     
     Gtk.main ();
     

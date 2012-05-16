@@ -277,8 +277,8 @@ public class LoginBox : GtkClutter.Actor {
             this.password.grab_focus ();
         }
         
-        //if (LightDM.get_sessions ().length () == 1)
-        //    settings.hide ();
+        if (LightDM.get_sessions ().length () == 1)
+            settings.hide ();
     }
 }
 
