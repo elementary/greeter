@@ -405,74 +405,11 @@ public static int main (string [] args) {
         return true;
     });
     
-    /*shutdown-and-so-on thing*/
-    try {
-        shutdown.set_from_icon_name (new Gtk.Image (), 
-            "system-shutdown-symbolic", Gtk.IconSize.MENU);
-    } catch (Error e) { warning (e.message); }
-    shutdown.x = geom.width - shutdown.width - 15;
-    shutdown.y = 10;
-    shutdown.reactive = true;
-    bool shutdown_shown = false;
-    shutdown.button_press_event.connect ( () => {
-        if (shutdown_shown)
-            return false;
-        shutdown_shown = true;
-        var pop = new PopOver ();
-        var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
-        if (LightDM.get_can_suspend ()) {
-            var but = new Gtk.Button.with_label (_("Suspend"));
-            but.relief = Gtk.ReliefStyle.NONE;
-            but.halign = Gtk.Align.START;
-            but.clicked.connect ( () => {
-                try {
-                    LightDM.suspend ();
-                } catch (Error e) { warning (e.message); }
-            });
-            box.pack_start (but);
-        }
-        if (LightDM.get_can_hibernate ()) {
-            var but = new Gtk.Button.with_label (_("Hibernate"));
-            but.relief = Gtk.ReliefStyle.NONE;
-            but.halign = Gtk.Align.START;
-            but.clicked.connect ( () => {
-                try {
-                    LightDM.hibernate ();
-                } catch (Error e) { warning (e.message); }
-            });
-            box.pack_start (but);
-        }
-        if (LightDM.get_can_restart ()) {
-            var but = new Gtk.Button.with_label (_("Restart"));
-            but.relief = Gtk.ReliefStyle.NONE;
-            but.halign = Gtk.Align.START;
-            but.clicked.connect ( () => {
-                try {
-                    LightDM.restart ();
-                } catch (Error e) { warning (e.message); }
-            });
-            box.pack_start (but);
-        }
-        if (LightDM.get_can_shutdown ()) {
-            var but = new Gtk.Button.with_label (_("Shutdown"));
-            but.relief = Gtk.ReliefStyle.NONE;
-            but.halign = Gtk.Align.START;
-            but.clicked.connect ( () => {
-                try {
-                    LightDM.shutdown ();
-                } catch (Error e) { warning (e.message); }
-            });
-            box.pack_start (but);
-        }
-        ((Gtk.Container)pop.get_content_area ()).add (box);
-        pop.x =  geom.width - 120;
-        pop.y = 10;
-        c.get_stage ().add_child (pop);
-        pop.get_widget ().show_all ();
-        pop.destroy.connect ( () => shutdown_shown = false );
-        return true;
-    });
-    greeterbox.add_child (shutdown);
+    /*indicators*/
+    var indicators = new Indicators ();
+    indicators.add_constraint (new Clutter.BindConstraint (greeterbox, Clutter.BindCoordinate.WIDTH, 0));
+    indicators.height = 28;
+    greeterbox.add_child (indicators);
     
     /*time label*/
     var time_ac = new GtkClutter.Actor ();
