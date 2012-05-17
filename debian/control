@@ -2,7 +2,7 @@ Source: pantheon-greeter
 Section: x11
 Priority: optional
 Maintainer: Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>
-Build-Depends: debhelper (>= 7.0.50~), valac-0.16 | valac (>= 0.16),
+Build-Depends: cmake, debhelper (>= 7.0.50~), valac-0.16 (>= 0.16.0),
                libgranite-dev, liblightdm-gobject-1-dev, libclutter-gtk-1.0-dev
 Standards-Version: 3.8.4
 
