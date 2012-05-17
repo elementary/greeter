@@ -91,7 +91,9 @@ public class LoginBox : GtkClutter.Actor {
         this.reactive = true;
         this.scale_gravity = Clutter.Gravity.CENTER;
         
-        this.background = new Clutter.Texture.from_file (DEFAULT_WALLPAPER);
+        try {
+            this.background = new Clutter.Texture.from_file (DEFAULT_WALLPAPER);
+        } catch (Error e) { warning (e.message); }
         this.background_s = new Clutter.Texture ();
         this.background_s.opacity = 0;
         this.background.load_async = true;
