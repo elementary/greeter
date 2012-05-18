@@ -273,7 +273,7 @@ public class LoginBox : GtkClutter.Actor {
         this.password.text = "";
         if (user == null) {
             this.username.set_markup ("<span face='Open Sans Light' font='24'>"+
-                "Guest session</span>");
+                _("Guest session")+"</span>");
             
             this.set_wallpaper (DEFAULT_WALLPAPER);
             
