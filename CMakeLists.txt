@@ -49,4 +49,3 @@ add_executable(pantheon-greeter ${VALA_C})
 
 install (TARGETS pantheon-greeter RUNTIME DESTINATION share/xgreeters)
 install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/pantheon-greeter.desktop DESTINATION share/xgreeters)
-install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/lightdm.conf DESTINATION /etc/lightdm)
