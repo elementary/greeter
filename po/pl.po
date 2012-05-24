@@ -1,4 +1,4 @@
-# French translation for pantheon-greeter
+# Polish translation for pantheon-greeter
 # Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the pantheon-greeter package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-05-16 23:20+0200\n"
-"PO-Revision-Date: 2012-05-23 19:31+0000\n"
-"Last-Translator: Benoît LAMY <Unknown>\n"
-"Language-Team: French <fr@li.org>\n"
+"PO-Revision-Date: 2012-05-23 12:52+0000\n"
+"Last-Translator: Daniel Kur <Daniel.M.Kur@gmail.com>\n"
+"Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,24 +19,24 @@ msgstr ""
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:357
 msgid "Guest session"
-msgstr "Session d'invité"
+msgstr "Sesja gościa"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:424
 msgid "Suspend"
-msgstr "Mettre en veille"
+msgstr "Wstrzymaj"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:435
 msgid "Hibernate"
-msgstr "Hiberner"
+msgstr "Hibernuj"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:446
 msgid "Restart"
-msgstr "Redémarrer"
+msgstr "Uruchom ponownie"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:457
 msgid "Shutdown"
-msgstr "Éteindre"
+msgstr "Wyłącz"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:96
 msgid "Login"
-msgstr "Connexion"
+msgstr "Zaloguj się"
