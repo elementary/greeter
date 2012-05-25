@@ -487,6 +487,7 @@ public static int main (string [] args) {
     greeterbox.depth = -1500;
     greeterbox.animate (Clutter.AnimationMode.EASE_OUT_CUBIC, 1000, depth:0.0f).completed.connect ( () => {
         greeterbox.remove_effect (mirror);
+        l.set_wallpaper (u.users.nth_data (current_user).background);
     });
     
     Gtk.main ();
