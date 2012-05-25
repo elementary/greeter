@@ -437,7 +437,7 @@ public static int main (string [] args) {
     time_ac.get_widget ().show_all ();
     time_ac.width = 500;
     time_ac.height = 150;
-    time_ac.x = geom.width - time_ac.width - 100;
+    time_ac.x = geom.width - time_ac.width - ((geom.width > 1500)?100:10);
     time_ac.y = geom.height / 2 - time_ac.height / 2;
     greeterbox.add_child (time_ac);
     
@@ -461,7 +461,7 @@ public static int main (string [] args) {
     w.set_default_size (geom.width, geom.height);
     w.move (geom.x, geom.y);
     w.show_all ();
-    w.fullscreen ();
+    //w.fullscreen ();
     
     l.password.grab_focus ();
     
