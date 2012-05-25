@@ -11,15 +11,22 @@ public class IndicatorMenuItem : Gtk.MenuItem {
         this.add (this.hbox);
         this.hbox.show ();
         
-        /*if (entry.label != null) {
-            entry.label.show.connect (this.visibility_changed_cb);
-            entry.label.hide.connect (this.visibility_changed_cb);
-            hbox.pack_start (entry.label, false, false, 0);
-        }*/
+        message ("\033"+entry.name_hint);
+        
         if (entry.image != null) {
-            entry.image.show.connect (visibility_changed_cb);
-            entry.image.hide.connect (visibility_changed_cb);
-            hbox.pack_start (entry.image, false, false, 0);
+            Gtk.Image img;
+            if (entry.name_hint == "indicator-session-devices") {
+                img = new Gtk.Image.from_pixbuf (Gtk.IconTheme.get_default ().
+                    lookup_by_gicon (new GLib.ThemedIcon.
+                    with_default_fallbacks ("system-shutdown-symbolic"), 16, 0).
+                    load_symbolic ({1,1,1,1}));
+            } else 
+                img = entry.image;
+            
+            img.show.connect (visibility_changed_cb);
+            img.hide.connect (visibility_changed_cb);
+            hbox.pack_start (img, false, false, 0);
+            img.show ();
         }
         if (entry.accessible_desc != null)
             get_accessible ().set_name (entry.accessible_desc);
