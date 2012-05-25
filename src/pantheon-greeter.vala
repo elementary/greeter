@@ -461,7 +461,7 @@ public static int main (string [] args) {
     w.set_default_size (geom.width, geom.height);
     w.move (geom.x, geom.y);
     w.show_all ();
-    //w.fullscreen ();
+    w.fullscreen ();
     
     l.password.grab_focus ();
     

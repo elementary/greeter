@@ -121,6 +121,7 @@ public class LoginBox : GtkClutter.Actor {
         username.halign  = Gtk.Align.START;
         username.ellipsize = Pango.EllipsizeMode.END;
         username.margin_top = 10;
+        username.height_request = 65;
         login.expand    = false;
         login.height_request = 1;
         login.width_request = 140;
