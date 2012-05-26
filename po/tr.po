@@ -1,4 +1,4 @@
-# Bulgarian translation for pantheon-greeter
+# Turkish translation for pantheon-greeter
 # Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the pantheon-greeter package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-05-25 22:56+0200\n"
-"PO-Revision-Date: 2012-05-21 13:25+0000\n"
-"Last-Translator: Veselin Trakiyski <Unknown>\n"
-"Language-Team: Bulgarian <bg@li.org>\n"
+"PO-Revision-Date: 2012-05-25 18:49+0000\n"
+"Last-Translator: Ebubekir KARUL <Unknown>\n"
+"Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,8 +20,8 @@ msgstr ""
 #: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:356
 #: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:277
 msgid "Guest session"
-msgstr "Сесия на гост"
+msgstr "Konuk Oturum"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:112
 msgid "Login"
-msgstr "Вход"
+msgstr "Oturum Aç"
