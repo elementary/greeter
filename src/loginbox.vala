@@ -168,11 +168,14 @@ public class LoginBox : GtkClutter.Actor {
             return false;
         });
         
+        PopOver pop = null;
         /*session choose popover*/
         this.settings.toggled.connect ( () => {
-            if (!settings.active)
+            if (!settings.active) {
+                pop.destroy ();
                 return;
-            var pop = new PopOver ();
+            }
+            pop = new PopOver ();
             var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
             ((Gtk.Container)pop.get_content_area ()).add (box);
             
@@ -198,7 +201,7 @@ public class LoginBox : GtkClutter.Actor {
             this.get_stage ().add_child (pop);
             pop.x = this.x + this.width - 265;
             pop.width = 245;
-            pop.y = this.y + 53;
+            pop.y = this.y + 60;
             pop.get_widget ().show_all ();
             pop.destroy.connect ( () => {
                 this.settings.active = false;

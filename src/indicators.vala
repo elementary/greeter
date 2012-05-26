@@ -11,8 +11,6 @@ public class IndicatorMenuItem : Gtk.MenuItem {
         this.add (this.hbox);
         this.hbox.show ();
         
-        message ("\033"+entry.name_hint);
-        
         if (entry.image != null) {
             Gtk.Image img;
             if (entry.name_hint == "indicator-session-devices") {
