@@ -285,6 +285,13 @@ public class LoginBox : GtkClutter.Actor {
             this.current_session = greeter.default_session_hint;
             this.password.set_sensitive (false);
         } else {
+            
+            LightDM.Layout layout = null;
+            LightDM.get_layouts ().foreach ( (l) => { if (l.name == user.layout) layout = l; });
+            if (layout != null)
+                LightDM.set_layout (layout);
+            
+            
             this.username.set_markup (get_user_markup (user, true));
             
             try {
