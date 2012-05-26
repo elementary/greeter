@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-25 22:56+0200\n"
+"POT-Creation-Date: 2012-05-26 09:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:356
-#: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:277
+#: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:280
 msgid "Guest session"
+msgstr ""
+
+#. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
+#: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:436
+msgid "%A, %B %eth"
+msgstr ""
+
+#. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
+#: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:439
+msgid "%l:%M %p"
 msgstr ""
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:112

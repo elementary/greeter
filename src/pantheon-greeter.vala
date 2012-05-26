@@ -430,7 +430,14 @@ public static int main (string [] args) {
     
     Timeout.add (1000,  () => {
         var date = new GLib.DateTime.now_local ();
-        time.set_markup (date.format ("<span face='Open Sans Light' font='24'>%A, %B %eth</span>\n<span face='Raleway' font='72'>%l:%M %p</span>"));
+        time.set_markup (date.format (
+            "<span face='Open Sans Light' font='24'>"+
+            /*Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details*/
+            _("%A, %B %eth")+
+            "</span>\n<span face='Raleway' font='72'>"+
+            /*Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details*/
+            _("%l:%M %p")+
+            "</span>"));
         return true;
     });
     ((Gtk.Container)time_ac.get_widget ()).add (time);
