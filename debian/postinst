@@ -4,7 +4,7 @@ set -e
 case "$1" in
   configure|upgrade)
     if [ -x /usr/lib/lightdm/lightdm-set-defaults ] ; then
-        /usr/lib/lightdm/lightdm-set-defaults --greeter=pantheon-greeter || true
+        /usr/lib/lightdm/lightdm-set-defaults --keep-old --greeter=pantheon-greeter || true
     fi
   ;;
 esac
