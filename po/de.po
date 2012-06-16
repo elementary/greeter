@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-05-26 09:20+0200\n"
-"PO-Revision-Date: 2012-05-26 08:17+0000\n"
-"Last-Translator: Eduard Gotwig <eduardgotwig@gmail.com>\n"
+"PO-Revision-Date: 2012-06-15 05:49+0000\n"
+"Last-Translator: Tom Gießmann <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-27 05:16+0000\n"
-"X-Generator: Launchpad (build 15288)\n"
+"X-Launchpad-Export-Date: 2012-06-16 05:18+0000\n"
+"X-Generator: Launchpad (build 15419)\n"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:356
 #: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:280
@@ -25,7 +25,7 @@ msgstr "Gastsitzung"
 #. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:436
 msgid "%A, %B %eth"
-msgstr "%A, der %e."
+msgstr "%A, der %e. %B"
 
 #. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:439
