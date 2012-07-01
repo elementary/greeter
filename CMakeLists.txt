@@ -38,7 +38,7 @@ PACKAGES
     gdk-x11-3.0
     x11
     clutter-gtk-1.0
-    indicator
+    indicator-0.4
 OPTIONS
     --vapidir=${CMAKE_CURRENT_SOURCE_DIR}/vapi
     )
