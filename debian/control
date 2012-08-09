@@ -14,6 +14,7 @@ Standards-Version: 3.8.4
 Package: pantheon-greeter
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
+Pre-Depends: dpkg (>= 1.15.6)
 Provides: lightdm-theme
 Description: Pantheon login screen
  Clutter-powered LightDM greeter resembling Unity greeter.
