@@ -2,13 +2,18 @@ Source: pantheon-greeter
 Section: x11
 Priority: optional
 Maintainer: Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>
-Build-Depends: cmake, debhelper (>= 7.0.50~), valac-0.16 (>= 0.16.0),
-               libgranite-dev, libindicator3-dev, liblightdm-gobject-1-dev, libclutter-gtk-1.0-dev
+Build-Depends: cmake,
+               debhelper (>= 7.0.50~),
+               libclutter-gtk-1.0-dev,
+               libgranite-dev,
+               libindicator3-dev,
+               liblightdm-gobject-1-dev,
+               valac-0.16 (>= 0.16.0)
 Standards-Version: 3.8.4
 
 Package: pantheon-greeter
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
 Provides: lightdm-theme
 Description: Pantheon login screen
  Clutter-powered LightDM greeter resembling Unity greeter.
