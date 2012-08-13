@@ -299,7 +299,7 @@ public class LoginBox : GtkClutter.Actor {
 			this.username.set_markup (get_user_markup (user, true));
 			
 			try {
-				this.image = new Gdk.Pixbuf.from_file (user.image);
+				this.image = new Gdk.Pixbuf.from_file_at_scale (user.image, 96, 96, true);
 			} catch (Error e) {
 				try {
 					this.image = Gtk.IconTheme.get_default ().load_icon ("avatar-default", 96, 0);
