@@ -45,6 +45,9 @@ OPTIONS
 
 add_subdirectory (po)
 
+include(GSettings)
+add_schema ("data/org.pantheon.desktop.greeter.gschema.xml")
+
 add_executable(pantheon-greeter ${VALA_C})
 
 install (TARGETS pantheon-greeter RUNTIME DESTINATION share/xgreeters)
