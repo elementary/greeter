@@ -7,31 +7,55 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-05-26 09:20+0200\n"
+"POT-Creation-Date: 2012-08-13 18:15+0200\n"
 "PO-Revision-Date: 2012-06-25 14:52+0000\n"
 "Last-Translator: MarkoD <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-26 05:48+0000\n"
-"X-Generator: Launchpad (build 15482)\n"
-
-#: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:356
-#: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:280
-msgid "Guest session"
-msgstr "Seja za gosta"
+"X-Launchpad-Export-Date: 2012-08-14 05:23+0000\n"
+"X-Generator: Launchpad (build 15791)\n"
 
 #. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:436
+#: /home/tom/Programming/pantheon-greeter/po/../src/ShadowedLabel.vala:82
 msgid "%A, %B %eth"
 msgstr "%A, %e. %B"
 
 #. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:439
+#: /home/tom/Programming/pantheon-greeter/po/../src/ShadowedLabel.vala:85
 msgid "%l:%M %p"
 msgstr "%k.%M"
 
-#: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:112
+#: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:94
+#: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:279
+msgid "Guest session"
+msgstr "Seja za gosta"
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:115
 msgid "Login"
 msgstr "Prijava"
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:183
+msgid "Shutdown"
+msgstr ""
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:184
+msgid "Suspend"
+msgstr ""
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:185
+msgid "Restart"
+msgstr ""
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:186
+msgid "Hibernate"
+msgstr ""
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:210
+msgid "Onscreen Keyboard"
+msgstr ""
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:215
+msgid "HighContrast"
+msgstr ""
