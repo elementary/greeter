@@ -7,55 +7,55 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-08-13 18:15+0200\n"
-"PO-Revision-Date: 2012-06-02 02:57+0000\n"
+"POT-Creation-Date: 2012-08-14 15:40-0500\n"
+"PO-Revision-Date: 2012-08-14 09:59+0000\n"
 "Last-Translator: Wang Dianjin <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-14 05:23+0000\n"
-"X-Generator: Launchpad (build 15791)\n"
+"X-Launchpad-Export-Date: 2012-08-15 05:15+0000\n"
+"X-Generator: Launchpad (build 15801)\n"
 
 #. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: /home/tom/Programming/pantheon-greeter/po/../src/ShadowedLabel.vala:82
+#: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:82
 msgid "%A, %B %eth"
 msgstr "%B，%A %eth"
 
 #. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: /home/tom/Programming/pantheon-greeter/po/../src/ShadowedLabel.vala:85
+#: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:85
 msgid "%l:%M %p"
 msgstr "%p %l:%M"
 
-#: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:94
-#: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:279
+#: /home/codygarver/greeter/po/../src/indicators.vala:183
+msgid "Shutdown"
+msgstr "关机"
+
+#: /home/codygarver/greeter/po/../src/indicators.vala:184
+msgid "Suspend"
+msgstr "待机"
+
+#: /home/codygarver/greeter/po/../src/indicators.vala:185
+msgid "Restart"
+msgstr "重启"
+
+#: /home/codygarver/greeter/po/../src/indicators.vala:186
+msgid "Hibernate"
+msgstr "休眠"
+
+#: /home/codygarver/greeter/po/../src/indicators.vala:210
+msgid "Onscreen Keyboard"
+msgstr "屏幕键盘"
+
+#: /home/codygarver/greeter/po/../src/indicators.vala:215
+msgid "HighContrast"
+msgstr "高对比度"
+
+#: /home/codygarver/greeter/po/../src/pantheon-greeter.vala:94
+#: /home/codygarver/greeter/po/../src/loginbox.vala:279
 msgid "Guest session"
 msgstr "客人会话"
 
-#: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:115
+#: /home/codygarver/greeter/po/../src/loginbox.vala:115
 msgid "Login"
 msgstr "关闭"
-
-#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:183
-msgid "Shutdown"
-msgstr ""
-
-#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:184
-msgid "Suspend"
-msgstr ""
-
-#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:185
-msgid "Restart"
-msgstr ""
-
-#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:186
-msgid "Hibernate"
-msgstr ""
-
-#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:210
-msgid "Onscreen Keyboard"
-msgstr ""
-
-#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:215
-msgid "HighContrast"
-msgstr ""
