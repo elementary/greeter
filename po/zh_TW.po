@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-08-14 15:40-0500\n"
-"PO-Revision-Date: 2012-07-06 08:09+0000\n"
-"Last-Translator: honki <honkiaa@gmail.com>\n"
+"PO-Revision-Date: 2012-08-17 00:47+0000\n"
+"Last-Translator: leo  <shing80333@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-15 05:15+0000\n"
-"X-Generator: Launchpad (build 15801)\n"
+"X-Launchpad-Export-Date: 2012-08-17 05:13+0000\n"
+"X-Generator: Launchpad (build 15810)\n"
 
 #. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:82
@@ -29,27 +29,27 @@ msgstr "%p %l:%M"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:183
 msgid "Shutdown"
-msgstr ""
+msgstr "關機"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:184
 msgid "Suspend"
-msgstr ""
+msgstr "待命"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:185
 msgid "Restart"
-msgstr ""
+msgstr "重新啟動"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:186
 msgid "Hibernate"
-msgstr ""
+msgstr "休眠"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:210
 msgid "Onscreen Keyboard"
-msgstr ""
+msgstr "螢幕小鍵盤"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:215
 msgid "HighContrast"
-msgstr ""
+msgstr "高對比"
 
 #: /home/codygarver/greeter/po/../src/pantheon-greeter.vala:94
 #: /home/codygarver/greeter/po/../src/loginbox.vala:279
