@@ -71,7 +71,7 @@ public class PantheonGreeter : Gtk.Window
 		indicators.add_constraint (new Clutter.BindConstraint (greeterbox, Clutter.BindCoordinate.WIDTH, 0));
 		
 		reposition ();
-		Gdk.Screen.get_default ().monitors_changed.connect (reposition);
+		get_screen ().monitors_changed.connect (reposition);
 		
 		loginbox.width = 500;
 		loginbox.height = 250;
@@ -85,7 +85,7 @@ public class PantheonGreeter : Gtk.Window
 		show_all ();
 		
 		/*get the names together*/
-		for (var i=0;i<users.users.length () + 1;i++) {
+		for (var i = 0; i < users.users.length () + 1; i++) {
 			if (i == users.users.length () && !greeter.has_guest_account_hint)
 				continue;
 			
@@ -119,9 +119,9 @@ public class PantheonGreeter : Gtk.Window
 		stage.add_child (d_left);
 		stage.add_child (d_right);
 		
-		d_left.width = d_right.width = stage.width/2;
+		d_left.width = d_right.width = stage.width / 2;
 		d_left.height = d_right.height = stage.height;
-		d_right.x = stage.width/2;
+		d_right.x = stage.width / 2;
 		
 		d_left.animate  (Clutter.AnimationMode.EASE_IN_CUBIC, 750, x:-d_left.width);
 		d_right.animate (Clutter.AnimationMode.EASE_IN_CUBIC, 750, x:stage.width);
@@ -142,7 +142,7 @@ public class PantheonGreeter : Gtk.Window
 		if (last_user == "")
 			current_user = 0;
 		else {
-			for (var i=0;i<users.users.length ();i++) {
+			for (var i = 0; i < users.users.length (); i++) {
 				if (users.users.nth_data (i).name == last_user)
 					current_user = i;
 			}
@@ -155,7 +155,7 @@ public class PantheonGreeter : Gtk.Window
 	void reposition ()
 	{
 		Gdk.Rectangle geometry;
-		Gdk.Screen.get_default ().get_monitor_geometry (Gdk.Screen.get_default ().get_primary_monitor (), out geometry);
+		get_screen ().get_monitor_geometry (get_screen ().get_primary_monitor (), out geometry);
 		
 		resize (geometry.width, geometry.height);
 		move (geometry.x, geometry.y);
@@ -163,7 +163,7 @@ public class PantheonGreeter : Gtk.Window
 		loginbox.y = Math.floorf (geometry.height / 2 - loginbox.height / 2);
 		name_container.y = loginbox.y;
 		
-		time.x = geometry.width - time.width - ((geometry.width > 1500)?100:10);
+		time.x = geometry.width - time.width - (geometry.width > 1500 ? 100 : 10);
 		time.y = geometry.height / 2 - time.height / 2;
 	}
 	
@@ -180,9 +180,9 @@ public class PantheonGreeter : Gtk.Window
 				var n_user = users.users.length ();
 				new_user ++;
 				
-				var sum = (greeter.has_guest_account_hint) ? n_user + 1 : n_user;
+				var sum = (int)(greeter.has_guest_account_hint ? n_user + 1 : n_user);
 				if (new_user >= sum)
-					new_user = (int)((greeter.has_guest_account_hint)?n_user : n_user - 1);
+					new_user = sum - 1;
 				break;
 			default:
 				return false;
@@ -224,9 +224,9 @@ public class PantheonGreeter : Gtk.Window
 			try {
 				greeter.start_session_sync (loginbox.current_session);
 			} catch (Error e) { warning (e.message); }
-				Gtk.main_quit ();
-			} else {
-				loginbox.wrong_pw ();
+			Gtk.main_quit ();
+		} else {
+			loginbox.wrong_pw ();
 		}
 	}
 }
@@ -243,14 +243,16 @@ public static int main (string [] args) {
 	Intl.textdomain ("pantheon-greeter");
 	
 	Gdk.get_default_root_window ().set_cursor (new Gdk.Cursor (Gdk.CursorType.LEFT_PTR));
-	Gtk.Settings.get_default ().gtk_theme_name = "elementary";
-	Gtk.Settings.get_default ().gtk_icon_theme_name = "elementary";
-	Gtk.Settings.get_default ().gtk_font_name = "Droid Sans";
-	Gtk.Settings.get_default ().gtk_xft_dpi= (int) (1024 * 96);
-	Gtk.Settings.get_default ().gtk_xft_antialias = 1;
-	Gtk.Settings.get_default ().gtk_xft_hintstyle = "hintslight";
-	Gtk.Settings.get_default ().gtk_xft_rgba = "rgb";
-	Gtk.Settings.get_default ().gtk_cursor_blink = true;
+	
+	var settings = Gtk.Settings.get_default ();
+	settings.gtk_theme_name = "elementary";
+	settings.gtk_icon_theme_name = "elementary";
+	settings.gtk_font_name = "Droid Sans";
+	settings.gtk_xft_dpi= (int) (1024 * 96);
+	settings.gtk_xft_antialias = 1;
+	settings.gtk_xft_hintstyle = "hintslight";
+	settings.gtk_xft_rgba = "rgb";
+	settings.gtk_cursor_blink = true;
 	
 	
 	new PantheonGreeter ();
