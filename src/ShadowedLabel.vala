@@ -10,25 +10,10 @@ public class ShadowedLabel : Actor
 			return _label;
 		}
 		set {
-			if (value == _label && buffer != null)
+			if (value == _label)
 				return;
 			
 			_label = value;
-			
-			buffer = new Granite.Drawing.BufferSurface ((int)width, (int)height);
-			var layout = Pango.cairo_create_layout (buffer.context);
-			layout.set_markup (label, -1);
-			
-			buffer.context.move_to (10, 0);
-			buffer.context.set_source_rgba (0, 0, 0, 1);
-			Pango.cairo_show_layout (buffer.context, layout);
-			Pango.cairo_show_layout (buffer.context, layout);
-			buffer.exponential_blur (10);
-			Pango.cairo_show_layout (buffer.context, layout);
-			Pango.cairo_show_layout (buffer.context, layout);
-			buffer.exponential_blur (5);
-			buffer.context.set_source_rgba (1, 1, 1, 1);
-			Pango.cairo_show_layout (buffer.context, layout);
 			
 			content.invalidate ();
 		}
@@ -51,8 +36,21 @@ public class ShadowedLabel : Actor
 		cr.paint ();
 		cr.set_operator (Cairo.Operator.OVER);
 		
-		if (buffer == null)
-			label = label;
+		var buffer = new Granite.Drawing.BufferSurface ((int)width, (int)height);
+		var layout = Pango.cairo_create_layout (buffer.context);
+		layout.set_markup (label, -1);
+		
+		buffer.context.move_to (10, 0);
+		buffer.context.set_source_rgba (0, 0, 0, 1);
+		Pango.cairo_show_layout (buffer.context, layout);
+		Pango.cairo_show_layout (buffer.context, layout);
+		buffer.exponential_blur (10);
+		Pango.cairo_show_layout (buffer.context, layout);
+		Pango.cairo_show_layout (buffer.context, layout);
+		buffer.exponential_blur (5);
+		buffer.context.set_source_rgba (1, 1, 1, 1);
+		Pango.cairo_show_layout (buffer.context, layout);
+		
 		cr.set_source_surface (buffer.surface, 0, 0);
 		cr.paint ();
 		
