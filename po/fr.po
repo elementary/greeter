@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-08-14 15:40-0500\n"
-"PO-Revision-Date: 2012-05-29 17:21+0000\n"
-"Last-Translator: Corentin Noël <tintou@mailoo.org>\n"
+"PO-Revision-Date: 2012-08-29 13:42+0000\n"
+"Last-Translator: jman6495 <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-28 10:27+0000\n"
+"X-Launchpad-Export-Date: 2012-08-30 05:28+0000\n"
 "X-Generator: Launchpad (build 15864)\n"
 
 #. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
@@ -29,27 +29,27 @@ msgstr "%H:%M"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:183
 msgid "Shutdown"
-msgstr ""
+msgstr "Éteindre"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:184
 msgid "Suspend"
-msgstr ""
+msgstr "Mettre en veille"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:185
 msgid "Restart"
-msgstr ""
+msgstr "Redémarrer"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:186
 msgid "Hibernate"
-msgstr ""
+msgstr "Veille prolongée"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:210
 msgid "Onscreen Keyboard"
-msgstr ""
+msgstr "Clavier Virtuel"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:215
 msgid "HighContrast"
-msgstr ""
+msgstr "Contraste élevé"
 
 #: /home/codygarver/greeter/po/../src/pantheon-greeter.vala:94
 #: /home/codygarver/greeter/po/../src/loginbox.vala:279
