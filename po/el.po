@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-08-14 15:40-0500\n"
-"PO-Revision-Date: 2012-06-18 13:50+0000\n"
-"Last-Translator: Nikos <nraptopoulos@gmail.com>\n"
+"PO-Revision-Date: 2012-09-01 08:12+0000\n"
+"Last-Translator: Filippos Kolyvas <fkolyvas@gmail.com>\n"
 "Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-28 10:27+0000\n"
-"X-Generator: Launchpad (build 15864)\n"
+"X-Launchpad-Export-Date: 2012-09-02 04:55+0000\n"
+"X-Generator: Launchpad (build 15890)\n"
 
 #. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:82
 msgid "%A, %B %eth"
-msgstr ""
+msgstr "%A, %e %b"
 
 #. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:85
@@ -29,27 +29,27 @@ msgstr "%l:%M %p"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:183
 msgid "Shutdown"
-msgstr ""
+msgstr "Τερματισμός υπολογιστή"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:184
 msgid "Suspend"
-msgstr ""
+msgstr "Αναστολή"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:185
 msgid "Restart"
-msgstr ""
+msgstr "Επανεκκίνηση"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:186
 msgid "Hibernate"
-msgstr ""
+msgstr "Αδρανοποίηση"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:210
 msgid "Onscreen Keyboard"
-msgstr ""
+msgstr "Πληκτρολόγιο οθόνης"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:215
 msgid "HighContrast"
-msgstr ""
+msgstr "Υψηλή αντίθεση"
 
 #: /home/codygarver/greeter/po/../src/pantheon-greeter.vala:94
 #: /home/codygarver/greeter/po/../src/loginbox.vala:279
@@ -58,4 +58,4 @@ msgstr "Συνεδρία επισκέπτη"
 
 #: /home/codygarver/greeter/po/../src/loginbox.vala:115
 msgid "Login"
-msgstr "Είσοδος"
+msgstr "Σύνδεση"
