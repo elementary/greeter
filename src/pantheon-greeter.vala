@@ -54,9 +54,10 @@ public class PantheonGreeter : Gtk.Window
 		greeterbox.add_child (loginbox.background);
 		greeterbox.add_child (loginbox.background_s);
 		greeterbox.add_child (time);
-		greeterbox.add_child (indicators);
 		greeterbox.add_child (name_container);
 		greeterbox.add_child (loginbox);
+		greeterbox.add_child (indicators);
+		
 		greeterbox.add_effect_with_name ("mirror", new MirrorEffect ());
 		greeterbox.depth = -1500;
 		
