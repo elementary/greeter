@@ -256,9 +256,7 @@ public class LoginBox : GtkClutter.Actor {
 	
 	public static string get_user_markup (LightDM.User user, bool title=false) {
 		var color = (title)?"color='#808080'":"";
-		var first_name = user.real_name.substring (0, user.real_name.index_of (" "));
-		return "<span face='Open Sans Light' font='32'>"+first_name+"</span>"+
-			"    <span face='Open Sans Normal' font='16' "+color+">"+user.name+"</span>";
+		return "<span face='Open Sans Light' font='32'>"+user.real_name+"</span>";
 	}
 	
 	public void wrong_pw () {

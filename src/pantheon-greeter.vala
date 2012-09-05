@@ -74,7 +74,7 @@ public class PantheonGreeter : Gtk.Window
 		reposition ();
 		get_screen ().monitors_changed.connect (reposition);
 		
-		loginbox.width = 500;
+		loginbox.width = 510;
 		loginbox.height = 250;
 		loginbox.x = 100;
 		name_container.x = loginbox.x;
