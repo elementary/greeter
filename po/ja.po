@@ -1,4 +1,4 @@
-# Amharic translation for pantheon-greeter
+# Japanese translation for pantheon-greeter
 # Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the pantheon-greeter package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-08-14 15:40-0500\n"
-"PO-Revision-Date: 2012-09-22 22:57+0000\n"
-"Last-Translator: samson <Unknown>\n"
-"Language-Team: Amharic <am@li.org>\n"
+"PO-Revision-Date: 2012-09-23 01:42+0000\n"
+"Last-Translator: Joji Bronner <Unknown>\n"
+"Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,42 +20,42 @@ msgstr ""
 #. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:82
 msgid "%A, %B %eth"
-msgstr "%A, %B %eth"
+msgstr ""
 
 #. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:85
 msgid "%l:%M %p"
-msgstr "%l:%M %p"
+msgstr ""
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:183
 msgid "Shutdown"
-msgstr "ማጥፊያ"
+msgstr "シャットダウン"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:184
 msgid "Suspend"
-msgstr "ማገጃ"
+msgstr "サスペンド"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:185
 msgid "Restart"
-msgstr "እንደገና ማስጀመሪያ"
+msgstr "再起動"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:186
 msgid "Hibernate"
-msgstr "ማስተኛ"
+msgstr "ハイバーネート"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:210
 msgid "Onscreen Keyboard"
-msgstr "የፊደል ገበታ በመመልከቻው ላይ"
+msgstr "オンスクリーンキーボード"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:215
 msgid "HighContrast"
-msgstr "ከፍተኛ ተነጻጻሪ"
+msgstr "高対照"
 
 #: /home/codygarver/greeter/po/../src/pantheon-greeter.vala:94
 #: /home/codygarver/greeter/po/../src/loginbox.vala:279
 msgid "Guest session"
-msgstr "የእንግዳ ክፍለ ጊዜ"
+msgstr "ゲストセッション"
 
 #: /home/codygarver/greeter/po/../src/loginbox.vala:115
 msgid "Login"
-msgstr "መግቢያ"
+msgstr "ログイン"

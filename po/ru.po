@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-08-14 15:40-0500\n"
-"PO-Revision-Date: 2012-06-01 13:23+0000\n"
-"Last-Translator: Nikita Putko <Unknown>\n"
+"PO-Revision-Date: 2012-09-22 17:03+0000\n"
+"Last-Translator: Vovk Vladimir <vladimir.vovk.at@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-28 10:28+0000\n"
-"X-Generator: Launchpad (build 15864)\n"
+"X-Launchpad-Export-Date: 2012-09-23 04:59+0000\n"
+"X-Generator: Launchpad (build 15985)\n"
 
 #. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:82
@@ -29,23 +29,23 @@ msgstr "%k:%M"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:183
 msgid "Shutdown"
-msgstr ""
+msgstr "Выключить"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:184
 msgid "Suspend"
-msgstr ""
+msgstr "Ждущий режим"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:185
 msgid "Restart"
-msgstr ""
+msgstr "Перезагрузить"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:186
 msgid "Hibernate"
-msgstr ""
+msgstr "Спящий режим"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:210
 msgid "Onscreen Keyboard"
-msgstr ""
+msgstr "Экранная клавиатура"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:215
 msgid "HighContrast"
