@@ -1,4 +1,4 @@
-# Slovenian translation for pantheon-greeter
+# Vietnamese translation for pantheon-greeter
 # Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the pantheon-greeter package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-08-14 15:40-0500\n"
-"PO-Revision-Date: 2012-09-23 18:09+0000\n"
-"Last-Translator: MarkoD <Unknown>\n"
-"Language-Team: Slovenian <sl@li.org>\n"
+"PO-Revision-Date: 2012-09-23 12:55+0000\n"
+"Last-Translator: Ngô Chin <ndtrung4419@gmail.com>\n"
+"Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,42 +20,42 @@ msgstr ""
 #. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:82
 msgid "%A, %B %eth"
-msgstr "%A, %e. %B"
+msgstr "%A, %e %B"
 
 #. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:85
 msgid "%l:%M %p"
-msgstr "%k.%M"
+msgstr "%l:%M %p"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:183
 msgid "Shutdown"
-msgstr "Ugasni"
+msgstr "Tắt máy"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:184
 msgid "Suspend"
-msgstr "V pripravljenost"
+msgstr "Tạm dừng"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:185
 msgid "Restart"
-msgstr "Znova zaženi"
+msgstr "Khởi động lại"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:186
 msgid "Hibernate"
-msgstr "V mirovanje"
+msgstr "Ngủ đông"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:210
 msgid "Onscreen Keyboard"
-msgstr "Tipkovnica na zaslonu"
+msgstr "Bàn phím ảo"
 
 #: /home/codygarver/greeter/po/../src/indicators.vala:215
 msgid "HighContrast"
-msgstr ""
+msgstr "Độ tương phản cao"
 
 #: /home/codygarver/greeter/po/../src/pantheon-greeter.vala:94
 #: /home/codygarver/greeter/po/../src/loginbox.vala:279
 msgid "Guest session"
-msgstr "Seja za gosta"
+msgstr "Phiên làm việc cho Khách"
 
 #: /home/codygarver/greeter/po/../src/loginbox.vala:115
 msgid "Login"
-msgstr "Prijava"
+msgstr "Đăng nhập"
