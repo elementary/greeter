@@ -74,15 +74,51 @@ public class TimeLabel : ShadowedLabel
 	bool update_time ()
 	{
 		var date = new GLib.DateTime.now_local ();
+		
+		/*Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. 
+		  %v is added here to provide the English date suffixes th, nd and so on*/
+		var day_format = _("%A, %B %e%v");
+		/*Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details*/
+		var time_format = _("%l:%M %p");
+		
+		//there is no %v, but we need one, so we add one
+		var num = date.get_day_of_month ();
+		day_format = day_format.replace ("%v", get_english_number_suffix (num));
+		
 		label = date.format (
 			"<span face='Open Sans Light' font='24'>"+
-			/*Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details*/
-			_("%A, %B %eth")+
+			day_format+
 			"</span>\n<span face='Raleway' font='72'>"+
-			/*Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details*/
-			_("%l:%M %p")+
+			time_format+
 			"</span>");
 		
 		return true;
+	}
+	
+	/**
+	 * Utility to get the English number suffix
+	 * @param number The number to find the the suffix for
+	 * @return The according English suffix
+	 **/
+	string get_english_number_suffix (int number)
+	{
+		number %= 100;
+		
+		if (number > 20)
+			number %= 10;
+		
+		switch (number) {
+		case 1:
+			return "st";
+		case 2:
+			return "nd";
+		case 3:
+			return "rd";
+		case 11:
+		case 12:
+		case 13:
+		default:
+			return "th";
+		}
 	}
 }
