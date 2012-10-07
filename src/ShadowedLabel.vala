@@ -74,15 +74,46 @@ public class TimeLabel : ShadowedLabel
 	bool update_time ()
 	{
 		var date = new GLib.DateTime.now_local ();
+		
+		/*Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. 
+		  %v is added here to provide th, nd and so on*/
+		var day = _("%A, %B %e%v");
+		
+		//there is no %v, but we need one, so we add one
+		var num = date.get_day_of_month ();
+		day = day.replace ("%v", get_english_number_suffix (num));
+		
 		label = date.format (
 			"<span face='Open Sans Light' font='24'>"+
-			/*Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details*/
-			_("%A, %B %eth")+
+			day+
 			"</span>\n<span face='Raleway' font='72'>"+
 			/*Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details*/
 			_("%l:%M %p")+
 			"</span>");
 		
 		return true;
+	}
+	
+	//utility to get the Enligh date suffix for day in month
+	string get_english_number_suffix (int number)
+	{
+		number %= 100;
+		
+		if (number > 20)
+			number %= 10;
+		
+		switch (number) {
+		case 1:
+			return "st";
+		case 2:
+			return "nd";
+		case 3:
+			return "rd";
+		case 11:
+		case 12:
+		case 13:
+		default:
+			return "th";
+		}
 	}
 }
