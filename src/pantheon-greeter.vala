@@ -13,6 +13,9 @@ public class PantheonGreeter : Gtk.Window
 	
 	Settings settings;
 	
+	//from this width on we use the shrinked down version
+	const int MIN_WIDTH = 1200;
+	
 	int _current_user = 0;
 	int current_user {
 		get {
@@ -72,12 +75,9 @@ public class PantheonGreeter : Gtk.Window
 		indicators.add_constraint (new Clutter.BindConstraint (greeterbox, Clutter.BindCoordinate.WIDTH, 0));
 		
 		reposition ();
-		get_screen ().monitors_changed.connect (reposition);
 		
 		loginbox.width = 510;
 		loginbox.height = 225;
-		loginbox.x = 100;
-		name_container.x = loginbox.x;
 		name_container.y = loginbox.y - current_user * 130.0f;
 		
 		clutter.key_release_event.connect (keyboard_navigation);
@@ -98,7 +98,6 @@ public class PantheonGreeter : Gtk.Window
 			
 			label.height = 75;
 			label.width = loginbox.width - 100;
-			label.x = 135;
 			label.y = i * 200 + label.height;
 			label.reactive = true;
 			label.button_release_event.connect ( (e) => {
@@ -112,6 +111,9 @@ public class PantheonGreeter : Gtk.Window
 			
 			name_container.add_child (label);
 		}
+		
+		reposition ();
+		get_screen ().monitors_changed.connect (reposition);
 		
 		/*opening animation*/
 		var d_left  = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
@@ -168,13 +170,20 @@ public class PantheonGreeter : Gtk.Window
 		Gdk.Rectangle geometry;
 		get_screen ().get_monitor_geometry (get_screen ().get_primary_monitor (), out geometry);
 		
+		bool small = geometry.width < MIN_WIDTH;
+		
+		loginbox.x = small ? 10 : 100;
+		name_container.x = loginbox.x;
+		foreach (var child in name_container.get_children ())
+			child.x = loginbox.x + 35;
+		
 		resize (geometry.width, geometry.height);
 		move (geometry.x, geometry.y);
 		
 		loginbox.y = Math.floorf (geometry.height / 2 - loginbox.height / 2);
 		name_container.y = loginbox.y;
 		
-		time.x = geometry.width - time.width - (geometry.width > 1500 ? 100 : 10);
+		time.x = geometry.width - time.width - (small ? 10 : 100);
 		time.y = geometry.height / 2 - time.height / 2;
 	}
 	
