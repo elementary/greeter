@@ -76,7 +76,7 @@ public class TimeLabel : ShadowedLabel
 		var date = new GLib.DateTime.now_local ();
 		
 		/*Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. 
-		  %v is added here to provide th, nd and so on*/
+		  %v is added here to provide the English date suffixes th, nd and so on*/
 		var day = _("%A, %B %e%v");
 		
 		//there is no %v, but we need one, so we add one
@@ -94,7 +94,11 @@ public class TimeLabel : ShadowedLabel
 		return true;
 	}
 	
-	//utility to get the Enligh date suffix for day in month
+	/**
+	 * Utility to get the Enligsh number suffix
+	 * @param number The number to find the the suffix for
+	 * @return The according English suffix
+	 **/
 	string get_english_number_suffix (int number)
 	{
 		number %= 100;
