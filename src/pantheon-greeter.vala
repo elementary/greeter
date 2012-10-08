@@ -15,6 +15,8 @@ public class PantheonGreeter : Gtk.Window
 	
 	//from this width on we use the shrinked down version
 	const int MIN_WIDTH = 1200;
+	//from this width on the clock wont fit anymore
+	const int NO_CLOCK_WIDTH = 920;
 	
 	int _current_user = 0;
 	int current_user {
@@ -185,6 +187,8 @@ public class PantheonGreeter : Gtk.Window
 		
 		time.x = geometry.width - time.width - (small ? 10 : 100);
 		time.y = geometry.height / 2 - time.height / 2;
+		
+		time.visible = geometry.width > NO_CLOCK_WIDTH; 
 	}
 	
 	bool keyboard_navigation (Gdk.EventKey e)
