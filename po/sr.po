@@ -7,55 +7,56 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-08-14 15:40-0500\n"
+"POT-Creation-Date: 2012-09-29 17:43+0200\n"
 "PO-Revision-Date: 2012-09-04 20:32+0000\n"
 "Last-Translator: Igor <Unknown>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-09-05 05:08+0000\n"
-"X-Generator: Launchpad (build 15901)\n"
+"X-Launchpad-Export-Date: 2012-10-08 05:34+0000\n"
+"X-Generator: Launchpad (build 16061)\n"
 
-#. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:82
-msgid "%A, %B %eth"
-msgstr "%A, %B %eth"
-
-#. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:85
-msgid "%l:%M %p"
-msgstr "%l:%M %p"
-
-#: /home/codygarver/greeter/po/../src/indicators.vala:183
-msgid "Shutdown"
-msgstr "Угаси"
-
-#: /home/codygarver/greeter/po/../src/indicators.vala:184
-msgid "Suspend"
-msgstr "Примири"
-
-#: /home/codygarver/greeter/po/../src/indicators.vala:185
-msgid "Restart"
-msgstr "Поново покрени"
-
-#: /home/codygarver/greeter/po/../src/indicators.vala:186
-msgid "Hibernate"
-msgstr "Хибернација"
-
-#: /home/codygarver/greeter/po/../src/indicators.vala:210
-msgid "Onscreen Keyboard"
-msgstr "Тастатура на Екрану"
-
-#: /home/codygarver/greeter/po/../src/indicators.vala:215
-msgid "HighContrast"
-msgstr "Велики контраст"
-
-#: /home/codygarver/greeter/po/../src/pantheon-greeter.vala:94
-#: /home/codygarver/greeter/po/../src/loginbox.vala:279
+#: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:95
+#: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:277
 msgid "Guest session"
 msgstr "Гост"
 
-#: /home/codygarver/greeter/po/../src/loginbox.vala:115
+#. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details.
+#. %v is added here to provide th, nd and so on
+#: /home/tom/Programming/pantheon-greeter/po/../src/ShadowedLabel.vala:80
+msgid "%A, %B %e%v"
+msgstr ""
+
+#. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
+#: /home/tom/Programming/pantheon-greeter/po/../src/ShadowedLabel.vala:93
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:183
+msgid "Shutdown"
+msgstr "Угаси"
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:184
+msgid "Suspend"
+msgstr "Примири"
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:185
+msgid "Restart"
+msgstr "Поново покрени"
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:186
+msgid "Hibernate"
+msgstr "Хибернација"
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:210
+msgid "Onscreen Keyboard"
+msgstr "Тастатура на Екрану"
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:215
+msgid "HighContrast"
+msgstr "Велики контраст"
+
+#: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:115
 msgid "Login"
 msgstr "Пријава"
