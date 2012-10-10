@@ -64,7 +64,7 @@ public class TimeLabel : ShadowedLabel
 	public TimeLabel ()
 	{
 		base ("");
-		width = 500;
+		width = 400;
 		height = 150;
 		
 		update_time ();
