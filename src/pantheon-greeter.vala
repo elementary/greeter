@@ -24,9 +24,11 @@ public class PantheonGreeter : Gtk.Window
 			return _current_user;
 		}
 		set {
+			name_container.get_children ().nth_data (_current_user).visible = true;
 			_current_user = value;
 			name_container.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, y:loginbox.y - _current_user * 200.0f);
 			loginbox.set_user (users.users.nth_data (_current_user));
+			name_container.get_children ().nth_data (_current_user).visible = false;
 		}
 	}
 	
