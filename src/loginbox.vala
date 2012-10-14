@@ -47,12 +47,9 @@ public class LoginBox : GtkClutter.Actor {
 			grid.remove ((_working)?avatar as Gtk.Widget:spinner as Gtk.Widget);
 			grid.attach ((_working)?spinner as Gtk.Widget:avatar as Gtk.Widget, 0, 0, 1, 3);
 			grid.show_all ();
+			spinner.start ();
 			if (LightDM.get_sessions ().length () == 1)
 				settings.hide ();
-			if (_working)
-				spinner.start ();
-			else
-				spinner.stop ();
 		}
 	}
 	
@@ -76,7 +73,7 @@ public class LoginBox : GtkClutter.Actor {
 		ulong lambda = 0;
 		lambda = bot.load_finished.connect (() => {
 			bot.visible = true;
-			bot.opacity = 255;
+			bot.opacity = 230;
 			top.animate (Clutter.AnimationMode.LINEAR, 300, opacity:0).completed.connect (() => {
 				top.visible = false;
 				top.get_parent ().set_child_above_sibling (bot, top);
@@ -99,6 +96,8 @@ public class LoginBox : GtkClutter.Actor {
 		
 		this.background = new Clutter.Texture ();
 		this.background_s = new Clutter.Texture ();
+		background.opacity = 230;
+		background_s.opacity = 230;
 		this.background.load_async = true;
 		this.background_s.load_async = true;
 		try {
@@ -143,6 +142,7 @@ public class LoginBox : GtkClutter.Actor {
 		
 		spinner = new Gtk.Spinner ();
 		spinner.valign = Gtk.Align.START;
+		spinner.start ();
 		spinner.set_size_request (97, 97);
 		
 		grid = new Gtk.Grid ();

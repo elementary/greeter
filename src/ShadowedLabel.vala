@@ -44,10 +44,10 @@ public class ShadowedLabel : Actor
 		buffer.context.set_source_rgba (0, 0, 0, 1);
 		Pango.cairo_show_layout (buffer.context, layout);
 		Pango.cairo_show_layout (buffer.context, layout);
-		buffer.exponential_blur (10);
+		buffer.exponential_blur (7);
 		Pango.cairo_show_layout (buffer.context, layout);
 		Pango.cairo_show_layout (buffer.context, layout);
-		buffer.exponential_blur (5);
+		buffer.exponential_blur (3);
 		buffer.context.set_source_rgba (1, 1, 1, 1);
 		Pango.cairo_show_layout (buffer.context, layout);
 		
