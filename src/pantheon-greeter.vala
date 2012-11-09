@@ -10,6 +10,7 @@ public class PantheonGreeter : Gtk.Window
 	Clutter.Actor name_container;
 	TimeLabel time;
 	Indicators indicators;
+	Wallpaper wallpaper;
 	
 	Settings settings;
 	
@@ -29,6 +30,8 @@ public class PantheonGreeter : Gtk.Window
 			name_container.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, y:loginbox.y - _current_user * 200.0f);
 			loginbox.set_user (users.users.nth_data (_current_user));
 			name_container.get_children ().nth_data (_current_user).visible = false;
+
+			wallpaper.set_wallpaper (users.users.nth_data (_current_user).background);
 		}
 	}
 	
@@ -45,6 +48,7 @@ public class PantheonGreeter : Gtk.Window
 		name_container = new Clutter.Actor ();
 		time = new TimeLabel ();
 		indicators = new Indicators (loginbox, settings);
+		wallpaper = new Wallpaper ();
 		
 		greeter.show_message.connect (wrong_pw);
 		greeter.show_prompt.connect (send_pw);
@@ -58,8 +62,8 @@ public class PantheonGreeter : Gtk.Window
 		var stage = clutter.get_stage () as Clutter.Stage;
 		stage.background_color = {0, 0, 0, 255};
 		
-		greeterbox.add_child (loginbox.background);
-		greeterbox.add_child (loginbox.background_s);
+		greeterbox.add_child (wallpaper.background);
+		greeterbox.add_child (wallpaper.background_s);
 		greeterbox.add_child (time);
 		greeterbox.add_child (name_container);
 		greeterbox.add_child (loginbox);
@@ -72,10 +76,10 @@ public class PantheonGreeter : Gtk.Window
 		
 		greeterbox.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
 		greeterbox.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
-		loginbox.background.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
-		loginbox.background.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
-		loginbox.background_s.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
-		loginbox.background_s.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
+		wallpaper.background.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
+		wallpaper.background.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
+		wallpaper.background_s.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
+		wallpaper.background_s.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
 		indicators.add_constraint (new Clutter.BindConstraint (greeterbox, Clutter.BindCoordinate.WIDTH, 0));
 		
 		reposition ();

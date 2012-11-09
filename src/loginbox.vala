@@ -14,8 +14,6 @@ public const string LIGHT_WINDOW_STYLE = """
 
 public class LoginBox : GtkClutter.Actor {
 	
-	public const string DEFAULT_WALLPAPER = "/usr/share/backgrounds/16.jpg";
-	
 	public LightDM.User current_user { get; private set; }
 	public string       current_session { get; private set; }
 	
@@ -27,9 +25,6 @@ public class LoginBox : GtkClutter.Actor {
 	Gtk.Grid                grid;
 	Gtk.Spinner             spinner;
 	Gdk.Pixbuf              image;
-	
-	public Clutter.Texture background;   //both not added to this box but to stage
-	public Clutter.Texture background_s; //double buffered!
 	
 	Granite.Drawing.BufferSurface buffer;
 	int shadow_blur = 20;
@@ -53,38 +48,6 @@ public class LoginBox : GtkClutter.Actor {
 		}
 	}
 	
-	bool second = false;
-	public void set_wallpaper (string? path) {
-		var file = (path == null || path == "") ? DEFAULT_WALLPAPER : path;
-		
-		var top = second ? background : background_s;
-		var bot = second ? background_s : background;
-		
-		if (file == top.filename)
-			return;
-		
-		top.detach_animation ();
-		bot.detach_animation ();
-		
-		try {
-			bot.set_from_file (file);
-		} catch (Error e) { warning (e.message); }
-		
-		ulong lambda = 0;
-		lambda = bot.load_finished.connect (() => {
-			bot.visible = true;
-			bot.opacity = 230;
-			top.animate (Clutter.AnimationMode.LINEAR, 300, opacity:0).completed.connect (() => {
-				top.visible = false;
-				top.get_parent ().set_child_above_sibling (bot, top);
-			});
-			
-			bot.disconnect (lambda);
-		});
-		
-		second = !second;
-	}
-	
 	public Gtk.Window draw_ref;
 	
 	public LoginBox (LightDM.Greeter greeter) {
@@ -93,16 +56,6 @@ public class LoginBox : GtkClutter.Actor {
 		
 		this.reactive = true;
 		this.scale_gravity = Clutter.Gravity.CENTER;
-		
-		this.background = new Clutter.Texture ();
-		this.background_s = new Clutter.Texture ();
-		background.opacity = 230;
-		background_s.opacity = 230;
-		this.background.load_async = true;
-		this.background_s.load_async = true;
-		try {
-			this.background.set_from_file (DEFAULT_WALLPAPER);
-		} catch (Error e) { warning (e.message); }
 		
 		try {
 			this.image = Gtk.IconTheme.get_default ().load_icon ("avatar-default", 96, 0);
@@ -276,8 +229,6 @@ public class LoginBox : GtkClutter.Actor {
 			this.username.set_markup ("<span face='Open Sans Light' font='24'>"+
 				_("Guest session")+"</span>");
 			
-			this.set_wallpaper ("");
-			
 			this.current_user = null;
 			this.current_session = greeter.default_session_hint;
 			this.password.set_sensitive (false);
@@ -304,9 +255,7 @@ public class LoginBox : GtkClutter.Actor {
 				} catch (Error e) { warning (e.message); }
 			}
 			this.avatar.queue_draw ();
-			if (!initial)
-				this.set_wallpaper ((user.background == null) ? "" : user.background);
-			
+
 			this.current_user = user;
 			this.current_session = user.session;
 			
