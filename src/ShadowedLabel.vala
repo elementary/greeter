@@ -15,7 +15,12 @@ public class ShadowedLabel : Actor
 			
 			_label = value;
 			
-			content.invalidate ();
+			var l = new Pango.Layout (Pango.cairo_font_map_get_default ().create_context ());
+			l.set_markup (label, -1);
+			Pango.Rectangle ink, log;
+			l.get_extents (out ink, out log);
+			width = Math.floorf (log.width / Pango.SCALE + 20);
+			height = Math.floorf (log.height / Pango.SCALE);
 		}
 	}
 	
@@ -64,8 +69,6 @@ public class TimeLabel : ShadowedLabel
 	public TimeLabel ()
 	{
 		base ("");
-		width = 400;
-		height = 150;
 		
 		update_time ();
 		Clutter.Threads.Timeout.add (5000, update_time);
