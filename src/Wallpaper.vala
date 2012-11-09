@@ -16,6 +16,9 @@ public class Wallpaper : Group
 		try {
 			background.set_from_file (get_default ());
 		} catch (Error e) { warning (e.message); }
+
+		add_child (background);
+		add_child (background_s);
 	}
 	
 	string get_default ()
@@ -47,11 +50,14 @@ public class Wallpaper : Group
 		
 		ulong lambda = 0;
 		lambda = bot.load_finished.connect (() => {
+			resize (bot);
+			
 			bot.visible = true;
 			bot.opacity = 230;
+			
 			top.animate (Clutter.AnimationMode.LINEAR, 300, opacity:0).completed.connect (() => {
 				top.visible = false;
-				top.get_parent ().set_child_above_sibling (bot, top);
+				set_child_above_sibling (bot, top);
 			});
 			
 			bot.disconnect (lambda);
@@ -60,4 +66,25 @@ public class Wallpaper : Group
 		second = !second;
 	}
 	
+	public void resize (Texture? tex = null)
+	{
+		if (tex == null)
+			tex = second ? background : background_s;
+		
+		int w, h;
+		tex.get_base_size (out w, out h);
+		
+		if (width > (w * height) / h) {
+			tex.width = width;
+			tex.height = (int)(h * width / w);
+			
+			if (height > tex.height) {
+				tex.height = height;
+				tex.width = (int)(w * height / h);
+			}
+		} else {
+			tex.height = height;
+			tex.width = (int)(w * height / h);
+		}
+	}
 }

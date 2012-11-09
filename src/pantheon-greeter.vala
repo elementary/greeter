@@ -62,8 +62,7 @@ public class PantheonGreeter : Gtk.Window
 		var stage = clutter.get_stage () as Clutter.Stage;
 		stage.background_color = {0, 0, 0, 255};
 		
-		greeterbox.add_child (wallpaper.background);
-		greeterbox.add_child (wallpaper.background_s);
+		greeterbox.add_child (wallpaper);
 		greeterbox.add_child (time);
 		greeterbox.add_child (name_container);
 		greeterbox.add_child (loginbox);
@@ -76,10 +75,6 @@ public class PantheonGreeter : Gtk.Window
 		
 		greeterbox.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
 		greeterbox.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
-		wallpaper.background.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
-		wallpaper.background.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
-		wallpaper.background_s.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
-		wallpaper.background_s.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
 		indicators.add_constraint (new Clutter.BindConstraint (greeterbox, Clutter.BindCoordinate.WIDTH, 0));
 		
 		reposition ();
@@ -177,7 +172,6 @@ public class PantheonGreeter : Gtk.Window
 	{
 		Gdk.Rectangle geometry;
 		get_screen ().get_monitor_geometry (get_screen ().get_primary_monitor (), out geometry);
-		
 		bool small = geometry.width < MIN_WIDTH;
 		
 		loginbox.x = small ? 10 : 100;
@@ -195,6 +189,10 @@ public class PantheonGreeter : Gtk.Window
 		time.y = geometry.height / 2 - time.height / 2;
 		
 		time.visible = geometry.width > NO_CLOCK_WIDTH; 
+		
+		wallpaper.width = geometry.width;
+		wallpaper.height = geometry.height;
+		wallpaper.resize ();
 	}
 	
 	bool keyboard_navigation (Gdk.EventKey e)
