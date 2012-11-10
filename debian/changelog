@@ -1,5 +1,5 @@
-pantheon-lightdm-theme (0.1) oneiric; urgency=low
+pantheon-greeter (0.1) UNRELEASED; urgency=low
 
-  * Initial Release.
+  * Initial release.
 
  -- Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>  Sat, 24 Sep 2011 00:06:23 +0400
