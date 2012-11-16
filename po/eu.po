@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-09-29 17:43+0200\n"
-"PO-Revision-Date: 2012-10-10 19:47+0000\n"
-"Last-Translator: Asier Iturralde Sarasola <Unknown>\n"
+"PO-Revision-Date: 2012-11-15 21:18+0000\n"
+"Last-Translator: Ibai Oihanguren <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-11 05:42+0000\n"
-"X-Generator: Launchpad (build 16118)\n"
+"X-Launchpad-Export-Date: 2012-11-16 04:58+0000\n"
+"X-Generator: Launchpad (build 16272)\n"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:95
 #: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:277
@@ -26,12 +26,12 @@ msgstr "Gonbidatuaren saioa"
 #. %v is added here to provide th, nd and so on
 #: /home/tom/Programming/pantheon-greeter/po/../src/ShadowedLabel.vala:80
 msgid "%A, %B %e%v"
-msgstr ""
+msgstr "%Bk %e, %A"
 
 #. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/tom/Programming/pantheon-greeter/po/../src/ShadowedLabel.vala:93
 msgid "%l:%M %p"
-msgstr "%l:%M %p"
+msgstr "%H:%M"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:183
 msgid "Shutdown"

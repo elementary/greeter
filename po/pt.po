@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-09-29 17:43+0200\n"
-"PO-Revision-Date: 2012-08-14 14:38+0000\n"
-"Last-Translator: Jesse Wayde Brandao <Unknown>\n"
+"PO-Revision-Date: 2012-11-15 10:40+0000\n"
+"Last-Translator: Sérgio Marques <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-08 05:34+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2012-11-16 04:58+0000\n"
+"X-Generator: Launchpad (build 16272)\n"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:95
 #: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:277
@@ -26,7 +26,7 @@ msgstr "Sessão de convidado"
 #. %v is added here to provide th, nd and so on
 #: /home/tom/Programming/pantheon-greeter/po/../src/ShadowedLabel.vala:80
 msgid "%A, %B %e%v"
-msgstr ""
+msgstr "%A, %e de %B de %Y"
 
 #. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/tom/Programming/pantheon-greeter/po/../src/ShadowedLabel.vala:93
@@ -35,7 +35,7 @@ msgstr "%l:%M %p"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:183
 msgid "Shutdown"
-msgstr "Encerrar"
+msgstr "Desligar"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:184
 msgid "Suspend"
@@ -51,11 +51,11 @@ msgstr "Hibernar"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:210
 msgid "Onscreen Keyboard"
-msgstr "Teclado no Ecrã"
+msgstr "Teclado no ecrã"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:215
 msgid "HighContrast"
-msgstr "Alto Contraste"
+msgstr "Alto contraste"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:115
 msgid "Login"
