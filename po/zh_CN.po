@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-09-29 17:43+0200\n"
-"PO-Revision-Date: 2012-10-24 12:34+0000\n"
-"Last-Translator: Wang Dianjin <Unknown>\n"
+"PO-Revision-Date: 2012-11-20 12:13+0000\n"
+"Last-Translator: Yangyu Huang <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-25 06:14+0000\n"
-"X-Generator: Launchpad (build 16179)\n"
+"X-Launchpad-Export-Date: 2012-11-21 05:13+0000\n"
+"X-Generator: Launchpad (build 16293)\n"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:95
 #: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:277
@@ -59,4 +59,4 @@ msgstr "高对比度"
 
 #: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:115
 msgid "Login"
-msgstr "关闭"
+msgstr "登录"
