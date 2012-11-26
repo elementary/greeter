@@ -4,11 +4,11 @@ public const string LIGHT_WINDOW_STYLE = """
 		background-image:none;
 		background-color:@bg_color;
 		
-		border-radius: 6px;
+		border-radius: 5px;
 		
-		border-width:1px;
+		border-width: 1px;
 		border-style: solid;
-		border-color: alpha (#000, 0.25);
+		border-color: alpha (#000, 0.4);
 	}
 """;
 
@@ -27,10 +27,10 @@ public class LoginBox : GtkClutter.Actor {
 	Gdk.Pixbuf              image;
 	
 	Granite.Drawing.BufferSurface buffer;
-	int shadow_blur = 20;
+	int shadow_blur = 25;
 	int shadow_x	= 0;
-	int shadow_y	= 4;
-	double shadow_alpha = 0.5;
+	int shadow_y	= 6;
+	double shadow_alpha = 0.6;
 	
 	LightDM.Greeter greeter;
 	
@@ -58,7 +58,7 @@ public class LoginBox : GtkClutter.Actor {
 		this.scale_gravity = Clutter.Gravity.CENTER;
 		
 		try {
-			this.image = Gtk.IconTheme.get_default ().load_icon ("avatar-default", 96, 0);
+			this.image = Gtk.IconTheme.get_default ().load_icon ("avatar-default", 92, 0);
 		} catch (Error e) { warning (e.message); }
 		
 		this.avatar = new Gtk.EventBox ();
@@ -67,22 +67,23 @@ public class LoginBox : GtkClutter.Actor {
 		this.login = new Gtk.Button.with_label (_("Login"));
 		this.settings = new Gtk.ToggleButton ();
 		
-		avatar.set_size_request (97, 97);
+		avatar.set_size_request (92, 92);
 		avatar.valign = Gtk.Align.START;
 		avatar.visible_window = false;
 		username.hexpand = true;
 		username.halign  = Gtk.Align.START;
 		username.ellipsize = Pango.EllipsizeMode.END;
-		username.margin_top = 10;
-		username.height_request = 65;
-		login.expand	= false;
+		username.margin_top = 6;
+		username.height_request = 1;
+		login.expand = false;
 		login.height_request = 1;
-		login.width_request = 140;
-		login.margin_top	= 30;
+		login.width_request = 120;
+		login.margin_top = 26;
 		login.halign = Gtk.Align.END;
 		settings.valign  = Gtk.Align.START;
 		settings.relief  = Gtk.ReliefStyle.NONE;
 		settings.add (new Gtk.Image.from_icon_name ("application-menu-symbolic", Gtk.IconSize.MENU));
+		password.margin_top = 11;
 		password.caps_lock_warning = true;
 		password.set_visibility (false);
 		password.key_release_event.connect ( (e) => {
@@ -94,9 +95,9 @@ public class LoginBox : GtkClutter.Actor {
 		});
 		
 		spinner = new Gtk.Spinner ();
-		spinner.valign = Gtk.Align.START;
+		spinner.valign = Gtk.Align.CENTER;
 		spinner.start ();
-		spinner.set_size_request (97, 97);
+		spinner.set_size_request (92, 24);
 		
 		grid = new Gtk.Grid ();
 		
@@ -108,13 +109,13 @@ public class LoginBox : GtkClutter.Actor {
 		
 		grid.margin = shadow_blur + 12;
 		grid.margin_top += 5;
-		grid.margin_bottom -= 10;
+		grid.margin_bottom -= 12;
 		grid.column_spacing = 12;
 		
 		avatar.draw.connect ( (ctx) => {
-			Granite.Drawing.Utilities.cairo_rounded_rectangle (ctx, 0.5, 0.5, 
-				avatar.get_allocated_width ()-1, avatar.get_allocated_height ()-1, 5);
-			Gdk.cairo_set_source_pixbuf (ctx, image, 0.5, 0.5);
+			Granite.Drawing.Utilities.cairo_rounded_rectangle (ctx, 0, 0, 
+				avatar.get_allocated_width (), avatar.get_allocated_height (), 3);
+			Gdk.cairo_set_source_pixbuf (ctx, image, 0, 0);
 			ctx.fill_preserve ();
 			ctx.set_line_width (1);
 			ctx.set_source_rgba (0, 0, 0, 0.3);
@@ -180,14 +181,14 @@ public class LoginBox : GtkClutter.Actor {
 			
 			this.buffer = new Granite.Drawing.BufferSurface (w, h);
 			
-			this.buffer.context.rectangle (shadow_blur + shadow_x, 
-				shadow_blur + shadow_y, w - shadow_blur*2 + shadow_x, h - shadow_blur*2 + shadow_y);
+			this.buffer.context.rectangle (shadow_blur + shadow_x + 3, 
+				shadow_blur + shadow_y*2, w - shadow_blur*2 + shadow_x - 6, h - shadow_blur*2 - shadow_y);
 			this.buffer.context.set_source_rgba (0, 0, 0, shadow_alpha);
 			this.buffer.context.fill ();
 			this.buffer.exponential_blur (shadow_blur / 2-2);
 			
 			draw_ref.get_style_context ().render_activity (this.buffer.context, shadow_blur + shadow_x, 
-				shadow_blur + shadow_y, w - shadow_blur*2 + shadow_x, h - shadow_blur*2 + shadow_y);
+				shadow_blur + shadow_y -2, w - shadow_blur*2 + shadow_x, h - shadow_blur*2);
 		});
 		
 		this.get_widget ().draw.connect ( (ctx) => {
@@ -208,16 +209,15 @@ public class LoginBox : GtkClutter.Actor {
 	}
 	
 	public static string get_user_markup (LightDM.User user, bool title=false) {
-		var color = (title)?"color='#808080'":"";
-		return "<span face='Open Sans Light' font='32'>"+user.real_name+"</span>";
+		return "<span face='Open Sans Light' font='24'>"+user.real_name+"</span>";
 	}
 	
 	public void wrong_pw () {
 		this.password.text = "";
-		this.animate (Clutter.AnimationMode.EASE_IN_BOUNCE, 200, scale_x:1.3f, scale_y:1.3f).
+		this.animate (Clutter.AnimationMode.EASE_IN_BOUNCE, 150, scale_x:0.9f, scale_y: 0.9f).
 			completed.connect ( () => {
 				Clutter.Threads.Timeout.add (1, () => {
-				this.animate (Clutter.AnimationMode.EASE_OUT_BOUNCE, 200, scale_x:1.0f, scale_y:1.0f);
+				this.animate (Clutter.AnimationMode.EASE_OUT_BOUNCE, 150, scale_x:1.0f, scale_y: 1.0f);
 				return false;
 				});
 			});

@@ -76,17 +76,17 @@ public class Indicators : GtkClutter.Actor {
     
     ~Indicators ()
     {
-		if (keyboard_pid != 0) {
-			Posix.kill (keyboard_pid, Posix.SIGKILL);
-			int status;
-			Posix.waitpid (keyboard_pid, out status, 0);
-			keyboard_pid = 0;
-		}
-	}
-	
-	private async void run () {
-		try {
-			var proxy = new GLib.DBusProxy.for_bus_sync (GLib.BusType.SESSION,
+        if (keyboard_pid != 0) {
+            Posix.kill (keyboard_pid, Posix.SIGKILL);
+            int status;
+            Posix.waitpid (keyboard_pid, out status, 0);
+            keyboard_pid = 0;
+        }
+    }
+
+    private async void run () {
+        try {
+            var proxy = new GLib.DBusProxy.for_bus_sync (GLib.BusType.SESSION,
                                                          GLib.DBusProxyFlags.NONE, null, 
                                                          "org.gnome.SettingsDaemon",
                                                          "/org/gnome/SettingsDaemon",
@@ -126,7 +126,7 @@ public class Indicators : GtkClutter.Actor {
         (get_widget () as Gtk.Container).add (bar);
         
         bar.pack_direction = Gtk.PackDirection.RTL;
-        height = 28;
+        height = 26;
         
         var transp = new Gtk.CssProvider ();
         try {
