@@ -75,16 +75,16 @@ public class LoginBox : GtkClutter.Actor {
 		username.ellipsize = Pango.EllipsizeMode.END;
 		username.margin_top = 6;
 		username.height_request = 1;
-		login.expand	= false;
+		login.expand = false;
 		login.height_request = 1;
 		login.width_request = 120;
-		login.margin_top	= 26;
+		login.margin_top = 26;
 		login.halign = Gtk.Align.END;
 		settings.valign  = Gtk.Align.START;
 		settings.relief  = Gtk.ReliefStyle.NONE;
 		settings.add (new Gtk.Image.from_icon_name ("application-menu-symbolic", Gtk.IconSize.MENU));
-        password.margin_top = 11;		
-        password.caps_lock_warning = true;
+		password.margin_top = 11;
+		password.caps_lock_warning = true;
 		password.set_visibility (false);
 		password.key_release_event.connect ( (e) => {
 			if (e.keyval == Gdk.Key.Return) {
