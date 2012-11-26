@@ -27,10 +27,10 @@ public class LoginBox : GtkClutter.Actor {
 	Gdk.Pixbuf              image;
 	
 	Granite.Drawing.BufferSurface buffer;
-	int shadow_blur = 20;
+	int shadow_blur = 30;
 	int shadow_x	= 0;
-	int shadow_y	= 4;
-	double shadow_alpha = 0.6;
+	int shadow_y	= 6;
+	double shadow_alpha = 0.8;
 	
 	LightDM.Greeter greeter;
 	
@@ -73,17 +73,18 @@ public class LoginBox : GtkClutter.Actor {
 		username.hexpand = true;
 		username.halign  = Gtk.Align.START;
 		username.ellipsize = Pango.EllipsizeMode.END;
-		username.margin_top = 10;
-		username.height_request = 65;
+		username.margin_top = 6;
+		username.height_request = 1;
 		login.expand	= false;
 		login.height_request = 1;
-		login.width_request = 140;
-		login.margin_top	= 30;
+		login.width_request = 120;
+		login.margin_top	= 26;
 		login.halign = Gtk.Align.END;
 		settings.valign  = Gtk.Align.START;
 		settings.relief  = Gtk.ReliefStyle.NONE;
 		settings.add (new Gtk.Image.from_icon_name ("application-menu-symbolic", Gtk.IconSize.MENU));
-		password.caps_lock_warning = true;
+        password.margin_top = 11;		
+        password.caps_lock_warning = true;
 		password.set_visibility (false);
 		password.key_release_event.connect ( (e) => {
 			if (e.keyval == Gdk.Key.Return) {
@@ -108,13 +109,13 @@ public class LoginBox : GtkClutter.Actor {
 		
 		grid.margin = shadow_blur + 12;
 		grid.margin_top += 5;
-		grid.margin_bottom -= 10;
+		grid.margin_bottom -= 12;
 		grid.column_spacing = 12;
 		
 		avatar.draw.connect ( (ctx) => {
-			Granite.Drawing.Utilities.cairo_rounded_rectangle (ctx, 0.5, 0.5, 
-				avatar.get_allocated_width ()-1, avatar.get_allocated_height ()-1, 5);
-			Gdk.cairo_set_source_pixbuf (ctx, image, 0.5, 0.5);
+			Granite.Drawing.Utilities.cairo_rounded_rectangle (ctx, 0, 0, 
+				avatar.get_allocated_width (), avatar.get_allocated_height (), 3);
+			Gdk.cairo_set_source_pixbuf (ctx, image, 0, 0);
 			ctx.fill_preserve ();
 			ctx.set_line_width (1);
 			ctx.set_source_rgba (0, 0, 0, 0.3);
@@ -180,14 +181,14 @@ public class LoginBox : GtkClutter.Actor {
 			
 			this.buffer = new Granite.Drawing.BufferSurface (w, h);
 			
-			this.buffer.context.rectangle (shadow_blur + shadow_x, 
-				shadow_blur + shadow_y, w - shadow_blur*2 + shadow_x, h - shadow_blur*2 + shadow_y);
+			this.buffer.context.rectangle (shadow_blur + shadow_x + 3, 
+				shadow_blur + shadow_y*2, w - shadow_blur*2 + shadow_x - 6, h - shadow_blur*2 - shadow_y + 8);
 			this.buffer.context.set_source_rgba (0, 0, 0, shadow_alpha);
 			this.buffer.context.fill ();
 			this.buffer.exponential_blur (shadow_blur / 2-2);
 			
 			draw_ref.get_style_context ().render_activity (this.buffer.context, shadow_blur + shadow_x, 
-				shadow_blur + shadow_y, w - shadow_blur*2 + shadow_x, h - shadow_blur*2 + shadow_y);
+				shadow_blur + shadow_y -2, w - shadow_blur*2 + shadow_x, h - shadow_blur*2 + 8);
 		});
 		
 		this.get_widget ().draw.connect ( (ctx) => {
@@ -208,7 +209,6 @@ public class LoginBox : GtkClutter.Actor {
 	}
 	
 	public static string get_user_markup (LightDM.User user, bool title=false) {
-		var color = (title)?"color='#808080'":"";
 		return "<span face='Open Sans Light' font='24'>"+user.real_name+"</span>";
 	}
 	
