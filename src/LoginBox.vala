@@ -139,7 +139,7 @@ public class LoginBox : GtkClutter.Actor {
 
             var but = new Gtk.RadioButton.with_label (null, LightDM.get_sessions ().nth_data (0).name);
             box.pack_start (but, false);
-            but.active = LightDM.get_sessions ().nth_data (0).key == current_session
+            but.active = LightDM.get_sessions ().nth_data (0).key == current_session;
 
             but.toggled.connect (() => {
                 current_session = LightDM.get_sessions ().nth_data (0).key;
