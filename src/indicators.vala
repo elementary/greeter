@@ -126,7 +126,7 @@ public class Indicators : GtkClutter.Actor {
         (get_widget () as Gtk.Container).add (bar);
         
         bar.pack_direction = Gtk.PackDirection.RTL;
-        height = 28;
+        height = 26;
         
         var transp = new Gtk.CssProvider ();
         try {
