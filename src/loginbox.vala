@@ -214,10 +214,10 @@ public class LoginBox : GtkClutter.Actor {
 	
 	public void wrong_pw () {
 		this.password.text = "";
-		this.animate (Clutter.AnimationMode.EASE_IN_BOUNCE, 200, scale_x:1.3f, scale_y:1.3f).
+		this.animate (Clutter.AnimationMode.EASE_IN_BOUNCE, 150, scale_x:0.9f, scale_y: 0.9f).
 			completed.connect ( () => {
 				Clutter.Threads.Timeout.add (1, () => {
-				this.animate (Clutter.AnimationMode.EASE_OUT_BOUNCE, 200, scale_x:1.0f, scale_y:1.0f);
+				this.animate (Clutter.AnimationMode.EASE_OUT_BOUNCE, 150, scale_x:1.0f, scale_y: 1.0f);
 				return false;
 				});
 			});
