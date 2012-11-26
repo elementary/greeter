@@ -30,7 +30,7 @@ public class LoginBox : GtkClutter.Actor {
 	int shadow_blur = 20;
 	int shadow_x	= 0;
 	int shadow_y	= 4;
-	double shadow_alpha = 0.5;
+	double shadow_alpha = 0.6;
 	
 	LightDM.Greeter greeter;
 	
@@ -58,7 +58,7 @@ public class LoginBox : GtkClutter.Actor {
 		this.scale_gravity = Clutter.Gravity.CENTER;
 		
 		try {
-			this.image = Gtk.IconTheme.get_default ().load_icon ("avatar-default", 96, 0);
+			this.image = Gtk.IconTheme.get_default ().load_icon ("avatar-default", 92, 0);
 		} catch (Error e) { warning (e.message); }
 		
 		this.avatar = new Gtk.EventBox ();
@@ -67,7 +67,7 @@ public class LoginBox : GtkClutter.Actor {
 		this.login = new Gtk.Button.with_label (_("Login"));
 		this.settings = new Gtk.ToggleButton ();
 		
-		avatar.set_size_request (97, 97);
+		avatar.set_size_request (92, 92);
 		avatar.valign = Gtk.Align.START;
 		avatar.visible_window = false;
 		username.hexpand = true;
@@ -96,7 +96,7 @@ public class LoginBox : GtkClutter.Actor {
 		spinner = new Gtk.Spinner ();
 		spinner.valign = Gtk.Align.START;
 		spinner.start ();
-		spinner.set_size_request (97, 97);
+		spinner.set_size_request (24, 24);
 		
 		grid = new Gtk.Grid ();
 		
@@ -209,7 +209,7 @@ public class LoginBox : GtkClutter.Actor {
 	
 	public static string get_user_markup (LightDM.User user, bool title=false) {
 		var color = (title)?"color='#808080'":"";
-		return "<span face='Open Sans Light' font='32'>"+user.real_name+"</span>";
+		return "<span face='Open Sans Light' font='24'>"+user.real_name+"</span>";
 	}
 	
 	public void wrong_pw () {

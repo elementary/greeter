@@ -45,14 +45,12 @@ public class ShadowedLabel : Actor
 		var layout = Pango.cairo_create_layout (buffer.context);
 		layout.set_markup (label, -1);
 		
-		buffer.context.move_to (10, 0);
+		buffer.context.move_to (0, 1);
 		buffer.context.set_source_rgba (0, 0, 0, 1);
 		Pango.cairo_show_layout (buffer.context, layout);
-		Pango.cairo_show_layout (buffer.context, layout);
-		buffer.exponential_blur (7);
-		Pango.cairo_show_layout (buffer.context, layout);
-		Pango.cairo_show_layout (buffer.context, layout);
 		buffer.exponential_blur (3);
+
+		buffer.context.move_to (0, 0);
 		buffer.context.set_source_rgba (1, 1, 1, 1);
 		Pango.cairo_show_layout (buffer.context, layout);
 		
