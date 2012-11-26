@@ -27,10 +27,10 @@ public class LoginBox : GtkClutter.Actor {
 	Gdk.Pixbuf              image;
 	
 	Granite.Drawing.BufferSurface buffer;
-	int shadow_blur = 30;
+	int shadow_blur = 25;
 	int shadow_x	= 0;
 	int shadow_y	= 6;
-	double shadow_alpha = 0.8;
+	double shadow_alpha = 0.6;
 	
 	LightDM.Greeter greeter;
 	
@@ -95,9 +95,9 @@ public class LoginBox : GtkClutter.Actor {
 		});
 		
 		spinner = new Gtk.Spinner ();
-		spinner.valign = Gtk.Align.START;
+		spinner.valign = Gtk.Align.CENTER;
 		spinner.start ();
-		spinner.set_size_request (24, 24);
+		spinner.set_size_request (92, 24);
 		
 		grid = new Gtk.Grid ();
 		
@@ -182,13 +182,13 @@ public class LoginBox : GtkClutter.Actor {
 			this.buffer = new Granite.Drawing.BufferSurface (w, h);
 			
 			this.buffer.context.rectangle (shadow_blur + shadow_x + 3, 
-				shadow_blur + shadow_y*2, w - shadow_blur*2 + shadow_x - 6, h - shadow_blur*2 - shadow_y + 8);
+				shadow_blur + shadow_y*2, w - shadow_blur*2 + shadow_x - 6, h - shadow_blur*2 - shadow_y);
 			this.buffer.context.set_source_rgba (0, 0, 0, shadow_alpha);
 			this.buffer.context.fill ();
 			this.buffer.exponential_blur (shadow_blur / 2-2);
 			
 			draw_ref.get_style_context ().render_activity (this.buffer.context, shadow_blur + shadow_x, 
-				shadow_blur + shadow_y -2, w - shadow_blur*2 + shadow_x, h - shadow_blur*2 + 8);
+				shadow_blur + shadow_y -2, w - shadow_blur*2 + shadow_x, h - shadow_blur*2);
 		});
 		
 		this.get_widget ().draw.connect ( (ctx) => {
