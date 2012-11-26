@@ -4,11 +4,11 @@ public const string LIGHT_WINDOW_STYLE = """
 		background-image:none;
 		background-color:@bg_color;
 		
-		border-radius: 6px;
+		border-radius: 5px;
 		
-		border-width:1px;
+		border-width: 1px;
 		border-style: solid;
-		border-color: alpha (#000, 0.25);
+		border-color: alpha (#000, 0.4);
 	}
 """;
 
