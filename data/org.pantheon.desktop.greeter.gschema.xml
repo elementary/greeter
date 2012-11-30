@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-	<schema path="/org/pantheon/desktop/greeter/" id="org.pantheon.desktop.greeter" gettext-domain="pantheon-greeter">
-		<key name="last-user" type="s">
-			<default>''</default>
-			<summary>The last selected user</summary>
-			<description>The user that will be selected by default.</description>
-		</key>
-		<key name="high-contrast" type="b">
-			<default>false</default>
-			<summary></summary>
-			<description></description>
-		</key>
-		<key name="onscreen-keyboard" type="b">
-			<default>false</default>
-			<summary></summary>
-			<description></description>
-		</key>
-		<key name="default-wallpaper" type="s">
-			<default><![CDATA['/usr/share/backgrounds/elementaryos-default']]></default>
-			<summary>Default Wallpaper</summary>
-			<description>Default wallpaper used for guest accounts and those which don't have a wallpaper set</description>
-		</key>
-	</schema>
+  <schema path="/org/pantheon/desktop/greeter/" id="org.pantheon.desktop.greeter" gettext-domain="pantheon-greeter">
+    <key name="last-user" type="s">
+      <default>''</default>
+      <summary>The last selected user</summary>
+      <description>The user that will be selected by default.</description>
+    </key>
+
+    <key name="high-contrast" type="b">
+      <default>false</default>
+      <summary></summary>
+      <description></description>
+    </key>
+
+    <key name="onscreen-keyboard" type="b">
+      <default>false</default>
+      <summary></summary>
+      <description></description>
+    </key>
+
+    <key name="default-wallpaper" type="s">
+      <default><![CDATA['/usr/share/backgrounds/elementaryos-default']]></default>
+      <summary>Default Wallpaper</summary>
+      <description>Default wallpaper used for guest accounts and those which haven't set a wallpaper.</description>
+    </key>
+  </schema>
 </schemalist>
