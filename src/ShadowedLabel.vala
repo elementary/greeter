@@ -89,7 +89,7 @@ public class TimeLabel : ShadowedLabel
 		label = date.format (
 			"<span face='Open Sans Light' font='24'>"+
 			day_format+
-			"</span>\n<span face='Raleway' font='72'>"+
+			"</span>\n<span face='Raleway' weight='100' font='72'>"+
 			time_format+
 			"</span>");
 		
