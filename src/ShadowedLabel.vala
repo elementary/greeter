@@ -131,7 +131,7 @@ public class TimeLabel : ShadowedLabel {
 		    case 11:
 		    case 12:
 		    case 13:
-		    default:
+            default:
                 return "th";
 		}
 	}
