@@ -7,56 +7,56 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-09-29 17:43+0200\n"
+"POT-Creation-Date: 2013-01-05 01:22+0100\n"
 "PO-Revision-Date: 2012-11-15 10:40+0000\n"
 "Last-Translator: Sérgio Marques <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-16 04:58+0000\n"
-"X-Generator: Launchpad (build 16272)\n"
-
-#: /home/tom/Programming/pantheon-greeter/po/../src/pantheon-greeter.vala:95
-#: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:277
-msgid "Guest session"
-msgstr "Sessão de convidado"
+"X-Launchpad-Export-Date: 2013-01-05 05:21+0000\n"
+"X-Generator: Launchpad (build 16393)\n"
 
 #. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details.
-#. %v is added here to provide th, nd and so on
-#: /home/tom/Programming/pantheon-greeter/po/../src/ShadowedLabel.vala:80
+#. %v is added here to provide the English date suffixes th, nd and so on
+#: /home/noelco/pantheon-greeter/po/../src/ShadowedLabel.vala:95
 msgid "%A, %B %e%v"
 msgstr "%A, %e de %B de %Y"
 
 #. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: /home/tom/Programming/pantheon-greeter/po/../src/ShadowedLabel.vala:93
+#: /home/noelco/pantheon-greeter/po/../src/ShadowedLabel.vala:97
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
-#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:183
+#: /home/noelco/pantheon-greeter/po/../src/LoginBox.vala:88
+msgid "Login"
+msgstr "Iniciar sessão"
+
+#: /home/noelco/pantheon-greeter/po/../src/LoginBox.vala:242
+#: /home/noelco/pantheon-greeter/po/../src/LoginBox.vala:262
+msgid "Guest session"
+msgstr "Sessão de convidado"
+
+#: /home/noelco/pantheon-greeter/po/../src/Indicators.vala:205
 msgid "Shutdown"
 msgstr "Desligar"
 
-#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:184
+#: /home/noelco/pantheon-greeter/po/../src/Indicators.vala:206
 msgid "Suspend"
 msgstr "Suspender"
 
-#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:185
+#: /home/noelco/pantheon-greeter/po/../src/Indicators.vala:207
 msgid "Restart"
 msgstr "Reiniciar"
 
-#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:186
+#: /home/noelco/pantheon-greeter/po/../src/Indicators.vala:208
 msgid "Hibernate"
 msgstr "Hibernar"
 
-#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:210
+#: /home/noelco/pantheon-greeter/po/../src/Indicators.vala:241
 msgid "Onscreen Keyboard"
 msgstr "Teclado no ecrã"
 
-#: /home/tom/Programming/pantheon-greeter/po/../src/indicators.vala:215
+#: /home/noelco/pantheon-greeter/po/../src/Indicators.vala:246
 msgid "HighContrast"
 msgstr "Alto contraste"
-
-#: /home/tom/Programming/pantheon-greeter/po/../src/loginbox.vala:115
-msgid "Login"
-msgstr "Iniciar sessão"
