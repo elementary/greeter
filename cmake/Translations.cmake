@@ -36,6 +36,6 @@ macro(add_translations_catalog NLS_PACKAGE)
 
     add_custom_command (TARGET pot COMMAND
         ${XGETTEXT_EXECUTABLE} -c -d ${NLS_PACKAGE} -o ${CMAKE_CURRENT_SOURCE_DIR}/${NLS_PACKAGE}.pot
-        ${VALA_SOURCE} ${C_SOURCE} --keyword="_" --keyword="N_" --from-code=UTF-8
+        ${VALA_SOURCE} ${C_SOURCE} --keyword="_" --keyword="N_" --keyword="C_:1c,2" --from-code=UTF-8
         )
 endmacro()

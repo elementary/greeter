@@ -108,7 +108,7 @@ public class LoginBox : GtkClutter.Actor {
         password.caps_lock_warning = true;
         password.set_visibility (false);
         password.key_release_event.connect ((e) => {
-            if (e.keyval == Gdk.Key.Return) {
+            if (e.keyval == Gdk.Key.Return || e.keyval == Gdk.Key.KP_Enter) {
                 login.clicked ();
                 return true;
             } else {
@@ -235,8 +235,12 @@ public class LoginBox : GtkClutter.Actor {
         this.get_widget ().get_style_context ().add_class ("content-view");
     }
 
-    public static string get_user_markup (LightDM.User user, bool title=false) {
-        return "<span face='Open Sans Light' font='24'>" + user.real_name + "</span>";
+    public static string get_user_markup (LightDM.User? user, bool title=false) {
+        if (user.real_name != null && user != null) {
+            return "<span face='Open Sans Light' font='24'>" + user.real_name + "</span>";
+        } else {
+            return "<span face='Open Sans Light' font='24'>" + _("Guest session") + "</span>";
+        }
     }
 
     public void wrong_pw () {

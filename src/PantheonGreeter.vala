@@ -74,7 +74,13 @@ public class PantheonGreeter : Gtk.Window {
         greeter.authentication_complete.connect (authenticated);
 
         loginbox.login.clicked.connect (authenticate);
-
+        
+        /*activate the numlock if needed*/
+        
+        var activate_numlock = settings.get_boolean ("activate-numlock");
+        if (activate_numlock)
+            Granite.Services.System.execute_command ("/usr/bin/numlockx on");
+        
         /*build up UI*/
         clutter.add_events (Gdk.EventMask.BUTTON_RELEASE_MASK);
 
@@ -109,12 +115,12 @@ public class PantheonGreeter : Gtk.Window {
 
         /*get the names together*/
         for (var i = 0; i < users.users.length () + 1; i++) {
-            if (i == users.users.length () && !greeter.has_guest_account_hint)
+            if (i > users.users.length () && !greeter.has_guest_account_hint)
                 continue;
 
             ShadowedLabel label = new ShadowedLabel ("");
             if (i == users.users.length ())
-                label.label =  ("<span face='Open Sans Light' font='24'>"+_("Guest session")+"</span>");
+                label.label = (LoginBox.get_user_markup (null));
             else
                 label.label = (LoginBox.get_user_markup (users.users.nth_data (i)));
 
