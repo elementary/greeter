@@ -94,7 +94,9 @@ public class TimeLabel : ShadowedLabel {
 		  %v is added here to provide the English date suffixes th, nd and so on*/
 		var day_format = _("%A, %B %e%v");
 		/*Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details*/
-		var time_format = _("%l:%M %p");
+		var time_format = _("%l:%M");
+		/*AM/PM display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details*/
+		var meridiem_format = _(" %p");
 		
 		//there is no %v, but we need one, so we add one
 		var num = date.get_day_of_month ();
@@ -105,6 +107,8 @@ public class TimeLabel : ShadowedLabel {
 			day_format+
 			"</span>\n<span face='Raleway' weight='100' font='72'>"+
 			time_format+
+			"</span><span face='Raleway' weight='100' font='50'>"+
+			meridiem_format+
 			"</span>");
 		
 		return true;
