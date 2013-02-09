@@ -28,10 +28,7 @@ public class Wallpaper : Group {
     bool second = false;
     string last_load_started = "";
 
-    PantheonGreeter greeter;
-
-    public Wallpaper (PantheonGreeter _greeter) {
-        greeter = _greeter;
+    public Wallpaper () {
         background = new Clutter.Texture ();
         background_s = new Clutter.Texture ();
         background.opacity = 230;
