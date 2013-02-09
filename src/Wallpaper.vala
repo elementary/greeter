@@ -28,7 +28,10 @@ public class Wallpaper : Group {
     bool second = false;
     string last_load_started = "";
 
-    public Wallpaper () {
+    PantheonGreeter greeter;
+
+    public Wallpaper (PantheonGreeter _greeter) {
+        greeter = _greeter;
         background = new Clutter.Texture ();
         background_s = new Clutter.Texture ();
         background.opacity = 230;
@@ -58,6 +61,9 @@ public class Wallpaper : Group {
             return;
         }
 
+        if(file == last_load_started) 
+            return;
+
         var top = second ? background : background_s;
         var bot = second ? background_s : background;
 
@@ -68,7 +74,6 @@ public class Wallpaper : Group {
         bot.detach_animation ();
 
         try {
-            warning("Startloading"+file);
             last_load_started = file;
             bot.set_from_file (file);
         } catch (Error e) { warning (e.message); }

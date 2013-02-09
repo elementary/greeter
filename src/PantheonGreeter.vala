@@ -67,7 +67,7 @@ public class PantheonGreeter : Gtk.Window {
         name_container = new Clutter.Actor ();
         time = new TimeLabel ();
         indicators = new Indicators (loginbox, settings);
-        wallpaper = new Wallpaper ();
+        wallpaper = new Wallpaper (this);
 
         greeter.show_message.connect (wrong_pw);
         greeter.show_prompt.connect (send_pw);
@@ -217,6 +217,10 @@ public class PantheonGreeter : Gtk.Window {
         wallpaper.width = geometry.width;
         wallpaper.height = geometry.height;
         wallpaper.resize ();
+    }
+
+    public string get_current_wallpaper () {
+        return users.users.nth_data (_current_user).background;
     }
 
     bool keyboard_navigation (Gdk.EventKey e) {
