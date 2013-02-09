@@ -26,6 +26,7 @@ public class Wallpaper : Group {
     public Clutter.Texture background_s; //double buffered!
 
     bool second = false;
+    string last_load_started = "";
 
     public Wallpaper () {
         background = new Clutter.Texture ();
@@ -67,11 +68,17 @@ public class Wallpaper : Group {
         bot.detach_animation ();
 
         try {
+            warning("Startloading"+file);
+            last_load_started = file;
             bot.set_from_file (file);
         } catch (Error e) { warning (e.message); }
 
+        string this_load_started = file;
+
         ulong lambda = 0;
         lambda = bot.load_finished.connect (() => {
+            if (this_load_started!=last_load_started)
+                return; //this image is not the latest requested image, so we abort here
             resize (bot);
 
             bot.visible = true;
