@@ -163,7 +163,7 @@ public class LoginBox : GtkClutter.Actor {
             but.active = LightDM.get_sessions ().nth_data (0).key == current_session;
 
             but.toggled.connect (() => {
-                if(but.get_active())
+                if (but.get_active())
                     current_session = LightDM.get_sessions ().nth_data (0).key;
             });
 
@@ -173,7 +173,7 @@ public class LoginBox : GtkClutter.Actor {
                 rad.active = LightDM.get_sessions ().nth_data (i).key == current_session;
                 var identifier = LightDM.get_sessions ().nth_data (i).key;
                 rad.toggled.connect ( () => { 
-                    if(rad.get_active())
+                    if (rad.get_active())
                         current_session = identifier; 
                 });
             }
