@@ -79,7 +79,7 @@ public class Wallpaper : Group {
 
         ulong lambda = 0;
         lambda = bot.load_finished.connect (() => {
-            if (this_load_started!=last_load_started)
+            if (this_load_started != last_load_started)
                 return; //this image is not the latest requested image, so we abort here
             resize (bot);
 
