@@ -163,7 +163,8 @@ public class LoginBox : GtkClutter.Actor {
             but.active = LightDM.get_sessions ().nth_data (0).key == current_session;
 
             but.toggled.connect (() => {
-                current_session = LightDM.get_sessions ().nth_data (0).key;
+                if (but.active)
+                    current_session = LightDM.get_sessions ().nth_data (0).key;
             });
 
             for (var i = 1;i < LightDM.get_sessions ().length (); i++) {
@@ -171,7 +172,10 @@ public class LoginBox : GtkClutter.Actor {
                 box.pack_start (rad, false);
                 rad.active = LightDM.get_sessions ().nth_data (i).key == current_session;
                 var identifier = LightDM.get_sessions ().nth_data (i).key;
-                rad.toggled.connect ( () => { current_session = identifier; });
+                rad.toggled.connect ( () => { 
+                    if (rad.active)
+                        current_session = identifier; 
+                });
             }
 
             this.get_stage ().add_child (pop);
