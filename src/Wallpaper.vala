@@ -35,12 +35,6 @@ public class Wallpaper : Group {
         background.load_async = true;
         background_s.load_async = true;
 
-        try {
-            background.set_from_file (get_default ());
-        } catch (Error e) {
-            warning (e.message);
-        }
-
         add_child (background);
         add_child (background_s);
     }
