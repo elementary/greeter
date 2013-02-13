@@ -28,7 +28,10 @@ public class Wallpaper : Group {
     public GtkClutter.Texture background_s; //double buffered!
 
     bool second = false;
-    string last_load_started = "";
+
+    string last_loaded = "";
+
+    Cancellable? cancellable = null;
 
     public Wallpaper () {
         background = new GtkClutter.Texture ();
@@ -54,8 +57,14 @@ public class Wallpaper : Group {
             return;
         }
 
-        if(file_path == last_load_started) 
+        
+
+        if(file_path == last_loaded) 
             return;
+        last_loaded = file_path;
+
+        if(cancellable != null)
+            cancellable.cancel();
 
         var top = second ? background : background_s;
         var bot = second ? background_s : background;
@@ -66,30 +75,29 @@ public class Wallpaper : Group {
         top.detach_animation ();
         bot.detach_animation ();
 
-        string this_load_started = file_path;
-        last_load_started = file_path;
-
-        try {
-        var load_stream = file.read();
-
-        Gdk.Pixbuf? p = new Gdk.Pixbuf.from_stream_async (load_stream,
-            (obj, res) => {
-                if (this_load_started != last_load_started)
-                    return; //this image is not the latest requested image, so we abort here
-                bot.set_pixbuf(pixbuf);
-                resize (bot);
-
-                bot.visible = true;
-                bot.opacity = 230;
-
-                top.animate (Clutter.AnimationMode.LINEAR, 300, opacity:0).completed.connect (() => {
-                    top.visible = false;
-                    set_child_above_sibling (bot, top);
-                });
-            });
-        } catch (Error e) { warning (e.message); }
+        cancellable = new Cancellable();
+        load_wallpaper(file_path,file,bot,top);
 
         second = !second;
+    }
+
+    public async void load_wallpaper (string path, File file, GtkClutter.Texture bot, 
+                                        GtkClutter.Texture top) {
+        try {
+            InputStream stream = yield file.read_async(GLib.Priority.DEFAULT);
+            Gdk.Pixbuf buf = yield Gdk.Pixbuf.new_from_stream_async(stream,cancellable);
+           if(last_loaded != path)
+                return;
+
+            bot.set_from_pixbuf (buf);
+            resize (bot);
+            bot.visible = true;
+            bot.opacity = 230;
+            top.animate (Clutter.AnimationMode.LINEAR, 300, opacity:0).completed.connect (() => {
+                    top.visible = false;
+                    set_child_above_sibling (bot, top);
+            });
+        } catch (Error e) { warning (e.message); }
     }
 
     public void resize (Texture? tex = null) {
