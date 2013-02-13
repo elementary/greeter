@@ -29,6 +29,10 @@ public class Wallpaper : Group {
 
     bool second = false;
 
+    string[] cache_path = {};
+    Gdk.Pixbuf[] cache_pixbuf = {};
+    int max_cache = 3;
+
     string last_loaded = "";
 
     Cancellable? cancellable = null;
@@ -84,9 +88,14 @@ public class Wallpaper : Group {
     public async void load_wallpaper (string path, File file, GtkClutter.Texture bot, 
                                         GtkClutter.Texture top) {
         try {
-            InputStream stream = yield file.read_async(GLib.Priority.DEFAULT);
-            Gdk.Pixbuf buf = yield Gdk.Pixbuf.new_from_stream_async(stream,cancellable);
-           if(last_loaded != path)
+            Gdk.Pixbuf? buf = try_load_from_cache(path);
+            if(buf == null) {
+                InputStream stream = yield file.read_async(GLib.Priority.DEFAULT);
+                buf = yield Gdk.Pixbuf.new_from_stream_async(stream,cancellable);
+                cache_path += path;
+                cache_pixbuf += buf;
+            }
+            if(last_loaded != path)
                 return;
 
             bot.set_from_pixbuf (buf);
@@ -95,9 +104,24 @@ public class Wallpaper : Group {
             bot.opacity = 230;
             top.animate (Clutter.AnimationMode.LINEAR, 300, opacity:0).completed.connect (() => {
                     top.visible = false;
+                    
                     set_child_above_sibling (bot, top);
             });
         } catch (Error e) { warning (e.message); }
+    }
+
+    public void clean_cache () {
+        int l = cache_path.length;
+        cache_path = cache_path[l - max_cache : l];
+        cache_pixbuf = cache_pixbuf[l - max_cache : l];
+    }
+
+    public Gdk.Pixbuf? try_load_from_cache (string path) {
+        for (int i = 0; i < cache_path.length; i++) {
+            if (cache_path[i] == path)
+                return cache_pixbuf[i];
+        }
+        return null;
     }
 
     public void resize (Texture? tex = null) {
