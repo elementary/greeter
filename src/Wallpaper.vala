@@ -25,7 +25,7 @@ public class Wallpaper : Clutter.Group {
 
     bool second = false;
 
-    int texture_max;
+    int gpu_limit;
 
     string[] cache_path = {};
     Gdk.Pixbuf[] cache_pixbuf = {};
@@ -46,8 +46,7 @@ public class Wallpaper : Clutter.Group {
 
         GL.GLint result = 1;
         GL.glGetIntegerv(GL.GL_MAX_TEXTURE_SIZE, out result);
-        texture_max = result;
-        warning("Texture-size"+string.parse(texture_max));
+        gpu_limit = result > 2048 ? 2048 : result;
     }
 
     string get_default () {
@@ -94,7 +93,8 @@ public class Wallpaper : Clutter.Group {
             //if we still dont have a wallpaper now, load from file
             if (buf == null) {
                 InputStream stream = yield file.read_async (GLib.Priority.DEFAULT);
-                buf = yield Gdk.Pixbuf.new_from_stream_at_scale_async (stream,texture_max,texture_max,true,cancellable);
+                buf = yield Gdk.Pixbuf.new_from_stream_async (stream,cancellable);
+                buf = validate_pixbuf (buf);
                 //add loaded wallpapers and paths to cache
                 cache_path += path;
                 cache_pixbuf += buf;
@@ -135,6 +135,33 @@ public class Wallpaper : Clutter.Group {
                 return cache_pixbuf[i];
         }
         return null;
+    }
+
+    /**
+     * makes the pixbuf fit inside the GPU limit
+     */
+    public Gdk.Pixbuf validate_pixbuf (Gdk.Pixbuf pixbuf) {
+        Gdk.Pixbuf result = scale_to_rect (pixbuf, gpu_limit, gpu_limit);
+        warning(result.width.to_string() + "|" + result.height.to_string());
+        return result;
+    }
+
+    /**
+     * Scales the Pixbuf down to fit in the gifen dimensions
+     */
+    public Gdk.Pixbuf scale_to_rect (Gdk.Pixbuf pixbuf, int rw, int rh) {
+        int h = pixbuf.height;
+        int w = pixbuf.width;
+        if (h > rh || w > rw) {
+            float hw = (float)h/w*rw;
+            float wh = (float)w/h*rh;
+            if (h < w) {
+                return pixbuf.scale_simple (rw, (int)(hw), Gdk.InterpType.NEAREST);
+            } else {
+                return pixbuf.scale_simple((int)(wh), rh, Gdk.InterpType.NEAREST);
+            } 
+        }
+        return pixbuf;
     }
 
     public void resize (GtkClutter.Texture? tex = null) {
