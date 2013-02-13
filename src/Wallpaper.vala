@@ -20,6 +20,8 @@
 ***/
 
 using Clutter;
+using Gdk;
+
 
 public class Wallpaper : Group {
     public GtkClutter.Texture background;   //both not added to this box but to stage
@@ -33,8 +35,6 @@ public class Wallpaper : Group {
         background_s = new GtkClutter.Texture ();
         background.opacity = 230;
         background_s.opacity = 230;
-        background.load_async = true;
-        background_s.load_async = true;
 
         add_child (background);
         add_child (background_s);
@@ -66,32 +66,28 @@ public class Wallpaper : Group {
         top.detach_animation ();
         bot.detach_animation ();
 
-        var load_stream = file.read();
+        string this_load_started = file_path;
+        last_load_started = file_path;
 
         try {
-            last_load_started = file_path;
-            Gdk.Pixbuf pixbuf = new Gdk.Pixbuf.from_stream_async(load_stream);
-            bot.set_from_file (file_path);
-        } catch (Error e) { warning (e.message); }
+        var load_stream = file.read();
 
-        string this_load_started = file_path;
+        Gdk.Pixbuf? p = new Gdk.Pixbuf.from_stream_async (load_stream,
+            (obj, res) => {
+                if (this_load_started != last_load_started)
+                    return; //this image is not the latest requested image, so we abort here
+                bot.set_pixbuf(pixbuf);
+                resize (bot);
 
-        ulong lambda = 0;
-        lambda = bot.load_finished.connect (() => {
-            if (this_load_started != last_load_started)
-                return; //this image is not the latest requested image, so we abort here
-            resize (bot);
+                bot.visible = true;
+                bot.opacity = 230;
 
-            bot.visible = true;
-            bot.opacity = 230;
-
-            top.animate (Clutter.AnimationMode.LINEAR, 300, opacity:0).completed.connect (() => {
-                top.visible = false;
-                set_child_above_sibling (bot, top);
+                top.animate (Clutter.AnimationMode.LINEAR, 300, opacity:0).completed.connect (() => {
+                    top.visible = false;
+                    set_child_above_sibling (bot, top);
+                });
             });
-
-            bot.disconnect (lambda);
-        });
+        } catch (Error e) { warning (e.message); }
 
         second = !second;
     }
