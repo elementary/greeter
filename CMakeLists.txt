@@ -15,7 +15,7 @@ configure_file (${CMAKE_SOURCE_DIR}/src/config.vala.cmake ${CMAKE_BINARY_DIR}/sr
 add_definitions (-DGETTEXT_PACKAGE="pantheon-greeter")
 
 find_package (PkgConfig)
-pkg_check_modules (DEPS REQUIRED granite liblightdm-gobject-1 gdk-x11-3.0 clutter-gtk-1.0 indicator3-0.4)
+pkg_check_modules (DEPS REQUIRED granite liblightdm-gobject-1 gdk-x11-3.0 clutter-gtk-1.0 indicator3-0.4 gdk-pixbuf-2.0)
 add_definitions (${DEPS_CFLAGS})
 link_libraries (${DEPS_LIBRARIES})
 link_directories (${DEPS_LIBRARY_DIRS})
@@ -34,6 +34,7 @@ PACKAGES
     granite
     liblightdm-gobject-1
     posix
+    gdk-pixbuf-2.0
     gdk-x11-3.0
     x11
     clutter-gtk-1.0

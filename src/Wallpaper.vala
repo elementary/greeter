@@ -22,15 +22,15 @@
 using Clutter;
 
 public class Wallpaper : Group {
-    public Clutter.Texture background;   //both not added to this box but to stage
-    public Clutter.Texture background_s; //double buffered!
+    public GtkClutter.Texture background;   //both not added to this box but to stage
+    public GtkClutter.Texture background_s; //double buffered!
 
     bool second = false;
     string last_load_started = "";
 
     public Wallpaper () {
-        background = new Clutter.Texture ();
-        background_s = new Clutter.Texture ();
+        background = new GtkClutter.Texture ();
+        background_s = new GtkClutter.Texture ();
         background.opacity = 230;
         background_s.opacity = 230;
         background.load_async = true;
@@ -45,31 +45,36 @@ public class Wallpaper : Group {
     }
 
     public void set_wallpaper (string? path) {
-        var file = (path == null || path == "") ? get_default () : path;
+        var file_path = (path == null || path == "") ? get_default () : path;
 
-        if (!File.new_for_path (file).query_exists ()) {
-            warning ("File %s does not exist!\n", file);
+        var file = File.new_for_path (file_path);
+
+        if (!file.query_exists ()) {
+            warning ("File %s does not exist!\n", file_path);
             return;
         }
 
-        if(file == last_load_started) 
+        if(file_path == last_load_started) 
             return;
 
         var top = second ? background : background_s;
         var bot = second ? background_s : background;
 
-        if (file == top.filename)
+        if (file_path == top.filename)
             return;
 
         top.detach_animation ();
         bot.detach_animation ();
 
+        var load_stream = file.read();
+
         try {
-            last_load_started = file;
-            bot.set_from_file (file);
+            last_load_started = file_path;
+            Gdk.Pixbuf pixbuf = new Gdk.Pixbuf.from_stream_async(load_stream);
+            bot.set_from_file (file_path);
         } catch (Error e) { warning (e.message); }
 
-        string this_load_started = file;
+        string this_load_started = file_path;
 
         ulong lambda = 0;
         lambda = bot.load_finished.connect (() => {
