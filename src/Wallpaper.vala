@@ -47,6 +47,7 @@ public class Wallpaper : Clutter.Group {
         GL.GLint result = 1;
         GL.glGetIntegerv(GL.GL_MAX_TEXTURE_SIZE, out result);
         texture_max = result;
+        warning("Texture-size"+string.parse(texture_max));
     }
 
     string get_default () {
