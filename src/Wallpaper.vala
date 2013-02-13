@@ -19,15 +19,13 @@
     END LICENSE
 ***/
 
-using Clutter;
-using Gdk;
-
-
-public class Wallpaper : Group {
+public class Wallpaper : Clutter.Group {
     public GtkClutter.Texture background;   //both not added to this box but to stage
     public GtkClutter.Texture background_s; //double buffered!
 
     bool second = false;
+
+    int texture_max;
 
     string[] cache_path = {};
     Gdk.Pixbuf[] cache_pixbuf = {};
@@ -45,6 +43,10 @@ public class Wallpaper : Group {
 
         add_child (background);
         add_child (background_s);
+
+        GL.GLint result = 1;
+        GL.glGetIntegerv(GL.GL_MAX_TEXTURE_SIZE, out result);
+        texture_max = result;
     }
 
     string get_default () {
@@ -61,8 +63,10 @@ public class Wallpaper : Group {
             return;
         }
 
+        //same wallpaper => abort
         if(file_path == last_loaded) 
             return;
+        //mark now loading wallpaper as the last one started loading async
         last_loaded = file_path;
 
         var top = second ? background : background_s;
@@ -74,6 +78,8 @@ public class Wallpaper : Group {
         top.detach_animation ();
         bot.detach_animation ();
 
+
+        //load the actual wallpaper async
         load_wallpaper(file_path,file,bot,top);
 
         second = !second;
@@ -81,16 +87,20 @@ public class Wallpaper : Group {
 
     public async void load_wallpaper (string path, File file, GtkClutter.Texture bot, 
                                         GtkClutter.Texture top) {
+
         try {
-            Gdk.Pixbuf? buf = try_load_from_cache(path);
-            if(buf == null) {
-                InputStream stream = yield file.read_async(GLib.Priority.DEFAULT);
-                buf = yield Gdk.Pixbuf.new_from_stream_async(stream,cancellable);
+            Gdk.Pixbuf? buf = try_load_from_cache (path);
+            //if we still dont have a wallpaper now, load from file
+            if (buf == null) {
+                InputStream stream = yield file.read_async (GLib.Priority.DEFAULT);
+                buf = yield Gdk.Pixbuf.new_from_stream_at_scale_async (stream,texture_max,texture_max,true,cancellable);
+                //add loaded wallpapers and paths to cache
                 cache_path += path;
                 cache_pixbuf += buf;
             }
+            //check if the currently loaded wallpaper is the one we loaded in this method
             if(last_loaded != path)
-                return;
+                return; //if not, abort
 
             bot.set_from_pixbuf (buf);
             resize (bot);
@@ -98,18 +108,26 @@ public class Wallpaper : Group {
             bot.opacity = 230;
             top.animate (Clutter.AnimationMode.LINEAR, 300, opacity:0).completed.connect (() => {
                     top.visible = false;
-                    
                     set_child_above_sibling (bot, top);
             });
         } catch (Error e) { warning (e.message); }
     }
 
+    /**
+     * resizes the cache if there are more pixbufs cached then max_mache allows
+     */
     public void clean_cache () {
         int l = cache_path.length;
-        cache_path = cache_path[l - max_cache : l];
-        cache_pixbuf = cache_pixbuf[l - max_cache : l];
+        if (l > max_cache) {
+            cache_path = cache_path[l - max_cache : l];
+            cache_pixbuf = cache_pixbuf[l - max_cache : l];
+        }
     }
 
+    /**
+     * Looks up the pixbuth of the image-file with the given path in the cache.
+     * Returns null if there is no pixbuf for that file in cache
+     */
     public Gdk.Pixbuf? try_load_from_cache (string path) {
         for (int i = 0; i < cache_path.length; i++) {
             if (cache_path[i] == path)
@@ -118,7 +136,7 @@ public class Wallpaper : Group {
         return null;
     }
 
-    public void resize (Texture? tex = null) {
+    public void resize (GtkClutter.Texture? tex = null) {
         if (tex == null)
             tex = second ? background : background_s;
 
