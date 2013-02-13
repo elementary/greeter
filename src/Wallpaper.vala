@@ -35,7 +35,7 @@ public class Wallpaper : Group {
 
     string last_loaded = "";
 
-    Cancellable? cancellable = null;
+    Cancellable? cancellable = new Cancellable();
 
     public Wallpaper () {
         background = new GtkClutter.Texture ();
@@ -61,14 +61,9 @@ public class Wallpaper : Group {
             return;
         }
 
-        
-
         if(file_path == last_loaded) 
             return;
         last_loaded = file_path;
-
-        if(cancellable != null)
-            cancellable.cancel();
 
         var top = second ? background : background_s;
         var bot = second ? background_s : background;
@@ -79,7 +74,6 @@ public class Wallpaper : Group {
         top.detach_animation ();
         bot.detach_animation ();
 
-        cancellable = new Cancellable();
         load_wallpaper(file_path,file,bot,top);
 
         second = !second;
