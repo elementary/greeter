@@ -54,7 +54,7 @@ public class Wallpaper : Clutter.Group {
         //We hardcode the texture_max value as some drivers seeems
         //to segfault if we take too much "GPU RAM" with our textures
         //despite the hardware should support it
-        gpu_limit = result > 2048 ? 2048 : result;
+        gpu_limit = result;
     }
 
     string get_default () {
