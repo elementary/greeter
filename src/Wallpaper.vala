@@ -46,6 +46,9 @@ public class Wallpaper : Clutter.Group {
 
         GL.GLint result = 1;
         GL.glGetIntegerv(GL.GL_MAX_TEXTURE_SIZE, out result);
+        //We hardcode the texture_max value as some drivers seeems
+        //to segfault if we take too much "GPU RAM" with our textures
+        //despite the hardware should support it
         gpu_limit = result > 2048 ? 2048 : result;
     }
 
@@ -100,7 +103,7 @@ public class Wallpaper : Clutter.Group {
                 cache_pixbuf += buf;
             }
             //check if the currently loaded wallpaper is the one we loaded in this method
-            if(last_loaded != path)
+            if (last_loaded != path)
                 return; //if not, abort
 
             bot.set_from_pixbuf (buf);
@@ -120,8 +123,8 @@ public class Wallpaper : Clutter.Group {
     public void clean_cache () {
         int l = cache_path.length;
         if (l > max_cache) {
-            cache_path = cache_path[l - max_cache : l];
-            cache_pixbuf = cache_pixbuf[l - max_cache : l];
+            cache_path = cache_path [l - max_cache : l];
+            cache_pixbuf = cache_pixbuf [l - max_cache : l];
         }
     }
 
@@ -142,23 +145,23 @@ public class Wallpaper : Clutter.Group {
      */
     public Gdk.Pixbuf validate_pixbuf (Gdk.Pixbuf pixbuf) {
         Gdk.Pixbuf result = scale_to_rect (pixbuf, gpu_limit, gpu_limit);
-        warning(result.width.to_string() + "|" + result.height.to_string());
         return result;
     }
 
     /**
-     * Scales the Pixbuf down to fit in the gifen dimensions
+     * Scales the Pixbuf down to fit in the given dimensions
      */
     public Gdk.Pixbuf scale_to_rect (Gdk.Pixbuf pixbuf, int rw, int rh) {
         int h = pixbuf.height;
         int w = pixbuf.width;
+        
         if (h > rh || w > rw) {
             float hw = (float)h/w*rw;
             float wh = (float)w/h*rh;
             if (h < w) {
                 return pixbuf.scale_simple (rw, (int)(hw), Gdk.InterpType.NEAREST);
             } else {
-                return pixbuf.scale_simple((int)(wh), rh, Gdk.InterpType.NEAREST);
+                return pixbuf.scale_simple ((int)(wh), rh, Gdk.InterpType.NEAREST);
             } 
         }
         return pixbuf;
