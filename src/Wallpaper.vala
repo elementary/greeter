@@ -35,7 +35,12 @@ public class Wallpaper : Clutter.Group {
 
     Cancellable? cancellable = new Cancellable();
 
-    public Wallpaper () {
+    int screen_width;
+    int screen_height;
+
+    public Wallpaper (int _screen_width, int _screen_height) {
+        screen_width = _screen_width;
+        screen_height = _screen_height;
         background = new GtkClutter.Texture ();
         background_s = new GtkClutter.Texture ();
         background.opacity = 230;
@@ -145,6 +150,7 @@ public class Wallpaper : Clutter.Group {
      */
     public Gdk.Pixbuf validate_pixbuf (Gdk.Pixbuf pixbuf) {
         Gdk.Pixbuf result = scale_to_rect (pixbuf, gpu_limit, gpu_limit);
+        result = scale_to_rect (pixbuf, screen_width, screen_height);
         return result;
     }
 

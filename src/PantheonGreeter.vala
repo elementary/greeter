@@ -67,7 +67,7 @@ public class PantheonGreeter : Gtk.Window {
         name_container = new Clutter.Actor ();
         time = new TimeLabel ();
         indicators = new Indicators (loginbox, settings);
-        wallpaper = new Wallpaper ();
+        wallpaper = new Wallpaper (get_screen ().get_width (), get_screen ().get_height ());
 
         greeter.show_message.connect (wrong_pw);
         greeter.show_prompt.connect (send_pw);
