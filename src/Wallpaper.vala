@@ -51,9 +51,6 @@ public class Wallpaper : Clutter.Group {
 
         GL.GLint result = 1;
         GL.glGetIntegerv(GL.GL_MAX_TEXTURE_SIZE, out result);
-        //We hardcode the texture_max value as some drivers seeems
-        //to segfault if we take too much "GPU RAM" with our textures
-        //despite the hardware should support it
         gpu_limit = result;
     }
 
