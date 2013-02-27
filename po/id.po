@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-02-10 05:37-0600\n"
-"PO-Revision-Date: 2012-12-03 09:21+0000\n"
-"Last-Translator: Viko Adi Rahmawan <Unknown>\n"
+"PO-Revision-Date: 2013-02-26 09:41+0000\n"
+"Last-Translator: Jeffry <jeffry.a@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-11 05:24+0000\n"
-"X-Generator: Launchpad (build 16482)\n"
+"X-Launchpad-Export-Date: 2013-02-27 05:00+0000\n"
+"X-Generator: Launchpad (build 16506)\n"
 
 #: /home/codygarver/greeter/po/../src/LoginBox.vala:88
 msgid "Login"
-msgstr "Masuk"
+msgstr "Login"
 
 #: /home/codygarver/greeter/po/../src/LoginBox.vala:246
 #: /home/codygarver/greeter/po/../src/LoginBox.vala:266
@@ -28,19 +28,19 @@ msgstr "Sesi tamu"
 
 #: /home/codygarver/greeter/po/../src/Indicators.vala:205
 msgid "Shutdown"
-msgstr "Matikan"
+msgstr "Shutdown"
 
 #: /home/codygarver/greeter/po/../src/Indicators.vala:206
 msgid "Suspend"
-msgstr "Suspensi"
+msgstr "Suspen"
 
 #: /home/codygarver/greeter/po/../src/Indicators.vala:207
 msgid "Restart"
-msgstr "Nyalakan Ulang"
+msgstr "Restart"
 
 #: /home/codygarver/greeter/po/../src/Indicators.vala:208
 msgid "Hibernate"
-msgstr "Hibernasi"
+msgstr "Hibernate"
 
 #: /home/codygarver/greeter/po/../src/Indicators.vala:241
 msgid "Onscreen Keyboard"
@@ -59,10 +59,10 @@ msgstr "%A, %e %B"
 #. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:97
 msgid "%l:%M"
-msgstr ""
+msgstr "%l:%M"
 
 #. AM/PM display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:99
 #, c-format
 msgid " %p"
-msgstr ""
+msgstr " %p"
