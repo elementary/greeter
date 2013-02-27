@@ -35,12 +35,10 @@ public class Wallpaper : Clutter.Group {
 
     Cancellable? cancellable = new Cancellable();
 
-    int screen_width;
-    int screen_height;
+    public int screen_width { get; set; }
+    public int screen_height { get; set; }
 
-    public Wallpaper (int _screen_width, int _screen_height) {
-        screen_width = _screen_width;
-        screen_height = _screen_height;
+    public Wallpaper () {
         background = new GtkClutter.Texture ();
         background_s = new GtkClutter.Texture ();
         background.opacity = 230;
@@ -77,15 +75,12 @@ public class Wallpaper : Clutter.Group {
         var top = second ? background : background_s;
         var bot = second ? background_s : background;
 
-        if (file_path == top.filename)
-            return;
-
         top.detach_animation ();
         bot.detach_animation ();
 
 
         //load the actual wallpaper async
-        load_wallpaper(file_path,file,bot,top);
+        load_wallpaper (file_path,file,bot,top);
 
         second = !second;
     }
@@ -98,7 +93,7 @@ public class Wallpaper : Clutter.Group {
             //if we still dont have a wallpaper now, load from file
             if (buf == null) {
                 InputStream stream = yield file.read_async (GLib.Priority.DEFAULT);
-                buf = yield Gdk.Pixbuf.new_from_stream_async (stream,cancellable);
+                buf = yield Gdk.Pixbuf.new_from_stream_async (stream, cancellable);
                 buf = validate_pixbuf (buf);
                 //add loaded wallpapers and paths to cache
                 cache_path += path;
@@ -131,7 +126,7 @@ public class Wallpaper : Clutter.Group {
     }
 
     /**
-     * Looks up the pixbuth of the image-file with the given path in the cache.
+     * Looks up the pixbuf of the image-file with the given path in the cache.
      * Returns null if there is no pixbuf for that file in cache
      */
     public Gdk.Pixbuf? try_load_from_cache (string path) {
@@ -143,7 +138,8 @@ public class Wallpaper : Clutter.Group {
     }
 
     /**
-     * makes the pixbuf fit inside the GPU limit
+     * makes the pixbuf fit inside the GPU limit and scales it to 
+     * screen size to save memory.
      */
     public Gdk.Pixbuf validate_pixbuf (Gdk.Pixbuf pixbuf) {
         Gdk.Pixbuf result = scale_to_rect (pixbuf, gpu_limit, gpu_limit);
@@ -152,7 +148,7 @@ public class Wallpaper : Clutter.Group {
     }
 
     /**
-     * Scales the Pixbuf down to fit in the given dimensions
+     * Scales the pixbuf down to fit in the given dimensions
      */
     public Gdk.Pixbuf scale_to_rect (Gdk.Pixbuf pixbuf, int rw, int rh) {
         int h = pixbuf.height;
@@ -162,9 +158,9 @@ public class Wallpaper : Clutter.Group {
             float hw = (float)h/w*rw;
             float wh = (float)w/h*rh;
             if (h < w) {
-                return pixbuf.scale_simple (rw, (int)(hw), Gdk.InterpType.NEAREST);
+                return pixbuf.scale_simple (rw, (int) (hw), Gdk.InterpType.NEAREST);
             } else {
-                return pixbuf.scale_simple ((int)(wh), rh, Gdk.InterpType.NEAREST);
+                return pixbuf.scale_simple ((int) (wh), rh, Gdk.InterpType.NEAREST);
             } 
         }
         return pixbuf;
