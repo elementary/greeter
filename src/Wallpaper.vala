@@ -19,25 +19,37 @@
     END LICENSE
 ***/
 
-using Clutter;
-
-public class Wallpaper : Group {
-    public Clutter.Texture background;   //both not added to this box but to stage
-    public Clutter.Texture background_s; //double buffered!
+public class Wallpaper : Clutter.Group {
+    public GtkClutter.Texture background;   //both not added to this box but to stage
+    public GtkClutter.Texture background_s; //double buffered!
 
     bool second = false;
-    string last_load_started = "";
+
+    int gpu_limit;
+
+    string[] cache_path = {};
+    Gdk.Pixbuf[] cache_pixbuf = {};
+    int max_cache = 3;
+
+    string last_loaded = "";
+
+    Cancellable? cancellable = new Cancellable();
+
+    public int screen_width { get; set; }
+    public int screen_height { get; set; }
 
     public Wallpaper () {
-        background = new Clutter.Texture ();
-        background_s = new Clutter.Texture ();
+        background = new GtkClutter.Texture ();
+        background_s = new GtkClutter.Texture ();
         background.opacity = 230;
         background_s.opacity = 230;
-        background.load_async = true;
-        background_s.load_async = true;
 
         add_child (background);
         add_child (background_s);
+
+        GL.GLint result = 1;
+        GL.glGetIntegerv(GL.GL_MAX_TEXTURE_SIZE, out result);
+        gpu_limit = result;
     }
 
     string get_default () {
@@ -45,53 +57,116 @@ public class Wallpaper : Group {
     }
 
     public void set_wallpaper (string? path) {
-        var file = (path == null || path == "") ? get_default () : path;
+        var file_path = (path == null || path == "") ? get_default () : path;
 
-        if (!File.new_for_path (file).query_exists ()) {
-            warning ("File %s does not exist!\n", file);
+        var file = File.new_for_path (file_path);
+
+        if (!file.query_exists ()) {
+            warning ("File %s does not exist!\n", file_path);
             return;
         }
 
-        if(file == last_load_started) 
+        //same wallpaper => abort
+        if(file_path == last_loaded) 
             return;
+        //mark now loading wallpaper as the last one started loading async
+        last_loaded = file_path;
 
         var top = second ? background : background_s;
         var bot = second ? background_s : background;
 
-        if (file == top.filename)
-            return;
-
         top.detach_animation ();
         bot.detach_animation ();
 
-        try {
-            last_load_started = file;
-            bot.set_from_file (file);
-        } catch (Error e) { warning (e.message); }
 
-        string this_load_started = file;
-
-        ulong lambda = 0;
-        lambda = bot.load_finished.connect (() => {
-            if (this_load_started != last_load_started)
-                return; //this image is not the latest requested image, so we abort here
-            resize (bot);
-
-            bot.visible = true;
-            bot.opacity = 230;
-
-            top.animate (Clutter.AnimationMode.LINEAR, 300, opacity:0).completed.connect (() => {
-                top.visible = false;
-                set_child_above_sibling (bot, top);
-            });
-
-            bot.disconnect (lambda);
-        });
+        //load the actual wallpaper async
+        load_wallpaper (file_path,file,bot,top);
 
         second = !second;
     }
 
-    public void resize (Texture? tex = null) {
+    public async void load_wallpaper (string path, File file, GtkClutter.Texture bot, 
+                                        GtkClutter.Texture top) {
+
+        try {
+            Gdk.Pixbuf? buf = try_load_from_cache (path);
+            //if we still dont have a wallpaper now, load from file
+            if (buf == null) {
+                InputStream stream = yield file.read_async (GLib.Priority.DEFAULT);
+                buf = yield Gdk.Pixbuf.new_from_stream_async (stream, cancellable);
+                buf = validate_pixbuf (buf);
+                //add loaded wallpapers and paths to cache
+                cache_path += path;
+                cache_pixbuf += buf;
+            }
+            //check if the currently loaded wallpaper is the one we loaded in this method
+            if (last_loaded != path)
+                return; //if not, abort
+
+            bot.set_from_pixbuf (buf);
+            resize (bot);
+            bot.visible = true;
+            bot.opacity = 230;
+            top.animate (Clutter.AnimationMode.LINEAR, 300, opacity:0).completed.connect (() => {
+                    top.visible = false;
+                    set_child_above_sibling (bot, top);
+            });
+        } catch (Error e) { warning (e.message); }
+    }
+
+    /**
+     * resizes the cache if there are more pixbufs cached then max_mache allows
+     */
+    public void clean_cache () {
+        int l = cache_path.length;
+        if (l > max_cache) {
+            cache_path = cache_path [l - max_cache : l];
+            cache_pixbuf = cache_pixbuf [l - max_cache : l];
+        }
+    }
+
+    /**
+     * Looks up the pixbuf of the image-file with the given path in the cache.
+     * Returns null if there is no pixbuf for that file in cache
+     */
+    public Gdk.Pixbuf? try_load_from_cache (string path) {
+        for (int i = 0; i < cache_path.length; i++) {
+            if (cache_path[i] == path)
+                return cache_pixbuf[i];
+        }
+        return null;
+    }
+
+    /**
+     * makes the pixbuf fit inside the GPU limit and scales it to 
+     * screen size to save memory.
+     */
+    public Gdk.Pixbuf validate_pixbuf (Gdk.Pixbuf pixbuf) {
+        Gdk.Pixbuf result = scale_to_rect (pixbuf, gpu_limit, gpu_limit);
+        result = scale_to_rect (pixbuf, screen_width, screen_height);
+        return result;
+    }
+
+    /**
+     * Scales the pixbuf down to fit in the given dimensions
+     */
+    public Gdk.Pixbuf scale_to_rect (Gdk.Pixbuf pixbuf, int rw, int rh) {
+        int h = pixbuf.height;
+        int w = pixbuf.width;
+        
+        if (h > rh || w > rw) {
+            float hw = (float)h/w*rw;
+            float wh = (float)w/h*rh;
+            if (h < w) {
+                return pixbuf.scale_simple (rw, (int) (hw), Gdk.InterpType.NEAREST);
+            } else {
+                return pixbuf.scale_simple ((int) (wh), rh, Gdk.InterpType.NEAREST);
+            } 
+        }
+        return pixbuf;
+    }
+
+    public void resize (GtkClutter.Texture? tex = null) {
         if (tex == null)
             tex = second ? background : background_s;
 

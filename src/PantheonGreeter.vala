@@ -215,7 +215,9 @@ public class PantheonGreeter : Gtk.Window {
         time.visible = geometry.width > NO_CLOCK_WIDTH;
 
         wallpaper.width = geometry.width;
+        wallpaper.screen_width = geometry.width;
         wallpaper.height = geometry.height;
+        wallpaper.screen_height = geometry.height;
         wallpaper.resize ();
     }
 
