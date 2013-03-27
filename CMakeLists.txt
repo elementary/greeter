@@ -1,8 +1,7 @@
 project (pantheon-greeter)
 cmake_minimum_required (VERSION 2.8)
-cmake_policy (VERSION 2.6)
+cmake_policy (VERSION 2.8)
 
-list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/vala)
 enable_testing ()
 
 list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
@@ -10,9 +9,19 @@ list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 set (DATADIR "${CMAKE_INSTALL_PREFIX}/share")
 set (PKGDATADIR "${DATADIR}/pantheon-greeter")
 set (CMAKE_INSTALL_PREFIX /usr)
+set (VERSION "0.1")
 
 configure_file (${CMAKE_SOURCE_DIR}/src/config.vala.cmake ${CMAKE_BINARY_DIR}/src/config.vala)
 add_definitions (-DGETTEXT_PACKAGE="pantheon-greeter")
+
+# Add 'make dist' command for creating release tarball
+set (CPACK_PACKAGE_VERSION ${VERSION})
+set (CPACK_SOURCE_GENERATOR "TGZ")
+set (CPACK_SOURCE_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}-${CPACK_PACKAGE_VERSION}")
+set (CPACK_SOURCE_IGNORE_FILES "/build/;/.bzr/;/.bzrignore;~$;${CPACK_SOURCE_IGNORE_FILES}")
+
+include (CPack)
+add_custom_target (dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
 find_package (PkgConfig)
 pkg_check_modules (DEPS REQUIRED granite liblightdm-gobject-1 gdk-x11-3.0 clutter-gtk-1.0 indicator3-0.4 gdk-pixbuf-2.0 gl)
@@ -22,7 +31,7 @@ link_directories (${DEPS_LIBRARY_DIRS})
 
 find_package (Vala REQUIRED)
 include (ValaVersion)
-ensure_vala_version ("0.16.0" MINIMUM)
+ensure_vala_version ("0.16.1" MINIMUM)
 
 file(GLOB_RECURSE sources src/*.vala)
 
