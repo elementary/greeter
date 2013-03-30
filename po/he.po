@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-02-10 05:37-0600\n"
-"PO-Revision-Date: 2013-02-25 20:48+0000\n"
-"Last-Translator: Danny Damsky <dannydamsky99@gmail.com>\n"
+"PO-Revision-Date: 2013-03-29 07:23+0000\n"
+"Last-Translator: Megolas <ofeklavie@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-26 05:22+0000\n"
-"X-Generator: Launchpad (build 16506)\n"
+"X-Launchpad-Export-Date: 2013-03-30 05:51+0000\n"
+"X-Generator: Launchpad (build 16546)\n"
 
 #: /home/codygarver/greeter/po/../src/LoginBox.vala:88
 msgid "Login"
-msgstr "כניסה"
+msgstr "התחבר"
 
 #: /home/codygarver/greeter/po/../src/LoginBox.vala:246
 #: /home/codygarver/greeter/po/../src/LoginBox.vala:266
@@ -54,15 +54,15 @@ msgstr "ניגודיות גבוהה"
 #. %v is added here to provide the English date suffixes th, nd and so on
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:95
 msgid "%A, %B %e%v"
-msgstr ""
+msgstr "%A, %B %e%v"
 
 #. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:97
 msgid "%l:%M"
-msgstr ""
+msgstr "%l:%M"
 
 #. AM/PM display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:99
 #, c-format
 msgid " %p"
-msgstr ""
+msgstr " %p"
