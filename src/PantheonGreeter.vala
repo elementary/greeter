@@ -74,13 +74,13 @@ public class PantheonGreeter : Gtk.Window {
         greeter.authentication_complete.connect (authenticated);
 
         loginbox.login.clicked.connect (authenticate);
-        
+
         /*activate the numlock if needed*/
-        
+
         var activate_numlock = settings.get_boolean ("activate-numlock");
         if (activate_numlock)
             Granite.Services.System.execute_command ("/usr/bin/numlockx on");
-        
+
         /*build up UI*/
         clutter.add_events (Gdk.EventMask.BUTTON_RELEASE_MASK);
 
@@ -223,22 +223,27 @@ public class PantheonGreeter : Gtk.Window {
 
     bool keyboard_navigation (Gdk.EventKey e) {
         int new_user = current_user;
-        switch (e.keyval) {
-        case Gdk.Key.Up:
-            new_user --;
-            if (new_user - 1 < 0)
-                new_user = 0;
-            break;
-        case Gdk.Key.Down:
-            var n_user = users.users.length ();
-            new_user ++;
 
-            var sum = (int)(greeter.has_guest_account_hint ? n_user + 1 : n_user);
-            if (new_user >= sum)
-                new_user = sum - 1;
-            break;
-        default:
-            return false;
+        switch (e.keyval) {
+            case Gdk.Key.Num_Lock:
+                settings.set_boolean ("activate-numlock", !settings.get_boolean ("activate-numlock"));
+                break;
+            case Gdk.Key.Up:
+                new_user --;
+
+                if (new_user - 1 < 0)
+                    new_user = 0;
+                break;
+            case Gdk.Key.Down:
+                var n_user = users.users.length ();
+                new_user ++;
+
+                var sum = (int)(greeter.has_guest_account_hint ? n_user + 1 : n_user);
+                if (new_user >= sum)
+                    new_user = sum - 1;
+                break;
+            default:
+                return false;
         }
 
         if (new_user != current_user)
