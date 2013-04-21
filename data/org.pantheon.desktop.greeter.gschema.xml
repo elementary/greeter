@@ -20,7 +20,7 @@
     </key>
 
     <key name="activate-numlock" type="b">
-      <default>true</default>
+      <default>false</default>
       <summary>Active the number pad</summary>
       <description>If true, a command will be prompted to activate it.</description>
     </key>
