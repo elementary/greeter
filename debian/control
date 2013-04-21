@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>
 Build-Depends: cmake (>= 2.8),
                debhelper (>= 7.0.50~),
-               libclutter-gtk-1.0-dev,
+               libclutter-gtk-1.0-dev (>= 1.2.1),
                libgranite-dev,
                libindicator3-dev,
                liblightdm-gobject-1-dev,
