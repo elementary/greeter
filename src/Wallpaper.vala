@@ -158,9 +158,9 @@ public class Wallpaper : Clutter.Group {
             float hw = (float)h/w*rw;
             float wh = (float)w/h*rh;
             if (h < w) {
-                return pixbuf.scale_simple (rw, (int) (hw), Gdk.InterpType.NEAREST);
+                return pixbuf.scale_simple (rw, (int) (hw), Gdk.InterpType.BILINEAR);
             } else {
-                return pixbuf.scale_simple ((int) (wh), rh, Gdk.InterpType.NEAREST);
+                return pixbuf.scale_simple ((int) (wh), rh, Gdk.InterpType.BILINEAR);
             } 
         }
         return pixbuf;
