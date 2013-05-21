@@ -111,7 +111,14 @@ public class Wallpaper : Clutter.Group {
                     top.visible = false;
                     set_child_above_sibling (bot, top);
             });
-        } catch (Error e) { warning (e.message); }
+        } catch (Error e) { 
+            if (get_default() != path) {
+                set_wallpaper (get_default());
+            }
+            warning ("Can't load: "+path);
+            warning ("Falling back to default if possible because:");
+            warning (e.message); 
+        }
     }
 
     /**
