@@ -239,8 +239,10 @@ public class Indicators : GtkClutter.Actor {
         accessibility.submenu = new Gtk.Menu ();
 
         var keyboard = new Gtk.CheckMenuItem.with_label (_("Onscreen Keyboard"));
-        keyboard.toggled.connect (toggle_keyboard);
         keyboard.active = settings.get_boolean ("onscreen-keyboard");
+        keyboard.toggled.connect ((e) => {
+            toggle_keyboard (e.active);
+        });
         accessibility.submenu.append (keyboard);
 
         var high_contrast = new Gtk.CheckMenuItem.with_label (_("HighContrast"));
@@ -268,10 +270,10 @@ public class Indicators : GtkClutter.Actor {
     int onboard_stdout_fd;
     Gtk.Window keyboard_window;
 
-    void toggle_keyboard (Gtk.CheckMenuItem item) {
+    public void toggle_keyboard (bool active) {
         if (keyboard_window != null) {
-            keyboard_window.visible = item.active;
-            settings.set_boolean ("onscreen-keyboard", item.active);
+            keyboard_window.visible = active;
+            settings.set_boolean ("onscreen-keyboard", active);
             return;
         }
 
