@@ -182,19 +182,11 @@ public class PantheonGreeter : Gtk.Window {
         indicators.bar.grab_focus ();
         loginbox.password.grab_focus ();
 
+        this.get_window ().focus (Gdk.CURRENT_TIME);
+
         if (settings.get_boolean ("onscreen-keyboard")) {
             indicators.toggle_keyboard (true);
         }
-
-        //trick used in unity-greeter to make blinking cursor appear
-        var event = new Gdk.Event (Gdk.EventType.FOCUS_CHANGE);
-        event.focus_change.type = Gdk.EventType.FOCUS_CHANGE;
-        event.focus_change.in = 1;
-        event.focus_change.window = this.get_window ();
-        if (event.focus_change.window != null)
-            event.focus_change.window.ref ();
-
-        this.send_focus_change (event);
     }
 
     void reposition () {
