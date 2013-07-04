@@ -285,7 +285,7 @@ public class PantheonGreeter : Gtk.Window {
 
 public static int main (string [] args) {
     /* Protect memory from being paged to disk, as we deal with passwords */
-    Posix.mlockall (Posix.MCL_CURRENT | Posix.MCL_FUTURE);
+    PosixMLock.mlockall (PosixMLock.MCL_CURRENT | PosixMLock.MCL_FUTURE);
 
     var init = GtkClutter.init (ref args);
     if (init != Clutter.InitError.SUCCESS)
