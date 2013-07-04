@@ -49,6 +49,7 @@ PACKAGES
     clutter-gtk-1.0
     indicator-0.4
     gl
+    posix-fixes
 OPTIONS
     --vapidir=${CMAKE_CURRENT_SOURCE_DIR}/vapi
 )
