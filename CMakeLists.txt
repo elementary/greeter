@@ -9,7 +9,7 @@ list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 set (DATADIR "${CMAKE_INSTALL_PREFIX}/share")
 set (PKGDATADIR "${DATADIR}/pantheon-greeter")
 set (CMAKE_INSTALL_PREFIX /usr)
-set (VERSION "1.0.1")
+set (VERSION "1.0.2")
 
 configure_file (${CMAKE_SOURCE_DIR}/src/config.vala.cmake ${CMAKE_BINARY_DIR}/src/config.vala)
 add_definitions (-DGETTEXT_PACKAGE="pantheon-greeter")
