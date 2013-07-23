@@ -1,3 +1,9 @@
+pantheon-greeter (1.0.2) precise; urgency=low
+
+  * New upstream release
+
+ -- Cody Garver <cody@elementaryos.org>  Tue, 23 Jul 2013 05:09:58 -0500
+
 pantheon-greeter (1.0.1) precise; urgency=low
 
   * New upstream release
