@@ -1,16 +1,16 @@
-# Bulgarian translation for pantheon-greeter
-# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# Lithuanian translation for pantheon-greeter
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the pantheon-greeter package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-02 09:24-0500\n"
-"PO-Revision-Date: 2013-08-21 11:31+0000\n"
-"Last-Translator: Aleksander Gospodinov <destinylafaw@gmail.com>\n"
-"Language-Team: Bulgarian <bg@li.org>\n"
+"PO-Revision-Date: 2013-08-21 16:55+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,51 +19,51 @@ msgstr ""
 
 #: /home/codygarver/greeter/po/../src/Indicators.vala:205
 msgid "Shutdown"
-msgstr "Изключване"
+msgstr ""
 
 #: /home/codygarver/greeter/po/../src/Indicators.vala:206
 msgid "Suspend"
-msgstr "Приспиване"
+msgstr ""
 
 #: /home/codygarver/greeter/po/../src/Indicators.vala:207
 msgid "Restart"
-msgstr "Рестартиране"
+msgstr ""
 
 #: /home/codygarver/greeter/po/../src/Indicators.vala:208
 msgid "Hibernate"
-msgstr "Дълбоко приспиване"
+msgstr ""
 
 #: /home/codygarver/greeter/po/../src/Indicators.vala:241
 msgid "Onscreen Keyboard"
-msgstr "Екранна клавиатура"
+msgstr ""
 
 #: /home/codygarver/greeter/po/../src/Indicators.vala:246
 msgid "HighContrast"
-msgstr "Висок контраст"
+msgstr ""
 
 #. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details.
 #. %v is added here to provide the English date suffixes th, nd and so on
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:95
 msgid "%A, %B %e%v"
-msgstr "%A, %B %e"
+msgstr ""
 
 #. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:97
 msgid "%l:%M"
-msgstr "%l:%M"
+msgstr ""
 
 #. AM/PM display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details.
 #. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:100
 #, c-format
 msgid " %p"
-msgstr " %p"
+msgstr ""
 
 #: /home/codygarver/greeter/po/../src/LoginBox.vala:88
 msgid "Login"
-msgstr "Вход"
+msgstr ""
 
 #: /home/codygarver/greeter/po/../src/LoginBox.vala:246
 #: /home/codygarver/greeter/po/../src/LoginBox.vala:266
 msgid "Guest session"
-msgstr "Сесия на гост"
+msgstr ""
