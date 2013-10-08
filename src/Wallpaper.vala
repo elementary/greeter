@@ -2,7 +2,7 @@
 /***
     BEGIN LICENSE
 
-    Copyright (C) 2011-2012 elementary Developers
+    Copyright (C) 2011-2013 elementary Developers
 
     This program is free software: you can redistribute it and/or modify it
     under the terms of the GNU Lesser General Public License version 3, as published
@@ -67,7 +67,7 @@ public class Wallpaper : Clutter.Group {
         }
 
         //same wallpaper => abort
-        if(file_path == last_loaded) 
+        if(file_path == last_loaded)
             return;
         //mark now loading wallpaper as the last one started loading async
         last_loaded = file_path;
@@ -85,7 +85,7 @@ public class Wallpaper : Clutter.Group {
         second = !second;
     }
 
-    public async void load_wallpaper (string path, File file, GtkClutter.Texture bot, 
+    public async void load_wallpaper (string path, File file, GtkClutter.Texture bot,
                                         GtkClutter.Texture top) {
 
         try {
@@ -111,13 +111,13 @@ public class Wallpaper : Clutter.Group {
                     top.visible = false;
                     set_child_above_sibling (bot, top);
             });
-        } catch (Error e) { 
+        } catch (Error e) {
             if (get_default() != path) {
                 set_wallpaper (get_default());
             }
             warning ("Can't load: "+path);
             warning ("Falling back to default if possible because:");
-            warning (e.message); 
+            warning (e.message);
         }
     }
 
@@ -145,7 +145,7 @@ public class Wallpaper : Clutter.Group {
     }
 
     /**
-     * makes the pixbuf fit inside the GPU limit and scales it to 
+     * makes the pixbuf fit inside the GPU limit and scales it to
      * screen size to save memory.
      */
     public Gdk.Pixbuf validate_pixbuf (Gdk.Pixbuf pixbuf) {
@@ -160,7 +160,7 @@ public class Wallpaper : Clutter.Group {
     public Gdk.Pixbuf scale_to_rect (Gdk.Pixbuf pixbuf, int rw, int rh) {
         int h = pixbuf.height;
         int w = pixbuf.width;
-        
+
         if (h > rh || w > rw) {
             float hw = (float)h/w*rw;
             float wh = (float)w/h*rh;
@@ -168,7 +168,7 @@ public class Wallpaper : Clutter.Group {
                 return pixbuf.scale_simple (rw, (int) (hw), Gdk.InterpType.BILINEAR);
             } else {
                 return pixbuf.scale_simple ((int) (wh), rh, Gdk.InterpType.BILINEAR);
-            } 
+            }
         }
         return pixbuf;
     }
