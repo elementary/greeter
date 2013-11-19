@@ -37,7 +37,7 @@ public abstract class CredentialsArea : Grid {
 
     public PantheonUser user { get; private set; }
 
-    public string get_username () {
+    public virtual string get_username () {
         return user.name;
     }
 
@@ -123,7 +123,7 @@ public class ManualLogin : CredentialsArea {
         attach (password, 0, 1, 1, 1);
     }
 
-    public new string get_username () {
+    public override string get_username () {
         return username.text;
     }
 }
