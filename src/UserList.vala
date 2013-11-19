@@ -42,9 +42,11 @@ public class UserList {
             index++;
         }
         if (greeter.show_manual_login_hint) {
+            warning ("test");
             users.add (new PantheonUser.Manual (index));
             index++;
         }
+        size = index;
 
         foreach (PantheonUser user in users) {
             user.load_avatar ();
@@ -57,7 +59,7 @@ public class UserList {
 
     public PantheonUser get_next (PantheonUser user) {
         int i = user.index;
-        if(i < size)
+        if(i < size - 1)
             return get (i + 1);
         return get (i);
     }

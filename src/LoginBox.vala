@@ -47,6 +47,7 @@ public class LoginBox : GtkClutter.Actor {
     Gdk.Pixbuf image;
     EventBox credentials_box;
     CredentialsArea credentials;
+    PantheonUser previous_user = null;
 
     Granite.Drawing.BufferSurface buffer;
     int shadow_blur = 25;
@@ -101,6 +102,9 @@ public class LoginBox : GtkClutter.Actor {
         this.credentials_box = new EventBox ();
         this.credentials = new GuestLogin (start_user);
 
+        width = 510;
+        height = 168;
+
         avatar.set_size_request (92, 92);
         avatar.valign = Align.START;
         avatar.visible_window = false;
@@ -125,7 +129,7 @@ public class LoginBox : GtkClutter.Actor {
 
         avatar.draw.connect ((ctx) => {
             Granite.Drawing.Utilities.cairo_rounded_rectangle (ctx, 0, 0,
-                                                               avatar.get_allocated_width (), avatar.get_allocated_height (), 3);
+                avatar.get_allocated_width (), avatar.get_allocated_height (), 3);
             Gdk.cairo_set_source_pixbuf (ctx, image, 0, 0);
             ctx.fill_preserve ();
             ctx.set_line_width (1);
@@ -252,8 +256,8 @@ public class LoginBox : GtkClutter.Actor {
             credentials_box.remove (credentials_box.get_child ());
         credentials_box.add (credentials);
 
-        if (avatar_handler != 0) {
-            credentials.user.disconnect (avatar_handler);
+        if (previous_user != null && avatar_handler != 0) {
+            previous_user.disconnect (avatar_handler);
         }
 
         image = credentials.user.get_avatar ();
@@ -262,11 +266,17 @@ public class LoginBox : GtkClutter.Actor {
             image = credentials.user.get_avatar ();
             avatar.queue_draw ();
         });
+
+        credentials.request_login.connect (() => {
+            login_requested ();
+        });
+
         credentials_box.show_all ();
     }
 
     public void set_user (PantheonUser user) {
         credentials.reset_pw ();
+        previous_user = credentials.user;
 
         if (user.is_guest ()) {
             credentials = new GuestLogin (user);
@@ -295,7 +305,7 @@ public class LoginBox : GtkClutter.Actor {
 
         if (layout != null)
             LightDM.set_layout (layout);
-        FIXME */ 
+        FIXME */
         credentials.pass_focus ();
         if (LightDM.get_sessions ().length () == 1)
             settings.hide ();

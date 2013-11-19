@@ -47,19 +47,27 @@ public class PantheonGreeter : Gtk.Window {
         } set {
             name_container.get_children ().nth_data (_current_user.index).visible = true;
             _current_user = value;
+
             name_container.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, y:loginbox.y - _current_user.index * 200.0f);
-            loginbox.set_user (_current_user);
             name_container.get_children ().nth_data (_current_user.index).visible = false;
 
             wallpaper.set_wallpaper (_current_user.background);
             indicators.user_changed_cb(_current_user);
+            loginbox.set_user (current_user);
         }
     }
 
     public PantheonGreeter () {
         settings = new Settings ("org.pantheon.desktop.greeter");
-
         greeter = new LightDM.Greeter ();
+        /*start*/
+        try {
+            greeter.connect_sync ();
+        } catch (Error e) {
+            warning ("Couldn't connect: %s", e.message);
+            Posix.exit (Posix.EXIT_FAILURE);
+        }
+        
         clutter = new GtkClutter.Embed ();
         fadein = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
         greeterbox = new Clutter.Actor ();
@@ -111,8 +119,6 @@ public class PantheonGreeter : Gtk.Window {
 
         reposition ();
 
-        loginbox.width = 510;
-        loginbox.height = 225;
         name_container.y = loginbox.y - current_user.index * 130.0f;
 
         clutter.key_release_event.connect (keyboard_navigation);
@@ -136,7 +142,6 @@ public class PantheonGreeter : Gtk.Window {
                     current_user = userlist.get (idx);
                     return true;
                 });
-
             name_container.add_child (label);
         }
 
@@ -179,15 +184,7 @@ public class PantheonGreeter : Gtk.Window {
             indicators.toggle_keyboard (true);
         }
 
-        /*start*/
-        try {
-            greeter.connect_sync ();
-        } catch (Error e) {
-            warning ("Couldn't connect: %s", e.message);
-            Posix.exit (Posix.EXIT_FAILURE);
-        }
-
-        loginbox.set_user (current_user);
+        current_user = _current_user;
     }
 
     public static LightDM.Layout? get_layout_by_name (string name) {
@@ -235,7 +232,7 @@ public class PantheonGreeter : Gtk.Window {
                 current_user = userlist.get_prev (current_user);
                 break;
             case Gdk.Key.Down:
-                current_user = userlist.get_prev (current_user);
+                current_user = userlist.get_next (current_user);
                 break;
             default:
                 return false;

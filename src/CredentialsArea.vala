@@ -44,6 +44,8 @@ public abstract class CredentialsArea : Grid {
     public Entry create_password_field () {
         var password = new Entry ();
         password.caps_lock_warning = true;
+        //replace the letters with dots
+        password.set_visibility (false);
         password.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
         password.icon_press.connect ((pos, event) => {
             if (pos == Gtk.EntryIconPosition.SECONDARY) {
@@ -92,7 +94,7 @@ public class UserLogin : CredentialsArea {
 
         var password = create_password_field ();
         password.margin_top = 11;
-        attach (password, 0, 0, 1, 1);
+        attach (password, 0, 1, 1, 1);
     }
 
 }
@@ -106,7 +108,7 @@ public class ManualLogin : CredentialsArea {
 
         var password = create_password_field ();
         password.margin_top = 11;
-        attach (password, 0, 0, 1, 1);
+        attach (password, 0, 1, 1, 1);
     }
 }
 

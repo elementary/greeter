@@ -68,21 +68,20 @@ public class PantheonUser : Object {
     }
 
     public async void load_avatar () {
-        /*
         try {
             File file = File.new_for_path (user.image);
             InputStream stream = yield file.read_async (GLib.Priority.DEFAULT);
             var buf = new Gdk.Pixbuf.from_stream_at_scale (stream, 96, 96, true);
             lock(avatar) {
                 avatar = buf;
-            }                   FIXME
+            }
             Idle.add(() => {
                 avatar_updated ();
                 return false;
             });
         } catch (Error e) {
-            warning ("Couldn't load face from " + user.image);
-        } */
+            message ("Using default-avatar instead of " + user.image);
+        }
     }
 
     public signal void avatar_updated ();
@@ -110,8 +109,8 @@ public class PantheonUser : Object {
         get {
             switch(usertype) {
             case UserType.NORMAL: return get_lightdm_user ().name;
-            case UserType.MANUAL: return "";
-            case UserType.GUEST: return"";
+            case UserType.MANUAL: return _("Manual Login");
+            case UserType.GUEST: return _("Guest session");
             }
             return "";
         }

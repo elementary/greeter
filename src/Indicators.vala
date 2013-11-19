@@ -203,10 +203,17 @@ public class Indicators : GtkClutter.Actor {
                 bar.append (new IndicatorMenuItem (entry));
             });
 
-            //FIXME handle removed indicators if necessary
+            io.entry_removed.connect ((object, entry) => {
+                for (var i = 1; i < bar.get_children ().length (); i++) {
+                    if (bar.get_children ().nth_data (i) is IndicatorMenuItem)
+                        if (entry == (bar.get_children ().nth_data (i) as IndicatorMenuItem).entry)
+                            bar.remove (bar.get_children ().nth_data (i));
+                }
+            });
 
             foreach (var entry in io.get_entries ())
-              bar.append (new IndicatorMenuItem (entry));
+                bar.append (new IndicatorMenuItem (entry));
+
         }
 
         start ();
