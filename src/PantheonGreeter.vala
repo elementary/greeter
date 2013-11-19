@@ -26,8 +26,8 @@ public class PantheonGreeter : Gtk.Window {
 
     Clutter.Rectangle fadein;
     Clutter.Actor greeterbox;
-    LightDM.UserList users;
     Clutter.Actor name_container;
+    UserList userlist;
 
     TimeLabel time;
     Indicators indicators;
@@ -40,18 +40,19 @@ public class PantheonGreeter : Gtk.Window {
     //from this width on the clock wont fit anymore
     const int NO_CLOCK_WIDTH = 920;
 
-    int _current_user = 0;
-    int current_user {
+    PantheonUser _current_user = null;
+    PantheonUser current_user {
         get {
             return _current_user;
         } set {
-            name_container.get_children ().nth_data (_current_user).visible = true;
+            name_container.get_children ().nth_data (_current_user.index).visible = true;
             _current_user = value;
-            name_container.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, y:loginbox.y - _current_user * 200.0f);
-            loginbox.set_user (users.users.nth_data (_current_user));
-            name_container.get_children ().nth_data (_current_user).visible = false;
+            name_container.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, y:loginbox.y - _current_user.index * 200.0f);
+            loginbox.set_user (_current_user);
+            name_container.get_children ().nth_data (_current_user.index).visible = false;
 
-            wallpaper.set_wallpaper (users.users.nth_data (_current_user).background);
+            wallpaper.set_wallpaper (_current_user.background);
+            indicators.user_changed_cb(_current_user);
         }
     }
 
@@ -60,20 +61,26 @@ public class PantheonGreeter : Gtk.Window {
 
         greeter = new LightDM.Greeter ();
         clutter = new GtkClutter.Embed ();
-        loginbox = new LoginBox (greeter);
         fadein = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
         greeterbox = new Clutter.Actor ();
-        users = LightDM.UserList.get_instance ();
+        userlist = new UserList (LightDM.UserList.get_instance (), greeter);
+
+        _current_user = userlist.get (0);
+
+        loginbox = new LoginBox (greeter, current_user);
+
         name_container = new Clutter.Actor ();
         time = new TimeLabel ();
         indicators = new Indicators (loginbox, settings);
         wallpaper = new Wallpaper ();
 
+        PantheonUser.load_default_avatar ();
+
         greeter.show_message.connect (wrong_pw);
         greeter.show_prompt.connect (send_pw);
         greeter.authentication_complete.connect (authenticated);
 
-        loginbox.login.clicked.connect (authenticate);
+        loginbox.login_requested.connect (authenticate);
 
         /*activate the numlock if needed*/
 
@@ -106,7 +113,7 @@ public class PantheonGreeter : Gtk.Window {
 
         loginbox.width = 510;
         loginbox.height = 225;
-        name_container.y = loginbox.y - current_user * 130.0f;
+        name_container.y = loginbox.y - current_user.index * 130.0f;
 
         clutter.key_release_event.connect (keyboard_navigation);
 
@@ -114,15 +121,9 @@ public class PantheonGreeter : Gtk.Window {
         show_all ();
 
         /*get the names together*/
-        for (var i = 0; i < users.users.length () + 1; i++) {
-            if (i > users.users.length () && !greeter.has_guest_account_hint)
-                continue;
-
+        for (var i = 0; i < userlist.size; i++) {
             ShadowedLabel label = new ShadowedLabel ("");
-            if (i == users.users.length ())
-                label.label = (LoginBox.get_user_markup (null));
-            else
-                label.label = (LoginBox.get_user_markup (users.users.nth_data (i)));
+            label.label = userlist.get (i).get_markup ();
 
             label.height = 75;
             label.width = loginbox.width - 100;
@@ -132,8 +133,7 @@ public class PantheonGreeter : Gtk.Window {
                     var idx = name_container.get_children ().index (e.source);
                     if (idx == -1)
                         return false;
-                    current_user = idx;
-
+                    current_user = userlist.get (idx);
                     return true;
                 });
 
@@ -159,7 +159,25 @@ public class PantheonGreeter : Gtk.Window {
 
         greeterbox.animate (Clutter.AnimationMode.EASE_OUT_CUBIC, 1000, depth:0.0f).completed.connect ( () => {
                 greeterbox.remove_effect_by_name ("mirror");
-            });
+        });
+
+        var last_user = settings.get_string ("last-user");
+        if (last_user == "")
+            _current_user = userlist.get (0);
+        else {
+            for (var i = 0; i < userlist.size; i++) {
+                if (userlist.get (i).name == last_user)
+                    current_user = userlist.get (i);
+            }
+        }
+
+        indicators.bar.grab_focus ();
+
+        this.get_window ().focus (Gdk.CURRENT_TIME);
+
+        if (settings.get_boolean ("onscreen-keyboard")) {
+            indicators.toggle_keyboard (true);
+        }
 
         /*start*/
         try {
@@ -169,24 +187,15 @@ public class PantheonGreeter : Gtk.Window {
             Posix.exit (Posix.EXIT_FAILURE);
         }
 
-        var last_user = settings.get_string ("last-user");
-        if (last_user == "")
-            current_user = 0;
-        else {
-            for (var i = 0; i < users.users.length (); i++) {
-                if (users.users.nth_data (i).name == last_user)
-                    current_user = i;
-            }
+        loginbox.set_user (current_user);
+    }
+
+    public static LightDM.Layout? get_layout_by_name (string name) {
+        foreach (var layout in LightDM.get_layouts ()) {
+            if (layout.name == name)
+                return layout;
         }
-
-        indicators.bar.grab_focus ();
-        loginbox.password.grab_focus ();
-
-        this.get_window ().focus (Gdk.CURRENT_TIME);
-
-        if (settings.get_boolean ("onscreen-keyboard")) {
-            indicators.toggle_keyboard (true);
-        }
+        return null;
     }
 
     void reposition () {
@@ -218,32 +227,19 @@ public class PantheonGreeter : Gtk.Window {
     }
 
     bool keyboard_navigation (Gdk.EventKey e) {
-        int new_user = current_user;
-
         switch (e.keyval) {
             case Gdk.Key.Num_Lock:
                 settings.set_boolean ("activate-numlock", !settings.get_boolean ("activate-numlock"));
                 break;
             case Gdk.Key.Up:
-                new_user --;
-
-                if (new_user - 1 < 0)
-                    new_user = 0;
+                current_user = userlist.get_prev (current_user);
                 break;
             case Gdk.Key.Down:
-                var n_user = users.users.length ();
-                new_user ++;
-
-                var sum = (int)(greeter.has_guest_account_hint ? n_user + 1 : n_user);
-                if (new_user >= sum)
-                    new_user = sum - 1;
+                current_user = userlist.get_prev (current_user);
                 break;
             default:
                 return false;
         }
-
-        if (new_user != current_user)
-            current_user = new_user;
 
         return true;
     }
@@ -261,7 +257,7 @@ public class PantheonGreeter : Gtk.Window {
     }
 
     void send_pw (string text, LightDM.PromptType type) {
-        greeter.respond (loginbox.password.text);
+        greeter.respond (loginbox.get_password ());
     }
 
     void authenticated () {

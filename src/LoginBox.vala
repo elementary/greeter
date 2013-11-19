@@ -19,6 +19,8 @@
     END LICENSE
 ***/
 
+using Gtk;
+
 public const string LIGHT_WINDOW_STYLE = """
     .content-view-window {
         background-image:none;
@@ -33,17 +35,18 @@ public const string LIGHT_WINDOW_STYLE = """
 """;
 
 public class LoginBox : GtkClutter.Actor {
-    public LightDM.User current_user { get; private set; }
+    public PantheonUser current_user { get; private set; }
     public string current_session { get; private set; }
 
-    public Gtk.EventBox avatar;
-    public Gtk.Label username;
-    public Gtk.Entry password;
-    public Gtk.Button login;
-    public Gtk.ToggleButton settings;
-    Gtk.Grid grid;
-    Gtk.Spinner spinner;
+    ulong avatar_handler = 0;
+
+    EventBox avatar;
+    ToggleButton settings;
+    Grid grid;
+    Spinner spinner;
     Gdk.Pixbuf image;
+    EventBox credentials_box;
+    CredentialsArea credentials;
 
     Granite.Drawing.BufferSurface buffer;
     int shadow_blur = 25;
@@ -53,14 +56,27 @@ public class LoginBox : GtkClutter.Actor {
 
     LightDM.Greeter greeter;
 
+    Window draw_ref;
+
+    public bool high_contrast {
+        set {
+            if (value)
+                draw_ref.get_style_context ().remove_class ("content-view-window");
+            else
+                draw_ref.get_style_context ().add_class ("content-view-window");
+        }
+    }
+
+    public signal void login_requested ();
+
     bool _working;
     public bool working {
         get {
             return _working;
         } set {
             _working = value;
-            grid.remove ((_working)?avatar as Gtk.Widget:spinner as Gtk.Widget);
-            grid.attach ((_working)?spinner as Gtk.Widget:avatar as Gtk.Widget, 0, 0, 1, 3);
+            grid.remove ((_working)?avatar as Widget:spinner as Widget);
+            grid.attach ((_working)?spinner as Widget:avatar as Widget, 0, 0, 1, 3);
             grid.show_all ();
             spinner.start ();
             if (LightDM.get_sessions ().length () == 1)
@@ -68,67 +84,40 @@ public class LoginBox : GtkClutter.Actor {
         }
     }
 
-    public Gtk.Window draw_ref;
-
-    public LoginBox (LightDM.Greeter greeter) {
+    public LoginBox (LightDM.Greeter greeter, PantheonUser start_user) {
         this.greeter = greeter;
 
         this.reactive = true;
         this.scale_gravity = Clutter.Gravity.CENTER;
 
         try {
-            this.image = Gtk.IconTheme.get_default ().load_icon ("avatar-default", 92, 0);
+            this.image = IconTheme.get_default ().load_icon ("avatar-default", 92, 0);
         } catch (Error e) {
             warning (e.message);
         }
 
-        this.avatar = new Gtk.EventBox ();
-        this.username = new Gtk.Label ("");
-        this.password = new Gtk.Entry ();
-        this.login = new Gtk.Button.with_label (_("Login"));
-        this.settings = new Gtk.ToggleButton ();
+        this.avatar = new EventBox ();
+        this.settings = new ToggleButton ();
+        this.credentials_box = new EventBox ();
+        this.credentials = new GuestLogin (start_user);
 
         avatar.set_size_request (92, 92);
-        avatar.valign = Gtk.Align.START;
+        avatar.valign = Align.START;
         avatar.visible_window = false;
-        username.hexpand = true;
-        username.halign  = Gtk.Align.START;
-        username.ellipsize = Pango.EllipsizeMode.END;
-        username.margin_top = 6;
-        username.height_request = 1;
-        login.expand = false;
-        login.height_request = 1;
-        login.width_request = 120;
-        login.margin_top = 26;
-        login.halign = Gtk.Align.END;
-        settings.valign  = Gtk.Align.START;
-        settings.relief  = Gtk.ReliefStyle.NONE;
-        settings.add (new Gtk.Image.from_icon_name ("application-menu-symbolic", Gtk.IconSize.MENU));
-        password.margin_top = 11;
-        password.caps_lock_warning = true;
-        password.set_visibility (false);
-        password.key_release_event.connect ((e) => {
-            if (e.keyval == Gdk.Key.Return || e.keyval == Gdk.Key.KP_Enter) {
-                login.clicked ();
-                return true;
-            } else {
-                return false;
-            }
-        });
+        settings.valign  = Align.START;
+        settings.relief  = ReliefStyle.NONE;
+        settings.add (new Image.from_icon_name ("application-menu-symbolic", IconSize.MENU));
 
-        spinner = new Gtk.Spinner ();
-        spinner.valign = Gtk.Align.CENTER;
+        spinner = new Spinner ();
+        spinner.valign = Align.CENTER;
         spinner.start ();
-        spinner.set_size_request (92, 24);
+        spinner.set_size_request (92, 92);
 
-        grid = new Gtk.Grid ();
+        grid = new Grid ();
 
         grid.attach (avatar, 0, 0, 1, 3);
+        grid.attach (credentials_box, 1, 0, 1, 3);
         grid.attach (settings, 2, 0, 1, 1);
-        grid.attach (username, 1, 0, 1, 1);
-        grid.attach (password, 1, 1, 2, 1);
-        grid.attach (login, 1, 2, 2, 1);
-
         grid.margin = shadow_blur + 12;
         grid.margin_top += 5;
         grid.margin_bottom -= 12;
@@ -145,61 +134,19 @@ public class LoginBox : GtkClutter.Actor {
             return false;
         });
 
-        PopOver pop = null;
-        /*session choose popover*/
-        this.settings.toggled.connect (() => {
-            if (!settings.active) {
-                pop.destroy ();
-                return;
-            }
-
-            pop = new PopOver ();
-
-            var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
-            (pop.get_content_area () as Gtk.Container).add (box);
-
-            var but = new Gtk.RadioButton.with_label (null, LightDM.get_sessions ().nth_data (0).name);
-            box.pack_start (but, false);
-            but.active = LightDM.get_sessions ().nth_data (0).key == current_session;
-
-            but.toggled.connect (() => {
-                if (but.active)
-                    current_session = LightDM.get_sessions ().nth_data (0).key;
-            });
-
-            for (var i = 1;i < LightDM.get_sessions ().length (); i++) {
-                var rad = new Gtk.RadioButton.with_label_from_widget (but, LightDM.get_sessions ().nth_data (i).name);
-                box.pack_start (rad, false);
-                rad.active = LightDM.get_sessions ().nth_data (i).key == current_session;
-                var identifier = LightDM.get_sessions ().nth_data (i).key;
-                rad.toggled.connect ( () => { 
-                    if (rad.active)
-                        current_session = identifier; 
-                });
-            }
-
-            this.get_stage ().add_child (pop);
-
-            pop.x = this.x + this.width - 265;
-            pop.width = 245;
-            pop.y = this.y + 50;
-            pop.get_widget ().show_all ();
-            pop.destroy.connect (() => {
-                settings.active = false;
-            });
-        });
+        create_popup ();
 
         /* draw the window stylish! */
-        var css = new Gtk.CssProvider ();
+        var css = new CssProvider ();
         try {
             css.load_from_data (LIGHT_WINDOW_STYLE, -1);
         } catch (Error e) {
             warning (e.message);
         }
 
-        draw_ref = new Gtk.Window ();
+        draw_ref = new Window ();
         draw_ref.get_style_context ().add_class ("content-view-window");
-        draw_ref.get_style_context ().add_provider (css, Gtk.STYLE_PROVIDER_PRIORITY_FALLBACK);
+        draw_ref.get_style_context ().add_provider (css, STYLE_PROVIDER_PRIORITY_FALLBACK);
 
         var w = -1; var h = -1;
         this.get_widget ().size_allocate.connect (() => {
@@ -234,21 +181,17 @@ public class LoginBox : GtkClutter.Actor {
             return false;
         });
 
-        ((Gtk.Container) this.get_widget ()).add (grid);
+        ((Container) this.get_widget ()).add (grid);
         this.get_widget ().show_all ();
         this.get_widget ().get_style_context ().add_class ("content-view");
     }
 
-    public static string get_user_markup (LightDM.User? user, bool title=false) {
-        if (user.real_name != null && user != null) {
-            return "<span face='Open Sans Light' font='24'>" + user.real_name + "</span>";
-        } else {
-            return "<span face='Open Sans Light' font='24'>" + _("Guest session") + "</span>";
-        }
+    public string get_password () {
+        return credentials.userpassword;
     }
 
     public void wrong_pw () {
-        this.password.text = "";
+        credentials.reset_pw ();
         this.animate (Clutter.AnimationMode.EASE_IN_BOUNCE, 150, scale_x:0.9f, scale_y: 0.9f).
         completed.connect (() => {
             Clutter.Threads.Timeout.add (1, () => {
@@ -258,56 +201,102 @@ public class LoginBox : GtkClutter.Actor {
         });
     }
 
-    public void set_user (LightDM.User ?user, bool initial=false) { //guest if null
-        this.password.text = "";
-
-        if (user == null) {
-            this.username.set_markup ("<span face='Open Sans Light' font='24'>"+
-                                      _("Guest session") + "</span>");
-
-            this.current_user = null;
-            this.current_session = greeter.default_session_hint;
-            this.password.set_sensitive (false);
-
-            try {
-                this.image = Gtk.IconTheme.get_default ().load_icon ("avatar-default", 96, 0);
-            } catch (Error e) {
-                warning (e.message);
+    private void create_popup () {
+        PopOver pop = null;
+        /*session choose popover*/
+        this.settings.toggled.connect (() => {
+            if (!settings.active) {
+                pop.destroy ();
+                return;
             }
 
-            this.avatar.queue_draw ();
-        } else {
-            LightDM.Layout layout = null;
-            LightDM.get_layouts ().foreach ((l) => {
-                    if (l.name == user.layout)
-                        layout = l;
+            pop = new PopOver ();
+
+            var box = new Box (Orientation.VERTICAL, 0);
+            (pop.get_content_area () as Container).add (box);
+
+            var but = new RadioButton.with_label (null, LightDM.get_sessions ().nth_data (0).name);
+            box.pack_start (but, false);
+            but.active = LightDM.get_sessions ().nth_data (0).key == current_session;
+
+            but.toggled.connect (() => {
+                if (but.active)
+                    current_session = LightDM.get_sessions ().nth_data (0).key;
             });
 
-            if (layout != null)
-                LightDM.set_layout (layout);
-
-
-            this.username.set_markup (get_user_markup (user, true));
-
-            try {
-                this.image = new Gdk.Pixbuf.from_file_at_scale (user.image, 96, 96, true);
-            } catch (Error e) {
-                try {
-                    this.image = Gtk.IconTheme.get_default ().load_icon ("avatar-default", 96, 0);
-                } catch (Error e) {
-                    warning (e.message);
-                }
+            for (var i = 1;i < LightDM.get_sessions ().length (); i++) {
+                var rad = new RadioButton.with_label_from_widget (but, LightDM.get_sessions ().nth_data (i).name);
+                box.pack_start (rad, false);
+                rad.active = LightDM.get_sessions ().nth_data (i).key == current_session;
+                var identifier = LightDM.get_sessions ().nth_data (i).key;
+                rad.toggled.connect ( () => {
+                    if (rad.active)
+                        current_session = identifier;
+                });
             }
 
-            this.avatar.queue_draw ();
+            this.get_stage ().add_child (pop);
 
-            this.current_user = user;
-            this.current_session = user.session;
+            pop.x = this.x + this.width - 265;
+            pop.width = 245;
+            pop.y = this.y + 50;
+            pop.get_widget ().show_all ();
+            pop.destroy.connect (() => {
+                settings.active = false;
+            });
+        });
+    }
 
-            this.password.set_sensitive (true);
-            this.password.grab_focus ();
+    private void update_credentials () {
+        if (credentials_box.get_child () != null)
+            credentials_box.remove (credentials_box.get_child ());
+        credentials_box.add (credentials);
+
+        if (avatar_handler != 0) {
+            credentials.user.disconnect (avatar_handler);
         }
 
+        image = credentials.user.get_avatar ();
+        avatar.queue_draw ();
+        avatar_handler = credentials.user.avatar_updated.connect (() => {
+            image = credentials.user.get_avatar ();
+            avatar.queue_draw ();
+        });
+        credentials_box.show_all ();
+    }
+
+    public void set_user (PantheonUser user) {
+        credentials.reset_pw ();
+
+        if (user.is_guest ()) {
+            credentials = new GuestLogin (user);
+            update_credentials ();
+            current_session = greeter.default_session_hint;
+        }
+        if (user.is_manual ()) {
+            credentials = new ManualLogin (user);
+            update_credentials ();
+            current_session = greeter.default_session_hint;
+        }
+
+        if (user.is_normal ()) {
+            credentials = new UserLogin (user);
+            update_credentials ();
+            current_session = user.get_lightdm_user ().session;
+        }
+
+        this.current_user = user;
+
+        /*LightDM.Layout layout = null;
+        LightDM.get_layouts ().foreach ((l) => {
+                if (l.name == user.get_lightdm_user ().layout)
+                    layout = l;
+        });
+
+        if (layout != null)
+            LightDM.set_layout (layout);
+        FIXME */ 
+        credentials.pass_focus ();
         if (LightDM.get_sessions ().length () == 1)
             settings.hide ();
     }
