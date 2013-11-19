@@ -112,6 +112,11 @@ public class ManualLogin : CredentialsArea {
     public ManualLogin (PantheonUser user) {
         base (user);
         username = new Entry();
+        username.hexpand = true;
+        username.halign  = Align.START;
+        username.margin_top = 6;
+        username.height_request = 1;
+
         attach (username, 0, 0, 1, 1);
 
         pass_focus.connect (() => {
