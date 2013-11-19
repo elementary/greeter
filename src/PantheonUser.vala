@@ -68,6 +68,8 @@ public class PantheonUser : Object {
     }
 
     public async void load_avatar () {
+        if (!is_normal ())
+            return;
         try {
             File file = File.new_for_path (user.image);
             InputStream stream = yield file.read_async (GLib.Priority.DEFAULT);

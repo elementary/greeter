@@ -37,11 +37,15 @@ public abstract class CredentialsArea : Grid {
 
     public PantheonUser user { get; private set; }
 
+    public string get_username () {
+        return user.name;
+    }
+
     public CredentialsArea (PantheonUser user) {
         this.user = user;
     }
 
-    public Entry create_password_field () {
+    public Entry create_password_field (bool grab_focus) {
         var password = new Entry ();
         password.caps_lock_warning = true;
         //replace the letters with dots
@@ -63,12 +67,15 @@ public abstract class CredentialsArea : Grid {
         password.changed.connect (() => {
             _userpassword = password.text;
         });
+
         reset_pw.connect (() => {
             password.text = "";
         });
-        pass_focus.connect (() => {
-            password.grab_focus ();
-        });
+        if(grab_focus) {
+            pass_focus.connect (() => {
+                password.grab_focus ();
+            });
+        }
         return password;
     }
 
@@ -92,23 +99,32 @@ public class UserLogin : CredentialsArea {
 
         attach (username, 0, 0, 1, 1);
 
-        var password = create_password_field ();
+        var password = create_password_field (true);
         password.margin_top = 11;
         attach (password, 0, 1, 1, 1);
     }
-
 }
 
 public class ManualLogin : CredentialsArea {
 
+    private Entry username;
+
     public ManualLogin (PantheonUser user) {
         base (user);
-        var username = new Entry();
+        username = new Entry();
         attach (username, 0, 0, 1, 1);
 
-        var password = create_password_field ();
+        pass_focus.connect (() => {
+            username.grab_focus ();
+        });
+
+        var password = create_password_field (false);
         password.margin_top = 11;
         attach (password, 0, 1, 1, 1);
+    }
+
+    public new string get_username () {
+        return username.text;
     }
 }
 
@@ -122,6 +138,9 @@ public class GuestLogin : CredentialsArea {
         var login_btn = new Button.with_label (_("Login"));
         login_btn.clicked.connect (() => {
             request_login ();
+        });
+        pass_focus.connect (() => {
+            login_btn.grab_focus ();
         });
         attach (login_btn, 0, 1, 1, 1);
     }

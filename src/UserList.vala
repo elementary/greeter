@@ -42,7 +42,6 @@ public class UserList {
             index++;
         }
         if (greeter.show_manual_login_hint) {
-            warning ("test");
             users.add (new PantheonUser.Manual (index));
             index++;
         }

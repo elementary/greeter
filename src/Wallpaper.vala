@@ -80,7 +80,7 @@ public class Wallpaper : Clutter.Group {
 
 
         //load the actual wallpaper async
-        load_wallpaper (file_path,file,bot,top);
+        load_wallpaper.begin (file_path,file,bot,top);
 
         second = !second;
     }

@@ -67,7 +67,7 @@ public class PantheonGreeter : Gtk.Window {
             warning ("Couldn't connect: %s", e.message);
             Posix.exit (Posix.EXIT_FAILURE);
         }
-        
+
         clutter = new GtkClutter.Embed ();
         fadein = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
         greeterbox = new Clutter.Actor ();
@@ -243,10 +243,10 @@ public class PantheonGreeter : Gtk.Window {
 
     void authenticate () {
         loginbox.working = true;
-        if (loginbox.current_user == null)
+        if (loginbox.current_user.is_guest ())
             greeter.authenticate_as_guest ();
         else
-            greeter.authenticate (loginbox.current_user.name);
+            greeter.authenticate (loginbox.get_username ());
     }
 
     void wrong_pw (string text, LightDM.MessageType type) {

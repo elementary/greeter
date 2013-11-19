@@ -251,6 +251,10 @@ public class LoginBox : GtkClutter.Actor {
         });
     }
 
+    public string get_username () {
+        return credentials.get_username ();
+    }
+
     private void update_credentials () {
         if (credentials_box.get_child () != null)
             credentials_box.remove (credentials_box.get_child ());
