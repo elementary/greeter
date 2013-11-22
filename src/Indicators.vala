@@ -331,8 +331,11 @@ public class Indicators : GtkClutter.Actor {
 
     public void set_layouts (List <LightDM.Layout> layouts)
     {
-        if (layouts.length () == 0)
-            layouts.append (LightDM.get_layout ()); /* default layout */
+        if (layouts.length () == 0) {
+            LightDM.get_layouts ().foreach ((entry) => {
+                layouts.append (entry);
+            });
+        }
 
         var default_item = recreate_menu (layouts);
 
