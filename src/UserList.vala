@@ -20,13 +20,29 @@
 ***/
 
 
-
-
-public class UserList {
+public class UserList : Object {
 
     public int size { get; private set; }
 
-    private Gee.ArrayList<PantheonUser> users = new Gee.ArrayList<PantheonUser> ();
+    Gee.ArrayList<PantheonUser> users = new Gee.ArrayList<PantheonUser> ();
+
+    PantheonUser _current_user;
+
+    public PantheonUser current_user {
+        get {
+            return _current_user;
+        }
+
+        set {
+            if (value != current_user) {
+                _current_user = value;
+                user_changed (value);
+            }
+        }
+
+    }
+
+    public signal void user_changed (PantheonUser user);
 
     public UserList (LightDM.UserList ld_users, LightDM.Greeter greeter) {
         int index = 0;
@@ -52,22 +68,30 @@ public class UserList {
         }
     }
 
-    public PantheonUser get (int i) {
+    public PantheonUser get_user (int i) {
         return users.get (i);
+    }
+
+    public void select_next_user () {
+        current_user = get_next (current_user);
+    }
+
+    public void select_prev_user () {
+        current_user = get_prev (current_user);
     }
 
     public PantheonUser get_next (PantheonUser user) {
         int i = user.index;
         if(i < size - 1)
-            return get (i + 1);
-        return get (i);
+            return get_user (i + 1);
+        return get_user (i);
     }
 
     public PantheonUser get_prev (PantheonUser user) {
         int i = user.index;
         if(i > 0)
-            return get (i - 1);
-        return get (i);
+            return get_user (i - 1);
+        return get_user (i);
     }
 
 }

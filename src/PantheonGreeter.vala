@@ -26,7 +26,7 @@ public class PantheonGreeter : Gtk.Window {
 
     Clutter.Rectangle fadein;
     Clutter.Actor greeterbox;
-    Clutter.Actor name_container;
+    UserListActor userlist_actor;
     UserList userlist;
 
     TimeLabel time;
@@ -39,23 +39,6 @@ public class PantheonGreeter : Gtk.Window {
     const int MIN_WIDTH = 1200;
     //from this width on the clock wont fit anymore
     const int NO_CLOCK_WIDTH = 920;
-
-    PantheonUser _current_user = null;
-    PantheonUser current_user {
-        get {
-            return _current_user;
-        } set {
-            name_container.get_children ().nth_data (_current_user.index).visible = true;
-            _current_user = value;
-
-            name_container.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, y:loginbox.y - _current_user.index * 200.0f);
-            name_container.get_children ().nth_data (_current_user.index).visible = false;
-
-            wallpaper.set_wallpaper (_current_user.background);
-            indicators.user_changed_cb(_current_user);
-            loginbox.set_user (current_user);
-        }
-    }
 
     public PantheonGreeter () {
         settings = new Settings ("org.pantheon.desktop.greeter");
@@ -73,16 +56,20 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox = new Clutter.Actor ();
         userlist = new UserList (LightDM.UserList.get_instance (), greeter);
 
-        _current_user = userlist.get (0);
+        loginbox = new LoginBox (greeter);
 
-        loginbox = new LoginBox (greeter, current_user);
-
-        name_container = new Clutter.Actor ();
+        userlist_actor = new UserListActor (userlist);
         time = new TimeLabel ();
         indicators = new Indicators (loginbox, settings);
         wallpaper = new Wallpaper ();
 
         PantheonUser.load_default_avatar ();
+
+        userlist.user_changed.connect ((user) => {
+            wallpaper.set_wallpaper (user.background);
+            indicators.user_changed_cb(user);
+            loginbox.set_user (user);
+        });
 
         greeter.show_message.connect (wrong_pw);
         greeter.show_prompt.connect (send_pw);
@@ -91,7 +78,6 @@ public class PantheonGreeter : Gtk.Window {
         loginbox.login_requested.connect (authenticate);
 
         /*activate the numlock if needed*/
-
         var activate_numlock = settings.get_boolean ("activate-numlock");
         if (activate_numlock)
             Granite.Services.System.execute_command ("/usr/bin/numlockx on");
@@ -104,7 +90,7 @@ public class PantheonGreeter : Gtk.Window {
 
         greeterbox.add_child (wallpaper);
         greeterbox.add_child (time);
-        greeterbox.add_child (name_container);
+        greeterbox.add_child (userlist_actor);
         greeterbox.add_child (loginbox);
         greeterbox.add_child (indicators);
 
@@ -119,31 +105,10 @@ public class PantheonGreeter : Gtk.Window {
 
         reposition ();
 
-        name_container.y = loginbox.y - current_user.index * 130.0f;
-
         clutter.key_release_event.connect (keyboard_navigation);
 
         add (clutter);
         show_all ();
-
-        /*get the names together*/
-        for (var i = 0; i < userlist.size; i++) {
-            ShadowedLabel label = new ShadowedLabel ("");
-            label.label = userlist.get (i).get_markup ();
-
-            label.height = 75;
-            label.width = loginbox.width - 100;
-            label.y = i * 200 + label.height;
-            label.reactive = true;
-            label.button_release_event.connect ( (e) => {
-                    var idx = name_container.get_children ().index (e.source);
-                    if (idx == -1)
-                        return false;
-                    current_user = userlist.get (idx);
-                    return true;
-                });
-            name_container.add_child (label);
-        }
 
         reposition ();
         get_screen ().monitors_changed.connect (reposition);
@@ -168,11 +133,13 @@ public class PantheonGreeter : Gtk.Window {
 
         var last_user = settings.get_string ("last-user");
         if (last_user == "")
-            _current_user = userlist.get (0);
+            userlist.current_user = userlist.get_user (0);
         else {
             for (var i = 0; i < userlist.size; i++) {
-                if (userlist.get (i).name == last_user)
-                    current_user = userlist.get (i);
+                if (userlist.get_user (i).name == last_user) {
+                    userlist.current_user = userlist.get_user (i);
+                    break;
+                }
             }
         }
 
@@ -183,8 +150,6 @@ public class PantheonGreeter : Gtk.Window {
         if (settings.get_boolean ("onscreen-keyboard")) {
             indicators.toggle_keyboard (true);
         }
-
-        current_user = _current_user;
     }
 
     public static LightDM.Layout? get_layout_by_name (string name) {
@@ -201,15 +166,14 @@ public class PantheonGreeter : Gtk.Window {
         bool small = geometry.width < MIN_WIDTH;
 
         loginbox.x = small ? 10 : 100;
-        name_container.x = loginbox.x;
-        foreach (var child in name_container.get_children ())
-        child.x = loginbox.x + 35;
 
         resize (geometry.width, geometry.height);
         move (geometry.x, geometry.y);
 
         loginbox.y = Math.floorf (geometry.height / 2 - loginbox.height / 2);
-        name_container.y = loginbox.y;
+
+        userlist_actor.x = loginbox.x + 140;
+        userlist_actor.y = loginbox.y + 140;
 
         time.x = geometry.width - time.width - (small ? 10 : 100);
         time.y = geometry.height / 2 - time.height / 2;
@@ -229,10 +193,10 @@ public class PantheonGreeter : Gtk.Window {
                 settings.set_boolean ("activate-numlock", !settings.get_boolean ("activate-numlock"));
                 break;
             case Gdk.Key.Up:
-                current_user = userlist.get_prev (current_user);
+                userlist.select_prev_user ();
                 break;
             case Gdk.Key.Down:
-                current_user = userlist.get_next (current_user);
+                userlist.select_next_user ();
                 break;
             default:
                 return false;

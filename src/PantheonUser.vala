@@ -52,11 +52,8 @@ public class PantheonUser : Object {
     }
 
     public string get_markup () {
-        if (usertype == UserType.NORMAL)
-            return "<span face='Open Sans Light' font='24'>"
-                                + user.display_name + "</span>";
         return "<span face='Open Sans Light' font='24'>"
-                            + _("Guest session") + "</span>";
+                            + display_name + "</span>";
     }
 
     public static void load_default_avatar () {
@@ -107,12 +104,23 @@ public class PantheonUser : Object {
         }
     }
 
+    public string display_name {
+        get {
+            switch(usertype) {
+            case UserType.NORMAL: return get_lightdm_user ().display_name;
+            case UserType.MANUAL: return _("Manual Login");
+            case UserType.GUEST: return _("Guest session");
+            }
+            return "";
+        }
+    }
+
     public string name {
         get {
             switch(usertype) {
             case UserType.NORMAL: return get_lightdm_user ().name;
-            case UserType.MANUAL: return _("Manual Login");
-            case UserType.GUEST: return _("Guest session");
+            case UserType.MANUAL: return "?pantheon-greeter-manual";
+            case UserType.GUEST: return "?pantheon-greeter-manual";
             }
             return "";
         }

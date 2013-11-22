@@ -35,13 +35,13 @@ public abstract class CredentialsArea : Grid {
         }
     }
 
-    public PantheonUser user { get; private set; }
+    public PantheonUser? user { get; private set; }
 
     public virtual string get_username () {
         return user.name;
     }
 
-    public CredentialsArea (PantheonUser user) {
+    public CredentialsArea (PantheonUser? user) {
         this.user = user;
     }
 
@@ -50,6 +50,7 @@ public abstract class CredentialsArea : Grid {
         password.caps_lock_warning = true;
         //replace the letters with dots
         password.set_visibility (false);
+        password.hexpand = true;
         password.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
         password.icon_press.connect ((pos, event) => {
             if (pos == Gtk.EntryIconPosition.SECONDARY) {
@@ -78,44 +79,27 @@ public abstract class CredentialsArea : Grid {
         }
         return password;
     }
-
-    public Label create_username_field (PantheonUser user) {
-        var username = new Label (user.get_markup ());
-        username.use_markup = true;
-        username.hexpand = true;
-        username.halign  = Align.START;
-        username.ellipsize = Pango.EllipsizeMode.END;
-        username.margin_top = 6;
-        username.height_request = 1;
-        return username;
-    }
 }
 
 public class UserLogin : CredentialsArea {
 
     public UserLogin (PantheonUser user) {
         base (user);
-        var username = create_username_field (user);
-
-        attach (username, 0, 0, 1, 1);
 
         var password = create_password_field (true);
-        password.margin_top = 11;
-        attach (password, 0, 1, 1, 1);
+        password.margin_top = 52;
+        attach (password, 0, 0, 1, 1);
     }
 }
 
 public class ManualLogin : CredentialsArea {
-
     private Entry username;
 
     public ManualLogin (PantheonUser user) {
         base (user);
         username = new Entry();
         username.hexpand = true;
-        username.halign  = Align.START;
-        username.margin_top = 6;
-        username.height_request = 1;
+        username.margin_top = 8;
 
         attach (username, 0, 0, 1, 1);
 
@@ -124,8 +108,9 @@ public class ManualLogin : CredentialsArea {
         });
 
         var password = create_password_field (false);
-        password.margin_top = 11;
-        attach (password, 0, 1, 1, 1);
+        password.margin_top = 16;
+        attach (password, 0, 1, 2, 1);
+
     }
 
     public override string get_username () {
@@ -137,8 +122,6 @@ public class GuestLogin : CredentialsArea {
 
     public GuestLogin (PantheonUser user) {
         base (user);
-        var username = create_username_field (user);
-        attach (username, 0, 0, 1, 1);
 
         var login_btn = new Button.with_label (_("Login"));
         login_btn.clicked.connect (() => {
@@ -149,4 +132,13 @@ public class GuestLogin : CredentialsArea {
         });
         attach (login_btn, 0, 1, 1, 1);
     }
+}
+
+public class DummyLogin : CredentialsArea {
+
+
+    public DummyLogin () {
+        base (null);
+    }
+
 }

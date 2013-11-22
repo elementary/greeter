@@ -85,7 +85,7 @@ public class LoginBox : GtkClutter.Actor {
         }
     }
 
-    public LoginBox (LightDM.Greeter greeter, PantheonUser start_user) {
+    public LoginBox (LightDM.Greeter greeter) {
         this.greeter = greeter;
 
         this.reactive = true;
@@ -100,7 +100,7 @@ public class LoginBox : GtkClutter.Actor {
         this.avatar = new EventBox ();
         this.settings = new ToggleButton ();
         this.credentials_box = new EventBox ();
-        this.credentials = new GuestLogin (start_user);
+        this.credentials = new DummyLogin ();
 
         width = 510;
         height = 168;
@@ -129,7 +129,7 @@ public class LoginBox : GtkClutter.Actor {
 
         avatar.draw.connect ((ctx) => {
             Granite.Drawing.Utilities.cairo_rounded_rectangle (ctx, 0, 0,
-                avatar.get_allocated_width (), avatar.get_allocated_height (), 3);
+                avatar.get_allocated_width (), avatar.get_allocated_height (), 46);
             Gdk.cairo_set_source_pixbuf (ctx, image, 0, 0);
             ctx.fill_preserve ();
             ctx.set_line_width (1);
@@ -179,8 +179,8 @@ public class LoginBox : GtkClutter.Actor {
             ctx.set_source_rgba (0, 0, 0, 0);
             ctx.fill ();
 
-            ctx.set_source_surface (buffer.surface, 0, 0);
-            ctx.paint ();
+            //ctx.set_source_surface (buffer.surface, 0, 0);
+            //ctx.paint ();
 
             return false;
         });

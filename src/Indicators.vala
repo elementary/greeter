@@ -65,6 +65,8 @@ public class Indicators : GtkClutter.Actor {
 
     int keyboard_pid;
 
+    int margin_to_right = 5;
+
     Gtk.MenuItem keyboard_menuitem;
     Gtk.Label keyboard_label;
 
@@ -175,10 +177,11 @@ public class Indicators : GtkClutter.Actor {
         } catch (Error e) { warning (e.message); }
         bar.get_style_context ().add_provider (transp, 20000);
 
+
         this.get_widget ().draw.connect ((ctx) => {
-            ctx.set_operator (Cairo.Operator.SOURCE);
             ctx.rectangle (0, 0, bar.get_allocated_width (), bar.get_allocated_height ());
-            ctx.set_source_rgba (0, 0, 0, 0.6);
+            ctx.set_operator (Cairo.Operator.SOURCE);
+            ctx.set_source_rgba (0, 0, 0, 0);
             ctx.fill ();
 
             return false;
@@ -211,8 +214,11 @@ public class Indicators : GtkClutter.Actor {
                 }
             });
 
-            foreach (var entry in io.get_entries ())
-                bar.append (new IndicatorMenuItem (entry));
+            foreach (var entry in io.get_entries ()) {
+                var widget = new IndicatorMenuItem (entry);
+                bar.append (widget);
+                widget.margin_right = margin_to_right;
+            }
 
         }
 
@@ -220,6 +226,7 @@ public class Indicators : GtkClutter.Actor {
 
         //keyboard layout menu
         keyboard_menuitem = new Gtk.MenuItem ();
+        keyboard_menuitem.margin_right = margin_to_right;
 
         var keyboard_hbox = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 3);
         keyboard_menuitem.add (keyboard_hbox);
@@ -234,6 +241,7 @@ public class Indicators : GtkClutter.Actor {
 
 
         var power = new Gtk.MenuItem ();
+        power.margin_right = margin_to_right;
         try {
             power.add (new Gtk.Image.from_pixbuf (Gtk.IconTheme.get_default ().lookup_by_gicon (
                                                   new GLib.ThemedIcon.with_default_fallbacks ("system-shutdown-symbolic"), 16, 0).load_symbolic ({1,1,1,1})));
@@ -269,6 +277,7 @@ public class Indicators : GtkClutter.Actor {
         power.show_all ();
 
         var accessibility = new Gtk.MenuItem ();
+        accessibility.margin_right = margin_to_right;
         try {
             accessibility.add (new Gtk.Image.from_pixbuf (Gtk.IconTheme.get_default ().lookup_by_gicon (
                                                           new GLib.ThemedIcon.with_default_fallbacks ("preferences-desktop-accessibility-symbolic"),
