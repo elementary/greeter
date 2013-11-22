@@ -65,6 +65,9 @@ public class Indicators : GtkClutter.Actor {
 
     int keyboard_pid;
 
+    Gtk.MenuItem power;
+    Gtk.MenuItem poweroff;
+
     int margin_to_right = 5;
 
     Gtk.MenuItem keyboard_menuitem;
@@ -164,7 +167,6 @@ public class Indicators : GtkClutter.Actor {
 
     public Indicators (LoginBox loginbox, Settings _settings) {
         settings = _settings;
-
         bar = new Gtk.MenuBar ();
         (get_widget () as Gtk.Container).add (bar);
 
@@ -240,7 +242,7 @@ public class Indicators : GtkClutter.Actor {
         keyboard_menuitem.show_all ();
 
 
-        var power = new Gtk.MenuItem ();
+        power = new Gtk.MenuItem ();
         power.margin_right = margin_to_right;
         try {
             power.add (new Gtk.Image.from_pixbuf (Gtk.IconTheme.get_default ().lookup_by_gicon (
@@ -251,7 +253,7 @@ public class Indicators : GtkClutter.Actor {
 
         power.submenu = new Gtk.Menu ();
 
-        var poweroff = new Gtk.MenuItem.with_label (_("Shutdown"));
+        poweroff = new Gtk.MenuItem.with_label (_("Shutdown"));
         var suspend = new Gtk.MenuItem.with_label (_("Suspend"));
         var restart = new Gtk.MenuItem.with_label (_("Restart"));
         var hibernate = new Gtk.MenuItem.with_label (_("Hibernate"));
@@ -312,6 +314,7 @@ public class Indicators : GtkClutter.Actor {
 
         accessibility.show_all ();
     }
+
 
     public void user_changed_cb (PantheonUser user) {
 

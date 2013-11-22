@@ -76,8 +76,8 @@ public class LoginBox : GtkClutter.Actor {
             return _working;
         } set {
             _working = value;
-            grid.remove ((_working)?avatar as Widget:spinner as Widget);
-            grid.attach ((_working)?spinner as Widget:avatar as Widget, 0, 0, 1, 3);
+            grid.remove ((_working) ? avatar as Widget:spinner as Widget);
+            grid.attach ((_working) ? spinner as Widget:avatar as Widget, 0, 0, 1, 3);
             grid.show_all ();
             spinner.start ();
             if (LightDM.get_sessions ().length () == 1)
@@ -108,7 +108,7 @@ public class LoginBox : GtkClutter.Actor {
         avatar.set_size_request (92, 92);
         avatar.valign = Align.START;
         avatar.visible_window = false;
-        settings.valign  = Align.START;
+        
         settings.relief  = ReliefStyle.NONE;
         settings.add (new Image.from_icon_name ("application-menu-symbolic", IconSize.MENU));
 
@@ -121,7 +121,7 @@ public class LoginBox : GtkClutter.Actor {
 
         grid.attach (avatar, 0, 0, 1, 3);
         grid.attach (credentials_box, 1, 0, 1, 3);
-        grid.attach (settings, 2, 0, 1, 1);
+        grid.attach (settings, 2, 2, 1, 1);
         grid.margin = shadow_blur + 12;
         grid.margin_top += 5;
         grid.margin_bottom -= 12;
@@ -276,6 +276,10 @@ public class LoginBox : GtkClutter.Actor {
         });
 
         credentials_box.show_all ();
+    }
+
+    public void pass_focus () {
+        credentials.pass_focus ();
     }
 
     public void set_user (PantheonUser user) {

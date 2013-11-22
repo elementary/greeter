@@ -89,6 +89,11 @@ public class UserLogin : CredentialsArea {
         var password = create_password_field (true);
         password.margin_top = 52;
         attach (password, 0, 0, 1, 1);
+
+        password.focus_out_event.connect (() => {
+            password.grab_focus ();
+            return false;
+        });
     }
 }
 
@@ -111,6 +116,15 @@ public class ManualLogin : CredentialsArea {
         password.margin_top = 16;
         attach (password, 0, 1, 2, 1);
 
+        password.focus_out_event.connect (() => {
+            username.grab_focus ();
+            return false;
+        });
+
+        username.focus_out_event.connect (() => {
+            password.grab_focus ();
+            return false;
+        });
     }
 
     public override string get_username () {
@@ -130,15 +144,18 @@ public class GuestLogin : CredentialsArea {
         pass_focus.connect (() => {
             login_btn.grab_focus ();
         });
+
+        login_btn.focus_out_event.connect (() => {
+            login_btn.grab_focus ();
+            return false;
+        });
+
         attach (login_btn, 0, 1, 1, 1);
     }
 }
 
 public class DummyLogin : CredentialsArea {
-
-
     public DummyLogin () {
         base (null);
     }
-
 }
