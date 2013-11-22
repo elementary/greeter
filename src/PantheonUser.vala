@@ -79,7 +79,7 @@ public class PantheonUser : Object {
                 return false;
             });
         } catch (Error e) {
-            message ("Using default-avatar instead of " + user.image);
+            debug ("Using default-avatar instead of " + user.image);
         }
     }
 

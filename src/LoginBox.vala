@@ -103,12 +103,12 @@ public class LoginBox : GtkClutter.Actor {
         this.credentials = new DummyLogin ();
 
         width = 510;
-        height = 168;
+        height = 188;
 
         avatar.set_size_request (92, 92);
         avatar.valign = Align.START;
         avatar.visible_window = false;
-        
+
         settings.relief  = ReliefStyle.NONE;
         settings.add (new Image.from_icon_name ("application-menu-symbolic", IconSize.MENU));
 
@@ -241,9 +241,14 @@ public class LoginBox : GtkClutter.Actor {
 
             this.get_stage ().add_child (pop);
 
-            pop.x = this.x + this.width - 265;
+            int po_x;
+            int po_y;
+            settings.translate_coordinates (this.grid, 10, 10, out po_x, out po_y);
+
+
             pop.width = 245;
-            pop.y = this.y + 50;
+            pop.x = po_x - pop.width/2 + 52;
+            pop.y = this.y + po_y + pop.height;
             pop.get_widget ().show_all ();
             pop.destroy.connect (() => {
                 settings.active = false;

@@ -172,6 +172,7 @@ public class Indicators : GtkClutter.Actor {
 
         bar.pack_direction = Gtk.PackDirection.RTL;
         height = 26;
+        bar.show_all ();
 
         var transp = new Gtk.CssProvider ();
         try {

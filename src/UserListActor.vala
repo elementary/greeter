@@ -24,6 +24,8 @@ public class UserListActor : Clutter.Actor {
     UserList userlist;
 
     Gee.HashMap<PantheonUser, ShadowedLabel> labels = new Gee.HashMap<PantheonUser, ShadowedLabel> ();
+    Gee.HashMap<PantheonUser, ShadowedLabel> dark_labels = new Gee.HashMap<PantheonUser, ShadowedLabel> ();
+
 
     public UserListActor (UserList userlist) {
         this.userlist = userlist;
@@ -37,15 +39,19 @@ public class UserListActor : Clutter.Actor {
 
     private void build_labels () {
         for (int i = 0; i < userlist.size; i++) {
-            ShadowedLabel label = new ShadowedLabel ("");
-            label.label = userlist.get_user (i).get_markup ();
-
-            label.height = 75;
-            label.width = 600;
-            label.y = i * 200 + label.height;
-            label.reactive = true;
+            ShadowedLabel label = new ShadowedLabel (userlist.get_user (i).get_markup ());
+            ShadowedLabel dark_label = new ShadowedLabel (userlist.get_user (i).get_markup ());
+            dark_label.height = label.height = 75;
+            dark_label.width  = label.width = 600;
+            dark_label.y = label.y = i * 200 + label.height;
+            dark_label.reactive = label.reactive = true;
             add_child (label);
+            add_child (dark_label);
             labels.set (userlist.get_user (i), label);
+
+            var color = new Clutter.ColorizeEffect (new Clutter.Color.from_string ("#858585"));
+            dark_label.add_effect (color);
+            dark_labels.set (userlist.get_user (i), dark_label);
         }
     }
 
@@ -61,7 +67,7 @@ public class UserListActor : Clutter.Actor {
 
             result[i] = run_y;
 
-            run_y += 100;
+            run_y += 50;
             if (user != current_user && userlist.get_next (user) == current_user) {
                 run_y += 150;
             }
@@ -86,16 +92,24 @@ public class UserListActor : Clutter.Actor {
         for (int i = 0; i < userlist.size; i++) {
             PantheonUser user = userlist.get_user (i);
             ShadowedLabel label = labels.get (user);
+            ShadowedLabel dark_label = dark_labels.get (user);
 
             label.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, y: y_vars[i]);
+            dark_label.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, y: y_vars[i]);
 
-            int opacity = 255;
+            uint opacity = 0;
 
-            if (user.is_manual () && user == current_user) {
-                opacity = 0;
+            if (user == current_user && !user.is_manual ()) {
+                opacity = 255;
             }
 
             label.animate (Clutter.AnimationMode.EASE_OUT_QUAD, duration, "opacity", opacity);
+
+            opacity = 0;
+            if (user != current_user)
+                opacity = 255;
+            dark_label.animate (Clutter.AnimationMode.EASE_OUT_QUAD, duration, "opacity", opacity);
+
         }
 
     }

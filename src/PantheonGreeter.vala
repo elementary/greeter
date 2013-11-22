@@ -172,8 +172,8 @@ public class PantheonGreeter : Gtk.Window {
 
         loginbox.y = Math.floorf (geometry.height / 2 - loginbox.height / 2);
 
-        userlist_actor.x = loginbox.x + 140;
-        userlist_actor.y = loginbox.y + 140;
+        userlist_actor.x = loginbox.x + 143;
+        userlist_actor.y = loginbox.y + 90;
 
         time.x = geometry.width - time.width - (small ? 10 : 100);
         time.y = geometry.height / 2 - time.height / 2;

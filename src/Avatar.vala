@@ -7,8 +7,4 @@ public class Avatar {
 
     }
 
-
-
-
-
 }

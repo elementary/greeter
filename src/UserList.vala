@@ -39,7 +39,6 @@ public class UserList : Object {
                 user_changed (value);
             }
         }
-
     }
 
     public signal void user_changed (PantheonUser user);
@@ -53,7 +52,7 @@ public class UserList : Object {
             }
         }
 
-        if (greeter.has_guest_account_hint) {
+        { //if (greeter.has_guest_account_hint) {
             users.add (new PantheonUser.Guest (index));
             index++;
         }
@@ -93,5 +92,4 @@ public class UserList : Object {
             return get_user (i - 1);
         return get_user (i);
     }
-
 }

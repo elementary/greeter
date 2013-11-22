@@ -149,6 +149,7 @@ public class GuestLogin : CredentialsArea {
             login_btn.grab_focus ();
             return false;
         });
+        login_btn.margin_top = 52;
 
         attach (login_btn, 0, 1, 1, 1);
     }
