@@ -40,7 +40,7 @@ public class UserListActor : Clutter.Actor {
     private void build_labels () {
         for (int i = 0; i < userlist.size; i++) {
             ShadowedLabel label = new ShadowedLabel (userlist.get_user (i).get_markup ());
-            ShadowedLabel dark_label = new ShadowedLabel (userlist.get_user (i).get_markup ());
+            ShadowedLabel dark_label = new ShadowedLabel (userlist.get_user (i).get_markup (), true);
             dark_label.height = label.height = 75;
             dark_label.width  = label.width = 600;
             dark_label.y = label.y = i * 200 + label.height;
@@ -48,9 +48,6 @@ public class UserListActor : Clutter.Actor {
             add_child (label);
             add_child (dark_label);
             labels.set (userlist.get_user (i), label);
-
-            var color = new Clutter.ColorizeEffect (new Clutter.Color.from_string ("#858585"));
-            dark_label.add_effect (color);
             dark_labels.set (userlist.get_user (i), dark_label);
         }
     }

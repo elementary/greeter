@@ -52,11 +52,11 @@ public class UserList : Object {
             }
         }
 
-        { //if (greeter.has_guest_account_hint) {
+        if (greeter.has_guest_account_hint) {
             users.add (new PantheonUser.Guest (index));
             index++;
         }
-        { //if (greeter.show_manual_login_hint) {
+        if (greeter.show_manual_login_hint) {
             users.add (new PantheonUser.Manual (index));
             index++;
         }

@@ -24,6 +24,8 @@ using Clutter;
 public class ShadowedLabel : Actor {
     Granite.Drawing.BufferSurface buffer;
 
+    bool dark;
+
     string _label = "";
     public string label {
         get {
@@ -43,9 +45,10 @@ public class ShadowedLabel : Actor {
         }
     }
 
-    public ShadowedLabel (string _label) {
+    public ShadowedLabel (string _label, bool dark = false) {
         content = new Canvas ();
         (content as Canvas).draw.connect (draw);
+        this.dark = dark;
 
         notify["width"].connect (() => {(content as Canvas).set_size ((int) width, (int) height); buffer = null;});
         notify["height"].connect (() => {(content as Canvas).set_size ((int) width, (int) height); buffer = null;});
@@ -63,12 +66,18 @@ public class ShadowedLabel : Actor {
         layout.set_markup (label, -1);
 
         buffer.context.move_to (0, 1);
-        buffer.context.set_source_rgba (0, 0, 0, 1);
+        if (dark)
+            buffer.context.set_source_rgba (0.7, 0.7, 0.7, 1);
+        else
+            buffer.context.set_source_rgba (0, 0, 0, 1);
         Pango.cairo_show_layout (buffer.context, layout);
-        buffer.exponential_blur (3);
+        buffer.exponential_blur (5);
 
         buffer.context.move_to (0, 0);
-        buffer.context.set_source_rgba (1, 1, 1, 1);
+        if (dark)
+            buffer.context.set_source_rgba (0, 0, 0, 1);
+        else
+            buffer.context.set_source_rgba (1, 1, 1, 1);
         Pango.cairo_show_layout (buffer.context, layout);
 
         cr.set_source_surface (buffer.surface, 0, 0);
@@ -111,7 +120,6 @@ public class TimeLabel : ShadowedLabel {
             "</span><span face='Raleway' weight='100' font='50'>"+
             meridiem_format+
             "</span>");
-
         return true;
     }
 
