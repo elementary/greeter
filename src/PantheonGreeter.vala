@@ -132,16 +132,14 @@ public class PantheonGreeter : Gtk.Window {
         });
 
         var last_user = settings.get_string ("last-user");
-        if (last_user == "")
-            userlist.current_user = userlist.get_user (0);
-        else {
-            for (var i = 0; i < userlist.size; i++) {
-                if (userlist.get_user (i).name == last_user) {
-                    userlist.current_user = userlist.get_user (i);
-                    break;
-                }
+        for (var i = 0; i < userlist.size; i++) {
+            if (userlist.get_user (i).name == last_user) {
+                userlist.current_user = userlist.get_user (i);
+                break;
             }
         }
+        if(userlist.current_user == null)
+            userlist.current_user = userlist.get_user (0);
 
         indicators.bar.grab_focus ();
 
