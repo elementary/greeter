@@ -301,8 +301,6 @@ public class Indicators : GtkClutter.Actor {
         var high_contrast = new Gtk.CheckMenuItem.with_label (_("HighContrast"));
         high_contrast.toggled.connect (() => {
             Gtk.Settings.get_default ().gtk_theme_name = high_contrast.active ? "HighContrastInverse" : "elementary";
-            loginbox.high_contrast = high_contrast.active;
-
             settings.set_boolean ("high-contrast", high_contrast.active);
 
             loginbox.get_widget ().queue_draw ();

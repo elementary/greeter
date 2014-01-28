@@ -21,60 +21,61 @@
 
 using Gtk;
 
-public const string LIGHT_WINDOW_STYLE = """
-    .content-view-window {
-        background-image:none;
-        background-color:@bg_color;
-
-        border-radius: 5px;
-
-        border-width: 1px;
-        border-style: solid;
-        border-color: alpha (#000, 0.4);
-    }
-""";
-
 public class LoginBox : GtkClutter.Actor {
     public PantheonUser current_user { get; private set; }
     public string current_session { get; private set; }
 
     ToggleButton settings;
     Grid grid;
-    Spinner spinner;
-    EventBox credentials_box;
     CredentialsArea credentials;
-    PantheonUser previous_user = null;
-
-    Granite.Drawing.BufferSurface buffer;
-    int shadow_blur = 25;
-    int shadow_x = 0;
-    int shadow_y = 6;
-    double shadow_alpha = 0.6;
 
     LightDM.Greeter greeter;
 
-    Window draw_ref;
-
-    public bool high_contrast {
-        set {
-            if (value)
-                draw_ref.get_style_context ().remove_class ("content-view-window");
-            else
-                draw_ref.get_style_context ().add_class ("content-view-window");
-        }
-    }
+    ShadowedLabel label;
+    ShadowedLabel dark_label;
 
     public signal void login_requested ();
 
-    public LoginBox (LightDM.Greeter greeter) {
+    public LoginBox (LightDM.Greeter greeter, PantheonUser user) {
         this.greeter = greeter;
 
         this.reactive = true;
         this.scale_gravity = Clutter.Gravity.CENTER;
 
         this.settings = new ToggleButton ();
-        this.credentials_box = new EventBox ();
-        this.credentials = new DummyLogin ();
+
+        if (user.is_guest ()) {
+            credentials = new GuestLogin (user);
+            current_session = greeter.default_session_hint;
+        }
+        if (user.is_manual ()) {
+            credentials = new ManualLogin (user);
+            current_session = greeter.default_session_hint;
+        }
+
+        if (user.is_normal ()) {
+            credentials = new UserLogin (user);
+            current_session = user.get_lightdm_user ().session;
+        }
+
+        this.current_user = user;
+
+        credentials.pass_focus ();
+        if (LightDM.get_sessions ().length () == 1)
+            settings.hide ();
+
+        credentials.request_login.connect (() => {
+            login_requested ();
+        });
+
+        label = new ShadowedLabel (userlist.get_user (i).get_markup ());
+        dark_label = new ShadowedLabel (userlist.get_user (i).get_markup (), true);
+        dark_label.height = label.height = 75;
+        dark_label.width  = label.width = 600;
+        dark_label.y = label.y = label.height;
+        dark_label.reactive = label.reactive = true;
+        add_child (label);
+        add_child (dark_label);
 
         width = 510;
         height = 188;
@@ -82,53 +83,20 @@ public class LoginBox : GtkClutter.Actor {
         settings.relief  = ReliefStyle.NONE;
         settings.add (new Image.from_icon_name ("application-menu-symbolic", IconSize.MENU));
 
-        spinner = new Spinner ();
-        spinner.valign = Align.CENTER;
-        spinner.start ();
-        spinner.set_size_request (92, 92);
-
         grid = new Grid ();
 
-        grid.attach (credentials_box, 1, 0, 1, 3);
+        grid.attach (credentials, 1, 0, 1, 3);
         grid.attach (settings, 2, 2, 1, 1);
-        grid.margin = shadow_blur + 12;
         grid.margin_top += 5;
         grid.margin_bottom -= 12;
         grid.column_spacing = 12;
 
         create_popup ();
 
-        /* draw the window stylish! */
-        var css = new CssProvider ();
-        try {
-            css.load_from_data (LIGHT_WINDOW_STYLE, -1);
-        } catch (Error e) {
-            warning (e.message);
-        }
-
-        draw_ref = new Window ();
-        draw_ref.get_style_context ().add_class ("content-view-window");
-        draw_ref.get_style_context ().add_provider (css, STYLE_PROVIDER_PRIORITY_FALLBACK);
-
         var w = -1; var h = -1;
         this.get_widget ().size_allocate.connect (() => {
-            if (w == this.get_widget ().get_allocated_width () &&
-                h == this.get_widget ().get_allocated_height ())
-                return;
-
             w = this.get_widget ().get_allocated_width ();
             h = this.get_widget ().get_allocated_height ();
-
-            this.buffer = new Granite.Drawing.BufferSurface (w, h);
-
-            this.buffer.context.rectangle (shadow_blur + shadow_x + 3,
-                                           shadow_blur + shadow_y*2, w - shadow_blur*2 + shadow_x - 6, h - shadow_blur*2 - shadow_y);
-            this.buffer.context.set_source_rgba (0, 0, 0, shadow_alpha);
-            this.buffer.context.fill ();
-            this.buffer.exponential_blur (shadow_blur / 2-2);
-
-            draw_ref.get_style_context ().render_activity (this.buffer.context, shadow_blur + shadow_x,
-                                                           shadow_blur + shadow_y -2, w - shadow_blur*2 + shadow_x, h - shadow_blur*2);
         });
 
         this.get_widget ().draw.connect ((ctx) => {
@@ -136,9 +104,6 @@ public class LoginBox : GtkClutter.Actor {
             ctx.set_operator (Cairo.Operator.SOURCE);
             ctx.set_source_rgba (0, 0, 0, 0);
             ctx.fill ();
-
-            //ctx.set_source_surface (buffer.surface, 0, 0);
-            //ctx.paint ();
 
             return false;
         });
@@ -161,6 +126,14 @@ public class LoginBox : GtkClutter.Actor {
                 return false;
             });
         });
+    }
+    
+    public void select () {
+    
+    }
+    
+    public void unselect () {
+    
     }
 
     private void create_popup () {
@@ -218,56 +191,7 @@ public class LoginBox : GtkClutter.Actor {
         return credentials.get_username ();
     }
 
-    private void update_credentials () {
-        if (credentials_box.get_child () != null)
-            credentials_box.remove (credentials_box.get_child ());
-        credentials_box.add (credentials);
-
-        credentials.request_login.connect (() => {
-            login_requested ();
-        });
-
-        credentials_box.show_all ();
-    }
-
     public void pass_focus () {
         credentials.pass_focus ();
-    }
-
-    public void set_user (PantheonUser user) {
-        credentials.reset_pw ();
-        previous_user = credentials.user;
-
-        if (user.is_guest ()) {
-            credentials = new GuestLogin (user);
-            update_credentials ();
-            current_session = greeter.default_session_hint;
-        }
-        if (user.is_manual ()) {
-            credentials = new ManualLogin (user);
-            update_credentials ();
-            current_session = greeter.default_session_hint;
-        }
-
-        if (user.is_normal ()) {
-            credentials = new UserLogin (user);
-            update_credentials ();
-            current_session = user.get_lightdm_user ().session;
-        }
-
-        this.current_user = user;
-
-        /*LightDM.Layout layout = null;
-        LightDM.get_layouts ().foreach ((l) => {
-                if (l.name == user.get_lightdm_user ().layout)
-                    layout = l;
-        });
-
-        if (layout != null)
-            LightDM.set_layout (layout);
-        FIXME */
-        credentials.pass_focus ();
-        if (LightDM.get_sessions ().length () == 1)
-            settings.hide ();
     }
 }

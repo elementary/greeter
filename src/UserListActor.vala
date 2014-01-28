@@ -23,6 +23,7 @@
 public class UserListActor : Clutter.Actor {
     UserList userlist;
 
+    Gee.HashMap<PantheonUser, LoginBox> boxes = new Gee.HashMap<PantheonUser, LoginBox> ();
     Gee.HashMap<PantheonUser, ShadowedLabel> labels = new Gee.HashMap<PantheonUser, ShadowedLabel> ();
     Gee.HashMap<PantheonUser, ShadowedLabel> dark_labels = new Gee.HashMap<PantheonUser, ShadowedLabel> ();
 
