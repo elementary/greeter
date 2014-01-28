@@ -38,13 +38,9 @@ public class LoginBox : GtkClutter.Actor {
     public PantheonUser current_user { get; private set; }
     public string current_session { get; private set; }
 
-    ulong avatar_handler = 0;
-
-    EventBox avatar;
     ToggleButton settings;
     Grid grid;
     Spinner spinner;
-    Gdk.Pixbuf image;
     EventBox credentials_box;
     CredentialsArea credentials;
     PantheonUser previous_user = null;
@@ -70,44 +66,18 @@ public class LoginBox : GtkClutter.Actor {
 
     public signal void login_requested ();
 
-    bool _working;
-    public bool working {
-        get {
-            return _working;
-        } set {
-            _working = value;
-            grid.remove ((_working) ? avatar as Widget:spinner as Widget);
-            grid.attach ((_working) ? spinner as Widget:avatar as Widget, 0, 0, 1, 3);
-            grid.show_all ();
-            spinner.start ();
-            if (LightDM.get_sessions ().length () == 1)
-                settings.hide ();
-        }
-    }
-
     public LoginBox (LightDM.Greeter greeter) {
         this.greeter = greeter;
 
         this.reactive = true;
         this.scale_gravity = Clutter.Gravity.CENTER;
 
-        try {
-            this.image = IconTheme.get_default ().load_icon ("avatar-default", 92, 0);
-        } catch (Error e) {
-            warning (e.message);
-        }
-
-        this.avatar = new EventBox ();
         this.settings = new ToggleButton ();
         this.credentials_box = new EventBox ();
         this.credentials = new DummyLogin ();
 
         width = 510;
         height = 188;
-
-        avatar.set_size_request (92, 92);
-        avatar.valign = Align.START;
-        avatar.visible_window = false;
 
         settings.relief  = ReliefStyle.NONE;
         settings.add (new Image.from_icon_name ("application-menu-symbolic", IconSize.MENU));
@@ -119,24 +89,12 @@ public class LoginBox : GtkClutter.Actor {
 
         grid = new Grid ();
 
-        grid.attach (avatar, 0, 0, 1, 3);
         grid.attach (credentials_box, 1, 0, 1, 3);
         grid.attach (settings, 2, 2, 1, 1);
         grid.margin = shadow_blur + 12;
         grid.margin_top += 5;
         grid.margin_bottom -= 12;
         grid.column_spacing = 12;
-
-        avatar.draw.connect ((ctx) => {
-            Granite.Drawing.Utilities.cairo_rounded_rectangle (ctx, 0, 0,
-                avatar.get_allocated_width (), avatar.get_allocated_height (), 46);
-            Gdk.cairo_set_source_pixbuf (ctx, image, 0, 0);
-            ctx.fill_preserve ();
-            ctx.set_line_width (1);
-            ctx.set_source_rgba (0, 0, 0, 0.3);
-            ctx.stroke ();
-            return false;
-        });
 
         create_popup ();
 
@@ -264,17 +222,6 @@ public class LoginBox : GtkClutter.Actor {
         if (credentials_box.get_child () != null)
             credentials_box.remove (credentials_box.get_child ());
         credentials_box.add (credentials);
-
-        if (previous_user != null && avatar_handler != 0) {
-            previous_user.disconnect (avatar_handler);
-        }
-
-        image = credentials.user.get_avatar ();
-        avatar.queue_draw ();
-        avatar_handler = credentials.user.avatar_updated.connect (() => {
-            image = credentials.user.get_avatar ();
-            avatar.queue_draw ();
-        });
 
         credentials.request_login.connect (() => {
             login_requested ();

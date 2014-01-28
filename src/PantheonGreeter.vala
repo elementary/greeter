@@ -204,7 +204,6 @@ public class PantheonGreeter : Gtk.Window {
     }
 
     void authenticate () {
-        loginbox.working = true;
         if (loginbox.current_user.is_guest ())
             greeter.authenticate_as_guest ();
         else
@@ -220,8 +219,6 @@ public class PantheonGreeter : Gtk.Window {
     }
 
     void authenticated () {
-        loginbox.working = false;
-
         settings.set_string ("last-user", loginbox.current_user.name);
 
         if (greeter.is_authenticated) {
