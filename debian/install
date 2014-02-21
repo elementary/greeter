@@ -1,0 +1,1 @@
+debian/40-pantheon-greeter.conf /usr/share/lightdm/lightdm.conf.d/
