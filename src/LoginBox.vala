@@ -84,8 +84,8 @@ public class LoginBox : GtkClutter.Actor {
             login_requested ();
         });
 
-        label = new ShadowedLabel (user.get_markup ());
-        dark_label = new ShadowedLabel (user.get_markup (), true);
+        label = new ShadowedLabel (user.get_markup (), true);
+        dark_label = new ShadowedLabel (user.get_markup (), false);
         dark_label.height = label.height = 75;
         dark_label.width  = label.width = 600;
         dark_label.y = label.y = 0;
