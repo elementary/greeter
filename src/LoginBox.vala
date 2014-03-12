@@ -49,9 +49,11 @@ public class LoginBox : GtkClutter.Actor {
             int opacity = 0;
             if (value) {
                 opacity = 255;
-                old_avatar.select ();
+                if (old_avatar != null)
+                    old_avatar.select ();
             } else {
-                old_avatar.deselect ();
+                if (old_avatar != null)
+                    old_avatar.deselect ();
             }
             credentials_actor.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 200, "opacity", opacity);
         }
