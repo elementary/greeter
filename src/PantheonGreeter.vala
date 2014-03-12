@@ -86,7 +86,7 @@ public class PantheonGreeter : Gtk.Window {
 
         userlist.current_user_changed.connect ((user) => {
             wallpaper.set_wallpaper (user.background);
-            //indicators.user_changed_cb(user);
+            indicators.keyboard_menu.user_changed_cb (user);
         });
 
         lightdm.show_message.connect (wrong_pw);
@@ -108,8 +108,7 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.add_child (userlist_actor);
         greeterbox.add_child (indicators);
 
-        greeterbox.add_effect_with_name ("mirror", new MirrorEffect ());
-        greeterbox.depth = -1500;
+        greeterbox.opacity = 0;
 
         stage.add_child (greeterbox);
 
@@ -122,9 +121,7 @@ public class PantheonGreeter : Gtk.Window {
         add (clutter);
         show_all ();
 
-        greeterbox.animate (Clutter.AnimationMode.EASE_OUT_CUBIC, 1000, depth:0.0f).completed.connect (() => {
-            greeterbox.remove_effect_by_name ("mirror");
-        });
+        greeterbox.animate (Clutter.AnimationMode.EASE_OUT_QUART, 1700, opacity: 255);
 
         var last_user = settings.get_string ("last-user");
         for (var i = 0; i < userlist.size; i++) {

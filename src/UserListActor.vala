@@ -29,9 +29,9 @@ public class UserListActor : Clutter.Actor {
         this.userlist = userlist;
 
         for (int i = 0; i < userlist.size; i++) {
-           var box = new LoginBox (userlist.get_user (i));
-           boxes.set (userlist.get_user (i), box);
-           add_child (box);
+            var box = new LoginBox (userlist.get_user (i));
+            boxes.set (userlist.get_user (i), box);
+            add_child (box);
         }
 
         userlist.current_user_changed.connect ((user) => {

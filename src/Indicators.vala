@@ -70,8 +70,9 @@ public class Indicators : GtkClutter.Actor {
 
     int margin_to_right = 5;
 
-    Gtk.MenuItem keyboard_menuitem;
-    Gtk.Label keyboard_label;
+    Settings settings;
+
+    public KeyboardLayoutMenu keyboard_menu { get; private set; }
 
     public Gtk.MenuBar bar;
     private List<Indicator.Object> indicator_objects;
@@ -138,32 +139,6 @@ public class Indicators : GtkClutter.Actor {
         }
     }
 
-    private void toggle_schema (string name, bool active) {
-        var schema = SettingsSchemaSource.get_default ().lookup (name, false);
-
-        if (schema != null)
-            new Settings (name).set_boolean ("active", active);
-    }
-
-    private void greeter_set_env (string key, string val) {
-        GLib.Environment.set_variable (key, val, true);
-        try {
-            var proxy = new GLib.DBusProxy.for_bus_sync (GLib.BusType.SESSION,
-                                                         GLib.DBusProxyFlags.NONE, null,
-                                                         "org.freedesktop.DBus",
-                                                         "/org/freedesktop/DBus",
-                                                         "org.freedesktop.DBus",
-                                                         null);
-
-            var builder = new GLib.VariantBuilder (GLib.VariantType.ARRAY);
-            builder.add ("{ss}", key, val);
-            proxy.call ("UpdateActivationEnvironment", new Variant ("(a{ss})", builder), DBusCallFlags.NONE, -1, null);
-        } catch (Error e) {
-            warning ("Could not get set environment for indicators: %s", e.message);
-        }
-    }
-
-    Settings settings;
 
     public Indicators (Settings _settings) {
         settings = _settings;
@@ -228,20 +203,10 @@ public class Indicators : GtkClutter.Actor {
         start ();
 
         //keyboard layout menu
-        keyboard_menuitem = new Gtk.MenuItem ();
-        keyboard_menuitem.margin_right = margin_to_right;
-
-        var keyboard_hbox = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 3);
-        keyboard_menuitem.add (keyboard_hbox);
-        keyboard_hbox.add ( new Gtk.Image.from_icon_name ("keyboard", Gtk.IconSize.LARGE_TOOLBAR));
-        keyboard_label = new Gtk.Label ("");
-        keyboard_label.set_use_markup (true);
-        keyboard_label.width_chars = 2;
-        keyboard_hbox.add (keyboard_label);
-
-        bar.append (keyboard_menuitem);
-        keyboard_menuitem.show_all ();
-
+        keyboard_menu = new KeyboardLayoutMenu ();
+        bar.append (keyboard_menu);
+        keyboard_menu.margin_right = margin_to_right;
+        keyboard_menu.show_all ();
 
         power = new Gtk.MenuItem ();
         power.margin_right = margin_to_right;
@@ -312,118 +277,6 @@ public class Indicators : GtkClutter.Actor {
         accessibility.show_all ();
     }
 
-
-    public void user_changed_cb (LoginOption user) {
-
-        var layouts = new List <LightDM.Layout> ();
-        if (!user.is_guest () && !user.is_manual ())
-            foreach (var name in user.get_lightdm_user ().get_layouts ())
-            {
-                var layout = PantheonGreeter.get_layout_by_name (name);
-                if (layout != null)
-                    layouts.append (layout);
-            }
-        set_layouts (layouts);
-    }
-
-    public void set_layouts (List <LightDM.Layout> layouts)
-    {
-        if (layouts.length () == 0) {
-            LightDM.get_layouts ().foreach ((entry) => {
-                layouts.append (entry);
-            });
-        }
-
-        var default_item = recreate_menu (layouts);
-
-        /* Activate first item */
-        if (default_item != null)
-        {
-            if (default_item.active) /* Started active, have to manually trigger callback */
-                layout_toggled_cb (default_item);
-            else
-                default_item.active = true; /* will trigger callback to do rest of work */
-        }
-    }
-
-    /* Returns menuitem for first layout in list */
-    private Gtk.RadioMenuItem recreate_menu (List <LightDM.Layout> layouts_in)
-    {
-        var submenu = new Gtk.Menu ();
-        keyboard_menuitem.set_submenu (submenu as Gtk.Widget);
-
-        var layouts = layouts_in.copy ();
-        layouts.sort (cmp_layout);
-
-        Gtk.RadioMenuItem? default_item = null;
-        Gtk.RadioMenuItem? last_item = null;
-        foreach (var layout in layouts)
-        {
-            var item = new Gtk.RadioMenuItem.with_label (last_item == null ? null : last_item.get_group (), layout.description);
-            last_item = item;
-
-            item.show ();
-
-            if (layouts_in.data == layout)
-                default_item = item;
-
-            /* LightDM does not change its layout list during its lifetime, so this is safe */
-            item.set_data ("unity-greeter-layout", layout);
-
-            item.toggled.connect (layout_toggled_cb);
-
-            submenu.append (item);
-        }
-
-        return default_item;
-    }
-
-    private static int cmp_layout (LightDM.Layout? a, LightDM.Layout? b)
-    {
-        if (a == null && b == null)
-            return 0;
-        else if (a == null)
-            return 1;
-        else if (b == null)
-            return -1;
-        else
-        {
-            /* Use a dumb, ascii comparison for now.  If it turns out that some
-               descriptions can be in unicode, we'll have to use libicu's collation
-               algorithms. */
-            return strcmp (a.description, b.description);
-        }
-    }
-
-    private void layout_toggled_cb (Gtk.CheckMenuItem item) {
-        if (!item.active)
-            return;
-
-        var layout = item.get_data<LightDM.Layout> ("unity-greeter-layout");
-        if (layout == null)
-            return;
-
-        var desc = layout.short_description;
-        if (desc == null || desc == "") {
-            var parts = layout.name.split ("\t", 2);
-            if (parts[0] == layout.name) {
-                desc = layout.name;
-            } else {
-                /* Lookup parent layout, get its short_description */
-                var parent_layout = PantheonGreeter.get_layout_by_name (parts[0]);
-                if (parent_layout.short_description == null ||
-                    parent_layout.short_description == "") {
-                    desc = parts[0];
-                } else {
-                    desc = parent_layout.short_description;
-                }
-            }
-        }
-        keyboard_label.label = "<span foreground=\"white\">"+desc+"</span>";
-
-        LightDM.set_layout (layout);
-    }
-
     int onboard_stdout_fd;
     Gtk.Window keyboard_window;
 
@@ -466,5 +319,31 @@ public class Indicators : GtkClutter.Actor {
 
         keyboard_window.show_all ();
         settings.set_boolean ("onscreen-keyboard", true);
+    }
+
+
+        private void toggle_schema (string name, bool active) {
+        var schema = SettingsSchemaSource.get_default ().lookup (name, false);
+
+        if (schema != null)
+            new Settings (name).set_boolean ("active", active);
+    }
+
+    private void greeter_set_env (string key, string val) {
+        GLib.Environment.set_variable (key, val, true);
+        try {
+            var proxy = new GLib.DBusProxy.for_bus_sync (GLib.BusType.SESSION,
+                                                         GLib.DBusProxyFlags.NONE, null,
+                                                         "org.freedesktop.DBus",
+                                                         "/org/freedesktop/DBus",
+                                                         "org.freedesktop.DBus",
+                                                         null);
+
+            var builder = new GLib.VariantBuilder (GLib.VariantType.ARRAY);
+            builder.add ("{ss}", key, val);
+            proxy.call ("UpdateActivationEnvironment", new Variant ("(a{ss})", builder), DBusCallFlags.NONE, -1, null);
+        } catch (Error e) {
+            warning ("Could not get set environment for indicators: %s", e.message);
+        }
     }
 }

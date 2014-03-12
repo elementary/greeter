@@ -1,4 +1,34 @@
 
+
+public class SelectableAvatar : GtkClutter.Actor {
+    Avatar normal_avatar;
+    Avatar desaturated_avatar;
+
+    public SelectableAvatar (LoginOption user) {
+        normal_avatar = new Avatar (user);
+        desaturated_avatar = new Avatar (user);
+        desaturated_avatar.add_effect (new Clutter.DesaturateEffect (1.0f));
+        add_child (normal_avatar);
+        add_child (desaturated_avatar);
+        deselect ();
+    }
+
+    public void select () {
+        normal_avatar.show ();
+        desaturated_avatar.dismiss ();
+    }
+
+    public void deselect () {
+        normal_avatar.dismiss ();
+        desaturated_avatar.show ();
+    }
+
+    public void dismiss () {
+        normal_avatar.dismiss ();
+        desaturated_avatar.dismiss ();
+    }
+}
+
 public class Avatar : GtkClutter.Actor {
 
     Gdk.Pixbuf image;
@@ -29,6 +59,9 @@ public class Avatar : GtkClutter.Actor {
             return false;
         });
         this.contents = box;
+    }
+
+    public void show () {
         animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 400, "opacity", 255);
     }
 
