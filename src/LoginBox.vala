@@ -75,7 +75,6 @@ public class LoginBox : GtkClutter.Actor {
             credentials_actor = new CredentialsAreaActor (credentials);
             current_session = user.get_lightdm_user ().session;
         }
-        add_child (credentials_actor);
 
 
         credentials.request_login.connect (() => {
@@ -89,6 +88,7 @@ public class LoginBox : GtkClutter.Actor {
         label.reactive = true;
         label.x = this.x;
         add_child (label);
+        add_child (credentials_actor);
 
         pass_focus ();
     }
@@ -126,17 +126,16 @@ public class LoginBox : GtkClutter.Actor {
             height = 188;
 
             this.settings = new ToggleButton ();
-
-            settings.relief  = ReliefStyle.NONE;
+            settings.relief = ReliefStyle.NONE;
             settings.add (new Image.from_icon_name ("application-menu-symbolic", IconSize.MENU));
+            settings.valign = Align.END;
+            settings.set_size_request (30, 30);
 
             grid = new Grid ();
+            grid.attach (credentials, 0, 0, 1, 2);
+            grid.attach (settings, 1, 1, 1, 1);
 
-            grid.attach (credentials, 1, 0, 1, 3);
-            grid.attach (settings, 2, 2, 1, 1);
-            grid.column_spacing = 12;
-
-            //create_popup ();
+            create_popup ();
 
             var w = -1; var h = -1;
             this.get_widget ().size_allocate.connect (() => {
@@ -155,7 +154,7 @@ public class LoginBox : GtkClutter.Actor {
 
             ((Container) this.get_widget ()).add (grid);
             this.get_widget ().show_all ();
-            this.get_widget ().get_style_context ().add_class ("content-view");
+            //this.get_widget ().get_style_context ().add_class ("content-view");
 
             if (LightDM.get_sessions ().length () == 1)
                 settings.hide ();
@@ -197,14 +196,21 @@ public class LoginBox : GtkClutter.Actor {
 
                 this.get_stage ().add_child (pop);
 
+
+                float actor_x = 0;
+                float actor_y = 0;
+
+                this.get_transformed_position (out actor_x, out actor_y);
+
                 int po_x;
                 int po_y;
-                settings.translate_coordinates (this.grid, 10, 10, out po_x, out po_y);
+                settings.translate_coordinates (credentials, 10, 10, out po_x, out po_y);
 
                 pop.width = 245;
-                pop.x = po_x - pop.width/2 + 52;
-                pop.y = this.y + po_y + pop.height;
+                pop.x = actor_x + po_x - pop.width + 40;
+                pop.y = actor_y + po_y;
                 pop.get_widget ().show_all ();
+
                 pop.destroy.connect (() => {
                     settings.active = false;
                 });

@@ -47,6 +47,8 @@ public class ShadowedLabel : Actor {
         content = new Canvas ();
         (content as Canvas).draw.connect (draw);
 
+        reactive = false;
+
         notify["width"].connect (() => {(content as Canvas).set_size ((int) width, (int) height); buffer = null;});
         notify["height"].connect (() => {(content as Canvas).set_size ((int) width, (int) height); buffer = null;});
 
@@ -56,8 +58,8 @@ public class ShadowedLabel : Actor {
     bool draw (Cairo.Context cr) {
         cr.set_operator (Cairo.Operator.CLEAR);
         cr.paint ();
-        cr.set_operator (Cairo.Operator.OVER);
 
+        cr.set_operator (Cairo.Operator.OVER);
         var buffer = new Granite.Drawing.BufferSurface ((int) width, (int) height);
         var layout = Pango.cairo_create_layout (buffer.context);
         layout.set_markup (label, -1);
@@ -74,7 +76,6 @@ public class ShadowedLabel : Actor {
         buffer.context.move_to (4, 0);
         buffer.context.set_source_rgba (1, 1, 1, 1);
         Pango.cairo_show_layout (buffer.context, layout);
-
 
         cr.paint ();
 
