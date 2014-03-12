@@ -56,6 +56,8 @@ public class PantheonGreeter : Gtk.Window {
             return false;
         });
 
+        LoginOption.load_default_avatar ();
+
         clutter = new GtkClutter.Embed ();
         fadein = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
         greeterbox = new Clutter.Actor ();
@@ -66,7 +68,6 @@ public class PantheonGreeter : Gtk.Window {
         indicators = new Indicators (settings);
         wallpaper = new Wallpaper ();
 
-        LoginOption.load_default_avatar ();
 
         get_screen ().monitors_changed.connect (monitors_changed);
 
@@ -112,7 +113,7 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
         indicators.add_constraint (new Clutter.BindConstraint (greeterbox, Clutter.BindCoordinate.WIDTH, 0));
 
-        clutter.key_release_event.connect (keyboard_navigation);
+        clutter.key_press_event.connect (keyboard_navigation);
 
         add (clutter);
         show_all ();

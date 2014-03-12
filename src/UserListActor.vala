@@ -51,7 +51,7 @@ public class UserListActor : Clutter.Actor {
 
             result[i] = run_y;
 
-            run_y += 50;
+            run_y += 100;
             if (user != current_user && userlist.get_next (user) == current_user) {
                 run_y += 100;
             }

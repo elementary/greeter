@@ -25,11 +25,13 @@ public class LoginOption : Object {
 
     private static Gdk.Pixbuf default_avatar;
 
-    private LightDM.User user;
+    private LightDM.User? user;
 
     private Gdk.Pixbuf avatar;
 
     public int index { get; private set; }
+
+    public bool avatar_ready { get; private set; }
 
     public UserType usertype { get; private set; }
 
@@ -37,18 +39,21 @@ public class LoginOption : Object {
         this.index = index;
         this.user = user;
         usertype = UserType.NORMAL;
+        avatar_ready = false;
     }
 
     public LoginOption.Guest (int index) {
         this.index = index;
         usertype = UserType.GUEST;
         user = null;
+        avatar_ready = true;
     }
 
     public LoginOption.Manual (int index) {
         this.index = index;
         usertype = UserType.MANUAL;
         user = null;
+        avatar_ready = true;
     }
 
     public string get_markup () {
@@ -60,7 +65,7 @@ public class LoginOption : Object {
         try {
             default_avatar = Gtk.IconTheme.get_default ().load_icon ("avatar-default", 96, 0);
         } catch {
-            error ("Couldn't load default wallpaper");
+            warning ("Couldn't load default wallpaper");
         }
     }
 
@@ -74,13 +79,14 @@ public class LoginOption : Object {
             lock(avatar) {
                 avatar = buf;
             }
-            Idle.add(() => {
-                avatar_updated ();
-                return false;
-            });
         } catch (Error e) {
             debug ("Using default-avatar instead of " + user.image);
         }
+        Idle.add(() => {
+            avatar_updated ();
+            return false;
+        });
+        avatar_ready = true;
     }
 
     public signal void avatar_updated ();

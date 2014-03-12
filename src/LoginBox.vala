@@ -32,6 +32,7 @@ public class LoginBox : GtkClutter.Actor {
         }
     }
 
+    Avatar old_avatar = null;
     CredentialsArea credentials;
     CredentialsAreaActor credentials_actor;
     ShadowedLabel label;
@@ -86,11 +87,26 @@ public class LoginBox : GtkClutter.Actor {
         label.width = 600;
         label.y = 0;
         label.reactive = true;
-        label.x = this.x;
+        label.x = this.x + 100;
         add_child (label);
+        credentials_actor.x = this.x + 100;
         add_child (credentials_actor);
 
         pass_focus ();
+        if (user.avatar_ready) {
+            update_avatar ();
+        } else {
+            user.avatar_updated.connect (() => {
+                update_avatar ();
+            });
+        }
+    }
+
+    private void update_avatar () {
+        if (old_avatar != null)
+            old_avatar.dismiss ();
+        old_avatar = new Avatar (user);
+        add_child (old_avatar);
     }
 
     public string get_password () {
