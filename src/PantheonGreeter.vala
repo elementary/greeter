@@ -35,12 +35,18 @@ public class PantheonGreeter : Gtk.Window {
 
     Settings settings;
 
+    public static PantheonGreeter instance { get; private set; }
+
     //from this width on we use the shrinked down version
     const int MIN_WIDTH = 1200;
     //from this width on the clock wont fit anymore
     const int NO_CLOCK_WIDTH = 920;
 
     public PantheonGreeter () {
+        //singleton
+        assert (instance == null);
+        instance = this;
+
         settings = new Settings ("org.pantheon.desktop.greeter");
         lightdm = new LightDM.Greeter ();
         /*start*/
@@ -86,8 +92,6 @@ public class PantheonGreeter : Gtk.Window {
         lightdm.show_message.connect (wrong_pw);
         lightdm.show_prompt.connect (send_pw);
         lightdm.authentication_complete.connect (authenticated);
-
-        // TODO loginbox.login_requested.connect (authenticate);
 
         /*activate the numlock if needed*/
         var activate_numlock = settings.get_boolean ("activate-numlock");
@@ -194,7 +198,7 @@ public class PantheonGreeter : Gtk.Window {
         return true;
     }
 
-    void authenticate () {
+    public void authenticate () {
         if (userlist.current_user.is_guest ())
             lightdm.authenticate_as_guest ();
         else

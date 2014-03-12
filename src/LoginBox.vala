@@ -79,7 +79,7 @@ public class LoginBox : GtkClutter.Actor {
 
 
         credentials.request_login.connect (() => {
-            login_requested ();
+            PantheonGreeter.instance.authenticate ();
         });
 
         label = new ShadowedLabel (user.get_markup ());
@@ -125,7 +125,6 @@ public class LoginBox : GtkClutter.Actor {
     }
 
     public void pass_focus () {
-        //credentials_actor.grab_key_focus ();
         credentials.pass_focus ();
     }
 
