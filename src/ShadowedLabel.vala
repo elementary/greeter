@@ -24,8 +24,6 @@ using Clutter;
 public class ShadowedLabel : Actor {
     Granite.Drawing.BufferSurface buffer;
 
-    bool dark;
-
     string _label = "";
     public string label {
         get {
@@ -45,10 +43,9 @@ public class ShadowedLabel : Actor {
         }
     }
 
-    public ShadowedLabel (string _label, bool dark = false) {
+    public ShadowedLabel (string _label) {
         content = new Canvas ();
         (content as Canvas).draw.connect (draw);
-        this.dark = dark;
 
         notify["width"].connect (() => {(content as Canvas).set_size ((int) width, (int) height); buffer = null;});
         notify["height"].connect (() => {(content as Canvas).set_size ((int) width, (int) height); buffer = null;});
@@ -65,22 +62,20 @@ public class ShadowedLabel : Actor {
         var layout = Pango.cairo_create_layout (buffer.context);
         layout.set_markup (label, -1);
 
-        buffer.context.move_to (0, 1);
-        if (dark)
-            buffer.context.set_source_rgba (0.3, 0.3, 0.3, 1);
-        else
-            buffer.context.set_source_rgba (0, 0, 0, 1);
+        buffer.context.move_to (4, 0);
+        buffer.context.set_source_rgba (0, 0, 0, 1);
         Pango.cairo_show_layout (buffer.context, layout);
         buffer.exponential_blur (3);
 
-        buffer.context.move_to (0, 0);
-        if (dark)
-            buffer.context.set_source_rgba (0, 0, 0, 1);
-        else
-            buffer.context.set_source_rgba (1, 1, 1, 1);
+        cr.set_source_surface (buffer.surface, 0, 0);
+        cr.paint ();
+        cr.paint ();
+
+        buffer.context.move_to (4, 0);
+        buffer.context.set_source_rgba (1, 1, 1, 1);
         Pango.cairo_show_layout (buffer.context, layout);
 
-        cr.set_source_surface (buffer.surface, 0, 0);
+
         cr.paint ();
 
         return true;

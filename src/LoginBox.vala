@@ -35,7 +35,6 @@ public class LoginBox : GtkClutter.Actor {
     CredentialsArea credentials;
     CredentialsAreaActor credentials_actor;
     ShadowedLabel label;
-    ShadowedLabel dark_label;
 
     public signal void login_requested ();
 
@@ -83,15 +82,13 @@ public class LoginBox : GtkClutter.Actor {
             login_requested ();
         });
 
-        label = new ShadowedLabel (user.get_markup (), true);
-        dark_label = new ShadowedLabel (user.get_markup (), false);
-        dark_label.height = label.height = 75;
-        dark_label.width  = label.width = 600;
-        dark_label.y = label.y = 0;
-        dark_label.reactive = label.reactive = true;
-        label.x = dark_label.x = this.x;
+        label = new ShadowedLabel (user.get_markup ());
+        label.height = 75;
+        label.width = 600;
+        label.y = 0;
+        label.reactive = true;
+        label.x = this.x;
         add_child (label);
-        add_child (dark_label);
 
         pass_focus ();
     }
