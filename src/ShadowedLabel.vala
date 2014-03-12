@@ -67,11 +67,11 @@ public class ShadowedLabel : Actor {
 
         buffer.context.move_to (0, 1);
         if (dark)
-            buffer.context.set_source_rgba (0.7, 0.7, 0.7, 1);
+            buffer.context.set_source_rgba (0.3, 0.3, 0.3, 1);
         else
             buffer.context.set_source_rgba (0, 0, 0, 1);
         Pango.cairo_show_layout (buffer.context, layout);
-        buffer.exponential_blur (5);
+        buffer.exponential_blur (3);
 
         buffer.context.move_to (0, 0);
         if (dark)

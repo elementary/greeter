@@ -83,6 +83,9 @@ public class UserListActor : Clutter.Actor {
             box.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 300, y: y_vars[i]);
 
             box.selected = (user == current_user); 
+            if (user == current_user) {
+                box.pass_focus ();
+            }
         }
 
     }

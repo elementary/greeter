@@ -49,7 +49,6 @@ public class LoginBox : GtkClutter.Actor {
             int opacity = 0;
             if (value) {
                 opacity = 255;
-                pass_focus ();
             }
             credentials_actor.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 200, "opacity", opacity);
         }
@@ -103,16 +102,17 @@ public class LoginBox : GtkClutter.Actor {
 
     public void wrong_pw () {
         credentials.reset_pw ();
-        this.animate (Clutter.AnimationMode.EASE_IN_BOUNCE, 150, scale_x:0.9f, scale_y: 0.9f).
+        this.animate (Clutter.AnimationMode.EASE_IN_BOUNCE, 150, scale_x: 0.9f, scale_y: 0.9f).
         completed.connect (() => {
             Clutter.Threads.Timeout.add (1, () => {
-                this.animate (Clutter.AnimationMode.EASE_OUT_BOUNCE, 150, scale_x:1.0f, scale_y: 1.0f);
+                this.animate (Clutter.AnimationMode.EASE_OUT_BOUNCE, 150, scale_x: 1.0f, scale_y: 1.0f);
                 return false;
             });
         });
     }
 
     public void pass_focus () {
+        //credentials_actor.grab_key_focus ();
         credentials.pass_focus ();
     }
 

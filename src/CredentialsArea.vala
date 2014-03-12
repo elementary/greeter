@@ -87,11 +87,6 @@ public class UserLogin : CredentialsArea {
         password = create_password_field (true);
         password.margin_top = 52;
         attach (password, 0, 0, 1, 1);
-
-        password.focus_out_event.connect (() => {
-            password.grab_focus ();
-            return false;
-        });
     }
 
     public override void pass_focus () {
@@ -137,10 +132,6 @@ public class GuestLogin : CredentialsArea {
             request_login ();
         });
 
-        login_btn.focus_out_event.connect (() => {
-            login_btn.grab_focus ();
-            return false;
-        });
         login_btn.margin_top = 52;
 
         attach (login_btn, 0, 1, 1, 1);

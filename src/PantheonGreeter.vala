@@ -70,8 +70,9 @@ public class PantheonGreeter : Gtk.Window {
 
         get_screen ().monitors_changed.connect (monitors_changed);
 
-        size_allocate.connect (() => {
+        configure_event.connect (() => {
             reposition ();
+            return false;
         });
 
         monitors_changed ();
