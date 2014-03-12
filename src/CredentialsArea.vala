@@ -24,7 +24,6 @@ using Gtk;
 public abstract class CredentialsArea : Grid {
 
     public signal void request_login ();
-    public signal void pass_focus ();
     public signal void reset_pw ();
 
     private string _userpassword = "";
@@ -35,15 +34,17 @@ public abstract class CredentialsArea : Grid {
         }
     }
 
-    public PantheonUser? user { get; private set; }
+    public LoginOption? user { get; private set; }
 
     public virtual string get_username () {
         return user.name;
     }
 
-    public CredentialsArea (PantheonUser? user) {
+    public CredentialsArea (LoginOption? user) {
         this.user = user;
     }
+
+    public abstract void pass_focus ();
 
     public Entry create_password_field (bool grab_focus) {
         var password = new Entry ();
@@ -72,21 +73,18 @@ public abstract class CredentialsArea : Grid {
         reset_pw.connect (() => {
             password.text = "";
         });
-        if(grab_focus) {
-            pass_focus.connect (() => {
-                password.grab_focus ();
-            });
-        }
         return password;
     }
 }
 
 public class UserLogin : CredentialsArea {
 
-    public UserLogin (PantheonUser user) {
+    Entry password;
+
+    public UserLogin (LoginOption user) {
         base (user);
 
-        var password = create_password_field (true);
+        password = create_password_field (true);
         password.margin_top = 52;
         attach (password, 0, 0, 1, 1);
 
@@ -95,12 +93,17 @@ public class UserLogin : CredentialsArea {
             return false;
         });
     }
+
+    public override void pass_focus () {
+        password.grab_focus ();
+    }
+
 }
 
 public class ManualLogin : CredentialsArea {
     private Entry username;
 
-    public ManualLogin (PantheonUser user) {
+    public ManualLogin (LoginOption user) {
         base (user);
         username = new Entry();
         username.hexpand = true;
@@ -108,23 +111,13 @@ public class ManualLogin : CredentialsArea {
 
         attach (username, 0, 0, 1, 1);
 
-        pass_focus.connect (() => {
-            username.grab_focus ();
-        });
-
         var password = create_password_field (false);
         password.margin_top = 16;
         attach (password, 0, 1, 2, 1);
+    }
 
-        password.focus_out_event.connect (() => {
-            username.grab_focus ();
-            return false;
-        });
-
-        username.focus_out_event.connect (() => {
-            password.grab_focus ();
-            return false;
-        });
+    public override void pass_focus () {
+        username.grab_focus ();
     }
 
     public override string get_username () {
@@ -134,15 +127,14 @@ public class ManualLogin : CredentialsArea {
 
 public class GuestLogin : CredentialsArea {
 
-    public GuestLogin (PantheonUser user) {
+    Button login_btn;
+
+    public GuestLogin (LoginOption user) {
         base (user);
 
-        var login_btn = new Button.with_label (_("Login"));
+        login_btn = new Button.with_label (_("Login"));
         login_btn.clicked.connect (() => {
             request_login ();
-        });
-        pass_focus.connect (() => {
-            login_btn.grab_focus ();
         });
 
         login_btn.focus_out_event.connect (() => {
@@ -153,10 +145,18 @@ public class GuestLogin : CredentialsArea {
 
         attach (login_btn, 0, 1, 1, 1);
     }
+
+    public override void pass_focus () {
+        login_btn.grab_focus ();
+    }
 }
 
 public class DummyLogin : CredentialsArea {
     public DummyLogin () {
         base (null);
     }
+
+    public override void pass_focus () {
+    }
+
 }

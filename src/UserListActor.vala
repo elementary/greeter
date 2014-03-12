@@ -23,37 +23,23 @@
 public class UserListActor : Clutter.Actor {
     UserList userlist;
 
-    Gee.HashMap<PantheonUser, LoginBox> boxes = new Gee.HashMap<PantheonUser, LoginBox> ();
-    Gee.HashMap<PantheonUser, ShadowedLabel> labels = new Gee.HashMap<PantheonUser, ShadowedLabel> ();
-    Gee.HashMap<PantheonUser, ShadowedLabel> dark_labels = new Gee.HashMap<PantheonUser, ShadowedLabel> ();
-
+    Gee.HashMap<LoginOption, LoginBox> boxes = new Gee.HashMap<LoginOption, LoginBox> ();
 
     public UserListActor (UserList userlist) {
         this.userlist = userlist;
 
-        userlist.user_changed.connect ((user) => {
+        for (int i = 0; i < userlist.size; i++) {
+           var box = new LoginBox (userlist.get_user (i));
+           boxes.set (userlist.get_user (i), box);
+           add_child (box);
+        }
+
+        userlist.current_user_changed.connect ((user) => {
             animate_list (user, 400);
         });
-
-        build_labels ();
     }
 
-    private void build_labels () {
-        for (int i = 0; i < userlist.size; i++) {
-            ShadowedLabel label = new ShadowedLabel (userlist.get_user (i).get_markup ());
-            ShadowedLabel dark_label = new ShadowedLabel (userlist.get_user (i).get_markup (), true);
-            dark_label.height = label.height = 75;
-            dark_label.width  = label.width = 600;
-            dark_label.y = label.y = i * 200 + label.height;
-            dark_label.reactive = label.reactive = true;
-            add_child (label);
-            add_child (dark_label);
-            labels.set (userlist.get_user (i), label);
-            dark_labels.set (userlist.get_user (i), dark_label);
-        }
-    }
-
-    private float[] get_y_for_users (PantheonUser current_user) {
+    private float[] get_y_for_users (LoginOption current_user) {
         float[] result = new float[userlist.size];
 
         float run_y = 0;
@@ -61,17 +47,17 @@ public class UserListActor : Clutter.Actor {
         float current_user_y = 0;
 
         for (int i = 0; i < userlist.size; i++) {
-            PantheonUser user = userlist.get_user (i);
+            LoginOption user = userlist.get_user (i);
 
             result[i] = run_y;
 
             run_y += 50;
             if (user != current_user && userlist.get_next (user) == current_user) {
-                run_y += 150;
+                run_y += 100;
             }
             if (user == current_user) {
                 current_user_y = run_y;
-                run_y += 150;
+                run_y += 100;
             }
 
         }
@@ -83,31 +69,20 @@ public class UserListActor : Clutter.Actor {
         return result;
     }
 
+    public LoginBox get_current_loginbox () {
+        var user = userlist.current_user;
+        return boxes.get (user);
+    }
 
-    private void animate_list (PantheonUser current_user, int duration) {
+    private void animate_list (LoginOption current_user, int duration) {
         float[] y_vars = get_y_for_users (current_user);
 
         for (int i = 0; i < userlist.size; i++) {
-            PantheonUser user = userlist.get_user (i);
-            ShadowedLabel label = labels.get (user);
-            ShadowedLabel dark_label = dark_labels.get (user);
+            LoginOption user = userlist.get_user (i);
+            LoginBox box = boxes.get (user);
+            box.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 300, y: y_vars[i]);
 
-            label.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, y: y_vars[i]);
-            dark_label.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 400, y: y_vars[i]);
-
-            uint opacity = 0;
-
-            if (user == current_user && !user.is_manual ()) {
-                opacity = 255;
-            }
-
-            label.animate (Clutter.AnimationMode.EASE_OUT_QUAD, duration, "opacity", opacity);
-
-            opacity = 0;
-            if (user != current_user)
-                opacity = 255;
-            dark_label.animate (Clutter.AnimationMode.EASE_OUT_QUAD, duration, "opacity", opacity);
-
+            box.selected = (user == current_user); 
         }
 
     }

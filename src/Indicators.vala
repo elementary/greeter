@@ -165,7 +165,7 @@ public class Indicators : GtkClutter.Actor {
 
     Settings settings;
 
-    public Indicators (LoginBox loginbox, Settings _settings) {
+    public Indicators (Settings _settings) {
         settings = _settings;
         bar = new Gtk.MenuBar ();
         (get_widget () as Gtk.Container).add (bar);
@@ -299,12 +299,12 @@ public class Indicators : GtkClutter.Actor {
         accessibility.submenu.append (keyboard);
 
         var high_contrast = new Gtk.CheckMenuItem.with_label (_("HighContrast"));
-        high_contrast.toggled.connect (() => {
+        /*high_contrast.toggled.connect (() => {
             Gtk.Settings.get_default ().gtk_theme_name = high_contrast.active ? "HighContrastInverse" : "elementary";
             settings.set_boolean ("high-contrast", high_contrast.active);
 
             loginbox.get_widget ().queue_draw ();
-        });
+        }); */
 
         high_contrast.active = settings.get_boolean ("high-contrast");
         accessibility.submenu.append (high_contrast);
@@ -315,7 +315,7 @@ public class Indicators : GtkClutter.Actor {
     }
 
 
-    public void user_changed_cb (PantheonUser user) {
+    public void user_changed_cb (LoginOption user) {
 
         var layouts = new List <LightDM.Layout> ();
         if (!user.is_guest () && !user.is_manual ())

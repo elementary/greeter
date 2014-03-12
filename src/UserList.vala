@@ -24,50 +24,49 @@ public class UserList : Object {
 
     public int size { get; private set; }
 
-    Gee.ArrayList<PantheonUser> users = new Gee.ArrayList<PantheonUser> ();
+    Gee.ArrayList<LoginOption> users = new Gee.ArrayList<LoginOption> ();
 
-    PantheonUser _current_user;
+    LoginOption _current_user;
 
-    public PantheonUser current_user {
+    public LoginOption current_user {
         get {
             return _current_user;
         }
-
         set {
             if (value != current_user) {
                 _current_user = value;
-                user_changed (value);
+                current_user_changed (value);
             }
         }
     }
 
-    public signal void user_changed (PantheonUser user);
+    public signal void current_user_changed (LoginOption user);
 
-    public UserList (LightDM.UserList ld_users, LightDM.Greeter greeter) {
+    public UserList (LightDM.UserList ld_users) {
         int index = 0;
-        if (!greeter.hide_users_hint) {
+        if (!PantheonGreeter.lightdm.hide_users_hint) {
             foreach (LightDM.User this_user in ld_users.users) {
-                users.add (new PantheonUser (index, this_user));
+                users.add (new LoginOption (index, this_user));
                 index++;
             }
         }
 
-        if (greeter.has_guest_account_hint) {
-            users.add (new PantheonUser.Guest (index));
+        if (PantheonGreeter.lightdm.has_guest_account_hint) {
+            users.add (new LoginOption.Guest (index));
             index++;
         }
-        if (greeter.show_manual_login_hint) {
-            users.add (new PantheonUser.Manual (index));
+        if (PantheonGreeter.lightdm.show_manual_login_hint) {
+            users.add (new LoginOption.Manual (index));
             index++;
         }
         size = index;
 
-        foreach (PantheonUser user in users) {
+        foreach (LoginOption user in users) {
             user.load_avatar ();
         }
     }
 
-    public PantheonUser get_user (int i) {
+    public LoginOption get_user (int i) {
         return users.get (i);
     }
 
@@ -79,14 +78,14 @@ public class UserList : Object {
         current_user = get_prev (current_user);
     }
 
-    public PantheonUser get_next (PantheonUser user) {
+    public LoginOption get_next (LoginOption user) {
         int i = user.index;
         if(i < size - 1)
             return get_user (i + 1);
         return get_user (i);
     }
 
-    public PantheonUser get_prev (PantheonUser user) {
+    public LoginOption get_prev (LoginOption user) {
         int i = user.index;
         if(i > 0)
             return get_user (i - 1);

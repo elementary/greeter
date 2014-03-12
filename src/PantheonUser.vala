@@ -21,7 +21,7 @@
 
 public enum UserType { NORMAL, GUEST, MANUAL }
 
-public class PantheonUser : Object {
+public class LoginOption : Object {
 
     private static Gdk.Pixbuf default_avatar;
 
@@ -33,19 +33,19 @@ public class PantheonUser : Object {
 
     public UserType usertype { get; private set; }
 
-    public PantheonUser (int index, LightDM.User user) {
+    public LoginOption (int index, LightDM.User user) {
         this.index = index;
         this.user = user;
         usertype = UserType.NORMAL;
     }
 
-    public PantheonUser.Guest (int index) {
+    public LoginOption.Guest (int index) {
         this.index = index;
         usertype = UserType.GUEST;
         user = null;
     }
 
-    public PantheonUser.Manual (int index) {
+    public LoginOption.Manual (int index) {
         this.index = index;
         usertype = UserType.MANUAL;
         user = null;

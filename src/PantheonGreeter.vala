@@ -20,9 +20,9 @@
 ***/
 
 public class PantheonGreeter : Gtk.Window {
-    LightDM.Greeter greeter;
+    public static LightDM.Greeter lightdm { get; private set; }
+
     GtkClutter.Embed clutter;
-    LoginBox loginbox;
 
     Clutter.Rectangle fadein;
     Clutter.Actor greeterbox;
@@ -42,40 +42,50 @@ public class PantheonGreeter : Gtk.Window {
 
     public PantheonGreeter () {
         settings = new Settings ("org.pantheon.desktop.greeter");
-        greeter = new LightDM.Greeter ();
+        lightdm = new LightDM.Greeter ();
         /*start*/
         try {
-            greeter.connect_sync ();
+            lightdm.connect_sync ();
         } catch (Error e) {
             warning ("Couldn't connect: %s", e.message);
             Posix.exit (Posix.EXIT_FAILURE);
         }
 
+        delete_event.connect (() => {
+            Posix.exit (Posix.EXIT_SUCCESS);
+            return false;
+        });
+
         clutter = new GtkClutter.Embed ();
         fadein = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
         greeterbox = new Clutter.Actor ();
-        userlist = new UserList (LightDM.UserList.get_instance (), greeter);
-
-        loginbox = new LoginBox (greeter);
+        userlist = new UserList (LightDM.UserList.get_instance ());
 
         userlist_actor = new UserListActor (userlist);
         time = new TimeLabel ();
-        indicators = new Indicators (loginbox, settings);
+        indicators = new Indicators (settings);
         wallpaper = new Wallpaper ();
 
-        PantheonUser.load_default_avatar ();
+        LoginOption.load_default_avatar ();
 
-        userlist.user_changed.connect ((user) => {
-            wallpaper.set_wallpaper (user.background);
-            indicators.user_changed_cb(user);
-            loginbox.set_user (user);
+        get_screen ().monitors_changed.connect (monitors_changed);
+
+        size_allocate.connect (() => {
+            reposition ();
         });
 
-        greeter.show_message.connect (wrong_pw);
-        greeter.show_prompt.connect (send_pw);
-        greeter.authentication_complete.connect (authenticated);
+        monitors_changed ();
 
-        loginbox.login_requested.connect (authenticate);
+        userlist.current_user_changed.connect ((user) => {
+            wallpaper.set_wallpaper (user.background);
+            //indicators.user_changed_cb(user);
+        });
+
+        lightdm.show_message.connect (wrong_pw);
+        lightdm.show_prompt.connect (send_pw);
+        lightdm.authentication_complete.connect (authenticated);
+
+        // TODO loginbox.login_requested.connect (authenticate);
 
         /*activate the numlock if needed*/
         var activate_numlock = settings.get_boolean ("activate-numlock");
@@ -84,14 +94,12 @@ public class PantheonGreeter : Gtk.Window {
 
         /*build up UI*/
         clutter.add_events (Gdk.EventMask.BUTTON_RELEASE_MASK);
-
         var stage = clutter.get_stage () as Clutter.Stage;
         stage.background_color = {0, 0, 0, 255};
 
         greeterbox.add_child (wallpaper);
         greeterbox.add_child (time);
         greeterbox.add_child (userlist_actor);
-        greeterbox.add_child (loginbox);
         greeterbox.add_child (indicators);
 
         greeterbox.add_effect_with_name ("mirror", new MirrorEffect ());
@@ -103,32 +111,13 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
         indicators.add_constraint (new Clutter.BindConstraint (greeterbox, Clutter.BindCoordinate.WIDTH, 0));
 
-        reposition ();
-
         clutter.key_release_event.connect (keyboard_navigation);
 
         add (clutter);
         show_all ();
 
-        reposition ();
-        get_screen ().monitors_changed.connect (reposition);
-
-        /*opening animation*/
-        var d_left  = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
-        var d_right = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
-
-        stage.add_child (d_left);
-        stage.add_child (d_right);
-
-        d_left.width = d_right.width = stage.width / 2;
-        d_left.height = d_right.height = stage.height;
-        d_right.x = stage.width / 2;
-
-        d_left.animate  (Clutter.AnimationMode.EASE_IN_CUBIC, 750, x:-d_left.width);
-        d_right.animate (Clutter.AnimationMode.EASE_IN_CUBIC, 750, x:stage.width);
-
-        greeterbox.animate (Clutter.AnimationMode.EASE_OUT_CUBIC, 1000, depth:0.0f).completed.connect ( () => {
-                greeterbox.remove_effect_by_name ("mirror");
+        greeterbox.animate (Clutter.AnimationMode.EASE_OUT_CUBIC, 1000, depth:0.0f).completed.connect (() => {
+            greeterbox.remove_effect_by_name ("mirror");
         });
 
         var last_user = settings.get_string ("last-user");
@@ -140,8 +129,6 @@ public class PantheonGreeter : Gtk.Window {
         }
         if(userlist.current_user == null)
             userlist.current_user = userlist.get_user (0);
-
-        indicators.bar.grab_focus ();
 
         this.get_window ().focus (Gdk.CURRENT_TIME);
 
@@ -158,30 +145,32 @@ public class PantheonGreeter : Gtk.Window {
         return null;
     }
 
-    void reposition () {
+    void monitors_changed () {
         Gdk.Rectangle geometry;
         get_screen ().get_monitor_geometry (get_screen ().get_primary_monitor (), out geometry);
         bool small = geometry.width < MIN_WIDTH;
-
-        loginbox.x = small ? 10 : 100;
-
         resize (geometry.width, geometry.height);
         move (geometry.x, geometry.y);
+        reposition ();
+    }
 
-        loginbox.y = Math.floorf (geometry.height / 2 - loginbox.height / 2);
+    void reposition () {
+        int width = 0;
+        int height = 0;
+        get_size (out width, out height);
 
-        userlist_actor.x = loginbox.x + 143;
-        userlist_actor.y = loginbox.y + 90;
+        userlist_actor.x = 243;
+        userlist_actor.y = Math.floorf (height / 2 - userlist_actor.height / 2);
 
-        time.x = geometry.width - time.width - (small ? 10 : 100);
-        time.y = geometry.height / 2 - time.height / 2;
+        time.x = width - time.width - 100;
+        time.y = height / 2 - time.height / 2;
 
-        time.visible = geometry.width > NO_CLOCK_WIDTH;
+        time.visible = width > NO_CLOCK_WIDTH;
 
-        wallpaper.width = geometry.width;
-        wallpaper.screen_width = geometry.width;
-        wallpaper.height = geometry.height;
-        wallpaper.screen_height = geometry.height;
+        wallpaper.width = width;
+        wallpaper.screen_width = width;
+        wallpaper.height = height;
+        wallpaper.screen_height = height;
         wallpaper.resize ();
     }
 
@@ -204,36 +193,35 @@ public class PantheonGreeter : Gtk.Window {
     }
 
     void authenticate () {
-        if (loginbox.current_user.is_guest ())
-            greeter.authenticate_as_guest ();
+        if (userlist.current_user.is_guest ())
+            lightdm.authenticate_as_guest ();
         else
-            greeter.authenticate (loginbox.get_username ());
+            lightdm.authenticate (userlist.current_user.name);
     }
 
     void wrong_pw (string text, LightDM.MessageType type) {
-        loginbox.wrong_pw ();
+        userlist_actor.get_current_loginbox ().wrong_pw ();
     }
 
     void send_pw (string text, LightDM.PromptType type) {
-        greeter.respond (loginbox.get_password ());
+        lightdm.respond (userlist_actor.get_current_loginbox ().get_password ());
     }
 
     void authenticated () {
-        settings.set_string ("last-user", loginbox.current_user.name);
+        settings.set_string ("last-user", userlist.current_user.name);
 
-        if (greeter.is_authenticated) {
+        if (lightdm.is_authenticated) {
             fadein.show ();
             fadein.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 200, opacity:255);
 
             try {
-                greeter.start_session_sync (loginbox.current_session);
+                lightdm.start_session_sync (userlist_actor.get_current_loginbox ().current_session);
             } catch (Error e) {
                 warning (e.message);
             }
-
-            Gtk.main_quit ();
+            Posix.exit (Posix.EXIT_SUCCESS);
         } else {
-            loginbox.wrong_pw ();
+            userlist_actor.get_current_loginbox ().wrong_pw ();
         }
     }
 }
