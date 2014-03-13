@@ -144,7 +144,7 @@ public class LoginBox : GtkClutter.Actor {
 
         public CredentialsAreaActor (CredentialsArea a) {
             credentials = a;
-            width = 510;
+            width = 200;
             height = 188;
 
             this.settings = new ToggleButton ();
