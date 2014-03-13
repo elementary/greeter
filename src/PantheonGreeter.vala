@@ -174,7 +174,7 @@ public class PantheonGreeter : Gtk.Window {
         wallpaper.screen_width = width;
         wallpaper.height = height;
         wallpaper.screen_height = height;
-        wallpaper.resize ();
+        wallpaper.reposition ();
     }
 
     bool keyboard_navigation (Gdk.EventKey e) {
