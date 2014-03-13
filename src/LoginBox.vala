@@ -176,7 +176,6 @@ public class LoginBox : GtkClutter.Actor {
 
             ((Container) this.get_widget ()).add (grid);
             this.get_widget ().show_all ();
-            //this.get_widget ().get_style_context ().add_class ("content-view");
 
             if (LightDM.get_sessions ().length () == 1)
                 settings.hide ();
