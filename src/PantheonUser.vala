@@ -126,9 +126,18 @@ public class LoginOption : Object {
             switch(usertype) {
             case UserType.NORMAL: return get_lightdm_user ().name;
             case UserType.MANUAL: return "?pantheon-greeter-manual";
-            case UserType.GUEST: return "?pantheon-greeter-manual";
+            case UserType.GUEST: return "?pantheon-greeter-guest";
             }
             return "";
+        }
+    }
+    
+    public bool logged_in {
+        get {
+            switch(usertype) {
+            case UserType.NORMAL: return get_lightdm_user ().logged_in;
+            }
+            return false;
         }
     }
 

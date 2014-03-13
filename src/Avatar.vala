@@ -30,6 +30,12 @@ public class SelectableAvatar : GtkClutter.Actor {
         add_child (normal_avatar);
         add_child (desaturated_avatar);
         deselect ();
+        
+        if (user.logged_in) {
+            var logged_in = new LoggedInIcon ();
+            logged_in.x = logged_in.y = 80;
+            add_child (logged_in);
+        }
     }
 
     public void select () {
@@ -45,6 +51,17 @@ public class SelectableAvatar : GtkClutter.Actor {
     public void dismiss () {
         normal_avatar.dismiss ();
         desaturated_avatar.dismiss ();
+    }
+}
+
+public class LoggedInIcon : GtkClutter.Texture {
+    static Gdk.Pixbuf image = null;
+
+    public LoggedInIcon () {
+        if (image == null) {
+            image = Gtk.IconTheme.get_default ().load_icon ("account-logged-in", 16, 0);
+        }
+        set_from_pixbuf (image);
     }
 }
 
@@ -87,7 +104,7 @@ public class Avatar : GtkClutter.Actor {
     public unowned Clutter.Animation fade_out () {
         return animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 400, "opacity", 0);
     }
-    
+
     public void dismiss () {
         fade_out ().completed.connect (() => {
             get_parent ().remove_child (this);
