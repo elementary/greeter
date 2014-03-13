@@ -39,6 +39,8 @@ public class LoginBox : GtkClutter.Actor {
 
     public signal void login_requested ();
 
+    public signal void wants_focus ();
+
     bool _selected = false;
     public bool selected {
         get {
@@ -105,6 +107,11 @@ public class LoginBox : GtkClutter.Actor {
                 update_avatar ();
             });
         }
+
+        button_press_event.connect ((e) => {
+            wants_focus ();
+            return true;
+        });
     }
 
     private void update_avatar () {
