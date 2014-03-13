@@ -6,6 +6,8 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
 
     LayoutItemNode[] layout_item_nodes = {};
 
+    Gtk.RadioMenuItem no_other_entries_item;
+
     public KeyboardLayoutMenu () {
 
         var keyboard_hbox = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 3);
@@ -47,9 +49,11 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
             item.toggled.connect (layout_toggled_cb);
 
             submenu.append (item);
-            layout_item_nodes[i] = {layout, item};
+            layout_item_nodes[i] = new LayoutItemNode (layout, item, false);
             i++;
         }
+        no_other_entries_item = new Gtk.RadioMenuItem.with_label (null, _("No other layouts available"));
+        submenu.append (no_other_entries_item);
     }
 
     public void user_changed_cb (LoginOption user) {
@@ -64,30 +68,43 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
             }
         }
         set_layouts (layouts);
+        update_layout_visibility ();
+    }
+
+    private void update_layout_visibility () {
+        foreach (var n in layout_item_nodes) {
+            if (n.visible) {
+                n.item.show ();
+            } else {
+                n.item.hide ();
+            }
+        }
     }
 
     private void set_layouts (List<LightDM.Layout> layouts)
     {
         if (layouts == null || layouts.length () == 0) {
             foreach (var n in layout_item_nodes) {
-                n.item.visible = false;
+                n.visible = false;
             }
+            no_other_entries_item.show ();
             return;
         }
         else {
             foreach (var n in layout_item_nodes) {
-                n.item.visible = false;
+                n.visible = false;
             }
             foreach (var layout in layouts) {
-                get_item_for_layout (layout).visible = true;
+                get_node_for_layout (layout).visible = true;
             }
+            no_other_entries_item.hide ();
         }
 
         var default_layout = layouts.data;
         if (default_layout == null) {
             default_layout = layout_item_nodes[0].layout;
         }
-        var default_item = get_item_for_layout (default_layout);
+        var default_item = get_node_for_layout (default_layout).item;
 
         /* Activate first item */
         if (default_item != null)
@@ -99,13 +116,14 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
         }
     }
 
-    private Gtk.RadioMenuItem get_item_for_layout (LightDM.Layout layout) {
+    private LayoutItemNode? get_node_for_layout (LightDM.Layout layout) {
         foreach (var n in layout_item_nodes) {
-            if (layout == n.layout) {
-                return n.item;
+            if (cmp_layout (layout, n.layout) == 0) {
+                return n;
             }
         }
-        error ("blub");
+        warning ("Couldn't find a layout that matches: " + layout.name);
+        return null;
     }
 
     private void layout_toggled_cb (Gtk.CheckMenuItem item) {
@@ -150,13 +168,20 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
             /* Use a dumb, ascii comparison for now.  If it turns out that some
                descriptions can be in unicode, we'll have to use libicu's collation
                algorithms. */
-            return strcmp (a.description, b.description);
+            return strcmp (a.name, b.name);
         }
     }
 
-    struct LayoutItemNode {
-        LightDM.Layout layout;
-        Gtk.RadioMenuItem item;
+    class LayoutItemNode {
+        public LightDM.Layout layout { get; set; }
+        public Gtk.RadioMenuItem item { get; set; }
+        public bool visible { get; set; }
+
+        public LayoutItemNode (LightDM.Layout layout, Gtk.RadioMenuItem item, bool visible) {
+            this.layout = layout;
+            this.item = item;
+            this.visible = visible;
+        }
     }
 
 }
