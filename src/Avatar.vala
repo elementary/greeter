@@ -1,4 +1,23 @@
+// -*- Mode: vala; indent-tabs-mode: nil; tab-width: 4 -*-
+/***
+    BEGIN LICENSE
 
+    Copyright (C) 2011-2014 elementary Developers
+
+    This program is free software: you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License version 3, as published
+    by the Free Software Foundation.
+
+    This program is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranties of
+    MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
+    PURPOSE.  See the GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program.  If not, see <http://www.gnu.org/licenses/>
+
+    END LICENSE
+***/
 
 public class SelectableAvatar : GtkClutter.Actor {
     Avatar normal_avatar;
@@ -14,13 +33,13 @@ public class SelectableAvatar : GtkClutter.Actor {
     }
 
     public void select () {
-        normal_avatar.show ();
-        desaturated_avatar.dismiss ();
+        normal_avatar.fade_in ();
+        desaturated_avatar.fade_out ();
     }
 
     public void deselect () {
-        normal_avatar.dismiss ();
-        desaturated_avatar.show ();
+        normal_avatar.fade_out ();
+        desaturated_avatar.fade_in ();
     }
 
     public void dismiss () {
@@ -61,12 +80,18 @@ public class Avatar : GtkClutter.Actor {
         this.contents = box;
     }
 
-    public void show () {
-        animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 400, "opacity", 255);
+    public unowned Clutter.Animation fade_in () {
+        return animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 400, "opacity", 255);
     }
 
+    public unowned Clutter.Animation fade_out () {
+        return animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 400, "opacity", 0);
+    }
+    
     public void dismiss () {
-        animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 400, "opacity", 0);
+        fade_out ().completed.connect (() => {
+            get_parent ().remove_child (this);
+        });
     }
 
 }
