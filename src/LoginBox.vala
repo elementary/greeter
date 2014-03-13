@@ -53,9 +53,12 @@ public class LoginBox : GtkClutter.Actor {
                 opacity = 255;
                 if (old_avatar != null)
                     old_avatar.select ();
+                if (credentials.hide_username_when_selected)
+                    label.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 200, "opacity", 0);
             } else {
                 if (old_avatar != null)
                     old_avatar.deselect ();
+                label.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 200, "opacity", 255);
             }
             credentials_actor.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 200, "opacity", opacity);
         }

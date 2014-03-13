@@ -28,6 +28,8 @@ public abstract class CredentialsArea : Grid {
 
     private string _userpassword = "";
 
+    public bool hide_username_when_selected { get; protected set; default = false; }
+
     public string userpassword {
         get {
             return _userpassword;
@@ -109,6 +111,7 @@ public class ManualLogin : CredentialsArea {
         var password = create_password_field (false);
         password.margin_top = 16;
         attach (password, 0, 1, 2, 1);
+        hide_username_when_selected = true;
     }
 
     public override void pass_focus () {
