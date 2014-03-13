@@ -114,7 +114,6 @@ public class Wallpaper : Clutter.Group {
     }
     
     GtkClutter.Texture make_texture () {
-        message (unused_wallpapers.length.to_string ());
         if (unused_wallpapers.is_empty ()) {
             return new GtkClutter.Texture ();
         } else {
