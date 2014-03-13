@@ -62,13 +62,9 @@ public class IndicatorMenuItem : Gtk.MenuItem {
 }
 
 public class Indicators : GtkClutter.Actor {
-
-    int keyboard_pid;
-
-    Gtk.MenuItem power;
-    Gtk.MenuItem poweroff;
-
     int margin_to_right = 5;
+
+    PowerMenu power;
 
     Settings settings;
 
@@ -112,16 +108,6 @@ public class Indicators : GtkClutter.Actor {
         GLib.Bus.own_name (GLib.BusType.SESSION, "org.gnome.ScreenSaver",
                            GLib.BusNameOwnerFlags.NONE);
         yield run ();
-    }
-
-    ~Indicators () {
-        if (keyboard_pid != 0) {
-            Posix.kill (keyboard_pid, Posix.SIGKILL);
-
-            int status;
-            Posix.waitpid (keyboard_pid, out status, 0);
-            keyboard_pid = 0;
-        }
     }
 
     private async void run () {
@@ -208,125 +194,16 @@ public class Indicators : GtkClutter.Actor {
         keyboard_menu.margin_right = margin_to_right;
         keyboard_menu.show_all ();
 
-        power = new Gtk.MenuItem ();
+        power = new PowerMenu ();
         power.margin_right = margin_to_right;
-        try {
-            power.add (new Gtk.Image.from_pixbuf (Gtk.IconTheme.get_default ().lookup_by_gicon (
-                                                  new GLib.ThemedIcon.with_default_fallbacks ("system-shutdown-symbolic"), 16, 0).load_symbolic ({1,1,1,1})));
-        } catch (Error e) {
-            warning (e.message);
-        }
-
-        power.submenu = new Gtk.Menu ();
-
-        poweroff = new Gtk.MenuItem.with_label (_("Shutdown"));
-        var suspend = new Gtk.MenuItem.with_label (_("Suspend"));
-        var restart = new Gtk.MenuItem.with_label (_("Restart"));
-        var hibernate = new Gtk.MenuItem.with_label (_("Hibernate"));
-
-        if (LightDM.get_can_hibernate ())
-            power.submenu.append (hibernate);
-
-        if (LightDM.get_can_suspend ())
-            power.submenu.append (suspend);
-
-        if (LightDM.get_can_restart ())
-            power.submenu.append (restart);
-
-        if (LightDM.get_can_shutdown ())
-            power.submenu.append (poweroff);
-
-        poweroff.activate.connect (() => {try { LightDM.shutdown (); } catch (Error e) { warning (e.message); }});
-        suspend.activate.connect (() => {try { LightDM.suspend (); } catch (Error e) { warning (e.message); }});
-        restart.activate.connect (() => {try { LightDM.restart (); } catch (Error e) { warning (e.message); }});
-        hibernate.activate.connect (() => {try { LightDM.hibernate (); } catch (Error e) { warning (e.message); }});
-
         bar.insert (power, 0);
         power.show_all ();
 
-        var accessibility = new Gtk.MenuItem ();
+        var accessibility = new AccessibilityMenu (settings);
         accessibility.margin_right = margin_to_right;
-        try {
-            accessibility.add (new Gtk.Image.from_pixbuf (Gtk.IconTheme.get_default ().lookup_by_gicon (
-                                                          new GLib.ThemedIcon.with_default_fallbacks ("preferences-desktop-accessibility-symbolic"),
-                                                          16, 0).load_symbolic ({1,1,1,1})));
-        } catch (Error e) {
-            warning (e.message);
-        }
-
-        accessibility.submenu = new Gtk.Menu ();
-
-        var keyboard = new Gtk.CheckMenuItem.with_label (_("Onscreen Keyboard"));
-        keyboard.active = settings.get_boolean ("onscreen-keyboard");
-        keyboard.toggled.connect ((e) => {
-            toggle_keyboard (e.active);
-        });
-        accessibility.submenu.append (keyboard);
-
-        var high_contrast = new Gtk.CheckMenuItem.with_label (_("HighContrast"));
-        high_contrast.toggled.connect (() => {
-            Gtk.Settings.get_default ().gtk_theme_name = high_contrast.active ? "HighContrastInverse" : "elementary";
-            settings.set_boolean ("high-contrast", high_contrast.active);
-        });
-
-        high_contrast.active = settings.get_boolean ("high-contrast");
-        accessibility.submenu.append (high_contrast);
-
         bar.append (accessibility);
 
         accessibility.show_all ();
-    }
-
-    int onboard_stdout_fd;
-    Gtk.Window keyboard_window;
-
-    public void toggle_keyboard (bool active) {
-        if (keyboard_window != null) {
-            keyboard_window.visible = active;
-            settings.set_boolean ("onscreen-keyboard", active);
-            return;
-        }
-
-        int id = 0;
-
-        try {
-            string [] argv;
-            Shell.parse_argv ("onboard --xid", out argv);
-            Process.spawn_async_with_pipes (null, argv, null, SpawnFlags.SEARCH_PATH, null, out keyboard_pid, null, out onboard_stdout_fd, null);
-
-            var f = FileStream.fdopen (onboard_stdout_fd, "r");
-            var stdout_text = new char[1024];
-            f.gets (stdout_text);
-            id = int.parse ((string)stdout_text);
-        } catch (Error e) {
-            warning (e.message);
-        }
-
-        var keyboard_socket = new Gtk.Socket ();
-        keyboard_window = new Gtk.Window ();
-        keyboard_window.accept_focus = false;
-        keyboard_window.focus_on_map = false;
-        keyboard_window.add (keyboard_socket);
-        keyboard_socket.add_id (id);
-
-        var screen = Gdk.Screen.get_default ();
-        var monitor = screen.get_primary_monitor ();
-        Gdk.Rectangle geom;
-        screen.get_monitor_geometry (monitor, out geom);
-        keyboard_window.move (geom.x, geom.y + geom.height - 200);
-        keyboard_window.resize (geom.width, 200);
-        keyboard_window.set_keep_above (true);
-
-        keyboard_window.show_all ();
-        settings.set_boolean ("onscreen-keyboard", true);
-    }
-
-
-        private void toggle_schema (string name, bool active) {
-        var schema = SettingsSchemaSource.get_default ().lookup (name, false);
-
-        if (schema != null)
-            new Settings (name).set_boolean ("active", active);
     }
 
     private void greeter_set_env (string key, string val) {
@@ -345,5 +222,12 @@ public class Indicators : GtkClutter.Actor {
         } catch (Error e) {
             warning ("Could not get set environment for indicators: %s", e.message);
         }
+    }
+
+    private void toggle_schema (string name, bool active) {
+        var schema = SettingsSchemaSource.get_default ().lookup (name, false);
+
+        if (schema != null)
+            new Settings (name).set_boolean ("active", active);
     }
 }

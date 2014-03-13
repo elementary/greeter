@@ -133,10 +133,6 @@ public class PantheonGreeter : Gtk.Window {
             userlist.current_user = userlist.get_user (0);
 
         this.get_window ().focus (Gdk.CURRENT_TIME);
-
-        if (settings.get_boolean ("onscreen-keyboard")) {
-            indicators.toggle_keyboard (true);
-        }
     }
 
     public static LightDM.Layout? get_layout_by_name (string name) {
