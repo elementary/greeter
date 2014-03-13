@@ -19,9 +19,21 @@
     END LICENSE
 ***/
 
+/**
+ * Represents a area on the screen where the current wallpaper of a user gets
+ * displayed.
+ */
 public class Wallpaper : Clutter.Group {
+    /**
+     * 
+     */
     List<GtkClutter.Texture> wallpapers = new List<GtkClutter.Texture> ();
     List<Cancellable> loading_wallpapers = new List<Cancellable> ();
+    
+    /**
+     * Contains old Textures that were used for wallpapers. They are recycled
+     * in the @make_texture method.
+     */
     Queue<GtkClutter.Texture> unused_wallpapers = new Queue<GtkClutter.Texture> ();
 
     int gpu_limit;
@@ -61,6 +73,7 @@ public class Wallpaper : Clutter.Group {
 
         last_loaded = file_path;
 
+        clean_cache ();
         load_wallpaper.begin (file_path, file);
     }
 
@@ -75,6 +88,7 @@ public class Wallpaper : Clutter.Group {
                 InputStream stream = yield file.read_async (GLib.Priority.DEFAULT);
                 buf = yield Gdk.Pixbuf.new_from_stream_async (stream, cancelable);
                 loading_wallpapers.remove (cancelable);
+                // we downscale the pixbuf as far as we can on the CPU
                 buf = validate_pixbuf (buf);
                 //add loaded wallpapers and paths to cache
                 cache_path += path;
@@ -91,6 +105,7 @@ public class Wallpaper : Clutter.Group {
             add_child (new_wallpaper);
             new_wallpaper.animate (Clutter.AnimationMode.EASE_OUT_QUINT, 500, opacity: 255);
 
+            // abort all currently loading wallpapers
             foreach (var c in loading_wallpapers) {
                 c.cancel ();
             }
@@ -110,7 +125,11 @@ public class Wallpaper : Clutter.Group {
             warning (@"Can't load: '$path' due to $(e.message)");
         }
     }
-    
+
+    /**
+     * Creates a texture. It also recycles old unused wallpapers if possible
+     * as spamming constructors is expensive.
+     */
     GtkClutter.Texture make_texture () {
         if (unused_wallpapers.is_empty ()) {
             return new GtkClutter.Texture ();
@@ -120,7 +139,7 @@ public class Wallpaper : Clutter.Group {
     }
 
     /**
-     * resizes the cache if there are more pixbufs cached then max_mache allows
+     * Resizes the cache if there are more pixbufs cached then max_mache allows
      */
     void clean_cache () {
         int l = cache_path.length;
@@ -153,7 +172,7 @@ public class Wallpaper : Clutter.Group {
     }
 
     /**
-     * Scales the pixbuf down to fit in the given dimensions
+     * Scales the pixbuf down to fit in the given dimensions.
      */
     Gdk.Pixbuf scale_to_rect (Gdk.Pixbuf pixbuf, int rw, int rh) {
         int h = pixbuf.height;
