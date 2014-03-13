@@ -105,11 +105,9 @@ public class Wallpaper : Clutter.Group {
 
         } catch (Error e) {
             if (get_default() != path) {
-                set_wallpaper (get_default());
+                set_wallpaper (get_default ());
             }
-            warning ("Can't load: " + path);
-            warning ("Falling back to default if possible because:");
-            warning (e.message);
+            warning (@"Can't load: '$path' due to $(e.message)");
         }
     }
     
