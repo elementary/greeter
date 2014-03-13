@@ -34,10 +34,12 @@ public class PantheonGreeter : Gtk.Window {
 
     Settings settings;
 
+
+
     public static PantheonGreeter instance { get; private set; }
 
     //from this width on we use the shrinked down version
-    const int MIN_WIDTH = 1200;
+    const int NORMAL_WIDTH = 1200;
     //from this width on the clock wont fit anymore
     const int NO_CLOCK_WIDTH = 920;
 
@@ -146,7 +148,6 @@ public class PantheonGreeter : Gtk.Window {
     void monitors_changed () {
         Gdk.Rectangle geometry;
         get_screen ().get_monitor_geometry (get_screen ().get_primary_monitor (), out geometry);
-        bool small = geometry.width < MIN_WIDTH;
         resize (geometry.width, geometry.height);
         move (geometry.x, geometry.y);
         reposition ();
@@ -155,10 +156,15 @@ public class PantheonGreeter : Gtk.Window {
     void reposition () {
         int width = 0;
         int height = 0;
+
         get_size (out width, out height);
 
-        userlist_actor.x = 243;
-        userlist_actor.y = Math.floorf (height / 2 - userlist_actor.height / 2);
+        if (width > NORMAL_WIDTH) {
+            userlist_actor.x = 243;
+        } else {
+            userlist_actor.x = 120 * ((float) (width) / NORMAL_WIDTH);
+        }
+        userlist_actor.y = Math.floorf (height / 2.0f - userlist_actor.height / 2.0f);
 
         time.x = width - time.width - 100;
         time.y = height / 2 - time.height / 2;
