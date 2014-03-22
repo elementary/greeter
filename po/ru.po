@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-02 09:24-0500\n"
-"PO-Revision-Date: 2013-06-12 04:40+0000\n"
-"Last-Translator: Danny Damsky <dannydamsky99@gmail.com>\n"
+"PO-Revision-Date: 2014-03-21 17:45+0000\n"
+"Last-Translator: Сергей <Brianstorm41@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-16 05:05+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2014-03-22 06:56+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 
 #: /home/codygarver/greeter/po/../src/Indicators.vala:205
 msgid "Shutdown"
@@ -45,7 +45,7 @@ msgstr "Высококонтрастный"
 #. %v is added here to provide the English date suffixes th, nd and so on
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:95
 msgid "%A, %B %e%v"
-msgstr "%A, %B %e%v"
+msgstr "%A, %B %e"
 
 #. Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: /home/codygarver/greeter/po/../src/ShadowedLabel.vala:97
