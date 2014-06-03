@@ -122,7 +122,7 @@ public class PantheonGreeter : Gtk.Window {
         add (clutter);
         show_all ();
 
-        greeterbox.animate (Clutter.AnimationMode.EASE_OUT_QUART, 1700, opacity: 255);
+        greeterbox.animate (Clutter.AnimationMode.EASE_OUT_QUART, 200, opacity: 255);
 
         var last_user = settings.get_string ("last-user");
         for (var i = 0; i < userlist.size; i++) {
