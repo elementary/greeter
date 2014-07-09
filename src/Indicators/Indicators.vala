@@ -186,7 +186,7 @@ public class Indicators : GtkClutter.Actor {
 
         }
 
-        start ();
+        start.begin ();
 
         //keyboard layout menu
         keyboard_menu = new KeyboardLayoutMenu ();
@@ -218,7 +218,7 @@ public class Indicators : GtkClutter.Actor {
 
             var builder = new GLib.VariantBuilder (GLib.VariantType.ARRAY);
             builder.add ("{ss}", key, val);
-            proxy.call ("UpdateActivationEnvironment", new Variant ("(a{ss})", builder), DBusCallFlags.NONE, -1, null);
+            proxy.call.begin ("UpdateActivationEnvironment", new Variant ("(a{ss})", builder), DBusCallFlags.NONE, -1, null);
         } catch (Error e) {
             warning ("Could not get set environment for indicators: %s", e.message);
         }

@@ -62,7 +62,7 @@ public class UserList : Object {
         size = index;
 
         foreach (LoginOption user in users) {
-            user.load_avatar ();
+            user.load_avatar.begin ();
         }
     }
 
