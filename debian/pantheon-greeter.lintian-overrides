@@ -1,2 +1,2 @@
 # not really used directly by users (copied from lightdm-gtk-greeter)
-lightdm-gtk-greeter: binary-without-manpage usr/sbin/lightdm-gtk-greeter
+pantheon-greeter: binary-without-manpage usr/sbin/pantheon-greeter
