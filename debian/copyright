@@ -22,7 +22,11 @@ License: 2-clause BSD
 
 
 Files: debian/*
-Copyright: 2011 Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>
+Copyright: 2011-2014 Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>
+           2012 Devid Antonio Filoni <d.filoni@ubuntu.com>
+           2012-2014 Cody Garver <cody@elementaryos.org>
+           2014 Rico Tzschichholz <ricotz@ubuntu.com>
+           2014 Ivo Nunes <ivo@elementaryos.org>
 License: GPL-3.0+
 
 
