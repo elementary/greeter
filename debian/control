@@ -3,7 +3,7 @@ Section: x11
 Priority: optional
 Maintainer: Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>
 Build-Depends: cmake (>= 2.8),
-               debhelper (>= 7.0.50~),
+               debhelper (>= 9),
                libclutter-gtk-1.0-dev,
                libgranite-dev,
                libindicator3-dev,
