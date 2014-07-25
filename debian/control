@@ -7,7 +7,8 @@ Build-Depends: cmake (>= 2.8),
                libclutter-gtk-1.0-dev,
                libgranite-dev,
                libindicator3-dev,
-               liblightdm-gobject-1-dev (>= 1.2.1),
+               liblightdm-gobject-dev (>= 1.2.1) | liblightdm-gobject-1-dev (>= 1.2.1),
+               lightdm-vala (>= 1.2.1) | liblightdm-gobject-1-dev (>= 1.2.1),
                valac (>= 0.16)
 Standards-Version: 3.9.3
 Homepage: https://launchpad.net/pantheon-greeter
