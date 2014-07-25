@@ -2,7 +2,10 @@
 set -e
 
 case "$1" in
-  remove|purge)
+  remove|abort-install)
+    update-alternatives --remove lightdm-greeter /usr/share/xgreeters/pantheon-greeter.desktop
+
+    # Purge from legacy greeter selection mechanism
     if [ -x /usr/lib/lightdm/lightdm-set-defaults ] ; then
         /usr/lib/lightdm/lightdm-set-defaults --remove --greeter=pantheon-greeter || true
     fi

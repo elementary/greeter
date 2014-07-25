@@ -1,13 +1,16 @@
 #!/bin/sh
 set -e
 
-case "$1" in
-  configure|upgrade)
+if [ "$1" = "configure" ]; then
+    # Use priority 40 that's below lightdm-gtk-greeter's 60 while in experimental
+    update-alternatives --install /usr/share/xgreeters/lightdm-greeter.desktop \
+    lightdm-greeter /usr/share/xgreeters/pantheon-greeter.desktop 40
+
+    # Legacy greeter switching mechanism
     if [ -x /usr/lib/lightdm/lightdm-set-defaults ] ; then
         /usr/lib/lightdm/lightdm-set-defaults --keep-old --greeter=pantheon-greeter || true
     fi
-  ;;
-esac
+fi
 
 #DEBHELPER#
 
