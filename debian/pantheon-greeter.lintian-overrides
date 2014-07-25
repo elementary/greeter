@@ -1,5 +1,2 @@
-# Yes I'm sure I pass -fstack-protector and -D_FORTIFY_SOURCE=2 and they're used
-
-
 # not really used directly by users (copied from lightdm-gtk-greeter)
 lightdm-gtk-greeter: binary-without-manpage usr/sbin/lightdm-gtk-greeter
