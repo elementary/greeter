@@ -4,7 +4,12 @@ Source: https://launchpad.net/pantheon-greeter
 
 
 Files: *
-Copyright: 2012 Tom Beckmann <tom@elementaryos.org>
+Copyright: 2012-2013 Tom Beckmann <tom@elementaryos.org>
+           2012-2013 Cody Garver <cody@elementaryos.org>
+           2012 Daniel Fore <daniel@elementaryos.org>
+           2012 David Gomes <david@elementaryos.org>
+           2013 Corentin Noël <corentin@elementaryos.org>
+           2013-2014 Raphael Isemann <raphael@elementaryos.org>
 License: GPL-3.0+
 
 
