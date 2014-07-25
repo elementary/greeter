@@ -26,6 +26,11 @@ Copyright: 2011 Sergey "Shnatsel" Davidoff <shnatsel@gmail.com>
 License: GPL-3.0+
 
 
+Files: debian/watch
+Copyright: 2014 Bart Martens <bartm@debian.org>
+License: GPL-3.0+
+
+
 License: GPL-3.0+
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
