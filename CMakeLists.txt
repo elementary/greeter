@@ -65,5 +65,5 @@ add_schema ("data/org.pantheon.desktop.greeter.gschema.xml")
 add_executable (pantheon-greeter ${VALA_C})
 target_link_libraries(pantheon-greeter m)
 
-install (TARGETS pantheon-greeter RUNTIME DESTINATION share/xgreeters)
+install (TARGETS pantheon-greeter RUNTIME DESTINATION sbin)
 install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/pantheon-greeter.desktop DESTINATION share/xgreeters)
