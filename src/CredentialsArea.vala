@@ -137,6 +137,8 @@ public class GuestLogin : CredentialsArea {
 
         login_btn.margin_top = 52;
 
+        login_btn.get_style_context ().add_class ("suggested-action");
+
         attach (login_btn, 0, 1, 1, 1);
     }
 
