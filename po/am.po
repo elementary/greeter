@@ -7,27 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-06 21:51-0500\n"
+"POT-Creation-Date: 2014-08-31 15:29-0500\n"
 "PO-Revision-Date: 2014-03-26 15:42+0000\n"
 "Last-Translator: samson <Unknown>\n"
 "Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-08 06:43+0000\n"
-"X-Generator: Launchpad (build 17156)\n"
-
-#: /home/codygarver/greeter/po/../src/PantheonUser.vala:117
-msgid "Manual Login"
-msgstr ""
-
-#: /home/codygarver/greeter/po/../src/PantheonUser.vala:118
-msgid "Guest session"
-msgstr "የእንግዳ ክፍለ ጊዜ"
-
-#: /home/codygarver/greeter/po/../src/CredentialsArea.vala:133
-msgid "Login"
-msgstr "መግቢያ"
+"X-Launchpad-Export-Date: 2014-09-01 07:16+0000\n"
+"X-Generator: Launchpad (build 17176)\n"
 
 #. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details.
 #. %v is added here to provide the English date suffixes th, nd and so on
@@ -47,20 +35,42 @@ msgstr "%l:%M"
 msgid " %p"
 msgstr " %p"
 
-#~ msgid "Restart"
-#~ msgstr "እንደገና ማስጀመሪያ"
+#: /home/codygarver/greeter/po/../src/PantheonUser.vala:117
+msgid "Manual Login"
+msgstr ""
 
-#~ msgid "HighContrast"
-#~ msgstr "ከፍተኛ ተነጻጻሪ"
+#: /home/codygarver/greeter/po/../src/PantheonUser.vala:118
+msgid "Guest session"
+msgstr "የእንግዳ ክፍለ ጊዜ"
 
-#~ msgid "Onscreen Keyboard"
-#~ msgstr "የፊደል ገበታ በመመልከቻው ላይ"
+#: /home/codygarver/greeter/po/../src/CredentialsArea.vala:133
+msgid "Login"
+msgstr "መግቢያ"
 
-#~ msgid "Suspend"
-#~ msgstr "ማገጃ"
+#: /home/codygarver/greeter/po/../src/Indicators/AccessibilityMenu.vala:22
+msgid "Onscreen Keyboard"
+msgstr "የፊደል ገበታ በመመልከቻው ላይ"
 
-#~ msgid "Shutdown"
-#~ msgstr "ማጥፊያ"
+#: /home/codygarver/greeter/po/../src/Indicators/AccessibilityMenu.vala:29
+msgid "HighContrast"
+msgstr "ከፍተኛ ተነጻጻሪ"
 
-#~ msgid "Hibernate"
-#~ msgstr "ማስተኛ"
+#: /home/codygarver/greeter/po/../src/Indicators/PowerMenu.vala:16
+msgid "Shutdown"
+msgstr "ማጥፊያ"
+
+#: /home/codygarver/greeter/po/../src/Indicators/PowerMenu.vala:17
+msgid "Suspend"
+msgstr "ማገጃ"
+
+#: /home/codygarver/greeter/po/../src/Indicators/PowerMenu.vala:18
+msgid "Restart"
+msgstr "እንደገና ማስጀመሪያ"
+
+#: /home/codygarver/greeter/po/../src/Indicators/PowerMenu.vala:19
+msgid "Hibernate"
+msgstr "ማስተኛ"
+
+#: /home/codygarver/greeter/po/../src/Indicators/KeyboardLayoutMenu.vala:55
+msgid "No other layouts available"
+msgstr ""
