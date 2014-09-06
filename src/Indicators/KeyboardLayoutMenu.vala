@@ -52,7 +52,7 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
             layout_item_nodes[i] = new LayoutItemNode (layout, item, false);
             i++;
         }
-        no_other_entries_item = new Gtk.RadioMenuItem.with_label (null, _("No other layouts available"));
+        no_other_entries_item = new Gtk.RadioMenuItem.with_label (null, _("No other keyboard layouts available"));
         submenu.append (no_other_entries_item);
     }
 
