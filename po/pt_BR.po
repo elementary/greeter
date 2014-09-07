@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-31 15:29-0500\n"
-"PO-Revision-Date: 2014-08-10 19:16+0000\n"
+"PO-Revision-Date: 2014-09-06 15:28+0000\n"
 "Last-Translator: Leonardo Lemos <leonardolemos@live.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-01 07:17+0000\n"
-"X-Generator: Launchpad (build 17176)\n"
+"X-Launchpad-Export-Date: 2014-09-07 06:41+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details.
 #. %v is added here to provide the English date suffixes th, nd and so on
@@ -73,4 +73,4 @@ msgstr "Hibernar"
 
 #: /home/codygarver/greeter/po/../src/Indicators/KeyboardLayoutMenu.vala:55
 msgid "No other layouts available"
-msgstr ""
+msgstr "Nenhum outro layout disponível"
