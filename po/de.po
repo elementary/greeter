@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-31 15:29-0500\n"
-"PO-Revision-Date: 2014-09-09 21:30+0000\n"
-"Last-Translator: Phillip Sz <Unknown>\n"
+"PO-Revision-Date: 2014-09-15 09:36+0000\n"
+"Last-Translator: UweS <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-10 07:37+0000\n"
+"X-Launchpad-Export-Date: 2014-09-16 08:11+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #. Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details.
@@ -37,7 +37,7 @@ msgstr " %p"
 
 #: /home/codygarver/greeter/po/../src/PantheonUser.vala:117
 msgid "Manual Login"
-msgstr "Manuelle Anmeldung"
+msgstr "Manuell anmelden"
 
 #: /home/codygarver/greeter/po/../src/PantheonUser.vala:118
 msgid "Guest session"
@@ -65,7 +65,7 @@ msgstr "Bereitschaft"
 
 #: /home/codygarver/greeter/po/../src/Indicators/PowerMenu.vala:18
 msgid "Restart"
-msgstr "Neustarten"
+msgstr "Neu starten"
 
 #: /home/codygarver/greeter/po/../src/Indicators/PowerMenu.vala:19
 msgid "Hibernate"
