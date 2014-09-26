@@ -12,7 +12,14 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
 
         var keyboard_hbox = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 3);
 
-        keyboard_hbox.add ( new Gtk.Image.from_icon_name ("keyboard", Gtk.IconSize.LARGE_TOOLBAR));
+        try {
+            add (new Gtk.Image.from_pixbuf (Gtk.IconTheme.get_default ().lookup_by_gicon (
+                                                          new GLib.ThemedIcon.with_default_fallbacks ("input-keyboard-symbolic"),
+                                                          16, 0).load_symbolic ({1,1,1,1})));
+        } catch (Error e) {
+            warning (e.message);
+        }
+
         keyboard_label = new Gtk.Label ("");
         keyboard_label.set_use_markup (true);
         keyboard_label.width_chars = 2;
