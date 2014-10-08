@@ -19,41 +19,33 @@
     END LICENSE
 ***/
 
-public enum UserType { NORMAL, GUEST, MANUAL }
+public abstract class LoginOption : Object {
 
-public class LoginOption : Object {
+    protected static Gdk.Pixbuf default_avatar;
 
-    private static Gdk.Pixbuf default_avatar;
 
-    private LightDM.User? user;
-
-    private Gdk.Pixbuf avatar;
+    private Gdk.Pixbuf _avatar;
+    public Gdk.Pixbuf avatar {
+        get {
+            lock (_avatar) return _avatar;
+        }
+        protected set {
+            lock (_avatar) _avatar = value;
+        }
+    }
+    /**
+     * True if and only if the avatar of this login option is from now on
+     * considered constant and you can safely ignore the avatar_updated
+     * signal.
+     */
+    public bool avatar_ready { get; protected set; default = true; }
+    public signal void avatar_updated ();
 
     public int index { get; private set; }
 
-    public bool avatar_ready { get; private set; }
-
-    public UserType usertype { get; private set; }
-
-    public LoginOption (int index, LightDM.User user) {
+    protected LoginOption (int index) {
         this.index = index;
-        this.user = user;
-        usertype = UserType.NORMAL;
-        avatar_ready = false;
-    }
-
-    public LoginOption.Guest (int index) {
-        this.index = index;
-        usertype = UserType.GUEST;
-        user = null;
-        avatar_ready = true;
-    }
-
-    public LoginOption.Manual (int index) {
-        this.index = index;
-        usertype = UserType.MANUAL;
-        user = null;
-        avatar_ready = true;
+        _avatar = default_avatar;
     }
 
     public string get_markup () {
@@ -61,100 +53,190 @@ public class LoginOption : Object {
                             + display_name + "</span>";
     }
 
+    /**
+     * Loads the default avatar and is called once at startup.
+     */
     public static void load_default_avatar () {
         try {
-            default_avatar = Gtk.IconTheme.get_default ().load_icon ("avatar-default", 96, 0);
+            default_avatar = Gtk.IconTheme.get_default ().
+                load_icon ("avatar-default", 96, 0);
         } catch {
             warning ("Couldn't load default wallpaper");
         }
     }
 
-    public async void load_avatar () {
-        if (!is_normal ())
-            return;
+    /**
+     * Each LoginOption can load their own avatar-image here.
+     */
+    public virtual async void load_avatar () { }
+
+    /**
+     * The name of this login how it shall be presented to the user.
+     */
+    public abstract string display_name { get; }
+
+    /**
+     * Path to the background-image of this user or ""
+     * in case he has none.
+     */
+    public virtual string background {
+        get {
+            return "";
+        }
+    }
+
+    /**
+     * The login name for this LoginOption. This is also used to identify this object
+     * from one session to another. Note that you still have to return a unique
+     * string even if this LoginOption cannot directly provide a login name to
+     * identify this entry.
+     */
+    public abstract string name { get; }
+
+    /**
+     * True if and only if this user is currently logged in.
+     */
+    public virtual bool logged_in {
+        get {
+            return false;
+        }
+    }
+
+    /**
+     * If this LoginOption is for a guest-user. This is necessary
+     * as LightDM handles guests in a special way.
+     */
+    public virtual bool is_guest {
+        get {
+            return false;
+        }
+    }
+
+    /**
+     * True if this LoginOption provides the necessary information to determine
+     * the login name. This is for example used by the LoginBox to decide if
+     * a Entry for a login name is necessary or not.
+     */
+    public virtual bool provides_login_name {
+        get {
+            return true;
+        }
+    }
+
+    /**
+     * The name of the session that this user wants by default.
+     */
+    public virtual string session {
+        get {
+            return PantheonGreeter.login_gateway.default_session;
+        }
+    }
+}
+
+public class GuestLogin : LoginOption {
+
+    public GuestLogin(int index) {
+        base (index);
+    }
+
+    public override bool is_guest {
+        get {
+            return true;
+        }
+    }
+
+    public override string name {
+        get {
+            return "?pantheon greeter guest?";
+        }
+    }
+
+    public override string display_name {
+        get {
+            return _("Guest session");
+        }
+    }
+}
+
+public class ManualLogin : LoginOption {
+
+    public ManualLogin(int index) {
+        base (index);
+    }
+
+    public override string name {
+        get {
+            return "?pantheon greeter manual?";
+        }
+    }
+
+    public override string display_name {
+        get {
+            return _("Manual Login");
+        }
+    }
+
+    // We want that the LoginBox makes a Entry for the username.
+    public override bool provides_login_name {
+        get {
+            return false;
+        }
+    }
+}
+
+public class UserLogin : LoginOption {
+
+    public LightDM.User lightdm_user { get; private set; }
+
+    public UserLogin (int index, LightDM.User user) {
+        base (index);
+        this.lightdm_user = user;
+        avatar_ready = false;
+    }
+
+    public override string background {
+        get {
+            return lightdm_user.background;
+        }
+    }
+
+    public override string display_name {
+        get {
+            return lightdm_user.display_name;
+        }
+    }
+
+    public override string name {
+        get {
+            return lightdm_user.name;
+        }
+    }
+
+    public override bool logged_in {
+        get {
+            return lightdm_user.logged_in;
+        }
+    }
+
+    public override string session {
+        get {
+            return lightdm_user.session;
+        }
+    }
+
+    public override async void load_avatar () {
         try {
-            File file = File.new_for_path (user.image);
+            File file = File.new_for_path (lightdm_user.image);
             InputStream stream = yield file.read_async (GLib.Priority.DEFAULT);
             var buf = new Gdk.Pixbuf.from_stream_at_scale (stream, 96, 96, true);
-            lock(avatar) {
-                avatar = buf;
-            }
+            avatar = buf;
         } catch (Error e) {
-            debug ("Using default-avatar instead of " + user.image);
+            message ("Using default-avatar instead of " + lightdm_user.image);
         }
         Idle.add(() => {
+            avatar_ready = true;
             avatar_updated ();
             return false;
         });
-        avatar_ready = true;
-    }
-
-    public signal void avatar_updated ();
-
-    public Gdk.Pixbuf get_avatar () {
-        lock(avatar) {
-            if(avatar == null)
-                return default_avatar;
-            return avatar;
-        }
-    }
-
-    public string background {
-        get {
-            switch(usertype) {
-            case UserType.NORMAL: return get_lightdm_user ().background;
-            case UserType.MANUAL: return "";
-            case UserType.GUEST: return "";
-            }
-            return "";
-        }
-    }
-
-    public string display_name {
-        get {
-            switch(usertype) {
-            case UserType.NORMAL: return get_lightdm_user ().display_name;
-            case UserType.MANUAL: return _("Manual Login");
-            case UserType.GUEST: return _("Guest session");
-            }
-            return "";
-        }
-    }
-
-    public string name {
-        get {
-            switch(usertype) {
-            case UserType.NORMAL: return get_lightdm_user ().name;
-            case UserType.MANUAL: return "?pantheon-greeter-manual";
-            case UserType.GUEST: return "?pantheon-greeter-guest";
-            }
-            return "";
-        }
-    }
-    
-    public bool logged_in {
-        get {
-            switch(usertype) {
-            case UserType.NORMAL: return get_lightdm_user ().logged_in;
-            }
-            return false;
-        }
-    }
-
-
-    public LightDM.User? get_lightdm_user () {
-        return user;
-    }
-
-    public bool is_guest () {
-        return usertype == UserType.GUEST;
-    }
-
-    public bool is_manual () {
-        return usertype == UserType.MANUAL;
-    }
-
-    public bool is_normal () {
-        return usertype == UserType.NORMAL;
     }
 }

@@ -22,34 +22,22 @@
 using Gtk;
 
 public abstract class CredentialsArea : Grid {
-
-    public signal void request_login ();
-    public signal void reset_pw ();
-
-    private string _userpassword = "";
-
-    public bool hide_username_when_selected { get; protected set; default = false; }
-
-    public string userpassword {
-        get {
-            return _userpassword;
-        }
-    }
-
-    public LoginOption? user { get; private set; }
-
-    public virtual string get_username () {
-        return user.name;
-    }
-
-    public CredentialsArea (LoginOption? user) {
-        this.user = user;
-    }
-
+    public signal void replied (string answer);
     public abstract void pass_focus ();
+}
 
-    public Entry create_password_field (bool grab_focus) {
-        var password = new Entry ();
+public class PasswordArea : CredentialsArea {
+
+    Entry password;
+
+    public PasswordArea () {
+        create_password_field ();
+    }
+
+    void create_password_field () {
+        password = new Entry ();
+        password.margin_top = 46;
+
         password.caps_lock_warning = true;
         //replace the letters with dots
         password.set_visibility (false);
@@ -57,85 +45,42 @@ public abstract class CredentialsArea : Grid {
         password.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
         password.icon_press.connect ((pos, event) => {
             if (pos == Gtk.EntryIconPosition.SECONDARY) {
-                request_login ();
+                replied (password.text);
             }
         });
         password.key_release_event.connect ((e) => {
             if (e.keyval == Gdk.Key.Return || e.keyval == Gdk.Key.KP_Enter) {
-                request_login ();
+                replied (password.text);
                 return true;
             } else {
                 return false;
             }
         });
-        password.changed.connect (() => {
-            _userpassword = password.text;
-        });
 
-        reset_pw.connect (() => {
-            password.text = "";
-        });
-        return password;
-    }
-}
-
-public class UserLogin : CredentialsArea {
-
-    Entry password;
-
-    public UserLogin (LoginOption user) {
-        base (user);
-
-        password = create_password_field (true);
-        password.margin_top = 52;
         attach (password, 0, 0, 1, 1);
     }
 
     public override void pass_focus () {
         password.grab_focus ();
     }
-
 }
 
-public class ManualLogin : CredentialsArea {
-    private Entry username;
-
-    public ManualLogin (LoginOption user) {
-        base (user);
-        username = new Entry();
-        username.hexpand = true;
-        username.margin_top = 8;
-
-        attach (username, 0, 0, 1, 1);
-
-        var password = create_password_field (false);
-        password.margin_top = 16;
-        attach (password, 0, 1, 2, 1);
-        hide_username_when_selected = true;
-    }
-
-    public override void pass_focus () {
-        username.grab_focus ();
-    }
-
-    public override string get_username () {
-        return username.text;
-    }
-}
-
-public class GuestLogin : CredentialsArea {
+/**
+ * Just provides a "Login"-button that can be clicked.
+ */
+public class LoginButtonArea : CredentialsArea {
 
     Button login_btn;
 
-    public GuestLogin (LoginOption user) {
-        base (user);
-
+    public LoginButtonArea () {
         login_btn = new Button.with_label (_("Login"));
         login_btn.clicked.connect (() => {
-            request_login ();
+            // It doesn't matter what we anser, the confirmation
+            // is that we reply at all.
+            replied ("");
         });
 
-        login_btn.margin_top = 52;
+        login_btn.margin_top = 46;
 
         login_btn.get_style_context ().add_class ("suggested-action");
 
@@ -145,14 +90,4 @@ public class GuestLogin : CredentialsArea {
     public override void pass_focus () {
         login_btn.grab_focus ();
     }
-}
-
-public class DummyLogin : CredentialsArea {
-    public DummyLogin () {
-        base (null);
-    }
-
-    public override void pass_focus () {
-    }
-
 }

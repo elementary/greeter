@@ -44,25 +44,25 @@ public class UserList : Object {
 
     public UserList (LightDM.UserList ld_users) {
         int index = 0;
-        if (!PantheonGreeter.lightdm.hide_users_hint) {
+        if (!PantheonGreeter.login_gateway.hide_users) {
             foreach (LightDM.User this_user in ld_users.users) {
-                users.add (new LoginOption (index, this_user));
+                users.add (new UserLogin (index, this_user));
                 index++;
             }
         }
 
-        if (PantheonGreeter.lightdm.has_guest_account_hint) {
-            users.add (new LoginOption.Guest (index));
+        if (PantheonGreeter.login_gateway.has_guest_account) {
+            users.add (new GuestLogin (index));
             index++;
         }
-        if (PantheonGreeter.lightdm.show_manual_login_hint) {
-            users.add (new LoginOption.Manual (index));
+        if (PantheonGreeter.login_gateway.show_manual_login) {
+            users.add (new ManualLogin (index));
             index++;
         }
         size = index;
 
         foreach (LoginOption user in users) {
-            user.load_avatar ();
+            user.load_avatar.begin ();
         }
     }
 

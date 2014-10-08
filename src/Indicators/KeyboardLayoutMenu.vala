@@ -59,10 +59,11 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
     public void user_changed_cb (LoginOption user) {
 
         var layouts = new List <LightDM.Layout> ();
-        if (!user.is_guest () && !user.is_manual ()) {
-            foreach (var name in user.get_lightdm_user ().get_layouts ())
+        UserLogin user_login = user as UserLogin;
+        if (user_login != null) {
+            foreach (var name in user_login.lightdm_user.get_layouts ())
             {
-                var layout = PantheonGreeter.get_layout_by_name (name);
+                var layout = get_layout_by_name (name);
                 if (layout != null)
                     layouts.append (layout);
             }
@@ -79,6 +80,14 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
                 n.item.hide ();
             }
         }
+    }
+
+    static LightDM.Layout? get_layout_by_name (string name) {
+        foreach (var layout in LightDM.get_layouts ()) {
+            if (layout.name == name)
+                return layout;
+        }
+        return null;
     }
 
     private void set_layouts (List<LightDM.Layout> layouts)
@@ -141,7 +150,7 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
                 desc = layout.name;
             } else {
                 /* Lookup parent layout, get its short_description */
-                var parent_layout = PantheonGreeter.get_layout_by_name (parts[0]);
+                var parent_layout = get_layout_by_name (parts[0]);
                 if (parent_layout.short_description == null ||
                     parent_layout.short_description == "") {
                     desc = parts[0];

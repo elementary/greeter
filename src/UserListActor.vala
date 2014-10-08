@@ -33,9 +33,6 @@ public class UserListActor : Clutter.Actor {
             var box = new LoginBox (user);
             boxes.set (user, box);
             add_child (box);
-            box.wants_focus.connect (() => {
-                userlist.current_user = user;
-            });
         }
 
         userlist.current_user_changed.connect ((user) => {
@@ -86,11 +83,10 @@ public class UserListActor : Clutter.Actor {
             LoginBox box = boxes.get (user);
             box.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 300, y: y_vars[i]);
 
-            box.selected = (user == current_user); 
+            box.selected = (user == current_user);
             if (user == current_user) {
                 box.pass_focus ();
             }
         }
-
     }
 }
