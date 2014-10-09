@@ -205,7 +205,8 @@ public class LightDMGateway : LoginGateway, Object {
 
         if (awaiting_confirmation) {
             warning ("Got user-interaction. Starting session");
-            start_session ();
+            awaiting_start_session = true;
+            login_successful ();
         } else {
             // We don't log this as it contains passwords etc.
             lightdm.respond (text);
@@ -256,6 +257,7 @@ public class LightDMGateway : LoginGateway, Object {
             // that the user wants to start a session now.
             if (had_prompt) {
                 // If yes, start a session
+                awaiting_start_session = true;
                 login_successful ();
             } else {
                 message ("Auth complete, but we await user-interaction before we"
