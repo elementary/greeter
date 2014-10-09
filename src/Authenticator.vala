@@ -20,14 +20,40 @@
 ***/
 
 public enum PromptType {
+    /**
+     * Reply with the password.
+     */
     PASSWORD,
+    /**
+     * Reply with any text to confirm that you want to login.
+     */
     CONFIRM_LOGIN
 }
 
 public enum MessageType {
+    /**
+     * Input was wrong (wrong username or password).
+     */
     WRONG_INPUT
 }
 
+/**
+ * A LoginMask is for example a UI such as the LoginBox that communicates with
+ * the user.
+ * It forms with the LoginGateway a protocol for logging in users. The steps
+ * are roughly:
+ * 1. gateway.login_with_mask - Call this as soon as you know the username
+ *           The gateway will get the login_name via the property of your
+ *           mask.
+ * 2. mask.show_prompt or mask.show_message - one of both is called and the
+ *           mask has to display that to the user.
+ *           show_prompt also demands that you answer
+ *           via gateway.respond.
+ * 3. Repeat Step 2 until the gateway fires login_successful
+ * 4. Call gateway.start_session after login_successful is called
+ *
+ *
+ */
 public interface LoginMask : GLib.Object {
 
     public abstract string login_name { get; }
@@ -137,7 +163,7 @@ public class LightDMGateway : LoginGateway, Object {
     public LightDMGateway () {
         message ("Connecting to LightDM...");
         lightdm = new LightDM.Greeter ();
-        /*start*/
+
         try {
             lightdm.connect_sync ();
         } catch (Error e) {
@@ -159,8 +185,10 @@ public class LightDMGateway : LoginGateway, Object {
         message (@"Starting authentication...");
         if (current_login != null)
             current_login.login_aborted ();
+
         had_prompt = false;
         awaiting_confirmation = false;
+
         current_login = login;
         if (guest) {
             lightdm.authenticate_as_guest ();
@@ -259,6 +287,9 @@ public class DummyGateway : LoginGateway, Object {
     bool last_was_guest = true;
 
     public void login_with_mask (LoginMask mask, bool guest) {
+        if (last_login_mask != null)
+            mask.login_aborted ();
+
         last_was_guest = guest;
         last_login_mask = mask;
         Idle.add(() => {
