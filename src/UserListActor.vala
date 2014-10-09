@@ -31,6 +31,10 @@ public class UserListActor : Clutter.Actor {
         for (int i = 0; i < userlist.size; i++) {
             var user = userlist.get_user (i);
             var box = new LoginBox (user);
+            box.button_press_event.connect ((e) => {
+                userlist.current_user = user;
+                return false;
+            });
             boxes.set (user, box);
             add_child (box);
         }

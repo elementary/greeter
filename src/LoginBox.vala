@@ -65,6 +65,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         this.reactive = true;
         this.scale_gravity = Clutter.Gravity.CENTER;
 
+        create_label ();
         create_credentials ();
 
         credentials_actor.replied.connect ((answer) => {
@@ -72,7 +73,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             PantheonGreeter.login_gateway.respond (answer);
         });
 
-        create_label ();
 
         if (user.avatar_ready) {
             update_avatar ();
@@ -191,7 +191,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             // to select from
             if (LightDM.get_sessions ().length () > 1) {
                 create_settings ();
-                create_popup ();
             }
 
             var w = -1; var h = -1;
@@ -271,17 +270,21 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
 
         void create_settings () {
             settings = new ToggleButton ();
+            settings.margin_left = 5;
+            settings.margin_top = 8;
             settings.relief = ReliefStyle.NONE;
             settings.add (new Image.from_icon_name ("application-menu-symbolic", IconSize.MENU));
             settings.valign = Align.END;
             settings.set_size_request (30, 30);
             grid.attach (settings, 1, 0, 1, 1);
+            create_popup ();
         }
 
         void create_popup () {
             PopOver pop = null;
             /*session choose popover*/
             this.settings.toggled.connect (() => {
+
                 if (!settings.active) {
                     pop.destroy ();
                     return;
@@ -321,7 +324,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
 
                 int po_x;
                 int po_y;
-                settings.translate_coordinates (credentials, 10, 10, out po_x, out po_y);
+                settings.translate_coordinates (grid, 10, 10, out po_x, out po_y);
 
                 pop.width = 245;
                 pop.x = actor_x + po_x - pop.width + 40;
