@@ -23,7 +23,7 @@ using Gtk;
 
 public class LoginBox : GtkClutter.Actor, LoginMask {
 
-    SelectableAvatar old_avatar = null;
+    SelectableAvatar avatar = null;
 
     CredentialsAreaActor credentials_actor;
     ShadowedLabel label;
@@ -40,8 +40,8 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             int opacity = 0;
             if (value) {
                 opacity = 255;
-                if (old_avatar != null)
-                    old_avatar.select ();
+                if (avatar != null)
+                    avatar.select ();
 
                 // LoginOption is not providing a name, so the CredentialsArea
                 // will display a Gtk.Entry for that and we need to hide
@@ -50,10 +50,9 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                 if (!user.provides_login_name)
                     label.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 200, "opacity", 0);
                 credentials_actor.remove_credentials ();
-                PantheonGreeter.login_gateway.login_with_mask (this, user.is_guest);
             } else {
-                if (old_avatar != null)
-                    old_avatar.deselect ();
+                if (avatar != null)
+                    avatar.deselect ();
                 label.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 200, "opacity", 255);
             }
             credentials_actor.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 200, "opacity", opacity);
@@ -69,10 +68,8 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         create_credentials ();
 
         credentials_actor.replied.connect ((answer) => {
-            selected = false;
             PantheonGreeter.login_gateway.respond (answer);
         });
-
 
         if (user.avatar_ready) {
             update_avatar ();
@@ -100,19 +97,57 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         add_child (label);
     }
 
-    void update_avatar () {
-        if (old_avatar != null)
-            old_avatar.dismiss ();
+    /**
+     * Starts the login procedure. Necessary to call this before the user
+     * can enter something so that the LoginGateway can tell
+     * us what kind of prompt he wants.
+     */
+    void start_login () {
+        PantheonGreeter.login_gateway.login_with_mask (this, user.is_guest);
+    }
 
-        old_avatar = new SelectableAvatar (user);
-        add_child (old_avatar);
+    void update_avatar () {
+        if (avatar != null)
+            avatar.dismiss ();
+
+        avatar = new SelectableAvatar (user);
+        add_child (avatar);
 
         if (selected)
-            old_avatar.select ();
+            avatar.select ();
     }
 
     public void pass_focus () {
+        start_login ();
         credentials_actor.pass_focus ();
+    }
+
+    /* The relative positions to the previous one the shake function should
+     * use. The values get smaller because the shaking should fade out to
+     * look smooth.
+     */
+    float[] shake_positions = {50, -80, 60, -30};
+
+    /**
+     * Shakes the LoginBox and then sets selected back to true.
+     */
+    void shake (int num = 0) {
+        if (num >= shake_positions.length) {
+            start_login ();
+            return;
+        }
+        var transition = new Clutter.PropertyTransition ("x");
+        transition.animatable = this;
+        transition.set_duration (100);
+        transition.set_progress_mode (Clutter.AnimationMode.EASE_IN_OUT_CIRC);
+        transition.set_from_value (this.x);
+        transition.set_to_value (this.x + shake_positions[num]);
+        transition.remove_on_complete = true;
+        transition.auto_reverse = false;
+        transition.completed.connect (() => {
+            shake (num + 1);
+        });
+        this.add_transition("shake" + num.to_string (), transition);
     }
 
     /* LoginMask interface */
@@ -136,15 +171,10 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
     }
 
     public void show_message (MessageType type) {
-        var transition = new Clutter.PropertyTransition ("x");
-        transition.set_duration (10);
-        transition.set_progress_mode (Clutter.AnimationMode.LINEAR);
-        transition.animatable = this;
-        transition.set_from_value (0.0);
-        transition.set_to_value (500.0);
-        transition.start ();
-        this.selected = true;
+        credentials_actor.remove_credentials ();
+        shake ();
     }
+
 
     public void login_aborted () {
         credentials_actor.remove_credentials ();
@@ -246,7 +276,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             }
             grid.attach (credentials, 0, 1, 1, 1);
             credentials.replied.connect ((answer) => {
-                grid.sensitive = false;
                 this.replied (answer);
             });
             grid.sensitive = true;
