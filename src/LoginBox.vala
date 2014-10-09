@@ -191,10 +191,20 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
 
     /* End of LoginMask interface */
 
+    /**
+     * Actor that holds the entries for entering name, password, login-button
+     * etc. Will fade out when the LoginBox is deselected to keep the UI
+     * clean.
+     */
     class CredentialsAreaActor : GtkClutter.Actor {
         CredentialsArea credentials;
         public string current_session { get; set; }
 
+        /**
+         * Fired when the user has replied to a prompt (aka: password,
+         * login-button was pressed). Should get forwarded to the
+         * LoginGateway.
+         */
         public signal void replied (string text);
 
         public signal void entered_login_name (string name);
@@ -303,6 +313,9 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             // now the LoginMask that recieves the LightDM-responses).
             if (login_box.selected)
                 credentials.pass_focus ();
+                
+            // Prevents that the user changes his login name during
+            // the authentication process.
             if (login_name_entry != null)
                 login_name_entry.sensitive = true;
         }
