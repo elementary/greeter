@@ -84,6 +84,10 @@ public class PantheonGreeter : Gtk.Window {
         message ("Connecting signals...");
         get_screen ().monitors_changed.connect (monitors_changed);
 
+        login_gateway.login_successful.connect (() => {
+            fade_out_ui ();
+        });
+
         configure_event.connect (() => {
             reposition ();
             return false;
@@ -142,6 +146,40 @@ public class PantheonGreeter : Gtk.Window {
 
         message ("Finished building UI...");
         this.get_window ().focus (Gdk.CURRENT_TIME);
+    }
+
+    /**
+     * Fades out an actor and returns the used transition that we can 
+     * connect us to its completed-signal.
+     */
+    Clutter.PropertyTransition fade_out_actor (Clutter.Actor actor) {
+        var transition = new Clutter.PropertyTransition ("opacity");
+        transition.animatable = actor;
+        transition.set_duration (300);
+        transition.set_progress_mode (Clutter.AnimationMode.EASE_OUT_CIRC);
+        transition.set_from_value (actor.opacity);
+        transition.set_to_value (0);
+        actor.add_transition("fadeout", transition);
+        return transition;
+    }
+
+    /**
+     * Fades out the ui and then starts the session.
+     * Only call this if the LoginGateway has signaled it is awaiting 
+     * start_session by firing login_successful!.
+     */
+    void fade_out_ui () {
+        // The animations are always the same. If they would have different
+        // lengths we need to use a TransitionGroup to determine
+        // the correct time everything is faded out.
+        var anim = fade_out_actor (time);
+        fade_out_actor (userlist_actor);
+        if (!TEST_MODE)
+            fade_out_actor (indicators);
+
+        anim.completed.connect (() => {
+            login_gateway.start_session ();
+        });
     }
 
     void monitors_changed () {

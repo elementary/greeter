@@ -62,7 +62,19 @@ public interface LoginGateway : GLib.Object {
 
     public abstract void respond (string message);
 
+    /**
+     * Called when a user successfully logins. It gives the Greeter time
+     * to run fade out animations etc.
+     * The Gateway shall not accept any request from now on beside
+     * the start_session call.
+     */
     public signal void login_successful ();
+
+    /**
+     * Only to be called after the login_successful was fired.
+     * Will start the session and exits this process.
+     */
+    public abstract void start_session ();
 
 }
 
@@ -88,9 +100,12 @@ public class LightDMGateway : LoginGateway, Object {
 
     /**
      * True if and only if we first await a extra-response before
-     * we actually login.
+     * we actually login. In case another login_with_mask call happens
+     * we just set this to false again.
      */
     bool awaiting_confirmation = false;
+
+    bool awaiting_start_session = false;
 
     LightDM.Greeter lightdm;
 
@@ -136,6 +151,11 @@ public class LightDMGateway : LoginGateway, Object {
     }
 
     public void login_with_mask (LoginMask login, bool guest) {
+        if (awaiting_start_session) {
+            warning ("Got login_with_mask while awaiting start_session!");
+            return;
+        }
+
         message (@"Starting authentication...");
         if (current_login != null)
             current_login.login_aborted ();
@@ -150,8 +170,13 @@ public class LightDMGateway : LoginGateway, Object {
     }
 
     public void respond (string text) {
+        if (awaiting_start_session) {
+            warning ("Got respond while awaiting start_session!");
+            return;
+        }
+
         if (awaiting_confirmation) {
-            message ("Got user-interaction. Starting session");
+            warning ("Got user-interaction. Starting session");
             start_session ();
         } else {
             // We don't log this as it contains passwords etc.
@@ -182,14 +207,17 @@ public class LightDMGateway : LoginGateway, Object {
         return MessageType.WRONG_INPUT;
     }
 
-    protected virtual void start_session () {
+    public void start_session () {
+        if (!awaiting_start_session) {
+            warning ("Got start_session without awaiting it.");
+        }
         message (@"Starting session $(current_login.login_session)");
         PantheonGreeter.instance.settings.set_string ("last-user",
                 current_login.login_name);
         try {
             lightdm.start_session_sync (current_login.login_session);
         } catch (Error e) {
-            warning (e.message);
+            error (e.message);
         }
         Posix.exit (Posix.EXIT_SUCCESS);
     }
@@ -200,11 +228,12 @@ public class LightDMGateway : LoginGateway, Object {
             // that the user wants to start a session now.
             if (had_prompt) {
                 // If yes, start a session
-                start_session ();
+                login_successful ();
             } else {
                 message ("Auth complete, but we await user-interaction before we"
                         + "start a session");
                 // If no, send a prompt and await the confirmation via respond.
+                // This variables is checked in respond as a special case.
                 awaiting_confirmation = true;
                 current_login.show_prompt (PromptType.CONFIRM_LOGIN);
             }
@@ -214,6 +243,10 @@ public class LightDMGateway : LoginGateway, Object {
     }
 }
 
+
+/**
+ * For testing purposes a Gateway which only allows the guest to login.
+ */
 public class DummyGateway : LoginGateway, Object {
 
     public bool hide_users { get { return false; } }
@@ -223,7 +256,10 @@ public class DummyGateway : LoginGateway, Object {
 
     LoginMask last_login_mask;
 
+    bool last_was_guest = true;
+
     public void login_with_mask (LoginMask mask, bool guest) {
+        last_was_guest = guest;
         last_login_mask = mask;
         Idle.add(() => {
             mask.show_prompt (guest ? PromptType.CONFIRM_LOGIN : PromptType.PASSWORD);
@@ -232,10 +268,22 @@ public class DummyGateway : LoginGateway, Object {
     }
 
     public void respond (string message) {
-        Idle.add(() => {
-            last_login_mask.show_message (MessageType.WRONG_INPUT);
-            return false;
-        });
+        if (last_was_guest) {
+            Idle.add(() => {
+                login_successful ();
+                return false;
+            });
+        } else {
+            Idle.add(() => {
+                last_login_mask.show_message (MessageType.WRONG_INPUT);
+                return false;
+            });
+        }
+    }
+
+    public void start_session () {
+        message ("Started session");
+        Posix.exit (Posix.EXIT_SUCCESS);
     }
 
 }

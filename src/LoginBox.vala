@@ -38,6 +38,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         set {
             _selected = value;
             int opacity = 0;
+             credentials_actor.remove_credentials ();
             if (value) {
                 opacity = 255;
                 if (avatar != null)
@@ -49,7 +50,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                 // as the mentioned entry.
                 if (!user.provides_login_name)
                     label.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 200, "opacity", 0);
-                credentials_actor.remove_credentials ();
             } else {
                 if (avatar != null)
                     avatar.deselect ();
@@ -67,10 +67,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         create_label ();
         create_credentials ();
 
-        credentials_actor.replied.connect ((answer) => {
-            PantheonGreeter.login_gateway.respond (answer);
-        });
-
         if (user.avatar_ready) {
             update_avatar ();
         } else {
@@ -82,9 +78,18 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
     }
 
     void create_credentials () {
-        credentials_actor = new CredentialsAreaActor(user);
+        credentials_actor = new CredentialsAreaActor(this, user);
         credentials_actor.x = this.x + 104;
         add_child (credentials_actor);
+
+        credentials_actor.replied.connect ((answer) => {
+            credentials_actor.remove_credentials ();
+            PantheonGreeter.login_gateway.respond (answer);
+        });
+
+        credentials_actor.entered_login_name.connect ((name) => {
+            start_login ();
+        });
     }
 
     void create_label () {
@@ -118,7 +123,11 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
     }
 
     public void pass_focus () {
-        start_login ();
+        // We can't start the login when the login option isn't
+        // providing a name without user interaction.
+        if (user.provides_login_name) {
+            start_login ();
+        }
         credentials_actor.pass_focus ();
     }
 
@@ -188,11 +197,15 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
 
         public signal void replied (string text);
 
+        public signal void entered_login_name (string name);
+
         Entry? login_name_entry = null;
         ToggleButton settings;
 
         // Grid that contains all elements of the ui
         Grid grid;
+
+        LoginBox login_box;
 
         public string login_name {
             get {
@@ -200,7 +213,8 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             }
         }
 
-        public CredentialsAreaActor (LoginOption login_option) {
+        public CredentialsAreaActor (LoginBox login_box, LoginOption login_option) {
+            this.login_box = login_box;
             current_session = login_option.session;
             width = 200;
             height = 188;
@@ -253,10 +267,11 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         }
 
         public void pass_focus () {
+            if (credentials != null) {
+                credentials.pass_focus ();
+            }
             if (login_name_entry != null) {
                 login_name_entry.grab_focus ();
-            } else if (credentials != null) {
-                credentials.pass_focus ();
             }
         }
 
@@ -278,15 +293,45 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             credentials.replied.connect ((answer) => {
                 this.replied (answer);
             });
-            grid.sensitive = true;
             grid.show_all ();
-            credentials.pass_focus ();
+
+            // We have to check if we are selected as we don't want to steal
+            // the focus from other logins. This would for example happen
+            // with the manual login as it can't directly start the login
+            // and therefore the previous login is still communicating with
+            // the LoginGateway until the manual login got a username (and is
+            // now the LoginMask that recieves the LightDM-responses).
+            if (login_box.selected)
+                credentials.pass_focus ();
+            if (login_name_entry != null)
+                login_name_entry.sensitive = true;
         }
 
         void create_login_name_entry () {
+            replied.connect ((answer) => {
+                login_name_entry.sensitive = false;
+            });
             login_name_entry = new Entry();
             login_name_entry.hexpand = true;
             login_name_entry.margin_top = 8;
+            login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
+            login_name_entry.icon_press.connect ((pos, event) => {
+                if (pos == Gtk.EntryIconPosition.SECONDARY) {
+                    entered_login_name (login_name_entry.text);
+                }
+            });
+            login_name_entry.key_release_event.connect ((e) => {
+                if (e.keyval == Gdk.Key.Return || e.keyval == Gdk.Key.KP_Enter) {
+                    entered_login_name (login_name_entry.text);
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            login_name_entry.focus_in_event.connect ((e) => {
+                remove_credentials ();
+                return false;
+            });
             grid.attach (login_name_entry, 0, 0, 1, 1);
         }
 
