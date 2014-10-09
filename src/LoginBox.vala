@@ -86,7 +86,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
 
     void create_credentials () {
         credentials_actor = new CredentialsAreaActor(user);
-        credentials_actor.x = this.x + 100;
+        credentials_actor.x = this.x + 104;
         add_child (credentials_actor);
     }
 

@@ -36,7 +36,7 @@ public class PasswordArea : CredentialsArea {
 
     void create_password_field () {
         password = new Entry ();
-        password.margin_top = 46;
+        password.margin_top = 32;
 
         password.caps_lock_warning = true;
         //replace the letters with dots
@@ -80,7 +80,7 @@ public class LoginButtonArea : CredentialsArea {
             replied ("");
         });
 
-        login_btn.margin_top = 46;
+        login_btn.margin_top = 32;
 
         login_btn.get_style_context ().add_class ("suggested-action");
 
