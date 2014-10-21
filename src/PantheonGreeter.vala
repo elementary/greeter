@@ -115,6 +115,9 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.add_child (wallpaper);
         greeterbox.add_child (time);
         greeterbox.add_child (userlist_actor);
+        if (!TEST_MODE) {
+            greeterbox.add_child (indicators);
+        }
 
         greeterbox.opacity = 0;
 
@@ -149,7 +152,7 @@ public class PantheonGreeter : Gtk.Window {
     }
 
     /**
-     * Fades out an actor and returns the used transition that we can 
+     * Fades out an actor and returns the used transition that we can
      * connect us to its completed-signal.
      */
     Clutter.PropertyTransition fade_out_actor (Clutter.Actor actor) {
@@ -165,7 +168,7 @@ public class PantheonGreeter : Gtk.Window {
 
     /**
      * Fades out the ui and then starts the session.
-     * Only call this if the LoginGateway has signaled it is awaiting 
+     * Only call this if the LoginGateway has signaled it is awaiting
      * start_session by firing login_successful!.
      */
     void fade_out_ui () {
