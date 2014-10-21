@@ -226,7 +226,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         public CredentialsAreaActor (LoginBox login_box, LoginOption login_option) {
             this.login_box = login_box;
             current_session = login_option.session;
-            width = 200;
+            width = 260;
             height = 188;
             credentials = null;
 
@@ -245,6 +245,9 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             // to select from
             if (LightDM.get_sessions ().length () > 1) {
                 create_settings ();
+            } else {
+                // Dummy for the settings-button or the grid-layout goes apeshit
+                create_settings_dummy ();
             }
 
             var w = -1; var h = -1;
@@ -313,7 +316,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             // now the LoginMask that recieves the LightDM-responses).
             if (login_box.selected)
                 credentials.pass_focus ();
-                
+
             // Prevents that the user changes his login name during
             // the authentication process.
             if (login_name_entry != null)
@@ -349,7 +352,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         }
 
         void create_entry_dummy () {
-            var dummy = new Grid();
+            var dummy = new Grid ();
             dummy.hexpand = true;
             dummy.margin_top = 8;
             grid.attach (dummy, 0, 0, 1, 1);
@@ -358,13 +361,25 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         void create_settings () {
             settings = new ToggleButton ();
             settings.margin_left = 5;
-            settings.margin_top = 8;
+            settings.margin_top = 6;
             settings.relief = ReliefStyle.NONE;
             settings.add (new Image.from_icon_name ("application-menu-symbolic", IconSize.MENU));
-            settings.valign = Align.END;
+            settings.valign = Align.START;
             settings.set_size_request (30, 30);
             grid.attach (settings, 1, 0, 1, 1);
             create_popup ();
+        }
+
+        /**
+         * Creates a invisible settings-dummy that has
+         * the dimension of the settings-button but is invisible.
+         * Prevents that the layout is different when there are is
+         * no settings-menu.
+         */
+        void create_settings_dummy () {
+            var dummy_grid = new Grid ();
+            dummy_grid.set_size_request (30, 30);
+            grid.attach (dummy_grid, 1, 0, 1, 1);
         }
 
         void create_popup () {
