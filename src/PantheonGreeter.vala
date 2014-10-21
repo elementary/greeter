@@ -19,11 +19,11 @@
     END LICENSE
 ***/
 public class PantheonGreeter : Gtk.Window {
-    public static LightDM.Greeter lightdm { get; private set; }
+
+    public static LoginGateway login_gateway { get; private set; }
 
     GtkClutter.Embed clutter;
 
-    Clutter.Rectangle fadein;
     Clutter.Actor greeterbox;
     UserListActor userlist_actor;
     UserList userlist;
@@ -32,9 +32,7 @@ public class PantheonGreeter : Gtk.Window {
     Indicators indicators;
     Wallpaper wallpaper;
 
-    Settings settings;
-
-
+    public Settings settings { get; private set; }
 
     public static PantheonGreeter instance { get; private set; }
 
@@ -43,40 +41,52 @@ public class PantheonGreeter : Gtk.Window {
     //from this width on the clock wont fit anymore
     const int NO_CLOCK_WIDTH = 920;
 
+    public static bool TEST_MODE { get; private set; }
+
     public PantheonGreeter () {
         //singleton
         assert (instance == null);
         instance = this;
 
-        settings = new Settings ("org.pantheon.desktop.greeter");
-        lightdm = new LightDM.Greeter ();
-        /*start*/
-        try {
-            lightdm.connect_sync ();
-        } catch (Error e) {
-            warning ("Couldn't connect: %s", e.message);
-            Posix.exit (Posix.EXIT_FAILURE);
+        TEST_MODE = Environment.get_variable ("LIGHTDM_TO_SERVER_FD") == null;
+
+        if (TEST_MODE) {
+            message ("Using dummy LightDM because LIGHTDM_TO_SERVER_FD was not found.");
+            login_gateway = new DummyGateway ();
+        } else {
+            login_gateway = new LightDMGateway ();
         }
 
+        settings = new Settings ("org.pantheon.desktop.greeter");
+
         delete_event.connect (() => {
+            message ("Window got closed. Exiting...");
             Posix.exit (Posix.EXIT_SUCCESS);
             return false;
         });
 
+        message ("Loading default-avatar...");
         LoginOption.load_default_avatar ();
 
+        message ("Building UI...");
         clutter = new GtkClutter.Embed ();
-        fadein = new Clutter.Rectangle.with_color ({0, 0, 0, 255});
         greeterbox = new Clutter.Actor ();
-        userlist = new UserList (LightDM.UserList.get_instance ());
 
+        userlist = new UserList (LightDM.UserList.get_instance ());
         userlist_actor = new UserListActor (userlist);
+
         time = new TimeLabel ();
-        indicators = new Indicators (settings);
+        if (!TEST_MODE) {
+            indicators = new Indicators (settings);
+        }
         wallpaper = new Wallpaper ();
 
-
+        message ("Connecting signals...");
         get_screen ().monitors_changed.connect (monitors_changed);
+
+        login_gateway.login_successful.connect (() => {
+            fade_out_ui ();
+        });
 
         configure_event.connect (() => {
             reposition ();
@@ -87,12 +97,10 @@ public class PantheonGreeter : Gtk.Window {
 
         userlist.current_user_changed.connect ((user) => {
             wallpaper.set_wallpaper (user.background);
-            indicators.keyboard_menu.user_changed_cb (user);
+            if (!TEST_MODE) {
+                indicators.keyboard_menu.user_changed_cb (user);
+            }
         });
-
-        lightdm.show_message.connect (wrong_pw);
-        lightdm.show_prompt.connect (send_pw);
-        lightdm.authentication_complete.connect (authenticated);
 
         /*activate the numlock if needed*/
         var activate_numlock = settings.get_boolean ("activate-numlock");
@@ -107,7 +115,9 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.add_child (wallpaper);
         greeterbox.add_child (time);
         greeterbox.add_child (userlist_actor);
-        greeterbox.add_child (indicators);
+        if (!TEST_MODE) {
+            greeterbox.add_child (indicators);
+        }
 
         greeterbox.opacity = 0;
 
@@ -115,7 +125,9 @@ public class PantheonGreeter : Gtk.Window {
 
         greeterbox.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
         greeterbox.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
-        indicators.add_constraint (new Clutter.BindConstraint (greeterbox, Clutter.BindCoordinate.WIDTH, 0));
+
+        if (!TEST_MODE)
+            indicators.add_constraint (new Clutter.BindConstraint (greeterbox, Clutter.BindCoordinate.WIDTH, 0));
 
         clutter.key_press_event.connect (keyboard_navigation);
 
@@ -124,6 +136,7 @@ public class PantheonGreeter : Gtk.Window {
 
         greeterbox.animate (Clutter.AnimationMode.EASE_OUT_QUART, 250, opacity: 255);
 
+        message ("Selecting last used user...");
         var last_user = settings.get_string ("last-user");
         for (var i = 0; i < userlist.size; i++) {
             if (userlist.get_user (i).name == last_user) {
@@ -131,18 +144,45 @@ public class PantheonGreeter : Gtk.Window {
                 break;
             }
         }
-        if(userlist.current_user == null)
+        if (userlist.current_user == null)
             userlist.current_user = userlist.get_user (0);
 
+        message ("Finished building UI...");
         this.get_window ().focus (Gdk.CURRENT_TIME);
     }
 
-    public static LightDM.Layout? get_layout_by_name (string name) {
-        foreach (var layout in LightDM.get_layouts ()) {
-            if (layout.name == name)
-                return layout;
-        }
-        return null;
+    /**
+     * Fades out an actor and returns the used transition that we can
+     * connect us to its completed-signal.
+     */
+    Clutter.PropertyTransition fade_out_actor (Clutter.Actor actor) {
+        var transition = new Clutter.PropertyTransition ("opacity");
+        transition.animatable = actor;
+        transition.set_duration (300);
+        transition.set_progress_mode (Clutter.AnimationMode.EASE_OUT_CIRC);
+        transition.set_from_value (actor.opacity);
+        transition.set_to_value (0);
+        actor.add_transition ("fadeout", transition);
+        return transition;
+    }
+
+    /**
+     * Fades out the ui and then starts the session.
+     * Only call this if the LoginGateway has signaled it is awaiting
+     * start_session by firing login_successful!.
+     */
+    void fade_out_ui () {
+        // The animations are always the same. If they would have different
+        // lengths we need to use a TransitionGroup to determine
+        // the correct time everything is faded out.
+        var anim = fade_out_actor (time);
+        fade_out_actor (userlist_actor);
+        if (!TEST_MODE)
+            fade_out_actor (indicators);
+
+        anim.completed.connect (() => {
+            login_gateway.start_session ();
+        });
     }
 
     void monitors_changed () {
@@ -164,7 +204,7 @@ public class PantheonGreeter : Gtk.Window {
         } else {
             userlist_actor.x = 120 * ((float) (width) / NORMAL_WIDTH);
         }
-        userlist_actor.y = Math.floorf (height / 2.0f - userlist_actor.height / 2.0f);
+        userlist_actor.y = Math.floorf (height / 2.0f);
 
         time.x = width - time.width - 100;
         time.y = height / 2 - time.height / 2;
@@ -195,42 +235,10 @@ public class PantheonGreeter : Gtk.Window {
 
         return true;
     }
-
-    public void authenticate () {
-        if (userlist.current_user.is_guest ())
-            lightdm.authenticate_as_guest ();
-        else
-            lightdm.authenticate (userlist.current_user.name);
-    }
-
-    void wrong_pw (string text, LightDM.MessageType type) {
-        userlist_actor.get_current_loginbox ().wrong_pw ();
-    }
-
-    void send_pw (string text, LightDM.PromptType type) {
-        lightdm.respond (userlist_actor.get_current_loginbox ().get_password ());
-    }
-
-    void authenticated () {
-        settings.set_string ("last-user", userlist.current_user.name);
-
-        if (lightdm.is_authenticated) {
-            fadein.show ();
-            fadein.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 200, opacity:255);
-
-            try {
-                lightdm.start_session_sync (userlist_actor.get_current_loginbox ().current_session);
-            } catch (Error e) {
-                warning (e.message);
-            }
-            Posix.exit (Posix.EXIT_SUCCESS);
-        } else {
-            userlist_actor.get_current_loginbox ().wrong_pw ();
-        }
-    }
 }
 
 public static int main (string [] args) {
+    message ("Starting pantheon-greeter...");
     /* Protect memory from being paged to disk, as we deal with passwords */
     PosixMLock.mlockall (PosixMLock.MCL_CURRENT | PosixMLock.MCL_FUTURE);
 
@@ -238,6 +246,8 @@ public static int main (string [] args) {
     if (init != Clutter.InitError.SUCCESS)
         error ("Clutter could not be intiailized");
 
+
+    message ("Applying settings...");
     /*some settings*/
     Intl.setlocale (LocaleCategory.ALL, "");
     Intl.bind_textdomain_codeset ("pantheon-greeter", "UTF-8");
@@ -256,8 +266,8 @@ public static int main (string [] args) {
     settings.gtk_cursor_blink = true;
 
     new PantheonGreeter ();
-
+    message ("Entering main-loop...");
     Gtk.main ();
-
+    message ("Gtk.main exited - shutting down.");
     return Posix.EXIT_SUCCESS;
 }

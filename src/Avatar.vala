@@ -89,7 +89,7 @@ public class Avatar : GtkClutter.Actor {
         box.valign = Gtk.Align.START;
         box.visible_window = false;
 
-        image = user.get_avatar ();
+        image = user.avatar;
 
         box.draw.connect ((ctx) => {
             ctx.set_operator (Cairo.Operator.CLEAR);

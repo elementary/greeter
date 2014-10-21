@@ -42,8 +42,7 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
 
         Gtk.RadioMenuItem? default_item = null;
         Gtk.RadioMenuItem? last_item = null;
-        foreach (var layout in layouts)
-        {
+        foreach (var layout in layouts) {
             var item = new Gtk.RadioMenuItem.with_label (last_item == null ? null : last_item.get_group (), layout.description);
             last_item = item;
 
@@ -66,10 +65,10 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
     public void user_changed_cb (LoginOption user) {
 
         var layouts = new List <LightDM.Layout> ();
-        if (!user.is_guest () && !user.is_manual ()) {
-            foreach (var name in user.get_lightdm_user ().get_layouts ())
-            {
-                var layout = PantheonGreeter.get_layout_by_name (name);
+        UserLogin user_login = user as UserLogin;
+        if (user_login != null) {
+            foreach (var name in user_login.lightdm_user.get_layouts ()) {
+                var layout = get_layout_by_name (name);
                 if (layout != null)
                     layouts.append (layout);
             }
@@ -86,6 +85,14 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
                 n.item.hide ();
             }
         }
+    }
+
+    static LightDM.Layout? get_layout_by_name (string name) {
+        foreach (var layout in LightDM.get_layouts ()) {
+            if (layout.name == name)
+                return layout;
+        }
+        return null;
     }
 
     private void set_layouts (List<LightDM.Layout> layouts)
@@ -114,8 +121,7 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
         var default_item = get_node_for_layout (default_layout).item;
 
         /* Activate first item */
-        if (default_item != null)
-        {
+        if (default_item != null) {
             if (default_item.active) /* Started active, have to manually trigger callback */
                 layout_toggled_cb (default_item);
             else
@@ -148,7 +154,7 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
                 desc = layout.name;
             } else {
                 /* Lookup parent layout, get its short_description */
-                var parent_layout = PantheonGreeter.get_layout_by_name (parts[0]);
+                var parent_layout = get_layout_by_name (parts[0]);
                 if (parent_layout.short_description == null ||
                     parent_layout.short_description == "") {
                     desc = parts[0];
@@ -170,8 +176,7 @@ public class KeyboardLayoutMenu : Gtk.MenuItem {
             return 1;
         else if (b == null)
             return -1;
-        else
-        {
+        else {
             /* Use a dumb, ascii comparison for now.  If it turns out that some
                descriptions can be in unicode, we'll have to use libicu's collation
                algorithms. */

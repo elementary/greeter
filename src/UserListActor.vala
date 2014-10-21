@@ -31,11 +31,12 @@ public class UserListActor : Clutter.Actor {
         for (int i = 0; i < userlist.size; i++) {
             var user = userlist.get_user (i);
             var box = new LoginBox (user);
+            box.button_press_event.connect ((e) => {
+                userlist.current_user = user;
+                return false;
+            });
             boxes.set (user, box);
             add_child (box);
-            box.wants_focus.connect (() => {
-                userlist.current_user = user;
-            });
         }
 
         userlist.current_user_changed.connect ((user) => {
@@ -86,11 +87,10 @@ public class UserListActor : Clutter.Actor {
             LoginBox box = boxes.get (user);
             box.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 300, y: y_vars[i]);
 
-            box.selected = (user == current_user); 
+            box.selected = (user == current_user);
             if (user == current_user) {
                 box.pass_focus ();
             }
         }
-
     }
 }
