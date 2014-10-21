@@ -135,7 +135,7 @@ public abstract class LoginOption : Object {
 
 public class GuestLogin : LoginOption {
 
-    public GuestLogin(int index) {
+    public GuestLogin (int index) {
         base (index);
     }
 
@@ -160,7 +160,7 @@ public class GuestLogin : LoginOption {
 
 public class ManualLogin : LoginOption {
 
-    public ManualLogin(int index) {
+    public ManualLogin (int index) {
         base (index);
     }
 
@@ -233,7 +233,7 @@ public class UserLogin : LoginOption {
         } catch (Error e) {
             message ("Using default-avatar instead of " + lightdm_user.image);
         }
-        Idle.add(() => {
+        Idle.add (() => {
             avatar_ready = true;
             avatar_updated ();
             return false;

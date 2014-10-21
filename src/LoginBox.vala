@@ -38,7 +38,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         set {
             _selected = value;
             int opacity = 0;
-             credentials_actor.remove_credentials ();
+            credentials_actor.remove_credentials ();
             if (value) {
                 opacity = 255;
                 if (avatar != null)
@@ -78,7 +78,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
     }
 
     void create_credentials () {
-        credentials_actor = new CredentialsAreaActor(this, user);
+        credentials_actor = new CredentialsAreaActor (this, user);
         credentials_actor.x = this.x + 104;
         add_child (credentials_actor);
 
@@ -156,7 +156,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         transition.completed.connect (() => {
             shake (num + 1);
         });
-        this.add_transition("shake" + num.to_string (), transition);
+        this.add_transition ("shake" + num.to_string (), transition);
     }
 
     /* LoginMask interface */
@@ -327,7 +327,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             replied.connect ((answer) => {
                 login_name_entry.sensitive = false;
             });
-            login_name_entry = new Entry();
+            login_name_entry = new Entry ();
             login_name_entry.hexpand = true;
             login_name_entry.margin_top = 8;
             login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");

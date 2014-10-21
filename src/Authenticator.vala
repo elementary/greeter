@@ -136,26 +136,22 @@ public class LightDMGateway : LoginGateway, Object {
     LightDM.Greeter lightdm;
 
     public bool hide_users {
-        get
-        {
+        get {
             return lightdm.hide_users_hint;
         }
     }
     public bool has_guest_account {
-        get
-        {
+        get {
             return lightdm.has_guest_account_hint;
         }
     }
     public bool show_manual_login {
-        get
-        {
+        get {
             return lightdm.show_manual_login_hint;
         }
     }
     public string default_session {
-        get
-        {
+        get {
             return lightdm.default_session_hint;
         }
     }
@@ -294,7 +290,7 @@ public class DummyGateway : LoginGateway, Object {
 
         last_was_guest = guest;
         last_login_mask = mask;
-        Idle.add(() => {
+        Idle.add (() => {
             mask.show_prompt (guest ? PromptType.CONFIRM_LOGIN : PromptType.PASSWORD);
             return false;
         });
@@ -302,12 +298,12 @@ public class DummyGateway : LoginGateway, Object {
 
     public void respond (string message) {
         if (last_was_guest) {
-            Idle.add(() => {
+            Idle.add (() => {
                 login_successful ();
                 return false;
             });
         } else {
-            Idle.add(() => {
+            Idle.add (() => {
                 last_login_mask.show_message (MessageType.WRONG_INPUT);
                 return false;
             });

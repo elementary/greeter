@@ -162,7 +162,7 @@ public class PantheonGreeter : Gtk.Window {
         transition.set_progress_mode (Clutter.AnimationMode.EASE_OUT_CIRC);
         transition.set_from_value (actor.opacity);
         transition.set_to_value (0);
-        actor.add_transition("fadeout", transition);
+        actor.add_transition ("fadeout", transition);
         return transition;
     }
 
