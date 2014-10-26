@@ -38,6 +38,8 @@ public class PasswordArea : CredentialsArea {
         password = new Entry ();
         password.margin_top = 32;
 
+        password.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, 
+                "dialog-password-symbolic");
         password.caps_lock_warning = true;
         //replace the letters with dots
         password.set_visibility (false);

@@ -328,6 +328,8 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                 login_name_entry.sensitive = false;
             });
             login_name_entry = new Entry ();
+            login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY,
+                    "avatar-default-symbolic");
             login_name_entry.hexpand = true;
             login_name_entry.margin_top = 8;
             login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
