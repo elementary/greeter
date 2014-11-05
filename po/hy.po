@@ -8,26 +8,26 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-29 09:42-0500\n"
-"PO-Revision-Date: 2013-06-12 04:40+0000\n"
-"Last-Translator: Eduard Gotwig <eduardgotwig@gmail.com>\n"
+"PO-Revision-Date: 2014-11-04 07:59+0000\n"
+"Last-Translator: Vahan Harutyunyan <Unknown>\n"
 "Language-Team: Armenian <hy@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-30 06:49+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-11-05 06:47+0000\n"
+"X-Generator: Launchpad (build 17223)\n"
 
 #: ../src/ShadowedLabel.vala:100
 msgid "%A, %B %e%v"
-msgstr ""
+msgstr "%A, %B %e%v"
 
 #: ../src/ShadowedLabel.vala:102
 msgid "%l:%M"
-msgstr ""
+msgstr "%l:%M"
 
 #: ../src/ShadowedLabel.vala:105
 msgid " %p"
-msgstr ""
+msgstr " %p"
 
 #: ../src/PantheonUser.vala:117
 msgid "Manual Login"
@@ -39,7 +39,7 @@ msgstr "հյուր նիստը"
 
 #: ../src/Indicators/AccessibilityMenu.vala:22
 msgid "Onscreen Keyboard"
-msgstr ""
+msgstr "Էկրանի ստեղնաշար"
 
 #: ../src/Indicators/AccessibilityMenu.vala:29
 msgid "HighContrast"
@@ -47,19 +47,19 @@ msgstr ""
 
 #: ../src/Indicators/PowerMenu.vala:16
 msgid "Shutdown"
-msgstr ""
+msgstr "Անջատել"
 
 #: ../src/Indicators/PowerMenu.vala:17
 msgid "Suspend"
-msgstr ""
+msgstr "Անցնել սպասման ռեժիմի"
 
 #: ../src/Indicators/PowerMenu.vala:18
 msgid "Restart"
-msgstr ""
+msgstr "Վերագործարկել"
 
 #: ../src/Indicators/PowerMenu.vala:19
 msgid "Hibernate"
-msgstr ""
+msgstr "Անցնել ննջման ռեժիմի"
 
 #: ../src/Indicators/KeyboardLayoutMenu.vala:55
 msgid "No other keyboard layouts available"
