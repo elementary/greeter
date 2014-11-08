@@ -25,11 +25,11 @@
  */
 public class Wallpaper : Clutter.Group {
     /**
-     * 
+     *
      */
     List<GtkClutter.Texture> wallpapers = new List<GtkClutter.Texture> ();
     List<Cancellable> loading_wallpapers = new List<Cancellable> ();
-    
+
     /**
      * Contains old Textures that were used for wallpapers. They are recycled
      * in the @make_texture method.
@@ -118,6 +118,9 @@ public class Wallpaper : Clutter.Group {
             }
             wallpapers.append (new_wallpaper);
 
+        } catch (IOError.CANCELLED e) {
+            message (@"Cancelled to load '$path'");
+            // do nothing, we cancelled on purpose
         } catch (Error e) {
             if (get_default() != path) {
                 set_wallpaper (get_default ());
