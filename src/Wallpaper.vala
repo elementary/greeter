@@ -86,7 +86,7 @@ public class Wallpaper : Clutter.Group {
                 var cancelable = new Cancellable ();
                 loading_wallpapers.append (cancelable);
                 InputStream stream = yield file.read_async (GLib.Priority.DEFAULT);
-                buf = yield Gdk.Pixbuf.new_from_stream_async (stream, cancelable);
+                buf = yield new Gdk.Pixbuf.from_stream_async (stream, cancelable);
                 loading_wallpapers.remove (cancelable);
                 // we downscale the pixbuf as far as we can on the CPU
                 buf = validate_pixbuf (buf);

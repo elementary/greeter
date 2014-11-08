@@ -96,8 +96,9 @@ public class Avatar : GtkClutter.Actor {
             ctx.paint ();
 
             ctx.set_operator (Cairo.Operator.OVER);
+            // 48 = min (width / 2, height / 2)
             Granite.Drawing.Utilities.cairo_rounded_rectangle (ctx, 0, 0,
-                box.get_allocated_width (), box.get_allocated_height (), 46);
+                box.get_allocated_width (), box.get_allocated_height (), 48);
             Gdk.cairo_set_source_pixbuf (ctx, image, 0, 0);
             ctx.fill_preserve ();
             ctx.set_line_width (0);

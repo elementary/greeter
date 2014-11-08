@@ -78,16 +78,16 @@ public class MirrorEffect : Clutter.OffscreenEffect {
 
         Cogl.polygon (polygon, true);
 
-        polygon[0].x = 0; polygon[0].y = this.get_actor ().height; polygon[0].z = this.get_actor ().depth;
+        polygon[0].x = 0; polygon[0].y = this.get_actor ().height; polygon[0].z = this.get_actor ().z_position;
         polygon[0].tx = 0; polygon[0].ty = 1;
         polygon[0].color = col_refl_top;
-        polygon[1].x = this.get_actor ().width; polygon[1].y = this.get_actor ().height; polygon[1].z = this.get_actor ().depth;
+        polygon[1].x = this.get_actor ().width; polygon[1].y = this.get_actor ().height; polygon[1].z = this.get_actor ().z_position;
         polygon[1].tx = 1; polygon[1].ty = 1;
         polygon[1].color = col_refl_top;
-        polygon[2].x = this.get_actor ().width; polygon[2].y = (1+this.length)*this.get_actor ().height; polygon[2].z = this.get_actor ().depth;
+        polygon[2].x = this.get_actor ().width; polygon[2].y = (1+this.length)*this.get_actor ().height; polygon[2].z = this.get_actor ().z_position;
         polygon[2].tx = 1; polygon[2].ty = (1.0f - this.length);
         polygon[2].color = col_refl_bot;
-        polygon[3].x = 0; polygon[3].y = (1+this.length)*this.get_actor ().height; polygon[3].z = this.get_actor ().depth;
+        polygon[3].x = 0; polygon[3].y = (1+this.length)*this.get_actor ().height; polygon[3].z = this.get_actor ().z_position;
         polygon[3].tx = 0; polygon[3].ty = (1.0f - this.length);
         polygon[3].color = col_refl_bot;
 
