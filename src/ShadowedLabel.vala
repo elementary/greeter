@@ -40,6 +40,8 @@ public class ShadowedLabel : Actor {
             l.get_extents (out ink, out log);
             width = Math.floorf (log.width / Pango.SCALE + 20);
             height = Math.floorf (log.height / Pango.SCALE);
+
+            content.invalidate ();
         }
     }
 
