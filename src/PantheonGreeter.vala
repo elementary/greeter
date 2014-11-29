@@ -43,6 +43,8 @@ public class PantheonGreeter : Gtk.Window {
 
     public static bool TEST_MODE { get; private set; }
 
+    private bool natural_scroll;
+
     public PantheonGreeter () {
         //singleton
         assert (instance == null);
@@ -58,6 +60,8 @@ public class PantheonGreeter : Gtk.Window {
         }
 
         settings = new Settings ("org.pantheon.desktop.greeter");
+
+        natural_scroll = new Settings ("org.gnome.settings-daemon.peripherals.touchpad").get_boolean ("natural-scroll");
 
         delete_event.connect (() => {
             message ("Window got closed. Exiting...");
@@ -239,13 +243,25 @@ public class PantheonGreeter : Gtk.Window {
     }
 
     bool scroll_navigation (Gdk.EventScroll e) {
-        switch (e.direction) {
-            case Gdk.ScrollDirection.UP:
-                userlist.select_prev_user ();
-                break;
-            case Gdk.ScrollDirection.DOWN:
-                userlist.select_next_user ();
-                break;
+        if (e.device.input_source == Gdk.InputSource.TOUCHPAD && natural_scroll) {
+            // Inverse scrolling direction
+            switch (e.direction) {
+                case Gdk.ScrollDirection.UP:
+                    userlist.select_next_user ();
+                    break;
+                case Gdk.ScrollDirection.DOWN:
+                    userlist.select_prev_user ();
+                    break;
+            }
+        } else {
+            switch (e.direction) {
+                case Gdk.ScrollDirection.UP:
+                    userlist.select_prev_user ();
+                    break;
+                case Gdk.ScrollDirection.DOWN:
+                    userlist.select_next_user ();
+                    break;
+            }
         }
 
         return false;
