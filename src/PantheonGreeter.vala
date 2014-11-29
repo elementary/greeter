@@ -134,6 +134,8 @@ public class PantheonGreeter : Gtk.Window {
         add (clutter);
         show_all ();
 
+        scroll_event.connect (scroll_navigation);
+
         greeterbox.animate (Clutter.AnimationMode.EASE_OUT_QUART, 250, opacity: 255);
 
         message ("Selecting last used user...");
@@ -234,6 +236,19 @@ public class PantheonGreeter : Gtk.Window {
         }
 
         return true;
+    }
+
+    bool scroll_navigation (Gdk.EventScroll e) {
+        switch (e.direction) {
+            case Gdk.ScrollDirection.UP:
+                userlist.select_prev_user ();
+                break;
+            case Gdk.ScrollDirection.DOWN:
+                userlist.select_next_user ();
+                break;
+        }
+
+        return false;
     }
 }
 
