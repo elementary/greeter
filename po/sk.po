@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-29 09:42-0500\n"
-"PO-Revision-Date: 2013-10-26 18:38+0000\n"
-"Last-Translator: Milan Slovák <Unknown>\n"
+"PO-Revision-Date: 2014-11-29 20:06+0000\n"
+"Last-Translator: Igor Štefanko <istefanko@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-30 06:49+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-11-30 05:50+0000\n"
+"X-Generator: Launchpad (build 17267)\n"
 
 #: ../src/ShadowedLabel.vala:100
 msgid "%A, %B %e%v"
@@ -23,7 +23,7 @@ msgstr "%A, %B %e%v"
 
 #: ../src/ShadowedLabel.vala:102
 msgid "%l:%M"
-msgstr "%l:%M"
+msgstr "%H:%M"
 
 #: ../src/ShadowedLabel.vala:105
 msgid " %p"
@@ -31,7 +31,7 @@ msgstr " %p"
 
 #: ../src/PantheonUser.vala:117
 msgid "Manual Login"
-msgstr ""
+msgstr "Manuálne prihlásenie"
 
 #: ../src/PantheonUser.vala:118
 msgid "Guest session"
@@ -63,7 +63,7 @@ msgstr "Režim spánku"
 
 #: ../src/Indicators/KeyboardLayoutMenu.vala:55
 msgid "No other keyboard layouts available"
-msgstr ""
+msgstr "Žiadne iné rozloženie klávesnice nie je dostupné"
 
 #: ../src/CredentialsArea.vala:133
 msgid "Login"
