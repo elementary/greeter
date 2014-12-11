@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-29 09:42-0500\n"
-"PO-Revision-Date: 2013-06-12 04:40+0000\n"
+"PO-Revision-Date: 2014-12-11 06:54+0000\n"
 "Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-08 06:28+0000\n"
-"X-Generator: Launchpad (build 17274)\n"
+"X-Launchpad-Export-Date: 2014-12-11 07:42+0000\n"
+"X-Generator: Launchpad (build 17283)\n"
 
 #: ../src/ShadowedLabel.vala:100
 msgid "%A, %B %e%v"
@@ -31,7 +31,7 @@ msgstr " %p"
 
 #: ../src/PantheonUser.vala:117
 msgid "Manual Login"
-msgstr ""
+msgstr "Acceso manual"
 
 #: ../src/PantheonUser.vala:118
 msgid "Guest session"
@@ -63,7 +63,7 @@ msgstr "Hibernar"
 
 #: ../src/Indicators/KeyboardLayoutMenu.vala:55
 msgid "No other keyboard layouts available"
-msgstr ""
+msgstr "Non hai outros deseños de teclado dispoñíbeis"
 
 #: ../src/CredentialsArea.vala:133
 msgid "Login"
