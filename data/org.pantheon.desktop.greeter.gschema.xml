@@ -30,5 +30,11 @@
       <summary>Default Wallpaper</summary>
       <description>Default wallpaper used for guest accounts and those which haven't set a wallpaper.</description>
     </key>
+
+    <key name="screensaver-timeout" type="i">
+      <default>60</default>
+      <summary>Screensaver Timeout</summary>
+      <description>Number of seconds of inactivity before blanking the screen, set to 0 to disable</description>
+    </key>
   </schema>
 </schemalist>
