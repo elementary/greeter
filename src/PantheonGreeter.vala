@@ -37,6 +37,22 @@ public class PantheonGreeter : Gtk.Window {
     int prefer_blanking;
     int allow_exposures;
 
+    /* taken from X11/X.h */
+    enum Blanking {
+        DONT_PREFER_BLANKING,
+        PREFER_BLANKING,
+        DEFAULT_BLANKING
+    }
+    enum Exposures {
+        DONT_PREFER_EXPOSURES,
+        PREFER_EXPOSURES,
+        DEFAULT_EXPOSURES
+    }
+    enum Screensaver {
+        RESET,
+        ACTIVE
+    }
+
     public Settings settings { get; private set; }
 
     public static PantheonGreeter instance { get; private set; }
@@ -92,7 +108,7 @@ public class PantheonGreeter : Gtk.Window {
         login_gateway.login_successful.connect (() => {
             fade_out_ui ();
 
-            /* restore screensaver setting */
+            /* restore screensaver setting, just like lightdm-gtk-greeter.c*/
             if (login_gateway.lock) {
                 unowned X.Display display = (get_screen ().get_display () as Gdk.X11.Display).get_xdisplay ();
                 display.set_screensaver (timeout, interval, prefer_blanking,
@@ -119,21 +135,19 @@ public class PantheonGreeter : Gtk.Window {
         if (activate_numlock)
             Granite.Services.System.execute_command ("/usr/bin/numlockx on");
 
-        /* activate screensaver*/
+        /* activate screensaver, just like lightdm-gtk-greeter.c*/
+        var screensaver_timeout = 60;
+        screensaver_timeout = settings.get_int ("screensaver-timeout");
+
+        unowned X.Display display = (get_screen ().get_display () as Gdk.X11.Display).get_xdisplay ();
+
+        display.get_screensaver (out timeout, out interval,
+                out prefer_blanking, out allow_exposures);
+        display.set_screensaver (screensaver_timeout, 0, Screensaver.ACTIVE,
+                                Exposures.DEFAULT_EXPOSURES);
+
         if (login_gateway.lock) {
-            var screensaver_timeout = 60;
-            screensaver_timeout = settings.get_int ("screensaver-timeout");
-
-            unowned X.Display display = (get_screen ().get_display () as Gdk.X11.Display).get_xdisplay ();
-
-            display.get_screensaver (out timeout, out interval,
-                                    out prefer_blanking, out allow_exposures);
-
-            warning ("timeout: %d intervar %d prefere_blanking %d, allow_exposures %d",
-                    timeout, interval, prefer_blanking, allow_exposures);
-            display.force_screensaver (1);
-            display.set_screensaver (screensaver_timeout, 0, 1,
-                                    allow_exposures);
+            display.force_screensaver (Screensaver.ACTIVE);
         }
 
         /*build up UI*/
