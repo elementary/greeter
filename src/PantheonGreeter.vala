@@ -93,9 +93,11 @@ public class PantheonGreeter : Gtk.Window {
             fade_out_ui ();
 
             /* restore screensaver setting */
-            unowned X.Display display = (get_screen ().get_display () as Gdk.X11.Display).get_xdisplay ();
-            display.set_screensaver (timeout, interval, prefer_blanking,
-                                    allow_exposures);
+            if (login_gateway.lock) {
+                unowned X.Display display = (get_screen ().get_display () as Gdk.X11.Display).get_xdisplay ();
+                display.set_screensaver (timeout, interval, prefer_blanking,
+                                        allow_exposures);
+            }
         });
 
         configure_event.connect (() => {
@@ -118,18 +120,21 @@ public class PantheonGreeter : Gtk.Window {
             Granite.Services.System.execute_command ("/usr/bin/numlockx on");
 
         /* activate screensaver*/
-        /* TODO: only blank if we have lock hint*/
-        var screensaver_timeout = 60;
-        screensaver_timeout = settings.get_int ("screensaver-timeout");
+        if (login_gateway.lock) {
+            var screensaver_timeout = 60;
+            screensaver_timeout = settings.get_int ("screensaver-timeout");
 
-        unowned X.Display display = (get_screen ().get_display () as Gdk.X11.Display).get_xdisplay ();
+            unowned X.Display display = (get_screen ().get_display () as Gdk.X11.Display).get_xdisplay ();
 
-        display.get_screensaver (out timeout, out interval,
-                                out prefer_blanking, out allow_exposures);
+            display.get_screensaver (out timeout, out interval,
+                                    out prefer_blanking, out allow_exposures);
 
-        display.force_screensaver (1);
-        display.set_screensaver (screensaver_timeout, 0, 1,
-                                allow_exposures);
+            warning ("timeout: %d intervar %d prefere_blanking %d, allow_exposures %d",
+                    timeout, interval, prefer_blanking, allow_exposures);
+            display.force_screensaver (1);
+            display.set_screensaver (screensaver_timeout, 0, 1,
+                                    allow_exposures);
+        }
 
         /*build up UI*/
         clutter.add_events (Gdk.EventMask.BUTTON_RELEASE_MASK);
