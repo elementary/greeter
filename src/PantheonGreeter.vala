@@ -110,7 +110,7 @@ public class PantheonGreeter : Gtk.Window {
 
             /* restore screensaver setting, just like lightdm-gtk-greeter.c*/
             if (login_gateway.lock) {
-                unowned X.Display display = (get_screen ().get_display () as Gdk.X11.Display).get_xdisplay ();
+                unowned X.Display display = (Gdk.Display.get_default () as Gdk.X11.Display).get_xdisplay ();
                 message ("restore user timeout: %d", timeout);
                 display.set_screensaver (timeout, interval, prefer_blanking,
                                         allow_exposures);
@@ -140,7 +140,7 @@ public class PantheonGreeter : Gtk.Window {
         var screensaver_timeout = 60;
         screensaver_timeout = settings.get_int ("screensaver-timeout");
 
-        unowned X.Display display = (get_screen ().get_display () as Gdk.X11.Display).get_xdisplay ();
+        unowned X.Display display = (Gdk.Display.get_default () as Gdk.X11.Display).get_xdisplay ();
 
         if (login_gateway.lock) {
             display.get_screensaver (out timeout, out interval,
