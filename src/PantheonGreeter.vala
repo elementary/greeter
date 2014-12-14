@@ -32,6 +32,11 @@ public class PantheonGreeter : Gtk.Window {
     Indicators indicators;
     Wallpaper wallpaper;
 
+    int timeout;
+    int interval;
+    int prefer_blanking;
+    int allow_exposures;
+
     public Settings settings { get; private set; }
 
     public static PantheonGreeter instance { get; private set; }
@@ -86,6 +91,11 @@ public class PantheonGreeter : Gtk.Window {
 
         login_gateway.login_successful.connect (() => {
             fade_out_ui ();
+
+            /* restore screensaver setting */
+            unowned X.Display display = (get_screen ().get_display () as Gdk.X11.Display).get_xdisplay ();
+            display.set_screensaver (timeout, interval, prefer_blanking,
+                                    allow_exposures);
         });
 
         configure_event.connect (() => {
@@ -106,6 +116,20 @@ public class PantheonGreeter : Gtk.Window {
         var activate_numlock = settings.get_boolean ("activate-numlock");
         if (activate_numlock)
             Granite.Services.System.execute_command ("/usr/bin/numlockx on");
+
+        /* activate screensaver*/
+        /* TODO: only blank if we have lock hint*/
+        var screensaver_timeout = 60;
+        unowned X.Display display = (get_screen ().get_display () as Gdk.X11.Display).get_xdisplay ();
+
+        display.get_screensaver (out timeout, out interval,
+                                out prefer_blanking, out allow_exposures);
+
+        warning ("timeout: %d intervar %d prefere_blanking %d, allow_exposures %d",
+                timeout, interval, prefer_blanking, allow_exposures);
+        display.force_screensaver (1);
+        display.set_screensaver (screensaver_timeout, 0, 1,
+                                allow_exposures);
 
         /*build up UI*/
         clutter.add_events (Gdk.EventMask.BUTTON_RELEASE_MASK);
