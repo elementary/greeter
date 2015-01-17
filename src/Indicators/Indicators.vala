@@ -66,7 +66,7 @@ public class Indicators : GtkClutter.Actor {
 
     PowerMenu power;
 
-    Settings settings;
+    unowned KeyFile settings;
 
     public KeyboardLayoutMenu keyboard_menu { get; private set; }
 
@@ -126,7 +126,7 @@ public class Indicators : GtkClutter.Actor {
     }
 
 
-    public Indicators (Settings _settings) {
+    public Indicators (KeyFile _settings) {
         settings = _settings;
         bar = new Gtk.MenuBar ();
         (get_widget () as Gtk.Container).add (bar);
