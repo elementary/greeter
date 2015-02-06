@@ -4,10 +4,10 @@ public class AccessibilityMenu : Gtk.MenuItem {
 
     int onboard_stdout_fd;
     Gtk.Window keyboard_window;
-    Settings settings;
+    unowned KeyFile settings;
     int keyboard_pid;
 
-    public AccessibilityMenu (Settings _settings) {
+    public AccessibilityMenu (KeyFile _settings) {
         this.settings = _settings;
         try {
             add (new Gtk.Image.from_pixbuf (Gtk.IconTheme.get_default ().lookup_by_gicon (
@@ -20,7 +20,12 @@ public class AccessibilityMenu : Gtk.MenuItem {
         submenu = new Gtk.Menu ();
 
         var keyboard = new Gtk.CheckMenuItem.with_label (_("Onscreen Keyboard"));
-        keyboard.active = settings.get_boolean ("onscreen-keyboard");
+        try {
+            keyboard.active = settings.get_boolean ("greeter", "onscreen-keyboard");
+        } catch (Error e) {
+            warning (e.message);
+        }
+
         keyboard.toggled.connect ((e) => {
             toggle_keyboard (e.active);
         });
@@ -29,14 +34,23 @@ public class AccessibilityMenu : Gtk.MenuItem {
         var high_contrast = new Gtk.CheckMenuItem.with_label (_("HighContrast"));
         high_contrast.toggled.connect (() => {
             Gtk.Settings.get_default ().gtk_theme_name = high_contrast.active ? "HighContrastInverse" : "elementary";
-            settings.set_boolean ("high-contrast", high_contrast.active);
+            settings.set_boolean ("greeter", "high-contrast", high_contrast.active);
         });
 
-        high_contrast.active = settings.get_boolean ("high-contrast");
+        try {
+            high_contrast.active = settings.get_boolean ("greeter", "high-contrast");
+        } catch (Error e) {
+            warning (e.message);
+        }
+
         submenu.append (high_contrast);
 
-        if (settings.get_boolean ("onscreen-keyboard")) {
-            toggle_keyboard (true);
+        try {
+            if (settings.get_boolean ("greeter", "onscreen-keyboard")) {
+                toggle_keyboard (true);
+            }
+        } catch (Error e) {
+            warning (e.message);
         }
     }
 
@@ -53,7 +67,7 @@ public class AccessibilityMenu : Gtk.MenuItem {
     public void toggle_keyboard (bool active) {
         if (keyboard_window != null) {
             keyboard_window.visible = active;
-            settings.set_boolean ("onscreen-keyboard", active);
+            settings.set_boolean ("greeter", "onscreen-keyboard", active);
             return;
         }
 
@@ -88,7 +102,7 @@ public class AccessibilityMenu : Gtk.MenuItem {
         keyboard_window.set_keep_above (true);
 
         keyboard_window.show_all ();
-        settings.set_boolean ("onscreen-keyboard", true);
+        settings.set_boolean ("greeter", "onscreen-keyboard", true);
     }
 
 }

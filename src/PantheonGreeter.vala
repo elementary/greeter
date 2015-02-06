@@ -32,7 +32,29 @@ public class PantheonGreeter : Gtk.Window {
     Indicators indicators;
     Wallpaper wallpaper;
 
-    public Settings settings { get; private set; }
+    int timeout;
+    int interval;
+    int prefer_blanking;
+    int allow_exposures;
+
+    /* taken from X11/X.h */
+    enum Blanking {
+        DONT_PREFER_BLANKING,
+        PREFER_BLANKING,
+        DEFAULT_BLANKING
+    }
+    enum Exposures {
+        DONT_PREFER_EXPOSURES,
+        PREFER_EXPOSURES,
+        DEFAULT_EXPOSURES
+    }
+    enum Screensaver {
+        RESET,
+        ACTIVE
+    }
+
+    //public Settings settings { get; private set; }
+    public KeyFile settings;
 
     public static PantheonGreeter instance { get; private set; }
 
@@ -57,7 +79,13 @@ public class PantheonGreeter : Gtk.Window {
             login_gateway = new LightDMGateway ();
         }
 
-        settings = new Settings ("org.pantheon.desktop.greeter");
+        settings = new KeyFile ();
+        try {
+            settings.load_from_file (Constants.CONF_DIR+"/pantheon-greeter.conf",
+                    KeyFileFlags.KEEP_COMMENTS);
+        } catch (Error e) {
+            warning (e.message);
+        }
 
         delete_event.connect (() => {
             message ("Window got closed. Exiting...");
@@ -86,6 +114,12 @@ public class PantheonGreeter : Gtk.Window {
 
         login_gateway.login_successful.connect (() => {
             fade_out_ui ();
+
+            /* restore screensaver setting, just like lightdm-gtk-greeter.c*/
+            unowned X.Display display = (Gdk.Display.get_default () as Gdk.X11.Display).get_xdisplay ();
+            message ("restore user timeout: %d", timeout);
+            display.set_screensaver (timeout, interval, prefer_blanking,
+                allow_exposures);
         });
 
         configure_event.connect (() => {
@@ -103,9 +137,34 @@ public class PantheonGreeter : Gtk.Window {
         });
 
         /*activate the numlock if needed*/
-        var activate_numlock = settings.get_boolean ("activate-numlock");
+        bool activate_numlock = false;
+        try {
+            activate_numlock = settings.get_boolean ("greeter", "activate-numlock");
+        } catch (Error e) {
+            warning (e.message);
+        }
         if (activate_numlock)
             Granite.Services.System.execute_command ("/usr/bin/numlockx on");
+
+        /* activate screensaver, just like lightdm-gtk-greeter.c*/
+        var screensaver_timeout = 60;
+        try {
+            screensaver_timeout = settings.get_integer ("greeter", "screensaver-timeout");
+        } catch (Error e) {
+            warning (e.message);
+        }
+
+        unowned X.Display display = (Gdk.Display.get_default () as Gdk.X11.Display).get_xdisplay ();
+
+        display.get_screensaver (out timeout, out interval,
+                out prefer_blanking, out allow_exposures);
+        message ("saving Screensaver timeout %d", timeout);
+        message ("set greeter screensaver timeout %d", screensaver_timeout);
+        display.set_screensaver (screensaver_timeout, 0, Screensaver.ACTIVE,
+                Exposures.DEFAULT_EXPOSURES);
+        if (login_gateway.lock) {
+            display.force_screensaver (Screensaver.ACTIVE);
+        }
 
         /*build up UI*/
         clutter.add_events (Gdk.EventMask.BUTTON_RELEASE_MASK);
@@ -139,7 +198,13 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.animate (Clutter.AnimationMode.EASE_OUT_QUART, 250, opacity: 255);
 
         message ("Selecting last used user...");
-        var last_user = settings.get_string ("last-user");
+        var last_user = "";
+        try {
+            last_user = settings.get_string ("greeter", "last-user");
+        } catch (Error e) {
+            warning (e.message);
+        }
+
         for (var i = 0; i < userlist.size; i++) {
             if (userlist.get_user (i).name == last_user) {
                 userlist.current_user = userlist.get_user (i);
@@ -223,7 +288,14 @@ public class PantheonGreeter : Gtk.Window {
     bool keyboard_navigation (Gdk.EventKey e) {
         switch (e.keyval) {
             case Gdk.Key.Num_Lock:
-                settings.set_boolean ("activate-numlock", !settings.get_boolean ("activate-numlock"));
+                var activate_numlock = false;
+                try {
+                    activate_numlock = settings.get_boolean ("greeter", "activate-numlock");
+                } catch (Error e) {
+                    warning (e.message);
+                }
+
+                settings.set_boolean ("greeter", "activate-numlock", !activate_numlock);
                 break;
             case Gdk.Key.Up:
                 userlist.select_prev_user ();

@@ -79,6 +79,7 @@ public interface LoginGateway : GLib.Object {
     public abstract bool hide_users { get; }
     public abstract bool has_guest_account { get; }
     public abstract bool show_manual_login { get; }
+    public abstract bool lock { get; }
     public abstract string default_session { get; }
 
     /**
@@ -148,6 +149,11 @@ public class LightDMGateway : LoginGateway, Object {
     public bool show_manual_login {
         get {
             return lightdm.show_manual_login_hint;
+        }
+    }
+    public bool lock {
+        get {
+            return lightdm.lock_hint;
         }
     }
     public string default_session {
@@ -237,7 +243,8 @@ public class LightDMGateway : LoginGateway, Object {
             warning ("Got start_session without awaiting it.");
         }
         message (@"Starting session $(current_login.login_session)");
-        PantheonGreeter.instance.settings.set_string ("last-user",
+        PantheonGreeter.instance.settings.set_string ("greeter",
+                "last-user",
                 current_login.login_name);
         try {
             lightdm.start_session_sync (current_login.login_session);
@@ -278,6 +285,7 @@ public class DummyGateway : LoginGateway, Object {
     public bool hide_users { get { return false; } }
     public bool has_guest_account { get { return true; } }
     public bool show_manual_login { get { return true; } }
+    public bool lock { get {return false; } }
     public string default_session { get { return ""; } }
 
     LoginMask last_login_mask;
