@@ -81,7 +81,8 @@ public class PantheonGreeter : Gtk.Window {
 
         settings = new KeyFile ();
         try {
-            settings.load_from_file (Constants.CONF_DIR+"/pantheon-greeter.conf", KeyFileFlags.KEEP_COMMENTS);
+            settings.load_from_file (Constants.CONF_DIR+"/pantheon-greeter.conf",
+                    KeyFileFlags.KEEP_COMMENTS);
         } catch (Error e) {
             warning (e.message);
         }
@@ -115,12 +116,10 @@ public class PantheonGreeter : Gtk.Window {
             fade_out_ui ();
 
             /* restore screensaver setting, just like lightdm-gtk-greeter.c*/
-            /* if (login_gateway.lock) { */
-                unowned X.Display display = (Gdk.Display.get_default () as Gdk.X11.Display).get_xdisplay ();
-                message ("restore user timeout: %d", timeout);
-                display.set_screensaver (timeout, interval, prefer_blanking,
-                                        allow_exposures);
-            /* } */
+            unowned X.Display display = (Gdk.Display.get_default () as Gdk.X11.Display).get_xdisplay ();
+            message ("restore user timeout: %d", timeout);
+            display.set_screensaver (timeout, interval, prefer_blanking,
+                allow_exposures);
         });
 
         configure_event.connect (() => {

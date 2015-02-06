@@ -54,7 +54,16 @@ public class Wallpaper : Clutter.Group {
     }
 
     string get_default () {
-        return new GLib.Settings ("org.pantheon.desktop.greeter").get_string ("default-wallpaper");
+        var settings = new KeyFile();
+        string default_wallpaper = "/usr/share/backgrounds/elementaryos-default";
+        try{
+            settings.load_from_file(Constants.CONF_DIR+"/pantheon-greeter.conf",
+                    KeyFileFlags.KEEP_COMMENTS);
+            default_wallpaper = settings.get_string ("greeter", "default-wallpaper");
+        } catch (Error e) {
+            warning (e.message);
+        }
+        return default_wallpaper;
     }
 
     public void reposition () {
