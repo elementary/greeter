@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-29 09:42-0500\n"
+"POT-Creation-Date: 2015-02-06 16:32-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,31 +17,31 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/ShadowedLabel.vala:100
+#: ../src/ShadowedLabel.vala:102
 msgid "%A, %B %e%v"
 msgstr ""
 
-#: ../src/ShadowedLabel.vala:102
+#: ../src/ShadowedLabel.vala:104
 msgid "%l:%M"
 msgstr ""
 
-#: ../src/ShadowedLabel.vala:105
+#: ../src/ShadowedLabel.vala:107
 msgid " %p"
 msgstr ""
 
-#: ../src/PantheonUser.vala:117
-msgid "Manual Login"
+#: ../src/PantheonUser.vala:156
+msgid "Guest session"
 msgstr ""
 
-#: ../src/PantheonUser.vala:118
-msgid "Guest session"
+#: ../src/PantheonUser.vala:175
+msgid "Manual Login"
 msgstr ""
 
 #: ../src/Indicators/AccessibilityMenu.vala:22
 msgid "Onscreen Keyboard"
 msgstr ""
 
-#: ../src/Indicators/AccessibilityMenu.vala:29
+#: ../src/Indicators/AccessibilityMenu.vala:34
 msgid "HighContrast"
 msgstr ""
 
@@ -61,10 +61,10 @@ msgstr ""
 msgid "Hibernate"
 msgstr ""
 
-#: ../src/Indicators/KeyboardLayoutMenu.vala:55
+#: ../src/Indicators/KeyboardLayoutMenu.vala:61
 msgid "No other keyboard layouts available"
 msgstr ""
 
-#: ../src/CredentialsArea.vala:133
+#: ../src/CredentialsArea.vala:78
 msgid "Login"
 msgstr ""
