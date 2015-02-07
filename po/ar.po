@@ -7,41 +7,41 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-29 09:42-0500\n"
+"POT-Creation-Date: 2015-02-06 16:32-0600\n"
 "PO-Revision-Date: 2013-06-12 04:40+0000\n"
 "Last-Translator: racerr <racerr@outlook.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-08 06:28+0000\n"
-"X-Generator: Launchpad (build 17274)\n"
+"X-Launchpad-Export-Date: 2015-02-07 07:14+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 
-#: ../src/ShadowedLabel.vala:100
+#: ../src/ShadowedLabel.vala:102
 msgid "%A, %B %e%v"
 msgstr "\\%x"
 
-#: ../src/ShadowedLabel.vala:102
+#: ../src/ShadowedLabel.vala:104
 msgid "%l:%M"
 msgstr "%l:%M"
 
-#: ../src/ShadowedLabel.vala:105
+#: ../src/ShadowedLabel.vala:107
 msgid " %p"
 msgstr " %p"
 
-#: ../src/PantheonUser.vala:117
-msgid "Manual Login"
-msgstr ""
-
-#: ../src/PantheonUser.vala:118
+#: ../src/PantheonUser.vala:156
 msgid "Guest session"
 msgstr "الدخول كضيف"
+
+#: ../src/PantheonUser.vala:175
+msgid "Manual Login"
+msgstr ""
 
 #: ../src/Indicators/AccessibilityMenu.vala:22
 msgid "Onscreen Keyboard"
 msgstr "لوحة مفاتيح ظاهرة"
 
-#: ../src/Indicators/AccessibilityMenu.vala:29
+#: ../src/Indicators/AccessibilityMenu.vala:34
 msgid "HighContrast"
 msgstr "تباين عالي"
 
@@ -61,10 +61,10 @@ msgstr "إعادة التشغيل"
 msgid "Hibernate"
 msgstr "السبات"
 
-#: ../src/Indicators/KeyboardLayoutMenu.vala:55
+#: ../src/Indicators/KeyboardLayoutMenu.vala:61
 msgid "No other keyboard layouts available"
 msgstr ""
 
-#: ../src/CredentialsArea.vala:133
+#: ../src/CredentialsArea.vala:78
 msgid "Login"
 msgstr "تسجيل الدخول"
