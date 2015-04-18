@@ -243,9 +243,8 @@ public class LightDMGateway : LoginGateway, Object {
             warning ("Got start_session without awaiting it.");
         }
         message (@"Starting session $(current_login.login_session)");
-        PantheonGreeter.instance.settings.set_string ("greeter",
-                "last-user",
-                current_login.login_name);
+        PantheonGreeter.instance.set_greeter_state ("last-user",
+                                            current_login.login_name);
         try {
             lightdm.start_session_sync (current_login.login_session);
         } catch (Error e) {

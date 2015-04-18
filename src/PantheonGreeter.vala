@@ -55,6 +55,8 @@ public class PantheonGreeter : Gtk.Window {
 
     //public Settings settings { get; private set; }
     public KeyFile settings;
+    public KeyFile state;
+    private string state_file;
 
     public static PantheonGreeter instance { get; private set; }
 
@@ -79,6 +81,22 @@ public class PantheonGreeter : Gtk.Window {
             login_gateway = new LightDMGateway ();
         }
 
+        var state_dir = Path.build_filename (Environment.get_user_cache_dir (), "unity-greeter");
+        DirUtils.create_with_parents (state_dir, 0775);
+
+        var xdg_seat = GLib.Environment.get_variable("XDG_SEAT");
+        var state_file_name = xdg_seat != null && xdg_seat != "seat0" ? xdg_seat + "-state" : "state";
+
+        state_file = Path.build_filename (state_dir, state_file_name);
+        state = new KeyFile ();
+        try {
+            state.load_from_file (state_file, KeyFileFlags.NONE);
+        } catch (Error e) {
+            if (!(e is FileError.NOENT)) {
+                warning ("Failed to load state from %s: %s\n", state_file, e.message);
+            }
+        }
+        
         settings = new KeyFile ();
         try {
             settings.load_from_file (Constants.CONF_DIR+"/pantheon-greeter.conf",
@@ -198,19 +216,20 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.animate (Clutter.AnimationMode.EASE_OUT_QUART, 250, opacity: 255);
 
         message ("Selecting last used user...");
-        var last_user = "";
-        try {
-            last_user = settings.get_string ("greeter", "last-user");
-        } catch (Error e) {
-            warning (e.message);
-        }
 
-        for (var i = 0; i < userlist.size; i++) {
-            if (userlist.get_user (i).name == last_user) {
-                userlist.current_user = userlist.get_user (i);
-                break;
+        var last_user = get_greeter_state ("last-user");
+
+        if (last_user == null) {
+            warning ("last user not set");
+        } else {
+            for (var i = 0; i < userlist.size; i++) {
+                if (userlist.get_user (i).name == last_user) {
+                    userlist.current_user = userlist.get_user (i);
+                    break;
+                }
             }
         }
+
         if (userlist.current_user == null)
             userlist.current_user = userlist.get_user (0);
 
@@ -322,6 +341,27 @@ public class PantheonGreeter : Gtk.Window {
 
         return false;
     }
+                
+    public string? get_greeter_state (string key) {
+        try {
+            return state.get_value ("greeter", key);
+        } catch (Error e) {
+            return null;
+        }
+    }
+
+    public void set_greeter_state (string key, string value) {
+        state.set_value ("greeter", key, value);
+        var data = state.to_data ();
+
+        try {
+            FileUtils.set_contents (state_file, data);
+        } catch (Error e) {
+            warning ("Failed to write state: %s", e.message);
+        }
+    }
+
+    
 }
 
 public static int main (string [] args) {
