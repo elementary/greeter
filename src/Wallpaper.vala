@@ -44,6 +44,7 @@ public class Wallpaper : Clutter.Group {
 
     string last_loaded = "";
 
+    public Gdk.Pixbuf? background_pixbuf;
     public int screen_width { get; set; }
     public int screen_height { get; set; }
 
@@ -102,6 +103,7 @@ public class Wallpaper : Clutter.Group {
                 //add loaded wallpapers and paths to cache
                 cache_path += path;
                 cache_pixbuf += buf;
+                background_pixbuf = buf;
             }
             //check if the currently loaded wallpaper is the one we loaded in this method
             if (last_loaded != path)

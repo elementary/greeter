@@ -54,6 +54,7 @@ PACKAGES
     indicator-0.4
     gl
     posix-fixes
+    x-fixes
 OPTIONS
     --vapidir=${CMAKE_CURRENT_SOURCE_DIR}/vapi
 )
