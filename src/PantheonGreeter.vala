@@ -258,6 +258,8 @@ public class PantheonGreeter : Gtk.Window {
      * start_session by firing login_successful!.
      */
     void fade_out_ui () {
+        refresh_background ();
+
         // The animations are always the same. If they would have different
         // lengths we need to use a TransitionGroup to determine
         // the correct time everything is faded out.
@@ -331,17 +333,17 @@ public class PantheonGreeter : Gtk.Window {
 
     bool scroll_navigation (Gdk.EventScroll e) {
         switch (e.direction) {
-            case Gdk.ScrollDirection.UP:
-                userlist.select_prev_user ();
-                break;
-            case Gdk.ScrollDirection.DOWN:
-                userlist.select_next_user ();
-                break;
+        case Gdk.ScrollDirection.UP:
+            userlist.select_prev_user ();
+            break;
+        case Gdk.ScrollDirection.DOWN:
+            userlist.select_next_user ();
+            break;
         }
 
         return false;
     }
-                
+
     public string? get_greeter_state (string key) {
         try {
             return state.get_value ("greeter", key);
@@ -361,7 +363,74 @@ public class PantheonGreeter : Gtk.Window {
         }
     }
 
-    
+    Cairo.XlibSurface? create_root_surface (Gdk.Screen screen) {
+        var visual = screen.get_system_visual ();
+        var xvisual = (visual as Gdk.X11.Visual).get_xvisual ();
+
+        var gdk_display = (screen.get_display () as Gdk.X11.Display);
+        unowned X.Display display = gdk_display.get_xdisplay ();
+
+        var root_window = (screen.get_root_window () as Gdk.X11.Window);
+        var pixmap = X.CreatePixmap (display,
+                                     root_window.get_xid (),
+                                     screen.get_width (),
+                                     screen.get_height (),
+                                     visual.get_depth ());
+
+        /* Convert into a Cairo surface */
+        var surface = new Cairo.XlibSurface (display, pixmap,
+                                             xvisual,
+                                             screen.get_width (),
+                                             screen.get_height ());
+
+        return surface;
+    }
+
+    void draw_wallpaper_on_surface (Cairo.Surface surface) {
+        var ctx = new Cairo.Context (surface);
+        ctx.save ();
+        ctx.set_source_rgba (0.0, 0.0, 0.0, 0.0);
+
+        var current_pixbuf = wallpaper.background_pixbuf;
+
+        var img_surface = new Cairo.Surface.similar (surface, Cairo.Content.COLOR_ALPHA,
+                                                     current_pixbuf.width,
+                                                     current_pixbuf.height);
+
+        var img_ctx = new Cairo.Context (img_surface);
+
+        Gdk.cairo_set_source_pixbuf (img_ctx, current_pixbuf,
+                                     0, 0);
+
+        img_ctx.paint ();
+
+        ctx.set_source_surface (img_surface, 0, 0);
+        ctx.paint ();
+        ctx.restore ();
+    }
+
+    void refresh_background () {
+        var screen = Gdk.Screen.get_default ();
+        var root_window = (screen.get_root_window () as Gdk.X11.Window);
+        var background_surface = create_root_surface (screen);
+
+        draw_wallpaper_on_surface (background_surface);
+
+        Gdk.flush ();
+
+        var x_display = (screen.get_display () as Gdk.X11.Display);
+        unowned X.Display display = x_display.get_xdisplay ();
+
+        /* Ensure Cairo has actually finished it's drawing */
+        background_surface.flush ();
+
+        /* Use this pixmap for the background */
+        X.SetWindowBackgroundPixmap (display,
+                                     root_window.get_xid (),
+                                     background_surface.get_drawable ());
+
+        X.ClearWindow (display, root_window.get_xid ());
+    }
 }
 
 public static int main (string [] args) {
@@ -373,6 +442,12 @@ public static int main (string [] args) {
     if (init != Clutter.InitError.SUCCESS)
         error ("Clutter could not be intiailized");
 
+    message ("Registering TERM signal...");
+    GLib.Unix.signal_add (GLib.ProcessSignal.TERM, () => {
+        message ("SIGTERM received, exiting...");
+        Gtk.main_quit ();
+        return true;
+    });
 
     message ("Applying settings...");
     /*some settings*/

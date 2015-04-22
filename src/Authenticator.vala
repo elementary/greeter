@@ -250,7 +250,6 @@ public class LightDMGateway : LoginGateway, Object {
         } catch (Error e) {
             error (e.message);
         }
-        Posix.exit (Posix.EXIT_SUCCESS);
     }
 
     void authentication () {
