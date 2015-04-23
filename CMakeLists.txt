@@ -35,7 +35,7 @@ link_directories (${DEPS_LIBRARY_DIRS})
 
 find_package (Vala REQUIRED)
 include (ValaVersion)
-ensure_vala_version ("0.16.1" MINIMUM)
+ensure_vala_version ("0.26.0" MINIMUM)
 
 file(GLOB_RECURSE sources src/*.vala)
 
@@ -53,8 +53,6 @@ PACKAGES
     clutter-gtk-1.0
     indicator-0.4
     gl
-    posix-fixes
-    x-fixes
 OPTIONS
     --vapidir=${CMAKE_CURRENT_SOURCE_DIR}/vapi
 )

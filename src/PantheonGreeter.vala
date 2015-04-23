@@ -371,14 +371,14 @@ public class PantheonGreeter : Gtk.Window {
         unowned X.Display display = gdk_display.get_xdisplay ();
 
         var root_window = (screen.get_root_window () as Gdk.X11.Window);
-        var pixmap = X.CreatePixmap (display,
+        var pixmap = X.create_pixmap (display,
                                      root_window.get_xid (),
                                      screen.get_width (),
                                      screen.get_height (),
                                      visual.get_depth ());
 
         /* Convert into a Cairo surface */
-        var surface = new Cairo.XlibSurface (display, pixmap,
+        var surface = new Cairo.XlibSurface (display, (int) pixmap,
                                              xvisual,
                                              screen.get_width (),
                                              screen.get_height ());
@@ -410,7 +410,7 @@ public class PantheonGreeter : Gtk.Window {
     }
 
     void refresh_background () {
-        var screen = Gdk.Screen.get_default ();
+        var screen = get_screen ();
         var root_window = (screen.get_root_window () as Gdk.X11.Window);
         var background_surface = create_root_surface (screen);
 
@@ -425,18 +425,18 @@ public class PantheonGreeter : Gtk.Window {
         background_surface.flush ();
 
         /* Use this pixmap for the background */
-        X.SetWindowBackgroundPixmap (display,
+        X.set_window_background_pixmap (display,
                                      root_window.get_xid (),
                                      background_surface.get_drawable ());
 
-        X.ClearWindow (display, root_window.get_xid ());
+        X.clear_window (display, root_window.get_xid ());
     }
 }
 
 public static int main (string [] args) {
     message ("Starting pantheon-greeter...");
     /* Protect memory from being paged to disk, as we deal with passwords */
-    PosixMLock.mlockall (PosixMLock.MCL_CURRENT | PosixMLock.MCL_FUTURE);
+    Posix.mlockall (Posix.MCL_CURRENT | Posix.MCL_FUTURE);
 
     var init = GtkClutter.init (ref args);
     if (init != Clutter.InitError.SUCCESS)
