@@ -28,7 +28,7 @@ include (CPack)
 add_custom_target (dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
 find_package (PkgConfig)
-pkg_check_modules (DEPS REQUIRED granite liblightdm-gobject-1>=1.2.1 gdk-x11-3.0 clutter-gtk-1.0 indicator3-0.4 gdk-pixbuf-2.0 gl)
+pkg_check_modules (DEPS REQUIRED granite liblightdm-gobject-1>=1.2.1 gdk-x11-3.0 clutter-gtk-1.0 indicator3-0.4 gdk-pixbuf-2.0 gl wingpanel-2.0)
 add_definitions (${DEPS_CFLAGS})
 link_libraries (${DEPS_LIBRARIES})
 link_directories (${DEPS_LIBRARY_DIRS})
@@ -53,6 +53,7 @@ PACKAGES
     clutter-gtk-1.0
     indicator-0.4
     gl
+    wingpanel-2.0
 OPTIONS
     --vapidir=${CMAKE_CURRENT_SOURCE_DIR}/vapi
 )

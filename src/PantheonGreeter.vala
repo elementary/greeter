@@ -29,7 +29,7 @@ public class PantheonGreeter : Gtk.Window {
     UserList userlist;
 
     TimeLabel time;
-    Indicators indicators;
+    Indicators.IndicatorBar indicator_bar;
     Wallpaper wallpaper;
 
     int timeout;
@@ -122,9 +122,9 @@ public class PantheonGreeter : Gtk.Window {
         userlist_actor = new UserListActor (userlist);
 
         time = new TimeLabel ();
-        if (!TEST_MODE) {
-            indicators = new Indicators (settings);
-        }
+
+        indicator_bar = new Indicators.IndicatorBar ();
+
         wallpaper = new Wallpaper ();
 
         message ("Connecting signals...");
@@ -149,9 +149,6 @@ public class PantheonGreeter : Gtk.Window {
 
         userlist.current_user_changed.connect ((user) => {
             wallpaper.set_wallpaper (user.background);
-            if (!TEST_MODE) {
-                indicators.keyboard_menu.user_changed_cb (user);
-            }
         });
 
         /*activate the numlock if needed*/
@@ -192,9 +189,7 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.add_child (wallpaper);
         greeterbox.add_child (time);
         greeterbox.add_child (userlist_actor);
-        if (!TEST_MODE) {
-            greeterbox.add_child (indicators);
-        }
+        greeterbox.add_child (indicator_bar);
 
         greeterbox.opacity = 0;
 
@@ -203,8 +198,7 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
         greeterbox.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
 
-        if (!TEST_MODE)
-            indicators.add_constraint (new Clutter.BindConstraint (greeterbox, Clutter.BindCoordinate.WIDTH, 0));
+        indicator_bar.add_constraint (new Clutter.BindConstraint (greeterbox, Clutter.BindCoordinate.WIDTH, 0));
 
         clutter.key_press_event.connect (keyboard_navigation);
 
@@ -266,7 +260,7 @@ public class PantheonGreeter : Gtk.Window {
         var anim = fade_out_actor (time);
         fade_out_actor (userlist_actor);
         if (!TEST_MODE)
-            fade_out_actor (indicators);
+            fade_out_actor (indicator_bar);
 
         anim.completed.connect (() => {
             login_gateway.start_session ();
