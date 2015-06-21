@@ -88,7 +88,9 @@ public class Indicators.IndicatorBar : GtkClutter.Actor {
                 return;
             }
 
-             entry_list.resort.begin ();
+            message ("Requesting resort because indicator %s has been added.", indicator.code_name);
+
+            entry_list.resort.begin ();
         });
     }
 
