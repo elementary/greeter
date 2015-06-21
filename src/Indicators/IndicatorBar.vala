@@ -28,17 +28,17 @@ public class Indicators.IndicatorBar : GtkClutter.Actor {
     public IndicatorBar () {
         Wingpanel.IndicatorManager.get_default ().initialize (Wingpanel.IndicatorManager.ServerType.GREETER);
 
-        entry_list = EntryList.get_default ();
+        entry_list = new EntryList ();
 
         build_ui ();
 
         if (Wingpanel.IndicatorManager.get_default ().has_indicators ()) {
-            load_indicators ();
+            load_indicators.begin (() => {
+                update_bar ();
+
+                connect_signals ();
+            });
         }
-
-        update_list ();
-
-        connect_signals ();
     }
 
     private void build_ui () {
@@ -54,7 +54,7 @@ public class Indicators.IndicatorBar : GtkClutter.Actor {
         container_widget.add (menu_bar);
     }
 
-    private void load_indicators () {
+    private async void load_indicators () {
         var indicators = Wingpanel.IndicatorManager.get_default ().get_indicators ();
 
         foreach (Wingpanel.Indicator indicator in indicators) {
@@ -62,8 +62,8 @@ public class Indicators.IndicatorBar : GtkClutter.Actor {
         }
     }
 
-    private void update_list () {
-        clear_list ();
+    private void update_bar () {
+        clear_bar ();
 
         foreach (IndicatorEntry entry in entry_list) {
             if (entry.get_is_visible ())
@@ -74,7 +74,7 @@ public class Indicators.IndicatorBar : GtkClutter.Actor {
     }
 
     private void connect_signals () {
-        entry_list.list_changed.connect (update_list);
+        entry_list.list_changed.connect (update_bar);
 
         Wingpanel.IndicatorManager.get_default ().indicator_added.connect ((indicator) => {
             entry_list.add (create_indicator_entry (indicator));
@@ -83,11 +83,12 @@ public class Indicators.IndicatorBar : GtkClutter.Actor {
 
     private IndicatorEntry create_indicator_entry (Wingpanel.Indicator indicator) {
         var indicator_entry = new IndicatorEntry (indicator);
+        indicator_entry.visibility_changed.connect (update_bar);
 
         return indicator_entry;
     }
 
-    private void clear_list () {
+    private void clear_bar () {
         var children = menu_bar.get_children ();
 
         foreach (var child in children)

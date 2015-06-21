@@ -20,8 +20,6 @@
 ***/
 
 public class Indicators.EntryList : Gee.ArrayList<IndicatorEntry> {
-    private static EntryList? instance = null;
-
     public signal void list_changed ();
 
     public EntryList () {
@@ -29,15 +27,15 @@ public class Indicators.EntryList : Gee.ArrayList<IndicatorEntry> {
     }
 
     public override bool add (IndicatorEntry entry) {
-        var added = base.add (entry);
+        bool added = base.add (entry);
 
         if (added)
-            resort ();
+            resort.begin ();
 
         return added;
     }
 
-    public void resort () {
+    private async void resort () {
         this.sort ((a, b) => {
             if (a == null)
                 return (b == null) ? 0 : -1;
@@ -74,12 +72,5 @@ public class Indicators.EntryList : Gee.ArrayList<IndicatorEntry> {
         }
 
         return 0;
-    }
-
-    public static EntryList get_default () {
-        if (instance == null)
-            instance = new EntryList ();
-
-        return instance;
     }
 }

@@ -29,6 +29,8 @@ public class Indicators.IndicatorEntry : Gtk.MenuItem {
     private IndicatorPopover popover;
     private Wingpanel.Indicator base_indicator;
 
+    public signal void visibility_changed ();
+
     public IndicatorEntry (Wingpanel.Indicator base_indicator) {
         this.base_indicator = base_indicator;
         this.add_events (Gdk.EventMask.SCROLL_MASK);
@@ -113,10 +115,10 @@ public class Indicators.IndicatorEntry : Gtk.MenuItem {
 
     private void request_resort () {
         if (base_indicator.visible) {
-            EntryList.get_default ().resort ();
+            visibility_changed ();
         } else {
             Timeout.add (revealer.transition_duration, () => {
-                EntryList.get_default ().resort ();
+                visibility_changed ();
 
                 return false;
             });
