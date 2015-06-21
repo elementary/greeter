@@ -34,9 +34,11 @@ public class Indicators.IndicatorBar : GtkClutter.Actor {
 
         if (Wingpanel.IndicatorManager.get_default ().has_indicators ()) {
             load_indicators.begin (() => {
-                update_bar ();
+                entry_list.resort.begin (() => {
+                    update_bar ();
 
-                connect_signals ();
+                    connect_signals ();
+                });
             });
         }
     }
@@ -55,10 +57,13 @@ public class Indicators.IndicatorBar : GtkClutter.Actor {
     }
 
     private async void load_indicators () {
+        message ("Loading indicators...");
+
         var indicators = Wingpanel.IndicatorManager.get_default ().get_indicators ();
 
         foreach (Wingpanel.Indicator indicator in indicators) {
-            entry_list.add (create_indicator_entry (indicator));
+            if (!entry_list.add (create_indicator_entry (indicator)))
+                warning ("Loading indicator %s failed.", indicator.code_name);
         }
     }
 
@@ -77,7 +82,13 @@ public class Indicators.IndicatorBar : GtkClutter.Actor {
         entry_list.list_changed.connect (update_bar);
 
         Wingpanel.IndicatorManager.get_default ().indicator_added.connect ((indicator) => {
-            entry_list.add (create_indicator_entry (indicator));
+            if (!entry_list.add (create_indicator_entry (indicator))) {
+                warning ("The new indicator %s could not be loaded.", indicator.code_name);
+
+                return;
+            }
+
+             entry_list.resort.begin ();
         });
     }
 

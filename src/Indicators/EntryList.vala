@@ -26,16 +26,9 @@ public class Indicators.EntryList : Gee.ArrayList<IndicatorEntry> {
         connect_signals ();
     }
 
-    public override bool add (IndicatorEntry entry) {
-        bool added = base.add (entry);
+    public async void resort () {
+        message ("Resorting indicators...");
 
-        if (added)
-            resort.begin ();
-
-        return added;
-    }
-
-    private async void resort () {
         this.sort ((a, b) => {
             if (a == null)
                 return (b == null) ? 0 : -1;
@@ -59,7 +52,7 @@ public class Indicators.EntryList : Gee.ArrayList<IndicatorEntry> {
 
     private void connect_signals () {
         WingpanelSettings.get_default ().notify["order"].connect (() => {
-            resort ();
+            resort.begin ();
         });
     }
 
