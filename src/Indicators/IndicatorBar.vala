@@ -62,6 +62,8 @@ public class Indicators.IndicatorBar : GtkClutter.Actor {
         var indicators = Wingpanel.IndicatorManager.get_default ().get_indicators ();
 
         foreach (Wingpanel.Indicator indicator in indicators) {
+            message ("Loading indicator %s...", indicator.code_name);
+
             if (!entry_list.add (create_indicator_entry (indicator)))
                 warning ("Loading indicator %s failed.", indicator.code_name);
         }
