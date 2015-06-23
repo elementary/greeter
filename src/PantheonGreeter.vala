@@ -18,6 +18,7 @@
 
     END LICENSE
 ***/
+
 public class PantheonGreeter : Gtk.Window {
 
     public static LoginGateway login_gateway { get; private set; }

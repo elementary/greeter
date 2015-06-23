@@ -19,9 +19,10 @@
     END LICENSE
 ***/
 
-
 public class Indicators.IndicatorBar : GtkClutter.Actor {
     private EntryList entry_list;
+
+    private PopoverManager popover_manager;
 
     private Gtk.MenuBar menu_bar;
 
@@ -29,6 +30,7 @@ public class Indicators.IndicatorBar : GtkClutter.Actor {
         Wingpanel.IndicatorManager.get_default ().initialize (Wingpanel.IndicatorManager.ServerType.GREETER);
 
         entry_list = new EntryList ();
+        popover_manager = new PopoverManager ();
 
         build_ui ();
 
@@ -62,11 +64,31 @@ public class Indicators.IndicatorBar : GtkClutter.Actor {
         var indicators = Wingpanel.IndicatorManager.get_default ().get_indicators ();
 
         foreach (Wingpanel.Indicator indicator in indicators) {
-            message ("Loading indicator %s...", indicator.code_name);
-
-            if (!entry_list.add (create_indicator_entry (indicator)))
-                warning ("Loading indicator %s failed.", indicator.code_name);
+            register_indicator (indicator);
         }
+    }
+
+    private bool register_indicator (Wingpanel.Indicator indicator) {
+        message ("Loading indicator %s...", indicator.code_name);
+
+        var indicator_entry = new IndicatorEntry (indicator);
+        indicator_entry.visibility_changed.connect (update_bar);
+
+        if (!entry_list.add (indicator_entry)) {
+            warning ("Registering entry for indicator %s failed.", indicator.code_name);
+
+            return false;
+        }
+
+        var indicator_popover = indicator_entry.get_popover ();
+
+        if (!popover_manager.add (indicator_popover)) {
+            warning ("Registering popover for indicator %s failed.", indicator.code_name);
+
+            return false;
+        }
+
+        return true;
     }
 
     private void update_bar () {
@@ -84,23 +106,13 @@ public class Indicators.IndicatorBar : GtkClutter.Actor {
         entry_list.list_changed.connect (update_bar);
 
         Wingpanel.IndicatorManager.get_default ().indicator_added.connect ((indicator) => {
-            if (!entry_list.add (create_indicator_entry (indicator))) {
-                warning ("The new indicator %s could not be loaded.", indicator.code_name);
-
+            if (!register_indicator (indicator))
                 return;
-            }
 
             message ("Requesting resort because indicator %s has been added.", indicator.code_name);
 
             entry_list.resort.begin ();
         });
-    }
-
-    private IndicatorEntry create_indicator_entry (Wingpanel.Indicator indicator) {
-        var indicator_entry = new IndicatorEntry (indicator);
-        indicator_entry.visibility_changed.connect (update_bar);
-
-        return indicator_entry;
     }
 
     private void clear_bar () {

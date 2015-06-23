@@ -19,7 +19,6 @@
     END LICENSE
 ***/
 
-
 public class Indicators.IndicatorEntry : Gtk.MenuItem {
     private Gtk.Widget display_widget;
     private Gtk.Widget? indicator_widget = null;
@@ -35,6 +34,7 @@ public class Indicators.IndicatorEntry : Gtk.MenuItem {
         this.base_indicator = base_indicator;
         this.add_events (Gdk.EventMask.SCROLL_MASK);
         this.get_style_context ().add_class (StyleClass.COMPOSITED_INDICATOR);
+        this.can_focus = false;
 
         display_widget = base_indicator.get_display_widget ();
         display_widget.margin_start = 4;
@@ -68,6 +68,10 @@ public class Indicators.IndicatorEntry : Gtk.MenuItem {
 
     public bool get_is_visible () {
         return base_indicator.visible;
+    }
+
+    public IndicatorPopover get_popover () {
+        return popover;
     }
 
     private void connect_signals () {
