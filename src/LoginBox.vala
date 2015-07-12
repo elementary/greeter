@@ -79,7 +79,8 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
 
     void create_credentials () {
         credentials_actor = new CredentialsAreaActor (this, user);
-        credentials_actor.x = this.x + 120;
+        credentials_actor.x = this.x + 124;
+        credentials_actor.y = 5;
         add_child (credentials_actor);
 
         credentials_actor.replied.connect ((answer) => {
@@ -96,7 +97,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         label = new ShadowedLabel (user.get_markup ());
         label.height = 75;
         label.width = 600;
-        label.y = 0;
+        label.y = 8;
         label.reactive = true;
         label.x = this.x + 120;
         add_child (label);
