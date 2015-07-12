@@ -60,7 +60,7 @@ public class LoggedInIcon : GtkClutter.Texture {
     public LoggedInIcon () {
         if (image == null) {
             try {
-            image = Gtk.IconTheme.get_default ().load_icon ("account-logged-in", 16, 0);
+            image = Gtk.IconTheme.get_default ().load_icon ("selection-checked", 24, 0);
             } catch (Error e) {
                 image = null;
                 warning (e.message);
