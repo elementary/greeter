@@ -75,7 +75,7 @@ public class LoginButtonArea : CredentialsArea {
     Button login_btn;
 
     public LoginButtonArea () {
-        login_btn = new Button.with_label (_("Login"));
+        login_btn = new Button.with_label (_("Log In"));
         login_btn.clicked.connect (() => {
             // It doesn't matter what we anser, the confirmation
             // is that we reply at all.
