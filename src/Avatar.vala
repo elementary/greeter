@@ -77,35 +77,58 @@ public class LoggedInIcon : GtkClutter.Texture {
 }
 
 public class Avatar : GtkClutter.Actor {
-
     Gdk.Pixbuf image;
-
     Gtk.EventBox box = new Gtk.EventBox ();
 
+    const int PADDING = 10;
+
     public Avatar (LoginOption user) {
+        image = user.avatar;
 
         opacity = 0;
-        box.set_size_request (96, 96);
         box.valign = Gtk.Align.START;
         box.visible_window = false;
 
-        image = user.avatar;
+        if (image != null)
+            box.set_size_request (image.width + PADDING, image.height + PADDING);
+
+        string CSS = """
+        .avatar {
+            border-radius: 50%;
+            border: 1px solid rgba(0, 0, 0, 0.25);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+                        inset 0 1px 0 0 rgba(255, 255, 255, 0.45),
+                        inset 0 -1px 0 0 rgba(255, 255, 255, 0.15),
+                        0 1px 3px rgba(0, 0, 0, 0.12),
+                        0 1px 2px rgba(0,0, 0, 0.24);
+        }
+        """;
+
+        Granite.Widgets.Utils.set_theming (box, CSS, "avatar", Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         box.draw.connect ((ctx) => {
+/*
             ctx.set_operator (Cairo.Operator.CLEAR);
             ctx.paint ();
-
             ctx.set_operator (Cairo.Operator.OVER);
-            // 48 = min (width / 2, height / 2)
-            Granite.Drawing.Utilities.cairo_rounded_rectangle (ctx, 0, 0,
-                box.get_allocated_width (), box.get_allocated_height (), 48);
-            Gdk.cairo_set_source_pixbuf (ctx, image, 0, 0);
-            ctx.fill_preserve ();
-            ctx.set_line_width (0);
-            ctx.set_source_rgba (0, 0, 0, 0.3);
-            ctx.stroke ();
+*/          
+
+            int width = box.get_allocated_width ();
+            int height = box.get_allocated_height ();
+            
+            //var val = Value (typeof (int));
+            var style_context = box.get_style_context ();
+            //style_context.get_style_property (Gtk.STYLE_PROPERTY_BORDER_RADIUS, val);
+
+            int offset = PADDING / 2;
+
+            style_context.render_background (ctx, offset - 1, offset - 1, width - PADDING + 2, height - PADDING + 2);
+            style_context.render_frame (ctx, offset - 1, offset - 1, width - PADDING + 2, height - PADDING + 2);
+            style_context.render_icon (ctx, image, offset, offset);
+
             return false;
         });
+
         this.contents = box;
     }
 
