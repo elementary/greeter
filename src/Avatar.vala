@@ -98,7 +98,12 @@ public class Avatar : GtkClutter.Actor {
             int height = box.get_allocated_height () - MARGIN * 2;
 
             var style_context = box.get_style_context ();
-            style_context.render_icon (ctx, image, MARGIN, MARGIN);
+            var border_radius = style_context.get_property (Gtk.STYLE_PROPERTY_BORDER_RADIUS,
+                                                            Gtk.StateFlags.NORMAL);
+            Granite.Drawing.Utilities.cairo_rounded_rectangle (ctx, MARGIN, MARGIN, width,
+                                                               height, (int) border_radius);
+            Gdk.cairo_set_source_pixbuf (ctx, image, MARGIN, MARGIN);
+            ctx.fill_preserve ();
             style_context.render_background (ctx, MARGIN, MARGIN, width, height);
             style_context.render_frame (ctx, MARGIN, MARGIN, width, height);
 
