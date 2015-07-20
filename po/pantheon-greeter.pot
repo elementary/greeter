@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-06 16:32-0600\n"
+"POT-Creation-Date: 2015-07-20 15:51-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,6 +29,10 @@ msgstr ""
 msgid " %p"
 msgstr ""
 
+#: ../src/CredentialsArea.vala:78
+msgid "Log In"
+msgstr ""
+
 #: ../src/PantheonUser.vala:156
 msgid "Guest session"
 msgstr ""
@@ -37,12 +41,8 @@ msgstr ""
 msgid "Manual Login"
 msgstr ""
 
-#: ../src/Indicators/AccessibilityMenu.vala:22
-msgid "Onscreen Keyboard"
-msgstr ""
-
-#: ../src/Indicators/AccessibilityMenu.vala:34
-msgid "HighContrast"
+#: ../src/Indicators/KeyboardLayoutMenu.vala:61
+msgid "No other keyboard layouts available"
 msgstr ""
 
 #: ../src/Indicators/PowerMenu.vala:16
@@ -61,10 +61,10 @@ msgstr ""
 msgid "Hibernate"
 msgstr ""
 
-#: ../src/Indicators/KeyboardLayoutMenu.vala:61
-msgid "No other keyboard layouts available"
+#: ../src/Indicators/AccessibilityMenu.vala:22
+msgid "Onscreen Keyboard"
 msgstr ""
 
-#: ../src/CredentialsArea.vala:78
-msgid "Login"
+#: ../src/Indicators/AccessibilityMenu.vala:34
+msgid "HighContrast"
 msgstr ""
