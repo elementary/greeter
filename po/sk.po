@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-06 16:32-0600\n"
+"POT-Creation-Date: 2015-07-20 15:51-0500\n"
 "PO-Revision-Date: 2014-11-29 20:06+0000\n"
 "Last-Translator: Igor Štefanko <istefanko@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-20 04:49+0000\n"
+"X-Launchpad-Export-Date: 2015-07-21 05:25+0000\n"
 "X-Generator: Launchpad (build 17628)\n"
 
 #: ../src/ShadowedLabel.vala:102
@@ -29,6 +29,10 @@ msgstr "%H:%M"
 msgid " %p"
 msgstr " %p"
 
+#: ../src/CredentialsArea.vala:78
+msgid "Log In"
+msgstr ""
+
 #: ../src/PantheonUser.vala:156
 msgid "Guest session"
 msgstr "Relácia pre hosťa"
@@ -37,13 +41,9 @@ msgstr "Relácia pre hosťa"
 msgid "Manual Login"
 msgstr "Manuálne prihlásenie"
 
-#: ../src/Indicators/AccessibilityMenu.vala:22
-msgid "Onscreen Keyboard"
-msgstr "Klávesnica na obrazovke"
-
-#: ../src/Indicators/AccessibilityMenu.vala:34
-msgid "HighContrast"
-msgstr "Vysoký kontrast"
+#: ../src/Indicators/KeyboardLayoutMenu.vala:61
+msgid "No other keyboard layouts available"
+msgstr "Žiadne iné rozloženie klávesnice nie je dostupné"
 
 #: ../src/Indicators/PowerMenu.vala:16
 msgid "Shutdown"
@@ -61,10 +61,13 @@ msgstr "Reštartovať"
 msgid "Hibernate"
 msgstr "Režim spánku"
 
-#: ../src/Indicators/KeyboardLayoutMenu.vala:61
-msgid "No other keyboard layouts available"
-msgstr "Žiadne iné rozloženie klávesnice nie je dostupné"
+#: ../src/Indicators/AccessibilityMenu.vala:22
+msgid "Onscreen Keyboard"
+msgstr "Klávesnica na obrazovke"
 
-#: ../src/CredentialsArea.vala:78
-msgid "Login"
-msgstr "Prihlásenie"
+#: ../src/Indicators/AccessibilityMenu.vala:34
+msgid "HighContrast"
+msgstr "Vysoký kontrast"
+
+#~ msgid "Login"
+#~ msgstr "Prihlásenie"

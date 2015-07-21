@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-06 16:32-0600\n"
+"POT-Creation-Date: 2015-07-20 15:51-0500\n"
 "PO-Revision-Date: 2014-10-11 07:33+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-20 04:49+0000\n"
+"X-Launchpad-Export-Date: 2015-07-21 05:25+0000\n"
 "X-Generator: Launchpad (build 17628)\n"
 
 #: ../src/ShadowedLabel.vala:102
@@ -29,6 +29,10 @@ msgstr "%l:%M"
 msgid " %p"
 msgstr " %p"
 
+#: ../src/CredentialsArea.vala:78
+msgid "Log In"
+msgstr ""
+
 #: ../src/PantheonUser.vala:156
 msgid "Guest session"
 msgstr "Sesi Tetamu"
@@ -37,13 +41,9 @@ msgstr "Sesi Tetamu"
 msgid "Manual Login"
 msgstr "Daftar  Masuk Manual"
 
-#: ../src/Indicators/AccessibilityMenu.vala:22
-msgid "Onscreen Keyboard"
-msgstr "Papan Kekunci Atas Skrin"
-
-#: ../src/Indicators/AccessibilityMenu.vala:34
-msgid "HighContrast"
-msgstr "Beza Jelas Tinggi"
+#: ../src/Indicators/KeyboardLayoutMenu.vala:61
+msgid "No other keyboard layouts available"
+msgstr "Tiada bentangan papan kekunci lain tersedia"
 
 #: ../src/Indicators/PowerMenu.vala:16
 msgid "Shutdown"
@@ -61,10 +61,13 @@ msgstr "Mula Semula"
 msgid "Hibernate"
 msgstr "Hibernasi"
 
-#: ../src/Indicators/KeyboardLayoutMenu.vala:61
-msgid "No other keyboard layouts available"
-msgstr "Tiada bentangan papan kekunci lain tersedia"
+#: ../src/Indicators/AccessibilityMenu.vala:22
+msgid "Onscreen Keyboard"
+msgstr "Papan Kekunci Atas Skrin"
 
-#: ../src/CredentialsArea.vala:78
-msgid "Login"
-msgstr "Daftar Masuk"
+#: ../src/Indicators/AccessibilityMenu.vala:34
+msgid "HighContrast"
+msgstr "Beza Jelas Tinggi"
+
+#~ msgid "Login"
+#~ msgstr "Daftar Masuk"
