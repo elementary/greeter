@@ -20,11 +20,20 @@
 ***/
 
 public class Indicators.EntryList : Gee.ArrayList<IndicatorEntry> {
-    public signal void list_changed ();
+    // The order in which the indicators are shown from left to right.
+    private const string[] INDICATOR_ORDER = {
+        Wingpanel.Indicator.KEYBOARD,
+        Wingpanel.Indicator.SOUND,
+        Wingpanel.Indicator.NETWORK,
+        Wingpanel.Indicator.BLUETOOTH,
+        Wingpanel.Indicator.PRINTER,
+        Wingpanel.Indicator.SYNC,
+        Wingpanel.Indicator.POWER,
+        Wingpanel.Indicator.MESSAGES,
+        Wingpanel.Indicator.SESSION
+    };
 
-    public EntryList () {
-        connect_signals ();
-    }
+    public signal void list_changed ();
 
     public async void resort () {
         message ("Resorting indicators...");
@@ -50,17 +59,9 @@ public class Indicators.EntryList : Gee.ArrayList<IndicatorEntry> {
         list_changed ();
     }
 
-    private void connect_signals () {
-        WingpanelSettings.get_default ().notify["order"].connect (() => {
-            resort.begin ();
-        });
-    }
-
     private int get_item_index (string item) {
-        var items = WingpanelSettings.get_default ().order;
-
-        for (int i = 0; i < items.length; i++) {
-            if (items[i].down () == item)
+        for (int i = 0; i < INDICATOR_ORDER.length; i++) {
+            if (INDICATOR_ORDER[i].down () == item)
                 return i;
         }
 
