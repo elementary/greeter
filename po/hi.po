@@ -8,38 +8,38 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-07-20 15:51-0500\n"
-"PO-Revision-Date: 2015-07-25 07:32+0000\n"
-"Last-Translator: Anand Kumar <Unknown>\n"
+"PO-Revision-Date: 2015-09-18 03:39+0000\n"
+"Last-Translator: Vishal Biswas <vshlbiswas@ymail.com>\n"
 "Language-Team: Hindi <hi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-26 05:24+0000\n"
-"X-Generator: Launchpad (build 17628)\n"
+"X-Launchpad-Export-Date: 2015-09-18 05:25+0000\n"
+"X-Generator: Launchpad (build 17746)\n"
 
 #: ../src/ShadowedLabel.vala:102
 msgid "%A, %B %e%v"
-msgstr ""
+msgstr "%A, %B %e %v"
 
 #: ../src/ShadowedLabel.vala:104
 msgid "%l:%M"
-msgstr ""
+msgstr "%l:%M"
 
 #: ../src/ShadowedLabel.vala:107
 msgid " %p"
-msgstr ""
+msgstr " %p"
 
 #: ../src/CredentialsArea.vala:78
 msgid "Log In"
-msgstr "सत्रारंभ"
+msgstr "लॉग इन करें"
 
 #: ../src/PantheonUser.vala:156
 msgid "Guest session"
-msgstr ""
+msgstr "अतिथि सत्र"
 
 #: ../src/PantheonUser.vala:175
 msgid "Manual Login"
-msgstr ""
+msgstr "मैनुअल लॉगिन"
 
 #: ../src/Indicators/KeyboardLayoutMenu.vala:61
 msgid "No other keyboard layouts available"
@@ -63,11 +63,11 @@ msgstr "सुप्तावस्था मे डालें"
 
 #: ../src/Indicators/AccessibilityMenu.vala:22
 msgid "Onscreen Keyboard"
-msgstr ""
+msgstr "स्क्रीन पर कीबोर्ड"
 
 #: ../src/Indicators/AccessibilityMenu.vala:34
 msgid "HighContrast"
-msgstr ""
+msgstr "उच्च-कंट्रास्ट"
 
 #~ msgid "Login"
 #~ msgstr "लॉग इन"
