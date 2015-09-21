@@ -45,6 +45,7 @@ public class PasswordArea : CredentialsArea {
         password.set_visibility (false);
         password.hexpand = true;
         password.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
+        password.set_icon_tooltip_text (Gtk.EntryIconPosition.SECONDARY, _("Log In"));
         password.icon_press.connect ((pos, event) => {
             if (pos == Gtk.EntryIconPosition.SECONDARY) {
                 replied (password.text);
