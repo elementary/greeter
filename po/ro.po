@@ -7,42 +7,26 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-07-20 15:51-0500\n"
+"POT-Creation-Date: 2015-09-17 19:14+0200\n"
 "PO-Revision-Date: 2013-06-20 17:34+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-21 05:25+0000\n"
-"X-Generator: Launchpad (build 17628)\n"
+"X-Launchpad-Export-Date: 2015-09-22 05:49+0000\n"
+"X-Generator: Launchpad (build 17749)\n"
 
-#: ../src/ShadowedLabel.vala:102
-msgid "%A, %B %e%v"
-msgstr ""
-
-#: ../src/ShadowedLabel.vala:104
-msgid "%l:%M"
-msgstr ""
-
-#: ../src/ShadowedLabel.vala:107
-msgid " %p"
-msgstr ""
-
-#: ../src/CredentialsArea.vala:78
+#: ../src/CredentialsArea.vala:48 ../src/CredentialsArea.vala:79
 msgid "Log In"
 msgstr ""
 
-#: ../src/PantheonUser.vala:156
-msgid "Guest session"
+#: ../src/Indicators/AccessibilityMenu.vala:22
+msgid "Onscreen Keyboard"
 msgstr ""
 
-#: ../src/PantheonUser.vala:175
-msgid "Manual Login"
-msgstr ""
-
-#: ../src/Indicators/KeyboardLayoutMenu.vala:61
-msgid "No other keyboard layouts available"
+#: ../src/Indicators/AccessibilityMenu.vala:34
+msgid "HighContrast"
 msgstr ""
 
 #: ../src/Indicators/PowerMenu.vala:16
@@ -61,10 +45,26 @@ msgstr ""
 msgid "Hibernate"
 msgstr ""
 
-#: ../src/Indicators/AccessibilityMenu.vala:22
-msgid "Onscreen Keyboard"
+#: ../src/Indicators/KeyboardLayoutMenu.vala:61
+msgid "No other keyboard layouts available"
 msgstr ""
 
-#: ../src/Indicators/AccessibilityMenu.vala:34
-msgid "HighContrast"
+#: ../src/PantheonUser.vala:156
+msgid "Guest session"
+msgstr ""
+
+#: ../src/PantheonUser.vala:175
+msgid "Manual Login"
+msgstr ""
+
+#: ../src/ShadowedLabel.vala:102
+msgid "%A, %B %e%v"
+msgstr ""
+
+#: ../src/ShadowedLabel.vala:104
+msgid "%l:%M"
+msgstr ""
+
+#: ../src/ShadowedLabel.vala:107
+msgid " %p"
 msgstr ""

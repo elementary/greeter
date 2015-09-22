@@ -7,43 +7,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-07-20 15:51-0500\n"
+"POT-Creation-Date: 2015-09-17 19:14+0200\n"
 "PO-Revision-Date: 2015-08-01 07:48+0000\n"
 "Last-Translator: colindemian <dengmengpc@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-02 05:23+0000\n"
-"X-Generator: Launchpad (build 17656)\n"
+"X-Launchpad-Export-Date: 2015-09-22 05:49+0000\n"
+"X-Generator: Launchpad (build 17749)\n"
 
-#: ../src/ShadowedLabel.vala:102
-msgid "%A, %B %e%v"
-msgstr "%b%e日，%A"
-
-#: ../src/ShadowedLabel.vala:104
-msgid "%l:%M"
-msgstr "%l:%M"
-
-#: ../src/ShadowedLabel.vala:107
-msgid " %p"
-msgstr " %p"
-
-#: ../src/CredentialsArea.vala:78
+#: ../src/CredentialsArea.vala:48 ../src/CredentialsArea.vala:79
 msgid "Log In"
 msgstr "登录"
 
-#: ../src/PantheonUser.vala:156
-msgid "Guest session"
-msgstr "访客会话"
+#: ../src/Indicators/AccessibilityMenu.vala:22
+msgid "Onscreen Keyboard"
+msgstr "屏幕键盘"
 
-#: ../src/PantheonUser.vala:175
-msgid "Manual Login"
-msgstr "手动登录"
-
-#: ../src/Indicators/KeyboardLayoutMenu.vala:61
-msgid "No other keyboard layouts available"
-msgstr "无其他键盘布局可用"
+#: ../src/Indicators/AccessibilityMenu.vala:34
+msgid "HighContrast"
+msgstr "高对比度"
 
 #: ../src/Indicators/PowerMenu.vala:16
 msgid "Shutdown"
@@ -61,13 +45,29 @@ msgstr "重启"
 msgid "Hibernate"
 msgstr "休眠"
 
-#: ../src/Indicators/AccessibilityMenu.vala:22
-msgid "Onscreen Keyboard"
-msgstr "屏幕键盘"
+#: ../src/Indicators/KeyboardLayoutMenu.vala:61
+msgid "No other keyboard layouts available"
+msgstr "无其他键盘布局可用"
 
-#: ../src/Indicators/AccessibilityMenu.vala:34
-msgid "HighContrast"
-msgstr "高对比度"
+#: ../src/PantheonUser.vala:156
+msgid "Guest session"
+msgstr "访客会话"
+
+#: ../src/PantheonUser.vala:175
+msgid "Manual Login"
+msgstr "手动登录"
+
+#: ../src/ShadowedLabel.vala:102
+msgid "%A, %B %e%v"
+msgstr "%b%e日，%A"
+
+#: ../src/ShadowedLabel.vala:104
+msgid "%l:%M"
+msgstr "%l:%M"
+
+#: ../src/ShadowedLabel.vala:107
+msgid " %p"
+msgstr " %p"
 
 #~ msgid "Login"
 #~ msgstr "登录"

@@ -7,43 +7,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-07-20 15:51-0500\n"
+"POT-Creation-Date: 2015-09-17 19:14+0200\n"
 "PO-Revision-Date: 2015-08-20 11:59+0000\n"
 "Last-Translator: Papp Ferenc <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-21 05:26+0000\n"
-"X-Generator: Launchpad (build 17690)\n"
+"X-Launchpad-Export-Date: 2015-09-22 05:49+0000\n"
+"X-Generator: Launchpad (build 17749)\n"
 
-#: ../src/ShadowedLabel.vala:102
-msgid "%A, %B %e%v"
-msgstr "%B %e., %A"
-
-#: ../src/ShadowedLabel.vala:104
-msgid "%l:%M"
-msgstr "%k.%M"
-
-#: ../src/ShadowedLabel.vala:107
-msgid " %p"
-msgstr " %p"
-
-#: ../src/CredentialsArea.vala:78
+#: ../src/CredentialsArea.vala:48 ../src/CredentialsArea.vala:79
 msgid "Log In"
 msgstr "Bejelentkezés"
 
-#: ../src/PantheonUser.vala:156
-msgid "Guest session"
-msgstr "Vendég-munkamenet"
+#: ../src/Indicators/AccessibilityMenu.vala:22
+msgid "Onscreen Keyboard"
+msgstr "Képernyő-billentyűzet"
 
-#: ../src/PantheonUser.vala:175
-msgid "Manual Login"
-msgstr "Kézi bejelentkezés"
-
-#: ../src/Indicators/KeyboardLayoutMenu.vala:61
-msgid "No other keyboard layouts available"
-msgstr "Nincs más elérhető billentyűzetkiosztás"
+#: ../src/Indicators/AccessibilityMenu.vala:34
+msgid "HighContrast"
+msgstr "Nagy kontraszt"
 
 #: ../src/Indicators/PowerMenu.vala:16
 msgid "Shutdown"
@@ -61,13 +45,29 @@ msgstr "Újraindítás"
 msgid "Hibernate"
 msgstr "Hibernálás"
 
-#: ../src/Indicators/AccessibilityMenu.vala:22
-msgid "Onscreen Keyboard"
-msgstr "Képernyő-billentyűzet"
+#: ../src/Indicators/KeyboardLayoutMenu.vala:61
+msgid "No other keyboard layouts available"
+msgstr "Nincs más elérhető billentyűzetkiosztás"
 
-#: ../src/Indicators/AccessibilityMenu.vala:34
-msgid "HighContrast"
-msgstr "Nagy kontraszt"
+#: ../src/PantheonUser.vala:156
+msgid "Guest session"
+msgstr "Vendég-munkamenet"
+
+#: ../src/PantheonUser.vala:175
+msgid "Manual Login"
+msgstr "Kézi bejelentkezés"
+
+#: ../src/ShadowedLabel.vala:102
+msgid "%A, %B %e%v"
+msgstr "%B %e., %A"
+
+#: ../src/ShadowedLabel.vala:104
+msgid "%l:%M"
+msgstr "%k.%M"
+
+#: ../src/ShadowedLabel.vala:107
+msgid " %p"
+msgstr " %p"
 
 #~ msgid "Login"
 #~ msgstr "Bejelentkezés"

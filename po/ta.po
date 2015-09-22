@@ -7,43 +7,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-07-20 15:51-0500\n"
+"POT-Creation-Date: 2015-09-17 19:14+0200\n"
 "PO-Revision-Date: 2015-08-25 16:09+0000\n"
 "Last-Translator: Raghavan <raghavan.energy@gmail.com>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-26 06:02+0000\n"
-"X-Generator: Launchpad (build 17690)\n"
+"X-Launchpad-Export-Date: 2015-09-22 05:49+0000\n"
+"X-Generator: Launchpad (build 17749)\n"
 
-#: ../src/ShadowedLabel.vala:102
-msgid "%A, %B %e%v"
-msgstr "%A, %B %e%v"
-
-#: ../src/ShadowedLabel.vala:104
-msgid "%l:%M"
-msgstr "%l:%M"
-
-#: ../src/ShadowedLabel.vala:107
-msgid " %p"
-msgstr " %p"
-
-#: ../src/CredentialsArea.vala:78
+#: ../src/CredentialsArea.vala:48 ../src/CredentialsArea.vala:79
 msgid "Log In"
 msgstr "உள்நுழை"
 
-#: ../src/PantheonUser.vala:156
-msgid "Guest session"
-msgstr "விருந்தினர் அமர்வை"
+#: ../src/Indicators/AccessibilityMenu.vala:22
+msgid "Onscreen Keyboard"
+msgstr "திரையின் மேல் தோன்றும் விசைப்பலகை"
 
-#: ../src/PantheonUser.vala:175
-msgid "Manual Login"
-msgstr ""
-
-#: ../src/Indicators/KeyboardLayoutMenu.vala:61
-msgid "No other keyboard layouts available"
-msgstr "வேறு எந்த விசைப்பலகை அமைப்பும் இல்லை"
+#: ../src/Indicators/AccessibilityMenu.vala:34
+msgid "HighContrast"
+msgstr "உயர்நிறமாறுபாடு"
 
 #: ../src/Indicators/PowerMenu.vala:16
 msgid "Shutdown"
@@ -61,13 +45,29 @@ msgstr "மீள்துவக்கம்"
 msgid "Hibernate"
 msgstr "இடை உறக்கம்"
 
-#: ../src/Indicators/AccessibilityMenu.vala:22
-msgid "Onscreen Keyboard"
-msgstr "திரையின் மேல் தோன்றும் விசைப்பலகை"
+#: ../src/Indicators/KeyboardLayoutMenu.vala:61
+msgid "No other keyboard layouts available"
+msgstr "வேறு எந்த விசைப்பலகை அமைப்பும் இல்லை"
 
-#: ../src/Indicators/AccessibilityMenu.vala:34
-msgid "HighContrast"
-msgstr "உயர்நிறமாறுபாடு"
+#: ../src/PantheonUser.vala:156
+msgid "Guest session"
+msgstr "விருந்தினர் அமர்வை"
+
+#: ../src/PantheonUser.vala:175
+msgid "Manual Login"
+msgstr ""
+
+#: ../src/ShadowedLabel.vala:102
+msgid "%A, %B %e%v"
+msgstr "%A, %B %e%v"
+
+#: ../src/ShadowedLabel.vala:104
+msgid "%l:%M"
+msgstr "%l:%M"
+
+#: ../src/ShadowedLabel.vala:107
+msgid " %p"
+msgstr " %p"
 
 #~ msgid "Login"
 #~ msgstr "உள்நுழை"
