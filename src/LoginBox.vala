@@ -62,7 +62,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
     public LoginBox (LoginOption user) {
         this.user = user;
         this.reactive = true;
-        this.scale_gravity = Clutter.Gravity.CENTER;
+        this.pivot_point = Clutter.Point.alloc ().init (0.5f, 0.5f);
 
         create_label ();
         create_credentials ();
@@ -74,7 +74,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                 update_avatar ();
             });
         }
-        show_all ();
     }
 
     void create_credentials () {
