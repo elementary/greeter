@@ -114,15 +114,30 @@ public class Wallpaper : Clutter.Group {
             new_wallpaper.set_from_pixbuf (buf);
             resize (new_wallpaper);
             add_child (new_wallpaper);
-            new_wallpaper.animate (Clutter.AnimationMode.EASE_OUT_QUINT, 500, opacity: 255);
+
+            new_wallpaper.save_easing_state ();
+            new_wallpaper.set_easing_mode (Clutter.AnimationMode.EASE_OUT_QUINT);
+            new_wallpaper.set_easing_duration (500);
+            new_wallpaper.set_opacity (255);
+            new_wallpaper.restore_easing_state ();
 
             // abort all currently loading wallpapers
             foreach (var c in loading_wallpapers) {
                 c.cancel ();
             }
+
             foreach (var other_wallpaper in wallpapers) {
                 wallpapers.remove (other_wallpaper);
-                other_wallpaper.animate (Clutter.AnimationMode.EASE_IN_QUINT, 500, opacity: 0).completed.connect (() => {
+
+                other_wallpaper.save_easing_state ();
+                other_wallpaper.set_easing_mode (Clutter.AnimationMode.EASE_IN_QUINT);
+                other_wallpaper.set_easing_duration (500);
+                other_wallpaper.set_opacity (0);
+                other_wallpaper.restore_easing_state ();
+
+                ulong sid = 0;
+                sid = other_wallpaper.transitions_completed.connect (() => {
+                    other_wallpaper.disconnect (sid);
                     remove_child (other_wallpaper);
                     unused_wallpapers.push_tail (other_wallpaper);
                 });

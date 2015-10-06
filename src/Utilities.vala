@@ -191,9 +191,13 @@ public class PopOver : GtkClutter.Actor {
         });
 
         this.leave_event.connect (() => {
-            this.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 200, opacity:0).
+            this.save_easing_state ();
+            this.set_easing_mode (Clutter.AnimationMode.EASE_OUT_QUAD);
+            this.set_easing_duration (200);
+            this.set_opacity (0);
+            this.restore_easing_state ();
 
-            completed.connect (() => {
+            transitions_completed.connect (() => {
                 this.get_stage ().remove_child (this);
                 this.destroy ();
             });
@@ -202,7 +206,13 @@ public class PopOver : GtkClutter.Actor {
         });
 
         this.opacity = 0;
-        this.animate (Clutter.AnimationMode.EASE_OUT_QUAD, 200, opacity:255);
+
+        this.save_easing_state ();
+        this.set_easing_mode (Clutter.AnimationMode.EASE_OUT_QUAD);
+        this.set_easing_duration (200);
+        this.set_opacity (255);
+        this.restore_easing_state ();
+
     }
 
     public Gtk.Widget get_content_area () {

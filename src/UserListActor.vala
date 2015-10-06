@@ -85,7 +85,12 @@ public class UserListActor : Clutter.Actor {
         for (int i = 0; i < userlist.size; i++) {
             LoginOption user = userlist.get_user (i);
             LoginBox box = boxes.get (user);
-            box.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 300, y: y_vars[i]);
+
+            box.save_easing_state ();
+            box.set_easing_mode (Clutter.AnimationMode.EASE_IN_OUT_QUAD);
+            box.set_easing_duration (300);
+            box.y = y_vars[i];
+            box.restore_easing_state ();
 
             box.selected = (user == current_user);
             if (user == current_user) {
