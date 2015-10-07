@@ -56,22 +56,23 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                     label.restore_easing_state ();
                 }
             } else {
-                if (avatar != null)
+
+                if (avatar != null) {
                     avatar.deselect ();
+                }
 
                 label.save_easing_state ();
                 label.set_easing_mode (Clutter.AnimationMode.EASE_IN_OUT_QUAD);
                 label.set_easing_duration (200);
                 label.set_opacity (255);
                 label.restore_easing_state ();
-
             }
+
             credentials_actor.save_easing_state ();
             credentials_actor.set_easing_mode (Clutter.AnimationMode.EASE_IN_OUT_QUAD);
             credentials_actor.set_easing_duration (200);
             credentials_actor.opacity = opacity;
             credentials_actor.restore_easing_state ();
-
         }
     }
 

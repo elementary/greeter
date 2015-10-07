@@ -119,7 +119,6 @@ public class Avatar : GtkClutter.Actor {
         set_easing_duration (400);
         set_opacity (255);
         restore_easing_state ();
-
     }
 
     public void fade_out () {
