@@ -213,7 +213,11 @@ public class PantheonGreeter : Gtk.Window {
 
         scroll_event.connect (scroll_navigation);
 
-        greeterbox.animate (Clutter.AnimationMode.EASE_OUT_QUART, 250, opacity: 255);
+        greeterbox.save_easing_state ();
+        greeterbox.set_easing_mode (Clutter.AnimationMode.EASE_OUT_QUART);
+        greeterbox.set_easing_duration (250);
+        greeterbox.set_opacity (255);
+        greeterbox.restore_easing_state ();
 
         message ("Selecting last used user...");
 

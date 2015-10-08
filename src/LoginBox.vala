@@ -48,14 +48,31 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                 // will display a Gtk.Entry for that and we need to hide
                 // the label that would otherwise be at the same position
                 // as the mentioned entry.
-                if (!user.provides_login_name)
-                    label.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 200, "opacity", 0);
+                if (!user.provides_login_name) {
+                    label.save_easing_state ();
+                    label.set_easing_mode (Clutter.AnimationMode.EASE_IN_OUT_QUAD);
+                    label.set_easing_duration (200);
+                    label.set_opacity (0);
+                    label.restore_easing_state ();
+                }
             } else {
-                if (avatar != null)
+
+                if (avatar != null) {
                     avatar.deselect ();
-                label.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 200, "opacity", 255);
+                }
+
+                label.save_easing_state ();
+                label.set_easing_mode (Clutter.AnimationMode.EASE_IN_OUT_QUAD);
+                label.set_easing_duration (200);
+                label.set_opacity (255);
+                label.restore_easing_state ();
             }
-            credentials_actor.animate (Clutter.AnimationMode.EASE_IN_OUT_QUAD, 200, "opacity", opacity);
+
+            credentials_actor.save_easing_state ();
+            credentials_actor.set_easing_mode (Clutter.AnimationMode.EASE_IN_OUT_QUAD);
+            credentials_actor.set_easing_duration (200);
+            credentials_actor.opacity = opacity;
+            credentials_actor.restore_easing_state ();
         }
     }
 
