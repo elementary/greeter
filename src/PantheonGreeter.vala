@@ -459,7 +459,9 @@ public static int main (string [] args) {
     Intl.bind_textdomain_codeset ("pantheon-greeter", "UTF-8");
     Intl.textdomain ("pantheon-greeter");
 
-    Gdk.get_default_root_window ().set_cursor (new Gdk.Cursor (Gdk.CursorType.LEFT_PTR));
+    var cursor = new Gdk.Cursor.for_display (Gdk.Display.get_default (),
+                                             Gdk.CursorType.LEFT_PTR);
+    Gdk.get_default_root_window ().set_cursor (cursor);
 
     var settings = Gtk.Settings.get_default ();
     settings.gtk_theme_name = "elementary";

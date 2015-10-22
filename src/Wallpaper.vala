@@ -220,8 +220,8 @@ public class Wallpaper : Clutter.Group {
     }
 
     void resize (GtkClutter.Texture tex) {
-        int w, h;
-        tex.get_base_size (out w, out h);
+        float w, h;
+        (tex as Clutter.Content).get_preferred_size (out w, out h);
 
         if (width > (w * height) / h) {
             tex.width = width;
