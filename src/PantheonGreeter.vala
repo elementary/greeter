@@ -221,21 +221,15 @@ public class PantheonGreeter : Gtk.Window {
 
         var last_user = get_greeter_state ("last-user");
         var select_user = login_gateway.select_user;
+        var switch_to_user = (select_user != null) ? select_user : last_user;
 
-        if (select_user != null) {
+        if (switch_to_user != null) {
             for (var i = 0; i < userlist.size; i++) {
-                if (userlist.get_user (i).name == select_user) {
+                if (userlist.get_user (i).name == switch_to_user) {
                     userlist.current_user = userlist.get_user (i);
                     break;
                 }
             }            
-        } else if (last_user != null) {
-            for (var i = 0; i < userlist.size; i++) {
-                if (userlist.get_user (i).name == last_user) {
-                    userlist.current_user = userlist.get_user (i);
-                    break;
-                }
-            }
         }
 
         if (userlist.current_user == null)
