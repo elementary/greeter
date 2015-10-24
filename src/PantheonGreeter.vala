@@ -219,9 +219,8 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.set_opacity (255);
         greeterbox.restore_easing_state ();
 
-        var last_user = get_greeter_state ("last-user");
         var select_user = login_gateway.select_user;
-        var switch_to_user = (select_user != null) ? select_user : last_user;
+        var switch_to_user = (select_user != null) ? select_user : get_greeter_state ("last-user");
 
         if (switch_to_user != null) {
             for (var i = 0; i < userlist.size; i++) {
