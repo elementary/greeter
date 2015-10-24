@@ -219,13 +219,17 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.set_opacity (255);
         greeterbox.restore_easing_state ();
 
-        message ("Selecting last used user...");
-
         var last_user = get_greeter_state ("last-user");
+        var select_user = login_gateway.select_user;
 
-        if (last_user == null) {
-            warning ("last user not set");
-        } else {
+        if (select_user != null) {
+            for (var i = 0; i < userlist.size; i++) {
+                if (userlist.get_user (i).name == select_user) {
+                    userlist.current_user = userlist.get_user (i);
+                    break;
+                }
+            }            
+        } else if (last_user != null) {
             for (var i = 0; i < userlist.size; i++) {
                 if (userlist.get_user (i).name == last_user) {
                     userlist.current_user = userlist.get_user (i);

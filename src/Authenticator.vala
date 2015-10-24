@@ -81,6 +81,7 @@ public interface LoginGateway : GLib.Object {
     public abstract bool show_manual_login { get; }
     public abstract bool lock { get; }
     public abstract string default_session { get; }
+    public abstract string? select_user { get; }
 
     /**
      * Starts the login-procedure for the passed
@@ -159,6 +160,11 @@ public class LightDMGateway : LoginGateway, Object {
     public string default_session {
         get {
             return lightdm.default_session_hint;
+        }
+    }
+    public string? select_user { 
+        get {
+            return lightdm.select_user_hint;
         }
     }
 
@@ -285,6 +291,7 @@ public class DummyGateway : LoginGateway, Object {
     public bool show_manual_login { get { return true; } }
     public bool lock { get {return false; } }
     public string default_session { get { return ""; } }
+    public string? select_user { get { return null; } }
 
     LoginMask last_login_mask;
 
