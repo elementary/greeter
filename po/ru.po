@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-09-17 19:14+0200\n"
-"PO-Revision-Date: 2015-10-23 21:33+0000\n"
-"Last-Translator: Kirill Ivaha <kirill.ivaha@gmail.com>\n"
+"PO-Revision-Date: 2015-11-09 22:23+0000\n"
+"Last-Translator: Maxim Taranov <png2378@protonmail.ch>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-01 05:23+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2015-11-10 04:48+0000\n"
+"X-Generator: Launchpad (build 17843)\n"
 
 #: ../src/CredentialsArea.vala:48 ../src/CredentialsArea.vala:79
 msgid "Log In"
-msgstr "Вход"
+msgstr "Войти"
 
 #: ../src/Indicators/AccessibilityMenu.vala:22
 msgid "Onscreen Keyboard"
@@ -59,11 +59,11 @@ msgstr "Ручной вход"
 
 #: ../src/ShadowedLabel.vala:102
 msgid "%A, %B %e%v"
-msgstr "%A, %B %e%v"
+msgstr "%A, %e %b"
 
 #: ../src/ShadowedLabel.vala:104
 msgid "%l:%M"
-msgstr "%l:%M"
+msgstr "%H:%M"
 
 #: ../src/ShadowedLabel.vala:107
 msgid " %p"
