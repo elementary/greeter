@@ -1,0 +1,70 @@
+# Georgian translation for pantheon-greeter
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# This file is distributed under the same license as the pantheon-greeter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pantheon-greeter\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-09-17 19:14+0200\n"
+"PO-Revision-Date: 2015-11-14 14:26+0000\n"
+"Last-Translator: Beqa Arabuli <arabulibeqa@yahoo.com>\n"
+"Language-Team: Georgian <ka@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2015-11-15 05:20+0000\n"
+"X-Generator: Launchpad (build 17845)\n"
+
+#: ../src/CredentialsArea.vala:48 ../src/CredentialsArea.vala:79
+msgid "Log In"
+msgstr "შესვლა"
+
+#: ../src/Indicators/AccessibilityMenu.vala:22
+msgid "Onscreen Keyboard"
+msgstr "ეკრანის კლავიატურა"
+
+#: ../src/Indicators/AccessibilityMenu.vala:34
+msgid "HighContrast"
+msgstr "მაღალი კონტრასტი"
+
+#: ../src/Indicators/PowerMenu.vala:16
+msgid "Shutdown"
+msgstr "გამორთვა"
+
+#: ../src/Indicators/PowerMenu.vala:17
+msgid "Suspend"
+msgstr "შეჩერება"
+
+#: ../src/Indicators/PowerMenu.vala:18
+msgid "Restart"
+msgstr "გადატვირთვა"
+
+#: ../src/Indicators/PowerMenu.vala:19
+msgid "Hibernate"
+msgstr "ძილის რეჟიმი"
+
+#: ../src/Indicators/KeyboardLayoutMenu.vala:61
+msgid "No other keyboard layouts available"
+msgstr "კლავიატურის სხვა გეგმა ხელმისაწვდომი არ არის"
+
+#: ../src/PantheonUser.vala:156
+msgid "Guest session"
+msgstr "სტუმრის სესია"
+
+#: ../src/PantheonUser.vala:175
+msgid "Manual Login"
+msgstr "შესვლა ხელით"
+
+#: ../src/ShadowedLabel.vala:102
+msgid "%A, %B %e%v"
+msgstr "%A, %B %e%v"
+
+#: ../src/ShadowedLabel.vala:104
+msgid "%l:%M"
+msgstr "%l:%M"
+
+#: ../src/ShadowedLabel.vala:107
+msgid " %p"
+msgstr " %p"
