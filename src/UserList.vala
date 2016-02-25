@@ -21,7 +21,7 @@
 
 [DBus (name = "org.freedesktop.Accounts.User")]
 interface AccountsServiceUser : Object {
-    public abstract bool Locked { get; }
+    public abstract bool locked { get; }
 }
 
 public class UserList : Object {
@@ -56,7 +56,7 @@ public class UserList : Object {
                     AccountsServiceUser accounts_user = Bus.get_proxy_sync (BusType.SYSTEM,
                         "org.freedesktop.Accounts",
                         "/org/freedesktop/Accounts/User" + uid);
-                    if (accounts_user.Locked == true) {
+                    if (accounts_user.locked == true) {
                         continue;
                     }
                 } catch (Error e) {
