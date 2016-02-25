@@ -19,6 +19,10 @@
     END LICENSE
 ***/
 
+[DBus (name = "org.freedesktop.Accounts.User")]
+interface AccountsServiceUser : Object {
+    public abstract bool Locked { get; }
+}
 
 public class UserList : Object {
 
@@ -46,6 +50,18 @@ public class UserList : Object {
         int index = 0;
         if (!PantheonGreeter.login_gateway.hide_users) {
             foreach (LightDM.User this_user in ld_users.users) {
+
+                try {
+                    string uid = "%d".printf ((int) this_user.get_uid ());
+                    AccountsServiceUser accounts_user = Bus.get_proxy_sync (BusType.SYSTEM,
+                        "org.freedesktop.Accounts",
+                        "/org/freedesktop/Accounts/User" + uid);
+                    if (accounts_user.Locked == true) {
+                        continue;
+                    }
+                } catch (Error e) {
+                    warning (e.message);
+                }
                 users.add (new UserLogin (index, this_user));
                 index++;
             }
