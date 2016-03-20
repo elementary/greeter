@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-09-17 19:14+0200\n"
-"PO-Revision-Date: 2014-07-29 18:37+0000\n"
-"Last-Translator: Shawn McTear <Unknown>\n"
+"PO-Revision-Date: 2016-03-19 19:51+0000\n"
+"Last-Translator: chilledfrogs <Unknown>\n"
 "Language-Team: English (Canada) <en_CA@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-01 05:23+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2016-03-20 05:29+0000\n"
+"X-Generator: Launchpad (build 17947)\n"
 
 #: ../src/CredentialsArea.vala:48 ../src/CredentialsArea.vala:79
 msgid "Log In"
-msgstr ""
+msgstr "Log In"
 
 #: ../src/Indicators/AccessibilityMenu.vala:22
 msgid "Onscreen Keyboard"
@@ -47,7 +47,7 @@ msgstr "Hibernate"
 
 #: ../src/Indicators/KeyboardLayoutMenu.vala:61
 msgid "No other keyboard layouts available"
-msgstr ""
+msgstr "No other keyboard layouts available"
 
 #: ../src/PantheonUser.vala:156
 msgid "Guest session"
@@ -55,7 +55,7 @@ msgstr "Guest session"
 
 #: ../src/PantheonUser.vala:175
 msgid "Manual Login"
-msgstr ""
+msgstr "Manual Login"
 
 #: ../src/ShadowedLabel.vala:102
 msgid "%A, %B %e%v"
