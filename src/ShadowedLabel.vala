@@ -99,16 +99,12 @@ public class TimeLabel : ShadowedLabel {
 
         /*Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details.
           %v is added here to provide the English date suffixes th, nd and so on*/
-        var day_format = _("%A, %B %e%v");
+        var day_format = _("%A, %B %e");
         /*Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details*/
         var time_format = _("%l:%M");
         /*AM/PM display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details.
         If you translate in a language that has no equivalent for AM/PM, keep the original english string.*/
         var meridiem_format = _(" %p");
-
-        //there is no %v, but we need one, so we add one
-        var num = date.get_day_of_month ();
-        day_format = day_format.replace ("%v", get_english_number_suffix (num));
 
         label = date.format (
             "<span face='Open Sans Light' font='24'>"+
