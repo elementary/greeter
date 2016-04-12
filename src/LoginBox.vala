@@ -19,8 +19,6 @@
     END LICENSE
 ***/
 
-using Gtk;
-
 public class LoginBox : GtkClutter.Actor, LoginMask {
 
     SelectableAvatar avatar = null;
@@ -226,11 +224,11 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
 
         public signal void entered_login_name (string name);
 
-        Entry? login_name_entry = null;
-        ToggleButton settings;
+        Gtk.Entry? login_name_entry = null;
+        Gtk.ToggleButton settings;
 
         // Grid that contains all elements of the ui
-        Grid grid;
+        Gtk.Grid grid;
 
         LoginBox login_box;
 
@@ -247,7 +245,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             height = 188;
             credentials = null;
 
-            grid = new Grid ();
+            grid = new Gtk.Grid ();
 
             // If the login option doesn't provice a login name, we have to
             // show a entry for the user to enter one.
@@ -285,7 +283,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                 return false;
             });
 
-            ((Container) this.get_widget ()).add (grid);
+            ((Gtk.Container) this.get_widget ()).add (grid);
             this.get_widget ().show_all ();
         }
 
@@ -344,7 +342,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             replied.connect ((answer) => {
                 login_name_entry.sensitive = false;
             });
-            login_name_entry = new Entry ();
+            login_name_entry = new Gtk.Entry ();
             login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY,
                     "avatar-default-symbolic");
             login_name_entry.hexpand = true;
@@ -371,19 +369,19 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         }
 
         void create_entry_dummy () {
-            var dummy = new Grid ();
+            var dummy = new Gtk.Grid ();
             dummy.hexpand = true;
             dummy.margin_top = 8;
             grid.attach (dummy, 0, 0, 1, 1);
         }
 
         void create_settings () {
-            settings = new ToggleButton ();
-            settings.margin_left = 5;
+            settings = new Gtk.ToggleButton ();
+            settings.margin_left = 6;
             settings.margin_top = 6;
-            settings.relief = ReliefStyle.NONE;
-            settings.add (new Image.from_icon_name ("application-menu-symbolic", IconSize.MENU));
-            settings.valign = Align.START;
+            settings.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+            settings.add (new Gtk.Image.from_icon_name ("application-menu-symbolic", Gtk.IconSize.MENU));
+            settings.valign = Gtk.Align.START;
             settings.set_size_request (30, 30);
             grid.attach (settings, 1, 0, 1, 1);
             create_popup ();
@@ -396,13 +394,13 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
          * no settings-menu.
          */
         void create_settings_dummy () {
-            var dummy_grid = new Grid ();
+            var dummy_grid = new Gtk.Grid ();
             dummy_grid.set_size_request (30, 30);
             grid.attach (dummy_grid, 1, 0, 1, 1);
         }
 
         void create_popup () {
-            PopOver pop = null;
+            Gtk.Popover pop = null;
             /*session choose popover*/
             this.settings.toggled.connect (() => {
 
@@ -411,13 +409,18 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                     return;
                 }
 
-                pop = new PopOver ();
+                pop = new Gtk.Popover (settings);
+                pop.set_position (Gtk.PositionType.BOTTOM);
 
-                var box = new Box (Orientation.VERTICAL, 0);
-                (pop.get_content_area () as Container).add (box);
+                var grid = new Gtk.Grid ();
+                grid.margin_bottom = 3;
+                grid.margin_top = 3;
+                grid.orientation = Gtk.Orientation.VERTICAL;
+                pop.add (grid);
 
-                var but = new RadioButton.with_label (null, LightDM.get_sessions ().nth_data (0).name);
-                box.pack_start (but, false);
+                var but = new Gtk.RadioButton.with_label (null, LightDM.get_sessions ().nth_data (0).name);
+                but.get_style_context ().add_class (Gtk.STYLE_CLASS_MENUITEM);
+                grid.add (but);
                 but.active = LightDM.get_sessions ().nth_data (0).key == current_session;
 
                 but.toggled.connect (() => {
@@ -426,8 +429,10 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                 });
 
                 for (var i = 1;i < LightDM.get_sessions ().length (); i++) {
-                    var rad = new RadioButton.with_label_from_widget (but, LightDM.get_sessions ().nth_data (i).name);
-                    box.pack_start (rad, false);
+                    var rad = new Gtk.RadioButton.with_label_from_widget (but, LightDM.get_sessions ().nth_data (i).name);
+                    rad.get_style_context ().add_class (Gtk.STYLE_CLASS_MENUITEM);
+                    grid.add (rad);
+
                     rad.active = LightDM.get_sessions ().nth_data (i).key == current_session;
                     var identifier = LightDM.get_sessions ().nth_data (i).key;
                     rad.toggled.connect ( () => {
@@ -436,23 +441,9 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                     });
                 }
 
-                this.get_stage ().add_child (pop);
+                pop.show_all ();
 
-                float actor_x = 0;
-                float actor_y = 0;
-
-                this.get_transformed_position (out actor_x, out actor_y);
-
-                int po_x;
-                int po_y;
-                settings.translate_coordinates (grid, 10, 10, out po_x, out po_y);
-
-                pop.width = 245;
-                pop.x = actor_x + po_x - pop.width + 40;
-                pop.y = actor_y + po_y;
-                pop.get_widget ().show_all ();
-
-                pop.destroy.connect (() => {
+                pop.closed.connect (() => {
                     settings.active = false;
                 });
             });
