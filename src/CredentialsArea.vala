@@ -36,7 +36,7 @@ public class PasswordArea : CredentialsArea {
 
     void create_password_field () {
         password = new Entry ();
-        password.margin_top = 32;
+        password.margin_top = 24;
 
         password.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, 
                 "dialog-password-symbolic");

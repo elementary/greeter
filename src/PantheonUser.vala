@@ -49,8 +49,7 @@ public abstract class LoginOption : Object {
     }
 
     public string get_markup () {
-        return "<span face='Open Sans Light' font='24'>"
-                            + display_name + "</span>";
+        return display_name;
     }
 
     /**

@@ -458,7 +458,7 @@ public static int main (string [] args) {
     var settings = Gtk.Settings.get_default ();
     settings.gtk_theme_name = "elementary";
     settings.gtk_icon_theme_name = "elementary";
-    settings.gtk_font_name = "Droid Sans";
+    settings.gtk_font_name = "Open Sans";
     settings.gtk_xft_dpi= (int) (1024 * 96);
     settings.gtk_xft_antialias = 1;
     settings.gtk_xft_hintstyle = "hintslight";
