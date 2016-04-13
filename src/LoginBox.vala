@@ -353,10 +353,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             grid.attach (login_name_entry, 0, 0, 1, 1);
         }
 
-        void create_user_name () {
-
-        }
-
         void create_settings () {
             settings = new Gtk.ToggleButton ();
             settings.margin_left = 6;
