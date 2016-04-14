@@ -19,9 +19,7 @@
     END LICENSE
 ***/
 
-using Clutter;
-
-public class ShadowedLabel : Actor {
+public class ShadowedLabel : Clutter.Actor {
     Granite.Drawing.BufferSurface buffer;
 
     string _label = "";
@@ -46,13 +44,13 @@ public class ShadowedLabel : Actor {
     }
 
     public ShadowedLabel (string _label) {
-        content = new Canvas ();
-        (content as Canvas).draw.connect (draw);
+        content = new Clutter.Canvas ();
+        (content as Clutter.Canvas).draw.connect (draw);
 
         reactive = false;
 
-        notify["width"].connect (() => {(content as Canvas).set_size ((int) width, (int) height); buffer = null;});
-        notify["height"].connect (() => {(content as Canvas).set_size ((int) width, (int) height); buffer = null;});
+        notify["width"].connect (() => {(content as Clutter.Canvas).set_size ((int) width, (int) height); buffer = null;});
+        notify["height"].connect (() => {(content as Clutter.Canvas).set_size ((int) width, (int) height); buffer = null;});
 
         label = _label;
     }
@@ -82,64 +80,5 @@ public class ShadowedLabel : Actor {
         cr.paint ();
 
         return true;
-    }
-}
-
-public class TimeLabel : ShadowedLabel {
-
-    public TimeLabel () {
-        base ("");
-
-        update_time ();
-        Clutter.Threads.Timeout.add (5000, update_time);
-    }
-
-    bool update_time () {
-        var date = new GLib.DateTime.now_local ();
-
-        /*Date display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details.
-          %v is added here to provide the English date suffixes th, nd and so on*/
-        var day_format = _("%A, %B %e");
-        /*Time display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details*/
-        var time_format = _("%l:%M");
-        /*AM/PM display, see http://unstable.valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details.
-        If you translate in a language that has no equivalent for AM/PM, keep the original english string.*/
-        var meridiem_format = _(" %p");
-
-        label = date.format (
-            "<span face='Open Sans Light' font='24'>"+
-            day_format+
-            "</span>\n<span face='Raleway' weight='100' font='72'>"+
-            time_format+
-            "</span><span face='Raleway' weight='100' font='50'>"+
-            meridiem_format+
-            "</span>");
-        return true;
-    }
-
-    /**
-     * Utility to get the English number suffix
-     * @param number The number to find the the suffix for
-     * @return The according English suffix
-     **/
-    string get_english_number_suffix (int number) {
-        number %= 100;
-
-        if (number > 20)
-            number %= 10;
-
-        switch (number) {
-            case 1:
-                return "st";
-            case 2:
-                return "nd";
-            case 3:
-                return "rd";
-            case 11:
-            case 12:
-            case 13:
-            default:
-                return "th";
-        }
     }
 }
