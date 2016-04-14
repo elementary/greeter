@@ -24,7 +24,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
     SelectableAvatar avatar = null;
 
     CredentialsAreaActor credentials_actor;
-    ShadowedLabel label;
+    Gtk.Label label;
 
     LoginOption user;
 
@@ -47,11 +47,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                 // the label that would otherwise be at the same position
                 // as the mentioned entry.
                 if (!user.provides_login_name) {
-                    label.save_easing_state ();
-                    label.set_easing_mode (Clutter.AnimationMode.EASE_IN_OUT_QUAD);
-                    label.set_easing_duration (200);
                     label.set_opacity (0);
-                    label.restore_easing_state ();
                 }
             } else {
 
@@ -59,11 +55,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                     avatar.deselect ();
                 }
 
-                label.save_easing_state ();
-                label.set_easing_mode (Clutter.AnimationMode.EASE_IN_OUT_QUAD);
-                label.set_easing_duration (200);
                 label.set_opacity (255);
-                label.restore_easing_state ();
             }
 
             credentials_actor.save_easing_state ();
@@ -79,7 +71,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         this.reactive = true;
         this.pivot_point = Clutter.Point.alloc ().init (0.5f, 0.5f);
 
-        create_label ();
         create_credentials ();
 
         if (user.avatar_ready) {
@@ -105,16 +96,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         credentials_actor.entered_login_name.connect ((name) => {
             start_login ();
         });
-    }
-
-    void create_label () {
-        label = new ShadowedLabel (user.get_markup ());
-        label.height = 75;
-        label.width = 600;
-        label.y = 8;
-        label.reactive = true;
-        label.x = this.x + 120;
-        add_child (label);
     }
 
     /**
@@ -251,7 +232,11 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             // show a entry for the user to enter one.
             // This is for example used in the manual login.
             if (login_option.provides_login_name) {
-                create_entry_dummy ();
+                var label = new Gtk.Label (login_option.get_markup ());
+                label.get_style_context ().add_class ("h2");
+                label.halign = Gtk.Align.START;
+
+                grid.attach (label, 0, 0, 1, 1);
             } else {
                 create_login_name_entry ();
             }
@@ -366,13 +351,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                 return false;
             });
             grid.attach (login_name_entry, 0, 0, 1, 1);
-        }
-
-        void create_entry_dummy () {
-            var dummy = new Gtk.Grid ();
-            dummy.hexpand = true;
-            dummy.margin_top = 8;
-            grid.attach (dummy, 0, 0, 1, 1);
         }
 
         void create_settings () {
