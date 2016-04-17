@@ -222,11 +222,11 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         public CredentialsAreaActor (LoginBox login_box, LoginOption login_option) {
             this.login_box = login_box;
             current_session = login_option.session;
-            width = 260;
             height = 188;
             credentials = null;
 
             grid = new Gtk.Grid ();
+            grid.width_request = 260;
 
             // If the login option doesn't provice a login name, we have to
             // show a entry for the user to enter one.
