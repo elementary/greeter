@@ -131,7 +131,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
      * use. The values get smaller because the shaking should fade out to
      * look smooth.
      */
-    float[] shake_positions = {50, -80, 60, -30, 50, -80, 60, -30};
+    float[] shake_positions = {50, -80, 60, -30, 50, -80, 30};
 
     /**
      * Shakes the LoginBox and then sets selected back to true.
