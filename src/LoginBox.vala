@@ -1,6 +1,6 @@
 // -*- Mode: vala; indent-tabs-mode: nil; tab-width: 4 -*-
 /*
-* Copyright (c) 2011-2016 APP Developers (http://launchpad.net/pantheon-greeter)
+* Copyright (c) 2011-2016 elementary LLC. (http://launchpad.net/pantheon-greeter)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -230,7 +230,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
 
             settings = new Gtk.ToggleButton ();
             settings.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
-            settings.add (new Gtk.Image.from_icon_name ("application-menu-symbolic", Gtk.IconSize.MENU));
+            settings.image = new Gtk.Image.from_icon_name ("application-menu-symbolic", Gtk.IconSize.MENU);
             settings.set_size_request (32, 32);
             settings.valign = Gtk.Align.CENTER;
 
@@ -239,7 +239,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             settings_list.margin_top = 3;
 
             settings_popover = new Gtk.Popover (settings);
-            settings_popover.set_position (Gtk.PositionType.BOTTOM);
+            settings_popover.position = Gtk.PositionType.BOTTOM;
             settings_popover.add (settings_list);
 
             grid = new Gtk.Grid ();
@@ -370,11 +370,12 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                 radio_row.add (radio);
                 settings_list.add (radio_row);
 
-                radio.active = LightDM.get_sessions ().nth_data (i).key == current_session;
                 var identifier = LightDM.get_sessions ().nth_data (i).key;
+                radio.active = identifier == current_session;
                 radio.toggled.connect ( () => {
-                    if (radio.active)
+                    if (radio.active) {
                         current_session = identifier;
+                    }
                 });
             }
         }
