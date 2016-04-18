@@ -200,6 +200,8 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         Gtk.Entry? login_name_entry = null;
         Gtk.Grid grid;
         Gtk.Grid settings_grid;
+        Gtk.Popover settings_popover;
+        Gtk.ToggleButton settings;
 
         LoginBox login_box;
 
@@ -215,10 +217,18 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             height = 188;
             credentials = null;
 
-            var login_option_widget = get_login_option_widget (login_option);
-            login_option_widget.width_request = 260;
+            var login_name_label = new Gtk.Label (login_option.get_markup ());
+            login_name_label.get_style_context ().add_class ("h2");
+            login_name_label.set_xalign (0);
+            login_name_label.width_request = 260;
 
-            var settings = new Gtk.ToggleButton ();
+            login_name_entry = new Gtk.Entry ();
+            login_name_entry.halign = Gtk.Align.START;
+            login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, "avatar-default-symbolic");
+            login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
+            login_name_entry.width_request = 260;
+
+            settings = new Gtk.ToggleButton ();
             settings.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
             settings.add (new Gtk.Image.from_icon_name ("application-menu-symbolic", Gtk.IconSize.MENU));
             settings.set_size_request (32, 32);
@@ -229,19 +239,50 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             settings_grid.margin_top = 3;
             settings_grid.orientation = Gtk.Orientation.VERTICAL;
 
-            var settings_popover = new Gtk.Popover (settings);
+            settings_popover = new Gtk.Popover (settings);
             settings_popover.set_position (Gtk.PositionType.BOTTOM);
             settings_popover.add (settings_grid);
 
             grid = new Gtk.Grid ();
             grid.column_spacing = 6;
             grid.row_spacing = 12;
-            grid.attach (login_option_widget, 0, 0, 1, 1);
+
+            if (login_option.provides_login_name) {
+                grid.attach (login_name_label, 0, 0, 1, 1);
+            } else {
+                grid.attach (login_name_entry, 0, 0, 1, 1);
+            }
 
             if (LightDM.get_sessions ().length () > 1) {
                 create_settings_items ();
                 grid.attach (settings, 1, 0, 1, 1);
             }
+
+            connect_signals ();
+
+            ((Gtk.Container) this.get_widget ()).add (grid);
+            this.get_widget ().show_all ();
+        }
+
+        void connect_signals () {
+            login_name_entry.activate.connect (() => {
+                entered_login_name (login_name_entry.text);
+            });
+
+            login_name_entry.focus_in_event.connect ((e) => {
+                remove_credentials ();
+                return false;
+            });
+
+            login_name_entry.icon_press.connect ((pos, event) => {
+                if (pos == Gtk.EntryIconPosition.SECONDARY) {
+                    entered_login_name (login_name_entry.text);
+                }
+            });
+
+            replied.connect ((answer) => {
+                login_name_entry.sensitive = false;
+            });
 
             settings_popover.closed.connect (() => {
                 settings.active = false;
@@ -250,9 +291,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             settings.toggled.connect (() => {
                 settings_popover.show_all ();
             });
-
-            ((Gtk.Container) this.get_widget ()).add (grid);
-            this.get_widget ().show_all ();
         }
 
         public void remove_credentials () {
@@ -332,46 +370,5 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                 });
             }
         }
-
-        Gtk.Widget get_login_option_widget (LoginOption login_option) {
-            if (login_option.provides_login_name) {
-                var label = new Gtk.Label (login_option.get_markup ());
-                label.get_style_context ().add_class ("h2");
-                label.set_xalign (0);
-                return (label);
-
-            } else {
-                replied.connect ((answer) => {
-                    login_name_entry.sensitive = false;
-                });
-
-                login_name_entry = new Gtk.Entry ();
-                login_name_entry.halign = Gtk.Align.START;
-                login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, "avatar-default-symbolic");
-                login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
-                login_name_entry.icon_press.connect ((pos, event) => {
-                    if (pos == Gtk.EntryIconPosition.SECONDARY) {
-                        entered_login_name (login_name_entry.text);
-                    }
-                });
-
-                login_name_entry.key_release_event.connect ((e) => {
-                    if (e.keyval == Gdk.Key.Return || e.keyval == Gdk.Key.KP_Enter) {
-                        entered_login_name (login_name_entry.text);
-                        return true;
-                    } else {
-                        return false;
-                    }
-                });
-
-                login_name_entry.focus_in_event.connect ((e) => {
-                    remove_credentials ();
-                    return false;
-                });
-
-                return (login_name_entry);
-            }
-        }
-
     }
 }
