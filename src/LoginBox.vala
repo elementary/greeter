@@ -199,7 +199,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
 
         Gtk.Entry? login_name_entry = null;
         Gtk.Grid grid;
-        Gtk.Grid settings_grid;
+        Gtk.ListBox settings_list;
         Gtk.Popover settings_popover;
         Gtk.ToggleButton settings;
 
@@ -234,14 +234,13 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             settings.set_size_request (32, 32);
             settings.valign = Gtk.Align.CENTER;
 
-            settings_grid = new Gtk.Grid ();
-            settings_grid.margin_bottom = 3;
-            settings_grid.margin_top = 3;
-            settings_grid.orientation = Gtk.Orientation.VERTICAL;
+            settings_list = new Gtk.ListBox ();
+            settings_list.margin_bottom = 3;
+            settings_list.margin_top = 3;
 
             settings_popover = new Gtk.Popover (settings);
             settings_popover.set_position (Gtk.PositionType.BOTTOM);
-            settings_popover.add (settings_grid);
+            settings_popover.add (settings_list);
 
             grid = new Gtk.Grid ();
             grid.column_spacing = 6;
@@ -346,7 +345,8 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
 
         void create_settings_items () {
             var button = new Gtk.RadioButton.with_label (null, LightDM.get_sessions ().nth_data (0).name);
-            button.get_style_context ().add_class (Gtk.STYLE_CLASS_MENUITEM);
+            button.margin_left = 6;
+            button.margin_right = 6;
             button.active = LightDM.get_sessions ().nth_data (0).key == current_session;
 
             button.toggled.connect (() => {
@@ -355,12 +355,20 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                 }
             });
 
-            settings_grid.add (button);
+            var button_row = new Gtk.ListBoxRow ();
+            button_row.get_style_context ().add_class (Gtk.STYLE_CLASS_MENUITEM);
+            button_row.add (button);
+            settings_list.add (button_row);
 
             for (var i = 1; i < LightDM.get_sessions ().length (); i++) {
                 var radio = new Gtk.RadioButton.with_label_from_widget (button, LightDM.get_sessions ().nth_data (i).name);
-                radio.get_style_context ().add_class (Gtk.STYLE_CLASS_MENUITEM);
-                settings_grid.add (radio);
+                radio.margin_left = 6;
+                radio.margin_right = 6;
+
+                var radio_row = new Gtk.ListBoxRow ();
+                radio_row.get_style_context ().add_class (Gtk.STYLE_CLASS_MENUITEM);
+                radio_row.add (radio);
+                settings_list.add (radio_row);
 
                 radio.active = LightDM.get_sessions ().nth_data (i).key == current_session;
                 var identifier = LightDM.get_sessions ().nth_data (i).key;
