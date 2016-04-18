@@ -134,7 +134,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
      * use. The values get smaller because the shaking should fade out to
      * look smooth.
      */
-    float[] shake_positions = {50, -80, 60, -30};
+    float[] shake_positions = {50, -80, 60, -30, 50, -80, 30};
 
     /**
      * Shakes the LoginBox and then sets selected back to true.
@@ -146,7 +146,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         }
         var transition = new Clutter.PropertyTransition ("x");
         transition.animatable = this;
-        transition.set_duration (100);
+        transition.set_duration (60);
         transition.set_progress_mode (Clutter.AnimationMode.EASE_IN_OUT_CIRC);
         transition.set_from_value (this.x);
         transition.set_to_value (this.x + shake_positions[num]);
