@@ -200,8 +200,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         Gtk.Entry? login_name_entry = null;
         Gtk.Grid grid;
         Gtk.ListBox settings_list;
-        Gtk.Popover settings_popover;
-        Gtk.ToggleButton settings;
 
         LoginBox login_box;
 
@@ -228,7 +226,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
             login_name_entry.width_request = 260;
 
-            settings = new Gtk.ToggleButton ();
+            var settings = new Gtk.ToggleButton ();
             settings.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
             settings.image = new Gtk.Image.from_icon_name ("application-menu-symbolic", Gtk.IconSize.MENU);
             settings.set_size_request (32, 32);
@@ -238,7 +236,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             settings_list.margin_bottom = 3;
             settings_list.margin_top = 3;
 
-            settings_popover = new Gtk.Popover (settings);
+            var settings_popover = new Gtk.Popover (settings);
             settings_popover.position = Gtk.PositionType.BOTTOM;
             settings_popover.add (settings_list);
             settings_popover.bind_property ("visible", settings, "active", GLib.BindingFlags.BIDIRECTIONAL);
