@@ -36,7 +36,6 @@ public class PasswordArea : CredentialsArea {
 
     void create_password_field () {
         password = new Entry ();
-        password.margin_top = 24;
 
         password.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, 
                 "dialog-password-symbolic");
@@ -82,8 +81,6 @@ public class LoginButtonArea : CredentialsArea {
             // is that we reply at all.
             replied ("");
         });
-
-        login_btn.margin_top = 32;
 
         login_btn.get_style_context ().add_class ("suggested-action");
 
