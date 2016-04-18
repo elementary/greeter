@@ -24,7 +24,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
     SelectableAvatar avatar = null;
 
     CredentialsAreaActor credentials_actor;
-    Gtk.Label label;
 
     LoginOption user;
 
@@ -43,20 +42,11 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                     avatar.select ();
                 }
 
-                // LoginOption is not providing a name, so the CredentialsArea
-                // will display a Gtk.Entry for that and we need to hide
-                // the label that would otherwise be at the same position
-                // as the mentioned entry.
-                if (!user.provides_login_name) {
-                    label.visible = false;
-                }
             } else {
 
                 if (avatar != null) {
                     avatar.deselect ();
                 }
-
-                label.visible = true;
             }
 
             credentials_actor.save_easing_state ();
