@@ -39,15 +39,16 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             credentials_actor.remove_credentials ();
             if (value) {
                 opacity = 255;
-                if (avatar != null)
+                if (avatar != null) {
                     avatar.select ();
+                }
 
                 // LoginOption is not providing a name, so the CredentialsArea
                 // will display a Gtk.Entry for that and we need to hide
                 // the label that would otherwise be at the same position
                 // as the mentioned entry.
                 if (!user.provides_login_name) {
-                    label.set_opacity (0);
+                    label.visible = false;
                 }
             } else {
 
@@ -55,7 +56,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                     avatar.deselect ();
                 }
 
-                label.set_opacity (255);
+                label.visible = true;
             }
 
             credentials_actor.save_easing_state ();
@@ -108,14 +109,16 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
     }
 
     void update_avatar () {
-        if (avatar != null)
+        if (avatar != null) {
             avatar.dismiss ();
+        }
 
         avatar = new SelectableAvatar (user);
         add_child (avatar);
 
-        if (selected)
+        if (selected) {
             avatar.select ();
+        }
     }
 
     public void pass_focus () {
@@ -202,14 +205,11 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
          * LoginGateway.
          */
         public signal void replied (string text);
-
         public signal void entered_login_name (string name);
 
         Gtk.Entry? login_name_entry = null;
-        Gtk.ToggleButton settings;
-
-        // Grid that contains all elements of the ui
         Gtk.Grid grid;
+        Gtk.Grid settings_grid;
 
         LoginBox login_box;
 
@@ -225,47 +225,40 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             height = 188;
             credentials = null;
 
+            var login_option_widget = get_login_option_widget (login_option);
+            login_option_widget.width_request = 260;
+
+            var settings = new Gtk.ToggleButton ();
+            settings.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+            settings.add (new Gtk.Image.from_icon_name ("application-menu-symbolic", Gtk.IconSize.MENU));
+            settings.set_size_request (32, 32);
+            settings.valign = Gtk.Align.CENTER;
+
+            settings_grid = new Gtk.Grid ();
+            settings_grid.margin_bottom = 3;
+            settings_grid.margin_top = 3;
+            settings_grid.orientation = Gtk.Orientation.VERTICAL;
+
+            var settings_popover = new Gtk.Popover (settings);
+            settings_popover.set_position (Gtk.PositionType.BOTTOM);
+            settings_popover.add (settings_grid);
+
             grid = new Gtk.Grid ();
-            grid.width_request = 260;
+            grid.column_spacing = 6;
+            grid.row_spacing = 12;
+            grid.attach (login_option_widget, 0, 0, 1, 1);
 
-            // If the login option doesn't provice a login name, we have to
-            // show a entry for the user to enter one.
-            // This is for example used in the manual login.
-            if (login_option.provides_login_name) {
-                var label = new Gtk.Label (login_option.get_markup ());
-                label.get_style_context ().add_class ("h2");
-                label.halign = Gtk.Align.START;
-
-                grid.attach (label, 0, 0, 1, 1);
-            } else {
-                create_login_name_entry ();
-            }
-
-            // Only show settings if we actually have more than one session
-            // to select from
             if (LightDM.get_sessions ().length () > 1) {
-                create_settings ();
-            } else {
-                // Dummy for the settings-button or the grid-layout goes apeshit
-                create_settings_dummy ();
+                create_settings_items ();
+                grid.attach (settings, 1, 0, 1, 1);
             }
 
-            var w = -1; var h = -1;
-            this.get_widget ().size_allocate.connect (() => {
-                w = this.get_widget ().get_allocated_width ();
-                h = this.get_widget ().get_allocated_height ();
+            settings_popover.closed.connect (() => {
+                settings.active = false;
             });
 
-            // We override the draw call and just paint a transparent
-            // rectangle. TODO: can we also just draw nothing?
-            // Shouldn't change anything...
-            this.get_widget ().draw.connect ((ctx) => {
-                ctx.rectangle (0, 0, w, h);
-                ctx.set_operator (Cairo.Operator.SOURCE);
-                ctx.set_source_rgba (0, 0, 0, 0);
-                ctx.fill ();
-
-                return false;
+            settings.toggled.connect (() => {
+                settings_popover.show_all ();
             });
 
             ((Gtk.Container) this.get_widget ()).add (grid);
@@ -323,108 +316,71 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                 login_name_entry.sensitive = true;
         }
 
-        void create_login_name_entry () {
-            replied.connect ((answer) => {
-                login_name_entry.sensitive = false;
-            });
-            login_name_entry = new Gtk.Entry ();
-            login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY,
-                    "avatar-default-symbolic");
-            login_name_entry.hexpand = true;
-            login_name_entry.margin_top = 8;
-            login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
-            login_name_entry.icon_press.connect ((pos, event) => {
-                if (pos == Gtk.EntryIconPosition.SECONDARY) {
-                    entered_login_name (login_name_entry.text);
+        void create_settings_items () {
+            var but = new Gtk.RadioButton.with_label (null, LightDM.get_sessions ().nth_data (0).name);
+            but.get_style_context ().add_class (Gtk.STYLE_CLASS_MENUITEM);
+            but.active = LightDM.get_sessions ().nth_data (0).key == current_session;
+
+            but.toggled.connect (() => {
+                if (but.active) {
+                    current_session = LightDM.get_sessions ().nth_data (0).key;
                 }
             });
-            login_name_entry.key_release_event.connect ((e) => {
-                if (e.keyval == Gdk.Key.Return || e.keyval == Gdk.Key.KP_Enter) {
-                    entered_login_name (login_name_entry.text);
-                    return true;
-                } else {
+
+            settings_grid.add (but);
+
+            for (var i = 1; i < LightDM.get_sessions ().length (); i++) {
+                var rad = new Gtk.RadioButton.with_label_from_widget (but, LightDM.get_sessions ().nth_data (i).name);
+                rad.get_style_context ().add_class (Gtk.STYLE_CLASS_MENUITEM);
+                settings_grid.add (rad);
+
+                rad.active = LightDM.get_sessions ().nth_data (i).key == current_session;
+                var identifier = LightDM.get_sessions ().nth_data (i).key;
+                rad.toggled.connect ( () => {
+                    if (rad.active)
+                        current_session = identifier;
+                });
+            }
+        }
+
+        Gtk.Widget get_login_option_widget (LoginOption login_option) {
+            if (login_option.provides_login_name) {
+                var label = new Gtk.Label (login_option.get_markup ());
+                label.get_style_context ().add_class ("h2");
+                label.set_xalign (0);
+                return (label);
+
+            } else {
+                replied.connect ((answer) => {
+                    login_name_entry.sensitive = false;
+                });
+
+                login_name_entry = new Gtk.Entry ();
+                login_name_entry.halign = Gtk.Align.START;
+                login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, "avatar-default-symbolic");
+                login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
+                login_name_entry.icon_press.connect ((pos, event) => {
+                    if (pos == Gtk.EntryIconPosition.SECONDARY) {
+                        entered_login_name (login_name_entry.text);
+                    }
+                });
+
+                login_name_entry.key_release_event.connect ((e) => {
+                    if (e.keyval == Gdk.Key.Return || e.keyval == Gdk.Key.KP_Enter) {
+                        entered_login_name (login_name_entry.text);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+
+                login_name_entry.focus_in_event.connect ((e) => {
+                    remove_credentials ();
                     return false;
-                }
-            });
-            login_name_entry.focus_in_event.connect ((e) => {
-                remove_credentials ();
-                return false;
-            });
-            grid.attach (login_name_entry, 0, 0, 1, 1);
-        }
-
-        void create_settings () {
-            settings = new Gtk.ToggleButton ();
-            settings.margin_left = 6;
-            settings.margin_top = 6;
-            settings.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
-            settings.add (new Gtk.Image.from_icon_name ("application-menu-symbolic", Gtk.IconSize.MENU));
-            settings.valign = Gtk.Align.START;
-            settings.set_size_request (30, 30);
-            grid.attach (settings, 1, 0, 1, 1);
-            create_popup ();
-        }
-
-        /**
-         * Creates a invisible settings-dummy that has
-         * the dimension of the settings-button but is invisible.
-         * Prevents that the layout is different when there are is
-         * no settings-menu.
-         */
-        void create_settings_dummy () {
-            var dummy_grid = new Gtk.Grid ();
-            dummy_grid.set_size_request (30, 30);
-            grid.attach (dummy_grid, 1, 0, 1, 1);
-        }
-
-        void create_popup () {
-            Gtk.Popover pop = null;
-            /*session choose popover*/
-            this.settings.toggled.connect (() => {
-
-                if (!settings.active) {
-                    pop.destroy ();
-                    return;
-                }
-
-                pop = new Gtk.Popover (settings);
-                pop.set_position (Gtk.PositionType.BOTTOM);
-
-                var grid = new Gtk.Grid ();
-                grid.margin_bottom = 3;
-                grid.margin_top = 3;
-                grid.orientation = Gtk.Orientation.VERTICAL;
-                pop.add (grid);
-
-                var but = new Gtk.RadioButton.with_label (null, LightDM.get_sessions ().nth_data (0).name);
-                but.get_style_context ().add_class (Gtk.STYLE_CLASS_MENUITEM);
-                grid.add (but);
-                but.active = LightDM.get_sessions ().nth_data (0).key == current_session;
-
-                but.toggled.connect (() => {
-                    if (but.active)
-                        current_session = LightDM.get_sessions ().nth_data (0).key;
                 });
 
-                for (var i = 1;i < LightDM.get_sessions ().length (); i++) {
-                    var rad = new Gtk.RadioButton.with_label_from_widget (but, LightDM.get_sessions ().nth_data (i).name);
-                    rad.get_style_context ().add_class (Gtk.STYLE_CLASS_MENUITEM);
-                    grid.add (rad);
-
-                    rad.active = LightDM.get_sessions ().nth_data (i).key == current_session;
-                    var identifier = LightDM.get_sessions ().nth_data (i).key;
-                    rad.toggled.connect ( () => {
-                        if (rad.active)
-                            current_session = identifier;
-                    });
-                }
-
-                pop.show_all ();
-
-                pop.closed.connect (() => {
-                    settings.active = false;
-                });
-            });
+                return (login_name_entry);
+            }
         }
 
     }
