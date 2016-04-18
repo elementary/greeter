@@ -241,6 +241,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             settings_popover = new Gtk.Popover (settings);
             settings_popover.position = Gtk.PositionType.BOTTOM;
             settings_popover.add (settings_list);
+            settings_popover.bind_property ("visible", settings, "active", GLib.BindingFlags.BIDIRECTIONAL);
 
             grid = new Gtk.Grid ();
             grid.column_spacing = 6;
@@ -281,14 +282,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
 
             replied.connect ((answer) => {
                 login_name_entry.sensitive = false;
-            });
-
-            settings_popover.closed.connect (() => {
-                settings.active = false;
-            });
-
-            settings.toggled.connect (() => {
-                settings_popover.show_all ();
             });
         }
 
@@ -378,6 +371,8 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
                     }
                 });
             }
+
+            settings_list.show_all ();
         }
     }
 }
