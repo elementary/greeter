@@ -345,27 +345,27 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         }
 
         void create_settings_items () {
-            var but = new Gtk.RadioButton.with_label (null, LightDM.get_sessions ().nth_data (0).name);
-            but.get_style_context ().add_class (Gtk.STYLE_CLASS_MENUITEM);
-            but.active = LightDM.get_sessions ().nth_data (0).key == current_session;
+            var button = new Gtk.RadioButton.with_label (null, LightDM.get_sessions ().nth_data (0).name);
+            button.get_style_context ().add_class (Gtk.STYLE_CLASS_MENUITEM);
+            button.active = LightDM.get_sessions ().nth_data (0).key == current_session;
 
-            but.toggled.connect (() => {
-                if (but.active) {
+            button.toggled.connect (() => {
+                if (button.active) {
                     current_session = LightDM.get_sessions ().nth_data (0).key;
                 }
             });
 
-            settings_grid.add (but);
+            settings_grid.add (button);
 
             for (var i = 1; i < LightDM.get_sessions ().length (); i++) {
-                var rad = new Gtk.RadioButton.with_label_from_widget (but, LightDM.get_sessions ().nth_data (i).name);
-                rad.get_style_context ().add_class (Gtk.STYLE_CLASS_MENUITEM);
-                settings_grid.add (rad);
+                var radio = new Gtk.RadioButton.with_label_from_widget (button, LightDM.get_sessions ().nth_data (i).name);
+                radio.get_style_context ().add_class (Gtk.STYLE_CLASS_MENUITEM);
+                settings_grid.add (radio);
 
-                rad.active = LightDM.get_sessions ().nth_data (i).key == current_session;
+                radio.active = LightDM.get_sessions ().nth_data (i).key == current_session;
                 var identifier = LightDM.get_sessions ().nth_data (i).key;
-                rad.toggled.connect ( () => {
-                    if (rad.active)
+                radio.toggled.connect ( () => {
+                    if (radio.active)
                         current_session = identifier;
                 });
             }
