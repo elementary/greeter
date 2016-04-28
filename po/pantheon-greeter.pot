@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-17 19:14+0200\n"
+"POT-Creation-Date: 2016-04-28 08:47-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,54 +17,29 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/CredentialsArea.vala:48 ../src/CredentialsArea.vala:79
-msgid "Log In"
+#. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
+#: ../src/TimeLabel.vala:34
+msgid "%A, %B %e"
 msgstr ""
 
-#: ../src/Indicators/AccessibilityMenu.vala:22
-msgid "Onscreen Keyboard"
-msgstr ""
-
-#: ../src/Indicators/AccessibilityMenu.vala:34
-msgid "HighContrast"
-msgstr ""
-
-#: ../src/Indicators/PowerMenu.vala:16
-msgid "Shutdown"
-msgstr ""
-
-#: ../src/Indicators/PowerMenu.vala:17
-msgid "Suspend"
-msgstr ""
-
-#: ../src/Indicators/PowerMenu.vala:18
-msgid "Restart"
-msgstr ""
-
-#: ../src/Indicators/PowerMenu.vala:19
-msgid "Hibernate"
-msgstr ""
-
-#: ../src/Indicators/KeyboardLayoutMenu.vala:61
-msgid "No other keyboard layouts available"
-msgstr ""
-
-#: ../src/PantheonUser.vala:156
-msgid "Guest session"
-msgstr ""
-
-#: ../src/PantheonUser.vala:175
-msgid "Manual Login"
-msgstr ""
-
-#: ../src/ShadowedLabel.vala:102
-msgid "%A, %B %e%v"
-msgstr ""
-
-#: ../src/ShadowedLabel.vala:104
+#. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
+#: ../src/TimeLabel.vala:36
 msgid "%l:%M"
 msgstr ""
 
-#: ../src/ShadowedLabel.vala:107
+#. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
+#: ../src/TimeLabel.vala:38
 msgid " %p"
+msgstr ""
+
+#: ../src/PantheonUser.vala:155
+msgid "Guest session"
+msgstr ""
+
+#: ../src/PantheonUser.vala:174
+msgid "Manual Login"
+msgstr ""
+
+#: ../src/CredentialsArea.vala:47 ../src/CredentialsArea.vala:78
+msgid "Log In"
 msgstr ""
