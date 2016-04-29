@@ -7,67 +7,63 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-09-17 19:14+0200\n"
+"POT-Creation-Date: 2016-04-28 08:47-0300\n"
 "PO-Revision-Date: 2013-06-12 04:40+0000\n"
 "Last-Translator: racerr <racerr@outlook.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-01 05:23+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2016-04-29 05:55+0000\n"
+"X-Generator: Launchpad (build 17995)\n"
 
-#: ../src/CredentialsArea.vala:48 ../src/CredentialsArea.vala:79
-msgid "Log In"
+#. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
+#: ../src/TimeLabel.vala:34
+msgid "%A, %B %e"
 msgstr ""
 
-#: ../src/Indicators/AccessibilityMenu.vala:22
-msgid "Onscreen Keyboard"
-msgstr "لوحة مفاتيح ظاهرة"
-
-#: ../src/Indicators/AccessibilityMenu.vala:34
-msgid "HighContrast"
-msgstr "تباين عالي"
-
-#: ../src/Indicators/PowerMenu.vala:16
-msgid "Shutdown"
-msgstr "إغلاق"
-
-#: ../src/Indicators/PowerMenu.vala:17
-msgid "Suspend"
-msgstr "تعليق"
-
-#: ../src/Indicators/PowerMenu.vala:18
-msgid "Restart"
-msgstr "إعادة التشغيل"
-
-#: ../src/Indicators/PowerMenu.vala:19
-msgid "Hibernate"
-msgstr "السبات"
-
-#: ../src/Indicators/KeyboardLayoutMenu.vala:61
-msgid "No other keyboard layouts available"
-msgstr ""
-
-#: ../src/PantheonUser.vala:156
-msgid "Guest session"
-msgstr "الدخول كضيف"
-
-#: ../src/PantheonUser.vala:175
-msgid "Manual Login"
-msgstr ""
-
-#: ../src/ShadowedLabel.vala:102
-msgid "%A, %B %e%v"
-msgstr "\\%x"
-
-#: ../src/ShadowedLabel.vala:104
+#. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
+#: ../src/TimeLabel.vala:36
 msgid "%l:%M"
 msgstr "%l:%M"
 
-#: ../src/ShadowedLabel.vala:107
+#. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
+#: ../src/TimeLabel.vala:38
 msgid " %p"
 msgstr " %p"
 
+#: ../src/PantheonUser.vala:155
+msgid "Guest session"
+msgstr "الدخول كضيف"
+
+#: ../src/PantheonUser.vala:174
+msgid "Manual Login"
+msgstr ""
+
+#: ../src/CredentialsArea.vala:47 ../src/CredentialsArea.vala:78
+msgid "Log In"
+msgstr ""
+
+#~ msgid "HighContrast"
+#~ msgstr "تباين عالي"
+
+#~ msgid "Onscreen Keyboard"
+#~ msgstr "لوحة مفاتيح ظاهرة"
+
+#~ msgid "Hibernate"
+#~ msgstr "السبات"
+
+#~ msgid "Restart"
+#~ msgstr "إعادة التشغيل"
+
+#~ msgid "Suspend"
+#~ msgstr "تعليق"
+
+#~ msgid "Shutdown"
+#~ msgstr "إغلاق"
+
 #~ msgid "Login"
 #~ msgstr "تسجيل الدخول"
+
+#~ msgid "%A, %B %e%v"
+#~ msgstr "\\%x"
