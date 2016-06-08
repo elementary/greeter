@@ -458,16 +458,6 @@ public static int main (string [] args) {
                                              Gdk.CursorType.LEFT_PTR);
     Gdk.get_default_root_window ().set_cursor (cursor);
 
-    var settings = Gtk.Settings.get_default ();
-    settings.gtk_theme_name = "elementary";
-    settings.gtk_icon_theme_name = "elementary";
-    settings.gtk_font_name = "Open Sans";
-    settings.gtk_xft_dpi= (int) (1024 * 96);
-    settings.gtk_xft_antialias = 1;
-    settings.gtk_xft_hintstyle = "hintslight";
-    settings.gtk_xft_rgba = "rgb";
-    settings.gtk_cursor_blink = true;
-
     new PantheonGreeter ();
     message ("Entering main-loop...");
     Gtk.main ();
