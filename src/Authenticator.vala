@@ -173,7 +173,7 @@ public class LightDMGateway : LoginGateway, Object {
         lightdm = new LightDM.Greeter ();
 
         try {
-            lightdm.connect_sync ();
+            lightdm.connect_to_daemon_sync ();
         } catch (Error e) {
             warning (@"Couldn't connect to lightdm: $(e.message)");
             Posix.exit (Posix.EXIT_FAILURE);
