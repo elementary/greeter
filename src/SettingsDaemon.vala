@@ -18,7 +18,6 @@
  */
 
 public class SettingsDaemon : Object {
-    private int logind_inhibit_fd = -1;
     private SessionManagerInterface session_manager;
     private int n_names = 0;
 
