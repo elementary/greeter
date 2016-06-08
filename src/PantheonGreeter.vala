@@ -60,6 +60,7 @@ public class PantheonGreeter : Gtk.Window {
     private string state_file;
 
     public static PantheonGreeter instance { get; private set; }
+    private static SettingsDaemon settings_daemon;
 
     //from this width on we use the shrinked down version
     const int NORMAL_WIDTH = 1200;
@@ -80,6 +81,8 @@ public class PantheonGreeter : Gtk.Window {
             login_gateway = new DummyGateway ();
         } else {
             login_gateway = new LightDMGateway ();
+            settings_daemon = new SettingsDaemon ();
+            settings_daemon.start ();
         }
 
         var state_dir = Path.build_filename (Environment.get_user_cache_dir (), "unity-greeter");
