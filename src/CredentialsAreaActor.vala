@@ -96,7 +96,6 @@ public class CredentialsAreaActor : GtkClutter.Actor {
 
         connect_signals ();
 
-
         ((Gtk.Container) this.get_widget ()).add (revealer);
         this.get_widget ().show_all ();
     }
