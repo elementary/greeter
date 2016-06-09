@@ -78,39 +78,17 @@ public class LoggedInIcon : GtkClutter.Texture {
 
 public class Avatar : GtkClutter.Actor {
     Gdk.Pixbuf image;
-    Gtk.EventBox box = new Gtk.EventBox ();
-    const int MARGIN = 12;
 
     public Avatar (LoginOption user) {
+        var container_widget = (Gtk.Container)this.get_widget ();
+
         image = user.avatar;
 
-        opacity = 0;
-        box.valign = Gtk.Align.START;
-        box.visible_window = false;
+        var avatar = new Granite.Widgets.Avatar ();
+        avatar.pixbuf = image;
+        
 
-        if (image != null)
-            box.set_size_request (image.width + 2 * MARGIN, image.height + 2 * MARGIN);
-
-        box.get_style_context ().add_class ("avatar");
-
-        box.draw.connect ((ctx) => {
-            int width = box.get_allocated_width () - MARGIN * 2;
-            int height = box.get_allocated_height () - MARGIN * 2;
-
-            var style_context = box.get_style_context ();
-            var border_radius = style_context.get_property (Gtk.STYLE_PROPERTY_BORDER_RADIUS,
-                                                            Gtk.StateFlags.NORMAL);
-            Granite.Drawing.Utilities.cairo_rounded_rectangle (ctx, MARGIN, MARGIN, width,
-                                                               height, (int) border_radius);
-            Gdk.cairo_set_source_pixbuf (ctx, image, MARGIN, MARGIN);
-            ctx.fill_preserve ();
-            style_context.render_background (ctx, MARGIN, MARGIN, width, height);
-            style_context.render_frame (ctx, MARGIN, MARGIN, width, height);
-
-            return false;
-        });
-
-        this.contents = box;
+        container_widget.add (avatar);
     }
 
     public void fade_in () {
