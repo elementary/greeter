@@ -19,29 +19,25 @@
     END LICENSE
 ***/
 
-using Gtk;
-
-public abstract class CredentialsArea : Grid {
+public abstract class CredentialsArea : Gtk.Grid {
     public signal void replied (string answer);
     public abstract void pass_focus ();
 }
 
 public class PasswordArea : CredentialsArea {
 
-    Entry password;
+    Gtk.Entry password;
 
     public PasswordArea () {
         create_password_field ();
     }
 
     void create_password_field () {
-        password = new Entry ();
+        password = new Gtk.Entry ();
 
-        password.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, 
-                "dialog-password-symbolic");
+        password.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, "dialog-password-symbolic");
         password.caps_lock_warning = true;
-        //replace the letters with dots
-        password.set_visibility (false);
+        password.visibility = false;
         password.hexpand = true;
         password.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
         password.set_icon_tooltip_text (Gtk.EntryIconPosition.SECONDARY, _("Log In"));
@@ -67,22 +63,19 @@ public class PasswordArea : CredentialsArea {
     }
 }
 
-/**
- * Just provides a "Login"-button that can be clicked.
- */
 public class LoginButtonArea : CredentialsArea {
 
-    Button login_btn;
+    Gtk.Button login_btn;
 
     public LoginButtonArea () {
-        login_btn = new Button.with_label (_("Log In"));
+        login_btn = new Gtk.Button.with_label (_("Log In"));
         login_btn.clicked.connect (() => {
             // It doesn't matter what we anser, the confirmation
             // is that we reply at all.
             replied ("");
         });
 
-        login_btn.get_style_context ().add_class ("suggested-action");
+        login_btn.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
 
         attach (login_btn, 0, 1, 1, 1);
     }
