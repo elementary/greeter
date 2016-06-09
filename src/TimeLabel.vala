@@ -19,7 +19,6 @@
 */
 
 public class TimeLabel : GtkClutter.Actor {
-
     private Gtk.Label date_label;
     private Gtk.Label time_label;
     private Gtk.Label pm_label;
@@ -49,6 +48,7 @@ public class TimeLabel : GtkClutter.Actor {
         layout.attach (date_label, 0, 0, 2, 1);
         layout.attach (time_label, 0, 1, 1, 1);
         layout.attach (pm_label, 1, 1, 1, 1);
+        layout.show_all ();
 
         container_widget.add (layout);
     }
