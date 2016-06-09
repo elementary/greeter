@@ -20,11 +20,17 @@
 ***/
 
 public class SelectableAvatar : GtkClutter.Actor {
-    Avatar normal_avatar;
+    Gdk.Pixbuf image;
 
     public SelectableAvatar (LoginOption user) {
-        normal_avatar = new Avatar (user);
-        add_child (normal_avatar);
+        var container_widget = (Gtk.Container)this.get_widget ();
+
+        image = user.avatar;
+
+        var avatar = new Granite.Widgets.Avatar ();
+        avatar.pixbuf = image;
+
+        container_widget.add (avatar);
 
         if (user.logged_in) {
             var logged_in = new LoggedInIcon ();
@@ -42,45 +48,4 @@ public class LoggedInIcon : GtkClutter.Actor {
 
         container_widget.add (image);
     }
-}
-
-public class Avatar : GtkClutter.Actor {
-    Gdk.Pixbuf image;
-
-    public Avatar (LoginOption user) {
-        var container_widget = (Gtk.Container)this.get_widget ();
-
-        image = user.avatar;
-
-        var avatar = new Granite.Widgets.Avatar ();
-        avatar.pixbuf = image;
-
-        container_widget.add (avatar);
-    }
-
-    public void fade_in () {
-        save_easing_state ();
-        set_easing_mode (Clutter.AnimationMode.EASE_IN_OUT_QUAD);
-        set_easing_duration (400);
-        set_opacity (255);
-        restore_easing_state ();
-    }
-
-    public void fade_out () {
-        save_easing_state ();
-        set_easing_mode (Clutter.AnimationMode.EASE_IN_OUT_QUAD);
-        set_easing_duration (400);
-        set_opacity (0);
-        restore_easing_state ();
-    }
-
-    public void dismiss () {
-        fade_out ();
-        ulong sid = 0;
-        sid = transitions_completed.connect (() => {
-            get_parent ().remove_child (this);
-            disconnect (sid);
-        });
-    }
-
 }
