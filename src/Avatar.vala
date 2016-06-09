@@ -20,12 +20,10 @@
 ***/
 
 public class SelectableAvatar : GtkClutter.Actor {
-    Gdk.Pixbuf image;
-
     public SelectableAvatar (LoginOption user) {
         var container_widget = (Gtk.Container)this.get_widget ();
 
-        image = user.avatar;
+        var image = user.avatar;
 
         var avatar = new Granite.Widgets.Avatar ();
         avatar.pixbuf = image;
