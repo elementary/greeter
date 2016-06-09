@@ -54,25 +54,13 @@ public class SelectableAvatar : GtkClutter.Actor {
     }
 }
 
-public class LoggedInIcon : GtkClutter.Texture {
-    static Gdk.Pixbuf image = null;
-
+public class LoggedInIcon : GtkClutter.Actor {
     public LoggedInIcon () {
-        if (image == null) {
-            try {
-            image = Gtk.IconTheme.get_default ().load_icon ("selection-checked", 24, 0);
-            } catch (Error e) {
-                image = null;
-                warning (e.message);
-                return;
-            }
-        }
+        var container_widget = (Gtk.Container)this.get_widget ();
 
-        try {
-            set_from_pixbuf (image);
-        } catch (Error e) {
-            warning (e.message);
-        }
+        var image = new Gtk.Image.from_icon_name ("selection-checked", Gtk.IconSize.LARGE_TOOLBAR);
+
+        container_widget.add (image);
     }
 }
 
@@ -86,7 +74,6 @@ public class Avatar : GtkClutter.Actor {
 
         var avatar = new Granite.Widgets.Avatar ();
         avatar.pixbuf = image;
-        
 
         container_widget.add (avatar);
     }
