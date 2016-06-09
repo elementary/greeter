@@ -21,36 +21,16 @@
 
 public class SelectableAvatar : GtkClutter.Actor {
     Avatar normal_avatar;
-    Avatar desaturated_avatar;
 
     public SelectableAvatar (LoginOption user) {
         normal_avatar = new Avatar (user);
-        desaturated_avatar = new Avatar (user);
-        desaturated_avatar.add_effect (new Clutter.DesaturateEffect (1.0f));
         add_child (normal_avatar);
-        add_child (desaturated_avatar);
-        deselect ();
 
         if (user.logged_in) {
             var logged_in = new LoggedInIcon ();
             logged_in.x = logged_in.y = 80;
             add_child (logged_in);
         }
-    }
-
-    public void select () {
-        normal_avatar.fade_in ();
-        desaturated_avatar.fade_out ();
-    }
-
-    public void deselect () {
-        normal_avatar.fade_out ();
-        desaturated_avatar.fade_in ();
-    }
-
-    public void dismiss () {
-        normal_avatar.dismiss ();
-        desaturated_avatar.dismiss ();
     }
 }
 

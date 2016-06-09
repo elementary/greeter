@@ -38,15 +38,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             credentials_actor.remove_credentials ();
             if (value) {
                 opacity = 255;
-                if (avatar != null) {
-                    avatar.select ();
-                }
-
-            } else {
-
-                if (avatar != null) {
-                    avatar.deselect ();
-                }
             }
 
             credentials_actor.save_easing_state ();
@@ -99,16 +90,8 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
     }
 
     void update_avatar () {
-        if (avatar != null) {
-            avatar.dismiss ();
-        }
-
         avatar = new SelectableAvatar (user);
         add_child (avatar);
-
-        if (selected) {
-            avatar.select ();
-        }
     }
 
     public void pass_focus () {
