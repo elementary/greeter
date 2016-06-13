@@ -19,14 +19,9 @@
 */
 
 public class Wallpaper : GtkClutter.Actor {
-    List<GtkClutter.Texture> wallpapers = new List<GtkClutter.Texture> ();
+    List<Gtk.Image> wallpapers = new List<Gtk.Image> ();
     List<Cancellable> loading_wallpapers = new List<Cancellable> ();
-
-    /**
-     * Contains old Textures that were used for wallpapers. They are recycled
-     * in the @make_texture method.
-     */
-    Queue<GtkClutter.Texture> unused_wallpapers = new Queue<GtkClutter.Texture> ();
+    Queue<Gtk.Image> unused_wallpapers = new Queue<Gtk.Image> ();
 
     int gpu_limit;
 
@@ -36,6 +31,7 @@ public class Wallpaper : GtkClutter.Actor {
 
     string last_loaded = "";
 
+    public Gtk.Stack stack;
     public Gdk.Pixbuf? background_pixbuf;
     public int screen_width { get; set; }
     public int screen_height { get; set; }
@@ -44,6 +40,13 @@ public class Wallpaper : GtkClutter.Actor {
         GL.GLint result = 1;
         GL.glGetIntegerv(GL.GL_MAX_TEXTURE_SIZE, out result);
         gpu_limit = result;
+    }
+
+    construct {
+        var container_widget = (Gtk.Container)this.get_widget ();
+        stack = new Gtk.Stack ();
+        stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
+        container_widget.add (stack);
     }
 
     string get_default () {
@@ -101,17 +104,12 @@ public class Wallpaper : GtkClutter.Actor {
                 return; //if not, abort
             }
 
-            var new_wallpaper = make_texture ();
-            new_wallpaper.opacity = 0;
-            new_wallpaper.set_from_pixbuf (buf);
+            var new_wallpaper = make_image ();
+            new_wallpaper.pixbuf = buf;
             resize (new_wallpaper);
-            add_child (new_wallpaper);
-
-            new_wallpaper.save_easing_state ();
-            new_wallpaper.set_easing_mode (Clutter.AnimationMode.EASE_OUT_QUINT);
-            new_wallpaper.set_easing_duration (500);
-            new_wallpaper.set_opacity (255);
-            new_wallpaper.restore_easing_state ();
+            stack.add (new_wallpaper);
+            stack.visible_child = new_wallpaper;
+            stack.show_all ();
 
             // abort all currently loading wallpapers
             foreach (var c in loading_wallpapers) {
@@ -121,18 +119,9 @@ public class Wallpaper : GtkClutter.Actor {
             foreach (var other_wallpaper in wallpapers) {
                 wallpapers.remove (other_wallpaper);
 
-                other_wallpaper.save_easing_state ();
-                other_wallpaper.set_easing_mode (Clutter.AnimationMode.EASE_IN_QUINT);
-                other_wallpaper.set_easing_duration (500);
-                other_wallpaper.set_opacity (0);
-                other_wallpaper.restore_easing_state ();
-
-                ulong sid = 0;
-                sid = other_wallpaper.transitions_completed.connect (() => {
-                    other_wallpaper.disconnect (sid);
-                    remove_child (other_wallpaper);
-                    unused_wallpapers.push_tail (other_wallpaper);
-                });
+                //FIXME: Wait until transition is over to remove from stack
+                stack.remove (other_wallpaper);
+                unused_wallpapers.push_tail (other_wallpaper);
             }
             wallpapers.append (new_wallpaper);
 
@@ -151,9 +140,9 @@ public class Wallpaper : GtkClutter.Actor {
      * Creates a texture. It also recycles old unused wallpapers if possible
      * as spamming constructors is expensive.
      */
-    GtkClutter.Texture make_texture () {
+    Gtk.Image make_image () {
         if (unused_wallpapers.is_empty ()) {
-            return new GtkClutter.Texture ();
+            return new Gtk.Image ();
         } else {
             return unused_wallpapers.pop_head ();
         }
@@ -208,21 +197,24 @@ public class Wallpaper : GtkClutter.Actor {
         return pixbuf;
     }
 
-    void resize (GtkClutter.Texture tex) {
-        float w, h;
-        (tex as Clutter.Content).get_preferred_size (out w, out h);
+    void resize (Gtk.Image image) {
+        int w, h;
+
+        w = image.width_request;
+        h = image.height_request;
+
 
         if (width > (w * height) / h) {
-            tex.width = width;
-            tex.height = (int) (h * width / w);
+            image.width_request = (int) width;
+            image.height_request = (int) (h * width / w);
 
-            if (height > tex.height) {
-                tex.height = height;
-                tex.width = (int) (w * height / h);
+            if (height > image.height_request) {
+                image.height_request = (int) height;
+                image.width_request = (int) (w * height / h);
             }
         } else {
-            tex.height = height;
-            tex.width = (int) (w * height / h);
+            image.height_request = (int) height;
+            image.width_request = (int) (w * height / h);
         }
     }
 }
