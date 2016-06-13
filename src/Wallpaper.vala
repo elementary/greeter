@@ -50,7 +50,7 @@ public class Wallpaper : GtkClutter.Actor {
         var settings = new KeyFile ();
         string default_wallpaper = "/usr/share/backgrounds/elementaryos-default";
         try {
-            settings.load_from_file (Constants.CONF_DIR+"/pantheon-greeter.conf", KeyFileFlags.KEEP_COMMENTS);
+            settings.load_from_file (Constants.CONF_DIR + "/pantheon-greeter.conf", KeyFileFlags.KEEP_COMMENTS);
             default_wallpaper = settings.get_string ("greeter", "default-wallpaper");
         } catch (Error e) {
             warning (e.message);
@@ -192,20 +192,17 @@ public class Wallpaper : GtkClutter.Actor {
         return result;
     }
 
-    /**
-     * Scales the pixbuf down to fit in the given dimensions.
-     */
-    Gdk.Pixbuf scale_to_rect (Gdk.Pixbuf pixbuf, int rw, int rh) {
-        int h = pixbuf.height;
-        int w = pixbuf.width;
+    Gdk.Pixbuf scale_to_rect (Gdk.Pixbuf pixbuf, int rect_width, int rect_height) {
+        int height = pixbuf.height;
+        int width = pixbuf.width;
 
-        if (h > rh || w > rw) {
-            float hw = (float)h/w*rw;
-            float wh = (float)w/h*rh;
-            if (h < w) {
-                return pixbuf.scale_simple (rw, (int) (hw), Gdk.InterpType.BILINEAR);
+        if (height > rect_height || width > rect_width) {
+            float hw = (float)height / width * rect_width;
+            float wh = (float)width / height * rect_height;
+            if (height < width) {
+                return pixbuf.scale_simple (rect_width, (int) (hw), Gdk.InterpType.BILINEAR);
             } else {
-                return pixbuf.scale_simple ((int) (wh), rh, Gdk.InterpType.BILINEAR);
+                return pixbuf.scale_simple ((int) (wh), rect_height, Gdk.InterpType.BILINEAR);
             }
         }
         return pixbuf;
