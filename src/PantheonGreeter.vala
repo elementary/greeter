@@ -70,6 +70,7 @@ public class PantheonGreeter : Gtk.Window {
     public static bool TEST_MODE { get; private set; }
 
     public PantheonGreeter () {
+        get_style_context ().add_class ("greeter");
         //singleton
         assert (instance == null);
         instance = this;
