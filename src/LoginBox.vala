@@ -34,17 +34,8 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         }
         set {
             _selected = value;
-            int opacity = 0;
             credentials_actor.remove_credentials ();
-            if (value) {
-                opacity = 255;
-            }
-
-            credentials_actor.save_easing_state ();
-            credentials_actor.set_easing_mode (Clutter.AnimationMode.EASE_IN_OUT_QUAD);
-            credentials_actor.set_easing_duration (200);
-            credentials_actor.opacity = opacity;
-            credentials_actor.restore_easing_state ();
+            credentials_actor.reveal = value;
         }
     }
 

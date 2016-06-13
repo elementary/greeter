@@ -32,6 +32,7 @@ public class CredentialsAreaActor : GtkClutter.Actor {
 
     Gtk.Entry? login_name_entry = null;
     Gtk.Grid grid;
+    Gtk.Revealer revealer;
     Gtk.ListBox settings_list;
 
     LoginBox login_box;
@@ -89,9 +90,13 @@ public class CredentialsAreaActor : GtkClutter.Actor {
             grid.attach (settings, 1, 0, 1, 1);
         }
 
+        revealer = new Gtk.Revealer ();
+        revealer.transition_type = Gtk.RevealerTransitionType.CROSSFADE;
+        revealer.add (grid);
+
         connect_signals ();
 
-        ((Gtk.Container) this.get_widget ()).add (grid);
+        ((Gtk.Container) this.get_widget ()).add (revealer);
         this.get_widget ().show_all ();
     }
 
@@ -114,6 +119,12 @@ public class CredentialsAreaActor : GtkClutter.Actor {
         replied.connect ((answer) => {
             login_name_entry.sensitive = false;
         });
+    }
+
+    public bool reveal {
+        set {
+            revealer.reveal_child = value;
+        }
     }
 
     public void remove_credentials () {
