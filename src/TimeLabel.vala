@@ -18,13 +18,39 @@
 *
 */
 
-public class TimeLabel : ShadowedLabel {
+public class TimeLabel : GtkClutter.Actor {
+    private Gtk.Label date_label;
+    private Gtk.Label time_label;
+    private Gtk.Label pm_label;
 
     public TimeLabel () {
-        base ("");
-
         update_time ();
         Clutter.Threads.Timeout.add (5000, update_time);
+    }
+
+    construct {
+        var container_widget = (Gtk.Container)this.get_widget ();
+
+        var layout = new Gtk.Grid ();
+        layout.margin = 16;
+
+        date_label = new Gtk.Label ("");
+        date_label.get_style_context ().add_class ("h2");
+        date_label.hexpand = true;
+
+        time_label = new Gtk.Label ("");
+        time_label.get_style_context ().add_class ("time");
+
+        pm_label = new Gtk.Label ("");
+        pm_label.get_style_context ().add_class ("time");
+        pm_label.get_style_context ().add_class ("pm");
+
+        layout.attach (date_label, 0, 0, 2, 1);
+        layout.attach (time_label, 0, 1, 1, 1);
+        layout.attach (pm_label, 1, 1, 1, 1);
+        layout.show_all ();
+
+        container_widget.add (layout);
     }
 
     bool update_time () {
@@ -37,14 +63,9 @@ public class TimeLabel : ShadowedLabel {
         /// AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
         var meridiem_format = _(" %p");
 
-        label = date.format (
-            "<span face='Open Sans Light' font='24'>"+
-            day_format+
-            "</span>\n<span face='Raleway' weight='100' font='72'>"+
-            time_format+
-            "</span><span face='Raleway' weight='100' font='50'>"+
-            meridiem_format+
-            "</span>");
+        date_label.label = date.format (day_format);
+        time_label.label = date.format (time_format);
+        pm_label.label = date.format (meridiem_format);
         return true;
     }
 }
