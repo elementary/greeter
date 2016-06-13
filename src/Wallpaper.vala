@@ -1,32 +1,24 @@
-// -*- Mode: vala; indent-tabs-mode: nil; tab-width: 4 -*-
-/***
-    BEGIN LICENSE
+/*
+* Copyright (c) 2011-2016 elementary LLC. (http://launchpad.net/pantheon-greeter)
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public
+* License as published by the Free Software Foundation; either
+* version 2 of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+* General Public License for more details.
+*
+* You should have received a copy of the GNU General Public
+* License along with this program; if not, write to the
+* Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+* Boston, MA 02111-1307, USA.
+*
+*/
 
-    Copyright (C) 2011-2014 elementary Developers
-
-    This program is free software: you can redistribute it and/or modify it
-    under the terms of the GNU Lesser General Public License version 3, as published
-    by the Free Software Foundation.
-
-    This program is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranties of
-    MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
-    PURPOSE.  See the GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with this program.  If not, see <http://www.gnu.org/licenses/>
-
-    END LICENSE
-***/
-
-/**
- * Represents a area on the screen where the current wallpaper of a user gets
- * displayed.
- */
-public class Wallpaper : Clutter.Group {
-    /**
-     *
-     */
+public class Wallpaper : GtkClutter.Actor {
     List<GtkClutter.Texture> wallpapers = new List<GtkClutter.Texture> ();
     List<Cancellable> loading_wallpapers = new List<Cancellable> ();
 
@@ -55,11 +47,10 @@ public class Wallpaper : Clutter.Group {
     }
 
     string get_default () {
-        var settings = new KeyFile();
+        var settings = new KeyFile ();
         string default_wallpaper = "/usr/share/backgrounds/elementaryos-default";
-        try{
-            settings.load_from_file(Constants.CONF_DIR+"/pantheon-greeter.conf",
-                    KeyFileFlags.KEEP_COMMENTS);
+        try {
+            settings.load_from_file (Constants.CONF_DIR+"/pantheon-greeter.conf", KeyFileFlags.KEEP_COMMENTS);
             default_wallpaper = settings.get_string ("greeter", "default-wallpaper");
         } catch (Error e) {
             warning (e.message);
@@ -106,8 +97,9 @@ public class Wallpaper : Clutter.Group {
                 background_pixbuf = buf;
             }
             //check if the currently loaded wallpaper is the one we loaded in this method
-            if (last_loaded != path)
+            if (last_loaded != path) {
                 return; //if not, abort
+            }
 
             var new_wallpaper = make_texture ();
             new_wallpaper.opacity = 0;
