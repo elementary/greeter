@@ -108,8 +108,8 @@ public class Wallpaper : GtkClutter.Actor {
             new_wallpaper.pixbuf = buf;
             resize (new_wallpaper);
             stack.add (new_wallpaper);
-            stack.visible_child = new_wallpaper;
             stack.show_all ();
+            stack.visible_child = new_wallpaper;
 
             // abort all currently loading wallpapers
             foreach (var c in loading_wallpapers) {
@@ -119,9 +119,10 @@ public class Wallpaper : GtkClutter.Actor {
             foreach (var other_wallpaper in wallpapers) {
                 wallpapers.remove (other_wallpaper);
 
-                //FIXME: Wait until transition is over to remove from stack
-                stack.remove (other_wallpaper);
-                unused_wallpapers.push_tail (other_wallpaper);
+                stack.notify["transition_running"].connect (() => {
+                    stack.remove (other_wallpaper);
+                    unused_wallpapers.push_tail (other_wallpaper);
+                });
             }
             wallpapers.append (new_wallpaper);
 
