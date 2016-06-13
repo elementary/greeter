@@ -187,7 +187,7 @@ public class Wallpaper : GtkClutter.Actor {
      * screen size to save memory.
      */
     Gdk.Pixbuf validate_pixbuf (Gdk.Pixbuf pixbuf) {
-        Gdk.Pixbuf result = scale_to_rect (pixbuf, gpu_limit, gpu_limit);
+        var result = scale_to_rect (pixbuf, gpu_limit, gpu_limit);
         result = scale_to_rect (pixbuf, screen_width, screen_height);
         return result;
     }
