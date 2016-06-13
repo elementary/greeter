@@ -22,6 +22,20 @@ public class CredentialsAreaActor : GtkClutter.Actor {
     CredentialsArea credentials;
     public string current_session { get; set; }
 
+    const string SHAKE_STYLE_CSS = """
+        @keyframes shake {
+	        0% { padding-left: 0 }
+	        25% { padding-left: 64px }
+	        50% { padding-left: 0 }
+	        75% { padding-left: 32px }
+	        100% { padding-left: 0}
+        }
+
+        .shake {
+	        animation: shake 0.4s ease-in-out 1;
+        }
+    """;
+
     /**
      * Fired when the user has replied to a prompt (aka: password,
      * login-button was pressed). Should get forwarded to the
@@ -48,6 +62,14 @@ public class CredentialsAreaActor : GtkClutter.Actor {
         current_session = login_option.session;
         height = 188;
         credentials = null;
+
+        var provider = new Gtk.CssProvider ();
+        try {
+            provider.load_from_data (SHAKE_STYLE_CSS, SHAKE_STYLE_CSS.length);
+            Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        } catch (Error e) {
+            critical (e.message);
+        }        
 
         var login_name_label = new Gtk.Label (login_option.get_markup ());
         login_name_label.get_style_context ().add_class ("h2");
@@ -125,6 +147,11 @@ public class CredentialsAreaActor : GtkClutter.Actor {
         set {
             revealer.reveal_child = value;
         }
+    }
+
+    public void shake () {
+        revealer.get_style_context ().remove_class ("shake");
+        revealer.get_style_context ().add_class ("shake");
     }
 
     public void remove_credentials () {
