@@ -68,7 +68,7 @@ public class CredentialsAreaActor : GtkClutter.Actor {
             provider.load_from_data (SHAKE_STYLE_CSS, SHAKE_STYLE_CSS.length);
             Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         } catch (Error e) {
-            critical (e.message);
+            warning (e.message);
         }        
 
         var login_name_label = new Gtk.Label (login_option.get_markup ());
@@ -151,7 +151,7 @@ public class CredentialsAreaActor : GtkClutter.Actor {
 
     public void shake () {
         revealer.get_style_context ().add_class ("shake");
-        Timeout.add (500, () => {
+        Timeout.add (450, () => {
             revealer.get_style_context ().remove_class ("shake");
             return false;
         });
