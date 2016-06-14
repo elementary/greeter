@@ -42,7 +42,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
     public LoginBox (LoginOption user) {
         this.user = user;
         this.reactive = true;
-        this.pivot_point = Clutter.Point.alloc ().init (0.5f, 0.5f);
 
         create_credentials ();
 
@@ -94,32 +93,10 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         credentials_actor.pass_focus ();
     }
 
-    /* The relative positions to the previous one the shake function should
-     * use. The values get smaller because the shaking should fade out to
-     * look smooth.
-     */
-    float[] shake_positions = {50, -80, 60, -30, 50, -80, 30};
-
-    /**
-     * Shakes the LoginBox and then sets selected back to true.
-     */
-    void shake (int num = 0) {
-        if (num >= shake_positions.length) {
-            start_login ();
-            return;
-        }
-        var transition = new Clutter.PropertyTransition ("x");
-        transition.animatable = this;
-        transition.set_duration (60);
-        transition.set_progress_mode (Clutter.AnimationMode.EASE_IN_OUT_CIRC);
-        transition.set_from_value (this.x);
-        transition.set_to_value (this.x + shake_positions[num]);
-        transition.remove_on_complete = true;
-        transition.auto_reverse = false;
-        transition.completed.connect (() => {
-            shake (num + 1);
-        });
-        this.add_transition ("shake" + num.to_string (), transition);
+    void shake () {
+        credentials_actor.shake ();
+        start_login ();
+        return;
     }
 
     /* LoginMask interface */
