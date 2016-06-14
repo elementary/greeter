@@ -119,9 +119,10 @@ public class Wallpaper : GtkClutter.Actor {
             foreach (var other_wallpaper in wallpapers) {
                 wallpapers.remove (other_wallpaper);
 
-                stack.notify["transition_running"].connect (() => {
+                Timeout.add (stack.transition_duration, () => {
                     stack.remove (other_wallpaper);
                     unused_wallpapers.push_tail (other_wallpaper);
+                    return false;
                 });
             }
             wallpapers.append (new_wallpaper);

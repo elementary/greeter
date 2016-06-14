@@ -32,7 +32,6 @@ public class TimeLabel : GtkClutter.Actor {
         var container_widget = (Gtk.Container)this.get_widget ();
 
         var layout = new Gtk.Grid ();
-        layout.margin = 16;
 
         date_label = new Gtk.Label ("");
         date_label.get_style_context ().add_class ("h2");
