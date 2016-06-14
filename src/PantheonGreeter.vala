@@ -104,69 +104,64 @@ public class PantheonGreeter : Gtk.Window {
         
         settings = new KeyFile ();
         try {
-            settings.load_from_file (Path.build_filename (Constants.CONF_DIR, "pantheon-greeter.conf"),
-                    KeyFileFlags.KEEP_COMMENTS);
+            settings.load_from_file (Path.build_filename (Constants.CONF_DIR, "pantheon-greeter.conf"), KeyFileFlags.KEEP_COMMENTS);
         } catch (Error e) {
             warning (e.message);
         }
-
-        delete_event.connect (() => {
-            message ("Window got closed. Exiting...");
-            Posix.exit (Posix.EXIT_SUCCESS);
-            return false;
-        });
 
         message ("Loading default-avatar...");
         LoginOption.load_default_avatar ();
 
         message ("Building UI...");
+
         clutter = new GtkClutter.Embed ();
-        greeterbox = new Clutter.Actor ();
+        clutter.add_events (Gdk.EventMask.BUTTON_RELEASE_MASK);
+
+        var stage = clutter.get_stage () as Clutter.Stage;
+        stage.background_color = {0, 0, 0, 255};
+
+        indicator_bar = new Indicators.IndicatorBar ();
+        indicator_bar.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
 
         userlist = new UserList (LightDM.UserList.get_instance ());
         userlist_actor = new UserListActor (userlist);
 
         time = new TimeLabel ();
 
-        indicator_bar = new Indicators.IndicatorBar ();
-
         wallpaper = new Wallpaper ();
-
-        message ("Connecting signals...");
-        get_screen ().monitors_changed.connect (monitors_changed);
-
-        login_gateway.login_successful.connect (() => {
-            fade_out_ui ();
-
-            /* restore screensaver setting, just like lightdm-gtk-greeter.c*/
-            unowned X.Display display = (Gdk.Display.get_default () as Gdk.X11.Display).get_xdisplay ();
-            message ("restore user timeout: %d", timeout);
-            display.set_screensaver (timeout, interval, prefer_blanking,
-                allow_exposures);
-        });
-
-        configure_event.connect (() => {
-            reposition ();
-            return false;
-        });
 
         monitors_changed ();
 
-        userlist.current_user_changed.connect ((user) => {
-            wallpaper.set_wallpaper (user.background);
-        });
+        greeterbox = new Clutter.Actor ();
+        greeterbox.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
+        greeterbox.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
+        greeterbox.opacity = 0;
+        greeterbox.save_easing_state ();
+        greeterbox.set_easing_mode (Clutter.AnimationMode.EASE_OUT_QUART);
+        greeterbox.set_easing_duration (250);
+        greeterbox.set_opacity (255);
+        greeterbox.restore_easing_state ();
 
-        /*activate the numlock if needed*/
+        greeterbox.add_child (wallpaper);
+        greeterbox.add_child (time);
+        greeterbox.add_child (userlist_actor);
+        greeterbox.add_child (indicator_bar);
+
+        stage.add_child (greeterbox);
+
+        add (clutter);
+        show_all ();
+
         bool activate_numlock = false;
         try {
             activate_numlock = settings.get_boolean ("greeter", "activate-numlock");
         } catch (Error e) {
             warning (e.message);
         }
-        if (activate_numlock)
+        if (activate_numlock) {
             Granite.Services.System.execute_command ("/usr/bin/numlockx on");
+        }
 
-        /* activate screensaver, just like lightdm-gtk-greeter.c*/
         var screensaver_timeout = 60;
         try {
             screensaver_timeout = settings.get_integer ("greeter", "screensaver-timeout");
@@ -176,47 +171,13 @@ public class PantheonGreeter : Gtk.Window {
 
         unowned X.Display display = (Gdk.Display.get_default () as Gdk.X11.Display).get_xdisplay ();
 
-        display.get_screensaver (out timeout, out interval,
-                out prefer_blanking, out allow_exposures);
+        display.get_screensaver (out timeout, out interval, out prefer_blanking, out allow_exposures);
         message ("saving Screensaver timeout %d", timeout);
         message ("set greeter screensaver timeout %d", screensaver_timeout);
-        display.set_screensaver (screensaver_timeout, 0, Screensaver.ACTIVE,
-                Exposures.DEFAULT_EXPOSURES);
+        display.set_screensaver (screensaver_timeout, 0, Screensaver.ACTIVE, Exposures.DEFAULT_EXPOSURES);
         if (login_gateway.lock) {
             display.force_screensaver (Screensaver.ACTIVE);
         }
-
-        /*build up UI*/
-        clutter.add_events (Gdk.EventMask.BUTTON_RELEASE_MASK);
-        var stage = clutter.get_stage () as Clutter.Stage;
-        stage.background_color = {0, 0, 0, 255};
-
-        greeterbox.add_child (wallpaper);
-        greeterbox.add_child (time);
-        greeterbox.add_child (userlist_actor);
-        greeterbox.add_child (indicator_bar);
-
-        greeterbox.opacity = 0;
-
-        stage.add_child (greeterbox);
-
-        greeterbox.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
-        greeterbox.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.HEIGHT, 0));
-
-        indicator_bar.add_constraint (new Clutter.BindConstraint (greeterbox, Clutter.BindCoordinate.WIDTH, 0));
-
-        clutter.key_press_event.connect (keyboard_navigation);
-
-        add (clutter);
-        show_all ();
-
-        scroll_event.connect (scroll_navigation);
-
-        greeterbox.save_easing_state ();
-        greeterbox.set_easing_mode (Clutter.AnimationMode.EASE_OUT_QUART);
-        greeterbox.set_easing_duration (250);
-        greeterbox.set_opacity (255);
-        greeterbox.restore_easing_state ();
 
         var select_user = login_gateway.select_user;
         var switch_to_user = (select_user != null) ? select_user : get_greeter_state ("last-user");
@@ -230,11 +191,47 @@ public class PantheonGreeter : Gtk.Window {
             }            
         }
 
-        if (userlist.current_user == null)
+        if (userlist.current_user == null) {
             userlist.current_user = userlist.get_user (0);
+        }
 
         message ("Finished building UI...");
         this.get_window ().focus (Gdk.CURRENT_TIME);
+
+        connect_signals ();
+    }
+
+    void connect_signals () {
+        message ("Connecting signals...");
+
+        get_screen ().monitors_changed.connect (monitors_changed);
+
+        login_gateway.login_successful.connect (() => {
+            fade_out_ui ();
+            /* restore screensaver setting, just like lightdm-gtk-greeter.c*/
+            unowned X.Display display = (Gdk.Display.get_default () as Gdk.X11.Display).get_xdisplay ();
+            message ("restore user timeout: %d", timeout);
+            display.set_screensaver (timeout, interval, prefer_blanking, allow_exposures);
+        });
+
+        configure_event.connect (() => {
+            reposition ();
+            return false;
+        });
+
+        delete_event.connect (() => {
+            message ("Window got closed. Exiting...");
+            Posix.exit (Posix.EXIT_SUCCESS);
+            return false;
+        });
+
+        userlist.current_user_changed.connect ((user) => {
+            wallpaper.set_wallpaper (user.background);
+        });
+
+        clutter.key_press_event.connect (keyboard_navigation);
+
+        scroll_event.connect (scroll_navigation);
     }
 
     /**
