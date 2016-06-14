@@ -187,15 +187,10 @@ public class Wallpaper : GtkClutter.Actor {
         double target_aspect = (double) rect_width / rect_height;
         double aspect = (double) pixbuf.width / pixbuf.height;
         double scale, offset_x = 0, offset_y = 0;
-        if (aspect > target_aspect)
-        {
-            /* Fit height and trim sides */
+        if (aspect > target_aspect) {
             scale = (double) rect_height / pixbuf.height;
             offset_x = (pixbuf.width * scale - rect_width) / 2;
-        }
-        else
-        {
-            /* Fit width and trim top and bottom */
+        } else {
             scale = (double) rect_width / pixbuf.width;
             offset_y = (pixbuf.height * scale - rect_height) / 2;
         }
