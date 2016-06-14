@@ -104,7 +104,7 @@ public class PantheonGreeter : Gtk.Window {
         
         settings = new KeyFile ();
         try {
-            settings.load_from_file (Constants.CONF_DIR+"/pantheon-greeter.conf",
+            settings.load_from_file (Path.build_filename (Constants.CONF_DIR, "pantheon-greeter.conf"),
                     KeyFileFlags.KEEP_COMMENTS);
         } catch (Error e) {
             warning (e.message);
@@ -292,12 +292,13 @@ public class PantheonGreeter : Gtk.Window {
         } else {
             userlist_actor.x = 120 * ((float) (width) / NORMAL_WIDTH);
         }
+
         userlist_actor.y = Math.floorf (height / 2.0f);
 
-        time.x = width - time.width - 100;
+        time.x = width - time.width - time.width / 2 - 100;
         time.y = height / 2 - time.height / 2;
 
-        time.visible = width > NO_CLOCK_WIDTH;
+        time.visible = width > NO_CLOCK_WIDTH + time.width / 2;
 
         wallpaper.width = width;
         wallpaper.screen_width = width;
