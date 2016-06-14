@@ -150,8 +150,11 @@ public class CredentialsAreaActor : GtkClutter.Actor {
     }
 
     public void shake () {
-        revealer.get_style_context ().remove_class ("shake");
         revealer.get_style_context ().add_class ("shake");
+        Timeout.add (500, () => {
+            revealer.get_style_context ().remove_class ("shake");
+            return false;
+        });
     }
 
     public void remove_credentials () {
