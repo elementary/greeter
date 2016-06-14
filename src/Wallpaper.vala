@@ -98,15 +98,17 @@ public class Wallpaper : GtkClutter.Actor {
                 cache_path += path;
                 cache_pixbuf += buf;
                 background_pixbuf = buf;
+            } else {
+                buf = validate_pixbuf (buf);
             }
-            //check if the currently loaded wallpaper is the one we loaded in this method
+
+            // check if the currently loaded wallpaper is the one we loaded in this method
             if (last_loaded != path) {
                 return; //if not, abort
             }
 
             var new_wallpaper = make_image ();
             new_wallpaper.pixbuf = buf;
-            resize (new_wallpaper);
             stack.add (new_wallpaper);
             stack.show_all ();
             stack.visible_child = new_wallpaper;
@@ -178,45 +180,24 @@ public class Wallpaper : GtkClutter.Actor {
      * screen size to save memory.
      */
     Gdk.Pixbuf validate_pixbuf (Gdk.Pixbuf pixbuf) {
-        var result = scale_to_rect (pixbuf, gpu_limit, gpu_limit);
-        result = scale_to_rect (pixbuf, screen_width, screen_height);
-        return result;
+        return scale_to_rect (pixbuf, screen_width, screen_height);
     }
 
     Gdk.Pixbuf scale_to_rect (Gdk.Pixbuf pixbuf, int rect_width, int rect_height) {
-        int height = pixbuf.height;
-        int width = pixbuf.width;
-
-        if (height > rect_height || width > rect_width) {
-            float hw = (float)height / width * rect_width;
-            float wh = (float)width / height * rect_height;
-            if (height < width) {
-                return pixbuf.scale_simple (rect_width, (int) (hw), Gdk.InterpType.BILINEAR);
-            } else {
-                return pixbuf.scale_simple ((int) (wh), rect_height, Gdk.InterpType.BILINEAR);
-            }
-        }
-        return pixbuf;
-    }
-
-    void resize (Gtk.Image image) {
-        int w, h;
-
-        w = image.width_request;
-        h = image.height_request;
-
-
-        if (width > (w * height) / h) {
-            image.width_request = (int) width;
-            image.height_request = (int) (h * width / w);
-
-            if (height > image.height_request) {
-                image.height_request = (int) height;
-                image.width_request = (int) (w * height / h);
-            }
+        double target_aspect = (double) rect_width / rect_height;
+        double aspect = (double) pixbuf.width / pixbuf.height;
+        double scale, offset_x = 0, offset_y = 0;
+        if (aspect > target_aspect) {
+            scale = (double) rect_height / pixbuf.height;
+            offset_x = (pixbuf.width * scale - rect_width) / 2;
         } else {
-            image.height_request = (int) height;
-            image.width_request = (int) (w * height / h);
+            scale = (double) rect_width / pixbuf.width;
+            offset_y = (pixbuf.height * scale - rect_height) / 2;
         }
+
+        var scaled_pixbuf = new Gdk.Pixbuf (pixbuf.colorspace, pixbuf.has_alpha, pixbuf.bits_per_sample, rect_width, rect_height);
+        pixbuf.scale (scaled_pixbuf, 0, 0, rect_width, rect_height, -offset_x, -offset_y, scale, scale, Gdk.InterpType.BILINEAR);
+
+        return scaled_pixbuf;
     }
 }
