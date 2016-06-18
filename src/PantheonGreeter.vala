@@ -150,7 +150,6 @@ public class PantheonGreeter : Gtk.Window {
         stage.add_child (greeterbox);
 
         add (clutter);
-        show_all ();
 
         bool activate_numlock = false;
         try {
@@ -179,9 +178,6 @@ public class PantheonGreeter : Gtk.Window {
             display.force_screensaver (Screensaver.ACTIVE);
         }
 
-        message ("Finished building UI...");
-        this.get_window ().focus (Gdk.CURRENT_TIME);
-
         connect_signals ();
 
         var select_user = login_gateway.select_user;
@@ -199,6 +195,11 @@ public class PantheonGreeter : Gtk.Window {
         if (userlist.current_user == null) {
             userlist.current_user = userlist.get_user (0);
         }
+
+        show_all ();
+
+        message ("Finished building UI...");
+        this.get_window ().focus (Gdk.CURRENT_TIME);
     }
 
     void connect_signals () {
