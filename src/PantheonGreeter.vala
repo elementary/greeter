@@ -179,6 +179,11 @@ public class PantheonGreeter : Gtk.Window {
             display.force_screensaver (Screensaver.ACTIVE);
         }
 
+        message ("Finished building UI...");
+        this.get_window ().focus (Gdk.CURRENT_TIME);
+
+        connect_signals ();
+
         var select_user = login_gateway.select_user;
         var switch_to_user = (select_user != null) ? select_user : get_greeter_state ("last-user");
 
@@ -194,11 +199,6 @@ public class PantheonGreeter : Gtk.Window {
         if (userlist.current_user == null) {
             userlist.current_user = userlist.get_user (0);
         }
-
-        message ("Finished building UI...");
-        this.get_window ().focus (Gdk.CURRENT_TIME);
-
-        connect_signals ();
     }
 
     void connect_signals () {
