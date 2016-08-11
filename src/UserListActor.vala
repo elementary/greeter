@@ -40,7 +40,7 @@ public class UserListActor : Clutter.Actor {
         }
 
         userlist.current_user_changed.connect ((user) => {
-            animate_list (user, 400);
+            animate_list (user, 300);
         });
     }
 
@@ -88,13 +88,16 @@ public class UserListActor : Clutter.Actor {
 
             box.save_easing_state ();
             box.set_easing_mode (Clutter.AnimationMode.EASE_IN_OUT_QUAD);
-            box.set_easing_duration (300);
+            box.set_easing_duration (duration);
             box.y = y_vars[i];
             box.restore_easing_state ();
 
             box.selected = (user == current_user);
             if (user == current_user) {
-                box.pass_focus ();
+                Timeout.add (duration, () => {
+                    box.pass_focus ();
+                    return false;
+                });
             }
         }
     }
