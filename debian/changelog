@@ -1,8 +1,8 @@
-pantheon-greeter (3.0) trusty; urgency=medium
+pantheon-greeter (3.0) xenial; urgency=medium
 
   * New upstream release
 
- -- Cody Garver <cody@elementary.io>  Fri, 24 Jul 2015 20:05:12 -0500
+ -- Cody Garver <cody@elementary.io>  Sun, 14 Aug 2016 06:59:30 -0500
 
 pantheon-greeter (2.0.2) trusty; urgency=low
 
