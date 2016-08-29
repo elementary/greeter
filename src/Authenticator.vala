@@ -23,18 +23,85 @@ public enum PromptType {
     /**
      * Reply with the password.
      */
-    PASSWORD,
+    SECRET,
+    /**
+     * Reply with the password.
+     */
+    QUESTION,
     /**
      * Reply with any text to confirm that you want to login.
      */
-    CONFIRM_LOGIN
+    CONFIRM_LOGIN,
+    /**
+     * Show fingerprint prompt
+     */
+    FPRINT
 }
 
-public enum MessageType {
+public enum PromptText {
     /**
-     * Input was wrong (wrong username or password).
+     * A message asking for username entry
      */
-    WRONG_INPUT
+    USERNAME,
+    /**
+     * A message asking for password entry
+     */
+    PASSWORD,
+    /**
+     * The message was not in the expected list
+     */
+    OTHER
+}
+
+public enum MessageText {
+    /**
+     * fprintd message to swipe finger
+     */
+    FPRINT_SWIPE,
+    /**
+     * fprintd message to swipe again
+     */
+    FPRINT_SWIPE_AGAIN,
+    /**
+     * fprintd message to swipe longer
+     */
+    FPRINT_SWIPE_TOO_SHORT,
+    /**
+     * fprintd message to center finger
+     */
+    FPRINT_NOT_CENTERED,
+    /**
+     * fprintd message to remove finger
+     */
+    FPRINT_REMOVE,
+    /**
+     * fprintd message to place finger on device again
+     */
+    FPRINT_PLACE,
+    /**
+     * fprintd message to place finger on device again
+     */
+    FPRINT_PLACE_AGAIN,
+    /**
+     * fprintd failure message
+     */
+    FPRINT_NO_MATCH,
+    /**
+     * fprintd timeout message
+     */
+    FPRINT_TIMEOUT,
+    /**
+     * Unknown fprintd error
+     */ 
+    FPRINT_ERROR,
+    /**
+     * Login failed
+     */ 
+    FAILED,
+    /**
+     * The message was not in the expected list
+     */
+    OTHER
 }
 
 /**
@@ -63,9 +130,11 @@ public interface LoginMask : GLib.Object {
      * Present a prompt to the user. The interface can answer via the
      * respond method of the LoginGateway.
      */
-    public abstract void show_prompt (PromptType type);
+     public abstract void show_prompt (PromptType type, PromptText prompttext = PromptText.OTHER, string text = "");
+     
+     public abstract void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "");
 
-    public abstract void show_message (MessageType type);
+     public abstract void not_authenticated ();
 
     /**
      * The login-try was aborted because another LoginMask wants to login.
@@ -179,9 +248,9 @@ public class LightDMGateway : LoginGateway, Object {
             Posix.exit (Posix.EXIT_FAILURE);
         }
         message ("Successfully connected to LightDM.");
-        lightdm.show_message.connect (this.show_message);
-        lightdm.show_prompt.connect (this.show_prompt);
-        lightdm.authentication_complete.connect (this.authentication);
+        lightdm.show_message.connect (show_message);
+        lightdm.show_prompt.connect (show_prompt);
+        lightdm.authentication_complete.connect (authentication);
     }
 
     public void login_with_mask (LoginMask login, bool guest) {
@@ -223,25 +292,106 @@ public class LightDMGateway : LoginGateway, Object {
 
     void show_message (string text, LightDM.MessageType type) {
         message (@"LightDM message: '$text' ($(type.to_string ()))");
-        current_login.show_message (string_to_messagetype (text));
+        
+        var messagetext = string_to_messagetext(text);
+        
+        if (messagetext == MessageText.FPRINT_SWIPE || messagetext == MessageText.FPRINT_PLACE) {
+            // For the fprint module, there is no prompt message from PAM.
+            send_prompt (PromptType.FPRINT);
+        }  
+        
+        current_login.show_message (type, messagetext, text);
     }
 
     void show_prompt (string text, LightDM.PromptType type) {
-        had_prompt = true;
         message (@"LightDM prompt: '$text' ($(type.to_string ()))");
-        current_login.show_prompt (string_to_prompttype(text));
+        
+        send_prompt (lightdm_prompttype_to_prompttype(type), string_to_prompttext(text), text);
+    }
+    
+    void send_prompt (PromptType type, PromptText prompttext = PromptText.OTHER, string text = "") {
+        had_prompt = true;
+
+        current_login.show_prompt (type, prompttext, text);
     }
 
-    PromptType string_to_prompttype (string text) {
-        if (text == "Password: ")
-            return PromptType.PASSWORD;
-        // TODO better fallback
-        return PromptType.PASSWORD;
+    PromptType lightdm_prompttype_to_prompttype(LightDM.PromptType type) {
+        if (type == LightDM.PromptType.SECRET) {
+            return PromptType.SECRET;
+        }
+        
+        return PromptType.QUESTION;
     }
+    
+    PromptText string_to_prompttext (string text) {
+        if (text == "Password: ") {
+            return PromptText.PASSWORD;
+        }
+        
+        if (text == "login: ") {
+            return PromptText.USERNAME;
+        }
+        
+        return PromptText.OTHER;
+    }
+    
+    MessageText string_to_messagetext (string text) {
+        // Ideally this would query PAM and ask which module is currently active,
+        // but since we're running through LightDM we don't have that ability.
+        // There should at be a state machine to transition to and from the 
+        // active module depending on the messages recieved. But, this is can go
+        // wrong quickly. 
+        // The reason why this is needed is, for example, we can get the "An
+        // unknown error occured" message from pam_fprintd, but we can get it 
+        // from some other random module as well. You never know.
+        // Maybe it's worth adding some LightDM/PAM functionality for this? 
+        // The PAM "feature" which makes it all tricky is that modules can send 
+        // arbitrary messages to the stream and it's hard to analyze or keep track
+        // of them programmatically. 
+        // Also, there doesn't seem to be a way to give the user a choice over
+        // which module he wants to use to authenticate (ie. maybe today I have
+        // a bandaid over my finger and I can't scan it so I have to wait for it
+        // time out, if I didn't disable that in the settings)
+        
+        // These messages are taken from here: 
+        //  - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/fingerprint-strings.h
+        //  - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/pam_fprintd.c
+        
+        if (text == "An unknown error occured") {
+            // LIGHTDM_MESSAGE_TYPE_ERROR
+            return MessageText.FPRINT_ERROR;
+        } else if (text.has_prefix("Swipe your finger across")) {
+            // LIGHTDM_MESSAGE_TYPE_INFO
+            return MessageText.FPRINT_SWIPE;
+        } else if (text == "Swipe your finger again") {
+            // LIGHTDM_MESSAGE_TYPE_ERROR
+            return MessageText.FPRINT_SWIPE_AGAIN;
+        } else if (text == "Swipe was too short, try again") {
+            // LIGHTDM_MESSAGE_TYPE_ERROR
+            return MessageText.FPRINT_SWIPE_TOO_SHORT;
+        } else if (text == "Your finger was not centered, try swiping your finger again") {
+            // LIGHTDM_MESSAGE_TYPE_ERROR
+            return MessageText.FPRINT_NOT_CENTERED;
+        } else if (text == "Remove your finger, and try swiping your finger again") {
+            // LIGHTDM_MESSAGE_TYPE_ERROR
+            return MessageText.FPRINT_REMOVE;
+        } else if (text.has_prefix("Place your finger on")) {
+            // LIGHTDM_MESSAGE_TYPE_INFO
+            return MessageText.FPRINT_PLACE;
+        } else if (text == "Place your finger on the reader again") {
+            // LIGHTDM_MESSAGE_TYPE_ERROR
+            return MessageText.FPRINT_PLACE_AGAIN;
+        } else if (text == "Failed to match fingerprint") {
+            // LIGHTDM_MESSAGE_TYPE_ERROR
+            return MessageText.FPRINT_NO_MATCH;
+        } else if (text == "Verification timed out") {
+            // LIGHTDM_MESSAGE_TYPE_INFO
+            return MessageText.FPRINT_TIMEOUT;
+        } else if (text == "Login failed") {
+            return MessageText.FAILED;
+        } 
 
-    MessageType string_to_messagetype (string text) {
-        // TODO actually parse the text
-        return MessageType.WRONG_INPUT;
+        return MessageText.OTHER;
     }
 
     public void start_session () {
@@ -275,7 +425,7 @@ public class LightDMGateway : LoginGateway, Object {
                 current_login.show_prompt (PromptType.CONFIRM_LOGIN);
             }
         } else {
-            current_login.show_message (MessageType.WRONG_INPUT);
+            current_login.not_authenticated ();
         }
     }
 }
@@ -304,7 +454,7 @@ public class DummyGateway : LoginGateway, Object {
         last_was_guest = guest;
         last_login_mask = mask;
         Idle.add (() => {
-            mask.show_prompt (guest ? PromptType.CONFIRM_LOGIN : PromptType.PASSWORD);
+            mask.show_prompt (guest ? PromptType.CONFIRM_LOGIN : PromptType.SECRET, guest ? PromptText.OTHER : PromptText.PASSWORD);
             return false;
         });
     }
@@ -317,7 +467,7 @@ public class DummyGateway : LoginGateway, Object {
             });
         } else {
             Idle.add (() => {
-                last_login_mask.show_message (MessageType.WRONG_INPUT);
+                last_login_mask.not_authenticated ();
                 return false;
             });
         }

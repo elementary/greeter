@@ -115,15 +115,18 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         }
     }
 
-    public void show_prompt (PromptType type) {
+    public void show_prompt (PromptType type, PromptText prompttext, string text = "") {
         credentials_actor.show_prompt (type);
     }
+    
+    public void show_message (LightDM.MessageType type, MessageText messagetext, string text = "") {
+        credentials_actor.show_message (type, messagetext, text);
+    }
 
-    public void show_message (MessageType type) {
+    public void not_authenticated () {
         credentials_actor.remove_credentials ();
         shake ();
     }
-
 
     public void login_aborted () {
         credentials_actor.remove_credentials ();
