@@ -1,0 +1,23 @@
+BUILDING
+-----
+
+    mkdir build
+    cd build
+    cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+    make
+
+TESTING
+-----
+To test the UI, simply run the `pantheon-greeter` executable in the build
+directory.
+
+To test how it interacts with LightDM, you need to install it globally via:
+
+    sudo make install
+
+And then run LightDM in test mode:
+
+    lightdm --test-mode --debug
+
+To do this, you need to have Xephyr installed. You can then find the debug log
+of the greeter in `~/.cache/lightdm/log`.
