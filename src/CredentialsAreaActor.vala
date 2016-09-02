@@ -172,16 +172,25 @@ public class CredentialsAreaActor : GtkClutter.Actor {
             login_name_entry.grab_focus ();
         }
     }
+    
+    public void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "") {
+        if (credentials != null) {
+           credentials.show_message (type, messagetext, text);
+        }
+    }
 
     public void show_prompt (PromptType type) {
         remove_credentials ();
 
         switch (type) {
-            case PromptType.PASSWORD:
+            case PromptType.SECRET:
                 credentials = new PasswordArea ();
                 break;
             case PromptType.CONFIRM_LOGIN:
                 credentials = new LoginButtonArea ();
+                break;
+            case PromptType.FPRINT:
+                credentials = new FingerprintIndicatorArea();
                 break;
             default:
                 warning (@"Not implemented $(type.to_string ())");
@@ -189,7 +198,7 @@ public class CredentialsAreaActor : GtkClutter.Actor {
         }
         grid.attach (credentials, 0, 1, 1, 1);
         credentials.replied.connect ((answer) => {
-            this.replied (answer);
+            replied (answer);
         });
         grid.show_all ();
 

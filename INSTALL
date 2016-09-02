@@ -1,6 +1,10 @@
-To install pantheon-greeter:
+To build pantheon-greeter:
+
    mkdir build
    cd build
    cmake .. -DCMAKE_INSTALL_PREFIX=/usr
    make
-   #sudo make install #Install
+
+To install pantheon-greeter, run this command in the build directory:
+
+  sudo make install
