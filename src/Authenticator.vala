@@ -357,34 +357,34 @@ public class LightDMGateway : LoginGateway, Object {
         //  - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/fingerprint-strings.h
         //  - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/pam_fprintd.c
         
-        if (text == "An unknown error occured") {
+        if (text == GLib.dgettext("fprintd","An unknown error occured")) {
             // LIGHTDM_MESSAGE_TYPE_ERROR
             return MessageText.FPRINT_ERROR;
-        } else if (text.has_prefix("Swipe your finger across")) {
+        } else if (check_fprintd_string(text, "Swipe", "across")) {
             // LIGHTDM_MESSAGE_TYPE_INFO
             return MessageText.FPRINT_SWIPE;
-        } else if (text == "Swipe your finger again") {
+        } else if (text == GLib.dgettext("fprintd", "Swipe your finger again")) {
             // LIGHTDM_MESSAGE_TYPE_ERROR
             return MessageText.FPRINT_SWIPE_AGAIN;
-        } else if (text == "Swipe was too short, try again") {
+        } else if (text == GLib.dgettext("fprintd", "Swipe was too short, try again")) {
             // LIGHTDM_MESSAGE_TYPE_ERROR
             return MessageText.FPRINT_SWIPE_TOO_SHORT;
-        } else if (text == "Your finger was not centered, try swiping your finger again") {
+        } else if (text == GLib.dgettext("fprintd", "Your finger was not centered, try swiping your finger again")) {
             // LIGHTDM_MESSAGE_TYPE_ERROR
             return MessageText.FPRINT_NOT_CENTERED;
-        } else if (text == "Remove your finger, and try swiping your finger again") {
+        } else if (text == GLib.dgettext("fprintd", "Remove your finger, and try swiping your finger again")) {
             // LIGHTDM_MESSAGE_TYPE_ERROR
             return MessageText.FPRINT_REMOVE;
-        } else if (text.has_prefix("Place your finger on")) {
+        } else if (check_fprintd_string(text, "Place", "on")) {
             // LIGHTDM_MESSAGE_TYPE_INFO
             return MessageText.FPRINT_PLACE;
-        } else if (text == "Place your finger on the reader again") {
+        } else if (text == GLib.dgettext("fprintd", "Place your finger on the reader again")) {
             // LIGHTDM_MESSAGE_TYPE_ERROR
             return MessageText.FPRINT_PLACE_AGAIN;
-        } else if (text == "Failed to match fingerprint") {
+        } else if (text == GLib.dgettext("fprintd", "Failed to match fingerprint")) {
             // LIGHTDM_MESSAGE_TYPE_ERROR
             return MessageText.FPRINT_NO_MATCH;
-        } else if (text == "Verification timed out") {
+        } else if (text == GLib.dgettext("fprintd", "Verification timed out")) {
             // LIGHTDM_MESSAGE_TYPE_INFO
             return MessageText.FPRINT_TIMEOUT;
         } else if (text == "Login failed") {
@@ -392,6 +392,24 @@ public class LightDMGateway : LoginGateway, Object {
         } 
 
         return MessageText.OTHER;
+    }
+    
+    public bool check_fprintd_string(string text, string action, string position) {
+        string[] fingers = {"finger",
+                        "left thumb", "left index finger", "left middle finger", "left ring finger", "left little finger",
+                        "right thumb", "right index finger", "right middle finger", "right ring finger", "right little finger"};
+                        
+        foreach (var finger in fingers) {
+            var english_string = action.concat(" your ", finger, " ", position, " %s");
+            
+            // load translations from the fprintd domain
+            if (text.has_prefix (GLib.dgettext ("fprintd", english_string).printf (""))) {
+                return true;
+            }
+
+        }
+        
+        return false;
     }
 
     public void start_session () {
