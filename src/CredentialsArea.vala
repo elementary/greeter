@@ -22,6 +22,8 @@
 public abstract class CredentialsArea : Gtk.Grid {
     public signal void replied (string answer);
     public abstract void pass_focus ();
+    
+    public abstract void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "");
 }
 
 public class PasswordArea : CredentialsArea {
@@ -168,13 +170,13 @@ public class FingerprintIndicatorArea : CredentialsArea {
         
         // some fprint messages are too long, so we override them
         if (messagetext == MessageText.FPRINT_SWIPE) {
-            text = "Swipe your finger";
+            text = _("Swipe your finger");
         } else if (messagetext == MessageText.FPRINT_PLACE) {
-            text = "Place your finger";
+            text = _("Place your finger");
         } else if (messagetext == MessageText.FPRINT_REMOVE) {
-            text = "Remove your finger and try again.";
+            text = _("Remove your finger and try again.");
         } else if (messagetext == MessageText.FPRINT_NOT_CENTERED) {
-            text = "Center your finger and try again.";
+            text = _("Center your finger and try again.");
         }
                 
         label.set_text(text);
