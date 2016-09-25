@@ -18,89 +18,116 @@
 *
 */
 
+public enum MessageText {
+    FPRINT_SWIPE,
+    FPRINT_SWIPE_AGAIN,
+    FPRINT_SWIPE_TOO_SHORT,
+    FPRINT_NOT_CENTERED,
+    FPRINT_REMOVE,
+    FPRINT_PLACE,
+    FPRINT_PLACE_AGAIN,
+    FPRINT_NO_MATCH,
+    FPRINT_TIMEOUT,
+    FPRINT_ERROR,
+    FAILED,
+    OTHER
+}
+
 public class FingerprintIndicatorArea : CredentialsArea {
-    Gtk.EventBox box = new Gtk.EventBox ();
-    Gtk.Label label = new Gtk.Label (null);
-    
+    Gtk.EventBox box;
+    Gtk.Label label;
+
+    const string STYLE_CSS = """
+        .fingerprint {
+            background-image:
+                linear-gradient(
+                    to bottom,
+                    shade (#666, 1.30),
+                    #666
+                );
+            border-radius: 50%;
+            box-shadow:
+                inset 0 0 0 1px alpha (#999, 0.05),
+                inset 0 1px 0 0 alpha (#999, 0.45),
+                inset 0 -1px 0 0 alpha (#999, 0.15),
+                0 1px 2px alpha (#000, 0.15),
+                0 2px 6px alpha (#000, 0.10);
+        }
+
+        .fingerprint-label {
+            text-shadow: 0 0 3px alpha (#000, 0.4);
+        }
+
+        .fingerprint-label.info {
+            color: alpha (#fff, 0.8);
+        }
+
+        .fingerprint-label.error {
+            color: lighter (@error_color);
+        }
+    """;
+
     public FingerprintIndicatorArea () {
-        this.margin_top = 15;
-        
-        Gdk.Pixbuf image = null;
-        var margin = 2;
-
+        var provider = new Gtk.CssProvider ();
         try {
-            image = new Gdk.Pixbuf.from_file_at_size (Constants.PKGDATADIR+"/fingerprint.png", 26, 26);
+            provider.load_from_data (STYLE_CSS, STYLE_CSS.length);
+            Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         } catch (Error e) {
-           warning (@"Can't load fingerprint icon due to $(e.message)");
-        }
-        
-        box.valign = Gtk.Align.START;
+            warning (e.message);
+        } 
+
+        var image = new Gtk.Image.from_file (Constants.PKGDATADIR + "/fingerprint.svg");
+        image.margin = 3;
+
+        box = new Gtk.EventBox ();
+        box.get_style_context ().add_class ("fingerprint");
         box.visible_window = false;
-        box.margin_top = 5;
-        box.margin_left = 10;
-        
-        if (image != null) {
-            box.set_size_request (image.width + 4*margin, image.height + 4*margin);
-        }
-        
-        var box_style_context = box.get_style_context ();
+        box.add (image);
 
-        box_style_context.add_class ("fingerprint");
-        
-        box.draw.connect ((ctx) => {
-            int width = box.get_allocated_width () - 2*margin;
-            int height = box.get_allocated_height () - 2*margin;
-
-            if (image != null) {
-                Gdk.cairo_set_source_pixbuf (ctx, image, 2*margin, 2*margin);
-            }
-           
-            box_style_context.render_background (ctx, margin, margin, width, height);
-            box_style_context.render_frame (ctx, margin, margin, width, height);
-            
-            ctx.paint ();
-            
-            return false;
-        });
-            
-        attach(box, 0, 0,1,1);
-        
-        label.margin_left = 7;
-        label.margin_top = 2;
+        label = new Gtk.Label ("");
+        label.valign = Gtk.Align.CENTER;
         
         var label_style_context = label.get_style_context ();
-
         label_style_context.add_class ("h3");
         label_style_context.add_class ("fingerprint-label");
-                
-        attach(label, 1, 0 ,1,1);
+
+        attach (box, 0, 0, 1, 1);   
+        attach (label, 1, 0, 1, 1);
+        column_spacing = 6;
+        margin_top = 24;
+        margin_left = 12;
     }
-    
+
     public override void pass_focus () {
     }
-    
+
     public override void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "") {
         var label_style_context = label.get_style_context ();
         
         if (type == LightDM.MessageType.INFO) {
-            label_style_context. remove_class("error");
-            label_style_context. add_class ("info");
+            label_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            label_style_context.add_class (Gtk.STYLE_CLASS_INFO);
         } else {
-            label_style_context. remove_class("info");
-            label_style_context. add_class ("error");
+            label_style_context.remove_class (Gtk.STYLE_CLASS_INFO);
+            label_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
         }
-        
-        // some fprint messages are too long, so we override them
-        if (messagetext == MessageText.FPRINT_SWIPE) {
-            text = _("Swipe your finger");
-        } else if (messagetext == MessageText.FPRINT_PLACE) {
-            text = _("Place your finger");
-        } else if (messagetext == MessageText.FPRINT_REMOVE) {
-            text = _("Remove your finger and try again.");
-        } else if (messagetext == MessageText.FPRINT_NOT_CENTERED) {
-            text = _("Center your finger and try again.");
+
+        switch (messagetext) {
+            case MessageText.FPRINT_SWIPE:
+                label.label = _("Swipe your finger");
+                break;
+            case MessageText.FPRINT_PLACE:
+                label.label = _("Place your finger");
+                break;
+            case MessageText.FPRINT_REMOVE:
+                label.label = _("Remove your finger and try again.");
+                break;
+            case MessageText.FPRINT_NOT_CENTERED:
+                label.label = _("Center your finger and try again.");
+                break;
+            default:
+                label.label = text;
+                break;
         }
-                
-        label.set_text(text);
     }
 }
