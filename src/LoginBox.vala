@@ -21,7 +21,7 @@
 
 public class LoginBox : GtkClutter.Actor, LoginMask {
 
-    SelectableAvatar avatar = null;
+    Avatar avatar = null;
 
     CredentialsAreaActor credentials_actor;
 
@@ -80,7 +80,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
     }
 
     void update_avatar () {
-        avatar = new SelectableAvatar (user);
+        avatar = new Avatar (user);
         add_child (avatar);
     }
 
