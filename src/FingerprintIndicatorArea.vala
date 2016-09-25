@@ -34,7 +34,6 @@ public enum MessageText {
 }
 
 public class FingerprintIndicatorArea : CredentialsArea {
-    Gtk.EventBox box;
     Gtk.Label label;
 
     const string STYLE_CSS = """
@@ -79,7 +78,7 @@ public class FingerprintIndicatorArea : CredentialsArea {
         var image = new Gtk.Image.from_file (Constants.PKGDATADIR + "/fingerprint.svg");
         image.margin = 3;
 
-        box = new Gtk.EventBox ();
+        var box = new Gtk.EventBox ();
         box.get_style_context ().add_class ("fingerprint");
         box.visible_window = false;
         box.add (image);
