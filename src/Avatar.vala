@@ -21,7 +21,6 @@
 public class Avatar : GtkClutter.Actor {
     public LoginOption user { get; construct; }
 
-
     public Avatar (LoginOption user) {
         Object (user: user);
     }
