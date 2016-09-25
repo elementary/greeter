@@ -20,14 +20,13 @@
 */
 
 public class LoginBox : GtkClutter.Actor, LoginMask {
-
     Avatar avatar = null;
-
     CredentialsAreaActor credentials_actor;
 
-    LoginOption user;
-
     bool _selected = false;
+
+    public LoginOption user { get; construct; }
+
     public bool selected {
         get {
             return _selected;
@@ -40,21 +39,12 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
     }
 
     public LoginBox (LoginOption user) {
-        this.user = user;
-        this.reactive = true;
-
-        create_credentials ();
-
-        if (user.avatar_ready) {
-            update_avatar ();
-        } else {
-            user.avatar_updated.connect (() => {
-                update_avatar ();
-            });
-        }
+        Object (user: user);
     }
 
-    void create_credentials () {
+    construct {
+        this.reactive = true;
+
         credentials_actor = new CredentialsAreaActor (this, user);
         credentials_actor.x = this.x + 124;
         credentials_actor.y = 5;
@@ -68,6 +58,14 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         credentials_actor.entered_login_name.connect ((name) => {
             start_login ();
         });
+
+        if (user.avatar_ready) {
+            update_avatar ();
+        } else {
+            user.avatar_updated.connect (() => {
+                update_avatar ();
+            });
+        }
     }
 
     /**
