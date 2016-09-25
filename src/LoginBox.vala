@@ -20,12 +20,10 @@
 */
 
 public class LoginBox : GtkClutter.Actor, LoginMask {
-    Avatar avatar = null;
-    CredentialsAreaActor credentials_actor;
+    private Avatar avatar = null;
+    private CredentialsAreaActor credentials_actor;
 
     bool _selected = false;
-
-    public LoginOption user { get; construct; }
 
     public bool selected {
         get {
@@ -37,6 +35,23 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             credentials_actor.reveal = value;
         }
     }
+
+    public string login_name {
+        get {
+            if (user.provides_login_name) {
+                return user.name;
+            }
+            return credentials_actor.login_name;
+        }
+    }
+
+    public string login_session {
+        get {
+            return credentials_actor.current_session;
+        }
+    }
+
+    public LoginOption user { get; construct; }
 
     public LoginBox (LoginOption user) {
         Object (user: user);
@@ -60,10 +75,10 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         });
 
         if (user.avatar_ready) {
-            update_avatar ();
+            create_avatar ();
         } else {
             user.avatar_updated.connect (() => {
-                update_avatar ();
+                create_avatar ();
             });
         }
     }
@@ -73,11 +88,11 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
      * can enter something so that the LoginGateway can tell
      * us what kind of prompt he wants.
      */
-    void start_login () {
+    private void start_login () {
         PantheonGreeter.login_gateway.login_with_mask (this, user.is_guest);
     }
 
-    void update_avatar () {
+    private void create_avatar () {
         avatar = new Avatar (user);
         add_child (avatar);
     }
@@ -95,22 +110,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         credentials_actor.shake ();
         start_login ();
         return;
-    }
-
-    /* LoginMask interface */
-    public string login_session {
-        get {
-            return credentials_actor.current_session;
-        }
-    }
-
-    public string login_name {
-        get {
-            if (user.provides_login_name) {
-                return user.name;
-            }
-            return credentials_actor.login_name;
-        }
     }
 
     public void show_prompt (PromptType type, PromptText prompttext, string text = "") {
