@@ -23,29 +23,24 @@ public class PasswordArea : CredentialsArea {
     Gtk.Entry password;
 
     public PasswordArea () {
-        create_password_field ();
     }
 
-    void create_password_field () {
+    construct {
         password = new Gtk.Entry ();
-
-        password.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, "dialog-password-symbolic");
         password.caps_lock_warning = true;
-        password.visibility = false;
         password.hexpand = true;
+        password.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, "dialog-password-symbolic");
         password.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
         password.set_icon_tooltip_text (Gtk.EntryIconPosition.SECONDARY, _("Log In"));
+        password.visibility = false;
+
+        password.activate.connect (() => {
+            replied (password.text);
+        });
+
         password.icon_press.connect ((pos, event) => {
             if (pos == Gtk.EntryIconPosition.SECONDARY) {
                 replied (password.text);
-            }
-        });
-        password.key_release_event.connect ((e) => {
-            if (e.keyval == Gdk.Key.Return || e.keyval == Gdk.Key.KP_Enter) {
-                replied (password.text);
-                return true;
-            } else {
-                return false;
             }
         });
 
