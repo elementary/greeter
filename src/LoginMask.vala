@@ -52,57 +52,6 @@ public enum PromptText {
     OTHER
 }
 
-public enum MessageText {
-    /**
-     * fprintd message to swipe finger
-     */
-    FPRINT_SWIPE,
-    /**
-     * fprintd message to swipe again
-     */
-    FPRINT_SWIPE_AGAIN,
-    /**
-     * fprintd message to swipe longer
-     */
-    FPRINT_SWIPE_TOO_SHORT,
-    /**
-     * fprintd message to center finger
-     */
-    FPRINT_NOT_CENTERED,
-    /**
-     * fprintd message to remove finger
-     */
-    FPRINT_REMOVE,
-    /**
-     * fprintd message to place finger on device again
-     */
-    FPRINT_PLACE,
-    /**
-     * fprintd message to place finger on device again
-     */
-    FPRINT_PLACE_AGAIN,
-    /**
-     * fprintd failure message
-     */
-    FPRINT_NO_MATCH,
-    /**
-     * fprintd timeout message
-     */
-    FPRINT_TIMEOUT,
-    /**
-     * Unknown fprintd error
-     */ 
-    FPRINT_ERROR,
-    /**
-     * Login failed
-     */ 
-    FAILED,
-    /**
-     * The message was not in the expected list
-     */
-    OTHER
-}
-
 /**
  * A LoginMask is for example a UI such as the LoginBox that communicates with
  * the user.
