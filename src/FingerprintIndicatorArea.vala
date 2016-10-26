@@ -78,9 +78,8 @@ public class FingerprintIndicatorArea : CredentialsArea {
         var image = new Gtk.Image.from_file (Constants.PKGDATADIR + "/fingerprint.svg");
         image.margin = 3;
 
-        var box = new Gtk.EventBox ();
+        var box = new Gtk.Grid ();
         box.get_style_context ().add_class ("fingerprint");
-        box.visible_window = false;
         box.add (image);
 
         label = new Gtk.Label ("");
