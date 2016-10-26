@@ -20,14 +20,11 @@
 */
 
 public class LoginBox : GtkClutter.Actor, LoginMask {
-
-    SelectableAvatar avatar = null;
-
-    CredentialsAreaActor credentials_actor;
-
-    LoginOption user;
+    private Avatar avatar;
+    private CredentialsAreaActor credentials_actor;
 
     bool _selected = false;
+
     public bool selected {
         get {
             return _selected;
@@ -39,22 +36,30 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         }
     }
 
-    public LoginBox (LoginOption user) {
-        this.user = user;
-        this.reactive = true;
-
-        create_credentials ();
-
-        if (user.avatar_ready) {
-            update_avatar ();
-        } else {
-            user.avatar_updated.connect (() => {
-                update_avatar ();
-            });
+    public string login_name {
+        get {
+            if (user.provides_login_name) {
+                return user.name;
+            }
+            return credentials_actor.login_name;
         }
     }
 
-    void create_credentials () {
+    public string login_session {
+        get {
+            return credentials_actor.current_session;
+        }
+    }
+
+    public LoginOption user { get; construct; }
+
+    public LoginBox (LoginOption user) {
+        Object (user: user);
+    }
+
+    construct {
+        reactive = true;
+
         credentials_actor = new CredentialsAreaActor (this, user);
         credentials_actor.x = this.x + 124;
         credentials_actor.y = 5;
@@ -68,6 +73,14 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         credentials_actor.entered_login_name.connect ((name) => {
             start_login ();
         });
+
+        if (user.avatar_ready) {
+            create_avatar ();
+        } else {
+            user.avatar_updated.connect (() => {
+                create_avatar ();
+            });
+        }
     }
 
     /**
@@ -75,12 +88,12 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
      * can enter something so that the LoginGateway can tell
      * us what kind of prompt he wants.
      */
-    void start_login () {
+    private void start_login () {
         PantheonGreeter.login_gateway.login_with_mask (this, user.is_guest);
     }
 
-    void update_avatar () {
-        avatar = new SelectableAvatar (user);
+    private void create_avatar () {
+        avatar = new Avatar (user);
         add_child (avatar);
     }
 
@@ -97,22 +110,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         credentials_actor.shake ();
         start_login ();
         return;
-    }
-
-    /* LoginMask interface */
-    public string login_session {
-        get {
-            return credentials_actor.current_session;
-        }
-    }
-
-    public string login_name {
-        get {
-            if (user.provides_login_name) {
-                return user.name;
-            }
-            return credentials_actor.login_name;
-        }
     }
 
     public void show_prompt (PromptType type, PromptText prompttext, string text = "") {
