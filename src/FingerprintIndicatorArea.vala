@@ -40,15 +40,19 @@ public class FingerprintIndicatorArea : CredentialsArea {
         .fingerprint {
             background-image:
                 linear-gradient(
-                    to bottom,
-                    shade (#666, 1.30),
-                    #666
+                    @bg_color,
+                    @bg_color 80%,
+                    shade (
+                        @bg_color,
+                        0.94
+                    )
                 );
             border-radius: 50%;
             box-shadow:
-                inset 0 0 0 1px alpha (#999, 0.05),
-                inset 0 1px 0 0 alpha (#999, 0.45),
-                inset 0 -1px 0 0 alpha (#999, 0.15),
+                inset 0 0 0 1px alpha (@bg_highlight_color, 0.1),
+                inset 0 1px 0 0 alpha (@bg_highlight_color, 0.9),
+                inset 0 -1px 0 0 alpha (@bg_highlight_color, 0.3),
+                0 0 0 1px alpha (#000, 0.2),
                 0 1px 2px alpha (#000, 0.15),
                 0 2px 6px alpha (#000, 0.10);
         }
@@ -76,7 +80,7 @@ public class FingerprintIndicatorArea : CredentialsArea {
         } 
 
         var image = new Gtk.Image.from_file (Constants.PKGDATADIR + "/fingerprint.svg");
-        image.margin = 3;
+        image.margin = 6;
 
         var box = new Gtk.Grid ();
         box.get_style_context ().add_class ("fingerprint");
@@ -92,8 +96,6 @@ public class FingerprintIndicatorArea : CredentialsArea {
         attach (box, 0, 0, 1, 1);   
         attach (label, 1, 0, 1, 1);
         column_spacing = 6;
-        margin_top = 24;
-        margin_left = 12;
     }
 
     public override void pass_focus () {
