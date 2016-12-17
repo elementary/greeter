@@ -76,10 +76,6 @@ public class UserList : Object {
             index++;
         }
         size = index;
-
-        foreach (LoginOption user in users) {
-            user.load_avatar.begin ();
-        }
     }
 
     public LoginOption get_user (int i) {

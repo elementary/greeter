@@ -20,7 +20,6 @@
 */
 
 public class LoginBox : GtkClutter.Actor, LoginMask {
-    private Avatar avatar;
     private CredentialsAreaActor credentials_actor;
 
     bool _selected = false;
@@ -74,13 +73,8 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             start_login ();
         });
 
-        if (user.avatar_ready) {
-            create_avatar ();
-        } else {
-            user.avatar_updated.connect (() => {
-                create_avatar ();
-            });
-        }
+        var avatar = new Avatar (user);
+        add_child (avatar);
     }
 
     /**
@@ -90,11 +84,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
      */
     private void start_login () {
         PantheonGreeter.login_gateway.login_with_mask (this, user.is_guest);
-    }
-
-    private void create_avatar () {
-        avatar = new Avatar (user);
-        add_child (avatar);
     }
 
     public void pass_focus () {

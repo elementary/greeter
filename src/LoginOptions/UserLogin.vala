@@ -25,7 +25,12 @@ public class UserLogin : LoginOption {
     public UserLogin (int index, LightDM.User user) {
         base (index);
         this.lightdm_user = user;
-        avatar_ready = false;
+    }
+
+    public override string? avatar_path {
+        get {
+            return lightdm_user.image;
+        }
     }
 
     public override string background {
@@ -56,21 +61,5 @@ public class UserLogin : LoginOption {
         get {
             return lightdm_user.session;
         }
-    }
-
-    public override async void load_avatar () {
-        try {
-            File file = File.new_for_path (lightdm_user.image);
-            InputStream stream = yield file.read_async (GLib.Priority.DEFAULT);
-            var buf = new Gdk.Pixbuf.from_stream_at_scale (stream, 96, 96, true);
-            avatar = buf;
-        } catch (Error e) {
-            message ("Using default-avatar instead of " + lightdm_user.image);
-        }
-        Idle.add (() => {
-            avatar_ready = true;
-            avatar_updated ();
-            return false;
-        });
     }
 }

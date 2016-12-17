@@ -109,9 +109,6 @@ public class PantheonGreeter : Gtk.Window {
             warning (e.message);
         }
 
-        message ("Loading default-avatar...");
-        LoginOption.load_default_avatar ();
-
         message ("Building UI...");
 
         clutter = new GtkClutter.Embed ();
