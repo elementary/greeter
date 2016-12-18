@@ -19,32 +19,10 @@
 */
 
 public abstract class LoginOption : Object {
-
-    protected static Gdk.Pixbuf default_avatar;
-
-
-    private Gdk.Pixbuf _avatar;
-    public Gdk.Pixbuf avatar {
-        get {
-            lock (_avatar) return _avatar;
-        }
-        protected set {
-            lock (_avatar) _avatar = value;
-        }
-    }
-    /**
-     * True if and only if the avatar of this login option is from now on
-     * considered constant and you can safely ignore the avatar_updated
-     * signal.
-     */
-    public bool avatar_ready { get; protected set; default = true; }
-    public signal void avatar_updated ();
-
     public int index { get; private set; }
 
     protected LoginOption (int index) {
         this.index = index;
-        _avatar = default_avatar;
     }
 
     public string get_markup () {
@@ -52,26 +30,19 @@ public abstract class LoginOption : Object {
     }
 
     /**
-     * Loads the default avatar and is called once at startup.
-     */
-    public static void load_default_avatar () {
-        try {
-            default_avatar = Gtk.IconTheme.get_default ().
-                load_icon ("avatar-default", 96, 0);
-        } catch {
-            warning ("Couldn't load default wallpaper");
-        }
-    }
-
-    /**
-     * Each LoginOption can load their own avatar-image here.
-     */
-    public virtual async void load_avatar () { }
-
-    /**
      * The name of this login how it shall be presented to the user.
      */
     public abstract string display_name { get; }
+
+    /**
+     * Path to the avatar of this user or null
+     * in case he has none.
+     */
+    public virtual string? avatar_path {
+        get {
+            return null;
+        }
+    }
 
     /**
      * Path to the background-image of this user or ""

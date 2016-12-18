@@ -28,8 +28,13 @@ public class Avatar : GtkClutter.Actor {
     construct {
         var container_widget = (Gtk.Container)this.get_widget ();
 
-        var avatar = new Granite.Widgets.Avatar ();
-        avatar.pixbuf = user.avatar;
+        var path = user.avatar_path;
+        Granite.Widgets.Avatar avatar;
+        if (path != null) {
+            avatar = new Granite.Widgets.Avatar.from_file (path, 96);
+        } else {
+            avatar = new Granite.Widgets.Avatar.with_default_icon (96);
+        }
 
         container_widget.add (avatar);
 
