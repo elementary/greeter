@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-12-01 09:23-0600\n"
-"PO-Revision-Date: 2016-07-21 09:44+0000\n"
-"Last-Translator: Mikael Nyberg <mikanybe@gmail.com>\n"
+"PO-Revision-Date: 2016-12-30 19:13+0000\n"
+"Last-Translator: Joachim Johansson <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-02 05:15+0000\n"
-"X-Generator: Launchpad (build 18282)\n"
+"X-Launchpad-Export-Date: 2016-12-31 04:45+0000\n"
+"X-Generator: Launchpad (build 18298)\n"
 
 #: ../src/LoginOptions/GuestLogin.vala:41
 msgid "Guest session"
@@ -27,19 +27,19 @@ msgstr "Manuell inloggning"
 
 #: ../src/FingerprintIndicatorArea.vala:117
 msgid "Swipe your finger"
-msgstr ""
+msgstr "Svep med fingret"
 
 #: ../src/FingerprintIndicatorArea.vala:120
 msgid "Place your finger"
-msgstr ""
+msgstr "Placera ditt finger"
 
 #: ../src/FingerprintIndicatorArea.vala:123
 msgid "Remove your finger and try again."
-msgstr ""
+msgstr "Ta bort fingret och försök igen"
 
 #: ../src/FingerprintIndicatorArea.vala:126
 msgid "Center your finger and try again."
-msgstr ""
+msgstr "Centrera fingret och försök igen"
 
 #: ../src/PasswordArea.vala:34 ../src/LoginButtonArea.vala:26
 msgid "Log In"
@@ -53,7 +53,7 @@ msgstr "%A, %e %B"
 #. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: ../src/TimeLabel.vala:61
 msgid "%l:%M"
-msgstr "%H:%M"
+msgstr "%H.%M"
 
 #. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
 #: ../src/TimeLabel.vala:63

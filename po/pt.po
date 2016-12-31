@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-12-01 09:23-0600\n"
-"PO-Revision-Date: 2016-09-10 14:47+0000\n"
+"PO-Revision-Date: 2016-12-30 23:56+0000\n"
 "Last-Translator: Pedro Monteiro <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-02 05:15+0000\n"
-"X-Generator: Launchpad (build 18282)\n"
+"X-Launchpad-Export-Date: 2016-12-31 04:45+0000\n"
+"X-Generator: Launchpad (build 18298)\n"
 
 #: ../src/LoginOptions/GuestLogin.vala:41
 msgid "Guest session"
@@ -27,19 +27,19 @@ msgstr "Login Manual"
 
 #: ../src/FingerprintIndicatorArea.vala:117
 msgid "Swipe your finger"
-msgstr ""
+msgstr "Deslize o dedo"
 
 #: ../src/FingerprintIndicatorArea.vala:120
 msgid "Place your finger"
-msgstr ""
+msgstr "Coloque o dedo"
 
 #: ../src/FingerprintIndicatorArea.vala:123
 msgid "Remove your finger and try again."
-msgstr ""
+msgstr "Afaste o dedo e tente de novo."
 
 #: ../src/FingerprintIndicatorArea.vala:126
 msgid "Center your finger and try again."
-msgstr ""
+msgstr "Centre o dedo e tente de novo."
 
 #: ../src/PasswordArea.vala:34 ../src/LoginButtonArea.vala:26
 msgid "Log In"
