@@ -92,12 +92,12 @@ public class Wallpaper : GtkClutter.Actor {
                 InputStream stream = yield file.read_async (GLib.Priority.DEFAULT);
                 buf = yield new Gdk.Pixbuf.from_stream_async (stream, cancelable);
                 loading_wallpapers.remove (cancelable);
-                // we downscale the pixbuf as far as we can on the CPU
-                buf = validate_pixbuf (buf);
                 //add loaded wallpapers and paths to cache
                 cache_path += path;
                 cache_pixbuf += buf;
                 background_pixbuf = buf;
+                // we downscale the pixbuf as far as we can on the CPU
+                buf = validate_pixbuf (buf);
             } else {
                 buf = validate_pixbuf (buf);
             }
