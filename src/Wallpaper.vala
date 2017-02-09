@@ -184,6 +184,9 @@ public class Wallpaper : GtkClutter.Actor {
     }
 
     public static Gdk.Pixbuf scale_to_rect (Gdk.Pixbuf pixbuf, int rect_width, int rect_height) {
+        if (pixbuf.width == rect_width && pixbuf.height == rect_height) {
+            return pixbuf;
+        }
         double target_aspect = (double) rect_width / rect_height;
         double aspect = (double) pixbuf.width / pixbuf.height;
         double scale, offset_x = 0, offset_y = 0;
