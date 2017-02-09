@@ -369,15 +369,15 @@ public class PantheonGreeter : Gtk.Window {
         var root_window = (screen.get_root_window () as Gdk.X11.Window);
         var pixmap = X.create_pixmap (display,
                                      root_window.get_xid (),
-                                     screen.get_width () * root_window.get_scale_factor(),
-                                     screen.get_height () * root_window.get_scale_factor(),
+                                     screen.get_width () * root_window.get_scale_factor (),
+                                     screen.get_height () * root_window.get_scale_factor (),
                                      visual.get_depth ());
 
         /* Convert into a Cairo surface */
         var surface = new Cairo.XlibSurface (display, (int) pixmap,
                                              xvisual,
-                                             screen.get_width () * root_window.get_scale_factor(),
-                                             screen.get_height () * root_window.get_scale_factor());
+                                             screen.get_width () * root_window.get_scale_factor (),
+                                             screen.get_height () * root_window.get_scale_factor ());
 
         return surface;
     }
@@ -387,11 +387,11 @@ public class PantheonGreeter : Gtk.Window {
         ctx.save ();
         ctx.set_source_rgba (0.0, 0.0, 0.0, 0.0);
 
-        int scale_factor = get_screen().get_root_window().get_scale_factor();
-        int width = get_screen().get_width() * scale_factor;
-        int height = get_screen().get_height() * scale_factor;
+        int scale_factor = get_screen ().get_root_window ().get_scale_factor ();
+        int width = get_screen ().get_width () * scale_factor;
+        int height = get_screen ().get_height () * scale_factor;
 
-        var current_pixbuf = Wallpaper.scale_to_rect(wallpaper.background_pixbuf, width, height);
+        var current_pixbuf = Wallpaper.scale_to_rect (wallpaper.background_pixbuf, width, height);
 
         var img_surface = new Cairo.Surface.similar (surface, Cairo.Content.COLOR_ALPHA,
                                                      current_pixbuf.width,
