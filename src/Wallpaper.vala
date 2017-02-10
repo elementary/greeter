@@ -92,12 +92,12 @@ public class Wallpaper : GtkClutter.Actor {
                 InputStream stream = yield file.read_async (GLib.Priority.DEFAULT);
                 buf = yield new Gdk.Pixbuf.from_stream_async (stream, cancelable);
                 loading_wallpapers.remove (cancelable);
-                // we downscale the pixbuf as far as we can on the CPU
-                buf = validate_pixbuf (buf);
                 //add loaded wallpapers and paths to cache
                 cache_path += path;
                 cache_pixbuf += buf;
                 background_pixbuf = buf;
+                // we downscale the pixbuf as far as we can on the CPU
+                buf = validate_pixbuf (buf);
             } else {
                 buf = validate_pixbuf (buf);
             }
@@ -183,7 +183,10 @@ public class Wallpaper : GtkClutter.Actor {
         return scale_to_rect (pixbuf, screen_width, screen_height);
     }
 
-    Gdk.Pixbuf scale_to_rect (Gdk.Pixbuf pixbuf, int rect_width, int rect_height) {
+    public static Gdk.Pixbuf scale_to_rect (Gdk.Pixbuf pixbuf, int rect_width, int rect_height) {
+        if (pixbuf.width == rect_width && pixbuf.height == rect_height) {
+            return pixbuf;
+        }
         double target_aspect = (double) rect_width / rect_height;
         double aspect = (double) pixbuf.width / pixbuf.height;
         double scale, offset_x = 0, offset_y = 0;
