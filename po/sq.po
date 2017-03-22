@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2017-02-01 10:31-0600\n"
-"PO-Revision-Date: 2016-06-23 15:27+0000\n"
-"Last-Translator: Indrit Bashkimi <indrit.bashkimi@gmail.com>\n"
+"PO-Revision-Date: 2017-03-21 15:55+0000\n"
+"Last-Translator: xh3n1 <myrtajxheni@gmail.com>\n"
 "Language-Team: Albanian <sq@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
-"X-Generator: Launchpad (build 18330)\n"
+"X-Launchpad-Export-Date: 2017-03-22 06:48+0000\n"
+"X-Generator: Launchpad (build 18334)\n"
 
 #: ../src/LoginOptions/GuestLogin.vala:41
 msgid "Guest session"
@@ -23,19 +23,19 @@ msgstr "Seksion i i të ftuarit"
 
 #: ../src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
-msgstr ""
+msgstr "Logim manual"
 
 #: ../src/FingerprintIndicatorArea.vala:117
 msgid "Swipe your finger"
-msgstr ""
+msgstr "Rrëshqit gishtin"
 
 #: ../src/FingerprintIndicatorArea.vala:120
 msgid "Place your finger"
-msgstr ""
+msgstr "Vendosni gishtin"
 
 #: ../src/FingerprintIndicatorArea.vala:123
 msgid "Remove your finger and try again."
-msgstr ""
+msgstr "Hiqni gishtin dhe provoni përsëri"
 
 #: ../src/FingerprintIndicatorArea.vala:126
 msgid "Center your finger and try again."
@@ -43,7 +43,7 @@ msgstr ""
 
 #: ../src/PasswordArea.vala:34 ../src/LoginButtonArea.vala:26
 msgid "Log In"
-msgstr ""
+msgstr "Hyni"
 
 #. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: ../src/TimeLabel.vala:59
