@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-01 10:31-0600\n"
-"PO-Revision-Date: 2017-04-14 16:21+0000\n"
-"Last-Translator: Boris Bongalov <b.bongalov@gmail.com>\n"
+"PO-Revision-Date: 2017-05-09 22:12+0000\n"
+"Last-Translator: Martin Tomov <martin.tomov@boomer.digital>\n"
 "Language-Team: Bulgarian "
 "<https://l10n.elementary.io/projects/desktop/greeter/bg/>\n"
 "Language: bg\n"
@@ -30,7 +30,7 @@ msgstr "Ръчен вход"
 
 #: ../src/FingerprintIndicatorArea.vala:117
 msgid "Swipe your finger"
-msgstr ""
+msgstr "Плъзни пръста"
 
 #: ../src/FingerprintIndicatorArea.vala:120
 msgid "Place your finger"
