@@ -37,11 +37,39 @@ find_package (Vala REQUIRED)
 include (ValaVersion)
 ensure_vala_version ("0.26.0" MINIMUM)
 
-file(GLOB_RECURSE sources src/*.vala)
-
 include (ValaPrecompile)
 vala_precompile (VALA_C
-    ${sources}
+    src/Avatar.vala
+    src/CredentialsArea.vala
+    src/CredentialsAreaActor.vala
+    src/FingerprintIndicatorArea.vala
+    src/LoginBox.vala
+    src/LoginButtonArea.vala
+    src/LoginMask.vala
+    src/PantheonGreeter.vala
+    src/PasswordArea.vala
+    src/SettingsDaemon.vala
+    src/TimeLabel.vala
+    src/UserList.vala
+    src/UserListActor.vala
+    src/Wallpaper.vala
+
+    src/Gateways/DummyGateway.vala
+    src/Gateways/LightDMGateway.vala
+    src/Gateways/LoginGateway.vala
+
+    src/Indicators/EntryList.vala
+    src/Indicators/IndicatorBar.vala
+    src/Indicators/IndicatorEntry.vala
+    src/Indicators/IndicatorPopover.vala
+    src/Indicators/PopoverManager.vala
+    src/Indicators/StyleClass.vala
+
+    src/LoginOptions/GuestLogin.vala
+    src/LoginOptions/LoginOption.vala
+    src/LoginOptions/ManualLogin.vala
+    src/LoginOptions/UserLogin.vala
+
     ${CMAKE_BINARY_DIR}/src/config.vala
 PACKAGES
     granite
