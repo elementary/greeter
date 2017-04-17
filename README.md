@@ -10,8 +10,7 @@ You'll need the following dependencies:
 * libgdk-pixbuf2.0-dev
 * libgranite-dev
 * libgtk-3-dev
-* liblightdm-gobject-dev
-* lightdm-vala
+* liblightdm-gobject-1-dev
 * libwingpanel-2.0-dev
 * libx11-dev
 * valac
