@@ -3,6 +3,19 @@
 
 ## Building and Installation
 
+You'll need the following dependencies:
+
+* cmake
+* libclutter-gtk-1.0-dev
+* libgdk-pixbuf2.0-dev
+* libgranite-dev
+* libgtk-3-dev
+* liblightdm-gobject-dev
+* lightdm-vala
+* libwingpanel-2.0-dev
+* libx11-dev
+* valac
+
 It's recommended to create a clean build environment
 
     mkdir build
