@@ -6,16 +6,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-01 10:31-0600\n"
-"PO-Revision-Date: 2014-10-20 20:59+0000\n"
-"Last-Translator: Martin Myrvold <Unknown>\n"
-"Language-Team: Norwegian Nynorsk <nn@li.org>\n"
+"PO-Revision-Date: 2017-04-19 22:13+0000\n"
+"Last-Translator: Martin Myrvold <myrvold.martin@gmail.com>\n"
+"Language-Team: nn (generated) "
+"<https://l10n.elementary.io/projects/desktop/greeter/nn/>\n"
+"Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.13-dev\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
-"X-Generator: Launchpad (build 18330)\n"
 
 #: ../src/LoginOptions/GuestLogin.vala:41
 msgid "Guest session"
@@ -27,28 +30,28 @@ msgstr "Manuell pålogging"
 
 #: ../src/FingerprintIndicatorArea.vala:117
 msgid "Swipe your finger"
-msgstr ""
+msgstr "Sveip fingeren din"
 
 #: ../src/FingerprintIndicatorArea.vala:120
 msgid "Place your finger"
-msgstr ""
+msgstr "Plasser fingeren din"
 
 #: ../src/FingerprintIndicatorArea.vala:123
 msgid "Remove your finger and try again."
-msgstr ""
+msgstr "Ta vekk fingeren din og prøv om att."
 
 #: ../src/FingerprintIndicatorArea.vala:126
 msgid "Center your finger and try again."
-msgstr ""
+msgstr "Sentrer fingeren din og prøv om att."
 
 #: ../src/PasswordArea.vala:34 ../src/LoginButtonArea.vala:26
 msgid "Log In"
-msgstr ""
+msgstr "Logg inn"
 
 #. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: ../src/TimeLabel.vala:59
 msgid "%A, %B %e"
-msgstr ""
+msgstr "%A, %e %B"
 
 #. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: ../src/TimeLabel.vala:61
