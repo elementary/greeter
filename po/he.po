@@ -6,16 +6,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-01 10:31-0600\n"
-"PO-Revision-Date: 2016-09-26 09:18+0000\n"
-"Last-Translator: Niv Baehr <Unknown>\n"
-"Language-Team: Hebrew <he@li.org>\n"
+"PO-Revision-Date: 2017-04-20 14:07+0000\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: Hebrew "
+"<https://l10n.elementary.io/projects/desktop/greeter/he/>\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.13-dev\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
-"X-Generator: Launchpad (build 18330)\n"
 
 #: ../src/LoginOptions/GuestLogin.vala:41
 msgid "Guest session"
@@ -27,19 +30,19 @@ msgstr "כניסה ידנית"
 
 #: ../src/FingerprintIndicatorArea.vala:117
 msgid "Swipe your finger"
-msgstr ""
+msgstr "נא להעביר את האצבע"
 
 #: ../src/FingerprintIndicatorArea.vala:120
 msgid "Place your finger"
-msgstr ""
+msgstr "נא למקם את האצבע"
 
 #: ../src/FingerprintIndicatorArea.vala:123
 msgid "Remove your finger and try again."
-msgstr ""
+msgstr "נא להסיר את האצבע ולנסות שוב."
 
 #: ../src/FingerprintIndicatorArea.vala:126
 msgid "Center your finger and try again."
-msgstr ""
+msgstr "נא למרכז את האצבע ולנסות שוב."
 
 #: ../src/PasswordArea.vala:34 ../src/LoginButtonArea.vala:26
 msgid "Log In"
