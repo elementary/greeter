@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-01 10:31-0600\n"
-"PO-Revision-Date: 2017-04-20 14:07+0000\n"
+"PO-Revision-Date: 2017-04-20 14:08+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew "
 "<https://l10n.elementary.io/projects/desktop/greeter/he/>\n"
@@ -51,7 +51,7 @@ msgstr "כניסה"
 #. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: ../src/TimeLabel.vala:59
 msgid "%A, %B %e"
-msgstr "%A, %e ב%B"
+msgstr "%A, ה־%B ב%e"
 
 #. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: ../src/TimeLabel.vala:61
