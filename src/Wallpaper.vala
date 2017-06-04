@@ -18,7 +18,7 @@
 *
 */
 
-public class Wallpaper : GtkClutter.Actor {
+public class Wallpaper : Gtk.Stack {
     List<Gtk.Image> wallpapers = new List<Gtk.Image> ();
     List<Cancellable> loading_wallpapers = new List<Cancellable> ();
     Queue<Gtk.Image> unused_wallpapers = new Queue<Gtk.Image> ();
@@ -31,22 +31,18 @@ public class Wallpaper : GtkClutter.Actor {
 
     string last_loaded = "";
 
-    public Gtk.Stack stack;
     public Gdk.Pixbuf? background_pixbuf;
     public int screen_width { get; set; }
     public int screen_height { get; set; }
 
     public Wallpaper () {
-        GL.GLint result = 1;
-        GL.glGetIntegerv(GL.GL_MAX_TEXTURE_SIZE, out result);
-        gpu_limit = result;
+        Object (transition_type: Gtk.StackTransitionType.CROSSFADE);
     }
 
     construct {
-        var container_widget = (Gtk.Container)this.get_widget ();
-        stack = new Gtk.Stack ();
-        stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
-        container_widget.add (stack);
+        GL.GLint result = 1;
+        GL.glGetIntegerv(GL.GL_MAX_TEXTURE_SIZE, out result);
+        gpu_limit = result;
     }
 
     string get_default () {
@@ -109,9 +105,9 @@ public class Wallpaper : GtkClutter.Actor {
 
             var new_wallpaper = make_image ();
             new_wallpaper.pixbuf = buf;
-            stack.add (new_wallpaper);
-            stack.show_all ();
-            stack.visible_child = new_wallpaper;
+            add (new_wallpaper);
+            show_all ();
+            visible_child = new_wallpaper;
 
             // abort all currently loading wallpapers
             foreach (var c in loading_wallpapers) {
@@ -121,8 +117,8 @@ public class Wallpaper : GtkClutter.Actor {
             foreach (var other_wallpaper in wallpapers) {
                 wallpapers.remove (other_wallpaper);
 
-                Timeout.add (stack.transition_duration, () => {
-                    stack.remove (other_wallpaper);
+                Timeout.add (transition_duration, () => {
+                    remove (other_wallpaper);
                     unused_wallpapers.push_tail (other_wallpaper);
                     return false;
                 });
