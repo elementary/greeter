@@ -45,7 +45,7 @@ public class Indicators.IndicatorBar : Gtk.MenuBar {
                 });
             });
         }
-
+        
         get_style_context ().add_class (StyleClass.PANEL);
     }
 
