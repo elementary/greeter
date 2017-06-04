@@ -1,38 +1,42 @@
 // -*- Mode: vala; indent-tabs-mode: nil; tab-width: 4 -*-
-/***
-    BEGIN LICENSE
-
-    Copyright (C) 2011-2015 elementary Developers
-
-    This program is free software: you can redistribute it and/or modify it
-    under the terms of the GNU Lesser General Public License version 3, as published
-    by the Free Software Foundation.
-
-    This program is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranties of
-    MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
-    PURPOSE.  See the GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with this program.  If not, see <http://www.gnu.org/licenses/>
-
-    END LICENSE
-***/
+/*
+* Copyright (c) 2011-2017 elementary LLC. (https://elementary.io)
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public
+* License as published by the Free Software Foundation; either
+* version 3 of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+* General Public License for more details.
+*
+* You should have received a copy of the GNU General Public
+* License along with this program; if not, write to the
+* Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+* Boston, MA 02110-1301 USA
+*/
 
 public class Indicators.IndicatorBar : GtkClutter.Actor {
     private EntryList entry_list;
-
     private PopoverManager popover_manager;
-
     private Gtk.MenuBar menu_bar;
 
-    public IndicatorBar () {
+    construct {
         Wingpanel.IndicatorManager.get_default ().initialize (Wingpanel.IndicatorManager.ServerType.GREETER);
 
         entry_list = new EntryList ();
         popover_manager = new PopoverManager ();
 
-        build_ui ();
+        menu_bar = new Gtk.MenuBar ();
+        menu_bar.can_focus = true;
+        menu_bar.border_width = 0;
+        menu_bar.get_style_context ().add_class (StyleClass.PANEL);
+        menu_bar.halign = Gtk.Align.END;
+
+        var container_widget = (Gtk.Container) this.get_widget ();
+        container_widget.add (menu_bar);
 
         if (Wingpanel.IndicatorManager.get_default ().has_indicators ()) {
             load_indicators.begin (() => {
@@ -43,19 +47,6 @@ public class Indicators.IndicatorBar : GtkClutter.Actor {
                 });
             });
         }
-    }
-
-    private void build_ui () {
-        var container_widget = (Gtk.Container)this.get_widget ();
-
-        menu_bar = new Gtk.MenuBar ();
-        menu_bar.can_focus = true;
-        menu_bar.border_width = 0;
-        menu_bar.override_background_color (Gtk.StateFlags.NORMAL, {0, 0, 0, 0});
-        menu_bar.get_style_context ().add_class (StyleClass.PANEL);
-        menu_bar.halign = Gtk.Align.END;
-
-        container_widget.add (menu_bar);
     }
 
     private async void load_indicators () {
