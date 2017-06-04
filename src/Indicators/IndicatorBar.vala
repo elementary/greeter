@@ -29,14 +29,13 @@ public class Indicators.IndicatorBar : GtkClutter.Actor {
         entry_list = new EntryList ();
         popover_manager = new PopoverManager ();
 
-        var container_widget = (Gtk.Container)this.get_widget ();
-
         menu_bar = new Gtk.MenuBar ();
         menu_bar.can_focus = true;
         menu_bar.border_width = 0;
         menu_bar.get_style_context ().add_class (StyleClass.PANEL);
         menu_bar.halign = Gtk.Align.END;
 
+        var container_widget = (Gtk.Container) this.get_widget ();
         container_widget.add (menu_bar);
 
         if (Wingpanel.IndicatorManager.get_default ().has_indicators ()) {
