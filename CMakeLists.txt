@@ -39,20 +39,11 @@ ensure_vala_version ("0.26.0" MINIMUM)
 
 include (ValaPrecompile)
 vala_precompile (VALA_C
-    src/Avatar.vala
-    src/CredentialsArea.vala
-    src/CredentialsAreaActor.vala
-    src/FingerprintIndicatorArea.vala
-    src/LoginBox.vala
-    src/LoginButtonArea.vala
     src/LoginMask.vala
     src/PantheonGreeter.vala
-    src/PasswordArea.vala
     src/SettingsDaemon.vala
-    src/TimeLabel.vala
     src/UserList.vala
     src/UserListActor.vala
-    src/Wallpaper.vala
 
     src/Gateways/DummyGateway.vala
     src/Gateways/LightDMGateway.vala
@@ -69,6 +60,16 @@ vala_precompile (VALA_C
     src/LoginOptions/LoginOption.vala
     src/LoginOptions/ManualLogin.vala
     src/LoginOptions/UserLogin.vala
+
+    src/Widgets/Avatar.vala
+    src/Widgets/CredentialsArea.vala
+    src/Widgets/CredentialsAreaActor.vala
+    src/Widgets/FingerprintIndicatorArea.vala
+    src/Widgets/LoginBox.vala
+    src/Widgets/LoginButtonArea.vala
+    src/Widgets/PasswordArea.vala
+    src/Widgets/TimeLabel.vala
+    src/Widgets/Wallpaper.vala
 
     ${CMAKE_BINARY_DIR}/src/config.vala
 PACKAGES
