@@ -24,6 +24,7 @@ public class PantheonGreeter : Gtk.Window {
     public static LoginGateway login_gateway { get; private set; }
 
     GtkClutter.Embed clutter;
+    GtkClutter.Actor time_actor;
 
     Clutter.Actor greeterbox;
     UserListActor userlist_actor;
@@ -129,7 +130,12 @@ public class PantheonGreeter : Gtk.Window {
         userlist = new UserList (LightDM.UserList.get_instance ());
         userlist_actor = new UserListActor (userlist);
 
-        time = new TimeLabel ();
+        var time_label = new TimeLabel ();
+
+        time_actor = new GtkClutter.Actor ();
+
+        var time_actor_container = (Gtk.Container) time_actor.get_widget ();
+        time_actor_container.add (time_label);
 
         wallpaper = new Wallpaper ();
 
@@ -146,7 +152,7 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.restore_easing_state ();
 
         greeterbox.add_child (wallpaper);
-        greeterbox.add_child (time);
+        greeterbox.add_child (time_actor);
         greeterbox.add_child (userlist_actor);
         greeterbox.add_child (indicator_bar_actor);
 
@@ -264,7 +270,7 @@ public class PantheonGreeter : Gtk.Window {
         // The animations are always the same. If they would have different
         // lengths we need to use a TransitionGroup to determine
         // the correct time everything is faded out.
-        var anim = fade_out_actor (time);
+        var anim = fade_out_actor (time_actor);
         fade_out_actor (userlist_actor);
         if (!TEST_MODE)
             fade_out_actor (indicator_bar_actor);
@@ -296,10 +302,10 @@ public class PantheonGreeter : Gtk.Window {
 
         userlist_actor.y = Math.floorf (height / 2.0f);
 
-        time.x = width - time.width - time.width / 2 - 100;
-        time.y = height / 2 - time.height / 2;
+        time_actor.x = width - time_actor.width - time_actor.width / 2 - 100;
+        time_actor.y = height / 2 - time_actor.height / 2;
 
-        time.visible = width > NO_CLOCK_WIDTH + time.width / 2;
+        time_actor.visible = width > NO_CLOCK_WIDTH + time_actor.width / 2;
 
         wallpaper.width = width;
         wallpaper.screen_width = width;
