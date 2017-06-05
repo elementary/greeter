@@ -39,13 +39,11 @@ ensure_vala_version ("0.26.0" MINIMUM)
 
 include (ValaPrecompile)
 vala_precompile (VALA_C
-    src/Actors/CredentialsAreaActor.vala
-    src/Actors/UserListActor.vala
-
     src/LoginMask.vala
     src/PantheonGreeter.vala
     src/SettingsDaemon.vala
     src/UserList.vala
+    src/UserListActor.vala
 
     src/Gateways/DummyGateway.vala
     src/Gateways/LightDMGateway.vala
@@ -65,6 +63,7 @@ vala_precompile (VALA_C
 
     src/Widgets/Avatar.vala
     src/Widgets/CredentialsArea.vala
+    src/Widgets/CredentialsAreaActor.vala
     src/Widgets/FingerprintIndicatorArea.vala
     src/Widgets/LoginBox.vala
     src/Widgets/LoginButtonArea.vala
