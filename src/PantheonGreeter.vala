@@ -30,7 +30,6 @@ public class PantheonGreeter : Gtk.Window {
     UserListActor userlist_actor;
     UserList userlist;
 
-    TimeLabel time;
     GtkClutter.Actor indicator_bar_actor;
     Wallpaper wallpaper;
 
