@@ -18,7 +18,7 @@
 *
 */
 
-public abstract class CredentialsArea : Gtk.Grid {
+public abstract class AbstractCredentialsArea : Gtk.Grid {
     public signal void replied (string answer);
     public abstract void pass_focus ();
     
