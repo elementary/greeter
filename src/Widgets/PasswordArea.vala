@@ -18,7 +18,7 @@
 *
 */
 
-public class PasswordArea : CredentialsArea {
+public class PasswordArea : AbstractCredentialsArea {
 
     Gtk.Entry password;
 

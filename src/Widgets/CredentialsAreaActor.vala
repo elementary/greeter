@@ -19,7 +19,8 @@
 */
 
 public class CredentialsAreaActor : GtkClutter.Actor {
-    CredentialsArea credentials;
+    private AbstractCredentialsArea credentials;
+
     public string current_session { get; set; }
 
     const string SHAKE_STYLE_CSS = """

@@ -18,7 +18,7 @@
 *
 */
 
-public class LoginButtonArea : CredentialsArea {
+public class LoginButtonArea : AbstractCredentialsArea {
 
     Gtk.Button login_btn;
 
