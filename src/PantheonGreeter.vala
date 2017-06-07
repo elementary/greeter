@@ -204,6 +204,10 @@ public class PantheonGreeter : Gtk.Window {
             userlist.current_user = userlist.get_user (0);
         }
 
+        var provider = new Gtk.CssProvider ();
+        provider.load_from_resource ("io/elementary/greeter/Greeter.css");
+        Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_FALLBACK);
+
         show_all ();
 
         message ("Finished building UI...");

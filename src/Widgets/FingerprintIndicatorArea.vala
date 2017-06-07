@@ -36,49 +36,7 @@ public enum MessageText {
 public class FingerprintIndicatorArea : CredentialsArea {
     Gtk.Label label;
 
-    const string STYLE_CSS = """
-        .fingerprint {
-            background-image:
-                linear-gradient(
-                    @bg_color,
-                    @bg_color 80%,
-                    shade (
-                        @bg_color,
-                        0.94
-                    )
-                );
-            border-radius: 50%;
-            box-shadow:
-                inset 0 0 0 1px alpha (@bg_highlight_color, 0.1),
-                inset 0 1px 0 0 alpha (@bg_highlight_color, 0.9),
-                inset 0 -1px 0 0 alpha (@bg_highlight_color, 0.3),
-                0 0 0 1px alpha (#000, 0.2),
-                0 1px 2px alpha (#000, 0.15),
-                0 2px 6px alpha (#000, 0.10);
-        }
-
-        .fingerprint-label {
-            text-shadow: 0 0 3px alpha (#000, 0.4);
-        }
-
-        .fingerprint-label.info {
-            color: alpha (#fff, 0.8);
-        }
-
-        .fingerprint-label.error {
-            color: lighter (@error_color);
-        }
-    """;
-
     public FingerprintIndicatorArea () {
-        var provider = new Gtk.CssProvider ();
-        try {
-            provider.load_from_data (STYLE_CSS, STYLE_CSS.length);
-            Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        } catch (Error e) {
-            warning (e.message);
-        } 
-
         var image = new Gtk.Image.from_file (Constants.PKGDATADIR + "/fingerprint.svg");
         image.margin = 6;
 
