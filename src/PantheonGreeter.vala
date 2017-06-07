@@ -24,6 +24,7 @@ public class PantheonGreeter : Gtk.Window {
     public static LoginGateway login_gateway { get; private set; }
 
     GtkClutter.Embed clutter;
+    GtkClutter.Actor wallpaper_actor;
     GtkClutter.Actor time_actor;
 
     Clutter.Actor greeterbox;
@@ -132,6 +133,11 @@ public class PantheonGreeter : Gtk.Window {
 
         wallpaper = new Wallpaper ();
 
+        wallpaper_actor = new GtkClutter.Actor ();
+
+        var wallpaper_actor_container = (Gtk.Container) wallpaper_actor.get_widget ();
+        wallpaper_actor_container.add (wallpaper);
+
         monitors_changed ();
 
         greeterbox = new Clutter.Actor ();
@@ -144,7 +150,7 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.set_opacity (255);
         greeterbox.restore_easing_state ();
 
-        greeterbox.add_child (wallpaper);
+        greeterbox.add_child (wallpaper_actor);
         greeterbox.add_child (time_actor);
         greeterbox.add_child (userlist_actor);
         greeterbox.add_child (indicator_bar);
@@ -300,9 +306,10 @@ public class PantheonGreeter : Gtk.Window {
 
         time_actor.visible = width > NO_CLOCK_WIDTH + time_actor.width / 2;
 
-        wallpaper.width = width;
+        wallpaper_actor.width = width;
+        wallpaper_actor.height = height;
+
         wallpaper.screen_width = width;
-        wallpaper.height = height;
         wallpaper.screen_height = height;
         wallpaper.reposition ();
     }
