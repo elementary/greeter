@@ -33,10 +33,10 @@ public enum MessageText {
     OTHER
 }
 
-public class FingerprintIndicatorArea : CredentialsArea {
+public class FingerprintCredentials : Credentials {
     Gtk.Label label;
 
-    public FingerprintIndicatorArea () {
+    public FingerprintCredentials () {
         var image = new Gtk.Image.from_file (Constants.PKGDATADIR + "/fingerprint.svg");
         image.margin = 6;
 
