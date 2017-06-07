@@ -20,7 +20,7 @@
 */
 
 public class LoginBox : GtkClutter.Actor, LoginMask {
-    private CredentialsAreaActor credentials_actor;
+    private CredentialsArea credentials_area;
 
     bool _selected = false;
 
@@ -30,8 +30,8 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         }
         set {
             _selected = value;
-            credentials_actor.remove_credentials ();
-            credentials_actor.reveal = value;
+            credentials_area.remove_credentials ();
+            credentials_area.reveal = value;
         }
     }
 
@@ -40,13 +40,13 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             if (user.provides_login_name) {
                 return user.name;
             }
-            return credentials_actor.login_name;
+            return credentials_area.login_name;
         }
     }
 
     public string login_session {
         get {
-            return credentials_actor.current_session;
+            return credentials_area.current_session;
         }
     }
 
@@ -59,17 +59,23 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
     construct {
         reactive = true;
 
-        credentials_actor = new CredentialsAreaActor (this, user);
-        credentials_actor.x = this.x + 124;
-        credentials_actor.y = 5;
-        add_child (credentials_actor);
+        credentials_area = new CredentialsArea (this, user);
 
-        credentials_actor.replied.connect ((answer) => {
-            credentials_actor.remove_credentials ();
+        var credentials_area_actor = new GtkClutter.Actor ();
+        credentials_area_actor.height = 188;
+        credentials_area_actor.x = this.x + 124;
+        credentials_area_actor.y = 5;
+
+        ((Gtk.Container) credentials_area_actor.get_widget ()).add (credentials_area);
+
+        add_child (credentials_area_actor);
+
+        credentials_area.replied.connect ((answer) => {
+            credentials_area.remove_credentials ();
             PantheonGreeter.login_gateway.respond (answer);
         });
 
-        credentials_actor.entered_login_name.connect ((name) => {
+        credentials_area.entered_login_name.connect ((name) => {
             start_login ();
         });
 
@@ -92,29 +98,29 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         if (user.provides_login_name) {
             start_login ();
         }
-        credentials_actor.pass_focus ();
+        credentials_area.pass_focus ();
     }
 
     void shake () {
-        credentials_actor.shake ();
+        credentials_area.shake ();
         start_login ();
         return;
     }
 
     public void show_prompt (PromptType type, PromptText prompttext, string text = "") {
-        credentials_actor.show_prompt (type);
+        credentials_area.show_prompt (type);
     }
     
     public void show_message (LightDM.MessageType type, MessageText messagetext, string text = "") {
-        credentials_actor.show_message (type, messagetext, text);
+        credentials_area.show_message (type, messagetext, text);
     }
 
     public void not_authenticated () {
-        credentials_actor.remove_credentials ();
+        credentials_area.remove_credentials ();
         shake ();
     }
 
     public void login_aborted () {
-        credentials_actor.remove_credentials ();
+        credentials_area.remove_credentials ();
     }
 }
