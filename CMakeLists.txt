@@ -62,12 +62,12 @@ vala_precompile (VALA_C
     src/LoginOptions/UserLogin.vala
 
     src/Widgets/Avatar.vala
+    src/Widgets/Credentials.vala
     src/Widgets/CredentialsArea.vala
-    src/Widgets/CredentialsAreaActor.vala
-    src/Widgets/FingerprintIndicatorArea.vala
+    src/Widgets/FingerprintCredentials.vala
     src/Widgets/LoginBox.vala
-    src/Widgets/LoginButtonArea.vala
-    src/Widgets/PasswordArea.vala
+    src/Widgets/LoginButtonCredentials.vala
+    src/Widgets/PasswordCredentials.vala
     src/Widgets/TimeLabel.vala
     src/Widgets/Wallpaper.vala
 
