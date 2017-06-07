@@ -18,8 +18,8 @@
 *
 */
 
-public class CredentialsAreaActor : Gtk.Revealer {
-    CredentialsArea credentials;
+public class CredentialsArea : Gtk.Revealer {
+    Credentials credentials;
     public string current_session { get; set; }
 
     const string SHAKE_STYLE_CSS = """
@@ -57,7 +57,7 @@ public class CredentialsAreaActor : Gtk.Revealer {
         }
     }
 
-    public CredentialsAreaActor (LoginBox login_box, LoginOption login_option) {
+    public CredentialsArea (LoginBox login_box, LoginOption login_option) {
         Object (
             login_box: login_box,
             login_option: login_option,

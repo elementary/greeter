@@ -20,7 +20,7 @@
 */
 
 public class LoginBox : GtkClutter.Actor, LoginMask {
-    private CredentialsAreaActor credentials_area;
+    private CredentialsArea credentials_area;
 
     bool _selected = false;
 
@@ -59,7 +59,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
     construct {
         reactive = true;
 
-        credentials_area = new CredentialsAreaActor (this, user);
+        credentials_area = new CredentialsArea (this, user);
 
         var credentials_area_actor = new GtkClutter.Actor ();
         credentials_area_actor.height = 188;
