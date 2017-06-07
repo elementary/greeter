@@ -33,7 +33,7 @@ public enum MessageText {
     OTHER
 }
 
-public class FingerprintIndicatorArea : Credentials {
+public class FingerprintCredentials : Credentials {
     Gtk.Label label;
 
     const string STYLE_CSS = """
@@ -70,7 +70,7 @@ public class FingerprintIndicatorArea : Credentials {
         }
     """;
 
-    public FingerprintIndicatorArea () {
+    public FingerprintCredentials () {
         var provider = new Gtk.CssProvider ();
         try {
             provider.load_from_data (STYLE_CSS, STYLE_CSS.length);

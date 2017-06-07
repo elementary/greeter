@@ -183,13 +183,13 @@ public class CredentialsArea : Gtk.Revealer {
 
         switch (type) {
             case PromptType.SECRET:
-                credentials = new PasswordArea ();
+                credentials = new PasswordCredentials ();
                 break;
             case PromptType.CONFIRM_LOGIN:
-                credentials = new LoginButtonArea ();
+                credentials = new LoginButtonCredentials ();
                 break;
             case PromptType.FPRINT:
-                credentials = new FingerprintIndicatorArea();
+                credentials = new FingerprintCredentials ();
                 break;
             default:
                 warning (@"Not implemented $(type.to_string ())");

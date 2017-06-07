@@ -18,11 +18,11 @@
 *
 */
 
-public class LoginButtonArea : Credentials {
+public class LoginButtonCredentials : Credentials {
 
     Gtk.Button login_btn;
 
-    public LoginButtonArea () {
+    public LoginButtonCredentials () {
         login_btn = new Gtk.Button.with_label (_("Log In"));
         login_btn.clicked.connect (() => {
             // It doesn't matter what we answer, the confirmation

@@ -18,12 +18,8 @@
 *
 */
 
-public class PasswordArea : Credentials {
-
+public class PasswordCredentials : Credentials {
     Gtk.Entry password;
-
-    public PasswordArea () {
-    }
 
     construct {
         password = new Gtk.Entry ();
