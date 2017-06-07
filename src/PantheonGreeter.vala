@@ -31,7 +31,7 @@ public class PantheonGreeter : Gtk.Window {
     UserListActor userlist_actor;
     UserList userlist;
 
-    Indicators.IndicatorBar indicator_bar;
+    GtkClutter.Actor indicator_bar_actor;
     Wallpaper wallpaper;
 
     int timeout;
@@ -118,8 +118,14 @@ public class PantheonGreeter : Gtk.Window {
         var stage = clutter.get_stage () as Clutter.Stage;
         stage.background_color = {0, 0, 0, 255};
 
-        indicator_bar = new Indicators.IndicatorBar ();
-        indicator_bar.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
+        var indicator_bar = new Indicators.IndicatorBar ();
+
+        indicator_bar_actor = new GtkClutter.Actor ();
+        indicator_bar_actor.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
+
+        var indicator_bar_actor_container = (Gtk.Container) indicator_bar_actor.get_widget ();
+        indicator_bar_actor_container.add (indicator_bar);
+
 
         userlist = new UserList (LightDM.UserList.get_instance ());
         userlist_actor = new UserListActor (userlist);
@@ -153,7 +159,7 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.add_child (wallpaper_actor);
         greeterbox.add_child (time_actor);
         greeterbox.add_child (userlist_actor);
-        greeterbox.add_child (indicator_bar);
+        greeterbox.add_child (indicator_bar_actor);
 
         stage.add_child (greeterbox);
 
@@ -272,7 +278,7 @@ public class PantheonGreeter : Gtk.Window {
         var anim = fade_out_actor (time_actor);
         fade_out_actor (userlist_actor);
         if (!TEST_MODE)
-            fade_out_actor (indicator_bar);
+            fade_out_actor (indicator_bar_actor);
 
         anim.completed.connect (() => {
             login_gateway.start_session ();
