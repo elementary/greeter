@@ -56,8 +56,9 @@ public class CredentialsArea : Gtk.Revealer {
         credentials = null;     
 
         var login_name_label = new Gtk.Label (login_option.get_markup ());
+        login_name_label.hexpand = true;
+        login_name_label.xalign = 0;
         login_name_label.get_style_context ().add_class ("h2");
-        login_name_label.set_xalign (0);
 
         login_name_entry = new Gtk.Entry ();
         login_name_entry.hexpand = true;
