@@ -31,7 +31,7 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         set {
             _selected = value;
             credentials_area.remove_credentials ();
-            credentials_area.reveal = value;
+            credentials_area.reveal_child = value;
         }
     }
 
