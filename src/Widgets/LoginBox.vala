@@ -61,14 +61,38 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
 
         credentials_area = new CredentialsArea (this, user);
 
+        var path = user.avatar_path;
+        Granite.Widgets.Avatar avatar;
+
+        if (path != null) {
+            avatar = new Granite.Widgets.Avatar.from_file (path, 96);
+        } else {
+            avatar = new Granite.Widgets.Avatar.with_default_icon (96);
+        }
+
+        var grid = new Gtk.Grid ();
+        grid.column_spacing = 12;
+        grid.add (avatar);
+        grid.add (credentials_area);
+        grid.show_all ();
+
         var credentials_area_actor = new GtkClutter.Actor ();
         credentials_area_actor.height = 188;
-        credentials_area_actor.x = this.x + 124;
-        credentials_area_actor.y = 5;
 
-        ((Gtk.Container) credentials_area_actor.get_widget ()).add (credentials_area);
+        ((Gtk.Container) credentials_area_actor.get_widget ()).add (grid);
 
         add_child (credentials_area_actor);
+
+        if (user.logged_in) {
+            var logged_in = new Gtk.Image.from_icon_name ("selection-checked", Gtk.IconSize.LARGE_TOOLBAR);
+
+            var logged_in_actor = new GtkClutter.Actor ();
+            logged_in_actor.x = logged_in_actor.y = 75;
+
+            ((Gtk.Container) logged_in_actor.get_widget ()).add (logged_in);
+
+            add_child (logged_in_actor);
+        }
 
         credentials_area.replied.connect ((answer) => {
             credentials_area.remove_credentials ();
@@ -79,8 +103,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             start_login ();
         });
 
-        var avatar = new Avatar (user);
-        add_child (avatar);
     }
 
     /**
