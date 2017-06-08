@@ -33,7 +33,7 @@ public enum MessageText {
     OTHER
 }
 
-public class FingerprintCredentials : Credentials {
+public class FingerprintCredentials : Gtk.Grid, Credentials {
     Gtk.Label label;
 
     public FingerprintCredentials () {
@@ -56,10 +56,10 @@ public class FingerprintCredentials : Credentials {
         column_spacing = 6;
     }
 
-    public override void pass_focus () {
+    public void pass_focus () {
     }
 
-    public override void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "") {
+    public void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "") {
         var label_style_context = label.get_style_context ();
         
         if (type == LightDM.MessageType.INFO) {

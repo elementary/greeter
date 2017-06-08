@@ -18,7 +18,7 @@
 *
 */
 
-public class LoginButtonCredentials : Credentials {
+public class LoginButtonCredentials : Gtk.Grid, Credentials {
 
     Gtk.Button login_btn;
 
@@ -35,11 +35,11 @@ public class LoginButtonCredentials : Credentials {
         attach (login_btn, 0, 1, 1, 1);
     }
 
-    public override void pass_focus () {
+    public void pass_focus () {
         login_btn.grab_focus ();
     }
     
-    public override void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "") {
+    public void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "") {
         // there are no messages to display
     }
 }

@@ -18,36 +18,36 @@
 *
 */
 
-public class PasswordCredentials : Credentials {
-    Gtk.Entry password;
+public class PasswordCredentials : Gtk.Entry, Credentials {
+    public PasswordCredentials () {
+        Object (
+            caps_lock_warning: true,
+            hexpand: true,
+            visibility: false
+        );
+    }
 
     construct {
-        password = new Gtk.Entry ();
-        password.caps_lock_warning = true;
-        password.hexpand = true;
-        password.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, "dialog-password-symbolic");
-        password.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
-        password.set_icon_tooltip_text (Gtk.EntryIconPosition.SECONDARY, _("Log In"));
-        password.visibility = false;
+        set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, "dialog-password-symbolic");
+        set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
+        set_icon_tooltip_text (Gtk.EntryIconPosition.SECONDARY, _("Log In"));
 
-        password.activate.connect (() => {
-            replied (password.text);
+        activate.connect (() => {
+            replied (text);
         });
 
-        password.icon_press.connect ((pos, event) => {
+        icon_press.connect ((pos, event) => {
             if (pos == Gtk.EntryIconPosition.SECONDARY) {
-                replied (password.text);
+                replied (text);
             }
         });
-
-        attach (password, 0, 0, 1, 1);
     }
 
-    public override void pass_focus () {
-        password.grab_focus ();
+    public void pass_focus () {
+        grab_focus ();
     }
     
-    public override void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "") {
+    public void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "") {
         // there are no messages to display
     }
 }
