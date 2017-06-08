@@ -29,10 +29,6 @@ public class LoginButtonCredentials : Gtk.Button, Credentials {
             replied ("");
         });
     }
-
-    public void pass_focus () {
-        grab_focus ();
-    }
     
     public void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "") {
         // there are no messages to display

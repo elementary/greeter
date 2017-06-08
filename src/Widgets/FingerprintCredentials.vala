@@ -56,9 +56,6 @@ public class FingerprintCredentials : Gtk.Grid, Credentials {
         column_spacing = 6;
     }
 
-    public void pass_focus () {
-    }
-
     public void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "") {
         var label_style_context = label.get_style_context ();
         

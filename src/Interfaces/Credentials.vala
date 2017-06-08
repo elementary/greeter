@@ -20,7 +20,5 @@
 
 public interface Credentials : Gtk.Widget {
     public signal void replied (string answer);
-    public abstract void pass_focus ();
-    
     public abstract void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "");
 }

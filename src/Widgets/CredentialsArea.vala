@@ -143,7 +143,7 @@ public class CredentialsArea : Gtk.Revealer {
 
     public void pass_focus () {
         if (credentials != null) {
-            credentials.pass_focus ();
+            credentials.grab_focus ();
         }
         if (login_name_entry != null) {
             login_name_entry.grab_focus ();
@@ -186,7 +186,7 @@ public class CredentialsArea : Gtk.Revealer {
         // the LoginGateway until the manual login got a username (and is
         // now the LoginMask that recieves the LightDM-responses).
         if (login_box.selected)
-            credentials.pass_focus ();
+            credentials.grab_focus ();
 
         // Prevents that the user changes his login name during
         // the authentication process.
