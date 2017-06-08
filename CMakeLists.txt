@@ -90,7 +90,10 @@ add_subdirectory (po)
 
 include (GSettings)
 
-add_executable (pantheon-greeter ${VALA_C})
+include (GResource)
+glib_compile_resources (GLIB_RESOURCES_CSS SOURCE data/css.gresource.xml)
+
+add_executable (pantheon-greeter ${VALA_C} ${GLIB_RESOURCES_CSS})
 target_link_libraries(pantheon-greeter m)
 
 install (TARGETS pantheon-greeter RUNTIME DESTINATION sbin)
