@@ -26,8 +26,6 @@ public class Avatar : GtkClutter.Actor {
     }
 
     construct {
-        var container_widget = (Gtk.Container)this.get_widget ();
-
         var path = user.avatar_path;
         Granite.Widgets.Avatar avatar;
         if (path != null) {
@@ -36,22 +34,18 @@ public class Avatar : GtkClutter.Actor {
             avatar = new Granite.Widgets.Avatar.with_default_icon (96);
         }
 
+        var container_widget = (Gtk.Container)this.get_widget ();
         container_widget.add (avatar);
 
         if (user.logged_in) {
-            var logged_in = new LoggedInIcon ();
-            logged_in.x = logged_in.y = 80;
-            add_child (logged_in);
+            var logged_in = new Gtk.Image.from_icon_name ("selection-checked", Gtk.IconSize.LARGE_TOOLBAR);
+
+            var logged_in_actor = new GtkClutter.Actor ();
+            logged_in_actor.x = logged_in_actor.y = 80;
+
+            ((Gtk.Container) logged_in_actor.get_widget ()).add (logged_in);
+
+            add_child (logged_in_actor);
         }
-    }
-}
-
-public class LoggedInIcon : GtkClutter.Actor {
-    public LoggedInIcon () {
-        var container_widget = (Gtk.Container)this.get_widget ();
-
-        var image = new Gtk.Image.from_icon_name ("selection-checked", Gtk.IconSize.LARGE_TOOLBAR);
-
-        container_widget.add (image);
     }
 }
