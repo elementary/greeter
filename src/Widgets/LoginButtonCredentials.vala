@@ -18,28 +18,19 @@
 *
 */
 
-public class LoginButtonCredentials : Credentials {
+public class LoginButtonCredentials : Gtk.Button, Credentials {
+    construct {
+        label = _("Log In");
+        get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
 
-    Gtk.Button login_btn;
-
-    public LoginButtonCredentials () {
-        login_btn = new Gtk.Button.with_label (_("Log In"));
-        login_btn.clicked.connect (() => {
+        clicked.connect (() => {
             // It doesn't matter what we answer, the confirmation
             // is that we reply at all.
             replied ("");
         });
-
-        login_btn.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
-
-        attach (login_btn, 0, 1, 1, 1);
-    }
-
-    public override void pass_focus () {
-        login_btn.grab_focus ();
     }
     
-    public override void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "") {
+    public void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "") {
         // there are no messages to display
     }
 }
