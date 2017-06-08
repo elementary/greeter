@@ -58,13 +58,11 @@ public class CredentialsArea : Gtk.Revealer {
         var login_name_label = new Gtk.Label (login_option.get_markup ());
         login_name_label.get_style_context ().add_class ("h2");
         login_name_label.set_xalign (0);
-        login_name_label.width_request = 260;
 
         login_name_entry = new Gtk.Entry ();
-        login_name_entry.halign = Gtk.Align.START;
+        login_name_entry.hexpand = true;
         login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.PRIMARY, "avatar-default-symbolic");
         login_name_entry.set_icon_from_icon_name (Gtk.EntryIconPosition.SECONDARY, "go-jump-symbolic");
-        login_name_entry.width_request = 260;
 
         var settings = new Gtk.ToggleButton ();
         settings.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
@@ -82,6 +80,7 @@ public class CredentialsArea : Gtk.Revealer {
         settings_popover.bind_property ("visible", settings, "active", GLib.BindingFlags.BIDIRECTIONAL);
 
         grid = new Gtk.Grid ();
+        grid.width_request = 260;
         grid.column_spacing = 6;
         grid.row_spacing = 12;
 
@@ -118,12 +117,6 @@ public class CredentialsArea : Gtk.Revealer {
         });
 
         show_all ();
-    }
-
-    public bool reveal {
-        set {
-            reveal_child = value;
-        }
     }
 
     public void shake () {
