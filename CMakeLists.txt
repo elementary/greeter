@@ -63,7 +63,6 @@ vala_precompile (VALA_C
     src/LoginOptions/ManualLogin.vala
     src/LoginOptions/UserLogin.vala
 
-    src/Widgets/Avatar.vala
     src/Widgets/CredentialsArea.vala
     src/Widgets/FingerprintCredentials.vala
     src/Widgets/LoginBox.vala
