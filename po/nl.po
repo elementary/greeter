@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-01 10:31-0600\n"
-"PO-Revision-Date: 2017-06-18 21:18+0000\n"
-"Last-Translator: Rowan Hoogervorst <rowtricker@gmail.com>\n"
+"PO-Revision-Date: 2017-06-18 21:19+0000\n"
+"Last-Translator: Dieter Debast <dieter_debast@hotmail.com>\n"
 "Language-Team: Dutch "
 "<https://l10n.elementary.io/projects/desktop/greeter/nl/>\n"
 "Language: nl\n"
@@ -34,7 +34,7 @@ msgstr "Swipe uw vinger"
 
 #: ../src/FingerprintIndicatorArea.vala:120
 msgid "Place your finger"
-msgstr "Plaats je vinger"
+msgstr "Plaats uw vinger"
 
 #: ../src/FingerprintIndicatorArea.vala:123
 msgid "Remove your finger and try again."
