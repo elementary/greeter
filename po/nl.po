@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-01 10:31-0600\n"
 "PO-Revision-Date: 2017-06-18 21:18+0000\n"
-"Last-Translator: Rowan Hoogervorst <rowtricker@gmail.com>\n"
+"Last-Translator: Dieter Debast <dieter_debast@hotmail.com>\n"
 "Language-Team: Dutch "
 "<https://l10n.elementary.io/projects/desktop/greeter/nl/>\n"
 "Language: nl\n"
@@ -30,7 +30,7 @@ msgstr "Handmatig inloggen"
 
 #: ../src/FingerprintIndicatorArea.vala:117
 msgid "Swipe your finger"
-msgstr "Swipe je vinger"
+msgstr "Swipe uw vinger"
 
 #: ../src/FingerprintIndicatorArea.vala:120
 msgid "Place your finger"
