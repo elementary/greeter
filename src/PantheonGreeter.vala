@@ -71,7 +71,6 @@ public class PantheonGreeter : Gtk.Window {
     public static bool TEST_MODE { get; private set; }
 
     public PantheonGreeter () {
-        get_style_context ().add_class ("greeter");
         //singleton
         assert (instance == null);
         instance = this;
@@ -110,8 +109,6 @@ public class PantheonGreeter : Gtk.Window {
             warning (e.message);
         }
 
-        message ("Building UI...");
-
         clutter = new GtkClutter.Embed ();
         clutter.add_events (Gdk.EventMask.BUTTON_RELEASE_MASK);
 
@@ -122,10 +119,7 @@ public class PantheonGreeter : Gtk.Window {
 
         indicator_bar_actor = new GtkClutter.Actor ();
         indicator_bar_actor.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
-
-        var indicator_bar_actor_container = (Gtk.Container) indicator_bar_actor.get_widget ();
-        indicator_bar_actor_container.add (indicator_bar);
-
+        ((Gtk.Container) indicator_bar_actor.get_widget ()).add (indicator_bar);
 
         userlist = new UserList (LightDM.UserList.get_instance ());
         userlist_actor = new UserListActor (userlist);
@@ -133,16 +127,12 @@ public class PantheonGreeter : Gtk.Window {
         var time_label = new TimeLabel ();
 
         time_actor = new GtkClutter.Actor ();
-
-        var time_actor_container = (Gtk.Container) time_actor.get_widget ();
-        time_actor_container.add (time_label);
+        ((Gtk.Container) time_actor.get_widget ()).add (time_label);
 
         wallpaper = new Wallpaper ();
 
         wallpaper_actor = new GtkClutter.Actor ();
-
-        var wallpaper_actor_container = (Gtk.Container) wallpaper_actor.get_widget ();
-        wallpaper_actor_container.add (wallpaper);
+        ((Gtk.Container) wallpaper_actor.get_widget ()).add (wallpaper);
 
         monitors_changed ();
 
@@ -185,9 +175,8 @@ public class PantheonGreeter : Gtk.Window {
         unowned X.Display display = (Gdk.Display.get_default () as Gdk.X11.Display).get_xdisplay ();
 
         display.get_screensaver (out timeout, out interval, out prefer_blanking, out allow_exposures);
-        message ("saving Screensaver timeout %d", timeout);
-        message ("set greeter screensaver timeout %d", screensaver_timeout);
         display.set_screensaver (screensaver_timeout, 0, Screensaver.ACTIVE, Exposures.DEFAULT_EXPOSURES);
+
         if (login_gateway.lock) {
             display.force_screensaver (Screensaver.ACTIVE);
         }
@@ -210,19 +199,18 @@ public class PantheonGreeter : Gtk.Window {
             userlist.current_user = userlist.get_user (0);
         }
 
+        get_style_context ().add_class ("greeter");
+
         var provider = new Gtk.CssProvider ();
         provider.load_from_resource ("io/elementary/greeter/Greeter.css");
         Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         show_all ();
 
-        message ("Finished building UI...");
         this.get_window ().focus (Gdk.CURRENT_TIME);
     }
 
     void connect_signals () {
-        message ("Connecting signals...");
-
         get_screen ().monitors_changed.connect (monitors_changed);
 
         login_gateway.login_successful.connect (() => {
@@ -239,7 +227,6 @@ public class PantheonGreeter : Gtk.Window {
         });
 
         delete_event.connect (() => {
-            message ("Window got closed. Exiting...");
             Posix.exit (Posix.EXIT_SUCCESS);
             return false;
         });
@@ -456,22 +443,20 @@ public class PantheonGreeter : Gtk.Window {
 }
 
 public static int main (string [] args) {
-    message ("Starting pantheon-greeter...");
     /* Protect memory from being paged to disk, as we deal with passwords */
     Posix.mlockall (Posix.MCL_CURRENT | Posix.MCL_FUTURE);
 
     var init = GtkClutter.init (ref args);
-    if (init != Clutter.InitError.SUCCESS)
-        error ("Clutter could not be intiailized");
 
-    message ("Registering TERM signal...");
+    if (init != Clutter.InitError.SUCCESS) {
+        error ("Clutter could not be intiailized");
+    }
+
     GLib.Unix.signal_add (GLib.ProcessSignal.TERM, () => {
-        message ("SIGTERM received, exiting...");
         Gtk.main_quit ();
         return true;
     });
 
-    message ("Applying settings...");
     /*some settings*/
     Intl.setlocale (LocaleCategory.ALL, "");
     Intl.bind_textdomain_codeset ("pantheon-greeter", "UTF-8");
@@ -482,8 +467,6 @@ public static int main (string [] args) {
     Gdk.get_default_root_window ().set_cursor (cursor);
 
     new PantheonGreeter ();
-    message ("Entering main-loop...");
     Gtk.main ();
-    message ("Gtk.main exited - shutting down.");
     return Posix.EXIT_SUCCESS;
 }
