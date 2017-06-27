@@ -84,6 +84,7 @@ PACKAGES
     wingpanel-2.0
 OPTIONS
     --vapidir=${CMAKE_CURRENT_SOURCE_DIR}/vapi
+    --thread
 )
 
 add_subdirectory (po)
