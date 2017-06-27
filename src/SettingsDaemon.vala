@@ -25,7 +25,6 @@ public class SettingsDaemon : Object {
     private Cond condition = Cond ();
     private int ready1 = 0;
     private int ready2 = 0;
-    private bool done = false;
     public signal void xsettings_ready1 ();
     public signal void xsettings_ready2 ();
     private SettingsDaemonDBusInterface  settings_daemon_proxy;
@@ -126,7 +125,6 @@ public class SettingsDaemon : Object {
                                                 }
                                             }
                                         );
-                                        done = true;
                                     }
                                     catch (Error e)
                                     {
