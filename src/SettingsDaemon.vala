@@ -148,7 +148,7 @@ public class SettingsDaemon : Object {
     public void wait_for_ready2 () {
         mutex.lock ();
         if (AtomicInt.@get (ref ready2) == 0) {
-            int64 until = GLib.get_monotonic_time () + 1 * TimeSpan.SECOND;
+            int64 until = GLib.get_monotonic_time () + 3 * TimeSpan.SECOND;
             condition.wait_until (mutex, until);
         }
         mutex.unlock ();
@@ -159,7 +159,10 @@ public class SettingsDaemon : Object {
     }
 
     private void xsettings_ready2_cb () {
+        mutex.lock ();
         AtomicInt.inc (ref ready2);
+        condition.signal ();
+        mutex.unlock ();
     }
 }
 
