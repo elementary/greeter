@@ -61,29 +61,24 @@ public class PantheonGreeter : Gtk.Window {
     private string state_file;
 
     public static PantheonGreeter instance { get; private set; }
-    private static SettingsDaemon settings_daemon;
 
     //from this width on we use the shrinked down version
     const int NORMAL_WIDTH = 1200;
     //from this width on the clock wont fit anymore
     const int NO_CLOCK_WIDTH = 920;
 
-    public static bool TEST_MODE { get; private set; }
+    public static bool TEST_MODE;
 
     public PantheonGreeter () {
         //singleton
         assert (instance == null);
         instance = this;
 
-        TEST_MODE = Environment.get_variable ("LIGHTDM_TO_SERVER_FD") == null;
-
         if (TEST_MODE) {
             message ("Using dummy LightDM because LIGHTDM_TO_SERVER_FD was not found.");
             login_gateway = new DummyGateway ();
         } else {
             login_gateway = new LightDMGateway ();
-            settings_daemon = new SettingsDaemon ();
-            settings_daemon.start ();
         }
 
         var state_dir = Path.build_filename (Environment.get_user_cache_dir (), "unity-greeter");
@@ -445,6 +440,14 @@ public class PantheonGreeter : Gtk.Window {
 public static int main (string [] args) {
     /* Protect memory from being paged to disk, as we deal with passwords */
     Posix.mlockall (Posix.MCL_CURRENT | Posix.MCL_FUTURE);
+
+    PantheonGreeter.TEST_MODE = Environment.get_variable ("LIGHTDM_TO_SERVER_FD") == null;
+
+    if (!PantheonGreeter.TEST_MODE) {
+        SettingsDaemon settings_daemon = new SettingsDaemon ();
+        settings_daemon.start ();
+        settings_daemon.wait_for_ready ();
+    }
 
     var init = GtkClutter.init (ref args);
 

@@ -21,6 +21,8 @@ public class SettingsDaemon : Object {
     private SessionManagerInterface session_manager;
     private int n_names = 0;
 
+    private bool ready = false;
+
     public void start () {
         string[] disabled = { "org.gnome.settings-daemon.plugins.background",
                               "org.gnome.settings-daemon.plugins.clipboard",
@@ -93,6 +95,22 @@ public class SettingsDaemon : Object {
         } catch (SpawnError e) {
             debug ("Could not start gnome-settings-daemon: %s", e.message);
         }
+
+        Gtk.main_iteration_do (true);
+
+        GLib.Bus.watch_name (BusType.SESSION, "org.gnome.SettingsDaemon", BusNameWatcherFlags.NONE,
+                                 (c, name, owner) =>
+                                 {
+                                    ready = true;
+                                 },
+                                 null);
+    }
+
+    public void wait_for_ready () {
+        while (!ready) {
+            Gtk.main_iteration_do (true);
+        }
+        Thread.usleep (1 * 1000 * 1000);
     }
 }
 
