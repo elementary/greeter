@@ -60,7 +60,7 @@ public class TimeLabel : Gtk.Grid {
         /// Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
         var time_format = _("%l:%M");
         /// Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-        var time_format_24h = _("%H:%M");
+        var time_format_24h = Granite.DateTime.get_default_time_format (!format24h);
         /// AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
         var meridiem_format = _(" %p");
 
