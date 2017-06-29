@@ -28,7 +28,7 @@ public class UserLogin : LoginOption {
 
         string gsettings_result;
         string? xdg_config_home_real = Environment.get_variable ("XDG_CONFIG_HOME");
-        string xdg_config_home_spoof = user.home_directory + "/.config";
+        string xdg_config_home_spoof = Path.build_path (Path.DIR_SEPARATOR_S, user.home_directory, ".config");
 
         Environment.set_variable ("XDG_CONFIG_HOME", xdg_config_home_spoof, true);
 
