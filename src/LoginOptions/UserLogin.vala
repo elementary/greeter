@@ -22,15 +22,19 @@ public class UserLogin : LoginOption {
 
     public LightDM.User lightdm_user { get; private set; }
 
+    private const string ENV_VAR_NAME = "XDG_CONFIG_HOME";
+    private const string ENV_VAR_SUFFIX = ".config";
+
     public UserLogin (int index, LightDM.User user) {
         base (index);
         this.lightdm_user = user;
 
         string gsettings_result;
-        string? xdg_config_home_real = Environment.get_variable ("XDG_CONFIG_HOME");
-        string xdg_config_home_spoof = Path.build_path (Path.DIR_SEPARATOR_S, user.home_directory, ".config");
+        string? xdg_config_home_real = Environment.get_variable (UserLogin.ENV_VAR_NAME);
+        string xdg_config_home_spoof = Path.build_path (Path.DIR_SEPARATOR_S,
+                                        user.home_directory, UserLogin.ENV_VAR_SUFFIX);
 
-        Environment.set_variable ("XDG_CONFIG_HOME", xdg_config_home_spoof, true);
+        Environment.set_variable (UserLogin.ENV_VAR_NAME, xdg_config_home_spoof, true);
 
         try {
             Process.spawn_command_line_sync ("gsettings get org.gnome.desktop.interface clock-format",
@@ -42,9 +46,9 @@ public class UserLogin : LoginOption {
         this.clock_format = gsettings_result;
 
         if (xdg_config_home_real == null) {
-            Environment.unset_variable ("XDG_CONFIG_HOME");
+            Environment.unset_variable (UserLogin.ENV_VAR_NAME);
         } else {
-            Environment.set_variable ("XDG_CONFIG_HOME", xdg_config_home_real, true);
+            Environment.set_variable (UserLogin.ENV_VAR_NAME, xdg_config_home_real, true);
         }
     }
 
