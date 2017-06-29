@@ -21,6 +21,14 @@ public class SettingsDaemon : Object {
     private SessionManagerInterface session_manager;
     private int n_names = 0;
 
+    private Mutex mutex = Mutex ();
+    private Cond condition = Cond ();
+    private int ready1 = 0;
+    private int ready2 = 0;
+    public signal void xsettings_ready1 ();
+    public signal void xsettings_ready2 ();
+    private SettingsDaemonDBusInterface  settings_daemon_proxy;
+
     public void start () {
         string[] disabled = { "org.gnome.settings-daemon.plugins.background",
                               "org.gnome.settings-daemon.plugins.clipboard",
@@ -93,6 +101,68 @@ public class SettingsDaemon : Object {
         } catch (SpawnError e) {
             debug ("Could not start gnome-settings-daemon: %s", e.message);
         }
+
+        /* Render things after xsettings is ready */
+
+        xsettings_ready1.connect ( xsettings_ready1_cb );
+        xsettings_ready2.connect ( xsettings_ready2_cb );
+
+        while (AtomicInt.@get (ref ready1) == 0) {
+            Gtk.main_iteration_do (true);
+            GLib.Bus.watch_name (BusType.SESSION, "org.gnome.SettingsDaemon", BusNameWatcherFlags.NONE,
+                                 (c, name, owner) =>
+                                 {
+                                    xsettings_ready1 ();
+                                    try {
+                                        settings_daemon_proxy = GLib.Bus.get_proxy_sync (
+                                            BusType.SESSION, "org.gnome.SettingsDaemon", "/org/gnome/SettingsDaemon");
+                                        settings_daemon_proxy.plugin_activated.connect (
+                                            (name) =>
+                                            {
+                                                if (name == "xsettings") {
+                                                    debug ("xsettings is ready");
+                                                    xsettings_ready2 ();
+                                                }
+                                            }
+                                        );
+                                    }
+                                    catch (Error e)
+                                    {
+                                        debug ("Failed to get GSD proxy, proceed anyway");
+                                        xsettings_ready2 ();
+                                    }
+                                },
+                                (c, name) =>
+                                {
+                                    debug ("Non existent bus name");
+                                });
+        }
+    }
+
+    public void wait_for_ready1 () {
+        while (AtomicInt.@get (ref ready1) == 0) {
+            Gtk.main_iteration_do (true);
+        }
+    }
+
+    public void wait_for_ready2 () {
+        mutex.lock ();
+        if (AtomicInt.@get (ref ready2) == 0) {
+            int64 until = GLib.get_monotonic_time () + 3 * TimeSpan.SECOND;
+            condition.wait_until (mutex, until);
+        }
+        mutex.unlock ();
+    }
+
+    private void xsettings_ready1_cb () {
+        AtomicInt.inc (ref ready1);
+    }
+
+    private void xsettings_ready2_cb () {
+        mutex.lock ();
+        AtomicInt.inc (ref ready2);
+        condition.signal ();
+        mutex.unlock ();
     }
 }
 
@@ -102,4 +172,11 @@ public class SessionManagerInterface : Object
     public bool session_is_active { get { return true; } }
     public string session_name { get { return "pantheon"; } }
     public uint32 inhibited_actions { get { return 0; } }
+}
+
+[DBus (name="org.gnome.SettingsDaemon")]
+private interface SettingsDaemonDBusInterface : Object
+{
+    public signal void plugin_activated (string name);
+    public signal void plugin_deactivated (string name);
 }
