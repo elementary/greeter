@@ -26,6 +26,7 @@ public class PantheonGreeter : Gtk.Window {
     GtkClutter.Embed clutter;
     GtkClutter.Actor wallpaper_actor;
     GtkClutter.Actor time_actor;
+    TimeLabel time_label;
 
     Clutter.Actor greeterbox;
     UserListActor userlist_actor;
@@ -124,7 +125,7 @@ public class PantheonGreeter : Gtk.Window {
         userlist = new UserList (LightDM.UserList.get_instance ());
         userlist_actor = new UserListActor (userlist);
 
-        var time_label = new TimeLabel ();
+        time_label = new TimeLabel ();
 
         time_actor = new GtkClutter.Actor ();
         ((Gtk.Container) time_actor.get_widget ()).add (time_label);
@@ -233,6 +234,7 @@ public class PantheonGreeter : Gtk.Window {
 
         userlist.current_user_changed.connect ((user) => {
             wallpaper.set_wallpaper (user.background);
+            time_label.set_format (user.clock_format);
         });
 
         clutter.key_press_event.connect (keyboard_navigation);

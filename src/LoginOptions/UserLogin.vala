@@ -25,6 +25,27 @@ public class UserLogin : LoginOption {
     public UserLogin (int index, LightDM.User user) {
         base (index);
         this.lightdm_user = user;
+
+        string gsettings_result;
+        string? xdg_config_home_real = Environment.get_variable ("XDG_CONFIG_HOME");
+        string xdg_config_home_spoof = user.home_directory + "/.config";
+
+        Environment.set_variable ("XDG_CONFIG_HOME", xdg_config_home_spoof, true);
+
+        try {
+            Process.spawn_command_line_sync ("gsettings get org.gnome.desktop.interface clock-format",
+                                                out gsettings_result);
+        } catch (SpawnError e) {
+            debug ("Could not spawn gsettings: %s", e.message);
+        }
+
+        this.clock_format = gsettings_result;
+
+        if (xdg_config_home_real == null) {
+            Environment.unset_variable ("XDG_CONFIG_HOME");
+        } else {
+            Environment.set_variable ("XDG_CONFIG_HOME", xdg_config_home_real, true);
+        }
     }
 
     public override string? avatar_path {
