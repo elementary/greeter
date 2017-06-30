@@ -47,9 +47,15 @@ public class TimeLabel : Gtk.Grid {
         show_all ();
     }
 
-    public void set_format (string? clock_format) {
-        format24h = (clock_format != null && clock_format.contains ("24h"));
-        update_time ();
+    public string format {
+        private get {
+            return "";
+        }
+        set {
+            format24h = (value != null && value.contains ("24h"));
+            update_time ();
+        }
+        default = "";
     }
 
     bool update_time () {

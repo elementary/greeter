@@ -234,7 +234,7 @@ public class PantheonGreeter : Gtk.Window {
 
         userlist.current_user_changed.connect ((user) => {
             wallpaper.set_wallpaper (user.background);
-            time_label.set_format (user.clock_format);
+            time_label.format = user.clock_format;
         });
 
         clutter.key_press_event.connect (keyboard_navigation);
