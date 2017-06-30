@@ -29,7 +29,7 @@ public class UserLogin : LoginOption {
         base (index);
         this.lightdm_user = user;
 
-        string gsettings_result;
+        string gsettings_result = "";
         string? xdg_config_home_real = Environment.get_variable (UserLogin.ENV_VAR_NAME);
         string xdg_config_home_spoof = Path.build_path (Path.DIR_SEPARATOR_S,
                                         user.home_directory, UserLogin.ENV_VAR_SUFFIX);
@@ -43,7 +43,7 @@ public class UserLogin : LoginOption {
             debug ("Could not spawn gsettings: %s", e.message);
         }
 
-        this.clock_format = gsettings_result;
+        clock_format = gsettings_result;
 
         if (xdg_config_home_real == null) {
             Environment.unset_variable (UserLogin.ENV_VAR_NAME);
