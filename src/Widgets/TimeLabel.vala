@@ -46,8 +46,10 @@ public class TimeLabel : Gtk.Grid {
 
         /// Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
         var day_format = _("%A, %B %e");
+
         /// Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
         var time_format = Granite.DateTime.get_default_time_format (true);
+
         date_label.label = date.format (day_format);
         time_label.label = date.format (time_format);
 
