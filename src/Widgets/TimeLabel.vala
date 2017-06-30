@@ -21,7 +21,6 @@
 public class TimeLabel : Gtk.Grid {
     private Gtk.Label date_label;
     private Gtk.Label time_label;
-    private Gtk.Label pm_label;
 
     public TimeLabel () {
         update_time ();
@@ -36,13 +35,9 @@ public class TimeLabel : Gtk.Grid {
         time_label = new Gtk.Label ("");
         time_label.get_style_context ().add_class ("time");
 
-        pm_label = new Gtk.Label ("");
-        pm_label.get_style_context ().add_class ("time");
-        pm_label.get_style_context ().add_class ("pm");
-
         attach (date_label, 0, 0, 2, 1);
         attach (time_label, 0, 1, 1, 1);
-        attach (pm_label, 1, 1, 1, 1);
+
         show_all ();
     }
 
@@ -52,13 +47,10 @@ public class TimeLabel : Gtk.Grid {
         /// Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
         var day_format = _("%A, %B %e");
         /// Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-        var time_format = _("%l:%M");
-        /// AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
-        var meridiem_format = _(" %p");
-
+        var time_format = Granite.DateTime.get_default_time_format (true);
         date_label.label = date.format (day_format);
         time_label.label = date.format (time_format);
-        pm_label.label = date.format (meridiem_format);
+
         return true;
     }
 }
