@@ -22,7 +22,7 @@ public class TimeLabel : Gtk.Grid {
     private Gtk.Label date_label;
     private Gtk.Label time_label;
     private Gtk.Label pm_label;
-    private bool format24h = false;
+    private bool format_24h = false;
 
     public TimeLabel () {
         update_time ();
@@ -48,14 +48,10 @@ public class TimeLabel : Gtk.Grid {
     }
 
     public string format {
-        private get {
-            return "";
-        }
         set {
-            format24h = (value != null && value.contains ("24h"));
+            format_24h = (value != null && value.contains ("24h"));
             update_time ();
         }
-        default = "";
     }
 
     bool update_time () {
@@ -71,8 +67,8 @@ public class TimeLabel : Gtk.Grid {
         var meridiem_format = _(" %p");
 
         date_label.label = date.format (day_format);
-        time_label.label = date.format (format24h ? time_format_24h : time_format);
-        pm_label.label = date.format (format24h ? "" : meridiem_format);
+        time_label.label = date.format (format_24h ? time_format_24h : time_format);
+        pm_label.label = date.format (format_24h ? "" : meridiem_format);
         return true;
     }
 }

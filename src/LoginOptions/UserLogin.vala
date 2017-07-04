@@ -29,7 +29,6 @@ public class UserLogin : LoginOption {
         base (index);
         this.lightdm_user = user;
 
-        string gsettings_result = "";
         string? xdg_config_home_real = Environment.get_variable (UserLogin.ENV_VAR_NAME);
         string xdg_config_home_spoof = Path.build_path (Path.DIR_SEPARATOR_S,
                                         user.home_directory, UserLogin.ENV_VAR_SUFFIX);
@@ -37,13 +36,15 @@ public class UserLogin : LoginOption {
         Environment.set_variable (UserLogin.ENV_VAR_NAME, xdg_config_home_spoof, true);
 
         try {
+            string gsettings_result;
+
             Process.spawn_command_line_sync ("gsettings get org.gnome.desktop.interface clock-format",
                                                 out gsettings_result);
+
+            clock_format = gsettings_result;
         } catch (SpawnError e) {
             debug ("Could not spawn gsettings: %s", e.message);
         }
-
-        clock_format = gsettings_result;
 
         if (xdg_config_home_real == null) {
             Environment.unset_variable (UserLogin.ENV_VAR_NAME);
