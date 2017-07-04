@@ -290,6 +290,8 @@ public class PantheonGreeter : Gtk.Window {
 
         get_size (out width, out height);
 
+        int scale_factor = get_screen ().get_root_window ().get_scale_factor ();
+
         if (width > NORMAL_WIDTH) {
             userlist_actor.x = 243;
         } else {
@@ -298,7 +300,7 @@ public class PantheonGreeter : Gtk.Window {
 
         userlist_actor.y = Math.floorf (height / 2.0f);
 
-        time_actor.x = width - time_actor.width - time_actor.width / 2 - 100;
+        time_actor.x = width - time_actor.width - time_actor.width / 2 - 200 / scale_factor;
         time_actor.y = height / 2 - time_actor.height / 2;
 
         time_actor.visible = width > NO_CLOCK_WIDTH + time_actor.width / 2;

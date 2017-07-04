@@ -35,7 +35,7 @@ public class TimeLabel : Gtk.Grid {
         time_label = new Gtk.Label ("");
         time_label.get_style_context ().add_class ("time");
 
-        attach (date_label, 0, 0, 2, 1);
+        attach (date_label, 0, 0, 1, 1);
         attach (time_label, 0, 1, 1, 1);
 
         show_all ();
