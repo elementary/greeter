@@ -22,6 +22,7 @@ public class TimeLabel : Gtk.Grid {
     private Gtk.Label date_label;
     private Gtk.Label time_label;
     private Gtk.Label pm_label;
+    private bool format_24h = false;
 
     public TimeLabel () {
         update_time ();
@@ -46,6 +47,13 @@ public class TimeLabel : Gtk.Grid {
         show_all ();
     }
 
+    public string format {
+        set {
+            format_24h = (value != null && value.contains ("24h"));
+            update_time ();
+        }
+    }
+
     bool update_time () {
         var date = new GLib.DateTime.now_local ();
 
@@ -53,12 +61,14 @@ public class TimeLabel : Gtk.Grid {
         var day_format = _("%A, %B %e");
         /// Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
         var time_format = _("%l:%M");
+        /// Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
+        var time_format_24h = Granite.DateTime.get_default_time_format (false);
         /// AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
         var meridiem_format = _(" %p");
 
         date_label.label = date.format (day_format);
-        time_label.label = date.format (time_format);
-        pm_label.label = date.format (meridiem_format);
+        time_label.label = date.format (format_24h ? time_format_24h : time_format);
+        pm_label.label = date.format (format_24h ? "" : meridiem_format);
         return true;
     }
 }

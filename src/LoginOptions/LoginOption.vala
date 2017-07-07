@@ -55,6 +55,13 @@ public abstract class LoginOption : Object {
     }
 
     /**
+     * Clock format setting of this user.
+     */
+    public virtual string clock_format {
+        get; protected set; default = "";
+    }
+
+    /**
      * The login name for this LoginOption. This is also used to identify this object
      * from one session to another. Note that you still have to return a unique
      * string even if this LoginOption cannot directly provide a login name to
