@@ -22,6 +22,8 @@ public class TimeLabel : Gtk.Grid {
     private Gtk.Label date_label;
     private Gtk.Label time_label;
 
+    private bool format_24h = false;
+
     public TimeLabel () {
         update_time ();
         Clutter.Threads.Timeout.add (5000, update_time);
@@ -41,6 +43,13 @@ public class TimeLabel : Gtk.Grid {
         show_all ();
     }
 
+    public string format {
+        set {
+            format_24h = (value != null && value.contains ("24h"));
+            update_time ();
+        }
+    }
+
     bool update_time () {
         var date = new GLib.DateTime.now_local ();
 
@@ -50,8 +59,11 @@ public class TimeLabel : Gtk.Grid {
         /// Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
         var time_format = Granite.DateTime.get_default_time_format (true);
 
+        /// Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
+        var time_format_24h = Granite.DateTime.get_default_time_format (false);
+
         date_label.label = date.format (day_format);
-        time_label.label = date.format (time_format);
+        time_label.label = date.format (format_24h ? time_format_24h : time_format);
 
         return true;
     }

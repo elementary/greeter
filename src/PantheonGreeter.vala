@@ -26,6 +26,8 @@ public class PantheonGreeter : Gtk.Window {
     GtkClutter.Embed clutter;
     GtkClutter.Actor wallpaper_actor;
     GtkClutter.Actor time_actor;
+    TimeLabel time_label;
+    bool skip_once = true;
 
     Clutter.Actor greeterbox;
     UserListActor userlist_actor;
@@ -124,7 +126,7 @@ public class PantheonGreeter : Gtk.Window {
         userlist = new UserList (LightDM.UserList.get_instance ());
         userlist_actor = new UserListActor (userlist);
 
-        var time_label = new TimeLabel ();
+        time_label = new TimeLabel ();
 
         time_actor = new GtkClutter.Actor ();
         ((Gtk.Container) time_actor.get_widget ()).add (time_label);
@@ -233,11 +235,40 @@ public class PantheonGreeter : Gtk.Window {
 
         userlist.current_user_changed.connect ((user) => {
             wallpaper.set_wallpaper (user.background);
+            update_format_with_fade (user.clock_format);
         });
 
         clutter.key_press_event.connect (keyboard_navigation);
 
         scroll_event.connect (scroll_navigation);
+    }
+
+    void update_format_with_fade (string clock_format) {
+        if (skip_once) {
+            skip_once = false;
+            time_label.format = clock_format;
+            return;
+        }
+        var transition_out = new Clutter.PropertyTransition ("opacity");
+        transition_out.animatable = time_actor;
+        transition_out.remove_on_complete = true;
+        transition_out.set_duration (300);
+        transition_out.set_progress_mode (Clutter.AnimationMode.EASE_OUT_QUAD);
+        uint opacity = time_actor.opacity;
+        transition_out.set_from_value (opacity);
+        transition_out.set_to_value (0);
+        transition_out.completed.connect (() => {
+            var transition_in = new Clutter.PropertyTransition ("opacity");
+            transition_in.animatable = time_actor;
+            transition_in.remove_on_complete = true;
+            transition_in.set_duration (300);
+            transition_in.set_progress_mode (Clutter.AnimationMode.EASE_IN_QUAD);
+            transition_in.set_from_value (0);
+            transition_in.set_to_value (opacity);
+            time_label.format = clock_format;
+            time_actor.add_transition ("fadein", transition_in);
+        });
+        time_actor.add_transition ("fadeout", transition_out);
     }
 
     /**
@@ -288,7 +319,11 @@ public class PantheonGreeter : Gtk.Window {
         int width = 0;
         int height = 0;
 
-        get_size (out width, out height);
+        Gdk.Rectangle geometry;
+        get_screen ().get_monitor_geometry (get_screen ().get_primary_monitor (), out geometry);
+
+        width = geometry.width;
+        height = geometry.height;
 
         int scale_factor = get_screen ().get_root_window ().get_scale_factor ();
 
@@ -378,17 +413,21 @@ public class PantheonGreeter : Gtk.Window {
         unowned X.Display display = gdk_display.get_xdisplay ();
 
         var root_window = (screen.get_root_window () as Gdk.X11.Window);
+
+        Gdk.Rectangle geometry;
+        get_screen ().get_monitor_geometry (get_screen ().get_primary_monitor (), out geometry);
+
         var pixmap = X.create_pixmap (display,
                                      root_window.get_xid (),
-                                     screen.get_width () * root_window.get_scale_factor (),
-                                     screen.get_height () * root_window.get_scale_factor (),
+                                     geometry.width * root_window.get_scale_factor (),
+                                     geometry.height * root_window.get_scale_factor (),
                                      visual.get_depth ());
 
         /* Convert into a Cairo surface */
         var surface = new Cairo.XlibSurface (display, (int) pixmap,
                                              xvisual,
-                                             screen.get_width () * root_window.get_scale_factor (),
-                                             screen.get_height () * root_window.get_scale_factor ());
+                                             geometry.width * root_window.get_scale_factor (),
+                                             geometry.height * root_window.get_scale_factor ());
 
         return surface;
     }
@@ -399,8 +438,12 @@ public class PantheonGreeter : Gtk.Window {
         ctx.set_source_rgba (0.0, 0.0, 0.0, 0.0);
 
         int scale_factor = get_screen ().get_root_window ().get_scale_factor ();
-        int width = get_screen ().get_width () * scale_factor;
-        int height = get_screen ().get_height () * scale_factor;
+
+        Gdk.Rectangle geometry;
+        get_screen ().get_monitor_geometry (get_screen ().get_primary_monitor (), out geometry);
+
+        int width = geometry.width * scale_factor;
+        int height = geometry.height * scale_factor;
 
         var current_pixbuf = Wallpaper.scale_to_rect (wallpaper.background_pixbuf, width, height);
 
