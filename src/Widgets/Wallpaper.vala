@@ -91,12 +91,13 @@ public class Wallpaper : Gtk.Stack {
                 //add loaded wallpapers and paths to cache
                 cache_path += path;
                 cache_pixbuf += buf;
-                background_pixbuf = buf;
                 // we downscale the pixbuf as far as we can on the CPU
                 buf = validate_pixbuf (buf);
             } else {
                 buf = validate_pixbuf (buf);
             }
+
+            background_pixbuf = buf;
 
             // check if the currently loaded wallpaper is the one we loaded in this method
             if (last_loaded != path) {
