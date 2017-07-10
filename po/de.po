@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-01 10:31-0600\n"
-"PO-Revision-Date: 2017-05-21 21:19+0000\n"
+"PO-Revision-Date: 2017-07-10 15:15+0000\n"
 "Last-Translator: Uwe S <saabisto@gmx.de>\n"
 "Language-Team: German "
 "<https://l10n.elementary.io/projects/desktop/greeter/de/>\n"
@@ -30,7 +30,7 @@ msgstr "Manuell anmelden"
 
 #: ../src/FingerprintIndicatorArea.vala:117
 msgid "Swipe your finger"
-msgstr "Scanne deinen Finger"
+msgstr "Finger scannen"
 
 #: ../src/FingerprintIndicatorArea.vala:120
 msgid "Place your finger"
@@ -38,11 +38,11 @@ msgstr "Finger auflegen"
 
 #: ../src/FingerprintIndicatorArea.vala:123
 msgid "Remove your finger and try again."
-msgstr "Hebe deinen Finger und versuche es erneut."
+msgstr "Finger anheben und erneut versuchen"
 
 #: ../src/FingerprintIndicatorArea.vala:126
 msgid "Center your finger and try again."
-msgstr "Zentriere deinen Finger und versuche es erneut."
+msgstr "Finger mittig auflegen und erneut versuchen"
 
 #: ../src/PasswordArea.vala:34 ../src/LoginButtonArea.vala:26
 msgid "Log In"
