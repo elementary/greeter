@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-01 10:31-0600\n"
-"PO-Revision-Date: 2017-07-22 12:10+0000\n"
-"Last-Translator: Tonda Pavlík <kontakt@playton.cz>\n"
+"PO-Revision-Date: 2017-07-22 21:49+0000\n"
+"Last-Translator: Jan Marek <janmarek28@gmail.com>\n"
 "Language-Team: Czech "
 "<https://weblate.elementary.io/projects/desktop/greeter/cs/>\n"
 "Language: cs\n"
@@ -21,9 +21,8 @@ msgstr ""
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: ../src/LoginOptions/GuestLogin.vala:41
-#, fuzzy
 msgid "Guest session"
-msgstr "Relace pro hosta"
+msgstr "Sezení hosta"
 
 #: ../src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
@@ -39,11 +38,11 @@ msgstr "Položte prst"
 
 #: ../src/FingerprintIndicatorArea.vala:123
 msgid "Remove your finger and try again."
-msgstr ""
+msgstr "Odeberte prst a zkuste to znovu."
 
 #: ../src/FingerprintIndicatorArea.vala:126
 msgid "Center your finger and try again."
-msgstr ""
+msgstr "Položte svůj prst a zkuste to znovu."
 
 #: ../src/PasswordArea.vala:34 ../src/LoginButtonArea.vala:26
 msgid "Log In"
