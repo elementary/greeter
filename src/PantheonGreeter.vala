@@ -283,7 +283,11 @@ public class PantheonGreeter : Gtk.Window {
         int width = 0;
         int height = 0;
 
-        get_size (out width, out height);
+        Gdk.Rectangle geometry;
+        get_screen ().get_monitor_geometry (get_screen ().get_primary_monitor (), out geometry);
+
+        width = geometry.width;
+        height = geometry.height;
 
         if (width > NORMAL_WIDTH) {
             userlist_actor.x = 243;
