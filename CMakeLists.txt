@@ -9,11 +9,12 @@ list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 set (CONF_DIR "/etc/lightdm")
 set (DATADIR "${CMAKE_INSTALL_PREFIX}/share")
 set (PKGDATADIR "${DATADIR}/pantheon-greeter")
+set (GETTEXT_PACKAGE ${CMAKE_PROJECT_NAME})
 set (CMAKE_INSTALL_PREFIX /usr)
 set (VERSION "3.2.0")
 
 configure_file (${CMAKE_SOURCE_DIR}/src/config.vala.cmake ${CMAKE_BINARY_DIR}/src/config.vala)
-add_definitions (-DGETTEXT_PACKAGE="pantheon-greeter")
+add_definitions (-DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\")
 
 # Comment this out to enable C compiler warnings
 add_definitions (-w)
@@ -97,6 +98,7 @@ add_executable (pantheon-greeter ${VALA_C} ${GLIB_RESOURCES_CSS})
 target_link_libraries(pantheon-greeter m)
 
 install (TARGETS pantheon-greeter RUNTIME DESTINATION sbin)
-install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/pantheon-greeter.desktop DESTINATION share/xgreeters)
+configure_file (${CMAKE_SOURCE_DIR}/data/pantheon-greeter.desktop.in ${CMAKE_BINARY_DIR}/data/pantheon-greeter.desktop)
+install (FILES ${CMAKE_BINARY_DIR}/data/pantheon-greeter.desktop DESTINATION share/xgreeters)
 install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/pantheon-greeter.conf DESTINATION ${CONF_DIR})
 install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/fingerprint.svg DESTINATION ${PKGDATADIR})
