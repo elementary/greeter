@@ -1,6 +1,6 @@
 include (Translations)
-add_translations_directory (pantheon-greeter)
-add_translations_catalog (pantheon-greeter
+add_translations_directory (${GETTEXT_PACKAGE})
+add_translations_catalog (${GETTEXT_PACKAGE}
     ../src
     ../src/Indicators
 )
