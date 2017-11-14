@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2011-2017 elementary LLC. (http://launchpad.net/pantheon-greeter)
+* Copyright (c) 2011-2017 elementary LLC. (https://github.com/elementary/greeter)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
