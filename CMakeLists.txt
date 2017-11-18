@@ -19,15 +19,6 @@ add_definitions (-DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\")
 # Comment this out to enable C compiler warnings
 add_definitions (-w)
 
-# Add 'make dist' command for creating release tarball
-set (CPACK_PACKAGE_VERSION ${VERSION})
-set (CPACK_SOURCE_GENERATOR "TGZ")
-set (CPACK_SOURCE_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}-${CPACK_PACKAGE_VERSION}")
-set (CPACK_SOURCE_IGNORE_FILES "/build/;/.bzr/;/.bzrignore;~$;${CPACK_SOURCE_IGNORE_FILES}")
-
-include (CPack)
-add_custom_target (dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
-
 find_package (PkgConfig)
 pkg_check_modules (DEPS REQUIRED granite liblightdm-gobject-1>=1.2.1 gdk-x11-3.0 clutter-gtk-1.0 gdk-pixbuf-2.0 gl wingpanel-2.0)
 add_definitions (${DEPS_CFLAGS})
