@@ -20,7 +20,7 @@ add_definitions (-DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\")
 add_definitions (-w)
 
 find_package (PkgConfig)
-pkg_check_modules (DEPS REQUIRED granite liblightdm-gobject-1>=1.2.1 gdk-x11-3.0 clutter-gtk-1.0 gdk-pixbuf-2.0 gl wingpanel-2.0)
+pkg_check_modules (DEPS REQUIRED granite>=0.3.1 liblightdm-gobject-1>=1.2.1 gdk-x11-3.0 clutter-gtk-1.0 gdk-pixbuf-2.0 gl wingpanel-2.0)
 add_definitions (${DEPS_CFLAGS})
 link_libraries (${DEPS_LIBRARIES})
 link_directories (${DEPS_LIBRARY_DIRS})
