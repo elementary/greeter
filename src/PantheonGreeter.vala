@@ -494,8 +494,8 @@ public static int main (string [] args) {
 
     /*some settings*/
     Intl.setlocale (LocaleCategory.ALL, "");
-    Intl.bind_textdomain_codeset ("pantheon-greeter", "UTF-8");
-    Intl.textdomain ("pantheon-greeter");
+    Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
+    Intl.textdomain (Constants.GETTEXT_PACKAGE);
 
     var cursor = new Gdk.Cursor.for_display (Gdk.Display.get_default (),
                                              Gdk.CursorType.LEFT_PTR);

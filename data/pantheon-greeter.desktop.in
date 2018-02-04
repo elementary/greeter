@@ -3,5 +3,5 @@ Name=Pantheon Greeter
 Comment=Pantheon Greeter
 Exec=pantheon-greeter
 Type=Application
-X-Ubuntu-Gettext-Domain=pantheon-greeter
+X-Ubuntu-Gettext-Domain=@GETTEXT_PACKAGE@
 Name[en_US]=pantheon-greeter
