@@ -24,6 +24,8 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
 
     bool _selected = false;
 
+    public signal void clicked ();
+
     public bool selected {
         get {
             return _selected;
@@ -70,6 +72,16 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             avatar = new Granite.Widgets.Avatar.with_default_icon (96);
         }
 
+        button_press_event.connect (() => {
+            clicked ();
+            return false;
+        });
+
+        avatar.button_press_event.connect (() => {
+            clicked ();
+            return false;
+        });
+
         var grid = new Gtk.Grid ();
         grid.column_spacing = 12;
         grid.add (avatar);
@@ -102,7 +114,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         credentials_area.entered_login_name.connect ((name) => {
             start_login ();
         });
-
     }
 
     /**
