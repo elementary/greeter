@@ -3,55 +3,57 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-01 10:31-0600\n"
-"PO-Revision-Date: 2017-02-01 18:58+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2017-12-18 14:21+0000\n"
+"Last-Translator: Вагиф Кязым <vaqif134@gmail.com>\n"
+"Language-Team: Azerbaijani "
+"<https://weblate.elementary.io/projects/desktop/greeter/az/>\n"
+"Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.18\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
-"X-Generator: Launchpad (build 18330)\n"
 
 #: ../src/LoginOptions/GuestLogin.vala:41
 msgid "Guest session"
-msgstr ""
+msgstr "Qonaq seansı"
 
 #: ../src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
-msgstr ""
+msgstr "Əllə giriş"
 
 #: ../src/FingerprintIndicatorArea.vala:117
 msgid "Swipe your finger"
-msgstr ""
+msgstr "Barmağınızı sürüşdürün"
 
 #: ../src/FingerprintIndicatorArea.vala:120
 msgid "Place your finger"
-msgstr ""
+msgstr "Barmağınızı yerləşdirin"
 
 #: ../src/FingerprintIndicatorArea.vala:123
 msgid "Remove your finger and try again."
-msgstr ""
+msgstr "Barmağınızı qaldırın və yenidən cəhd edin."
 
 #: ../src/FingerprintIndicatorArea.vala:126
 msgid "Center your finger and try again."
-msgstr ""
+msgstr "Barmağınızı ortalayın və yenidən cəhd edin."
 
 #: ../src/PasswordArea.vala:34 ../src/LoginButtonArea.vala:26
 msgid "Log In"
-msgstr ""
+msgstr "Daxil ol"
 
 #. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: ../src/TimeLabel.vala:59
 msgid "%A, %B %e"
-msgstr ""
+msgstr "%A, %B %e"
 
 #. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: ../src/TimeLabel.vala:61
 msgid "%l:%M"
-msgstr ""
+msgstr "%H:%M"
 
 #. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
 #: ../src/TimeLabel.vala:63
 msgid " %p"
-msgstr ""
+msgstr " %p"
