@@ -88,40 +88,21 @@ public class SettingsDaemon : Object {
 
         debug ("All bus names acquired, starting gnome-settings-daemon");
 
-        try {
-            Process.spawn_command_line_async ("/usr/lib/gnome-settings-daemon/gsd-a11y-keyboard");
-        } catch (SpawnError e) {
-            debug ("Could not start gsd-a11y-keyboard: %s", e.message);
-        }
+        string[] daemons =  {
+            "a11y-keyboard",
+            "a11y-settings",
+            "color",
+            "power",
+            "xrandr",
+            "xsettings"
+        };
 
-        try {
-            Process.spawn_command_line_async ("/usr/lib/gnome-settings-daemon/gsd-a11y-settings");
-        } catch (SpawnError e) {
-            debug ("Could not start gsd-a11y-settings: %s", e.message);
-        }
-
-        try {
-            Process.spawn_command_line_async ("/usr/lib/gnome-settings-daemon/gsd-color");
-        } catch (SpawnError e) {
-            debug ("Could not start gsd-color: %s", e.message);
-        }
-
-        try {
-            Process.spawn_command_line_async ("/usr/lib/gnome-settings-daemon/gsd-power");
-        } catch (SpawnError e) {
-            debug ("Could not start gsd-power: %s", e.message);
-        }
-
-        try {
-            Process.spawn_command_line_async ("/usr/lib/gnome-settings-daemon/gsd-xrandr");
-        } catch (SpawnError e) {
-            debug ("Could not start gsd-xrandr: %s", e.message);
-        }
-
-        try {
-            Process.spawn_command_line_async ("/usr/lib/gnome-settings-daemon/gsd-xsettings");
-        } catch (SpawnError e) {
-            debug ("Could not start gsd-xsettings: %s", e.message);
+        foreach (var daemon in daemons) {
+            try {
+                Process.spawn_command_line_async ("/usr/lib/gnome-settings-daemon/gsd-" + daemon);
+            } catch (SpawnError e) {
+                debug ("Could not start %s daemon: %s", daemon, e.message);
+            }
         }
     }
 }
