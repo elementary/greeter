@@ -97,7 +97,7 @@ public class SettingsDaemon : Object {
 
         foreach (var daemon in daemons) {
             try {
-                Process.spawn_command_line_async ("/usr/lib/gnome-settings-daemon/" + daemon);
+                Process.spawn_command_line_async (Constants.GSD_DIR + daemon);
             } catch (SpawnError e) {
                 debug ("Could not start %s: %s", daemon, e.message);
             }
