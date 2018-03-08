@@ -6,6 +6,7 @@
 You'll need the following dependencies:
 
 * cmake
+* gnome-settings-daemon >= 3.27
 * libclutter-gtk-1.0-dev
 * libgdk-pixbuf2.0-dev
 * libgranite-dev

@@ -89,19 +89,17 @@ public class SettingsDaemon : Object {
         debug ("All bus names acquired, starting gnome-settings-daemon");
 
         string[] daemons = {
-            "a11y-keyboard",
-            "a11y-settings",
-            "color",
-            "power",
-            "xrandr",
-            "xsettings"
+            "gsd-a11y-settings",
+            "gsd-color",
+            "gsd-power",
+            "gsd-xsettings"
         };
 
         foreach (var daemon in daemons) {
             try {
-                Process.spawn_command_line_async ("/usr/lib/gnome-settings-daemon/gsd-" + daemon);
+                Process.spawn_command_line_async ("/usr/lib/gnome-settings-daemon/" + daemon);
             } catch (SpawnError e) {
-                debug ("Could not start %s daemon: %s", daemon, e.message);
+                debug ("Could not start %s: %s", daemon, e.message);
             }
         }
     }
