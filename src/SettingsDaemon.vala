@@ -88,7 +88,7 @@ public class SettingsDaemon : Object {
 
         debug ("All bus names acquired, starting gnome-settings-daemon");
 
-        string[] daemons =  {
+        string[] daemons = {
             "a11y-keyboard",
             "a11y-settings",
             "color",
