@@ -26,23 +26,27 @@ public class UserLogin : LoginOption {
     public UserLogin (int index, LightDM.User user) {
         base (index);
         this.lightdm_user = user;
+        
+        if (lightdm_user.background == null) {
+            try {
+                string path = Path.build_filename ("/var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
+                var background_directory = File.new_for_path (path);
+                var enumerator = background_directory.enumerate_children (FileAttribute.STANDARD_NAME, 0);
+                
+                FileInfo file_info;
+                string file_name = "";
+                while ((file_info = enumerator.next_file ()) != null) {
+                    file_name = file_info.get_name ();
+                }
 
-        try {
-            string path = Path.build_filename ("/var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
-            var background_directory = File.new_for_path (path);
-            var enumerator = background_directory.enumerate_children (FileAttribute.STANDARD_NAME, 0);
-            
-            FileInfo file_info;
-            string file_name = "";
-            while ((file_info = enumerator.next_file ()) != null) {
-                file_name = file_info.get_name ();
+                path = Path.build_filename (path, file_name);
+                background_path = path;
+            } catch (Error e) {
+                warning (e.message);
+                background_path = "";
             }
-
-            path = Path.build_filename (path, file_name);
-            background_path = path;
-        } catch (Error e) {
-            warning (e.message);
-            background_path = "";
+        } else {
+            background_path = lightdm_user.background;
         }
     }
 
@@ -54,11 +58,7 @@ public class UserLogin : LoginOption {
 
     public override string background {
         get {
-            if (lightdm_user.background == null) {
-                return background_path;
-            }
-            
-            return lightdm_user.background;
+            return background_path;
         }
     }
 
