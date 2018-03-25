@@ -49,7 +49,7 @@ public abstract class LoginOption : Object {
      * in case he has none.
      */
     public virtual string background {
-        owned get {
+        get {
             return "";
         }
     }
