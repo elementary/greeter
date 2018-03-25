@@ -36,7 +36,10 @@ public class UserLogin : LoginOption {
                 FileInfo file_info;
                 string file_name = "";
                 while ((file_info = enumerator.next_file ()) != null) {
-                    file_name = file_info.get_name ();
+                    if (file_info.get_file_type () == FileType.REGULAR) {
+                        file_name = file_info.get_name ();
+                        break;
+                    }
                 }
 
                 path = Path.build_filename (path, file_name);
