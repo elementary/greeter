@@ -34,7 +34,28 @@ public class UserLogin : LoginOption {
     }
 
     public override string background {
-        get {
+        owned get {
+            if (lightdm_user.background == null) {
+                try {
+                    string path = Path.build_filename ("/var", "lib", "lightdm-data", lightdm_user.name, "wallpaper/");
+                    var background_directory = File.new_for_path (path);
+                    var enumerator = background_directory.enumerate_children (FileAttribute.STANDARD_NAME, 0);
+                    
+                    FileInfo file_info;
+                    string file_name = "";
+                    while ((file_info = enumerator.next_file ()) != null) {
+                        file_name = file_info.get_name ();
+                    }
+
+                    path = Path.build_filename (path, file_name);
+                    return path;
+                } catch (Error e) {
+                    warning (e.message);
+                    return "";
+                }
+
+            }
+            
             return lightdm_user.background;
         }
     }
