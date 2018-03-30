@@ -111,9 +111,19 @@ public class LightDMGateway : LoginGateway, Object {
 
         current_login = login;
         if (guest) {
-            lightdm.authenticate_as_guest ();
+            try {
+                lightdm.authenticate_as_guest ();
+            } catch (Error e) {
+                warning (e.message);
+            }
+
         } else {
-            lightdm.authenticate (current_login.login_name);
+            try {
+                lightdm.authenticate (current_login.login_name);
+            } catch (Error e) {
+                warning (e.message);
+            }
+
         }
     }
 
@@ -129,7 +139,12 @@ public class LightDMGateway : LoginGateway, Object {
             login_successful ();
         } else {
             // We don't log this as it contains passwords etc.
-            lightdm.respond (text);
+            try {
+                lightdm.respond (text);
+            } catch (Error e) {
+                warning (e.message);
+            }
+            
         }
     }
 
