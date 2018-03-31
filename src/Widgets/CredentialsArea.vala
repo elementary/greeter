@@ -190,8 +190,8 @@ public class CredentialsArea : Gtk.Revealer {
 
     void create_settings_items () {
         var button = new Gtk.RadioButton.with_label (null, LightDM.get_sessions ().nth_data (0).name);
-        button.margin_left = 6;
-        button.margin_right = 6;
+        button.margin_start = 6;
+        button.margin_end = 6;
         button.active = LightDM.get_sessions ().nth_data (0).key == current_session;
 
         button.toggled.connect (() => {
@@ -207,8 +207,8 @@ public class CredentialsArea : Gtk.Revealer {
 
         for (var i = 1; i < LightDM.get_sessions ().length (); i++) {
             var radio = new Gtk.RadioButton.with_label_from_widget (button, LightDM.get_sessions ().nth_data (i).name);
-            radio.margin_left = 6;
-            radio.margin_right = 6;
+            radio.margin_start = 6;
+            radio.margin_end = 6;
 
             var radio_row = new Gtk.ListBoxRow ();
             radio_row.get_style_context ().add_class (Gtk.STYLE_CLASS_MENUITEM);
