@@ -18,7 +18,7 @@ Homepage: https://launchpad.net/pantheon-greeter
 
 Package: pantheon-greeter
 Architecture: any
-Depends: numlockx, ${misc:Depends}, ${shlibs:Depends}
+Depends: mutter, numlockx, ${misc:Depends}, ${shlibs:Depends}
 Provides: lightdm-greeter
 Description: Pantheon Login Screen
  Clutter-powered LightDM greeter resembling Unity greeter written for Pantheon.
