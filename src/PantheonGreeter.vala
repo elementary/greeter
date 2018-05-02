@@ -84,16 +84,6 @@ public class PantheonGreeter : Gtk.Window {
             login_gateway = new LightDMGateway ();
             settings_daemon = new SettingsDaemon ();
             settings_daemon.start ();
-
-            string? mutter_path = GLib.Environment.find_program_in_path ("mutter");
-            if (mutter_path != null) {
-                try {
-                    var mutter = GLib.AppInfo.create_from_commandline ("mutter", null, GLib.AppInfoCreateFlags.NONE);
-                    mutter.launch (null, null);
-                } catch (Error e) {
-                    critical ("Unable to launch compositor: %s", e.message);
-                }
-            }
         }
 
         var state_dir = Path.build_filename (Environment.get_user_cache_dir (), "unity-greeter");
