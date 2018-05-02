@@ -87,7 +87,7 @@ public class PantheonGreeter : Gtk.Window {
 
             string? mutter_path = GLib.Environment.find_program_in_path ("mutter");
             if (mutter_path != null) {
-                    try {
+                try {
                     var mutter = GLib.AppInfo.create_from_commandline ("mutter", null, GLib.AppInfoCreateFlags.NONE);
                     mutter.launch (null, null);
                 } catch (Error e) {
