@@ -8,6 +8,7 @@ list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 set (CONF_DIR "/etc/lightdm")
 set (DATADIR "${CMAKE_INSTALL_PREFIX}/share")
+set (GSD_DIR "/usr/lib/gnome-settings-daemon/")
 set (PKGDATADIR "${DATADIR}/pantheon-greeter")
 set (GETTEXT_PACKAGE ${CMAKE_PROJECT_NAME})
 set (CMAKE_INSTALL_PREFIX /usr)
