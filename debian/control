@@ -1,4 +1,4 @@
-Source: pantheon-greeter
+Source: io.elementary.greeter
 Section: x11
 Priority: optional
 Maintainer: Sergey "Shnatsel" Davidoff <sergey@elementaryos.org>
@@ -16,8 +16,10 @@ Build-Depends: cmake (>= 2.8),
 Standards-Version: 3.9.5
 Homepage: https://launchpad.net/pantheon-greeter
 
-Package: pantheon-greeter
+Package: io.elementary.greeter
 Architecture: any
+Conflicts: pantheon-greeter
+Replaces: pantheon-greeter
 Depends: numlockx, ${misc:Depends}, ${shlibs:Depends}
 Provides: lightdm-greeter
 Description: Pantheon Login Screen
