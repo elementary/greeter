@@ -25,3 +25,11 @@ Provides: lightdm-greeter
 Description: Pantheon Login Screen
  Clutter-powered LightDM greeter resembling Unity greeter written for Pantheon.
  It features smooth animations and a fancy transition from boot screen.
+ 
+Package: pantheon-greeter
+Architecture: all
+Depends: io.elementary.greeter, ${misc:Depends}
+Priority: optional
+Description: Dummy transitional package
+ This package is transitional to io.elementary.greeter, it is safe to remove.
+
