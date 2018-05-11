@@ -10,6 +10,7 @@ config_header = configure_file (
     output: 'config.vala',
     configuration: conf_data
 )
+install_path = join_paths(get_option('prefix'), 'sbin')
 
 executable(
     meson.project_name(),
@@ -54,5 +55,6 @@ executable(
     	meson.get_compiler('vala').find_library('posix'),
     	meson.get_compiler('c').find_library('m', required : false)
     ],
-    install : true
+    install : true,
+    install_dir: install_path
 )
