@@ -1,2 +1,5 @@
 debian/40-io.elementary.greeter.conf /usr/share/lightdm/lightdm.conf.d/
 debian/io.elementary.greeter.whitelist /etc/wingpanel.d/
+/usr/share/xgreeters/io.elementary.greeter.desktop
+/etc/lightdm/io.elementary.greeter.conf
+/usr/share/io.elementary.greeter/fingerprint.svg
