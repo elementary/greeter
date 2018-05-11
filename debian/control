@@ -3,6 +3,8 @@ Section: x11
 Priority: optional
 Maintainer: Sergey "Shnatsel" Davidoff <sergey@elementaryos.org>
 Build-Depends: debhelper (>= 10.5.1),
+               desktop-file-utils,
+               gettext,
                libclutter-gtk-1.0-dev,
                libgdk-pixbuf2.0-dev,
                libgranite-dev,
