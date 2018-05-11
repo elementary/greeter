@@ -3,3 +3,4 @@ debian/io.elementary.greeter.whitelist /etc/wingpanel.d/
 /usr/share/xgreeters/io.elementary.greeter.desktop
 /etc/lightdm/io.elementary.greeter.conf
 /usr/share/io.elementary.greeter/fingerprint.svg
+/usr/sbin/io.elementary.greeter
