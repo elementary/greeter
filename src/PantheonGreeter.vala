@@ -104,7 +104,7 @@ public class PantheonGreeter : Gtk.Window {
         
         settings = new KeyFile ();
         try {
-            settings.load_from_file (Path.build_filename (Constants.CONF_DIR, "pantheon-greeter.conf"), KeyFileFlags.KEEP_COMMENTS);
+            settings.load_from_file (Path.build_filename (Constants.CONF_DIR, "io.elementary.greeter.conf"), KeyFileFlags.KEEP_COMMENTS);
         } catch (Error e) {
             warning (e.message);
         }
