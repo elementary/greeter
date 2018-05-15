@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Pantheon Greeter
 Comment=Pantheon Greeter
-Exec=@CMAKE_PROJECT_NAME@
+Exec=@MESON_PROJECT_NAME@
 Type=Application
 X-Ubuntu-Gettext-Domain=@GETTEXT_PACKAGE@
-Name[en_US]=@CMAKE_PROJECT_NAME@
+Name[en_US]=@MESON_PROJECT_NAME@
