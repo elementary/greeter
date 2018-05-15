@@ -1,2 +1,0 @@
-# not really used directly by users (copied from lightdm-gtk-greeter)
-io.elementary.greeter: binary-without-manpage usr/sbin/io.elementary.greeter

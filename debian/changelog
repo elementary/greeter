@@ -1,65 +1,65 @@
-io.elementary.greeter (3.2.0) xenial; urgency=medium
+pantheon-greeter (3.2.0) xenial; urgency=medium
 
   * New upstream release.
 
  -- Cody Garver <cody@elementary.io>  Tue, 12 Sep 2017 00:18:43 -0500
 
-io.elementary.greeter (3.1.1) xenial; urgency=medium
+pantheon-greeter (3.1.1) xenial; urgency=medium
 
   * New upstream release.
 
  -- Cody Garver <cody@elementary.io>  Wed, 01 Mar 2017 21:56:24 -0600
 
-io.elementary.greeter (3.1.0) xenial; urgency=medium
+pantheon-greeter (3.1.0) xenial; urgency=medium
 
   * New upstream release.
 
  -- Cody Garver <cody@elementary.io>  Wed, 01 Feb 2017 10:18:23 -0600
 
-io.elementary.greeter (3.0) xenial; urgency=medium
+pantheon-greeter (3.0) xenial; urgency=medium
 
   * New upstream release
 
  -- Cody Garver <cody@elementary.io>  Sun, 14 Aug 2016 06:59:30 -0500
 
-io.elementary.greeter (2.0.2) trusty; urgency=low
+pantheon-greeter (2.0.2) trusty; urgency=low
 
   * New upstream release
 
  -- Cody Garver <cody@elementary.io>  Mon, 20 Jul 2015 06:20:42 -0500
 
-io.elementary.greeter (2.0.1) trusty; urgency=low
+pantheon-greeter (2.0.1) trusty; urgency=low
 
   * New upstream release
 
  -- Cody Garver <cody@elementaryos.org>  Tue, 02 Jun 2015 16:05:56 -0500
 
-io.elementary.greeter (2.0.0) trusty; urgency=low
+pantheon-greeter (2.0.0) trusty; urgency=low
 
   * New upstream release
 
  -- Cody Garver <cody@elementaryos.org>  Mon, 06 Apr 2015 16:34:12 -0500
 
-io.elementary.greeter (1.0.2) precise; urgency=low
+pantheon-greeter (1.0.2) precise; urgency=low
 
   * New upstream release
 
  -- Cody Garver <cody@elementaryos.org>  Tue, 23 Jul 2013 05:09:58 -0500
 
-io.elementary.greeter (1.0.1) precise; urgency=low
+pantheon-greeter (1.0.1) precise; urgency=low
 
   * New upstream release
 
  -- Cody Garver <cody@elementaryos.org>  Thu, 20 Jun 2013 04:06:14 -0500
 
-io.elementary.greeter (1.0) precise; urgency=low
+pantheon-greeter (1.0) precise; urgency=low
 
   * New upstream release
   * Full rewrite
 
  -- Cody Garver <cody@elementaryos.org>  Wed, 12 Jun 2013 00:36:54 -0500
 
-io.elementary.greeter (0.1) UNRELEASED; urgency=low
+pantheon-greeter (0.1) UNRELEASED; urgency=low
 
   * Initial release.
 
