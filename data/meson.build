@@ -1,6 +1,15 @@
+conf_data = configuration_data()
+conf_data.set('GETTEXT_PACKAGE', meson.project_name())
+conf_data.set('MESON_PROJECT_NAME', meson.project_name())
+desktop_in = configure_file (
+    input: meson.project_name() + '.desktop.in.in',
+    output: meson.project_name() + '.desktop.in',
+    configuration: conf_data
+)
+
 i18n.merge_file (
     'desktop',
-    input: meson.project_name() + '.desktop.in',
+    input: desktop_in,
     output: meson.project_name() + '.desktop',
     install: true,
     install_dir: join_paths(get_option('datadir'), 'xgreeters'),
