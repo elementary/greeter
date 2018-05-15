@@ -3,11 +3,11 @@ set -e
 
 case "$1" in
   remove|abort-install)
-    update-alternatives --remove lightdm-greeter /usr/share/xgreeters/pantheon-greeter.desktop
+    update-alternatives --remove lightdm-greeter /usr/share/xgreeters/io.elementary.greeter.desktop
 
     # Purge from legacy greeter selection mechanism
     if [ -x /usr/lib/lightdm/lightdm-set-defaults ] ; then
-        /usr/lib/lightdm/lightdm-set-defaults --remove --greeter=pantheon-greeter || true
+        /usr/lib/lightdm/lightdm-set-defaults --remove --greeter=io.elementary.greeter || true
     fi
   ;;
 esac
