@@ -1,4 +1,4 @@
-Source: io.elementary.greeter
+Source: pantheon-greeter
 Section: x11
 Priority: optional
 Maintainer: Sergey "Shnatsel" Davidoff <sergey@elementaryos.org>
@@ -14,15 +14,12 @@ Build-Depends: cmake (>= 2.8),
                libx11-dev,
                valac (>= 0.26)
 Standards-Version: 3.9.5
-Homepage: https://launchpad.net/pantheon-greeter
+Homepage: https://github.com/elementary/greeter
 
-Package: io.elementary.greeter
+Package: pantheon-greeter
 Architecture: any
-Conflicts: pantheon-greeter
-Replaces: pantheon-greeter
 Depends: numlockx, ${misc:Depends}, ${shlibs:Depends}
 Provides: lightdm-greeter
 Description: Pantheon Login Screen
  Clutter-powered LightDM greeter resembling Unity greeter written for Pantheon.
  It features smooth animations and a fancy transition from boot screen.
- 

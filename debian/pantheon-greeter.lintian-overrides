@@ -1,0 +1,2 @@
+# not really used directly by users (copied from lightdm-gtk-greeter)
+pantheon-greeter: binary-without-manpage usr/sbin/io.elementary.greeter
