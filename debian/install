@@ -1,2 +1,2 @@
-debian/40-pantheon-greeter.conf /usr/share/lightdm/lightdm.conf.d/
-debian/pantheon-greeter.whitelist /etc/wingpanel.d/
+debian/40-io.elementary.greeter.conf /usr/share/lightdm/lightdm.conf.d/
+debian/io.elementary.greeter.whitelist /etc/wingpanel.d/
