@@ -1,6 +1,6 @@
 project(
     'io.elementary.greeter',
-     'vala', 'c',
+    'vala', 'c',
     version: '3.2.0')
 
 gnome = import('gnome')
