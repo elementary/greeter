@@ -1,5 +1,5 @@
 conf_data = configuration_data()
-conf_data.set('CONF_DIR', '/etc/lightdm')
+conf_data.set('CONF_DIR', join_paths(get_option('sysconfdir'), 'lightdm'))
 conf_data.set('DATADIR', get_option('datadir'))
 conf_data.set('GSD_DIR', '/usr/lib/gnome-settings-daemon/')
 conf_data.set('PKGDATADIR', join_paths(get_option('datadir'), meson.project_name()))
