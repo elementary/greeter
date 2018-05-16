@@ -15,7 +15,6 @@ Build-Depends: debhelper (>= 10.5.1),
                libx11-dev,
                meson,
                valac (>= 0.26)
-
 Standards-Version: 4.1.1
 Homepage: https://github.com/elementary/greeter
 
