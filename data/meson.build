@@ -1,6 +1,7 @@
 conf_data = configuration_data()
 conf_data.set('GETTEXT_PACKAGE', meson.project_name())
-conf_data.set('MESON_PROJECT_NAME', meson.project_name())
+conf_data.set('PROJECT_NAME', meson.project_name())
+
 desktop_in = configure_file (
     input: meson.project_name() + '.desktop.in.in',
     output: meson.project_name() + '.desktop.in',
@@ -19,8 +20,9 @@ i18n.merge_file (
 
 install_data(
     meson.project_name() + '.conf',
-    install_dir: '/etc/lightdm'
+    install_dir: join_paths(get_option('sysconfdir'), 'lightdm')
 )
+
 install_data(
     'fingerprint.svg',
     install_dir: join_paths(get_option('datadir'), meson.project_name())

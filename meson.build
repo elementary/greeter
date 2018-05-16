@@ -1,4 +1,7 @@
-project('io.elementary.greeter', 'vala', 'c')
+project(
+    'io.elementary.greeter',
+    'vala', 'c',
+    version: '3.2.0')
 
 gnome = import('gnome')
 i18n = import('i18n')
@@ -15,4 +18,3 @@ greeter_resources = gnome.compile_resources(
 subdir('src')
 subdir('data')
 subdir('po')
-meson.add_install_script('meson/post_install.py')
