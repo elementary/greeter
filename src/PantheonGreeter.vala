@@ -456,6 +456,13 @@ public static int main (string [] args) {
         error ("Clutter could not be intiailized");
     }
 
+    try {
+        var compositor = GLib.AppInfo.create_from_commandline ("io.elementary.greeter-compositor", null, GLib.AppInfoCreateFlags.NONE);
+        compositor.launch (null, null);
+    } catch (Error e) {
+        critical (e.message);
+    }
+
     GLib.Unix.signal_add (GLib.ProcessSignal.TERM, () => {
         Gtk.main_quit ();
         return true;

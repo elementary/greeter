@@ -4,6 +4,7 @@ conf_data.set('GETTEXT_PACKAGE', meson.project_name())
 conf_data.set('GSD_DIR', '/usr/lib/gnome-settings-daemon/')
 conf_data.set('PKGDATADIR', join_paths(get_option('prefix'), get_option('datadir'), meson.project_name()))
 conf_data.set('VERSION', meson.project_version())
+conf_data.set('RESOURCEPATH', '/org/pantheon/desktop/gala')
 config_header = configure_file (
     input: 'config.vala.in',
     output: 'config.vala',
