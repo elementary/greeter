@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 21:28+0100\n"
-"PO-Revision-Date: 2017-04-14 23:19+0000\n"
+"PO-Revision-Date: 2018-06-01 20:44+0000\n"
 "Last-Translator: Corentin Noël <corentin@elementary.io>\n"
-"Language-Team: French <https://l10n.elementary.io/projects/desktop/greeter/"
-"fr/>\n"
+"Language-Team: French "
+"<https://weblate.elementary.io/projects/desktop/greeter/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.13-dev\n"
+"X-Generator: Weblate 2.18\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: src/Credentials/PasswordCredentials.vala:33
@@ -43,38 +43,37 @@ msgstr "Centrez votre doigt et réessayez."
 
 #: src/Gateways/LightDMGateway.vala:218
 msgid "An unknown error occured"
-msgstr ""
+msgstr "Une erreur inconnue est survenue"
 
 #: src/Gateways/LightDMGateway.vala:224
-#, fuzzy
 msgid "Swipe your finger again"
-msgstr "Glissez votre doigt"
+msgstr "Glissez votre doigt une nouvelle fois"
 
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
-msgstr ""
+msgstr "Vous n'êtes pas restés assez longtemps, veuillez réessayer"
 
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
 msgstr ""
+"Votre doigt n'était pas suffisamment au milieu, réessayez de glisser votre "
+"doigt"
 
 #: src/Gateways/LightDMGateway.vala:233
-#, fuzzy
 msgid "Remove your finger, and try swiping your finger again"
-msgstr "Retirez votre doigt et réessayez."
+msgstr "Retirez votre doigt et réessayez"
 
 #: src/Gateways/LightDMGateway.vala:239
-#, fuzzy
 msgid "Place your finger on the reader again"
-msgstr "Retirez votre doigt et réessayez."
+msgstr "Placez à nouveau votre doigt sur le lecteur"
 
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
-msgstr ""
+msgstr "L'empreinte ne correspond pas"
 
 #: src/Gateways/LightDMGateway.vala:245
 msgid "Verification timed out"
-msgstr ""
+msgstr "Délai de vérification expiré"
 
 #: src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
