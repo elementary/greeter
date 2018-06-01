@@ -23,11 +23,6 @@ install_data(
     install_dir: join_paths(get_option('sysconfdir'), 'lightdm')
 )
 
-install_data(
-    'fingerprint.svg',
-    install_dir: join_paths(get_option('datadir'), meson.project_name())
-)
-
 test (
     'Validate desktop file',
     find_program('desktop-file-validate'),

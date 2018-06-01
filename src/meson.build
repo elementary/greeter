@@ -2,7 +2,6 @@ conf_data = configuration_data()
 conf_data.set('CONF_DIR', join_paths(get_option('sysconfdir'), 'lightdm'))
 conf_data.set('GETTEXT_PACKAGE', meson.project_name())
 conf_data.set('GSD_DIR', '/usr/lib/gnome-settings-daemon/')
-conf_data.set('PKGDATADIR', join_paths(get_option('prefix'), get_option('datadir'), meson.project_name()))
 conf_data.set('VERSION', meson.project_version())
 config_header = configure_file (
     input: 'config.vala.in',
