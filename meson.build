@@ -16,5 +16,6 @@ greeter_resources = gnome.compile_resources(
 )
 
 subdir('src')
+subdir('compositor')
 subdir('data')
 subdir('po')

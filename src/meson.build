@@ -12,6 +12,7 @@ install_path = join_paths(get_option('prefix'), 'sbin')
 
 executable(
     meson.project_name(),
+    'ComponentWatcher.vala',
     'PantheonGreeter.vala',
     'SettingsDaemon.vala',
     'UserList.vala',
