@@ -2,6 +2,7 @@ src/UserListActor.vala
 src/UserList.vala
 src/SettingsDaemon.vala
 src/PantheonGreeter.vala
+src/LoginMask.vala
 src/Credentials/PasswordCredentials.vala
 src/Credentials/LoginButtonCredentials.vala
 src/Credentials/FingerprintCredentials.vala
@@ -15,7 +16,6 @@ src/Indicators/IndicatorPopover.vala
 src/Indicators/IndicatorEntry.vala
 src/Indicators/IndicatorBar.vala
 src/Indicators/EntryList.vala
-src/Interfaces/LoginMask.vala
 src/LoginOptions/UserLogin.vala
 src/LoginOptions/ManualLogin.vala
 src/LoginOptions/LoginOption.vala
