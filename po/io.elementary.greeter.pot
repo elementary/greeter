@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the io.elementary.greeter package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: io.elementary.greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-19 05:19-0600\n"
+"POT-Creation-Date: 2018-06-01 21:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,46 +17,76 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/LoginOptions/GuestLogin.vala:41
-msgid "Guest session"
+#: src/Credentials/PasswordCredentials.vala:33
+#: src/Credentials/LoginButtonCredentials.vala:23
+msgid "Log In"
 msgstr ""
 
-#: ../src/LoginOptions/ManualLogin.vala:35
-msgid "Manual Login"
-msgstr ""
-
-#: ../src/Widgets/FingerprintCredentials.vala:72
+#: src/Credentials/FingerprintCredentials.vala:71
 msgid "Swipe your finger"
 msgstr ""
 
-#: ../src/Widgets/FingerprintCredentials.vala:75
+#: src/Credentials/FingerprintCredentials.vala:74
 msgid "Place your finger"
 msgstr ""
 
-#: ../src/Widgets/FingerprintCredentials.vala:78
+#: src/Credentials/FingerprintCredentials.vala:77
 msgid "Remove your finger and try again."
 msgstr ""
 
-#: ../src/Widgets/FingerprintCredentials.vala:81
+#: src/Credentials/FingerprintCredentials.vala:80
 msgid "Center your finger and try again."
 msgstr ""
 
-#. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: ../src/Widgets/TimeLabel.vala:53
+#: src/Gateways/LightDMGateway.vala:218
+msgid "An unknown error occured"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:224
+msgid "Swipe your finger again"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:227
+msgid "Swipe was too short, try again"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:230
+msgid "Your finger was not centered, try swiping your finger again"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:233
+msgid "Remove your finger, and try swiping your finger again"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:239
+msgid "Place your finger on the reader again"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:242
+msgid "Failed to match fingerprint"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:245
+msgid "Verification timed out"
+msgstr ""
+
+#: src/LoginOptions/ManualLogin.vala:35
+msgid "Manual Login"
+msgstr ""
+
+#: src/LoginOptions/GuestLogin.vala:41
+msgid "Guest session"
+msgstr ""
+
+#: src/Widgets/TimeLabel.vala:53
 msgid "%A, %B %e"
 msgstr ""
 
-#. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: ../src/Widgets/TimeLabel.vala:55
+#: src/Widgets/TimeLabel.vala:55
 msgid "%l:%M"
 msgstr ""
 
-#. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
-#: ../src/Widgets/TimeLabel.vala:57
+#: src/Widgets/TimeLabel.vala:57
+#, c-format
 msgid " %p"
-msgstr ""
-
-#: ../src/Widgets/PasswordCredentials.vala:33
-#: ../src/Widgets/LoginButtonCredentials.vala:23
-msgid "Log In"
 msgstr ""

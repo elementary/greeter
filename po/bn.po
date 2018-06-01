@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-01 10:31-0600\n"
+"POT-Creation-Date: 2018-06-01 21:28+0100\n"
 "PO-Revision-Date: 2013-07-11 04:53+0000\n"
 "Last-Translator: Muntasim Ul Haque <tranjeeshan@tuta.io>\n"
 "Language-Team: Bengali <bn@li.org>\n"
@@ -18,46 +18,77 @@ msgstr ""
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 "X-Generator: Launchpad (build 18330)\n"
 
-#: ../src/LoginOptions/GuestLogin.vala:41
-msgid "Guest session"
-msgstr "অতিথি সেশন"
-
-#: ../src/LoginOptions/ManualLogin.vala:35
-msgid "Manual Login"
-msgstr ""
-
-#: ../src/FingerprintIndicatorArea.vala:117
-msgid "Swipe your finger"
-msgstr ""
-
-#: ../src/FingerprintIndicatorArea.vala:120
-msgid "Place your finger"
-msgstr ""
-
-#: ../src/FingerprintIndicatorArea.vala:123
-msgid "Remove your finger and try again."
-msgstr ""
-
-#: ../src/FingerprintIndicatorArea.vala:126
-msgid "Center your finger and try again."
-msgstr ""
-
-#: ../src/PasswordArea.vala:34 ../src/LoginButtonArea.vala:26
+#: src/Credentials/PasswordCredentials.vala:33
+#: src/Credentials/LoginButtonCredentials.vala:23
 msgid "Log In"
 msgstr ""
 
-#. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: ../src/TimeLabel.vala:59
+#: src/Credentials/FingerprintCredentials.vala:71
+msgid "Swipe your finger"
+msgstr ""
+
+#: src/Credentials/FingerprintCredentials.vala:74
+msgid "Place your finger"
+msgstr ""
+
+#: src/Credentials/FingerprintCredentials.vala:77
+msgid "Remove your finger and try again."
+msgstr ""
+
+#: src/Credentials/FingerprintCredentials.vala:80
+msgid "Center your finger and try again."
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:218
+msgid "An unknown error occured"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:224
+msgid "Swipe your finger again"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:227
+msgid "Swipe was too short, try again"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:230
+msgid "Your finger was not centered, try swiping your finger again"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:233
+msgid "Remove your finger, and try swiping your finger again"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:239
+msgid "Place your finger on the reader again"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:242
+msgid "Failed to match fingerprint"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:245
+msgid "Verification timed out"
+msgstr ""
+
+#: src/LoginOptions/ManualLogin.vala:35
+msgid "Manual Login"
+msgstr ""
+
+#: src/LoginOptions/GuestLogin.vala:41
+msgid "Guest session"
+msgstr "অতিথি সেশন"
+
+#: src/Widgets/TimeLabel.vala:53
 msgid "%A, %B %e"
 msgstr ""
 
-#. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: ../src/TimeLabel.vala:61
+#: src/Widgets/TimeLabel.vala:55
 msgid "%l:%M"
 msgstr ""
 
-#. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
-#: ../src/TimeLabel.vala:63
+#: src/Widgets/TimeLabel.vala:57
+#, c-format
 msgid " %p"
 msgstr ""
 

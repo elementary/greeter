@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-01 10:31-0600\n"
+"POT-Creation-Date: 2018-06-01 21:28+0100\n"
 "PO-Revision-Date: 2017-07-22 09:08+0000\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
-"Language-Team: Chinese (Traditional) "
-"<https://weblate.elementary.io/projects/desktop/greeter/zh_TW/>\n"
+"Language-Team: Chinese (Traditional) <https://weblate.elementary.io/projects/"
+"desktop/greeter/zh_TW/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,46 +20,80 @@ msgstr ""
 "X-Generator: Weblate 2.15\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: ../src/LoginOptions/GuestLogin.vala:41
-msgid "Guest session"
-msgstr "訪客作業階段"
-
-#: ../src/LoginOptions/ManualLogin.vala:35
-msgid "Manual Login"
-msgstr "手動登入"
-
-#: ../src/FingerprintIndicatorArea.vala:117
-msgid "Swipe your finger"
-msgstr "滑動您的手指"
-
-#: ../src/FingerprintIndicatorArea.vala:120
-msgid "Place your finger"
-msgstr "放置您的手指"
-
-#: ../src/FingerprintIndicatorArea.vala:123
-msgid "Remove your finger and try again."
-msgstr "移除您的手指並重試。"
-
-#: ../src/FingerprintIndicatorArea.vala:126
-msgid "Center your finger and try again."
-msgstr "將您的手指置中並重試。"
-
-#: ../src/PasswordArea.vala:34 ../src/LoginButtonArea.vala:26
+#: src/Credentials/PasswordCredentials.vala:33
+#: src/Credentials/LoginButtonCredentials.vala:23
 msgid "Log In"
 msgstr "登入"
 
-#. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: ../src/TimeLabel.vala:59
+#: src/Credentials/FingerprintCredentials.vala:71
+msgid "Swipe your finger"
+msgstr "滑動您的手指"
+
+#: src/Credentials/FingerprintCredentials.vala:74
+msgid "Place your finger"
+msgstr "放置您的手指"
+
+#: src/Credentials/FingerprintCredentials.vala:77
+msgid "Remove your finger and try again."
+msgstr "移除您的手指並重試。"
+
+#: src/Credentials/FingerprintCredentials.vala:80
+msgid "Center your finger and try again."
+msgstr "將您的手指置中並重試。"
+
+#: src/Gateways/LightDMGateway.vala:218
+msgid "An unknown error occured"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:224
+#, fuzzy
+msgid "Swipe your finger again"
+msgstr "滑動您的手指"
+
+#: src/Gateways/LightDMGateway.vala:227
+msgid "Swipe was too short, try again"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:230
+msgid "Your finger was not centered, try swiping your finger again"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:233
+#, fuzzy
+msgid "Remove your finger, and try swiping your finger again"
+msgstr "移除您的手指並重試。"
+
+#: src/Gateways/LightDMGateway.vala:239
+#, fuzzy
+msgid "Place your finger on the reader again"
+msgstr "移除您的手指並重試。"
+
+#: src/Gateways/LightDMGateway.vala:242
+msgid "Failed to match fingerprint"
+msgstr ""
+
+#: src/Gateways/LightDMGateway.vala:245
+msgid "Verification timed out"
+msgstr ""
+
+#: src/LoginOptions/ManualLogin.vala:35
+msgid "Manual Login"
+msgstr "手動登入"
+
+#: src/LoginOptions/GuestLogin.vala:41
+msgid "Guest session"
+msgstr "訪客作業階段"
+
+#: src/Widgets/TimeLabel.vala:53
 msgid "%A, %B %e"
 msgstr "%b%e日%A"
 
-#. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: ../src/TimeLabel.vala:61
+#: src/Widgets/TimeLabel.vala:55
 msgid "%l:%M"
 msgstr "%l:%M"
 
-#. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
-#: ../src/TimeLabel.vala:63
+#: src/Widgets/TimeLabel.vala:57
+#, c-format
 msgid " %p"
 msgstr " %p"
 
