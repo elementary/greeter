@@ -37,7 +37,7 @@ public class FingerprintCredentials : Gtk.Grid, Credentials {
     Gtk.Label label;
 
     public FingerprintCredentials () {
-        var image = new Gtk.Image.from_icon_name ("fingerprint.svg", Gtk.IconSize.LARGE_TOOLBAR);
+        var image = new Gtk.Image.from_icon_name ("fingerprint", Gtk.IconSize.LARGE_TOOLBAR);
         image.margin = 6;
 
         var box = new Gtk.Grid ();
