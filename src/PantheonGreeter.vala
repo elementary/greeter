@@ -470,6 +470,9 @@ public static int main (string [] args) {
                                              Gdk.CursorType.LEFT_PTR);
     Gdk.get_default_root_window ().set_cursor (cursor);
 
+    var icon_theme = Gtk.IconTheme.get_default ();
+    icon_theme.add_resource_path ("/io/elementary/greeter/icons");
+
     new PantheonGreeter ();
     Gtk.main ();
     return Posix.EXIT_SUCCESS;

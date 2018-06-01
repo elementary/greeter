@@ -37,28 +37,27 @@ public class FingerprintCredentials : Gtk.Grid, Credentials {
     Gtk.Label label;
 
     public FingerprintCredentials () {
-        var image = new Gtk.Image.from_file (Constants.PKGDATADIR + "/fingerprint.svg");
+        var image = new Gtk.Image.from_icon_name ("fingerprint.svg", Gtk.IconSize.LARGE_TOOLBAR);
         image.margin = 6;
 
         var box = new Gtk.Grid ();
         box.get_style_context ().add_class ("fingerprint");
         box.add (image);
 
-        label = new Gtk.Label ("");
+        label = new Gtk.Label (null);
         label.valign = Gtk.Align.CENTER;
-        
+
         var label_style_context = label.get_style_context ();
-        label_style_context.add_class ("h3");
+        label_style_context.add_class (Granite.STYLE_CLASS_H3_LABEL);
         label_style_context.add_class ("fingerprint-label");
 
-        attach (box, 0, 0, 1, 1);   
+        attach (box, 0, 0, 1, 1);
         attach (label, 1, 0, 1, 1);
         column_spacing = 6;
     }
 
     public void show_message (LightDM.MessageType type, MessageText messagetext = MessageText.OTHER, string text = "") {
         var label_style_context = label.get_style_context ();
-        
         if (type == LightDM.MessageType.INFO) {
             label_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
             label_style_context.add_class (Gtk.STYLE_CLASS_INFO);
