@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 21:28+0100\n"
-"PO-Revision-Date: 2017-08-17 09:36+0000\n"
-"Last-Translator: Max Mustermann <mustermann_23@posteo.eu>\n"
-"Language-Team: German <https://weblate.elementary.io/projects/desktop/"
-"greeter/de/>\n"
+"PO-Revision-Date: 2018-06-02 19:03+0000\n"
+"Last-Translator: Jörg Arnold <j.ar@mailbox.org>\n"
+"Language-Team: German "
+"<https://weblate.elementary.io/projects/desktop/greeter/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.15\n"
+"X-Generator: Weblate 2.18\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: src/Credentials/PasswordCredentials.vala:33
@@ -43,38 +43,35 @@ msgstr "Finger mittig auflegen und erneut versuchen."
 
 #: src/Gateways/LightDMGateway.vala:218
 msgid "An unknown error occured"
-msgstr ""
+msgstr "Ein unbekannter Fehler ist aufgetreten"
 
 #: src/Gateways/LightDMGateway.vala:224
-#, fuzzy
 msgid "Swipe your finger again"
-msgstr "Finger scannen"
+msgstr "Wischen Sie noch einmal mit Ihrem Finger"
 
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
-msgstr ""
+msgstr "Der Wisch war zu kurz, versuch es noch mal"
 
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
-msgstr ""
+msgstr "Ihr Finger war nicht mittig, versuchen Sie es noch einmal"
 
 #: src/Gateways/LightDMGateway.vala:233
-#, fuzzy
 msgid "Remove your finger, and try swiping your finger again"
-msgstr "Finger anheben und erneut versuchen."
+msgstr "Entfernen Sie Ihren Finger und versuchen Sie es erneut"
 
 #: src/Gateways/LightDMGateway.vala:239
-#, fuzzy
 msgid "Place your finger on the reader again"
-msgstr "Finger anheben und erneut versuchen."
+msgstr "Legen Sie Ihren Finger erneut auf den Scanner"
 
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
-msgstr ""
+msgstr "Fingerabdruck konnte nicht abgeglichen werden"
 
 #: src/Gateways/LightDMGateway.vala:245
 msgid "Verification timed out"
-msgstr ""
+msgstr "Zeitüberschreitung bei der Verifizierung"
 
 #: src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
