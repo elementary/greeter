@@ -447,6 +447,8 @@ public class PantheonGreeter : Gtk.Window {
 }
 
 public static int main (string [] args) {
+    var compositor = new Greeter.ComponentWatcher ("io.elementary.greeter-compositor");
+
     /* Protect memory from being paged to disk, as we deal with passwords */
     Posix.mlockall (Posix.MCL_CURRENT | Posix.MCL_FUTURE);
 
@@ -457,6 +459,7 @@ public static int main (string [] args) {
     }
 
     GLib.Unix.signal_add (GLib.ProcessSignal.TERM, () => {
+        compositor.terminate (false);
         Gtk.main_quit ();
         return true;
     });
@@ -475,5 +478,6 @@ public static int main (string [] args) {
 
     new PantheonGreeter ();
     Gtk.main ();
+    compositor.terminate (false);
     return Posix.EXIT_SUCCESS;
 }
