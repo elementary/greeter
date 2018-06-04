@@ -8,15 +8,17 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 21:28+0100\n"
-"PO-Revision-Date: 2016-12-13 16:15+0000\n"
-"Last-Translator: Davidmp <rbndavid@gmail.com>\n"
-"Language-Team: Catalan <ca@li.org>\n"
+"PO-Revision-Date: 2018-06-06 00:08+0000\n"
+"Last-Translator: David M <rbndavid@gmail.com>\n"
+"Language-Team: Catalan "
+"<https://weblate.elementary.io/projects/desktop/greeter/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.18\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
-"X-Generator: Launchpad (build 18330)\n"
 
 #: src/Credentials/PasswordCredentials.vala:33
 #: src/Credentials/LoginButtonCredentials.vala:23
@@ -25,11 +27,11 @@ msgstr "Inicia la sessió"
 
 #: src/Credentials/FingerprintCredentials.vala:71
 msgid "Swipe your finger"
-msgstr "Fer lliscar el dit"
+msgstr "Feu lliscar el dit."
 
 #: src/Credentials/FingerprintCredentials.vala:74
 msgid "Place your finger"
-msgstr "Poseu-hi el dit"
+msgstr "Poseu-hi el dit."
 
 #: src/Credentials/FingerprintCredentials.vala:77
 msgid "Remove your finger and try again."
@@ -41,38 +43,35 @@ msgstr "Poseu el dit al centre i torneu-ho a provar."
 
 #: src/Gateways/LightDMGateway.vala:218
 msgid "An unknown error occured"
-msgstr ""
+msgstr "Hi ha hagut un error desconegut."
 
 #: src/Gateways/LightDMGateway.vala:224
-#, fuzzy
 msgid "Swipe your finger again"
-msgstr "Fer lliscar el dit"
+msgstr "Feu lliscar el dit un altre cop."
 
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
-msgstr ""
+msgstr "El lliscament és massa curt. Torneu-hi."
 
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
-msgstr ""
+msgstr "El dit no estava centrat. Torneu-hi."
 
 #: src/Gateways/LightDMGateway.vala:233
-#, fuzzy
 msgid "Remove your finger, and try swiping your finger again"
-msgstr "Traieu-ne el dit i torneu-ho a provar."
+msgstr "Traieu-ne el dit i torneu-lo a fer lliscar."
 
 #: src/Gateways/LightDMGateway.vala:239
-#, fuzzy
 msgid "Place your finger on the reader again"
-msgstr "Traieu-ne el dit i torneu-ho a provar."
+msgstr "Torneu a posar el dit sobre el lector."
 
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
-msgstr ""
+msgstr "Ha fallat fer coincidir l'empremta."
 
 #: src/Gateways/LightDMGateway.vala:245
 msgid "Verification timed out"
-msgstr ""
+msgstr "S'ha esgotat el temps de verificació."
 
 #: src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
