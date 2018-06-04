@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 21:28+0100\n"
-"PO-Revision-Date: 2018-04-21 00:10+0000\n"
+"PO-Revision-Date: 2018-06-04 07:52+0000\n"
 "Last-Translator: Jan Marek <janmarek28@gmail.com>\n"
-"Language-Team: Czech <https://weblate.elementary.io/projects/desktop/greeter/"
-"cs/>\n"
+"Language-Team: Czech "
+"<https://weblate.elementary.io/projects/desktop/greeter/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,38 +43,35 @@ msgstr "Položte svůj prst doprostřed a zkuste to znovu."
 
 #: src/Gateways/LightDMGateway.vala:218
 msgid "An unknown error occured"
-msgstr ""
+msgstr "Vyskytla se neznámá chyba"
 
 #: src/Gateways/LightDMGateway.vala:224
-#, fuzzy
 msgid "Swipe your finger again"
-msgstr "Potáhněte prstem"
+msgstr "Znovu přejeďte prstem"
 
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
-msgstr ""
+msgstr "Přejetí bylo příliš krátké, zkuste to znovu"
 
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
-msgstr ""
+msgstr "Váš prst nebyl umístěn uprostřed, zkuste přetáhnout prstem znovu"
 
 #: src/Gateways/LightDMGateway.vala:233
-#, fuzzy
 msgid "Remove your finger, and try swiping your finger again"
-msgstr "Odeberte prst a zkuste to znovu."
+msgstr "Odejměte prst a zkuste přetáhnout prstem znovu"
 
 #: src/Gateways/LightDMGateway.vala:239
-#, fuzzy
 msgid "Place your finger on the reader again"
-msgstr "Odeberte prst a zkuste to znovu."
+msgstr "Položte svůj prst na čtečku znovu"
 
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
-msgstr ""
+msgstr "Nelze spárovat otisk prstu"
 
 #: src/Gateways/LightDMGateway.vala:245
 msgid "Verification timed out"
-msgstr ""
+msgstr "Vypršel čas pro ověření"
 
 #: src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
