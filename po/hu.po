@@ -8,15 +8,17 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 21:28+0100\n"
-"PO-Revision-Date: 2015-08-20 11:59+0000\n"
-"Last-Translator: Papp Ferenc <Unknown>\n"
-"Language-Team: Hungarian <hu@li.org>\n"
+"PO-Revision-Date: 2018-06-04 12:25+0000\n"
+"Last-Translator: Majer Tamás <mtamas@disroot.org>\n"
+"Language-Team: Hungarian "
+"<https://weblate.elementary.io/projects/desktop/greeter/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.18\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
-"X-Generator: Launchpad (build 18330)\n"
 
 #: src/Credentials/PasswordCredentials.vala:33
 #: src/Credentials/LoginButtonCredentials.vala:23
@@ -25,51 +27,51 @@ msgstr "Bejelentkezés"
 
 #: src/Credentials/FingerprintCredentials.vala:71
 msgid "Swipe your finger"
-msgstr ""
+msgstr "Csúsztassa az ujját"
 
 #: src/Credentials/FingerprintCredentials.vala:74
 msgid "Place your finger"
-msgstr ""
+msgstr "Helyezze rá az ujját"
 
 #: src/Credentials/FingerprintCredentials.vala:77
 msgid "Remove your finger and try again."
-msgstr ""
+msgstr "Vegye le a ujját és próbálja újra."
 
 #: src/Credentials/FingerprintCredentials.vala:80
 msgid "Center your finger and try again."
-msgstr ""
+msgstr "Helyezze középre az ujját és próbálja újra."
 
 #: src/Gateways/LightDMGateway.vala:218
 msgid "An unknown error occured"
-msgstr ""
+msgstr "Ismeretlen hiba történt"
 
 #: src/Gateways/LightDMGateway.vala:224
 msgid "Swipe your finger again"
-msgstr ""
+msgstr "Csúsztassa az ujját mégegyszer"
 
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
-msgstr ""
+msgstr "A csúsztatás túl rövid volt, próbálja újra"
 
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
-msgstr ""
+msgstr "Az ujja nem volt középen, próbálja csúsztatni mégegyszer"
 
 #: src/Gateways/LightDMGateway.vala:233
 msgid "Remove your finger, and try swiping your finger again"
-msgstr ""
+msgstr "Vegye el az ujját, és próbálja csúsztatni mégegyszer"
 
 #: src/Gateways/LightDMGateway.vala:239
 msgid "Place your finger on the reader again"
-msgstr ""
+msgstr "Helyezze az ujját megint az olvasóra"
 
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
-msgstr ""
+msgstr "Nem egyeznek az ujjlenyomatok"
 
 #: src/Gateways/LightDMGateway.vala:245
 msgid "Verification timed out"
-msgstr ""
+msgstr "Az ellenőrzés ideje lejárt"
 
 #: src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
@@ -81,7 +83,7 @@ msgstr "Vendég-munkamenet"
 
 #: src/Widgets/TimeLabel.vala:53
 msgid "%A, %B %e"
-msgstr ""
+msgstr "%B %e, %A"
 
 #: src/Widgets/TimeLabel.vala:55
 msgid "%l:%M"
