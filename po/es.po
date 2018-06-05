@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 21:28+0100\n"
-"PO-Revision-Date: 2018-06-05 04:43+0000\n"
-"Last-Translator: anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2018-06-06 00:08+0000\n"
+"Last-Translator: haggen svastian <h2gn@openmailbox.org>\n"
 "Language-Team: Spanish "
 "<https://weblate.elementary.io/projects/desktop/greeter/es/>\n"
 "Language: es\n"
@@ -59,18 +59,16 @@ msgid "Your finger was not centered, try swiping your finger again"
 msgstr "Su dedo no se encontraba centrado, pruebe a deslizar su dedo de nuevo"
 
 #: src/Gateways/LightDMGateway.vala:233
-#, fuzzy
 msgid "Remove your finger, and try swiping your finger again"
-msgstr "Retira tu dedo y prueba de nuevo."
+msgstr "Retira tu dedo y prueba de nuevo"
 
 #: src/Gateways/LightDMGateway.vala:239
-#, fuzzy
 msgid "Place your finger on the reader again"
-msgstr "Retira tu dedo y prueba de nuevo."
+msgstr "Retira tu dedo y prueba de nuevo"
 
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
-msgstr ""
+msgstr "Error al hacer coincidir la huella digital"
 
 #: src/Gateways/LightDMGateway.vala:245
 msgid "Verification timed out"
