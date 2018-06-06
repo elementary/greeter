@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 21:28+0100\n"
-"PO-Revision-Date: 2018-06-06 06:03+0000\n"
-"Last-Translator: haggen svastian <h2gn@openmailbox.org>\n"
+"PO-Revision-Date: 2018-06-06 06:04+0000\n"
+"Last-Translator: anonymous <noreply@weblate.org>\n"
 "Language-Team: Spanish "
 "<https://weblate.elementary.io/projects/desktop/greeter/es/>\n"
 "Language: es\n"
@@ -51,7 +51,7 @@ msgstr "Desliza tu dedo otra vez"
 
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
-msgstr ""
+msgstr "El deslizamiento ha sido muy corto, inténtelo de nuevo"
 
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
