@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 21:28+0100\n"
-"PO-Revision-Date: 2018-06-06 00:08+0000\n"
+"PO-Revision-Date: 2018-06-06 06:03+0000\n"
 "Last-Translator: haggen svastian <h2gn@openmailbox.org>\n"
 "Language-Team: Spanish "
 "<https://weblate.elementary.io/projects/desktop/greeter/es/>\n"
@@ -46,9 +46,8 @@ msgid "An unknown error occured"
 msgstr "Ha ocurrido un error desconocido"
 
 #: src/Gateways/LightDMGateway.vala:224
-#, fuzzy
 msgid "Swipe your finger again"
-msgstr "Desliza tu dedo"
+msgstr "Desliza tu dedo otra vez"
 
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
