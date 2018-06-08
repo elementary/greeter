@@ -8,15 +8,17 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 21:28+0100\n"
-"PO-Revision-Date: 2016-12-12 08:33+0000\n"
-"Last-Translator: Jiri Grönroos <Unknown>\n"
-"Language-Team: Finnish <fi@li.org>\n"
+"PO-Revision-Date: 2018-06-08 08:10+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
+"Language-Team: Finnish "
+"<https://weblate.elementary.io/projects/desktop/greeter/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.18\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
-"X-Generator: Launchpad (build 18330)\n"
 
 #: src/Credentials/PasswordCredentials.vala:33
 #: src/Credentials/LoginButtonCredentials.vala:23
@@ -41,38 +43,35 @@ msgstr "Keskitä sormesi ja yritä uudelleen."
 
 #: src/Gateways/LightDMGateway.vala:218
 msgid "An unknown error occured"
-msgstr ""
+msgstr "Havaittiin tuntematon virhe"
 
 #: src/Gateways/LightDMGateway.vala:224
-#, fuzzy
 msgid "Swipe your finger again"
-msgstr "Vedä sormesi"
+msgstr "Vedä sormesi uudelleen"
 
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
-msgstr ""
+msgstr "Veto oli liian lyhyt, yritä uudelleen"
 
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
-msgstr ""
+msgstr "Sormesi ei ollut keskitettynä, vedä sormesi uudelleen"
 
 #: src/Gateways/LightDMGateway.vala:233
-#, fuzzy
 msgid "Remove your finger, and try swiping your finger again"
-msgstr "Nosta sormesi pois ja yritä uudelleen."
+msgstr "Nosta sormesi pois ja yritä vetää sormellasi uudelleen"
 
 #: src/Gateways/LightDMGateway.vala:239
-#, fuzzy
 msgid "Place your finger on the reader again"
-msgstr "Nosta sormesi pois ja yritä uudelleen."
+msgstr "Aseta sormesi uudelleen lukijalle"
 
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
-msgstr ""
+msgstr "Sormenjäljen vastaaminen epäonnistui"
 
 #: src/Gateways/LightDMGateway.vala:245
 msgid "Verification timed out"
-msgstr ""
+msgstr "Vahvistus aikakatkaistiin"
 
 #: src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
