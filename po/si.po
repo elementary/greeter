@@ -3,86 +3,88 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 21:28+0100\n"
-"PO-Revision-Date: 2017-02-01 18:58+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2018-06-09 16:44+0000\n"
+"Last-Translator: Gamunu Udaya Balagalla <gamunu.balagalla@gmail.com>\n"
+"Language-Team: Sinhala "
+"<https://weblate.elementary.io/projects/desktop/greeter/si/>\n"
+"Language: si\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.18\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
-"X-Generator: Launchpad (build 18330)\n"
 
 #: src/Credentials/PasswordCredentials.vala:33
 #: src/Credentials/LoginButtonCredentials.vala:23
 msgid "Log In"
-msgstr ""
+msgstr "ඇතුල් වන්න"
 
 #: src/Credentials/FingerprintCredentials.vala:71
 msgid "Swipe your finger"
-msgstr ""
+msgstr "ඔබේ ඇඟිල්ල අදින්න"
 
 #: src/Credentials/FingerprintCredentials.vala:74
 msgid "Place your finger"
-msgstr ""
+msgstr "ඔබේ ඇඟිල්ල තබන්න"
 
 #: src/Credentials/FingerprintCredentials.vala:77
 msgid "Remove your finger and try again."
-msgstr ""
+msgstr "ඔබගේ ඇඟිල්ල ඉවත් කර නැවත උත්සාහ කරන්න."
 
 #: src/Credentials/FingerprintCredentials.vala:80
 msgid "Center your finger and try again."
-msgstr ""
+msgstr "ඔබගේ ඇඟිල්ල කේන්ද්රගතකර නැවත උත්සාහ කරන්න."
 
 #: src/Gateways/LightDMGateway.vala:218
 msgid "An unknown error occured"
-msgstr ""
+msgstr "නොදන්නා දෝෂයක් ඇතිවිය"
 
 #: src/Gateways/LightDMGateway.vala:224
 msgid "Swipe your finger again"
-msgstr ""
+msgstr "ඔබගේ ඇඟිල්ල නැවතත් අදින්න"
 
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
-msgstr ""
+msgstr "ඇදීම ඉතා කෙටි විය, යළි උත්සාහ කරන්න"
 
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
-msgstr ""
+msgstr "ඔබේ ඇඟිල්ල කේන්ද්රගත වී නැත"
 
 #: src/Gateways/LightDMGateway.vala:233
 msgid "Remove your finger, and try swiping your finger again"
-msgstr ""
+msgstr "ඔබගේ ඇඟිල්ල ඉවත් කර, ඔබගේ ඇඟිල්ල යලිත් ඇදීමට උත්සාහ කරන්න"
 
 #: src/Gateways/LightDMGateway.vala:239
 msgid "Place your finger on the reader again"
-msgstr ""
+msgstr "කියවනය මත නැවත ඇගිල්ල ඇඟිල්ල තබන්න"
 
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
-msgstr ""
+msgstr "ඇඟිලි සලකුණු ගැලපීම අසමත් විය"
 
 #: src/Gateways/LightDMGateway.vala:245
 msgid "Verification timed out"
-msgstr ""
+msgstr "තහවුරු කිරීම කල් ඉකුත් විය"
 
 #: src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
-msgstr ""
+msgstr "අත් මෙහෙයුම් පිරුම"
 
 #: src/LoginOptions/GuestLogin.vala:41
 msgid "Guest session"
-msgstr ""
+msgstr "ආගන්තුක සැසිය"
 
 #: src/Widgets/TimeLabel.vala:53
 msgid "%A, %B %e"
-msgstr ""
+msgstr "%A, %B %e"
 
 #: src/Widgets/TimeLabel.vala:55
 msgid "%l:%M"
-msgstr ""
+msgstr "%l:%M"
 
 #: src/Widgets/TimeLabel.vala:57
 #, c-format
 msgid " %p"
-msgstr ""
+msgstr " %p"
