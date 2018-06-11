@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 21:28+0100\n"
-"PO-Revision-Date: 2018-06-11 19:23+0000\n"
+"PO-Revision-Date: 2018-06-13 00:07+0000\n"
 "Last-Translator: Richard Sjöqvist <richard@spiro.se>\n"
 "Language-Team: Swedish "
 "<https://weblate.elementary.io/projects/desktop/greeter/sv/>\n"
@@ -35,11 +35,11 @@ msgstr "Placera ditt finger"
 
 #: src/Credentials/FingerprintCredentials.vala:77
 msgid "Remove your finger and try again."
-msgstr "Ta bort fingret och försök igen"
+msgstr "Ta bort fingret och försök igen."
 
 #: src/Credentials/FingerprintCredentials.vala:80
 msgid "Center your finger and try again."
-msgstr "Centrera fingret och försök igen"
+msgstr "Centrera fingret och försök igen."
 
 #: src/Gateways/LightDMGateway.vala:218
 msgid "An unknown error occured"
