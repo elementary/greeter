@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 21:28+0100\n"
-"PO-Revision-Date: 2018-06-04 12:25+0000\n"
+"PO-Revision-Date: 2018-06-15 00:10+0000\n"
 "Last-Translator: Majer Tamás <mtamas@disroot.org>\n"
 "Language-Team: Hungarian "
 "<https://weblate.elementary.io/projects/desktop/greeter/hu/>\n"
@@ -83,11 +83,11 @@ msgstr "Vendég-munkamenet"
 
 #: src/Widgets/TimeLabel.vala:53
 msgid "%A, %B %e"
-msgstr "%B %e, %A"
+msgstr "%B %e. %A"
 
 #: src/Widgets/TimeLabel.vala:55
 msgid "%l:%M"
-msgstr "%k.%M"
+msgstr "%l:%M"
 
 #: src/Widgets/TimeLabel.vala:57
 #, c-format
