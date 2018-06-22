@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 21:28+0100\n"
-"PO-Revision-Date: 2018-02-23 20:58+0000\n"
+"PO-Revision-Date: 2018-06-22 12:59+0000\n"
 "Last-Translator: Shawn <syst3mfailur3@gmail.com>\n"
-"Language-Team: English (Canada) <https://weblate.elementary.io/projects/"
-"desktop/greeter/en_CA/>\n"
+"Language-Team: English (Canada) "
+"<https://weblate.elementary.io/projects/desktop/greeter/en_CA/>\n"
 "Language: en_CA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,38 +43,35 @@ msgstr "Centre your finger and try again."
 
 #: src/Gateways/LightDMGateway.vala:218
 msgid "An unknown error occured"
-msgstr ""
+msgstr "An unknown error occured"
 
 #: src/Gateways/LightDMGateway.vala:224
-#, fuzzy
 msgid "Swipe your finger again"
-msgstr "Swipe your finger"
+msgstr "Swipe your finger again"
 
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
-msgstr ""
+msgstr "Swipe was too short, try again"
 
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
-msgstr ""
+msgstr "Your finger was not centred, try swiping your finger again"
 
 #: src/Gateways/LightDMGateway.vala:233
-#, fuzzy
 msgid "Remove your finger, and try swiping your finger again"
-msgstr "Remove your finger and try again."
+msgstr "Remove your finger, and try swiping your finger again"
 
 #: src/Gateways/LightDMGateway.vala:239
-#, fuzzy
 msgid "Place your finger on the reader again"
-msgstr "Remove your finger and try again."
+msgstr "Place your finger on the reader again"
 
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
-msgstr ""
+msgstr "Failed to match fingerprint"
 
 #: src/Gateways/LightDMGateway.vala:245
 msgid "Verification timed out"
-msgstr ""
+msgstr "Verification timed out"
 
 #: src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
