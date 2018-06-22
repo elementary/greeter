@@ -101,7 +101,7 @@ public class PantheonGreeter : Gtk.Window {
                 warning ("Failed to load state from %s: %s\n", state_file, e.message);
             }
         }
-        
+
         settings = new KeyFile ();
         try {
             settings.load_from_file (Path.build_filename (Constants.CONF_DIR, "io.elementary.greeter.conf"), KeyFileFlags.KEEP_COMMENTS);
@@ -192,7 +192,7 @@ public class PantheonGreeter : Gtk.Window {
                     userlist.current_user = userlist.get_user (i);
                     break;
                 }
-            }            
+            }
         }
 
         if (userlist.current_user == null) {
@@ -208,6 +208,7 @@ public class PantheonGreeter : Gtk.Window {
         show_all ();
 
         this.get_window ().focus (Gdk.CURRENT_TIME);
+        fullscreen ();
     }
 
     void connect_signals () {
