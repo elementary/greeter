@@ -228,8 +228,7 @@ public class PantheonGreeter : Gtk.Window {
         });
 
         delete_event.connect (() => {
-            Posix.exit (Posix.EXIT_SUCCESS);
-            return false;
+            return true;
         });
 
         userlist.current_user_changed.connect ((user) => {
