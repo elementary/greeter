@@ -8,15 +8,18 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 21:28+0100\n"
-"PO-Revision-Date: 2016-12-10 08:16+0000\n"
-"Last-Translator: Jernej Virag <Unknown>\n"
-"Language-Team: Slovenian <sl@li.org>\n"
+"PO-Revision-Date: 2018-07-03 18:57+0000\n"
+"Last-Translator: Jernej Virag <jernej@virag.si>\n"
+"Language-Team: Slovenian <https://weblate.elementary.io/projects/desktop/"
+"greeter/sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
-"X-Generator: Launchpad (build 18330)\n"
 
 #: src/Credentials/PasswordCredentials.vala:33
 #: src/Credentials/LoginButtonCredentials.vala:23
@@ -41,38 +44,35 @@ msgstr "Položite prst na sredino in poskusite znova."
 
 #: src/Gateways/LightDMGateway.vala:218
 msgid "An unknown error occured"
-msgstr ""
+msgstr "Prišlo je do neznane napake"
 
 #: src/Gateways/LightDMGateway.vala:224
-#, fuzzy
 msgid "Swipe your finger again"
-msgstr "Poskenirajte prst"
+msgstr "Še enkrat poskenirajte prst"
 
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
-msgstr ""
+msgstr "Prekratek poteg prsta, poskusite znova"
 
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
-msgstr ""
+msgstr "Vaš prst ni bil na sredini bralnika, poskusite znova"
 
 #: src/Gateways/LightDMGateway.vala:233
-#, fuzzy
 msgid "Remove your finger, and try swiping your finger again"
-msgstr "Poskusite znova."
+msgstr "Poskusite znova"
 
 #: src/Gateways/LightDMGateway.vala:239
-#, fuzzy
 msgid "Place your finger on the reader again"
-msgstr "Poskusite znova."
+msgstr "Poskusite znova"
 
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
-msgstr ""
+msgstr "Prstni odtis se ne ujema z nobenim shranjenim"
 
 #: src/Gateways/LightDMGateway.vala:245
 msgid "Verification timed out"
-msgstr ""
+msgstr "Čas za preverjanje je potekel"
 
 #: src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
