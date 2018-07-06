@@ -31,7 +31,6 @@ public class PantheonGreeter : Gtk.Window {
     UserListActor userlist_actor;
     UserList userlist;
 
-    GtkClutter.Actor indicator_bar_actor;
     Wallpaper wallpaper;
 
     int timeout;
@@ -73,6 +72,7 @@ public class PantheonGreeter : Gtk.Window {
     public PantheonGreeter () {
         //singleton
         assert (instance == null);
+        decorated = false;
         instance = this;
 
         TEST_MODE = Environment.get_variable ("LIGHTDM_TO_SERVER_FD") == null;
@@ -84,6 +84,13 @@ public class PantheonGreeter : Gtk.Window {
             login_gateway = new LightDMGateway ();
             settings_daemon = new SettingsDaemon ();
             settings_daemon.start ();
+
+            try {
+                var panel = AppInfo.create_from_commandline ("wingpanel -g", null, GLib.AppInfoCreateFlags.NONE);
+                panel.launch (null, null);
+            } catch (Error e) {
+                warning ("Failed to start panel: %s", e.message);
+            }
         }
 
         var state_dir = Path.build_filename (Environment.get_user_cache_dir (), "unity-greeter");
@@ -115,12 +122,6 @@ public class PantheonGreeter : Gtk.Window {
         var stage = clutter.get_stage () as Clutter.Stage;
         stage.background_color = {0, 0, 0, 255};
 
-        var indicator_bar = new Indicators.IndicatorBar ();
-
-        indicator_bar_actor = new GtkClutter.Actor ();
-        indicator_bar_actor.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
-        ((Gtk.Container) indicator_bar_actor.get_widget ()).add (indicator_bar);
-
         userlist = new UserList (LightDM.UserList.get_instance ());
         userlist_actor = new UserListActor (userlist);
 
@@ -149,7 +150,6 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.add_child (wallpaper_actor);
         greeterbox.add_child (time_actor);
         greeterbox.add_child (userlist_actor);
-        greeterbox.add_child (indicator_bar_actor);
 
         stage.add_child (greeterbox);
 
@@ -208,7 +208,6 @@ public class PantheonGreeter : Gtk.Window {
         show_all ();
 
         this.get_window ().focus (Gdk.CURRENT_TIME);
-        fullscreen ();
     }
 
     void connect_signals () {
@@ -271,8 +270,6 @@ public class PantheonGreeter : Gtk.Window {
         // the correct time everything is faded out.
         var anim = fade_out_actor (time_actor);
         fade_out_actor (userlist_actor);
-        if (!TEST_MODE)
-            fade_out_actor (indicator_bar_actor);
 
         anim.completed.connect (() => {
             login_gateway.start_session ();
