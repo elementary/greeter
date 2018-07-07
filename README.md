@@ -16,19 +16,15 @@ You'll need the following dependencies:
 * libx11-dev
 * valac
 
-It's recommended to create a clean build environment
+Run `meson` to configure the build environment and then `ninja` to build
 
-    mkdir build
-    cd build/
-    
-Run `cmake` to configure the build environment and then `make` to build
+    meson build --prefix=/usr
+    cd build
+    ninja
 
-    cmake -DCMAKE_INSTALL_PREFIX=/usr ..
-    make
-    
-To install, use `make install`
+To install, use `ninja install`
 
-    sudo make install
+    sudo ninja install
 
 ## Testing & Debugging
 
