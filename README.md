@@ -12,8 +12,10 @@ You'll need the following dependencies:
 * libgranite-dev
 * libgtk-3-dev
 * liblightdm-gobject-1-dev
+* libmutter
 * libwingpanel-2.0-dev
 * libx11-dev
+* meson
 * valac
 
 Run `meson` to configure the build environment and then `ninja` to build
