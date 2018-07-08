@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2011-2017 elementary LLC. (http://launchpad.net/pantheon-greeter)
+* Copyright (c) 2011-2017 elementary LLC. (https://github.com/elementary/greeter)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -13,8 +13,8 @@
 *
 * You should have received a copy of the GNU General Public
 * License along with this program; if not, write to the
-* Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-* Boston, MA 02111-1307, USA.
+* Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+* Boston, MA 02110-1301 USA.
 *
 */
 
@@ -49,7 +49,7 @@ public class Wallpaper : Gtk.Stack {
         var settings = new KeyFile ();
         string default_wallpaper = "/usr/share/backgrounds/elementaryos-default";
         try {
-            settings.load_from_file (Constants.CONF_DIR + "/pantheon-greeter.conf", KeyFileFlags.KEEP_COMMENTS);
+            settings.load_from_file (Constants.CONF_DIR + "/io.elementary.greeter.conf", KeyFileFlags.KEEP_COMMENTS);
             default_wallpaper = settings.get_string ("greeter", "default-wallpaper");
         } catch (Error e) {
             warning (e.message);

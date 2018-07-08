@@ -1,6 +1,6 @@
 // -*- Mode: vala; indent-tabs-mode: nil; tab-width: 4 -*-
 /*
-* Copyright (c) 2011-2017 elementary LLC. (http://launchpad.net/pantheon-greeter)
+* Copyright (c) 2011-2017 elementary LLC. (https://github.com/elementary/greeter)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -14,8 +14,8 @@
 *
 * You should have received a copy of the GNU General Public
 * License along with this program; if not, write to the
-* Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-* Boston, MA 02111-1307, USA.
+* Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+* Boston, MA 02110-1301 USA.
 *
 */
 
@@ -23,6 +23,8 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
     private CredentialsArea credentials_area;
 
     bool _selected = false;
+
+    public signal void clicked ();
 
     public bool selected {
         get {
@@ -70,6 +72,16 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
             avatar = new Granite.Widgets.Avatar.with_default_icon (96);
         }
 
+        button_press_event.connect (() => {
+            clicked ();
+            return false;
+        });
+
+        avatar.button_press_event.connect (() => {
+            clicked ();
+            return false;
+        });
+
         var grid = new Gtk.Grid ();
         grid.column_spacing = 12;
         grid.add (avatar);
@@ -102,7 +114,6 @@ public class LoginBox : GtkClutter.Actor, LoginMask {
         credentials_area.entered_login_name.connect ((name) => {
             start_login ();
         });
-
     }
 
     /**

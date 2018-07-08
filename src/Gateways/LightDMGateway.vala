@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2011-2017 elementary LLC (http://launchpad.net/pantheon-greeter)
+* Copyright (c) 2011-2017 elementary LLC (https://github.com/elementary/greeter)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -13,8 +13,8 @@
 *
 * You should have received a copy of the GNU General Public
 * License along with this program; if not, write to the
-* Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-* Boston, MA 02111-1307, USA.
+* Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+* Boston, MA 02110-1301 USA.
 *
 */
 
@@ -111,9 +111,19 @@ public class LightDMGateway : LoginGateway, Object {
 
         current_login = login;
         if (guest) {
-            lightdm.authenticate_as_guest ();
+            try {
+                lightdm.authenticate_as_guest ();
+            } catch (Error e) {
+                warning (e.message);
+            }
+
         } else {
-            lightdm.authenticate (current_login.login_name);
+            try {
+                lightdm.authenticate (current_login.login_name);
+            } catch (Error e) {
+                warning (e.message);
+            }
+
         }
     }
 
@@ -129,7 +139,12 @@ public class LightDMGateway : LoginGateway, Object {
             login_successful ();
         } else {
             // We don't log this as it contains passwords etc.
-            lightdm.respond (text);
+            try {
+                lightdm.respond (text);
+            } catch (Error e) {
+                warning (e.message);
+            }
+            
         }
     }
 

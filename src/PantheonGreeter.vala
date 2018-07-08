@@ -31,7 +31,6 @@ public class PantheonGreeter : Gtk.Window {
     UserListActor userlist_actor;
     UserList userlist;
 
-    GtkClutter.Actor indicator_bar_actor;
     Wallpaper wallpaper;
 
     int timeout;
@@ -73,6 +72,7 @@ public class PantheonGreeter : Gtk.Window {
     public PantheonGreeter () {
         //singleton
         assert (instance == null);
+        decorated = false;
         instance = this;
 
         TEST_MODE = Environment.get_variable ("LIGHTDM_TO_SERVER_FD") == null;
@@ -84,6 +84,13 @@ public class PantheonGreeter : Gtk.Window {
             login_gateway = new LightDMGateway ();
             settings_daemon = new SettingsDaemon ();
             settings_daemon.start ();
+
+            try {
+                var panel = AppInfo.create_from_commandline ("wingpanel -g", null, GLib.AppInfoCreateFlags.NONE);
+                panel.launch (null, null);
+            } catch (Error e) {
+                warning ("Failed to start panel: %s", e.message);
+            }
         }
 
         var state_dir = Path.build_filename (Environment.get_user_cache_dir (), "unity-greeter");
@@ -101,10 +108,10 @@ public class PantheonGreeter : Gtk.Window {
                 warning ("Failed to load state from %s: %s\n", state_file, e.message);
             }
         }
-        
+
         settings = new KeyFile ();
         try {
-            settings.load_from_file (Path.build_filename (Constants.CONF_DIR, "pantheon-greeter.conf"), KeyFileFlags.KEEP_COMMENTS);
+            settings.load_from_file (Path.build_filename (Constants.CONF_DIR, "io.elementary.greeter.conf"), KeyFileFlags.KEEP_COMMENTS);
         } catch (Error e) {
             warning (e.message);
         }
@@ -114,12 +121,6 @@ public class PantheonGreeter : Gtk.Window {
 
         var stage = clutter.get_stage () as Clutter.Stage;
         stage.background_color = {0, 0, 0, 255};
-
-        var indicator_bar = new Indicators.IndicatorBar ();
-
-        indicator_bar_actor = new GtkClutter.Actor ();
-        indicator_bar_actor.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.WIDTH, 0));
-        ((Gtk.Container) indicator_bar_actor.get_widget ()).add (indicator_bar);
 
         userlist = new UserList (LightDM.UserList.get_instance ());
         userlist_actor = new UserListActor (userlist);
@@ -149,7 +150,6 @@ public class PantheonGreeter : Gtk.Window {
         greeterbox.add_child (wallpaper_actor);
         greeterbox.add_child (time_actor);
         greeterbox.add_child (userlist_actor);
-        greeterbox.add_child (indicator_bar_actor);
 
         stage.add_child (greeterbox);
 
@@ -192,7 +192,7 @@ public class PantheonGreeter : Gtk.Window {
                     userlist.current_user = userlist.get_user (i);
                     break;
                 }
-            }            
+            }
         }
 
         if (userlist.current_user == null) {
@@ -227,8 +227,10 @@ public class PantheonGreeter : Gtk.Window {
         });
 
         delete_event.connect (() => {
-            Posix.exit (Posix.EXIT_SUCCESS);
-            return false;
+            if (TEST_MODE) {
+                Posix.exit (Posix.EXIT_SUCCESS);
+            }
+            return !TEST_MODE;
         });
 
         userlist.current_user_changed.connect ((user) => {
@@ -268,8 +270,6 @@ public class PantheonGreeter : Gtk.Window {
         // the correct time everything is faded out.
         var anim = fade_out_actor (time_actor);
         fade_out_actor (userlist_actor);
-        if (!TEST_MODE)
-            fade_out_actor (indicator_bar_actor);
 
         anim.completed.connect (() => {
             login_gateway.start_session ();
@@ -455,6 +455,8 @@ public class PantheonGreeter : Gtk.Window {
 }
 
 public static int main (string [] args) {
+    var compositor = new Greeter.ComponentWatcher ("io.elementary.greeter-compositor");
+
     /* Protect memory from being paged to disk, as we deal with passwords */
     Posix.mlockall (Posix.MCL_CURRENT | Posix.MCL_FUTURE);
 
@@ -465,20 +467,25 @@ public static int main (string [] args) {
     }
 
     GLib.Unix.signal_add (GLib.ProcessSignal.TERM, () => {
+        compositor.terminate (false);
         Gtk.main_quit ();
         return true;
     });
 
     /*some settings*/
     Intl.setlocale (LocaleCategory.ALL, "");
-    Intl.bind_textdomain_codeset ("pantheon-greeter", "UTF-8");
-    Intl.textdomain ("pantheon-greeter");
+    Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
+    Intl.textdomain (Constants.GETTEXT_PACKAGE);
 
     var cursor = new Gdk.Cursor.for_display (Gdk.Display.get_default (),
                                              Gdk.CursorType.LEFT_PTR);
     Gdk.get_default_root_window ().set_cursor (cursor);
 
+    var icon_theme = Gtk.IconTheme.get_default ();
+    icon_theme.add_resource_path ("/io/elementary/greeter/icons");
+
     new PantheonGreeter ();
     Gtk.main ();
+    compositor.terminate (false);
     return Posix.EXIT_SUCCESS;
 }

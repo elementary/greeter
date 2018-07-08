@@ -5,29 +5,28 @@
 
 You'll need the following dependencies:
 
-* cmake
+* gnome-settings-daemon >= 3.27
 * libclutter-gtk-1.0-dev
 * libgdk-pixbuf2.0-dev
+* libgnome-desktop-3-dev
 * libgranite-dev
 * libgtk-3-dev
 * liblightdm-gobject-1-dev
+* libmutter
 * libwingpanel-2.0-dev
 * libx11-dev
+* meson
 * valac
 
-It's recommended to create a clean build environment
+Run `meson` to configure the build environment and then `ninja` to build
 
-    mkdir build
-    cd build/
-    
-Run `cmake` to configure the build environment and then `make` to build
+    meson build --prefix=/usr
+    cd build
+    ninja
 
-    cmake -DCMAKE_INSTALL_PREFIX=/usr ..
-    make
-    
-To install, use `make install`
+To install, use `ninja install`
 
-    sudo make install
+    sudo ninja install
 
 ## Testing & Debugging
 

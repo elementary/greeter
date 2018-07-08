@@ -1,0 +1,6 @@
+namespace Constants {
+    public const string CONF_DIR = "@CONF_DIR@";
+    public const string GETTEXT_PACKAGE = "@GETTEXT_PACKAGE@";
+    public const string GSD_DIR = "@GSD_DIR@";
+    public const string VERSION = "@VERSION@";
+}

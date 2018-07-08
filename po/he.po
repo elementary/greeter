@@ -7,59 +7,90 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-01 10:31-0600\n"
-"PO-Revision-Date: 2017-04-20 14:08+0000\n"
+"POT-Creation-Date: 2018-06-01 21:28+0100\n"
+"PO-Revision-Date: 2018-06-02 08:47+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew "
-"<https://l10n.elementary.io/projects/desktop/greeter/he/>\n"
+"<https://weblate.elementary.io/projects/desktop/greeter/he/>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.13-dev\n"
+"X-Generator: Weblate 2.18\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: ../src/LoginOptions/GuestLogin.vala:41
-msgid "Guest session"
-msgstr "כניסת אורח"
-
-#: ../src/LoginOptions/ManualLogin.vala:35
-msgid "Manual Login"
-msgstr "כניסה ידנית"
-
-#: ../src/FingerprintIndicatorArea.vala:117
-msgid "Swipe your finger"
-msgstr "נא להעביר את האצבע"
-
-#: ../src/FingerprintIndicatorArea.vala:120
-msgid "Place your finger"
-msgstr "נא למקם את האצבע"
-
-#: ../src/FingerprintIndicatorArea.vala:123
-msgid "Remove your finger and try again."
-msgstr "נא להסיר את האצבע ולנסות שוב."
-
-#: ../src/FingerprintIndicatorArea.vala:126
-msgid "Center your finger and try again."
-msgstr "נא למרכז את האצבע ולנסות שוב."
-
-#: ../src/PasswordArea.vala:34 ../src/LoginButtonArea.vala:26
+#: src/Credentials/PasswordCredentials.vala:33
+#: src/Credentials/LoginButtonCredentials.vala:23
 msgid "Log In"
 msgstr "כניסה"
 
-#. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: ../src/TimeLabel.vala:59
+#: src/Credentials/FingerprintCredentials.vala:71
+msgid "Swipe your finger"
+msgstr "נא להעביר את האצבע"
+
+#: src/Credentials/FingerprintCredentials.vala:74
+msgid "Place your finger"
+msgstr "נא למקם את האצבע"
+
+#: src/Credentials/FingerprintCredentials.vala:77
+msgid "Remove your finger and try again."
+msgstr "נא להסיר את האצבע ולנסות שוב."
+
+#: src/Credentials/FingerprintCredentials.vala:80
+msgid "Center your finger and try again."
+msgstr "נא למרכז את האצבע ולנסות שוב."
+
+#: src/Gateways/LightDMGateway.vala:218
+msgid "An unknown error occured"
+msgstr "אירעה שגיאה בלתי ידועה"
+
+#: src/Gateways/LightDMGateway.vala:224
+msgid "Swipe your finger again"
+msgstr "נא להעביר את האצבע שוב"
+
+#: src/Gateways/LightDMGateway.vala:227
+msgid "Swipe was too short, try again"
+msgstr "ההעברה הייתה מהירה מדי, נא לנסות שוב"
+
+#: src/Gateways/LightDMGateway.vala:230
+msgid "Your finger was not centered, try swiping your finger again"
+msgstr "האצבע שלך לא הועברה במרכז, נא לנסות להעביר את האצבע שוב"
+
+#: src/Gateways/LightDMGateway.vala:233
+msgid "Remove your finger, and try swiping your finger again"
+msgstr "נא להרים את האצבע ולנסות להעביר אותה שוב"
+
+#: src/Gateways/LightDMGateway.vala:239
+msgid "Place your finger on the reader again"
+msgstr "נא להציב את האצבע על הקורא שוב"
+
+#: src/Gateways/LightDMGateway.vala:242
+msgid "Failed to match fingerprint"
+msgstr "התאמת טביעת האצבע נכשלה"
+
+#: src/Gateways/LightDMGateway.vala:245
+msgid "Verification timed out"
+msgstr "זמן האימות פג"
+
+#: src/LoginOptions/ManualLogin.vala:35
+msgid "Manual Login"
+msgstr "כניסה ידנית"
+
+#: src/LoginOptions/GuestLogin.vala:41
+msgid "Guest session"
+msgstr "כניסת אורח"
+
+#: src/Widgets/TimeLabel.vala:53
 msgid "%A, %B %e"
 msgstr "%A, ה־%B ב%e"
 
-#. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: ../src/TimeLabel.vala:61
+#: src/Widgets/TimeLabel.vala:55
 msgid "%l:%M"
 msgstr "%l:%M"
 
-#. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
-#: ../src/TimeLabel.vala:63
+#: src/Widgets/TimeLabel.vala:57
+#, c-format
 msgid " %p"
 msgstr " %p"
 
