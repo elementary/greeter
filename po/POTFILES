@@ -10,12 +10,6 @@ src/Credentials/Credentials.vala
 src/Gateways/LoginGateway.vala
 src/Gateways/LightDMGateway.vala
 src/Gateways/DummyGateway.vala
-src/Indicators/StyleClass.vala
-src/Indicators/PopoverManager.vala
-src/Indicators/IndicatorPopover.vala
-src/Indicators/IndicatorEntry.vala
-src/Indicators/IndicatorBar.vala
-src/Indicators/EntryList.vala
 src/LoginOptions/UserLogin.vala
 src/LoginOptions/ManualLogin.vala
 src/LoginOptions/LoginOption.vala

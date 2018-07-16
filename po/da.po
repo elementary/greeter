@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-01 21:28+0100\n"
+"POT-Creation-Date: 2018-07-16 08:43-0700\n"
 "PO-Revision-Date: 2018-06-03 15:12+0000\n"
 "Last-Translator: Kaj Printz Madsen <kajprintz@gmail.com>\n"
-"Language-Team: Danish "
-"<https://weblate.elementary.io/projects/desktop/greeter/da/>\n"
+"Language-Team: Danish <https://weblate.elementary.io/projects/desktop/"
+"greeter/da/>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,34 +41,60 @@ msgstr "Fjern din finger og prøv igen."
 msgid "Center your finger and try again."
 msgstr "Centrér din finger og prøv igen."
 
+#. Ideally this would query PAM and ask which module is currently active,
+#. but since we're running through LightDM we don't have that ability.
+#. There should at be a state machine to transition to and from the
+#. active module depending on the messages recieved. But, this is can go
+#. wrong quickly.
+#. The reason why this is needed is, for example, we can get the "An
+#. unknown error occured" message from pam_fprintd, but we can get it
+#. from some other random module as well. You never know.
+#. Maybe it's worth adding some LightDM/PAM functionality for this?
+#. The PAM "feature" which makes it all tricky is that modules can send
+#. arbitrary messages to the stream and it's hard to analyze or keep track
+#. of them programmatically.
+#. Also, there doesn't seem to be a way to give the user a choice over
+#. which module he wants to use to authenticate (ie. maybe today I have
+#. a bandaid over my finger and I can't scan it so I have to wait for it
+#. time out, if I didn't disable that in the settings)
+#. These messages are taken from here:
+#. - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/fingerprint-strings.h
+#. - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/pam_fprintd.c
 #: src/Gateways/LightDMGateway.vala:218
 msgid "An unknown error occured"
 msgstr "Der opstod en ukendt fejl"
 
+#. LIGHTDM_MESSAGE_TYPE_INFO
 #: src/Gateways/LightDMGateway.vala:224
 msgid "Swipe your finger again"
 msgstr "Stryg med fingeren igen"
 
+#. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
 msgstr "Stryg var for kort, prøv igen"
 
+#. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
 msgstr "Din finger var ikke centreret, prøv at stryge fingeren igen"
 
+#. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:233
 msgid "Remove your finger, and try swiping your finger again"
 msgstr "Fjern din finger, og prøv at stryge fingeren igen"
 
+#. LIGHTDM_MESSAGE_TYPE_INFO
 #: src/Gateways/LightDMGateway.vala:239
 msgid "Place your finger on the reader again"
 msgstr "Placer fingeren på læseren igen"
 
+#. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
 msgstr "Kunne ikke matche fingeraftryk"
 
+#. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:245
 msgid "Verification timed out"
 msgstr "Verifikationsperioden udløb"
@@ -81,14 +107,17 @@ msgstr "Manuelt login"
 msgid "Guest session"
 msgstr "Gæstesession"
 
+#. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: src/Widgets/TimeLabel.vala:53
 msgid "%A, %B %e"
 msgstr "%A d. %e. %B"
 
+#. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: src/Widgets/TimeLabel.vala:55
 msgid "%l:%M"
 msgstr "%H:%M"
 
+#. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
 #: src/Widgets/TimeLabel.vala:57
 #, c-format
 msgid " %p"

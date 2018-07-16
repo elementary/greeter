@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-01 21:28+0100\n"
+"POT-Creation-Date: 2018-07-16 08:43-0700\n"
 "PO-Revision-Date: 2017-05-09 22:12+0000\n"
 "Last-Translator: Martin Tomov <martin.tomov@boomer.digital>\n"
 "Language-Team: Bulgarian <https://l10n.elementary.io/projects/desktop/"
@@ -41,37 +41,63 @@ msgstr "Вдигнете пръста си и опитайте отново."
 msgid "Center your finger and try again."
 msgstr "Поставете пръста си в центъра и опитайте отново."
 
+#. Ideally this would query PAM and ask which module is currently active,
+#. but since we're running through LightDM we don't have that ability.
+#. There should at be a state machine to transition to and from the
+#. active module depending on the messages recieved. But, this is can go
+#. wrong quickly.
+#. The reason why this is needed is, for example, we can get the "An
+#. unknown error occured" message from pam_fprintd, but we can get it
+#. from some other random module as well. You never know.
+#. Maybe it's worth adding some LightDM/PAM functionality for this?
+#. The PAM "feature" which makes it all tricky is that modules can send
+#. arbitrary messages to the stream and it's hard to analyze or keep track
+#. of them programmatically.
+#. Also, there doesn't seem to be a way to give the user a choice over
+#. which module he wants to use to authenticate (ie. maybe today I have
+#. a bandaid over my finger and I can't scan it so I have to wait for it
+#. time out, if I didn't disable that in the settings)
+#. These messages are taken from here:
+#. - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/fingerprint-strings.h
+#. - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/pam_fprintd.c
 #: src/Gateways/LightDMGateway.vala:218
 msgid "An unknown error occured"
 msgstr ""
 
+#. LIGHTDM_MESSAGE_TYPE_INFO
 #: src/Gateways/LightDMGateway.vala:224
 #, fuzzy
 msgid "Swipe your finger again"
 msgstr "Плъзни пръста"
 
+#. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
 msgstr ""
 
+#. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
 msgstr ""
 
+#. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:233
 #, fuzzy
 msgid "Remove your finger, and try swiping your finger again"
 msgstr "Вдигнете пръста си и опитайте отново."
 
+#. LIGHTDM_MESSAGE_TYPE_INFO
 #: src/Gateways/LightDMGateway.vala:239
 #, fuzzy
 msgid "Place your finger on the reader again"
 msgstr "Вдигнете пръста си и опитайте отново."
 
+#. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
 msgstr ""
 
+#. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:245
 msgid "Verification timed out"
 msgstr ""
@@ -84,14 +110,17 @@ msgstr "Ръчен вход"
 msgid "Guest session"
 msgstr "Сесия на гост"
 
+#. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: src/Widgets/TimeLabel.vala:53
 msgid "%A, %B %e"
 msgstr "%A, %e %B"
 
+#. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: src/Widgets/TimeLabel.vala:55
 msgid "%l:%M"
 msgstr "%H:%M"
 
+#. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
 #: src/Widgets/TimeLabel.vala:57
 #, c-format
 msgid " %p"
