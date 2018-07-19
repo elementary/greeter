@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-16 08:43-0700\n"
-"PO-Revision-Date: 2018-06-02 00:04+0000\n"
-"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"PO-Revision-Date: 2018-07-19 21:41+0000\n"
+"Last-Translator: Nils K <slx@nilsk.net>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.elementary.io/projects/"
 "desktop/greeter/nb/>\n"
 "Language: nb\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-04-05 07:04+0000\n"
 
 #: src/Credentials/PasswordCredentials.vala:33
@@ -66,9 +66,8 @@ msgstr "En ukjent feil har inntruffet"
 
 #. LIGHTDM_MESSAGE_TYPE_INFO
 #: src/Gateways/LightDMGateway.vala:224
-#, fuzzy
 msgid "Swipe your finger again"
-msgstr "Sveip med fingeren"
+msgstr "Sveip med fingeren igjen"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:227
@@ -77,21 +76,18 @@ msgstr "Sveipet var for kort, prøv igjen"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:230
-#, fuzzy
 msgid "Your finger was not centered, try swiping your finger again"
 msgstr "Fingeren din var ikke sentrert, prøv å sveipe fingeren igjen"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:233
-#, fuzzy
 msgid "Remove your finger, and try swiping your finger again"
-msgstr "Fjern fingeren din og prøv igjen."
+msgstr "Fjern fingeren din og forsøk å sveipe fingeren en gang til"
 
 #. LIGHTDM_MESSAGE_TYPE_INFO
 #: src/Gateways/LightDMGateway.vala:239
-#, fuzzy
 msgid "Place your finger on the reader again"
-msgstr "Fjern fingeren din og prøv igjen."
+msgstr "Plasser fingeren din på leseren igjen"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:242
