@@ -140,7 +140,7 @@ executable(
 	dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, mutter_dep],
 	vala_args: vala_flags,
 	c_args: compositor_c_args,
-	build_rpath: '-Wl,-rpath,@0@'.format(mutter_typelib_dir),
+	build_rpath: mutter_typelib_dir,
 	install_rpath: mutter_typelib_dir,
 	install: true,
 )
