@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-16 08:43-0700\n"
-"PO-Revision-Date: 2018-06-02 19:03+0000\n"
+"PO-Revision-Date: 2018-08-20 00:06+0000\n"
 "Last-Translator: Jörg Arnold <j.ar@mailbox.org>\n"
 "Language-Team: German <https://weblate.elementary.io/projects/desktop/"
 "greeter/de/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: src/Credentials/PasswordCredentials.vala:33
@@ -27,7 +27,7 @@ msgstr "Anmelden"
 
 #: src/Credentials/FingerprintCredentials.vala:71
 msgid "Swipe your finger"
-msgstr "Finger scannen"
+msgstr "Wischen Sie mit dem Finger"
 
 #: src/Credentials/FingerprintCredentials.vala:74
 msgid "Place your finger"
