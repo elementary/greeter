@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-16 08:43-0700\n"
 "PO-Revision-Date: 2018-08-29 06:14+0000\n"
-"Last-Translator: Mihailov Vasilievic Filho <mihailov.vf@gmail.com>\n"
+"Last-Translator: João Vitor Antoniassi Segantin <segantin.jv@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.elementary.io/projects/"
 "desktop/greeter/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -77,7 +77,7 @@ msgstr "O deslize foi rápido demais, tente novamente "
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
-msgstr ""
+msgstr "Seu dedo não estava centralizado, tente deslizá-lo novamente"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:233
@@ -94,12 +94,12 @@ msgstr "Tire seu dedo e tente novamente."
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
-msgstr ""
+msgstr "Impressão digital não reconhecida"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:245
 msgid "Verification timed out"
-msgstr ""
+msgstr "Tempo de verificação esgotado"
 
 #: src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
