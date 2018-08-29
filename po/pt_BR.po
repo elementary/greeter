@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-16 08:43-0700\n"
-"PO-Revision-Date: 2018-08-29 15:58+0000\n"
+"PO-Revision-Date: 2018-08-30 00:06+0000\n"
 "Last-Translator: Rodrigo Oliveira <rod.oliveira@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.elementary.io/projects/"
 "desktop/greeter/pt_BR/>\n"
@@ -72,12 +72,12 @@ msgstr "Deslize seu dedo novamente"
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
-msgstr "O deslize foi rápido demais, tente novamente "
+msgstr "O deslize foi muito rápido, tente novamente"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
-msgstr "Seu dedo não está centralizado, tente deslizar seu dedo novamente "
+msgstr "Seu dedo não está centralizado, tente deslizar seu dedo novamente"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:233
@@ -92,7 +92,7 @@ msgstr "Coloque o dedo no leitor novamente"
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
-msgstr "Falha ao identificar a digital "
+msgstr "Falha ao identificar a digital"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:245
