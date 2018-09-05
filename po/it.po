@@ -8,15 +8,17 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-16 08:43-0700\n"
-"PO-Revision-Date: 2017-02-03 16:32+0000\n"
-"Last-Translator: Fabio Zaramella <FFabio.96.X@Gmail.com>\n"
-"Language-Team: Italian <it@li.org>\n"
+"PO-Revision-Date: 2018-09-05 22:28+0000\n"
+"Last-Translator: strozzascotte <marco.depaolini@gmail.com>\n"
+"Language-Team: Italian <https://weblate.elementary.io/projects/desktop/"
+"greeter/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
-"X-Generator: Launchpad (build 18330)\n"
 
 #: src/Credentials/PasswordCredentials.vala:33
 #: src/Credentials/LoginButtonCredentials.vala:23
@@ -60,45 +62,42 @@ msgstr "Centra il dito e prova di nuovo."
 #. - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/pam_fprintd.c
 #: src/Gateways/LightDMGateway.vala:218
 msgid "An unknown error occured"
-msgstr ""
+msgstr "È avvenuto un errore sconosciuto"
 
 #. LIGHTDM_MESSAGE_TYPE_INFO
 #: src/Gateways/LightDMGateway.vala:224
-#, fuzzy
 msgid "Swipe your finger again"
-msgstr "Scorri con il dito"
+msgstr "Scorri di nuovo con il dito"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
-msgstr ""
+msgstr "Lo scorrimento è stato troppo breve, riprova"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
-msgstr ""
+msgstr "Il tuo dito non era centrato, prova a scorrere di nuovo"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:233
-#, fuzzy
 msgid "Remove your finger, and try swiping your finger again"
-msgstr "Togli il dito e prova di nuovo."
+msgstr "Togli il dito e prova a scorrerlo di nuovo"
 
 #. LIGHTDM_MESSAGE_TYPE_INFO
 #: src/Gateways/LightDMGateway.vala:239
-#, fuzzy
 msgid "Place your finger on the reader again"
-msgstr "Togli il dito e prova di nuovo."
+msgstr "Togli il dito e prova di nuovo"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
-msgstr ""
+msgstr "L'impronta digitale non è stata riconosciuta"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:245
 msgid "Verification timed out"
-msgstr ""
+msgstr "Tempo per la verifica esaurito"
 
 #: src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
