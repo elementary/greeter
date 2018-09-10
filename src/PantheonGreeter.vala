@@ -73,6 +73,7 @@ public class PantheonGreeter : Gtk.Window {
         //singleton
         assert (instance == null);
         decorated = false;
+        type_hint = Gdk.WindowTypeHint.DESKTOP;
         instance = this;
 
         TEST_MODE = Environment.get_variable ("LIGHTDM_TO_SERVER_FD") == null;
