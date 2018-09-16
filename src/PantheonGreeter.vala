@@ -173,6 +173,8 @@ public class PantheonGreeter : Gtk.Window {
             warning (e.message);
         }
 
+        Granite.Services.System.execute_command ("/usr/bin/io.elementary.dpms-greeter-helper");
+
         unowned X.Display display = (Gdk.Display.get_default () as Gdk.X11.Display).get_xdisplay ();
 
         display.get_screensaver (out timeout, out interval, out prefer_blanking, out allow_exposures);
