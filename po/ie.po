@@ -2,13 +2,21 @@ msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-16 08:43-0700\n"
+"PO-Revision-Date: 2018-09-15 00:10+0000\n"
+"Last-Translator: Carmina16 <mistresssilvara@hotmail.com>\n"
+"Language-Team: Occidental <https://weblate.elementary.io/projects/desktop/"
+"greeter/ie/>\n"
+"Language: ie\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.0.1\n"
 
 #: src/Credentials/PasswordCredentials.vala:33
 #: src/Credentials/LoginButtonCredentials.vala:23
 msgid "Log In"
-msgstr ""
+msgstr "Aperter"
 
 #: src/Credentials/FingerprintCredentials.vala:71
 msgid "Swipe your finger"
@@ -16,15 +24,15 @@ msgstr ""
 
 #: src/Credentials/FingerprintCredentials.vala:74
 msgid "Place your finger"
-msgstr ""
+msgstr "Mette vor fingre"
 
 #: src/Credentials/FingerprintCredentials.vala:77
 msgid "Remove your finger and try again."
-msgstr ""
+msgstr "Forprende vor fingre e repena denov."
 
 #: src/Credentials/FingerprintCredentials.vala:80
 msgid "Center your finger and try again."
-msgstr ""
+msgstr "Centra vor fingre e repena denov."
 
 #. Ideally this would query PAM and ask which module is currently active,
 #. but since we're running through LightDM we don't have that ability.
@@ -47,7 +55,7 @@ msgstr ""
 #. - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/pam_fprintd.c
 #: src/Gateways/LightDMGateway.vala:218
 msgid "An unknown error occured"
-msgstr ""
+msgstr "Un ínconosset errore ha evenit"
 
 #. LIGHTDM_MESSAGE_TYPE_INFO
 #: src/Gateways/LightDMGateway.vala:224
@@ -72,12 +80,12 @@ msgstr ""
 #. LIGHTDM_MESSAGE_TYPE_INFO
 #: src/Gateways/LightDMGateway.vala:239
 msgid "Place your finger on the reader again"
-msgstr ""
+msgstr "Mette denov vor fingre sur li letor"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
-msgstr ""
+msgstr "Ne successat trovar li fingre-print"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:245
@@ -86,24 +94,24 @@ msgstr ""
 
 #: src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
-msgstr ""
+msgstr "Aperter manualmen"
 
 #: src/LoginOptions/GuestLogin.vala:41
 msgid "Guest session"
-msgstr ""
+msgstr "Session de gast"
 
 #. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: src/Widgets/TimeLabel.vala:53
 msgid "%A, %B %e"
-msgstr ""
+msgstr "%A, %e %B"
 
 #. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: src/Widgets/TimeLabel.vala:55
 msgid "%l:%M"
-msgstr ""
+msgstr "%H:%M"
 
 #. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
 #: src/Widgets/TimeLabel.vala:57
 #, c-format
 msgid " %p"
-msgstr ""
+msgstr " %p"
