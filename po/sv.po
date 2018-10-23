@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-16 08:43-0700\n"
-"PO-Revision-Date: 2018-06-13 00:07+0000\n"
-"Last-Translator: Richard Sjöqvist <richard@spiro.se>\n"
+"PO-Revision-Date: 2018-10-22 00:03+0000\n"
+"Last-Translator: Fredrik B <frbo9002@gmail.com>\n"
 "Language-Team: Swedish <https://weblate.elementary.io/projects/desktop/"
 "greeter/sv/>\n"
 "Language: sv\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: src/Credentials/PasswordCredentials.vala:33
@@ -115,7 +115,7 @@ msgstr "%A, %e %B"
 #. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: src/Widgets/TimeLabel.vala:55
 msgid "%l:%M"
-msgstr "%H.%M"
+msgstr "%H:%M"
 
 #. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
 #: src/Widgets/TimeLabel.vala:57
