@@ -8,7 +8,7 @@ config_header = configure_file (
     output: 'config.vala',
     configuration: conf_data
 )
-install_path = join_paths(get_option('prefix'), 'sbin')
+install_path = join_paths(get_option('prefix'), get_option('sbindir'))
 
 executable(
     meson.project_name(),
