@@ -200,7 +200,7 @@ public class LightDMGateway : LoginGateway, Object {
         // active module depending on the messages recieved. But, this is can go
         // wrong quickly. 
         // The reason why this is needed is, for example, we can get the "An
-        // unknown error occured" message from pam_fprintd, but we can get it 
+        // unknown error occurred" message from pam_fprintd, but we can get it 
         // from some other random module as well. You never know.
         // Maybe it's worth adding some LightDM/PAM functionality for this? 
         // The PAM "feature" which makes it all tricky is that modules can send 
@@ -215,7 +215,7 @@ public class LightDMGateway : LoginGateway, Object {
         //  - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/fingerprint-strings.h
         //  - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/pam_fprintd.c
         
-        if (text == GLib.dgettext("fprintd","An unknown error occured")) {
+        if (text == GLib.dgettext("fprintd","An unknown error occurred")) {
             // LIGHTDM_MESSAGE_TYPE_ERROR
             return MessageText.FPRINT_ERROR;
         } else if (check_fprintd_string(text, "Swipe", "across")) {
