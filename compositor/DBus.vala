@@ -56,7 +56,7 @@ public class GreeterCompositor.DBus {
     [DBus (visible = false)]
     public signal void change_wallpaper (string path);
 
-    public void set_wallpaper (string path) {
+    public void set_wallpaper (string path) throws GLib.Error {
         change_wallpaper (path);
     }
 
