@@ -20,7 +20,7 @@ namespace GreeterCompositor {
     [DBus (name = "org.freedesktop.Notifications")]
     interface DBusNotifications : GLib.Object {
         public abstract uint32 notify (string app_name, uint32 replaces_id, string app_icon, string summary,
-            string body, string[] actions, HashTable<string, Variant> hints, int32 expire_timeout) throws IOError;
+            string body, string[] actions, HashTable<string, Variant> hints, int32 expire_timeout) throws GLib.Error;
     }
 
     public class MediaFeedback : GLib.Object {
@@ -112,7 +112,7 @@ namespace GreeterCompositor {
 
             try {
                 notification_id = notifications.notify ("gala-feedback", notification_id, feedback.icon, "", "", {}, hints, 2000);
-            } catch (IOError e) {
+            } catch (GLib.Error e) {
                 critical ("%s", e.message);
             }
         }
