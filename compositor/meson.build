@@ -129,13 +129,14 @@ compositor_files = files(
 	'MediaFeedback.vala',
 	'DBus.vala',
 	'DBusAccelerator.vala',
-	'Wallpaper.vala',
+	'SystemBackground.vala',
 	'Utils.vala'
 )
 
 executable(
 	meson.project_name()+'-compositor',
 	compositor_files,
+	compositor_resources,
 	config_header,
 	dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, mutter_dep],
 	vala_args: vala_flags,
