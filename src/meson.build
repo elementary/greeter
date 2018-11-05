@@ -1,3 +1,11 @@
+gobject_dep = dependency('gobject-2.0')
+glib_dep = dependency('glib-2.0')
+gtk_dep = dependency('gtk+-3.0')
+granite_dep = dependency('granite')
+lightdm_dep = dependency('liblightdm-gobject-1')
+
+install_path = join_paths(get_option('prefix'), get_option('sbindir'))
+
 conf_data = configuration_data()
 conf_data.set('CONF_DIR', join_paths(get_option('sysconfdir'), 'lightdm'))
 conf_data.set('GETTEXT_PACKAGE', meson.project_name())
@@ -8,46 +16,21 @@ config_header = configure_file (
     output: 'config.vala',
     configuration: conf_data
 )
-install_path = join_paths(get_option('prefix'), get_option('sbindir'))
 
 executable(
     meson.project_name(),
-    'ComponentWatcher.vala',
-    'PantheonGreeter.vala',
-    'SettingsDaemon.vala',
-    'UserList.vala',
-    'UserListActor.vala',
-    'LoginMask.vala',
-    'Credentials/Credentials.vala',
-    'Credentials/FingerprintCredentials.vala',
-    'Credentials/LoginButtonCredentials.vala',
-    'Credentials/PasswordCredentials.vala',
-    'Gateways/DummyGateway.vala',
-    'Gateways/LightDMGateway.vala',
-    'Gateways/LoginGateway.vala',
-    'LoginOptions/GuestLogin.vala',
-    'LoginOptions/LoginOption.vala',
-    'LoginOptions/ManualLogin.vala',
-    'LoginOptions/UserLogin.vala',
-    'Widgets/CredentialsArea.vala',
-    'Widgets/LoginBox.vala',
-    'Widgets/TimeLabel.vala',
-    'Widgets/Wallpaper.vala',
+    'Application.vala',
+    'DateTimeWidget.vala',
+    'MainWindow.vala',
+    'PromptText.vala',
+    'SessionButton.vala',
+    'Settings.vala',
+    'SubprocessSupervisor.vala',
+    'Cards/BackgroundImage.vala',
+    'Cards/ManualCard.vala',
+    'Cards/UserCard.vala',
     config_header,
-    greeter_resources,
-
-    dependencies: [
-        dependency('clutter-gtk-1.0'),
-        dependency('gdk-pixbuf-2.0'),
-        dependency('gdk-x11-3.0'),
-        dependency('gl'),
-        dependency('granite'),
-        dependency('liblightdm-gobject-1'),
-        dependency('wingpanel-2.0'),
-        dependency('x11'),
-        meson.get_compiler('vala').find_library('posix'),
-        meson.get_compiler('c').find_library('m', required : false)
-    ],
+    dependencies: [ gobject_dep, glib_dep, gtk_dep, granite_dep, lightdm_dep ],
     install : true,
     install_dir: install_path
 )
