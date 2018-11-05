@@ -8,15 +8,17 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-16 08:43-0700\n"
-"PO-Revision-Date: 2016-02-22 14:24+0000\n"
-"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
-"Language-Team: Esperanto <eo@li.org>\n"
+"PO-Revision-Date: 2018-10-29 00:09+0000\n"
+"Last-Translator: Jesse ALTER <jesse@jessealter.com>\n"
+"Language-Team: Esperanto <https://weblate.elementary.io/projects/desktop/"
+"greeter/eo/>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
-"X-Generator: Launchpad (build 18330)\n"
 
 #: src/Credentials/PasswordCredentials.vala:33
 #: src/Credentials/LoginButtonCredentials.vala:23
@@ -25,11 +27,11 @@ msgstr "Ensaluti"
 
 #: src/Credentials/FingerprintCredentials.vala:71
 msgid "Swipe your finger"
-msgstr ""
+msgstr "Ŝovumi vian fingron"
 
 #: src/Credentials/FingerprintCredentials.vala:74
 msgid "Place your finger"
-msgstr ""
+msgstr "Metu vian fingron"
 
 #: src/Credentials/FingerprintCredentials.vala:77
 msgid "Remove your finger and try again."
@@ -65,7 +67,7 @@ msgstr ""
 #. LIGHTDM_MESSAGE_TYPE_INFO
 #: src/Gateways/LightDMGateway.vala:224
 msgid "Swipe your finger again"
-msgstr ""
+msgstr "Ŝovumu vian fingron denove"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:227
