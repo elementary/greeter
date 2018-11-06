@@ -1,7 +1,13 @@
 conf_data = configuration_data()
 conf_data.set('CONF_DIR', join_paths(get_option('sysconfdir'), 'lightdm'))
 conf_data.set('GETTEXT_PACKAGE', meson.project_name())
-conf_data.set('GSD_DIR', '/usr/lib/gnome-settings-daemon/')
+
+if ubuntu_patched_gsd
+    conf_data.set('GSD_DIR', '/usr/lib/gnome-settings-daemon/')
+else
+    conf_data.set('GSD_DIR', join_paths(get_option('prefix'), get_option('libexecdir')))
+endif
+
 conf_data.set('VERSION', meson.project_version())
 config_header = configure_file (
     input: 'config.vala.in',
