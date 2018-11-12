@@ -1,0 +1,15 @@
+.date,
+.time {
+    color: #fff;
+    text-shadow:
+        0 0 2px alpha (#000, 0.3),
+        0 1px 2px alpha (#000, 0.6);
+}
+
+.date {
+    font-size: 24px;
+}
+
+.time {
+    font-size: 72px;
+}

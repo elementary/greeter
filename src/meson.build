@@ -25,6 +25,7 @@ config_header = configure_file (
 
 executable(
     meson.project_name(),
+    greeter_resources,
     'Application.vala',
     'DateTimeWidget.vala',
     'MainWindow.vala',

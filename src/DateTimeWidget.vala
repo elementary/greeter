@@ -1,38 +1,27 @@
 public class Greeter.DateTimeWidget : Gtk.Grid {
-    private const string STYLESHEET = """
-    .time {
-        color: #fff;
-        text-shadow:
-            0 0 2px alpha (#000, 0.3),
-            0 1px 2px alpha (#000, 0.6);
-        font-size: 72px;
-    }
+    private Gtk.Label time_label;
+    private Gtk.Label date_label;
 
-    .date {
-        color: #fff;
-        text-shadow:
-            0 0 2px alpha (#000, 0.3),
-            0 1px 2px alpha (#000, 0.6);
-        font-size: 24px;
-    }""";
-
-    Gtk.Label time_label;
-    Gtk.Label date_label;
     construct {
         orientation = Gtk.Orientation.VERTICAL;
-        time_label = new Gtk.Label (null);
-        time_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
-        time_label.get_style_context ().add_class ("time");
-        date_label = new Gtk.Label (null);
-        date_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
-        date_label.get_style_context ().add_class ("date");
 
         var css_provider = new Gtk.CssProvider ();
-        try {
-            css_provider.load_from_data (STYLESHEET, -1);
-            time_label.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-            date_label.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        } catch (Error e) {}
+        css_provider.load_from_resource ("/io/elementary/greeter/DateTime.css");
+
+        time_label = new Gtk.Label (null);
+
+        var time_label_style_context = time_label.get_style_context ();
+        time_label_style_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
+        time_label_style_context.add_class ("time");
+        time_label_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        date_label = new Gtk.Label (null);
+
+        var date_label_style_context = date_label.get_style_context ();
+        date_label_style_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
+        date_label_style_context.add_class ("date");
+        date_label_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
         add (time_label);
         add (date_label);
 
