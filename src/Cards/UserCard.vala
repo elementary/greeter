@@ -10,7 +10,7 @@ public class Greeter.UserCard : Gtk.Revealer {
     public double reveal_ratio { get; private set; default = 0.0; }
 
     private Gtk.Revealer form_revealer;
-    private Gtk.StyleContext main_grid_style_context;
+    private weak Gtk.StyleContext main_grid_style_context;
 
     construct {
         width_request = 350;
