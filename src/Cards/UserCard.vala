@@ -65,7 +65,6 @@ public class Greeter.UserCard : Gtk.Revealer {
 
         var background_image = new Greeter.BackgroundImage (lightdm_user.background);
 
-        form_revealer.bind_property ("reveal-child", background_image, "round-bottom", GLib.BindingFlags.INVERT_BOOLEAN|GLib.BindingFlags.SYNC_CREATE);
         bind_property ("show-input", form_revealer, "reveal-child", GLib.BindingFlags.SYNC_CREATE);
 
         var main_grid = new Gtk.Grid ();
