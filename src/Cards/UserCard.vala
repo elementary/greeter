@@ -21,8 +21,7 @@ public class Greeter.UserCard : Gtk.Revealer {
         events |= Gdk.EventMask.BUTTON_RELEASE_MASK;
 
         var username_label = new Gtk.Label (lightdm_user.display_name);
-        username_label.margin_bottom = 12;
-        username_label.margin_top = 24;
+        username_label.margin = 12;
         username_label.hexpand = true;
         username_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
@@ -92,7 +91,7 @@ public class Greeter.UserCard : Gtk.Revealer {
         }
 
         avatar.valign = Gtk.Align.START;
-        avatar.margin_top = 108;
+        avatar.margin_top = 96;
 
         var card_overlay = new Gtk.Overlay ();
         card_overlay.margin = 12;
