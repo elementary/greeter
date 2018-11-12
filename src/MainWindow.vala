@@ -169,6 +169,11 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.show_prompt.connect (show_prompt);
         lightdm_greeter.authentication_complete.connect (authentication_complete);
         load_users.begin ();
+
+        notify["scale-factor"].connect (() => {
+            unmaximize ();
+            maximize ();
+        });
     }
 
     private void create_session_selection_action () {

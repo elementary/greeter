@@ -17,7 +17,7 @@
  * Authored by: Michael Terry <michael.terry@canonical.com>
  */
 
-public class SettingsDaemon : Object {
+public class Greeter.SettingsDaemon : Object {
     private SessionManagerInterface session_manager;
     private int n_names = 0;
 
@@ -77,7 +77,7 @@ public class SettingsDaemon : Object {
         var source = SettingsSchemaSource.get_default ();
         var schema = source.lookup (schema_name, false);
         if (schema != null) {
-            var settings = new Settings (schema_name);
+            var settings = new GLib.Settings (schema_name);
             settings.set_boolean ("active", enabled);
         }
     }

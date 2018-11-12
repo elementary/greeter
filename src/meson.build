@@ -31,6 +31,7 @@ executable(
     'MainWindow.vala',
     'PromptText.vala',
     'SessionButton.vala',
+    'SettingsDaemon.vala',
     'Settings.vala',
     'SubprocessSupervisor.vala',
     'Cards/BackgroundImage.vala',

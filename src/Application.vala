@@ -42,6 +42,10 @@ public int main (string[] args) {
     Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
     Intl.textdomain (Constants.GETTEXT_PACKAGE);
 
+    var settings_daemon = new Greeter.SettingsDaemon ();
+    settings_daemon.start ();
+
+
     Greeter.SubprocessSupervisor compositor;
     Greeter.SubprocessSupervisor wingpanel;
     try {
