@@ -6,8 +6,6 @@ public class Greeter.DateTimeWidget : Gtk.Grid {
             0 0 2px alpha (#000, 0.3),
             0 1px 2px alpha (#000, 0.6);
         font-size: 72px;
-        font-family: Raleway;
-        font-weight: 200;
     }
 
     .date {
