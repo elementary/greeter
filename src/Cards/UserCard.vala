@@ -10,6 +10,7 @@ public class Greeter.UserCard : Gtk.Revealer {
     public double reveal_ratio { get; private set; default = 0.0; }
 
     private Gtk.Revealer form_revealer;
+    private Gtk.StyleContext main_grid_style_context;
 
     construct {
         width_request = 350;
@@ -77,10 +78,12 @@ public class Greeter.UserCard : Gtk.Revealer {
         var css_provider = new Gtk.CssProvider ();
         css_provider.load_from_resource ("/io/elementary/greeter/Card.css");
 
-        var main_grid_style_context = main_grid.get_style_context ();
+        main_grid_style_context = main_grid.get_style_context ();
         main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
         main_grid_style_context.add_class ("rounded");
         main_grid_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        update_collapsed_class ();
 
         Granite.Widgets.Avatar avatar;
         if (lightdm_user.image != null) {
@@ -125,6 +128,10 @@ public class Greeter.UserCard : Gtk.Revealer {
             reveal_ratio = (double)alloc.height/(double)total_height;
         });
 
+        form_revealer.notify["child-revealed"].connect (() => {
+            update_collapsed_class ();
+        });
+
         notify["child-revealed"].connect (() => {
             reveal_ratio = child_revealed ? 1.0 : 0.0;
         });
@@ -146,6 +153,14 @@ public class Greeter.UserCard : Gtk.Revealer {
                 login_stack.visible_child = login_button;
             }
         });
+    }
+
+    private void update_collapsed_class () {
+        if (form_revealer.child_revealed) {
+            main_grid_style_context.remove_class ("collapsed");
+        } else {
+            main_grid_style_context.add_class ("collapsed");
+        }
     }
 
     public UserCard (LightDM.User lightdm_user) {
