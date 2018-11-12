@@ -1,16 +1,10 @@
 public class Greeter.BackgroundImage : Gtk.EventBox {
-    public bool round_bottom { get; set; default=false; }
-
     private uint last_size_hash = 0;
     private Gdk.Pixbuf full_pixbuf;
     private Gdk.Pixbuf fitting_pixbuf;
 
     construct {
         height_request = 150;
-
-        notify["round-bottom"].connect (() => {
-            queue_draw ();
-        });
     }
 
     public BackgroundImage (string? path) {
@@ -50,13 +44,8 @@ public class Greeter.BackgroundImage : Gtk.EventBox {
         cr.scale (1.0/scale, 1.0/scale);
         cr.new_sub_path ();
         cr.arc (width - radius, radius, radius, -Math.PI_2, 0);
-        if (round_bottom) {
-            cr.arc (width - radius, height - radius, radius, 0, Math.PI_2);
-            cr.arc (radius, height - radius, radius, Math.PI_2, Math.PI);
-        } else {
-            cr.line_to (width, height);
-            cr.line_to (0, height);
-        }
+        cr.line_to (width, height);
+        cr.line_to (0, height);
 
         cr.arc (radius, radius, radius, Math.PI, Math.PI + Math.PI_2);
         cr.close_path ();
