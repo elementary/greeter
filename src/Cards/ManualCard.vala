@@ -1,9 +1,4 @@
 public class Greeter.ManualCard : Gtk.Revealer {
-    private const string STYLESHEET =
-    """.rounded {
-        border-radius: 4px 4px 4px 4px;
-    }""";
-
     construct {
         width_request = 350;
         reveal_child = true;
@@ -42,16 +37,15 @@ public class Greeter.ManualCard : Gtk.Revealer {
         form_grid.attach (session_button, 1, 1, 1, 2);
 
         var main_grid = new Gtk.Grid ();
-        main_grid.get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
         main_grid.add (form_grid);
 
         var css_provider = new Gtk.CssProvider ();
+        css_provider.load_from_resource ("/io/elementary/greeter/Card.css");
 
-        try {
-            css_provider.load_from_data (STYLESHEET, -1);
-            main_grid.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-            main_grid.get_style_context ().add_class ("rounded");
-        } catch (Error e) {}
+        var main_grid_style_context = main_grid.get_style_context ();
+        main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
+        main_grid_style_context.add_class ("rounded");
+        main_grid_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         add (main_grid);
     }

@@ -1,9 +1,4 @@
 public class Greeter.UserCard : Gtk.Revealer {
-    private const string STYLESHEET =
-    """.rounded {
-        border-radius: 4px 4px 4px 4px;
-    }""";
-
     public signal void go_left ();
     public signal void go_right ();
     public signal void focus_requested ();
@@ -76,17 +71,16 @@ public class Greeter.UserCard : Gtk.Revealer {
         var main_grid = new Gtk.Grid ();
         main_grid.margin_bottom = 48;
         main_grid.orientation = Gtk.Orientation.VERTICAL;
-        main_grid.get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
-        var css_provider = new Gtk.CssProvider ();
-
-        try {
-            css_provider.load_from_data (STYLESHEET, -1);
-            main_grid.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-            main_grid.get_style_context ().add_class ("rounded");
-        } catch (Error e) {}
-
         main_grid.add (background_image);
         main_grid.add (form_revealer);
+
+        var css_provider = new Gtk.CssProvider ();
+        css_provider.load_from_resource ("/io/elementary/greeter/Card.css");
+
+        var main_grid_style_context = main_grid.get_style_context ();
+        main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
+        main_grid_style_context.add_class ("rounded");
+        main_grid_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         Granite.Widgets.Avatar avatar;
         if (lightdm_user.image != null) {
