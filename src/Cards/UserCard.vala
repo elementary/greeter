@@ -91,7 +91,7 @@ public class Greeter.UserCard : Gtk.Revealer {
         }
 
         avatar.valign = Gtk.Align.START;
-        avatar.margin_top = 96;
+        avatar.margin_top = 93;
 
         var card_overlay = new Gtk.Overlay ();
         card_overlay.margin = 12;
