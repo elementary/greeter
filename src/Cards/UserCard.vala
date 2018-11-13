@@ -64,31 +64,24 @@ public class Greeter.UserCard : Gtk.Revealer {
         form_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
         form_revealer.add (form_grid);
 
-        string? background_path;
+        var background_path = lightdm_user.background;
 
-        if (lightdm_user.background == null) {
+        if (background_path == null) {
             try {
-                string path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
-                var background_directory = File.new_for_path (path);
-                var enumerator = background_directory.enumerate_children (FileAttribute.STANDARD_NAME, 0);
+                string path = GLib.Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
+                var background_directory = GLib.File.new_for_path (path);
+                var enumerator = background_directory.enumerate_children (GLib.FileAttribute.STANDARD_NAME, GLib.FileQueryInfoFlags.NONE);
 
-                FileInfo file_info;
-                string file_name = "";
+                GLib.FileInfo file_info;
                 while ((file_info = enumerator.next_file ()) != null) {
-                    if (file_info.get_file_type () == FileType.REGULAR) {
-                        file_name = file_info.get_name ();
+                    if (file_info.get_file_type () == GLib.FileType.REGULAR) {
+                        background_path = Path.build_filename (path, file_info.get_name ());
                         break;
                     }
                 }
-
-                path = Path.build_filename (path, file_name);
-                background_path = path;
             } catch (Error e) {
-                warning (e.message);
-                background_path = null;
+                critical (e.message);
             }
-        } else {
-            background_path = lightdm_user.background;
         }
 
         var background_image = new Greeter.BackgroundImage (background_path);
