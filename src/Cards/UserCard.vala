@@ -64,7 +64,27 @@ public class Greeter.UserCard : Gtk.Revealer {
         form_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
         form_revealer.add (form_grid);
 
-        var background_image = new Greeter.BackgroundImage (lightdm_user.background);
+        var background_path = lightdm_user.background;
+
+        if (background_path == null) {
+            try {
+                string path = GLib.Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
+                var background_directory = GLib.File.new_for_path (path);
+                var enumerator = background_directory.enumerate_children (GLib.FileAttribute.STANDARD_NAME, GLib.FileQueryInfoFlags.NONE);
+
+                GLib.FileInfo file_info;
+                while ((file_info = enumerator.next_file ()) != null) {
+                    if (file_info.get_file_type () == GLib.FileType.REGULAR) {
+                        background_path = Path.build_filename (path, file_info.get_name ());
+                        break;
+                    }
+                }
+            } catch (Error e) {
+                critical (e.message);
+            }
+        }
+
+        var background_image = new Greeter.BackgroundImage (background_path);
 
         bind_property ("show-input", form_revealer, "reveal-child", GLib.BindingFlags.SYNC_CREATE);
 
