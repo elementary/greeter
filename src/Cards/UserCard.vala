@@ -19,16 +19,14 @@
  * Authors: Corentin Noël <corentin@elementary.io>
  */
 
-public class Greeter.UserCard : Gtk.Revealer {
+public class Greeter.UserCard : Greeter.BaseCard {
     public signal void go_left ();
     public signal void go_right ();
     public signal void focus_requested ();
-    public signal void do_connect (string? credential = null);
 
     public LightDM.User lightdm_user { get; construct; }
     public bool show_input { get; set; default = false; }
     public bool need_password { get; set; default = true; }
-    public bool connecting { get; set; default = false; }
     public double reveal_ratio { get; private set; default = 0.0; }
 
     private Gtk.Revealer form_revealer;
@@ -36,12 +34,6 @@ public class Greeter.UserCard : Gtk.Revealer {
     private Greeter.PasswordEntry password_entry;
 
     construct {
-        width_request = 350;
-        reveal_child = true;
-        transition_type = Gtk.RevealerTransitionType.CROSSFADE;
-        halign = Gtk.Align.CENTER;
-        valign = Gtk.Align.CENTER;
-        events |= Gdk.EventMask.BUTTON_RELEASE_MASK;
 
         var username_label = new Gtk.Label (lightdm_user.display_name);
         username_label.margin = 24;
@@ -109,9 +101,6 @@ public class Greeter.UserCard : Gtk.Revealer {
         main_grid.add (background_image);
         main_grid.add (username_label);
         main_grid.add (form_revealer);
-
-        var css_provider = new Gtk.CssProvider ();
-        css_provider.load_from_resource ("/io/elementary/greeter/Card.css");
 
         main_grid_style_context = main_grid.get_style_context ();
         main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
@@ -216,7 +205,7 @@ public class Greeter.UserCard : Gtk.Revealer {
         Object (lightdm_user: lightdm_user);
     }
 
-    public void wrong_credentials () {
+    public override void wrong_credentials () {
         password_entry.animate_error ();
     }
 }

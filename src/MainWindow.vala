@@ -28,9 +28,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private int index_delta = 0;
     private int animation_delta = 0;
     private Gtk.Overlay main_overlay;
-    private Greeter.ManualCard manual_card;
     private LightDM.Greeter lightdm_greeter;
     private Greeter.Settings settings;
+    private Gtk.ToggleButton manual_login_button;
+    private unowned Greeter.BaseCard current_card;
 
     construct {
         decorated = false;
@@ -56,7 +57,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         var guest_login_button = new Gtk.Button.with_label (_("Login as Guest"));
         guest_login_button.hexpand = true;
-        var manual_login_button = new Gtk.ToggleButton.with_label (_("Manual Login…"));
+        manual_login_button = new Gtk.ToggleButton.with_label (_("Manual Login…"));
         manual_login_button.hexpand = true;
         var extra_login_grid = new Gtk.Grid ();
         extra_login_grid.halign = Gtk.Align.CENTER;
@@ -81,7 +82,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         user_cards = new GLib.Queue<unowned Greeter.UserCard> ();
 
-        manual_card = new Greeter.ManualCard ();
+        var manual_card = new Greeter.ManualCard ();
         manual_card.reveal_child = false;
         main_overlay.add_overlay (manual_card);
 
@@ -90,7 +91,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         main_overlay.add_overlay (datetime_widget);
 
         main_overlay.get_child_position.connect ((widget, out allocation) => {
-            if (widget is Greeter.UserCard) {
+            if (widget is Greeter.UserCard && widget.is_visible ()) {
                 unowned Greeter.UserCard card = (Greeter.UserCard)widget;
                 var index = user_cards.index (card) - index_delta;
                 int minimum_width, natural_width;
@@ -113,11 +114,36 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     card.reveal_child = false;
                 });
                 manual_card.reveal_child = true;
+
+                if (lightdm_greeter.in_authentication) {
+                    try {
+                        lightdm_greeter.cancel_authentication ();
+                    } catch (Error e) {
+                        critical (e.message);
+                    }
+                }
+
+                current_card = manual_card;
             } else {
                 manual_card.reveal_child = false;
                 user_cards.head.foreach ((card) => {
                     card.reveal_child = true;
                 });
+
+                if (lightdm_greeter.in_authentication) {
+                    try {
+                        lightdm_greeter.cancel_authentication ();
+                    } catch (Error e) {
+                        critical (e.message);
+                    }
+                }
+
+                current_card = user_cards.peek_nth (index_delta);
+                try {
+                    lightdm_greeter.authenticate (((UserCard) current_card).lightdm_user.name);
+                } catch (Error e) {
+                    critical (e.message);
+                }
             }
         });
 
@@ -163,6 +189,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             unmaximize ();
             maximize ();
         });
+
+        manual_card.do_connect_username.connect (do_connect_username);
+        manual_card.do_connect.connect (do_connect);
 
         destroy.connect (() => {
             Gtk.main_quit ();
@@ -221,10 +250,12 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 error (e.message);
             }
         } else {
-            unowned Greeter.UserCard user_card = user_cards.peek_nth (index_delta);
-            switch_to_card (user_card);
-            user_card.connecting = false;
-            user_card.wrong_credentials ();
+            if (current_card is Greeter.UserCard) {
+                switch_to_card ((Greeter.UserCard) current_card);
+            }
+
+            current_card.connecting = false;
+            current_card.wrong_credentials ();
         }
         /*if (lightdm.is_authenticated) {
             // Check if the LoginMask actually got userinput that confirms
@@ -252,6 +283,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         } catch (Error e) {
             critical (e.message);
         }
+
+        lightdm_greeter.notify_property ("show-manual-login-hint");
+        lightdm_greeter.notify_property ("has-guest-account-hint");
 
         unowned LightDM.UserList lightdm_user_list = LightDM.UserList.get_instance ();
         lightdm_user_list.users.foreach ((user) => {
@@ -329,6 +363,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             return;
         }
 
+        current_card = user_card;
         next_delta = user_cards.index (user_card);
         int minimum_width, natural_width;
         user_card.get_preferred_width (out minimum_width, out natural_width);
@@ -367,6 +402,22 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         animation_delta = (int) (user_card.reveal_ratio * distance);
         main_overlay.queue_allocate ();
+    }
+
+    private void do_connect_username (string username) {
+        if (lightdm_greeter.in_authentication) {
+            try {
+                lightdm_greeter.cancel_authentication ();
+            } catch (Error e) {
+                critical (e.message);
+            }
+        }
+
+        try {
+            lightdm_greeter.authenticate (username);
+        } catch (Error e) {
+            critical (e.message);
+        }
     }
 
     private void do_connect (string? credential) {

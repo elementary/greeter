@@ -36,6 +36,7 @@ executable(
     'Settings.vala',
     'SubprocessSupervisor.vala',
     'Cards/BackgroundImage.vala',
+    'Cards/BaseCard.vala',
     'Cards/ManualCard.vala',
     'Cards/UserCard.vala',
     config_header,

@@ -1,28 +1,23 @@
-public class Greeter.ManualCard : Gtk.Revealer {
+public class Greeter.ManualCard : Greeter.BaseCard {
+    private Greeter.PasswordEntry password_entry;
+    private Gtk.Entry username_entry;
+
     construct {
         width_request = 350;
-        reveal_child = true;
-        transition_type = Gtk.RevealerTransitionType.CROSSFADE;
-        halign = Gtk.Align.CENTER;
-        valign = Gtk.Align.CENTER;
-        events |= Gdk.EventMask.BUTTON_RELEASE_MASK;
 
         var label = new Gtk.Label (_("Manual Login"));
         label.xalign = 0.5f;
         label.hexpand = true;
         label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
-        var username_entry = new Gtk.Entry ();
+        username_entry = new Gtk.Entry ();
+        this.bind_property ("connecting", username_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
         username_entry.hexpand = true;
         username_entry.placeholder_text = _("Username");
         username_entry.input_purpose = Gtk.InputPurpose.FREE_FORM;
 
-        var password_entry = new Gtk.Entry ();
-        password_entry.primary_icon_name = "dialog-password-symbolic";
-        password_entry.placeholder_text = _("Password");
-        password_entry.hexpand = true;
-        password_entry.visibility = false;
-        password_entry.input_purpose = Gtk.InputPurpose.PASSWORD;
+        password_entry = new Greeter.PasswordEntry ();
+        this.bind_property ("connecting", password_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
 
         var session_button = new Greeter.SessionButton ();
 
@@ -39,14 +34,25 @@ public class Greeter.ManualCard : Gtk.Revealer {
         var main_grid = new Gtk.Grid ();
         main_grid.add (form_grid);
 
-        var css_provider = new Gtk.CssProvider ();
-        css_provider.load_from_resource ("/io/elementary/greeter/Card.css");
-
         var main_grid_style_context = main_grid.get_style_context ();
         main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
         main_grid_style_context.add_class ("rounded");
         main_grid_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         add (main_grid);
+
+        password_entry.activate.connect (on_login);
+    }
+
+    private void on_login () {
+        connecting = true;
+        do_connect_username (username_entry.text);
+        do_connect (password_entry.text);
+
+        password_entry.text = "";
+    }
+
+    public override void wrong_credentials () {
+        password_entry.animate_error ();
     }
 }
