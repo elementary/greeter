@@ -92,13 +92,23 @@ public class Greeter.UserCard : Gtk.Revealer {
             avatar = new Granite.Widgets.Avatar.with_default_icon (64);
         }
 
-        avatar.valign = Gtk.Align.START;
-        avatar.margin_top = 108;
+        var avatar_overlay = new Gtk.Overlay ();
+        avatar_overlay.valign = Gtk.Align.START;
+        avatar_overlay.halign = Gtk.Align.CENTER;
+        avatar_overlay.margin_top = 108;
+        avatar_overlay.add (avatar);
+
+        if (lightdm_user.logged_in) {
+            var logged_in = new Gtk.Image.from_icon_name ("selection-checked", Gtk.IconSize.LARGE_TOOLBAR);
+            logged_in.halign = logged_in.valign = Gtk.Align.END;
+
+            avatar_overlay.add_overlay (logged_in);
+        }
 
         var card_overlay = new Gtk.Overlay ();
         card_overlay.margin = 12;
         card_overlay.add (main_grid);
-        card_overlay.add_overlay (avatar);
+        card_overlay.add_overlay (avatar_overlay);
 
         add (card_overlay);
 
