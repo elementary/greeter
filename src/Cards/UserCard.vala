@@ -21,8 +21,7 @@ public class Greeter.UserCard : Gtk.Revealer {
         events |= Gdk.EventMask.BUTTON_RELEASE_MASK;
 
         var username_label = new Gtk.Label (lightdm_user.display_name);
-        username_label.margin_bottom = 12;
-        username_label.margin_top = 24;
+        username_label.margin = 24;
         username_label.hexpand = true;
         username_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
@@ -54,7 +53,7 @@ public class Greeter.UserCard : Gtk.Revealer {
         var form_grid = new Gtk.Grid ();
         form_grid.column_spacing = 6;
         form_grid.row_spacing = 12;
-        form_grid.margin = 12;
+        form_grid.margin = 24;
         form_grid.margin_top = 0;
         form_grid.attach (login_stack, 0, 1, 1, 1);
         form_grid.attach (session_button, 1, 1, 1, 1);
@@ -63,6 +62,7 @@ public class Greeter.UserCard : Gtk.Revealer {
         form_revealer.reveal_child = true;
         form_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
         form_revealer.add (form_grid);
+        bind_property ("show-input", form_revealer, "reveal-child", GLib.BindingFlags.SYNC_CREATE);
 
         var background_path = lightdm_user.background;
 
@@ -85,8 +85,6 @@ public class Greeter.UserCard : Gtk.Revealer {
         }
 
         var background_image = new Greeter.BackgroundImage (background_path);
-
-        bind_property ("show-input", form_revealer, "reveal-child", GLib.BindingFlags.SYNC_CREATE);
 
         var main_grid = new Gtk.Grid ();
         main_grid.margin_bottom = 48;
@@ -115,7 +113,7 @@ public class Greeter.UserCard : Gtk.Revealer {
         var avatar_overlay = new Gtk.Overlay ();
         avatar_overlay.valign = Gtk.Align.START;
         avatar_overlay.halign = Gtk.Align.CENTER;
-        avatar_overlay.margin_top = 108;
+        avatar_overlay.margin_top = 100;
         avatar_overlay.add (avatar);
 
         if (lightdm_user.logged_in) {

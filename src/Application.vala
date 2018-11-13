@@ -45,7 +45,6 @@ public int main (string[] args) {
     var settings_daemon = new Greeter.SettingsDaemon ();
     settings_daemon.start ();
 
-
     Greeter.SubprocessSupervisor compositor;
     Greeter.SubprocessSupervisor wingpanel;
     try {
