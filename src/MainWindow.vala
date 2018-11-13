@@ -23,10 +23,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private const string STYLESHEET =
         ".composited { background-color: transparent; }";
 
-    public MainWindow () {
-        //Object (application: application);
-    }
-
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
     private int index_delta = 0;
@@ -55,10 +51,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             get_style_context ().add_class ("composited");
         } catch (Error e) {}
 
-        destroy.connect (() => {
-            Gtk.main_quit ();
-        });
-
         main_overlay = new Gtk.Overlay ();
         main_overlay.margin_top = main_overlay.margin_bottom = 24;
 
@@ -81,10 +73,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             guest_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             manual_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         } catch (Error e) {}
-
-        destroy.connect (() => {
-            Gtk.main_quit ();
-        });
 
         var datetime_widget = new Greeter.DateTimeWidget ();
         datetime_widget.halign = Gtk.Align.CENTER;
@@ -168,11 +156,16 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.show_message.connect (show_message);
         lightdm_greeter.show_prompt.connect (show_prompt);
         lightdm_greeter.authentication_complete.connect (authentication_complete);
+
         load_users.begin ();
 
         notify["scale-factor"].connect (() => {
             unmaximize ();
             maximize ();
+        });
+
+        destroy.connect (() => {
+            Gtk.main_quit ();
         });
     }
 
@@ -218,12 +211,20 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         current_login.show_prompt (type, prompttext, text);*/
     }
 
+    // Called after the credentials are checked, might be authenticated or not.
     private void authentication_complete () {
-        var action_group = get_action_group ("session");
-        try {
-            lightdm_greeter.start_session_sync (action_group.get_action_state ("select").get_string ());
-        } catch (Error e) {
-            error (e.message);
+        if (lightdm_greeter.is_authenticated) {
+            var action_group = get_action_group ("session");
+            try {
+                lightdm_greeter.start_session_sync (action_group.get_action_state ("select").get_string ());
+            } catch (Error e) {
+                error (e.message);
+            }
+        } else {
+            unowned Greeter.UserCard user_card = user_cards.peek_nth (index_delta);
+            switch_to_card (user_card);
+            user_card.connecting = false;
+            user_card.wrong_credentials ();
         }
         /*if (lightdm.is_authenticated) {
             // Check if the LoginMask actually got userinput that confirms

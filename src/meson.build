@@ -29,6 +29,7 @@ executable(
     'Application.vala',
     'DateTimeWidget.vala',
     'MainWindow.vala',
+    'PasswordEntry.vala',
     'PromptText.vala',
     'SessionButton.vala',
     'SettingsDaemon.vala',

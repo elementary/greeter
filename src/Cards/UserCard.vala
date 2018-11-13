@@ -1,3 +1,24 @@
+/*
+ * Copyright 2018 elementary, Inc. (https://elementary.io)
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301 USA.
+ *
+ * Authors: Corentin Noël <corentin@elementary.io>
+ */
+
 public class Greeter.UserCard : Gtk.Revealer {
     public signal void go_left ();
     public signal void go_right ();
@@ -7,10 +28,12 @@ public class Greeter.UserCard : Gtk.Revealer {
     public LightDM.User lightdm_user { get; construct; }
     public bool show_input { get; set; default = false; }
     public bool need_password { get; set; default = true; }
+    public bool connecting { get; set; default = false; }
     public double reveal_ratio { get; private set; default = 0.0; }
 
     private Gtk.Revealer form_revealer;
     private weak Gtk.StyleContext main_grid_style_context;
+    private Greeter.PasswordEntry password_entry;
 
     construct {
         width_request = 350;
@@ -25,15 +48,8 @@ public class Greeter.UserCard : Gtk.Revealer {
         username_label.hexpand = true;
         username_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
-        var password_entry = new Gtk.Entry ();
-        password_entry.tooltip_text = _("Password");
-        password_entry.placeholder_text = _("Password");
-        password_entry.primary_icon_name = "dialog-password-symbolic";
-        password_entry.secondary_icon_name = "go-jump-symbolic";
-        password_entry.secondary_icon_tooltip_text = _("Log In");
-        password_entry.hexpand = true;
-        password_entry.visibility = false;
-        password_entry.input_purpose = Gtk.InputPurpose.PASSWORD;
+        password_entry = new Greeter.PasswordEntry ();
+        this.bind_property ("connecting", password_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
         var fingerprint_image = new Gtk.Image.from_icon_name ("fingerprint-symbolic", Gtk.IconSize.BUTTON);
         var session_button = new Greeter.SessionButton ();
 
@@ -44,6 +60,7 @@ public class Greeter.UserCard : Gtk.Revealer {
         password_grid.add (fingerprint_image);
 
         var login_button = new Gtk.Button.with_label (_("Log In"));
+        this.bind_property ("connecting", login_button, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
         login_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
 
         var login_stack = new Gtk.Stack ();
@@ -164,15 +181,8 @@ public class Greeter.UserCard : Gtk.Revealer {
             reveal_ratio = child_revealed ? 1.0 : 0.0;
         });
 
-        password_entry.activate.connect (() => do_connect (password_entry.text));
-
-        password_entry.icon_press.connect ((pos, event) => {
-            if (pos == Gtk.EntryIconPosition.SECONDARY) {
-                do_connect (password_entry.text);
-            }
-        });
-
-        login_button.clicked.connect (() => do_connect ());
+        password_entry.activate.connect (on_login);
+        login_button.clicked.connect (on_login);
 
         notify["need-password"].connect (() => {
             if (need_password) {
@@ -181,6 +191,17 @@ public class Greeter.UserCard : Gtk.Revealer {
                 login_stack.visible_child = login_button;
             }
         });
+    }
+
+    private void on_login () {
+        connecting = true;
+        if (need_password) {
+            do_connect (password_entry.text);
+        } else {
+            do_connect ();
+        }
+
+        password_entry.text = "";
     }
 
     private void update_collapsed_class () {
@@ -193,5 +214,9 @@ public class Greeter.UserCard : Gtk.Revealer {
 
     public UserCard (LightDM.User lightdm_user) {
         Object (lightdm_user: lightdm_user);
+    }
+
+    public void wrong_credentials () {
+        password_entry.animate_error ();
     }
 }

@@ -19,22 +19,6 @@
  * Authors: Corentin Noël <corentin@elementary.io>
  */
 
-/*public class Greeter.Application : Gtk.Application {
-    public Application () {
-        Object (
-            application_id: "io.elementary.greeter",
-            flags: GLib.ApplicationFlags.FLAGS_NONE
-        );
-    }
-
-    protected override void activate () {
-        if (active_window == null) {
-            var window = new Greeter.MainWindow (this);
-            window.show_all ();
-        }
-    }
-}*/
-
 public int main (string[] args) {
     Posix.mlockall (Posix.MCL_CURRENT | Posix.MCL_FUTURE);
 
@@ -62,9 +46,7 @@ public int main (string[] args) {
     Gtk.init (ref args);
     var window = new Greeter.MainWindow ();
     window.show_all ();
-    //new PantheonGreeter ();
     Gtk.main ();
 
-    //return application.run (args);
     return 0;
 }

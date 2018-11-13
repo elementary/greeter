@@ -1,0 +1,55 @@
+/*
+ * Copyright 2018 elementary, Inc. (https://elementary.io)
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301 USA.
+ *
+ * Authors: Corentin Noël <corentin@elementary.io>
+ */
+
+public class Greeter.PasswordEntry : Gtk.Entry {
+    construct {
+        tooltip_text = _("Password");
+        placeholder_text = _("Password");
+        primary_icon_name = "dialog-password-symbolic";
+        secondary_icon_name = "go-jump-symbolic";
+        secondary_icon_tooltip_text = _("Log In");
+        hexpand = true;
+        visibility = false;
+        input_purpose = Gtk.InputPurpose.PASSWORD;
+
+        var css_provider = new Gtk.CssProvider ();
+        css_provider.load_from_resource ("/io/elementary/greeter/PasswordEntry.css");
+        get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        icon_press.connect ((pos, event) => {
+            if (pos == Gtk.EntryIconPosition.SECONDARY) {
+                activate ();
+            }
+        });
+    }
+
+    public void animate_error () {
+        weak Gtk.StyleContext style_context = get_style_context ();
+        style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+        style_context.add_class ("shake");
+        GLib.Timeout.add (450, () => {
+            style_context.remove_class ("shake");
+            style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            grab_focus ();
+            return GLib.Source.REMOVE;
+        });
+    }
+}
