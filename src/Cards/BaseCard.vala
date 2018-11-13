@@ -56,6 +56,5 @@ public abstract class Greeter.BaseCard : Gtk.Revealer {
     }
 
     public virtual void wrong_credentials () {
-        
     }
 }

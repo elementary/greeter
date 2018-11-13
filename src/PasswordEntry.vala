@@ -30,26 +30,10 @@ public class Greeter.PasswordEntry : Gtk.Entry {
         visibility = false;
         input_purpose = Gtk.InputPurpose.PASSWORD;
 
-        var css_provider = new Gtk.CssProvider ();
-        css_provider.load_from_resource ("/io/elementary/greeter/PasswordEntry.css");
-        get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
         icon_press.connect ((pos, event) => {
             if (pos == Gtk.EntryIconPosition.SECONDARY) {
                 activate ();
             }
-        });
-    }
-
-    public void animate_error () {
-        weak Gtk.StyleContext style_context = get_style_context ();
-        style_context.add_class (Gtk.STYLE_CLASS_ERROR);
-        style_context.add_class ("shake");
-        GLib.Timeout.add (450, () => {
-            style_context.remove_class ("shake");
-            style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
-            grab_focus ();
-            return GLib.Source.REMOVE;
         });
     }
 }
