@@ -26,7 +26,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     public LightDM.User lightdm_user { get; construct; }
     public bool show_input { get; set; default = false; }
-    public bool need_password { get; set; default = true; }
     public double reveal_ratio { get; private set; default = 0.0; }
 
     private Gtk.Revealer form_revealer;
@@ -34,6 +33,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Greeter.PasswordEntry password_entry;
 
     construct {
+        need_password = true;
 
         var username_label = new Gtk.Label (lightdm_user.display_name);
         username_label.margin = 24;
@@ -43,6 +43,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
         password_entry = new Greeter.PasswordEntry ();
         this.bind_property ("connecting", password_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
         var fingerprint_image = new Gtk.Image.from_icon_name ("fingerprint-symbolic", Gtk.IconSize.BUTTON);
+        this.bind_property ("use-fingerprint", fingerprint_image, "no-show-all", GLib.BindingFlags.INVERT_BOOLEAN|GLib.BindingFlags.SYNC_CREATE);
+        this.bind_property ("use-fingerprint", fingerprint_image, "visible", GLib.BindingFlags.SYNC_CREATE);
         var session_button = new Greeter.SessionButton ();
 
         var password_grid = new Gtk.Grid ();

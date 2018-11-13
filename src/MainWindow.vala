@@ -219,7 +219,19 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void show_message (string text, LightDM.MessageType type) {
-        critical ("message: `%s' (%d)", text, type);
+        var messagetext = Greeter.FPrintUtils.string_to_messagetext (text);
+        switch (messagetext) {
+            case Greeter.FPrintUtils.MessageText.FPRINT_TIMEOUT:
+            case Greeter.FPrintUtils.MessageText.FPRINT_ERROR:
+            case Greeter.FPrintUtils.MessageText.OTHER:
+                current_card.use_fingerprint = false;
+                break;
+            default:
+                current_card.use_fingerprint = true;
+                break;
+        }
+
+        critical ("message: `%s' (%d): %s", text, type, messagetext.to_string ());
         /*var messagetext = string_to_messagetext(text);
         
         if (messagetext == MessageText.FPRINT_SWIPE || messagetext == MessageText.FPRINT_PLACE) {

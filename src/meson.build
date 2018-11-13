@@ -28,6 +28,7 @@ executable(
     greeter_resources,
     'Application.vala',
     'DateTimeWidget.vala',
+    'FPrintUtils.vala',
     'MainWindow.vala',
     'PasswordEntry.vala',
     'PromptText.vala',
