@@ -32,7 +32,6 @@ public class Greeter.SettingsDaemon : Object {
                               "org.gnome.settings-daemon.plugins.housekeeping",
                               "org.gnome.settings-daemon.plugins.keybindings",
                               "org.gnome.settings-daemon.plugins.keyboard",
-                              "org.gnome.settings-daemon.plugins.media-keys",
                               "org.gnome.settings-daemon.plugins.mouse",
                               "org.gnome.settings-daemon.plugins.print-notifications",
                               "org.gnome.settings-daemon.plugins.smartcard",
@@ -43,6 +42,7 @@ public class Greeter.SettingsDaemon : Object {
                               "org.gnome.settings-daemon.plugins.a11y-settings",
                               "org.gnome.settings-daemon.plugins.color",
                               "org.gnome.settings-daemon.plugins.cursor",
+                              "org.gnome.settings-daemon.plugins.media-keys",
                               "org.gnome.settings-daemon.plugins.power",
                               "org.gnome.settings-daemon.plugins.xrandr",
                               "org.gnome.settings-daemon.plugins.xsettings" };
@@ -95,6 +95,7 @@ public class Greeter.SettingsDaemon : Object {
         string[] daemons = {
             "gsd-a11y-settings",
             "gsd-color",
+            "gsd-media-keys",
             "gsd-power",
             "gsd-xsettings"
         };
