@@ -6,19 +6,22 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     construct {
         width_request = 350;
 
+        var icon = new Gtk.Image ();
+        icon.icon_name = "avatar-default";
+        icon.pixel_size = 64;
+
         var label = new Gtk.Label (_("Manual Login"));
-        label.xalign = 0.5f;
         label.hexpand = true;
+        label.margin_bottom = 16;
         label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
         username_entry = new Gtk.Entry ();
-        this.bind_property ("connecting", username_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
         username_entry.hexpand = true;
         username_entry.placeholder_text = _("Username");
+        username_entry.primary_icon_name = "avatar-default-symbolic";
         username_entry.input_purpose = Gtk.InputPurpose.FREE_FORM;
 
         password_entry = new Greeter.PasswordEntry ();
-        this.bind_property ("connecting", password_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
 
         var session_button = new Greeter.SessionButton ();
 
@@ -26,13 +29,15 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         form_grid.orientation = Gtk.Orientation.VERTICAL;
         form_grid.column_spacing = 6;
         form_grid.row_spacing = 12;
-        form_grid.margin = 12;
-        form_grid.attach (label, 0, 0, 2, 1);
-        form_grid.attach (username_entry, 0, 1, 1, 1);
-        form_grid.attach (password_entry, 0, 2, 1, 1);
-        form_grid.attach (session_button, 1, 1, 1, 2);
+        form_grid.margin = 24;
+        form_grid.attach (icon, 0, 0, 2, 1);
+        form_grid.attach (label, 0, 1, 2, 1);
+        form_grid.attach (username_entry, 0, 2);
+        form_grid.attach (password_entry, 0, 3);
+        form_grid.attach (session_button, 1, 2, 1, 2);
 
         main_grid = new Gtk.Grid ();
+        main_grid.margin = 12;
         main_grid.add (form_grid);
 
         var main_grid_style_context = main_grid.get_style_context ();
@@ -41,6 +46,9 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         main_grid_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         add (main_grid);
+
+        bind_property ("connecting", username_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
+        bind_property ("connecting", password_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
 
         password_entry.activate.connect (on_login);
     }
