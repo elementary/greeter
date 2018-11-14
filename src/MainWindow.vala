@@ -20,9 +20,6 @@
  */
 
 public class Greeter.MainWindow : Gtk.ApplicationWindow {
-    private const string STYLESHEET =
-        ".composited { background-color: transparent; }";
-
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
     private int index_delta = 0;
@@ -44,25 +41,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         create_session_selection_action ();
 
         set_visual (get_screen ().get_rgba_visual());
-        var css_provider = new Gtk.CssProvider ();
-
-        try {
-            css_provider.load_from_data (STYLESHEET, -1);
-            get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-            get_style_context ().add_class ("composited");
-        } catch (Error e) {}
-
-        main_overlay = new Gtk.Overlay ();
-        main_overlay.margin_top = main_overlay.margin_bottom = 24;
 
         var guest_login_button = new Gtk.Button.with_label (_("Login as Guest"));
-        guest_login_button.hexpand = true;
+
         manual_login_button = new Gtk.ToggleButton.with_label (_("Manual Login…"));
-        manual_login_button.hexpand = true;
+
         var extra_login_grid = new Gtk.Grid ();
         extra_login_grid.halign = Gtk.Align.CENTER;
         extra_login_grid.valign = Gtk.Align.END;
-        extra_login_grid.orientation = Gtk.Orientation.HORIZONTAL;
         extra_login_grid.column_spacing = 12;
         extra_login_grid.column_homogeneous = true;
         extra_login_grid.add (guest_login_button);
@@ -70,25 +56,32 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         try {
             var settings = Gtk.Settings.get_default ();
-            css_provider = Gtk.CssProvider.get_named (settings.gtk_theme_name, "dark");
+            var css_provider = Gtk.CssProvider.get_named (settings.gtk_theme_name, "dark");
             guest_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             manual_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         } catch (Error e) {}
 
         var datetime_widget = new Greeter.DateTimeWidget ();
         datetime_widget.halign = Gtk.Align.CENTER;
-        datetime_widget.valign = Gtk.Align.START;
-        datetime_widget.margin_top = 24;
 
         user_cards = new GLib.Queue<unowned Greeter.UserCard> ();
 
         var manual_card = new Greeter.ManualCard ();
         manual_card.reveal_child = false;
+
+        main_overlay = new Gtk.Overlay ();
+        main_overlay.vexpand = true;
         main_overlay.add_overlay (manual_card);
 
-        add (main_overlay);
-        main_overlay.add_overlay (extra_login_grid);
-        main_overlay.add_overlay (datetime_widget);
+        var main_grid = new Gtk.Grid ();
+        main_grid.margin_top = main_grid.margin_bottom = 24;
+        main_grid.row_spacing = 24;
+        main_grid.orientation = Gtk.Orientation.VERTICAL;
+        main_grid.add (datetime_widget);
+        main_grid.add (main_overlay);
+        main_grid.add (extra_login_grid);
+
+        add (main_grid);
 
         main_overlay.get_child_position.connect ((widget, out allocation) => {
             if (widget is Greeter.UserCard && widget.is_visible ()) {
