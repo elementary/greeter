@@ -1,6 +1,7 @@
 public class Greeter.ManualCard : Greeter.BaseCard {
     private Greeter.PasswordEntry password_entry;
     private Gtk.Entry username_entry;
+    private Gtk.Grid main_grid;
 
     construct {
         width_request = 350;
@@ -31,7 +32,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         form_grid.attach (password_entry, 0, 2, 1, 1);
         form_grid.attach (session_button, 1, 1, 1, 2);
 
-        var main_grid = new Gtk.Grid ();
+        main_grid = new Gtk.Grid ();
         main_grid.add (form_grid);
 
         var main_grid_style_context = main_grid.get_style_context ();
@@ -53,6 +54,14 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     }
 
     public override void wrong_credentials () {
-        password_entry.animate_error ();
+        weak Gtk.StyleContext grid_style_context = main_grid.get_style_context ();
+        weak Gtk.StyleContext entry_style_context = password_entry.get_style_context ();
+        entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+        grid_style_context.add_class ("shake");
+        GLib.Timeout.add (450, () => {
+            grid_style_context.remove_class ("shake");
+            entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            return GLib.Source.REMOVE;
+        });
     }
 }

@@ -208,6 +208,13 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     public override void wrong_credentials () {
-        password_entry.animate_error ();
+        weak Gtk.StyleContext entry_style_context = password_entry.get_style_context ();
+        entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+        main_grid_style_context.add_class ("shake");
+        GLib.Timeout.add (450, () => {
+            main_grid_style_context.remove_class ("shake");
+            entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            return GLib.Source.REMOVE;
+        });
     }
 }
