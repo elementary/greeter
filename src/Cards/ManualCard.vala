@@ -54,12 +54,13 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     }
 
     public override void wrong_credentials () {
-        weak Gtk.StyleContext style_context = main_grid.get_style_context ();
-        style_context.add_class (Gtk.STYLE_CLASS_ERROR);
-        style_context.add_class ("shake");
+        weak Gtk.StyleContext grid_style_context = main_grid.get_style_context ();
+        weak Gtk.StyleContext entry_style_context = password_entry.get_style_context ();
+        entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+        grid_style_context.add_class ("shake");
         GLib.Timeout.add (450, () => {
-            style_context.remove_class ("shake");
-            style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            grid_style_context.remove_class ("shake");
+            entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
             return GLib.Source.REMOVE;
         });
     }
