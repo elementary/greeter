@@ -16,6 +16,13 @@ public class Greeter.BackgroundImage : Gtk.EventBox {
             full_pixbuf = new Gdk.Pixbuf.from_file (path);
         } catch (GLib.Error e) {
             critical (e.message);
+            critical ("Fallback to default wallpaper");
+
+            try {
+                full_pixbuf = new Gdk.Pixbuf.from_file ("/usr/share/backgrounds/elementaryos-default");
+            } catch (GLib.Error e) {
+                critical (e.message);
+            }
         }
     }
 
@@ -23,21 +30,15 @@ public class Greeter.BackgroundImage : Gtk.EventBox {
         var scale = get_scale_factor ();
         var width = get_allocated_width () * scale;
         var height = get_allocated_height () * scale;
-        var radius = 4 * scale;
+        var radius = 3 * scale;
 
         var new_hash = GLib.int_hash (width) + GLib.int_hash (height);
         if (new_hash != last_size_hash) {
             last_size_hash = new_hash;
             double full_ratio = (double)full_pixbuf.height / (double)full_pixbuf.width;
-            Gdk.Pixbuf scaled_pixbuf;
             fitting_pixbuf = new Gdk.Pixbuf (full_pixbuf.colorspace, full_pixbuf.has_alpha, full_pixbuf.bits_per_sample, width, height);
-            if (full_ratio > 1) {
-                scaled_pixbuf = full_pixbuf.scale_simple ((int)(height * full_ratio), height, Gdk.InterpType.BILINEAR);
-                scaled_pixbuf.copy_area ((scaled_pixbuf.width - width)/2, 0, width, height, fitting_pixbuf, 0, 0);
-            } else {
-                scaled_pixbuf = full_pixbuf.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
-                scaled_pixbuf.copy_area (0, (scaled_pixbuf.height - height)/2, width, height, fitting_pixbuf, 0, 0);
-            }
+            var scaled_pixbuf = full_pixbuf.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
+            scaled_pixbuf.copy_area (0, (scaled_pixbuf.height - height)/2, width, height, fitting_pixbuf, 0, 0);
         }
 
         cr.save ();
