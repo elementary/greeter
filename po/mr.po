@@ -8,36 +8,38 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-16 08:43-0700\n"
-"PO-Revision-Date: 2013-06-12 04:40+0000\n"
-"Last-Translator: kroq-gar78 <Unknown>\n"
-"Language-Team: Marathi <mr@li.org>\n"
+"PO-Revision-Date: 2018-10-17 18:22+0000\n"
+"Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
+"Language-Team: Marathi <https://weblate.elementary.io/projects/desktop/"
+"greeter/mr/>\n"
 "Language: mr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
-"X-Generator: Launchpad (build 18330)\n"
 
 #: src/Credentials/PasswordCredentials.vala:33
 #: src/Credentials/LoginButtonCredentials.vala:23
 msgid "Log In"
-msgstr ""
+msgstr "लॉग इन"
 
 #: src/Credentials/FingerprintCredentials.vala:71
 msgid "Swipe your finger"
-msgstr ""
+msgstr "आपल्या बोटाने स्वाइप करा"
 
 #: src/Credentials/FingerprintCredentials.vala:74
 msgid "Place your finger"
-msgstr ""
+msgstr "आपले बोट ठेवा"
 
 #: src/Credentials/FingerprintCredentials.vala:77
 msgid "Remove your finger and try again."
-msgstr ""
+msgstr "आपली बोट काढून टाका आणि पुन्हा प्रयत्न करा."
 
 #: src/Credentials/FingerprintCredentials.vala:80
 msgid "Center your finger and try again."
-msgstr ""
+msgstr "आपले बोट केंद्रीत करा आणि पुन्हा प्रयत्न करा."
 
 #. Ideally this would query PAM and ask which module is currently active,
 #. but since we're running through LightDM we don't have that ability.
@@ -60,66 +62,66 @@ msgstr ""
 #. - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/pam_fprintd.c
 #: src/Gateways/LightDMGateway.vala:218
 msgid "An unknown error occured"
-msgstr ""
+msgstr "एक अज्ञात त्रुटी आली"
 
 #. LIGHTDM_MESSAGE_TYPE_INFO
 #: src/Gateways/LightDMGateway.vala:224
 msgid "Swipe your finger again"
-msgstr ""
+msgstr "पुन्हा आपल्या बोटाने स्वाइप करा"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:227
 msgid "Swipe was too short, try again"
-msgstr ""
+msgstr "स्वाइप खूप लहान होता, पुन्हा प्रयत्न करा"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:230
 msgid "Your finger was not centered, try swiping your finger again"
-msgstr ""
+msgstr "आपले बोट केंद्रित केलेले नाही, पुन्हा आपले बोट फिरवण्याचा प्रयत्न करा"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:233
 msgid "Remove your finger, and try swiping your finger again"
-msgstr ""
+msgstr "आपले बोट काढून टाका आणि पुन्हा आपल्या बोटाने स्वाइप करून पहा"
 
 #. LIGHTDM_MESSAGE_TYPE_INFO
 #: src/Gateways/LightDMGateway.vala:239
 msgid "Place your finger on the reader again"
-msgstr ""
+msgstr "पुन्हा वाचकवर आपले बोट ठेवा"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:242
 msgid "Failed to match fingerprint"
-msgstr ""
+msgstr "फिंगरप्रिंट जुळविण्यात अयशस्वी"
 
 #. LIGHTDM_MESSAGE_TYPE_ERROR
 #: src/Gateways/LightDMGateway.vala:245
 msgid "Verification timed out"
-msgstr ""
+msgstr "सत्यापन कालबाह्य झाले"
 
 #: src/LoginOptions/ManualLogin.vala:35
 msgid "Manual Login"
-msgstr ""
+msgstr "मॅन्युअल लॉग इन"
 
 #: src/LoginOptions/GuestLogin.vala:41
 msgid "Guest session"
-msgstr ""
+msgstr "अतिथी सत्र"
 
 #. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: src/Widgets/TimeLabel.vala:53
 msgid "%A, %B %e"
-msgstr ""
+msgstr "%A, %B %e"
 
 #. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
 #: src/Widgets/TimeLabel.vala:55
 msgid "%l:%M"
-msgstr ""
+msgstr "%l:%M"
 
 #. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
 #: src/Widgets/TimeLabel.vala:57
 #, c-format
 msgid " %p"
-msgstr ""
+msgstr " %p"
 
 #~ msgid "Suspend"
 #~ msgstr "निलंबित करा"
