@@ -47,11 +47,14 @@ public class Greeter.UserCard : Greeter.BaseCard {
         this.bind_property ("use-fingerprint", fingerprint_image, "visible", GLib.BindingFlags.SYNC_CREATE);
         var session_button = new Greeter.SessionButton ();
 
+        var caps_lock_revealer = new Greeter.CapsLockRevealer ();
+
         var password_grid = new Gtk.Grid ();
-        password_grid.orientation = Gtk.Orientation.HORIZONTAL;
         password_grid.column_spacing = 6;
-        password_grid.add (password_entry);
-        password_grid.add (fingerprint_image);
+        password_grid.row_spacing = 6;
+        password_grid.attach (password_entry, 0, 0);
+        password_grid.attach (fingerprint_image, 1, 0);
+        password_grid.attach (caps_lock_revealer, 0, 1, 2, 1);
 
         var login_button = new Gtk.Button.with_label (_("Log In"));
         this.bind_property ("connecting", login_button, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
