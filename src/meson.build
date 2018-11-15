@@ -27,6 +27,7 @@ executable(
     meson.project_name(),
     greeter_resources,
     'Application.vala',
+    'CapsLockRevealer.vala',
     'DateTimeWidget.vala',
     'FPrintUtils.vala',
     'MainWindow.vala',
