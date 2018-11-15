@@ -23,9 +23,15 @@ public class Greeter.ManualCard : Greeter.BaseCard {
 
         password_entry = new Greeter.PasswordEntry ();
 
-        var session_button = new Greeter.SessionButton ();
-
         var caps_lock_revealer = new Greeter.CapsLockRevealer ();
+
+        var password_grid = new Gtk.Grid ();
+        password_grid.row_spacing = 6;
+        password_grid.orientation = Gtk.Orientation.VERTICAL;
+        password_grid.add (password_entry);
+        password_grid.add (caps_lock_revealer);
+
+        var session_button = new Greeter.SessionButton ();
 
         var form_grid = new Gtk.Grid ();
         form_grid.orientation = Gtk.Orientation.VERTICAL;
@@ -35,9 +41,8 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         form_grid.attach (icon, 0, 0, 2, 1);
         form_grid.attach (label, 0, 1, 2, 1);
         form_grid.attach (username_entry, 0, 2);
-        form_grid.attach (password_entry, 0, 3);
+        form_grid.attach (password_grid, 0, 3);
         form_grid.attach (session_button, 1, 2, 1, 2);
-        form_grid.attach (caps_lock_revealer, 0, 4, 2, 1);
 
         main_grid = new Gtk.Grid ();
         main_grid.margin = 12;
