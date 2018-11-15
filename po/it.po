@@ -120,8 +120,8 @@ msgstr "%k:%M"
 #. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
 #: src/Widgets/TimeLabel.vala:57
 #, c-format
-msgid " %p"
-msgstr " %p"
+msgid ""
+msgstr ""
 
 #~ msgid "Login"
 #~ msgstr "Accesso"
