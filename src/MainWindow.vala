@@ -29,6 +29,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private Greeter.Settings settings;
     private Gtk.ToggleButton manual_login_button;
     private unowned Greeter.BaseCard current_card;
+    private const uint[] NAVIGATION_KEYS = {
+        Gdk.Key.Up,
+        Gdk.Key.Down,
+        Gdk.Key.Left,
+        Gdk.Key.Right,
+        Gdk.Key.Return,
+        Gdk.Key.Tab
+    };
 
     construct {
         decorated = false;
@@ -185,6 +193,20 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         manual_card.do_connect_username.connect (do_connect_username);
         manual_card.do_connect.connect (do_connect);
+
+        key_press_event.connect ((event) => {
+            // arrow key is being used to navigate
+            if (event.keyval in NAVIGATION_KEYS) {
+                return false;
+            }
+
+            // Don't focus if it is a modifier or if search_box is already focused
+            if ((event.is_modifier == 0) && !current_card.password_focus) {
+                current_card.grab_focus ();
+            }
+
+            return false;
+        });
 
         destroy.connect (() => {
             Gtk.main_quit ();
