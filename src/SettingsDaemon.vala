@@ -22,6 +22,7 @@ public class SettingsDaemon : Object {
     private int n_names = 0;
 
     public void start () {
+#if UBUNTU_PATCHED_GSD
         string[] disabled = { "org.gnome.settings-daemon.plugins.background",
                               "org.gnome.settings-daemon.plugins.clipboard",
                               "org.gnome.settings-daemon.plugins.font",
@@ -30,7 +31,6 @@ public class SettingsDaemon : Object {
                               "org.gnome.settings-daemon.plugins.housekeeping",
                               "org.gnome.settings-daemon.plugins.keybindings",
                               "org.gnome.settings-daemon.plugins.keyboard",
-                              "org.gnome.settings-daemon.plugins.media-keys",
                               "org.gnome.settings-daemon.plugins.mouse",
                               "org.gnome.settings-daemon.plugins.print-notifications",
                               "org.gnome.settings-daemon.plugins.smartcard",
@@ -41,6 +41,7 @@ public class SettingsDaemon : Object {
                               "org.gnome.settings-daemon.plugins.a11y-settings",
                               "org.gnome.settings-daemon.plugins.color",
                               "org.gnome.settings-daemon.plugins.cursor",
+                              "org.gnome.settings-daemon.plugins.media-keys",
                               "org.gnome.settings-daemon.plugins.power",
                               "org.gnome.settings-daemon.plugins.xrandr",
                               "org.gnome.settings-daemon.plugins.xsettings" };
@@ -52,7 +53,7 @@ public class SettingsDaemon : Object {
         foreach (var schema in enabled) {
             set_plugin_enabled (schema, true);
         }
-
+#endif
         /* Pretend to be GNOME session */
         session_manager = new SessionManagerInterface ();
         n_names++;
@@ -71,6 +72,7 @@ public class SettingsDaemon : Object {
                            () => debug ("Failed to acquire name org.gnome.SessionManager"));
     }
 
+#if UBUNTU_PATCHED_GSD
     private void set_plugin_enabled (string schema_name, bool enabled) {
         var source = SettingsSchemaSource.get_default ();
         var schema = source.lookup (schema_name, false);
@@ -79,6 +81,7 @@ public class SettingsDaemon : Object {
             settings.set_boolean ("active", enabled);
         }
     }
+#endif
 
     private void start_settings_daemon () {
         n_names--;
@@ -91,6 +94,7 @@ public class SettingsDaemon : Object {
         string[] daemons = {
             "gsd-a11y-settings",
             "gsd-color",
+            "gsd-media-keys",
             "gsd-power",
             "gsd-xsettings"
         };
