@@ -20,7 +20,6 @@
  */
 
 public abstract class Greeter.BaseCard : Gtk.Revealer {
-    public signal void do_connect_username (string username);
     public signal void do_connect (string? credential = null);
 
     protected static Gtk.CssProvider css_provider;
