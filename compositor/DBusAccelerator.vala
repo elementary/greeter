@@ -46,7 +46,7 @@ namespace GreeterCompositor {
             wm.get_screen ().get_display ().accelerator_activated.connect (on_accelerator_activated);
         }
 
-        void on_accelerator_activated (uint action, uint device_id, uint timestamp) {
+        private void on_accelerator_activated (uint action, uint device_id, uint timestamp) {
             foreach (string accelerator in grabbed_accelerators.get_keys ()) {
                 if (grabbed_accelerators[accelerator] == action) {
                     var parameters = new GLib.HashTable<string, Variant> (null, null);
@@ -58,7 +58,7 @@ namespace GreeterCompositor {
             }
         }
 
-        public uint grab_accelerator (string accelerator, uint flags) {
+        public uint grab_accelerator (string accelerator, uint flags) throws GLib.Error {
             uint? action = grabbed_accelerators[accelerator];
 
             if (action == null) {
@@ -71,7 +71,7 @@ namespace GreeterCompositor {
             return action;
         }
 
-        public uint[] grab_accelerators (Accelerator[] accelerators) {
+        public uint[] grab_accelerators (Accelerator[] accelerators) throws GLib.Error {
             uint[] actions = {};
 
             foreach (unowned Accelerator? accelerator in accelerators) {
@@ -81,7 +81,7 @@ namespace GreeterCompositor {
             return actions;
         }
 
-        public bool ungrab_accelerator (uint action) {
+        public bool ungrab_accelerator (uint action) throws GLib.Error {
             bool ret = false;
 
             foreach (unowned string accelerator in grabbed_accelerators.get_keys ()) {
@@ -96,7 +96,7 @@ namespace GreeterCompositor {
         }
 
         [DBus (name = "ShowOSD")]
-        public void show_osd (GLib.HashTable<string, Variant> parameters) {
+        public void show_osd (GLib.HashTable<string, Variant> parameters) throws GLib.Error {
             int32 monitor_index = -1;
             if (parameters.contains ("monitor"))
                 monitor_index = parameters["monitor"].get_int32 ();
