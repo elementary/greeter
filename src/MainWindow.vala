@@ -197,11 +197,33 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         key_press_event.connect ((event) => {
             // arrow key is being used to navigate
             if (event.keyval in NAVIGATION_KEYS) {
+                if (current_card is UserCard) {
+                    weak Gtk.Widget? current_focus = get_focus ();
+                    if (current_focus is Gtk.Entry && current_focus.is_ancestor (current_card)) {
+                        if (((Gtk.Entry) current_focus).text == "") {
+                            if (event.keyval == Gdk.Key.Left) {
+                                if (get_style_context ().direction == Gtk.TextDirection.RTL) {
+                                    activate_action ("next", null);
+                                } else {
+                                    activate_action ("previous", null);
+                                }
+                            } else if (event.keyval == Gdk.Key.Right) {
+                                if (get_style_context ().direction == Gtk.TextDirection.RTL) {
+                                    activate_action ("previous", null);
+                                } else {
+                                    activate_action ("next", null);
+                                }
+                            }
+                        }
+                    }
+                }
+
                 return false;
             }
 
             // Don't focus if it is a modifier or if search_box is already focused
-            if ((event.is_modifier == 0) && !current_card.password_focus) {
+            weak Gtk.Widget? current_focus = get_focus ();
+            if ((event.is_modifier == 0) && (current_focus == null || !current_focus.is_ancestor (current_card))) {
                 current_card.grab_focus ();
             }
 

@@ -3,12 +3,6 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     private Gtk.Entry username_entry;
     private Gtk.Grid main_grid;
 
-    public new bool password_focus {
-        get {
-            return username_entry.has_focus || password_entry.has_focus;
-        }
-    }
-
     construct {
         width_request = 350;
 
@@ -65,6 +59,9 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         bind_property ("connecting", password_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
 
         password_entry.activate.connect (on_login);
+        grab_focus.connect (() => {
+            username_entry.grab_focus_without_selecting ();
+        });
     }
 
     private void on_login () {
@@ -85,9 +82,5 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
             return GLib.Source.REMOVE;
         });
-    }
-
-    public override void grab_focus () {
-        username_entry.grab_focus ();
     }
 }

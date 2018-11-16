@@ -27,7 +27,6 @@ public abstract class Greeter.BaseCard : Gtk.Revealer {
 
     public bool connecting { get; set; default = false; }
     public bool need_password { get; set; default = false; }
-    public bool password_focus { get; set; }
     public bool use_fingerprint { get; set; default = false; }
 
     static construct {
