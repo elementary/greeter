@@ -29,6 +29,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private Greeter.Settings settings;
     private Gtk.ToggleButton manual_login_button;
     private unowned Greeter.BaseCard current_card;
+    private const uint[] NAVIGATION_KEYS = {
+        Gdk.Key.Up,
+        Gdk.Key.Down,
+        Gdk.Key.Left,
+        Gdk.Key.Right,
+        Gdk.Key.Return,
+        Gdk.Key.Tab
+    };
 
     construct {
         decorated = false;
@@ -185,6 +193,42 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         manual_card.do_connect_username.connect (do_connect_username);
         manual_card.do_connect.connect (do_connect);
+
+        key_press_event.connect ((event) => {
+            // arrow key is being used to navigate
+            if (event.keyval in NAVIGATION_KEYS) {
+                if (current_card is UserCard) {
+                    weak Gtk.Widget? current_focus = get_focus ();
+                    if (current_focus is Gtk.Entry && current_focus.is_ancestor (current_card)) {
+                        if (((Gtk.Entry) current_focus).text == "") {
+                            if (event.keyval == Gdk.Key.Left) {
+                                if (get_style_context ().direction == Gtk.TextDirection.RTL) {
+                                    activate_action ("next", null);
+                                } else {
+                                    activate_action ("previous", null);
+                                }
+                            } else if (event.keyval == Gdk.Key.Right) {
+                                if (get_style_context ().direction == Gtk.TextDirection.RTL) {
+                                    activate_action ("previous", null);
+                                } else {
+                                    activate_action ("next", null);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return false;
+            }
+
+            // Don't focus if it is a modifier or if search_box is already focused
+            weak Gtk.Widget? current_focus = get_focus ();
+            if ((event.is_modifier == 0) && (current_focus == null || !current_focus.is_ancestor (current_card))) {
+                current_card.grab_focus ();
+            }
+
+            return false;
+        });
 
         destroy.connect (() => {
             Gtk.main_quit ();

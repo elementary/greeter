@@ -59,6 +59,9 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         bind_property ("connecting", password_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
 
         password_entry.activate.connect (on_login);
+        grab_focus.connect (() => {
+            username_entry.grab_focus_without_selecting ();
+        });
     }
 
     private void on_login () {

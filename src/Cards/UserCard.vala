@@ -41,6 +41,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         username_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
         password_entry = new Greeter.PasswordEntry ();
+
         this.bind_property ("connecting", password_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
         var fingerprint_image = new Gtk.Image.from_icon_name ("fingerprint-symbolic", Gtk.IconSize.BUTTON);
         this.bind_property ("use-fingerprint", fingerprint_image, "no-show-all", GLib.BindingFlags.INVERT_BOOLEAN|GLib.BindingFlags.SYNC_CREATE);
@@ -156,6 +157,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         card_overlay.button_release_event.connect ((event) => {
             if (!show_input) {
                 focus_requested ();
+                password_entry.grab_focus ();
             }
 
             return false;
@@ -184,6 +186,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
             } else {
                 login_stack.visible_child = login_button;
             }
+        });
+
+        grab_focus.connect (() => {
+            password_entry.grab_focus_without_selecting ();
         });
     }
 
