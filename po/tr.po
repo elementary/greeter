@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-16 12:23-0800\n"
-"PO-Revision-Date: 2018-10-28 00:05+0000\n"
+"PO-Revision-Date: 2018-11-16 22:34+0000\n"
 "Last-Translator: Sinan Decron <intenfinitia@gmail.com>\n"
 "Language-Team: Turkish <https://weblate.elementary.io/projects/desktop/"
 "greeter/tr/>\n"
@@ -22,20 +22,19 @@ msgstr ""
 
 #: src/CapsLockRevealer.vala:27
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps Lock açık"
 
 #: src/MainWindow.vala:53
 msgid "Login as Guest"
-msgstr ""
+msgstr "Misafir olarak giriş yap"
 
 #: src/MainWindow.vala:55
-#, fuzzy
 msgid "Manual Login…"
-msgstr "Elle Giriş Yap"
+msgstr "Elle Giriş Yap…"
 
 #: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
 msgid "Password"
-msgstr ""
+msgstr "Parola"
 
 #: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
 msgid "Log In"
@@ -47,11 +46,11 @@ msgstr "Elle Giriş Yap"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr ""
+msgstr "Kullanıcı adı"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "Kullanıcı adı dene"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Parmağınızı sürükleyin"
