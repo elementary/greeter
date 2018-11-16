@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-16 08:43-0700\n"
+"POT-Creation-Date: 2018-11-16 12:23-0800\n"
 "PO-Revision-Date: 2013-06-12 04:40+0000\n"
 "Last-Translator: racerr <racerr@outlook.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
@@ -18,108 +18,46 @@ msgstr ""
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 "X-Generator: Launchpad (build 18330)\n"
 
-#: src/Credentials/PasswordCredentials.vala:33
-#: src/Credentials/LoginButtonCredentials.vala:23
+#: src/CapsLockRevealer.vala:27
+msgid "Caps Lock is on"
+msgstr ""
+
+#: src/MainWindow.vala:53
+msgid "Login as Guest"
+msgstr ""
+
+#: src/MainWindow.vala:55
+msgid "Manual Login…"
+msgstr ""
+
+#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
+msgid "Password"
+msgstr ""
+
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
 msgid "Log In"
 msgstr ""
 
-#: src/Credentials/FingerprintCredentials.vala:71
-msgid "Swipe your finger"
-msgstr ""
-
-#: src/Credentials/FingerprintCredentials.vala:74
-msgid "Place your finger"
-msgstr ""
-
-#: src/Credentials/FingerprintCredentials.vala:77
-msgid "Remove your finger and try again."
-msgstr ""
-
-#: src/Credentials/FingerprintCredentials.vala:80
-msgid "Center your finger and try again."
-msgstr ""
-
-#. Ideally this would query PAM and ask which module is currently active,
-#. but since we're running through LightDM we don't have that ability.
-#. There should at be a state machine to transition to and from the
-#. active module depending on the messages recieved. But, this is can go
-#. wrong quickly.
-#. The reason why this is needed is, for example, we can get the "An
-#. unknown error occured" message from pam_fprintd, but we can get it
-#. from some other random module as well. You never know.
-#. Maybe it's worth adding some LightDM/PAM functionality for this?
-#. The PAM "feature" which makes it all tricky is that modules can send
-#. arbitrary messages to the stream and it's hard to analyze or keep track
-#. of them programmatically.
-#. Also, there doesn't seem to be a way to give the user a choice over
-#. which module he wants to use to authenticate (ie. maybe today I have
-#. a bandaid over my finger and I can't scan it so I have to wait for it
-#. time out, if I didn't disable that in the settings)
-#. These messages are taken from here:
-#. - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/fingerprint-strings.h
-#. - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/pam_fprintd.c
-#: src/Gateways/LightDMGateway.vala:218
-msgid "An unknown error occured"
-msgstr ""
-
-#. LIGHTDM_MESSAGE_TYPE_INFO
-#: src/Gateways/LightDMGateway.vala:224
-msgid "Swipe your finger again"
-msgstr ""
-
-#. LIGHTDM_MESSAGE_TYPE_ERROR
-#: src/Gateways/LightDMGateway.vala:227
-msgid "Swipe was too short, try again"
-msgstr ""
-
-#. LIGHTDM_MESSAGE_TYPE_ERROR
-#: src/Gateways/LightDMGateway.vala:230
-msgid "Your finger was not centered, try swiping your finger again"
-msgstr ""
-
-#. LIGHTDM_MESSAGE_TYPE_ERROR
-#: src/Gateways/LightDMGateway.vala:233
-msgid "Remove your finger, and try swiping your finger again"
-msgstr ""
-
-#. LIGHTDM_MESSAGE_TYPE_INFO
-#: src/Gateways/LightDMGateway.vala:239
-msgid "Place your finger on the reader again"
-msgstr ""
-
-#. LIGHTDM_MESSAGE_TYPE_ERROR
-#: src/Gateways/LightDMGateway.vala:242
-msgid "Failed to match fingerprint"
-msgstr ""
-
-#. LIGHTDM_MESSAGE_TYPE_ERROR
-#: src/Gateways/LightDMGateway.vala:245
-msgid "Verification timed out"
-msgstr ""
-
-#: src/LoginOptions/ManualLogin.vala:35
+#: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
 msgstr ""
 
-#: src/LoginOptions/GuestLogin.vala:41
-msgid "Guest session"
-msgstr "الدخول كضيف"
-
-#. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: src/Widgets/TimeLabel.vala:53
-msgid "%A, %B %e"
+#: src/Cards/ManualCard.vala:22
+msgid "Username"
 msgstr ""
 
-#. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: src/Widgets/TimeLabel.vala:55
-msgid "%l:%M"
-msgstr "%l:%M"
+#: src/Cards/ManualCard.vala:26
+msgid "Try username"
+msgstr ""
 
-#. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
-#: src/Widgets/TimeLabel.vala:57
-#, c-format
-msgid " %p"
-msgstr " %p"
+#~ msgid "Guest session"
+#~ msgstr "الدخول كضيف"
+
+#~ msgid "%l:%M"
+#~ msgstr "%l:%M"
+
+#~ msgid " %p"
+#~ msgstr " %p"
 
 #~ msgid "HighContrast"
 #~ msgstr "تباين عالي"
