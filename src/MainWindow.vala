@@ -287,6 +287,13 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         had_prompt = true;
 
         current_login.show_prompt (type, prompttext, text);*/
+        if (current_card is ManualCard) {
+            if (type == LightDM.PromptType.SECRET) {
+                ((ManualCard) current_card).ask_password ();
+            } else {
+                ((ManualCard) current_card).wrong_username ();
+            }
+        }
     }
 
     // Called after the credentials are checked, might be authenticated or not.

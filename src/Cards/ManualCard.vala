@@ -1,4 +1,6 @@
 public class Greeter.ManualCard : Greeter.BaseCard {
+    public signal void do_connect_username (string username);
+
     private Greeter.PasswordEntry password_entry;
     private Gtk.Entry username_entry;
     private Gtk.Grid main_grid;
@@ -20,8 +22,12 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         username_entry.placeholder_text = _("Username");
         username_entry.primary_icon_name = "avatar-default-symbolic";
         username_entry.input_purpose = Gtk.InputPurpose.FREE_FORM;
+        username_entry.secondary_icon_name = "go-jump-symbolic";
+        username_entry.secondary_icon_tooltip_text = _("Try username");
 
         password_entry = new Greeter.PasswordEntry ();
+        password_entry.sensitive = false;
+        password_entry.secondary_icon_name = "";
 
         var caps_lock_revealer = new Greeter.CapsLockRevealer ();
 
@@ -58,23 +64,66 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         bind_property ("connecting", username_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
         bind_property ("connecting", password_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
 
+        username_entry.activate.connect (() => do_connect_username (username_entry.text));
         password_entry.activate.connect (on_login);
         grab_focus.connect (() => {
-            username_entry.grab_focus_without_selecting ();
+            if (username_entry.sensitive) {
+                username_entry.grab_focus_without_selecting ();
+            } else {
+                password_entry.grab_focus_without_selecting ();
+            }
         });
     }
 
     private void on_login () {
         connecting = true;
-        do_connect_username (username_entry.text);
         do_connect (password_entry.text);
-
         password_entry.text = "";
+        password_entry.sensitive = false;
+    }
+
+    private void focus_username_entry () {
+        password_entry.secondary_icon_name = "";
+        password_entry.sensitive = false;
+        username_entry.secondary_icon_name = "go-jump-symbolic";
+        username_entry.sensitive = true;
+        username_entry.grab_focus_without_selecting ();
+    }
+
+    private void focus_password_entry () {
+        username_entry.secondary_icon_name = "";
+        username_entry.sensitive = false;
+        password_entry.secondary_icon_name = "go-jump-symbolic";
+        password_entry.sensitive = true;
+        password_entry.grab_focus_without_selecting ();
     }
 
     public override void wrong_credentials () {
+        focus_username_entry ();
         weak Gtk.StyleContext grid_style_context = main_grid.get_style_context ();
-        weak Gtk.StyleContext entry_style_context = password_entry.get_style_context ();
+        weak Gtk.StyleContext username_entry_style_context = username_entry.get_style_context ();
+        weak Gtk.StyleContext password_entry_style_context = password_entry.get_style_context ();
+        username_entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+        password_entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+        grid_style_context.add_class ("shake");
+        GLib.Timeout.add (450, () => {
+            grid_style_context.remove_class ("shake");
+            username_entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            password_entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            return GLib.Source.REMOVE;
+        });
+    }
+
+    public void ask_password () {
+        focus_password_entry ();
+    }
+
+    public void wrong_username () {
+        username_entry.grab_focus_without_selecting ();
+        username_entry.secondary_icon_name = "";
+        username_entry.text = "";
+        weak Gtk.StyleContext grid_style_context = main_grid.get_style_context ();
+        weak Gtk.StyleContext entry_style_context = username_entry.get_style_context ();
         entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
         grid_style_context.add_class ("shake");
         GLib.Timeout.add (450, () => {
