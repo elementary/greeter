@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/io/elementary/greeter">
-    <file alias="Greeter.css" compressed="true">Greeter.css</file>
+    <file alias="Card.css" compressed="true">Card.css</file>
+    <file alias="DateTime.css" compressed="true">DateTime.css</file>
   </gresource>
   <gresource prefix="/io/elementary/greeter/icons">
     <file alias="/symbolic/fingerprint.svg" compressed="true">fingerprint.svg</file>

@@ -23,6 +23,11 @@ greeter_resources = gnome.compile_resources(
     source_dir: 'data'
 )
 
+compositor_resources = gnome.compile_resources(
+    'compositor-resources', 'data/compositor.gresource.xml',
+    source_dir: 'data'
+)
+
 subdir('src')
 subdir('compositor')
 subdir('data')
