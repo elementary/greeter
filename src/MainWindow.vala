@@ -50,7 +50,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         set_visual (get_screen ().get_rgba_visual());
 
-        var guest_login_button = new Gtk.Button.with_label (_("Login as Guest"));
+        var guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
 
         manual_login_button = new Gtk.ToggleButton.with_label (_("Manual Login…"));
 
