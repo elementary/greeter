@@ -6,9 +6,7 @@
 You'll need the following dependencies:
 
 * gnome-settings-daemon >= 3.27
-* libclutter-gtk-1.0-dev
 * libgdk-pixbuf2.0-dev
-* libgnome-desktop-3-dev
 * libgranite-dev
 * libgtk-3-dev
 * liblightdm-gobject-1-dev

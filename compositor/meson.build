@@ -4,7 +4,6 @@ glib_dep = [dependency('gio-2.0'), dependency('gio-unix-2.0'), dependency('gmodu
 gtk_dep = [dependency('gtk+-3.0'), dependency('gdk-x11-3.0')]
 gee_dep = dependency('gee-0.8')
 m_dep = meson.get_compiler('c').find_library('m', required: false)
-gnome_desktop_dep = dependency('gnome-desktop-3.0')
 
 # Mutter is a complicated library with many API changes, copied from Gala.
 mutter_dep = []
