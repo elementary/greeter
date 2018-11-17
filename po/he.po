@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-17 11:07+0100\n"
-"PO-Revision-Date: 2018-11-16 20:26+0000\n"
+"PO-Revision-Date: 2018-11-17 21:18+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://weblate.elementary.io/projects/desktop/"
 "greeter/he/>\n"
@@ -22,15 +22,15 @@ msgstr ""
 
 #: compositor/WindowManager.vala:431
 msgid "Does the display look OK?"
-msgstr ""
+msgstr "התצוגה נראית בסדר?"
 
 #: compositor/WindowManager.vala:434
 msgid "Keep This Configuration"
-msgstr ""
+msgstr "להשאיר את התצורה הזאת"
 
 #: compositor/WindowManager.vala:435
 msgid "Restore Previous Configuration"
-msgstr ""
+msgstr "שחזור התצורה הקודמת"
 
 #: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
 msgid "Password"
@@ -41,7 +41,6 @@ msgid "Log In"
 msgstr "כניסה"
 
 #: src/MainWindow.vala:53
-#, fuzzy
 msgid "Log in as Guest"
 msgstr "כניסה כאורח"
 
