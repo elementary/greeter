@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-17 11:07+0100\n"
-"PO-Revision-Date: 2018-11-04 00:03+0000\n"
+"PO-Revision-Date: 2018-11-17 11:50+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://weblate.elementary.io/projects/desktop/"
 "greeter/ja/>\n"
@@ -22,19 +22,19 @@ msgstr ""
 
 #: compositor/WindowManager.vala:431
 msgid "Does the display look OK?"
-msgstr ""
+msgstr "ディスプレイの設定に問題はありませんか？"
 
 #: compositor/WindowManager.vala:434
 msgid "Keep This Configuration"
-msgstr ""
+msgstr "この設定を保つ"
 
 #: compositor/WindowManager.vala:435
 msgid "Restore Previous Configuration"
-msgstr ""
+msgstr "前の設定へ戻す"
 
 #: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
 msgid "Password"
-msgstr ""
+msgstr "パスワード"
 
 #: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
 msgid "Log In"
@@ -42,16 +42,15 @@ msgstr "ログイン"
 
 #: src/MainWindow.vala:53
 msgid "Log in as Guest"
-msgstr ""
+msgstr "ゲストとしてログイン"
 
 #: src/MainWindow.vala:55
-#, fuzzy
 msgid "Manual Login…"
-msgstr "手動ログイン"
+msgstr "ユーザー名を指定してログイン…"
 
 #: src/CapsLockRevealer.vala:27
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps Lock がオンになっています"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -59,11 +58,11 @@ msgstr "手動ログイン"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr ""
+msgstr "ユーザー名"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "ユーザー名を試します"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "指をスワイプしてください"
