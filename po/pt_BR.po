@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-16 12:23-0800\n"
+"POT-Creation-Date: 2018-11-17 11:07+0100\n"
 "PO-Revision-Date: 2018-08-30 00:06+0000\n"
 "Last-Translator: Rodrigo Oliveira <rod.oliveira@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.elementary.io/projects/"
@@ -20,18 +20,17 @@ msgstr ""
 "X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: src/CapsLockRevealer.vala:27
-msgid "Caps Lock is on"
+#: compositor/WindowManager.vala:431
+msgid "Does the display look OK?"
 msgstr ""
 
-#: src/MainWindow.vala:53
-msgid "Login as Guest"
+#: compositor/WindowManager.vala:434
+msgid "Keep This Configuration"
 msgstr ""
 
-#: src/MainWindow.vala:55
-#, fuzzy
-msgid "Manual Login…"
-msgstr "Entrada manual"
+#: compositor/WindowManager.vala:435
+msgid "Restore Previous Configuration"
+msgstr ""
 
 #: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
 msgid "Password"
@@ -40,6 +39,19 @@ msgstr ""
 #: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
 msgid "Log In"
 msgstr "Entrar"
+
+#: src/MainWindow.vala:53
+msgid "Log in as Guest"
+msgstr ""
+
+#: src/MainWindow.vala:55
+#, fuzzy
+msgid "Manual Login…"
+msgstr "Entrada manual"
+
+#: src/CapsLockRevealer.vala:27
+msgid "Caps Lock is on"
+msgstr ""
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
