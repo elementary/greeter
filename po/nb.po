@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-17 11:07+0100\n"
-"PO-Revision-Date: 2018-11-17 09:57+0000\n"
+"PO-Revision-Date: 2018-11-18 00:07+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.elementary.io/projects/"
 "desktop/greeter/nb/>\n"
@@ -22,15 +22,15 @@ msgstr ""
 
 #: compositor/WindowManager.vala:431
 msgid "Does the display look OK?"
-msgstr ""
+msgstr "Ser skjermen OK ut?"
 
 #: compositor/WindowManager.vala:434
 msgid "Keep This Configuration"
-msgstr ""
+msgstr "Behold dette oppsettet"
 
 #: compositor/WindowManager.vala:435
 msgid "Restore Previous Configuration"
-msgstr ""
+msgstr "Gjenopprett tidligere oppsett"
 
 #: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
 msgid "Password"
@@ -41,7 +41,6 @@ msgid "Log In"
 msgstr "Logg inn"
 
 #: src/MainWindow.vala:53
-#, fuzzy
 msgid "Log in as Guest"
 msgstr "Logg inn som gjest"
 
