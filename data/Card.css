@@ -1,0 +1,15 @@
+@keyframes shake {
+    0% { margin-left: -32px; margin-right: 32px; }
+    25% { margin-left: 32px; margin-right: -32px; }
+    50% { margin-left: -16px; margin-right: 16px; }
+    75% { margin-left: 16px; margin-right: -16px; }
+    100% { margin-left: 0; margin-right: 0;}
+}
+
+.rounded {
+    border-radius: 4px;
+}
+
+.shake {
+    animation: shake 0.4s ease-in-out 1;
+}

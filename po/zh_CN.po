@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-16 08:43-0700\n"
+"POT-Creation-Date: 2018-11-16 12:23-0800\n"
 "PO-Revision-Date: 2018-08-13 00:02+0000\n"
 "Last-Translator: Yang Yang <reliveyy@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://weblate.elementary.io/projects/"
@@ -20,110 +20,88 @@ msgstr ""
 "X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-03-14 06:58+0000\n"
 
-#: src/Credentials/PasswordCredentials.vala:33
-#: src/Credentials/LoginButtonCredentials.vala:23
+#: src/CapsLockRevealer.vala:27
+msgid "Caps Lock is on"
+msgstr ""
+
+#: src/MainWindow.vala:53
+msgid "Login as Guest"
+msgstr ""
+
+#: src/MainWindow.vala:55
+#, fuzzy
+msgid "Manual Login…"
+msgstr "手动登录"
+
+#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
+msgid "Password"
+msgstr ""
+
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
 msgid "Log In"
 msgstr "登录"
 
-#: src/Credentials/FingerprintCredentials.vala:71
-msgid "Swipe your finger"
-msgstr "滑动手指"
-
-#: src/Credentials/FingerprintCredentials.vala:74
-msgid "Place your finger"
-msgstr "放置手指"
-
-#: src/Credentials/FingerprintCredentials.vala:77
-msgid "Remove your finger and try again."
-msgstr "移开您的手指并重试"
-
-#: src/Credentials/FingerprintCredentials.vala:80
-msgid "Center your finger and try again."
-msgstr "居中放置手指并重试"
-
-#. Ideally this would query PAM and ask which module is currently active,
-#. but since we're running through LightDM we don't have that ability.
-#. There should at be a state machine to transition to and from the
-#. active module depending on the messages recieved. But, this is can go
-#. wrong quickly.
-#. The reason why this is needed is, for example, we can get the "An
-#. unknown error occured" message from pam_fprintd, but we can get it
-#. from some other random module as well. You never know.
-#. Maybe it's worth adding some LightDM/PAM functionality for this?
-#. The PAM "feature" which makes it all tricky is that modules can send
-#. arbitrary messages to the stream and it's hard to analyze or keep track
-#. of them programmatically.
-#. Also, there doesn't seem to be a way to give the user a choice over
-#. which module he wants to use to authenticate (ie. maybe today I have
-#. a bandaid over my finger and I can't scan it so I have to wait for it
-#. time out, if I didn't disable that in the settings)
-#. These messages are taken from here:
-#. - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/fingerprint-strings.h
-#. - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/pam_fprintd.c
-#: src/Gateways/LightDMGateway.vala:218
-msgid "An unknown error occured"
-msgstr "出现未知错误"
-
-#. LIGHTDM_MESSAGE_TYPE_INFO
-#: src/Gateways/LightDMGateway.vala:224
-msgid "Swipe your finger again"
-msgstr "重新滑动手指"
-
-#. LIGHTDM_MESSAGE_TYPE_ERROR
-#: src/Gateways/LightDMGateway.vala:227
-msgid "Swipe was too short, try again"
-msgstr "滑动距离太短，请重试"
-
-#. LIGHTDM_MESSAGE_TYPE_ERROR
-#: src/Gateways/LightDMGateway.vala:230
-msgid "Your finger was not centered, try swiping your finger again"
-msgstr "手指未居中，请重新滑动"
-
-#. LIGHTDM_MESSAGE_TYPE_ERROR
-#: src/Gateways/LightDMGateway.vala:233
-#, fuzzy
-msgid "Remove your finger, and try swiping your finger again"
-msgstr "移开您的手指并重试"
-
-#. LIGHTDM_MESSAGE_TYPE_INFO
-#: src/Gateways/LightDMGateway.vala:239
-#, fuzzy
-msgid "Place your finger on the reader again"
-msgstr "移开您的手指并重试"
-
-#. LIGHTDM_MESSAGE_TYPE_ERROR
-#: src/Gateways/LightDMGateway.vala:242
-msgid "Failed to match fingerprint"
-msgstr "指纹匹配失败"
-
-#. LIGHTDM_MESSAGE_TYPE_ERROR
-#: src/Gateways/LightDMGateway.vala:245
-msgid "Verification timed out"
-msgstr "认证超时"
-
-#: src/LoginOptions/ManualLogin.vala:35
+#: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
 msgstr "手动登录"
 
-#: src/LoginOptions/GuestLogin.vala:41
-msgid "Guest session"
-msgstr "访客会话"
+#: src/Cards/ManualCard.vala:22
+msgid "Username"
+msgstr ""
 
-#. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: src/Widgets/TimeLabel.vala:53
-msgid "%A, %B %e"
-msgstr "%b%e日 %A"
+#: src/Cards/ManualCard.vala:26
+msgid "Try username"
+msgstr ""
 
-#. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: src/Widgets/TimeLabel.vala:55
-msgid "%l:%M"
-msgstr "%l:%M"
+#~ msgid "Swipe your finger"
+#~ msgstr "滑动手指"
 
-#. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
-#: src/Widgets/TimeLabel.vala:57
-#, c-format
-msgid " %p"
-msgstr " %p"
+#~ msgid "Place your finger"
+#~ msgstr "放置手指"
+
+#~ msgid "Remove your finger and try again."
+#~ msgstr "移开您的手指并重试"
+
+#~ msgid "Center your finger and try again."
+#~ msgstr "居中放置手指并重试"
+
+#~ msgid "An unknown error occured"
+#~ msgstr "出现未知错误"
+
+#~ msgid "Swipe your finger again"
+#~ msgstr "重新滑动手指"
+
+#~ msgid "Swipe was too short, try again"
+#~ msgstr "滑动距离太短，请重试"
+
+#~ msgid "Your finger was not centered, try swiping your finger again"
+#~ msgstr "手指未居中，请重新滑动"
+
+#, fuzzy
+#~ msgid "Remove your finger, and try swiping your finger again"
+#~ msgstr "移开您的手指并重试"
+
+#, fuzzy
+#~ msgid "Place your finger on the reader again"
+#~ msgstr "移开您的手指并重试"
+
+#~ msgid "Failed to match fingerprint"
+#~ msgstr "指纹匹配失败"
+
+#~ msgid "Verification timed out"
+#~ msgstr "认证超时"
+
+#~ msgid "Guest session"
+#~ msgstr "访客会话"
+
+#~ msgid "%A, %B %e"
+#~ msgstr "%b%e日 %A"
+
+#~ msgid "%l:%M"
+#~ msgstr "%l:%M"
+
+#~ msgid " %p"
+#~ msgstr " %p"
 
 #~ msgid "HighContrast"
 #~ msgstr "高对比度"

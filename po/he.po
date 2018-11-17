@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-16 08:43-0700\n"
-"PO-Revision-Date: 2018-06-02 08:47+0000\n"
+"POT-Creation-Date: 2018-11-16 12:23-0800\n"
+"PO-Revision-Date: 2018-11-16 20:26+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://weblate.elementary.io/projects/desktop/"
 "greeter/he/>\n"
@@ -16,112 +16,89 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: src/Credentials/PasswordCredentials.vala:33
-#: src/Credentials/LoginButtonCredentials.vala:23
+#: src/CapsLockRevealer.vala:27
+msgid "Caps Lock is on"
+msgstr "ה־Caps Lock פעיל"
+
+#: src/MainWindow.vala:53
+msgid "Login as Guest"
+msgstr "כניסה כאורח"
+
+#: src/MainWindow.vala:55
+msgid "Manual Login…"
+msgstr "כניסה ידנית…"
+
+#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
+msgid "Password"
+msgstr "ססמה"
+
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
 msgid "Log In"
 msgstr "כניסה"
 
-#: src/Credentials/FingerprintCredentials.vala:71
-msgid "Swipe your finger"
-msgstr "נא להעביר את האצבע"
-
-#: src/Credentials/FingerprintCredentials.vala:74
-msgid "Place your finger"
-msgstr "נא למקם את האצבע"
-
-#: src/Credentials/FingerprintCredentials.vala:77
-msgid "Remove your finger and try again."
-msgstr "נא להסיר את האצבע ולנסות שוב."
-
-#: src/Credentials/FingerprintCredentials.vala:80
-msgid "Center your finger and try again."
-msgstr "נא למרכז את האצבע ולנסות שוב."
-
-#. Ideally this would query PAM and ask which module is currently active,
-#. but since we're running through LightDM we don't have that ability.
-#. There should at be a state machine to transition to and from the
-#. active module depending on the messages recieved. But, this is can go
-#. wrong quickly.
-#. The reason why this is needed is, for example, we can get the "An
-#. unknown error occured" message from pam_fprintd, but we can get it
-#. from some other random module as well. You never know.
-#. Maybe it's worth adding some LightDM/PAM functionality for this?
-#. The PAM "feature" which makes it all tricky is that modules can send
-#. arbitrary messages to the stream and it's hard to analyze or keep track
-#. of them programmatically.
-#. Also, there doesn't seem to be a way to give the user a choice over
-#. which module he wants to use to authenticate (ie. maybe today I have
-#. a bandaid over my finger and I can't scan it so I have to wait for it
-#. time out, if I didn't disable that in the settings)
-#. These messages are taken from here:
-#. - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/fingerprint-strings.h
-#. - https://cgit.freedesktop.org/libfprint/fprintd/tree/pam/pam_fprintd.c
-#: src/Gateways/LightDMGateway.vala:218
-msgid "An unknown error occured"
-msgstr "אירעה שגיאה בלתי ידועה"
-
-#. LIGHTDM_MESSAGE_TYPE_INFO
-#: src/Gateways/LightDMGateway.vala:224
-msgid "Swipe your finger again"
-msgstr "נא להעביר את האצבע שוב"
-
-#. LIGHTDM_MESSAGE_TYPE_ERROR
-#: src/Gateways/LightDMGateway.vala:227
-msgid "Swipe was too short, try again"
-msgstr "ההעברה הייתה מהירה מדי, נא לנסות שוב"
-
-#. LIGHTDM_MESSAGE_TYPE_ERROR
-#: src/Gateways/LightDMGateway.vala:230
-msgid "Your finger was not centered, try swiping your finger again"
-msgstr "האצבע שלך לא הועברה במרכז, נא לנסות להעביר את האצבע שוב"
-
-#. LIGHTDM_MESSAGE_TYPE_ERROR
-#: src/Gateways/LightDMGateway.vala:233
-msgid "Remove your finger, and try swiping your finger again"
-msgstr "נא להרים את האצבע ולנסות להעביר אותה שוב"
-
-#. LIGHTDM_MESSAGE_TYPE_INFO
-#: src/Gateways/LightDMGateway.vala:239
-msgid "Place your finger on the reader again"
-msgstr "נא להציב את האצבע על הקורא שוב"
-
-#. LIGHTDM_MESSAGE_TYPE_ERROR
-#: src/Gateways/LightDMGateway.vala:242
-msgid "Failed to match fingerprint"
-msgstr "התאמת טביעת האצבע נכשלה"
-
-#. LIGHTDM_MESSAGE_TYPE_ERROR
-#: src/Gateways/LightDMGateway.vala:245
-msgid "Verification timed out"
-msgstr "זמן האימות פג"
-
-#: src/LoginOptions/ManualLogin.vala:35
+#: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
 msgstr "כניסה ידנית"
 
-#: src/LoginOptions/GuestLogin.vala:41
-msgid "Guest session"
-msgstr "כניסת אורח"
+#: src/Cards/ManualCard.vala:22
+msgid "Username"
+msgstr "שם משתמש"
 
-#. / Date display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: src/Widgets/TimeLabel.vala:53
-msgid "%A, %B %e"
-msgstr "%A, ה־%B ב%e"
+#: src/Cards/ManualCard.vala:26
+msgid "Try username"
+msgstr "ניסיון של שם משתמש"
 
-#. / Time display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details
-#: src/Widgets/TimeLabel.vala:55
-msgid "%l:%M"
-msgstr "%l:%M"
+#~ msgid "Swipe your finger"
+#~ msgstr "נא להעביר את האצבע"
 
-#. / AM/PM display, see http://valadoc.org/#!api=glib-2.0/GLib.DateTime.format for more details. If you translate in a language that has no equivalent for AM/PM, keep the original english string.
-#: src/Widgets/TimeLabel.vala:57
-#, c-format
-msgid " %p"
-msgstr " %p"
+#~ msgid "Place your finger"
+#~ msgstr "נא למקם את האצבע"
+
+#~ msgid "Remove your finger and try again."
+#~ msgstr "נא להסיר את האצבע ולנסות שוב."
+
+#~ msgid "Center your finger and try again."
+#~ msgstr "נא למרכז את האצבע ולנסות שוב."
+
+#~ msgid "An unknown error occured"
+#~ msgstr "אירעה שגיאה בלתי ידועה"
+
+#~ msgid "Swipe your finger again"
+#~ msgstr "נא להעביר את האצבע שוב"
+
+#~ msgid "Swipe was too short, try again"
+#~ msgstr "ההעברה הייתה מהירה מדי, נא לנסות שוב"
+
+#~ msgid "Your finger was not centered, try swiping your finger again"
+#~ msgstr "האצבע שלך לא הועברה במרכז, נא לנסות להעביר את האצבע שוב"
+
+#~ msgid "Remove your finger, and try swiping your finger again"
+#~ msgstr "נא להרים את האצבע ולנסות להעביר אותה שוב"
+
+#~ msgid "Place your finger on the reader again"
+#~ msgstr "נא להציב את האצבע על הקורא שוב"
+
+#~ msgid "Failed to match fingerprint"
+#~ msgstr "התאמת טביעת האצבע נכשלה"
+
+#~ msgid "Verification timed out"
+#~ msgstr "זמן האימות פג"
+
+#~ msgid "Guest session"
+#~ msgstr "כניסת אורח"
+
+#~ msgid "%A, %B %e"
+#~ msgstr "%A, ה־%B ב%e"
+
+#~ msgid "%l:%M"
+#~ msgstr "%l:%M"
+
+#~ msgid " %p"
+#~ msgstr " %p"
 
 #~ msgid "HighContrast"
 #~ msgstr "ניגודיות גבוהה"

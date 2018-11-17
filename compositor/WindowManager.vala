@@ -124,10 +124,9 @@ namespace GreeterCompositor {
 
             stage = Compositor.get_stage_for_screen (screen) as Clutter.Stage;
 
-            var wallpaper = new Wallpaper (screen);
-            wallpaper.add_constraint (new Clutter.BindConstraint (stage,
-                Clutter.BindCoordinate.ALL, 0));
-            stage.insert_child_below (wallpaper, null);
+            var system_background = new Greeter.SystemBackground (screen);
+            system_background.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.ALL, 0));
+            stage.insert_child_below (system_background, null);
 
             ui_group = new Clutter.Actor ();
             ui_group.reactive = true;
