@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-17 11:07+0100\n"
-"PO-Revision-Date: 2018-11-17 11:50+0000\n"
+"PO-Revision-Date: 2018-11-18 00:07+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://weblate.elementary.io/projects/desktop/"
 "greeter/ja/>\n"
@@ -54,7 +54,7 @@ msgstr "Caps Lock がオンになっています"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
-msgstr "手動ログイン"
+msgstr "ユーザー名を指定してログイン"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
