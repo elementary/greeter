@@ -21,13 +21,13 @@
 
 public class Greeter.SystemBackground : Meta.BackgroundActor {
     const Clutter.Color DEFAULT_BACKGROUND_COLOR = { 0x2e, 0x34, 0x36, 0xff };
-    
-    static Meta.Background? system_background = null;
 
-    public signal void loaded ();
+    static Meta.Background? system_background = null;
 
     public SystemBackground (Meta.Screen screen) {
         Object (meta_screen: screen, monitor: 0);
+
+        background = system_background;
     }
 
     construct {
@@ -35,20 +35,13 @@ public class Greeter.SystemBackground : Meta.BackgroundActor {
             system_background = new Meta.Background (meta_screen);
         }
 
-        background = system_background;
+        refresh();
     }
 
-    public void refresh ()  {       
-        if (system_background != null) {
-            this.set_wallpaper ();
-        }
-    }
-
-    public void set_wallpaper ()  {
+    public static void refresh() {
         var texture_file = GLib.File.new_for_uri ("resource:///io/elementary/greeter/texture.png");
-        this.background.set_color (DEFAULT_BACKGROUND_COLOR);
-        this.background.set_file (texture_file, GDesktop.BackgroundStyle.WALLPAPER);
+        system_background.set_color (DEFAULT_BACKGROUND_COLOR);
+        system_background.set_file (texture_file, GDesktop.BackgroundStyle.WALLPAPER);
     }
-
 }
 

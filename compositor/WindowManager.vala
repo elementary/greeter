@@ -19,18 +19,7 @@
 using Meta;
 
 namespace GreeterCompositor {
-    [DBus (name = "org.freedesktop.login1.Manager")]
-    public interface LoginDRemote : GLib.Object {
-        public signal void prepare_for_sleep (bool suspending);
-    }
-
     public class WindowManager : Meta.Plugin {
-        const uint GL_VENDOR = 0x1F00;
-        const string LOGIND_DBUS_NAME = "org.freedesktop.login1";
-        const string LOGIND_DBUS_OBJECT_PATH = "/org/freedesktop/login1";
-
-        delegate unowned string? GlQueryFunc (uint id);
-
         /**
          * {@inheritDoc}
          */
@@ -66,8 +55,6 @@ namespace GreeterCompositor {
 
         Window? moving; //place for the window that is being moved over
 
-        LoginDRemote? logind_proxy = null;
-
         //Gee.LinkedList<ModalProxy> modal_stack = new Gee.LinkedList<ModalProxy> ();
 
         Gee.HashSet<Meta.WindowActor> minimizing = new Gee.HashSet<Meta.WindowActor> ();
@@ -88,23 +75,11 @@ namespace GreeterCompositor {
         public override void start () {
             Util.later_add (LaterType.BEFORE_REDRAW, show_stage);
 
-            if (logind_proxy == null) {
-                try {
-                    logind_proxy = Bus.get_proxy_sync (BusType.SYSTEM, LOGIND_DBUS_NAME, LOGIND_DBUS_OBJECT_PATH);
-                    logind_proxy.prepare_for_sleep.connect (prepare_for_sleep);
-                } catch (Error e) {
-                    warning ("Failed to get LoginD proxy: %s", e.message);
-                }
-            }
-        }
-
-        void prepare_for_sleep (bool suspending) {
-            if (suspending)
-                return;
-
-            var screen = get_screen ();
-            var system_background = new Greeter.SystemBackground (screen);
-            system_background.refresh ();
+#if HAS_MUTTER322
+            get_screen ().get_display ().gl_video_memory_purged.connect (() => {
+                Greeter.SystemBackground.refresh ();
+            });
+#endif
         }
 
         bool show_stage () {
@@ -117,7 +92,6 @@ namespace GreeterCompositor {
 
             var system_background = new Greeter.SystemBackground (screen);
             system_background.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.ALL, 0));
-            system_background.set_wallpaper ();
             stage.insert_child_below (system_background, null);
 
             ui_group = new Clutter.Actor ();
