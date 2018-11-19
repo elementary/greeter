@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-17 11:07+0100\n"
-"PO-Revision-Date: 2018-11-18 00:07+0000\n"
+"PO-Revision-Date: 2018-11-19 11:19+0000\n"
 "Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian <https://weblate.elementary.io/projects/desktop/"
 "greeter/lt/>\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: compositor/WindowManager.vala:431
 msgid "Does the display look OK?"
-msgstr ""
+msgstr "Ar ekranas gerai atrodo?"
 
 #: compositor/WindowManager.vala:434
 msgid "Keep This Configuration"
@@ -51,7 +51,7 @@ msgstr "Rankinis prisijungimas…"
 
 #: src/CapsLockRevealer.vala:27
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Įjungtos DIDŽIOSIOS RAIDĖS"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -63,7 +63,7 @@ msgstr "Naudotojo vardas"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "Išbandyti naudotojo vardą"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Perbraukite savo pirštu"
