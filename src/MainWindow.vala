@@ -280,7 +280,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void show_prompt (string text, LightDM.PromptType type = LightDM.PromptType.QUESTION) {
-        var current_prompt = Greeter.PromptText.from_string (text);
         critical ("prompt: `%s' (%d)", text, type);
         /*send_prompt (lightdm_prompttype_to_prompttype(type), string_to_prompttext(text), text);
         

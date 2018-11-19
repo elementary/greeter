@@ -31,15 +31,6 @@ namespace GreeterCompositor {
 
         delegate unowned string? GlQueryFunc (uint id);
 
-        static bool is_nvidia () {
-            var gl_get_string = (GlQueryFunc) Cogl.get_proc_address ("glGetString");
-            if (gl_get_string == null)
-                return false;
-
-            unowned string? vendor = gl_get_string (GL_VENDOR);
-            return (vendor != null && vendor.contains ("NVIDIA Corporation"));
-        }
-
         /**
          * {@inheritDoc}
          */
@@ -97,9 +88,7 @@ namespace GreeterCompositor {
         public override void start () {
             Util.later_add (LaterType.BEFORE_REDRAW, show_stage);
 
-            // Handle FBO issue with nvidia blob
-            if (logind_proxy == null
-                && is_nvidia ()) {
+            if (logind_proxy == null) {
                 try {
                     logind_proxy = Bus.get_proxy_sync (BusType.SYSTEM, LOGIND_DBUS_NAME, LOGIND_DBUS_OBJECT_PATH);
                     logind_proxy.prepare_for_sleep.connect (prepare_for_sleep);
@@ -113,7 +102,9 @@ namespace GreeterCompositor {
             if (suspending)
                 return;
 
-            Meta.Background.refresh_all ();
+            var screen = get_screen ();
+            var system_background = new Greeter.SystemBackground (screen);
+            system_background.refresh ();
         }
 
         bool show_stage () {
@@ -126,6 +117,7 @@ namespace GreeterCompositor {
 
             var system_background = new Greeter.SystemBackground (screen);
             system_background.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.ALL, 0));
+            system_background.set_wallpaper ();
             stage.insert_child_below (system_background, null);
 
             ui_group = new Clutter.Actor ();
@@ -214,7 +206,7 @@ namespace GreeterCompositor {
         }
 
         public void get_current_cursor_position (out int x, out int y) {
-            Gdk.Display.get_default ().get_device_manager ().get_client_pointer ().get_position (null, out x, out y);
+            Gdk.Display.get_default ().get_default_seat ().get_pointer ().get_position (null, out x, out y);  
         }
 
         public override void show_window_menu_for_rect (Meta.Window window, Meta.WindowMenuType menu, Meta.Rectangle rect) {
