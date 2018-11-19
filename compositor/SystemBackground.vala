@@ -21,6 +21,7 @@
 
 public class Greeter.SystemBackground : Meta.BackgroundActor {
     const Clutter.Color DEFAULT_BACKGROUND_COLOR = { 0x2e, 0x34, 0x36, 0xff };
+    
     static Meta.Background? system_background = null;
 
     public signal void loaded ();
@@ -31,23 +32,23 @@ public class Greeter.SystemBackground : Meta.BackgroundActor {
 
     construct {
         if (system_background == null) {
-            var texture_file = GLib.File.new_for_uri ("resource:///io/elementary/greeter/texture.png");
             system_background = new Meta.Background (meta_screen);
-            system_background.set_color (DEFAULT_BACKGROUND_COLOR);
-            system_background.set_file (texture_file, GDesktop.BackgroundStyle.WALLPAPER);
         }
 
         background = system_background;
     }
 
-    public static void refresh ()  {
-        /* Meta.Background.refresh_all does not refresh backgrounds with the WALLPAPER style.
-         * (Last tested with mutter 3.28)
-         * As a workaround, re-apply the current color again to force the wallpaper texture
-         * to be rendered from scratch.
-         */
-        if (system_background != null)
-            system_background.set_color (DEFAULT_BACKGROUND_COLOR);
+    public void refresh ()  {       
+        if (system_background != null) {
+            this.set_wallpaper ();
+        }
     }
+
+    public void set_wallpaper ()  {
+        var texture_file = GLib.File.new_for_uri ("resource:///io/elementary/greeter/texture.png");
+        this.background.set_color (DEFAULT_BACKGROUND_COLOR);
+        this.background.set_file (texture_file, GDesktop.BackgroundStyle.WALLPAPER);
+    }
+
 }
 

@@ -50,7 +50,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         set_visual (get_screen ().get_rgba_visual());
 
-        var guest_login_button = new Gtk.Button.with_label (_("Login as Guest"));
+        var guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
 
         manual_login_button = new Gtk.ToggleButton.with_label (_("Manual Login…"));
 
@@ -280,7 +280,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void show_prompt (string text, LightDM.PromptType type = LightDM.PromptType.QUESTION) {
-        var current_prompt = Greeter.PromptText.from_string (text);
         critical ("prompt: `%s' (%d)", text, type);
         /*send_prompt (lightdm_prompttype_to_prompttype(type), string_to_prompttext(text), text);
         

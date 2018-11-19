@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-16 12:23-0800\n"
-"PO-Revision-Date: 2018-11-16 20:26+0000\n"
+"POT-Creation-Date: 2018-11-17 11:07+0100\n"
+"PO-Revision-Date: 2018-11-17 21:18+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://weblate.elementary.io/projects/desktop/"
 "greeter/he/>\n"
@@ -20,17 +20,17 @@ msgstr ""
 "X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: src/CapsLockRevealer.vala:27
-msgid "Caps Lock is on"
-msgstr "ה־Caps Lock פעיל"
+#: compositor/WindowManager.vala:431
+msgid "Does the display look OK?"
+msgstr "התצוגה נראית בסדר?"
 
-#: src/MainWindow.vala:53
-msgid "Login as Guest"
-msgstr "כניסה כאורח"
+#: compositor/WindowManager.vala:434
+msgid "Keep This Configuration"
+msgstr "להשאיר את התצורה הזאת"
 
-#: src/MainWindow.vala:55
-msgid "Manual Login…"
-msgstr "כניסה ידנית…"
+#: compositor/WindowManager.vala:435
+msgid "Restore Previous Configuration"
+msgstr "שחזור התצורה הקודמת"
 
 #: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
 msgid "Password"
@@ -39,6 +39,18 @@ msgstr "ססמה"
 #: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
 msgid "Log In"
 msgstr "כניסה"
+
+#: src/MainWindow.vala:53
+msgid "Log in as Guest"
+msgstr "כניסה כאורח"
+
+#: src/MainWindow.vala:55
+msgid "Manual Login…"
+msgstr "כניסה ידנית…"
+
+#: src/CapsLockRevealer.vala:27
+msgid "Caps Lock is on"
+msgstr "ה־Caps Lock פעיל"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"

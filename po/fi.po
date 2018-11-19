@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-16 12:23-0800\n"
-"PO-Revision-Date: 2018-06-08 08:10+0000\n"
+"POT-Creation-Date: 2018-11-17 11:07+0100\n"
+"PO-Revision-Date: 2018-11-18 00:07+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://weblate.elementary.io/projects/desktop/"
 "greeter/fi/>\n"
@@ -17,29 +17,40 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: src/CapsLockRevealer.vala:27
-msgid "Caps Lock is on"
-msgstr ""
+#: compositor/WindowManager.vala:431
+msgid "Does the display look OK?"
+msgstr "Näyttääkö kaikki kelvolliselta?"
 
-#: src/MainWindow.vala:53
-msgid "Login as Guest"
-msgstr ""
+#: compositor/WindowManager.vala:434
+msgid "Keep This Configuration"
+msgstr "Säilytä asetukset"
 
-#: src/MainWindow.vala:55
-#, fuzzy
-msgid "Manual Login…"
-msgstr "Manuaalinen kirjautuminen"
+#: compositor/WindowManager.vala:435
+msgid "Restore Previous Configuration"
+msgstr "Palauta aiemmat asetukset"
 
 #: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
 msgid "Password"
-msgstr ""
+msgstr "Salasana"
 
 #: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
 msgid "Log In"
 msgstr "Kirjaudu sisään"
+
+#: src/MainWindow.vala:53
+msgid "Log in as Guest"
+msgstr "Kirjaudu vieraana"
+
+#: src/MainWindow.vala:55
+msgid "Manual Login…"
+msgstr "Manuaalinen kirjautuminen…"
+
+#: src/CapsLockRevealer.vala:27
+msgid "Caps Lock is on"
+msgstr "Caps Lock on päällä"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -47,7 +58,7 @@ msgstr "Manuaalinen kirjautuminen"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr ""
+msgstr "Käyttäjätunnus"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-16 12:23-0800\n"
-"PO-Revision-Date: 2018-06-03 10:36+0000\n"
+"POT-Creation-Date: 2018-11-17 11:07+0100\n"
+"PO-Revision-Date: 2018-11-17 18:00+0000\n"
 "Last-Translator: Piotr Strebski <strebski@gmail.com>\n"
 "Language-Team: Polish <https://weblate.elementary.io/projects/desktop/"
 "greeter/pl/>\n"
@@ -18,29 +18,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: src/CapsLockRevealer.vala:27
-msgid "Caps Lock is on"
-msgstr ""
+#: compositor/WindowManager.vala:431
+msgid "Does the display look OK?"
+msgstr "Czy wyświetlany obraz wygląda poprawnie?"
 
-#: src/MainWindow.vala:53
-msgid "Login as Guest"
-msgstr ""
+#: compositor/WindowManager.vala:434
+msgid "Keep This Configuration"
+msgstr "Zachowaj tę konfigurację"
 
-#: src/MainWindow.vala:55
-#, fuzzy
-msgid "Manual Login…"
-msgstr "Ręczne logowanie"
+#: compositor/WindowManager.vala:435
+msgid "Restore Previous Configuration"
+msgstr "Przywróć poprzednie ustawienia"
 
 #: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
 msgid "Password"
-msgstr ""
+msgstr "Hasło"
 
 #: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
 msgid "Log In"
 msgstr "Zaloguj się"
+
+#: src/MainWindow.vala:53
+msgid "Log in as Guest"
+msgstr "Zaloguj się jako gość"
+
+#: src/MainWindow.vala:55
+msgid "Manual Login…"
+msgstr "Ręczne logowanie…"
+
+#: src/CapsLockRevealer.vala:27
+msgid "Caps Lock is on"
+msgstr "Caps Lock jest włączony"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -48,11 +59,11 @@ msgstr "Ręczne logowanie"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr ""
+msgstr "Nazwa użytkownika"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "Wypróbuj nazwę użytkownika"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Przeciągnij palcem"

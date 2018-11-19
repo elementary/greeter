@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-16 12:23-0800\n"
-"PO-Revision-Date: 2018-11-04 00:03+0000\n"
+"POT-Creation-Date: 2018-11-17 11:07+0100\n"
+"PO-Revision-Date: 2018-11-18 00:07+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://weblate.elementary.io/projects/desktop/"
 "greeter/ja/>\n"
@@ -20,38 +20,49 @@ msgstr ""
 "X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: src/CapsLockRevealer.vala:27
-msgid "Caps Lock is on"
-msgstr ""
+#: compositor/WindowManager.vala:431
+msgid "Does the display look OK?"
+msgstr "ディスプレイの設定に問題はありませんか？"
 
-#: src/MainWindow.vala:53
-msgid "Login as Guest"
-msgstr ""
+#: compositor/WindowManager.vala:434
+msgid "Keep This Configuration"
+msgstr "この設定を保つ"
 
-#: src/MainWindow.vala:55
-#, fuzzy
-msgid "Manual Login…"
-msgstr "手動ログイン"
+#: compositor/WindowManager.vala:435
+msgid "Restore Previous Configuration"
+msgstr "前の設定へ戻す"
 
 #: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
 msgid "Password"
-msgstr ""
+msgstr "パスワード"
 
 #: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
 msgid "Log In"
 msgstr "ログイン"
 
+#: src/MainWindow.vala:53
+msgid "Log in as Guest"
+msgstr "ゲストとしてログイン"
+
+#: src/MainWindow.vala:55
+msgid "Manual Login…"
+msgstr "ユーザー名を指定してログイン…"
+
+#: src/CapsLockRevealer.vala:27
+msgid "Caps Lock is on"
+msgstr "Caps Lock がオンになっています"
+
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
-msgstr "手動ログイン"
+msgstr "ユーザー名を指定してログイン"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr ""
+msgstr "ユーザー名"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "ユーザー名を試します"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "指をスワイプしてください"

@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-16 12:23-0800\n"
-"PO-Revision-Date: 2018-07-19 21:41+0000\n"
-"Last-Translator: Nils K <slx@nilsk.net>\n"
+"POT-Creation-Date: 2018-11-17 11:07+0100\n"
+"PO-Revision-Date: 2018-11-18 00:07+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://weblate.elementary.io/projects/"
 "desktop/greeter/nb/>\n"
 "Language: nb\n"
@@ -20,26 +20,38 @@ msgstr ""
 "X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-04-05 07:04+0000\n"
 
-#: src/CapsLockRevealer.vala:27
-msgid "Caps Lock is on"
-msgstr ""
+#: compositor/WindowManager.vala:431
+msgid "Does the display look OK?"
+msgstr "Ser skjermen OK ut?"
 
-#: src/MainWindow.vala:53
-msgid "Login as Guest"
-msgstr ""
+#: compositor/WindowManager.vala:434
+msgid "Keep This Configuration"
+msgstr "Behold dette oppsettet"
 
-#: src/MainWindow.vala:55
-#, fuzzy
-msgid "Manual Login…"
-msgstr "Manuell innlogging"
+#: compositor/WindowManager.vala:435
+msgid "Restore Previous Configuration"
+msgstr "Gjenopprett tidligere oppsett"
 
 #: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
 msgid "Password"
-msgstr ""
+msgstr "Passord"
 
 #: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
 msgid "Log In"
 msgstr "Logg inn"
+
+#: src/MainWindow.vala:53
+msgid "Log in as Guest"
+msgstr "Logg inn som gjest"
+
+#: src/MainWindow.vala:55
+#, fuzzy
+msgid "Manual Login…"
+msgstr "Manuell innlogging…"
+
+#: src/CapsLockRevealer.vala:27
+msgid "Caps Lock is on"
+msgstr "Caps Lock er på"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -47,11 +59,11 @@ msgstr "Manuell innlogging"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr ""
+msgstr "Brukernavn"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "Prøv brukernavn"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Sveip med fingeren"
