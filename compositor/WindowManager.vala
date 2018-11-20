@@ -19,10 +19,6 @@
 using Meta;
 
 namespace GreeterCompositor {
-    [DBus (name = "org.freedesktop.login1.Manager")]
-    public interface LoginDRemote : GLib.Object {
-        public signal void prepare_for_sleep (bool suspending);
-    }
 
     public class WindowManager : Meta.Plugin {
         const uint GL_VENDOR = 0x1F00;
@@ -66,8 +62,6 @@ namespace GreeterCompositor {
 
         Window? moving; //place for the window that is being moved over
 
-        LoginDRemote? logind_proxy = null;
-
         //Gee.LinkedList<ModalProxy> modal_stack = new Gee.LinkedList<ModalProxy> ();
 
         Gee.HashSet<Meta.WindowActor> minimizing = new Gee.HashSet<Meta.WindowActor> ();
@@ -88,20 +82,12 @@ namespace GreeterCompositor {
         public override void start () {
             Util.later_add (LaterType.BEFORE_REDRAW, show_stage);
 
-            if (logind_proxy == null) {
-                try {
-                    logind_proxy = Bus.get_proxy_sync (BusType.SYSTEM, LOGIND_DBUS_NAME, LOGIND_DBUS_OBJECT_PATH);
-                    logind_proxy.prepare_for_sleep.connect (prepare_for_sleep);
-                } catch (Error e) {
-                    warning ("Failed to get LoginD proxy: %s", e.message);
-                }
-            }
+#if HAS_MUTTER322
+            get_screen ().get_display ().gl_video_memory_purged.connect (refresh_background);
+#endif
         }
 
-        void prepare_for_sleep (bool suspending) {
-            if (suspending)
-                return;
-
+        void refresh_background () {
             var screen = get_screen ();
             var system_background = new Greeter.SystemBackground (screen);
             system_background.refresh ();
