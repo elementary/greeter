@@ -181,14 +181,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.authentication_complete.connect (authentication_complete);
 
         lightdm_greeter.notify["has-guest-account-hint"].connect (() => {
-            if (lightdm_greeter.has_guest_account_hint) {
+            if (lightdm_greeter.has_guest_account_hint && guest_login_button.parent == null) {
                 extra_login_grid.attach (guest_login_button, 0, 0);
                 guest_login_button.show ();
             }
         });
 
         lightdm_greeter.notify["show-manual-login-hint"].connect (() => {
-            if (lightdm_greeter.show_manual_login_hint) {
+            if (lightdm_greeter.show_manual_login_hint && manual_login_button.parent == null) {
                 extra_login_grid.attach (manual_login_button, 1, 0);
                 manual_login_button.show ();
             }
