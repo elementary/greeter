@@ -23,6 +23,11 @@ install_data(
     install_dir: join_paths(get_option('sysconfdir'), 'lightdm')
 )
 
+install_data(
+    meson. project_name()+ '.blacklistmediakeys',
+    install_dir: join_paths(get_option('bindir'))
+)
+
 test (
     'Validate desktop file',
     find_program('desktop-file-validate'),

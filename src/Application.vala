@@ -31,6 +31,7 @@ public int main (string[] args) {
 
     Greeter.SubprocessSupervisor compositor;
     Greeter.SubprocessSupervisor wingpanel;
+    Granite.Services.System.execute_command ("/usr/bin/io.elementary.blacklistmediakeys");
     try {
         compositor = new Greeter.SubprocessSupervisor ({"io.elementary.greeter-compositor"});
     } catch (Error e) {

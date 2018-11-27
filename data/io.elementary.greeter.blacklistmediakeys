@@ -1,0 +1,13 @@
+#!/bin/bash
+
+get_dpms_greeter () {
+echo "Ready test"
+}
+set_dpms_greeter () {
+gsettings set org.gnome.settings-daemon.plugins.media-keys terminal ""
+ }
+if [ "$USER" = "lightdm" ] ; then
+set_dpms_greeter
+else
+get_dpms_greeter
+fi
