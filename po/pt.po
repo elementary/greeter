@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-17 11:07+0100\n"
-"PO-Revision-Date: 2018-07-20 11:19+0000\n"
-"Last-Translator: Christophe Silva <Christophesilva80@gmail.com>\n"
+"PO-Revision-Date: 2018-11-20 12:13+0000\n"
+"Last-Translator: Nuno Alexandre MS Ribeiro <nuno.anarresti@gmail.com>\n"
 "Language-Team: Portuguese <https://weblate.elementary.io/projects/desktop/"
 "greeter/pt/>\n"
 "Language: pt\n"
@@ -22,19 +22,19 @@ msgstr ""
 
 #: compositor/WindowManager.vala:431
 msgid "Does the display look OK?"
-msgstr ""
+msgstr "O ecrã parece-lhe estar bem?"
 
 #: compositor/WindowManager.vala:434
 msgid "Keep This Configuration"
-msgstr ""
+msgstr "Manter Esta Configuração"
 
 #: compositor/WindowManager.vala:435
 msgid "Restore Previous Configuration"
-msgstr ""
+msgstr "Restaurar as Configuração Anteriores"
 
 #: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
 msgid "Password"
-msgstr ""
+msgstr "Palavra passe"
 
 #: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
 msgid "Log In"
@@ -42,16 +42,15 @@ msgstr "Iniciar Sessão"
 
 #: src/MainWindow.vala:53
 msgid "Log in as Guest"
-msgstr ""
+msgstr "Entrar como convidado"
 
 #: src/MainWindow.vala:55
-#, fuzzy
 msgid "Manual Login…"
-msgstr "Login Manual"
+msgstr "Login Manual…"
 
 #: src/CapsLockRevealer.vala:27
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "O Caps Lock está ativado"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -59,11 +58,11 @@ msgstr "Login Manual"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr ""
+msgstr "Nome de utilizador"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "Tentar nome de utilizador"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Deslize o dedo"
