@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-17 11:07+0100\n"
-"PO-Revision-Date: 2018-10-17 18:22+0000\n"
+"PO-Revision-Date: 2018-11-29 12:08+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
 "Language-Team: Marathi <https://weblate.elementary.io/projects/desktop/"
 "greeter/mr/>\n"
@@ -22,19 +22,19 @@ msgstr ""
 
 #: compositor/WindowManager.vala:431
 msgid "Does the display look OK?"
-msgstr ""
+msgstr "डिस्प्ले ठीक दिसत आहे का?"
 
 #: compositor/WindowManager.vala:434
 msgid "Keep This Configuration"
-msgstr ""
+msgstr "हे कॉन्फिगरेशन ठेवा"
 
 #: compositor/WindowManager.vala:435
 msgid "Restore Previous Configuration"
-msgstr ""
+msgstr "मागील कॉन्फिगरेशन पुनर्संचयित करा"
 
 #: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
 msgid "Password"
-msgstr ""
+msgstr "पासवर्ड"
 
 #: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
 msgid "Log In"
@@ -42,16 +42,15 @@ msgstr "लॉग इन"
 
 #: src/MainWindow.vala:53
 msgid "Log in as Guest"
-msgstr ""
+msgstr "अतिथी म्हणून लॉग इन करा"
 
 #: src/MainWindow.vala:55
-#, fuzzy
 msgid "Manual Login…"
-msgstr "मॅन्युअल लॉग इन"
+msgstr "मॅन्युअल लॉग इन…"
 
 #: src/CapsLockRevealer.vala:27
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "कॅप्स लॉक चालू आहे"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -59,11 +58,11 @@ msgstr "मॅन्युअल लॉग इन"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr ""
+msgstr "वापरकर्तानाव(युजरनेम)"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "वापरकर्तानाव वापरुन पहा"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "आपल्या बोटाने स्वाइप करा"
