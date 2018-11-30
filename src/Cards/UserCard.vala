@@ -57,7 +57,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         password_grid.attach (password_entry, 0, 0);
         password_grid.attach (fingerprint_image, 1, 0);
         password_grid.attach (caps_lock_revealer, 0, 1, 2, 1);
-        password_grid.attach (num_lock_revealer, 0, 1, 2, 1);
+        password_grid.attach (num_lock_revealer, 1, 1, 2, 1);
 
         var login_button = new Gtk.Button.with_label (_("Log In"));
         this.bind_property ("connecting", login_button, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
