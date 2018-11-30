@@ -30,12 +30,14 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         password_entry.secondary_icon_name = "";
 
         var caps_lock_revealer = new Greeter.CapsLockRevealer ();
+        var num_lock_revealer = new Greeter.NumLockRevealer ();
 
         var password_grid = new Gtk.Grid ();
         password_grid.row_spacing = 6;
         password_grid.orientation = Gtk.Orientation.VERTICAL;
         password_grid.add (password_entry);
         password_grid.add (caps_lock_revealer);
+        password_grid.add (num_lock_revealer);
 
         var session_button = new Greeter.SessionButton ();
 

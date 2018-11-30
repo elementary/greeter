@@ -28,6 +28,7 @@ executable(
     greeter_resources,
     'Application.vala',
     'CapsLockRevealer.vala',
+    'NumLockRevealer.vala',
     'DateTimeWidget.vala',
     'FPrintUtils.vala',
     'MainWindow.vala',
