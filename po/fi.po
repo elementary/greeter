@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-17 11:07+0100\n"
-"PO-Revision-Date: 2018-12-07 05:24+0000\n"
+"PO-Revision-Date: 2018-12-08 00:04+0000\n"
 "Last-Translator: Veli-Pekka Samuli Finnilä <vpf@tuta.io>\n"
 "Language-Team: Finnish <https://weblate.elementary.io/projects/desktop/"
 "greeter/fi/>\n"
@@ -26,7 +26,7 @@ msgstr "Näyttääkö kaikki kelvolliselta?"
 
 #: compositor/WindowManager.vala:434
 msgid "Keep This Configuration"
-msgstr "Säilytä asetukset"
+msgstr "Säilytä nämä asetukset"
 
 #: compositor/WindowManager.vala:435
 msgid "Restore Previous Configuration"
@@ -42,7 +42,7 @@ msgstr "Kirjaudu sisään"
 
 #: src/MainWindow.vala:53
 msgid "Log in as Guest"
-msgstr "Kirjaudu vieraana"
+msgstr "Kirjaudu sisään vieraana"
 
 #: src/MainWindow.vala:55
 msgid "Manual Login…"
@@ -58,7 +58,7 @@ msgstr "Manuaalinen kirjautuminen"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr "Käyttäjätunnus"
+msgstr "Käyttäjänimi"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
