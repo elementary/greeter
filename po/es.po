@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-17 11:07+0100\n"
-"PO-Revision-Date: 2018-06-06 06:04+0000\n"
-"Last-Translator: haggen svastian <h2gn@openmailbox.org>\n"
+"PO-Revision-Date: 2018-12-08 00:04+0000\n"
+"Last-Translator: Cristian Molina <megatux@gmail.com>\n"
 "Language-Team: Spanish <https://weblate.elementary.io/projects/desktop/"
 "greeter/es/>\n"
 "Language: es\n"
@@ -17,24 +17,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:431
 msgid "Does the display look OK?"
-msgstr ""
+msgstr "¿Se ve bien la pantalla?"
 
 #: compositor/WindowManager.vala:434
 msgid "Keep This Configuration"
-msgstr ""
+msgstr "Mantener esta configuración"
 
 #: compositor/WindowManager.vala:435
 msgid "Restore Previous Configuration"
-msgstr ""
+msgstr "Restablecer configuración anterior"
 
 #: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
 #: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
 msgid "Log In"
@@ -42,7 +42,7 @@ msgstr "Iniciar sesión"
 
 #: src/MainWindow.vala:53
 msgid "Log in as Guest"
-msgstr ""
+msgstr "Entrar como invitado"
 
 #: src/MainWindow.vala:55
 #, fuzzy
