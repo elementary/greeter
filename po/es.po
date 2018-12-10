@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-17 11:07+0100\n"
-"PO-Revision-Date: 2018-12-08 00:04+0000\n"
+"PO-Revision-Date: 2018-12-10 19:58+0000\n"
 "Last-Translator: Cristian Molina <megatux@gmail.com>\n"
 "Language-Team: Spanish <https://weblate.elementary.io/projects/desktop/"
 "greeter/es/>\n"
@@ -45,13 +45,12 @@ msgid "Log in as Guest"
 msgstr "Entrar como invitado"
 
 #: src/MainWindow.vala:55
-#, fuzzy
 msgid "Manual Login…"
-msgstr "Acceso manual"
+msgstr "Ingreso manual…"
 
 #: src/CapsLockRevealer.vala:27
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps Lock está activado"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -59,11 +58,11 @@ msgstr "Acceso manual"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr ""
+msgstr "Nombre del usuario"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "Intente nombre de usuario"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Desliza tu dedo"
