@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-17 11:07+0100\n"
-"PO-Revision-Date: 2018-12-11 07:02+0000\n"
+"PO-Revision-Date: 2018-12-12 00:07+0000\n"
 "Last-Translator: Corentin Noël <corentin@elementary.io>\n"
 "Language-Team: French <https://weblate.elementary.io/projects/desktop/"
 "greeter/fr/>\n"
@@ -62,7 +62,7 @@ msgstr "Nom d'utilisateur"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr "Essayer l'utilisateur"
+msgstr "Essayer le nom d'utilisateur"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Glissez votre doigt"
