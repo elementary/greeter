@@ -59,8 +59,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         extra_login_grid.valign = Gtk.Align.END;
         extra_login_grid.column_spacing = 12;
         extra_login_grid.column_homogeneous = true;
-        extra_login_grid.add (guest_login_button);
-        extra_login_grid.add (manual_login_button);
 
         try {
             var settings = Gtk.Settings.get_default ();
@@ -178,11 +176,24 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         set_keep_below (true);
 
         lightdm_greeter = new LightDM.Greeter ();
-        lightdm_greeter.bind_property ("show-manual-login-hint", manual_login_button, "sensitive", GLib.BindingFlags.SYNC_CREATE);
-        lightdm_greeter.bind_property ("has-guest-account-hint", guest_login_button, "sensitive", GLib.BindingFlags.SYNC_CREATE);
         lightdm_greeter.show_message.connect (show_message);
         lightdm_greeter.show_prompt.connect (show_prompt);
         lightdm_greeter.authentication_complete.connect (authentication_complete);
+
+        lightdm_greeter.notify["has-guest-account-hint"].connect (() => {
+            if (lightdm_greeter.has_guest_account_hint && guest_login_button.parent == null) {
+                extra_login_grid.attach (guest_login_button, 0, 0);
+                guest_login_button.show ();
+            }
+        });
+
+        lightdm_greeter.notify["show-manual-login-hint"].connect (() => {
+            if (lightdm_greeter.show_manual_login_hint && manual_login_button.parent == null) {
+                extra_login_grid.attach (manual_login_button, 1, 0);
+                manual_login_button.show ();
+            }
+        });
+
 
         load_users.begin ();
 
