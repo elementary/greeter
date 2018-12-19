@@ -13,7 +13,7 @@ conf_data.set('GETTEXT_PACKAGE', meson.project_name())
 if ubuntu_patched_gsd
     conf_data.set('GSD_DIR', '/usr/lib/gnome-settings-daemon/')
 else
-    conf_data.set('GSD_DIR', join_paths(get_option('prefix'), get_option('libexecdir')))
+    conf_data.set('GSD_DIR', join_paths(get_option('prefix'), get_option('libexecdir') + '/'))
 endif
 
 conf_data.set('VERSION', meson.project_version())
