@@ -239,7 +239,9 @@ namespace GreeterCompositor {
                 if (new_ws_index != old_ws_index && old_ws_index < screen.get_n_workspaces ()) {
                     var old_ws_obj = screen.get_workspace_by_index (old_ws_index);
                     window.change_workspace (old_ws_obj);
-                    old_ws_obj.activate_with_focus (window, time);
+                    if (window.get_window_type () != Meta.WindowType.DOCK){
+                        old_ws_obj.activate_with_focus (window, time);
+                    }
                 }
 
                 ws_assoc.remove (window);
