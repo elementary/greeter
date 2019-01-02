@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-17 11:07+0100\n"
 "PO-Revision-Date: 2019-01-02 18:48+0000\n"
-"Last-Translator: Jörg Arnold <j.ar@mailbox.org>\n"
+"Last-Translator: glitzaf <glitzaf@gmail.com>\n"
 "Language-Team: German <https://weblate.elementary.io/projects/desktop/"
 "greeter/de/>\n"
 "Language: de\n"
@@ -42,7 +42,7 @@ msgstr "Anmelden"
 
 #: src/MainWindow.vala:53
 msgid "Log in as Guest"
-msgstr ""
+msgstr "Einloggen als Gast"
 
 #: src/MainWindow.vala:55
 #, fuzzy
