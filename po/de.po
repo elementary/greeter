@@ -42,7 +42,7 @@ msgstr "Anmelden"
 
 #: src/MainWindow.vala:53
 msgid "Log in as Guest"
-msgstr "Einloggen als Gast"
+msgstr "Anmelden als Gast"
 
 #: src/MainWindow.vala:55
 #, fuzzy
