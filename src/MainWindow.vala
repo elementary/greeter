@@ -39,11 +39,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     };
 
     construct {
-        decorated = false;
         app_paintable = true;
-        window_position = Gtk.WindowPosition.CENTER;
-        width_request = 200;
-        height_request = 150;
+        decorated = false;
+        type_hint = Gdk.WindowTypeHint.DESKTOP;
 
         settings = new Greeter.Settings ();
         create_session_selection_action ();
@@ -171,10 +169,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         add_action_entries (entries, this);
 
-        maximize ();
-        stick ();
-        set_keep_below (true);
-
         lightdm_greeter = new LightDM.Greeter ();
         lightdm_greeter.show_message.connect (show_message);
         lightdm_greeter.show_prompt.connect (show_prompt);
@@ -197,9 +191,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         load_users.begin ();
 
+        maximize_window ();
+
         notify["scale-factor"].connect (() => {
-            unmaximize ();
-            maximize ();
+            maximize_window ();
         });
 
         manual_card.do_connect_username.connect (do_connect_username);
@@ -244,6 +239,12 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         destroy.connect (() => {
             Gtk.main_quit ();
         });
+    }
+
+    private void maximize_window () {
+        var monitor = Gdk.Display.get_default ().get_monitor_at_window ((Gdk.Window) this);
+        var rect = monitor.get_geometry ();
+        resize (rect.width, rect.height);
     }
 
     private void create_session_selection_action () {
