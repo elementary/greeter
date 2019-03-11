@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-17 11:07+0100\n"
 "PO-Revision-Date: 2019-03-12 21:26+0000\n"
-"Last-Translator: nasserbinlaboun <nasser1990com@gmail.com>\n"
+"Last-Translator: Khalid <kmoj86@gmail.com>\n"
 "Language-Team: Arabic <https://l10n.elementary.io/projects/desktop/greeter/"
 "ar/>\n"
 "Language: ar\n"
@@ -39,7 +39,7 @@ msgstr ""
 
 #: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
 msgid "Log In"
-msgstr ""
+msgstr "الدخول"
 
 #: src/MainWindow.vala:53
 msgid "Log in as Guest"
@@ -55,7 +55,7 @@ msgstr ""
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
-msgstr ""
+msgstr "دخول يدوي"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
