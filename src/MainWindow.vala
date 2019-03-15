@@ -191,11 +191,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         });
 
-
-        load_users.begin ();
-
-        maximize_window ();
-
         notify["scale-factor"].connect (() => {
             maximize_window ();
         });
@@ -242,6 +237,17 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         destroy.connect (() => {
             Gtk.main_quit ();
         });
+
+        maximize_window ();
+
+        load_users.begin (() => {
+            present ();
+
+            /* Ensure current card is focused if set */
+            if (current_card != null) {
+                current_card.grab_focus ();
+            }
+        });
     }
 
     private void maximize_window () {
@@ -285,19 +291,19 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         critical ("message: `%s' (%d): %s", text, type, messagetext.to_string ());
         /*var messagetext = string_to_messagetext(text);
-        
+
         if (messagetext == MessageText.FPRINT_SWIPE || messagetext == MessageText.FPRINT_PLACE) {
             // For the fprint module, there is no prompt message from PAM.
             send_prompt (PromptType.FPRINT);
-        }  
-        
+        }
+
         current_login.show_message (type, messagetext, text);*/
     }
 
     private void show_prompt (string text, LightDM.PromptType type = LightDM.PromptType.QUESTION) {
         critical ("prompt: `%s' (%d)", text, type);
         /*send_prompt (lightdm_prompttype_to_prompttype(type), string_to_prompttext(text), text);
-        
+
         had_prompt = true;
 
         current_login.show_prompt (type, prompttext, text);*/
