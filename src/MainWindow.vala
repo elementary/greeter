@@ -234,6 +234,16 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             return false;
         });
 
+        // regrab focus when dpi changed
+        get_screen ().monitors_changed.connect(() => {
+            present ();
+
+            /* Ensure current card is focused if set */
+            if (current_card != null) {
+                current_card.grab_focus ();
+            }
+        });
+
         destroy.connect (() => {
             Gtk.main_quit ();
         });
