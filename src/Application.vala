@@ -29,6 +29,10 @@ public int main (string[] args) {
     var settings_daemon = new Greeter.SettingsDaemon ();
     settings_daemon.start ();
 
+    Gtk.init (ref args);
+    var window = new Greeter.MainWindow ();
+    window.show_all ();
+
     Greeter.SubprocessSupervisor compositor;
     Greeter.SubprocessSupervisor wingpanel;
     try {
@@ -43,9 +47,6 @@ public int main (string[] args) {
         critical (e.message);
     }
 
-    Gtk.init (ref args);
-    var window = new Greeter.MainWindow ();
-    window.show_all ();
     Gtk.main ();
 
     return 0;
