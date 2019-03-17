@@ -236,28 +236,32 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         // regrab focus when dpi changed
         get_screen ().monitors_changed.connect(() => {
-            present ();
-
-            /* Ensure current card is focused if set */
-            if (current_card != null) {
-                current_card.grab_focus ();
-            }
+            maximize_and_focus ();
         });
 
         destroy.connect (() => {
             Gtk.main_quit ();
         });
 
-        maximize_window ();
-
         load_users.begin (() => {
-            present ();
-
-            /* Ensure current card is focused if set */
-            if (current_card != null) {
-                current_card.grab_focus ();
-            }
+            /* A significant delay is required in order for the window and card to be focused at
+             * at boot.  TODO: Find whether boot sequence can be tweaked to fix this.
+             */
+            Timeout.add (500, () => {
+                maximize_and_focus ();
+                return Source.REMOVE;
+            });
         });
+
+        maximize_window ();
+    }
+
+    private void maximize_and_focus () {
+        present ();
+        maximize_window ();
+        if (current_card != null) {
+            current_card.grab_focus ();
+        }
     }
 
     private void maximize_window () {
@@ -456,6 +460,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         distance = (next_delta - index_delta) * natural_width;
         user_card.notify["reveal-ratio"].connect (notify_cb);
         user_card.show_input = true;
+        user_card.grab_focus ();
+
         if (index_delta != next_delta) {
             ((Greeter.UserCard) user_cards.peek_nth (index_delta)).show_input = false;
         }
