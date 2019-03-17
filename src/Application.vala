@@ -29,13 +29,19 @@ public int main (string[] args) {
     var settings_daemon = new Greeter.SettingsDaemon ();
     settings_daemon.start ();
 
+    Gtk.init (ref args);
+
     Greeter.SubprocessSupervisor compositor;
     Greeter.SubprocessSupervisor wingpanel;
+
     try {
         compositor = new Greeter.SubprocessSupervisor ({"io.elementary.greeter-compositor"});
     } catch (Error e) {
         critical (e.message);
     }
+
+    var window = new Greeter.MainWindow ();
+    window.show_all ();
 
     try {
         wingpanel = new Greeter.SubprocessSupervisor ({"wingpanel", "-g"});
@@ -43,9 +49,6 @@ public int main (string[] args) {
         critical (e.message);
     }
 
-    Gtk.init (ref args);
-    var window = new Greeter.MainWindow ();
-    window.show_all ();
     Gtk.main ();
 
     return 0;
