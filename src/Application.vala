@@ -31,7 +31,6 @@ public int main (string[] args) {
 
     Gtk.init (ref args);
 
-
     Greeter.SubprocessSupervisor compositor;
     Greeter.SubprocessSupervisor wingpanel;
 
