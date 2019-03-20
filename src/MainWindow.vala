@@ -191,6 +191,11 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         });
 
+
+        load_users.begin ();
+
+        maximize_window ();
+
         notify["scale-factor"].connect (() => {
             maximize_window ();
         });
@@ -234,34 +239,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             return false;
         });
 
-        // regrab focus when dpi changed
-        get_screen ().monitors_changed.connect(() => {
-            maximize_and_focus ();
-        });
-
         destroy.connect (() => {
             Gtk.main_quit ();
         });
-
-        load_users.begin (() => {
-            /* A significant delay is required in order for the window and card to be focused at
-             * at boot.  TODO: Find whether boot sequence can be tweaked to fix this.
-             */
-            Timeout.add (500, () => {
-                maximize_and_focus ();
-                return Source.REMOVE;
-            });
-        });
-
-        maximize_window ();
-    }
-
-    private void maximize_and_focus () {
-        present ();
-        maximize_window ();
-        if (current_card != null) {
-            current_card.grab_focus ();
-        }
     }
 
     private void maximize_window () {
@@ -305,19 +285,19 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         critical ("message: `%s' (%d): %s", text, type, messagetext.to_string ());
         /*var messagetext = string_to_messagetext(text);
-
+        
         if (messagetext == MessageText.FPRINT_SWIPE || messagetext == MessageText.FPRINT_PLACE) {
             // For the fprint module, there is no prompt message from PAM.
             send_prompt (PromptType.FPRINT);
-        }
-
+        }  
+        
         current_login.show_message (type, messagetext, text);*/
     }
 
     private void show_prompt (string text, LightDM.PromptType type = LightDM.PromptType.QUESTION) {
         critical ("prompt: `%s' (%d)", text, type);
         /*send_prompt (lightdm_prompttype_to_prompttype(type), string_to_prompttext(text), text);
-
+        
         had_prompt = true;
 
         current_login.show_prompt (type, prompttext, text);*/
