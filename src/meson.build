@@ -14,7 +14,7 @@ gsd_dir = get_option('gsd-dir')
 
 if gsd_dir == ''
     if ubuntu_patched_gsd
-        gsd_dir = join_paths(get_option('prefix'), get_option('libdir') + '/' + 'gnome-settings-daemon' + '/')
+        gsd_dir = join_paths(get_option('prefix'), 'lib', 'gnome-settings-daemon' + '/')
     else
         gsd_dir = join_paths(get_option('prefix'), get_option('libexecdir') + '/')
     endif
