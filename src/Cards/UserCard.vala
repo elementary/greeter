@@ -46,7 +46,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var fingerprint_image = new Gtk.Image.from_icon_name ("fingerprint-symbolic", Gtk.IconSize.BUTTON);
         this.bind_property ("use-fingerprint", fingerprint_image, "no-show-all", GLib.BindingFlags.INVERT_BOOLEAN|GLib.BindingFlags.SYNC_CREATE);
         this.bind_property ("use-fingerprint", fingerprint_image, "visible", GLib.BindingFlags.SYNC_CREATE);
+
         var session_button = new Greeter.SessionButton ();
+        session_button.valign = Gtk.Align.START;
 
         var caps_lock_revealer = new Greeter.CapsLockRevealer ();
 
@@ -56,6 +58,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
         password_grid.attach (password_entry, 0, 0);
         password_grid.attach (fingerprint_image, 1, 0);
         password_grid.attach (caps_lock_revealer, 0, 1, 2, 1);
+
+        var size_group = new Gtk.SizeGroup (Gtk.SizeGroupMode.VERTICAL);
+        size_group.add_widget (password_entry);
+        size_group.add_widget (session_button);
 
         var login_button = new Gtk.Button.with_label (_("Log In"));
         this.bind_property ("connecting", login_button, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
