@@ -90,6 +90,17 @@ public class Greeter.SettingsDaemon : Object {
             return;
         }
 
+        /* Disable all app launching shortcuts */
+        var media_key_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.media-keys");
+        media_key_settings.set_string ("calculator", "");
+        media_key_settings.set_string ("control-center", "");
+        media_key_settings.set_string ("email", "");
+        media_key_settings.set_string ("home", "");
+        media_key_settings.set_string ("media", "");
+        media_key_settings.set_string ("search", "");
+        media_key_settings.set_string ("terminal", "");
+        media_key_settings.set_string ("www", "");
+
         debug ("All bus names acquired, starting gnome-settings-daemon");
 
         string[] daemons = {
