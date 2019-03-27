@@ -24,6 +24,12 @@ public class Greeter.SessionButton : Gtk.MenuButton {
         var settings_list = new Gtk.ListBox ();
         settings_list.margin_bottom = 3;
         settings_list.margin_top = 3;
+        settings_list.set_sort_func ((row1, row2) => {
+            var child1 = (Gtk.ModelButton) row1.get_child ();
+            var child2 = (Gtk.ModelButton) row2.get_child ();
+
+            return child1.text.collate (child2.text);
+        });
 
         var settings_popover = new Gtk.Popover (this);
         settings_popover.position = Gtk.PositionType.BOTTOM;
@@ -57,6 +63,7 @@ public class Greeter.SessionButton : Gtk.MenuButton {
                     destroy ();
                 } else {
                     settings_list.show_all ();
+                    settings_list.invalidate_sort ();
                     ((Gtk.ModelButton) settings_list.get_row_at_index (0).get_child ()).active = true;
                 }
             }
