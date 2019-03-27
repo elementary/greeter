@@ -53,7 +53,7 @@ public class Greeter.SessionButton : Gtk.MenuButton {
                     settings_list.add (radio);
                 }
 
-                if (settings_list.get_row_at_index (0) == null) {
+                if (settings_list.get_row_at_index (1) == null) {
                     destroy ();
                 } else {
                     settings_list.show_all ();
