@@ -21,9 +21,20 @@
 
 public class Greeter.SessionButton : Gtk.MenuButton {
     construct {
+        var settings_list = new Gtk.ListBox ();
+        settings_list.margin_bottom = 3;
+        settings_list.margin_top = 3;
+
+        var settings_popover = new Gtk.Popover (this);
+        settings_popover.position = Gtk.PositionType.BOTTOM;
+        settings_popover.add (settings_list);
+
+        var cog_image = new Gtk.Image.from_icon_name ("open-menu-symbolic", Gtk.IconSize.BUTTON);
+
         direction = Gtk.ArrowType.DOWN;
-        menu_model = new GLib.Menu ();
+        popover = settings_popover;
         get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+        add (cog_image);
 
         // The session action is on the MainWindow toplevel, wait until it is accessible.
         hierarchy_changed.connect ((previous_toplevel) => {
@@ -35,17 +46,20 @@ public class Greeter.SessionButton : Gtk.MenuButton {
                 GLib.Variant? val = null;
                 string? key = null;
                 while (iter.next ("{sv}", out key, out val)) {
-                    var shell_menuitem = new GLib.MenuItem (key, GLib.Action.print_detailed_name ("session.select", val));
-                    ((GLib.Menu) menu_model).append_item (shell_menuitem);
+                    var radio = new Gtk.ModelButton ();
+                    radio.text = key;
+                    radio.set_detailed_action_name (GLib.Action.print_detailed_name ("session.select", val));
+
+                    settings_list.add (radio);
                 }
 
-                if (menu_model.get_n_items () < 2) {
+                if (settings_list.get_row_at_index (0) == null) {
                     destroy ();
+                } else {
+                    settings_list.show_all ();
+                    ((Gtk.ModelButton) settings_list.get_row_at_index (0).get_child ()).active = true;
                 }
             }
         });
-
-        var cog_image = new Gtk.Image.from_icon_name ("open-menu-symbolic", Gtk.IconSize.BUTTON);
-        add (cog_image);
     }
 }
