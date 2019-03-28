@@ -279,6 +279,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         });
         select_session_action.set_state_hint (vardict.end ());
 
+        if (select_session_action.get_state ().get_string () == "") {
+            select_session_action.set_state (new GLib.Variant.string ("pantheon"));
+        }
+
         select_session_action.activate.connect ((param) => {
             if (!select_session_action.get_state ().equal (param)) {
                 select_session_action.set_state (param);
