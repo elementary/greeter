@@ -64,10 +64,6 @@ public class Greeter.SessionButton : Gtk.MenuButton {
                 } else {
                     settings_list.show_all ();
                     settings_list.invalidate_sort ();
-
-                    if (session_action_group.get_action_state ("select").get_string () == "") {
-                        ((Gtk.ModelButton) settings_list.get_row_at_index (0).get_child ()).active = true;
-                    }
                 }
             }
         });
