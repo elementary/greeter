@@ -72,7 +72,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         disabled_message.max_width_chars = 30;
         disabled_message.valign = Gtk.Align.START;
         disabled_message.wrap = true;
-        disabled_message.get_style_context ().add_class (Gtk.STYLE_CLASS_ERROR);
 
         var login_stack = new Gtk.Stack ();
         login_stack.add_named (password_grid, "password");
