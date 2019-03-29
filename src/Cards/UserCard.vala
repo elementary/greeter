@@ -67,9 +67,17 @@ public class Greeter.UserCard : Greeter.BaseCard {
         this.bind_property ("connecting", login_button, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
         login_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
 
+        var disabled_message = new Gtk.Label (_("Account disabled by an administrator"));
+        disabled_message.margin_top = 3;
+        disabled_message.max_width_chars = 30;
+        disabled_message.valign = Gtk.Align.START;
+        disabled_message.wrap = true;
+        disabled_message.get_style_context ().add_class (Gtk.STYLE_CLASS_ERROR);
+
         var login_stack = new Gtk.Stack ();
         login_stack.add_named (password_grid, "password");
         login_stack.add_named (login_button, "button");
+        login_stack.add_named (disabled_message, "disabled");
 
         var form_grid = new Gtk.Grid ();
         form_grid.column_spacing = 6;
@@ -147,6 +155,15 @@ public class Greeter.UserCard : Greeter.BaseCard {
         card_overlay.add_overlay (avatar_overlay);
 
         add (card_overlay);
+
+        var user = Act.UserManager.get_default ().get_user (lightdm_user.name);
+        user.notify["is-loaded"].connect (() => {
+            if (user.locked) {
+                username_label.sensitive = false;
+                session_button.sensitive = false;
+                login_stack.visible_child_name = "disabled";
+            }
+        });
 
         card_overlay.focus.connect ((direction) => {
             if (direction == Gtk.DirectionType.LEFT) {
