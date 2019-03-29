@@ -1,7 +1,6 @@
 compositor/WindowManager.vala
 compositor/Utils.vala
 compositor/SystemBackground.vala
-compositor/Server.vala
 compositor/MediaFeedback.vala
 compositor/main.vala
 compositor/DBusAccelerator.vala

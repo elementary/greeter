@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-17 11:07+0100\n"
+"POT-Creation-Date: 2019-03-28 23:26-0700\n"
 "PO-Revision-Date: 2019-03-16 21:27+0000\n"
 "Last-Translator: nasserbinlaboun <nasser1990com@gmail.com>\n"
 "Language-Team: Arabic <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -21,15 +21,15 @@ msgstr ""
 "X-Generator: Weblate 3.4\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:431
+#: compositor/WindowManager.vala:409
 msgid "Does the display look OK?"
 msgstr "هل الواجهة تبدو جيدة؟"
 
-#: compositor/WindowManager.vala:434
+#: compositor/WindowManager.vala:412
 msgid "Keep This Configuration"
 msgstr "إحتفظ بهذه الإعدادات"
 
-#: compositor/WindowManager.vala:435
+#: compositor/WindowManager.vala:413
 msgid "Restore Previous Configuration"
 msgstr "إسترجع الإعدادات السابقة"
 
@@ -37,21 +37,25 @@ msgstr "إسترجع الإعدادات السابقة"
 msgid "Password"
 msgstr "كلمة المرور"
 
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:66
 msgid "Log In"
 msgstr "الدخول"
 
-#: src/MainWindow.vala:53
+#: src/MainWindow.vala:51
 msgid "Log in as Guest"
 msgstr "تسجيل الدخول كضيف"
 
-#: src/MainWindow.vala:55
+#: src/MainWindow.vala:53
 msgid "Manual Login…"
 msgstr "تسجيل دخول يدوي…"
 
 #: src/CapsLockRevealer.vala:27
 msgid "Caps Lock is on"
 msgstr "Caps Lock مفعل"
+
+#: src/Cards/UserCard.vala:144
+msgid "Session cannot be changed while user is logged in"
+msgstr ""
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
