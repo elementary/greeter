@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-17 11:07+0100\n"
+"POT-Creation-Date: 2019-03-28 23:26-0700\n"
 "PO-Revision-Date: 2019-01-03 00:04+0000\n"
 "Last-Translator: Jörg Arnold <j.ar@mailbox.org>\n"
 "Language-Team: German <https://weblate.elementary.io/projects/desktop/"
@@ -20,15 +20,15 @@ msgstr ""
 "X-Generator: Weblate 3.0.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:431
+#: compositor/WindowManager.vala:409
 msgid "Does the display look OK?"
 msgstr "Ist die Bildschirmanzeige korrekt?"
 
-#: compositor/WindowManager.vala:434
+#: compositor/WindowManager.vala:412
 msgid "Keep This Configuration"
 msgstr "Diese Einstellung speichern"
 
-#: compositor/WindowManager.vala:435
+#: compositor/WindowManager.vala:413
 msgid "Restore Previous Configuration"
 msgstr "Vorherige Einstellung wiederherstellen"
 
@@ -36,21 +36,25 @@ msgstr "Vorherige Einstellung wiederherstellen"
 msgid "Password"
 msgstr "Kennwort"
 
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:66
 msgid "Log In"
 msgstr "Anmelden"
 
-#: src/MainWindow.vala:53
+#: src/MainWindow.vala:51
 msgid "Log in as Guest"
 msgstr "Als Gast anmelden"
 
-#: src/MainWindow.vala:55
+#: src/MainWindow.vala:53
 msgid "Manual Login…"
 msgstr "Manuelle Anmeldung…"
 
 #: src/CapsLockRevealer.vala:27
 msgid "Caps Lock is on"
 msgstr "Feststelltaste ist aktiviert"
+
+#: src/Cards/UserCard.vala:144
+msgid "Session cannot be changed while user is logged in"
+msgstr ""
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
