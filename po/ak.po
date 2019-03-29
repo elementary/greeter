@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Akan (Desktop)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-17 11:07+0100\n"
+"POT-Creation-Date: 2019-03-28 23:26-0700\n"
 "PO-Revision-Date: 2017-06-12 16:06+0000\n"
 "Last-Translator: Lawrence Aberba <karabutaworld@gmail.com>\n"
 "Language-Team: Akan <karabutaworld@gmail.com>\n"
@@ -15,15 +15,15 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:431
+#: compositor/WindowManager.vala:409
 msgid "Does the display look OK?"
 msgstr ""
 
-#: compositor/WindowManager.vala:434
+#: compositor/WindowManager.vala:412
 msgid "Keep This Configuration"
 msgstr ""
 
-#: compositor/WindowManager.vala:435
+#: compositor/WindowManager.vala:413
 msgid "Restore Previous Configuration"
 msgstr ""
 
@@ -31,21 +31,25 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:60
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:66
 msgid "Log In"
 msgstr "Kɔ Mu"
 
-#: src/MainWindow.vala:53
+#: src/MainWindow.vala:51
 msgid "Log in as Guest"
 msgstr ""
 
-#: src/MainWindow.vala:55
+#: src/MainWindow.vala:53
 #, fuzzy
 msgid "Manual Login…"
 msgstr "Wo Ara Kɔ Mu"
 
 #: src/CapsLockRevealer.vala:27
 msgid "Caps Lock is on"
+msgstr ""
+
+#: src/Cards/UserCard.vala:144
+msgid "Session cannot be changed while user is logged in"
 msgstr ""
 
 #: src/Cards/ManualCard.vala:15
