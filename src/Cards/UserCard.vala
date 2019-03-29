@@ -141,7 +141,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             avatar_overlay.add_overlay (logged_in);
 
             session_button.sensitive = false;
-            session_button.tooltip_text = (_("Session type cannot be changed while logged in"));
+            session_button.tooltip_text = (_("Session cannot be changed while user is logged in"));
         }
 
         var card_overlay = new Gtk.Overlay ();
