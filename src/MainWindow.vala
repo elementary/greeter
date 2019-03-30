@@ -272,7 +272,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 opacity = current_opacity;
                 current_opacity += 0.02;
                 fade_in (current_opacity);
-                critical ("Opacity: %lf", current_opacity);
+                debug ("Opacity: %lf", current_opacity);
             }
             return Source.REMOVE;
         });
