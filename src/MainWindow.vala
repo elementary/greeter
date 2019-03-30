@@ -266,15 +266,15 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
     }
 
-    private void fade_in (double? current_opacity = 0) {
-        Timeout.add (1, () => {
-            if (current_opacity < 1) {
-                opacity = current_opacity;
-                current_opacity += 0.02;
-                fade_in (current_opacity);
-                debug ("Opacity: %lf", current_opacity);
-            }
-            return Source.REMOVE;
+    private void fade_in () {
+        double current_opacity = 0;
+
+        Timeout.add (8, () => {
+            opacity = current_opacity;
+            current_opacity += 0.05;
+            debug ("Opacity: %lf", current_opacity);
+
+            return current_opacity < 1;
         });
     }
 
