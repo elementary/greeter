@@ -41,6 +41,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     construct {
         app_paintable = true;
         decorated = false;
+        opacity = 0;
         type_hint = Gdk.WindowTypeHint.DESKTOP;
 
         settings = new Greeter.Settings ();
@@ -259,9 +260,22 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private void maximize_and_focus () {
         present ();
         maximize_window ();
+        fade_in ();
         if (current_card != null) {
             current_card.grab_focus ();
         }
+    }
+
+    private void fade_in (double? current_opacity = 0) {
+        Timeout.add (1, () => {
+            if (current_opacity < 1) {
+                opacity = current_opacity;
+                current_opacity += 0.02;
+                fade_in (current_opacity);
+                critical ("Opacity: %lf", current_opacity);
+            }
+            return Source.REMOVE;
+        });
     }
 
     private void maximize_window () {
