@@ -20,6 +20,8 @@
  */
 
 public class Greeter.MainWindow : Gtk.ApplicationWindow {
+    protected static Gtk.CssProvider css_provider;
+
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
     private int index_delta = 0;
@@ -38,11 +40,16 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         Gdk.Key.Tab
     };
 
+    static construct {
+        css_provider = new Gtk.CssProvider ();
+        css_provider.load_from_resource ("/io/elementary/greeter/MainWindow.css");
+    }
+
     construct {
         app_paintable = true;
         decorated = false;
-        opacity = 0;
         type_hint = Gdk.WindowTypeHint.DESKTOP;
+        get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         settings = new Greeter.Settings ();
         create_session_selection_action ();
@@ -260,22 +267,11 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private void maximize_and_focus () {
         present ();
         maximize_window ();
-        fade_in ();
+        get_style_context ().add_class ("initialized");
+
         if (current_card != null) {
             current_card.grab_focus ();
         }
-    }
-
-    private void fade_in () {
-        double current_opacity = 0;
-
-        Timeout.add (8, () => {
-            opacity = current_opacity;
-            current_opacity += 0.05;
-            debug ("Opacity: %lf", current_opacity);
-
-            return current_opacity < 1;
-        });
     }
 
     private void maximize_window () {
