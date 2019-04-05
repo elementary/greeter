@@ -225,6 +225,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private void on_act_user_loaded () {
+        if (!act_user.is_loaded) {
+            return;
+        }
+
         if (act_user.locked) {
             login_stack.visible_child_name = "disabled";
         } else {
