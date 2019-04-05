@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-28 23:26-0700\n"
+"POT-Creation-Date: 2019-04-04 19:01-0700\n"
 "PO-Revision-Date: 2018-12-12 00:07+0000\n"
 "Last-Translator: Corentin Noël <corentin@elementary.io>\n"
 "Language-Team: French <https://weblate.elementary.io/projects/desktop/"
@@ -40,16 +40,26 @@ msgstr "Mot de passe"
 msgid "Log In"
 msgstr "Connexion"
 
-#: src/MainWindow.vala:51
+#: src/MainWindow.vala:59
 msgid "Log in as Guest"
 msgstr "Connexion en tant qu'invité"
 
-#: src/MainWindow.vala:53
+#: src/MainWindow.vala:61
 msgid "Manual Login…"
 msgstr "Connexion manuelle…"
 
-#: src/CapsLockRevealer.vala:27
+#: src/CapsLockRevealer.vala:56
+#, fuzzy
+msgid "Caps Lock & Num Lock are on"
+msgstr "Le verrouillage des majuscules est actif"
+
+#: src/CapsLockRevealer.vala:58
 msgid "Caps Lock is on"
+msgstr "Le verrouillage des majuscules est actif"
+
+#: src/CapsLockRevealer.vala:60
+#, fuzzy
+msgid "Num Lock is on"
 msgstr "Le verrouillage des majuscules est actif"
 
 #: src/Cards/UserCard.vala:144

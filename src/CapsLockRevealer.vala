@@ -24,21 +24,43 @@ public class Greeter.CapsLockRevealer : Gtk.Revealer {
         var caps_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-capslock-symbolic", Gtk.IconSize.MENU);
         caps_lock_image.use_fallback = true;
 
-        var caps_lock_label = new Gtk.Label ("<small>%s</small>".printf (_("Caps Lock is on")));
-        caps_lock_label.use_markup = true;
+        var num_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-numlock-symbolic", Gtk.IconSize.MENU);
+        num_lock_image.use_fallback = true;
+
+        var lock_label = new Gtk.Label (null);
+        lock_label.use_markup = true;
 
         var caps_lock_grid = new Gtk.Grid ();
         caps_lock_grid.column_spacing = 3;
         caps_lock_grid.halign = Gtk.Align.CENTER;
         caps_lock_grid.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
         caps_lock_grid.add (caps_lock_image);
-        caps_lock_grid.add (caps_lock_label);
+        caps_lock_grid.add (num_lock_image);
+        caps_lock_grid.add (lock_label);
 
         add (caps_lock_grid);
 
+        string label;
+
         var keymap = Gdk.Keymap.get_for_display (Gdk.Display.get_default ());
         keymap.state_changed.connect (() => {
-            reveal_child = keymap.get_caps_lock_state ();
+            var caps_lock = keymap.get_caps_lock_state ();
+            var num_lock = keymap.get_num_lock_state ();
+
+            reveal_child = caps_lock || num_lock;
+
+            caps_lock_image.visible = caps_lock;
+            num_lock_image.visible = num_lock;
+
+            if (caps_lock && num_lock) {
+                label = _("Caps Lock & Num Lock are on");
+            } else if (caps_lock) {
+                label = _("Caps Lock is on");
+            } else if (num_lock) {
+                label = _("Num Lock is on");
+            }
+
+            lock_label.label = "<small>%s</small>".printf (GLib.Markup.escape_text (label, -1));
         });
     }
 }
