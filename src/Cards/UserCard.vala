@@ -28,7 +28,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
     public bool show_input { get; set; default = false; }
     public double reveal_ratio { get; private set; default = 0.0; }
 
+    private Act.User act_user;
     private Gtk.Revealer form_revealer;
+    private Gtk.Stack login_stack;
     private weak Gtk.StyleContext main_grid_style_context;
     private Greeter.PasswordEntry password_entry;
 
@@ -79,7 +81,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         disabled_grid.add (disabled_icon);
         disabled_grid.add (disabled_message);
 
-        var login_stack = new Gtk.Stack ();
+        login_stack = new Gtk.Stack ();
         login_stack.add_named (password_grid, "password");
         login_stack.add_named (login_button, "button");
         login_stack.add_named (disabled_grid, "disabled");
@@ -164,14 +166,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         add (card_overlay);
 
-        var user = Act.UserManager.get_default ().get_user (lightdm_user.name);
-        user.notify["is-loaded"].connect (() => {
-            if (user.locked) {
-                username_label.sensitive = false;
-                session_button.visible = false;
-                login_stack.visible_child_name = "disabled";
-            }
-        });
+        act_user = Act.UserManager.get_default ().get_user (lightdm_user.name);
+        act_user.bind_property ("locked", username_label, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
+        act_user.bind_property ("locked", session_button, "visible", GLib.BindingFlags.INVERT_BOOLEAN);
+        act_user.notify["is-loaded"].connect (on_act_user_loaded);
+
+        on_act_user_loaded ();
 
         card_overlay.focus.connect ((direction) => {
             if (direction == Gtk.DirectionType.LEFT) {
@@ -222,6 +222,18 @@ public class Greeter.UserCard : Greeter.BaseCard {
         grab_focus.connect (() => {
             password_entry.grab_focus_without_selecting ();
         });
+    }
+
+    private void on_act_user_loaded () {
+        if (act_user.locked) {
+            login_stack.visible_child_name = "disabled";
+        } else {
+            if (need_password) {
+                login_stack.visible_child_name = "password";
+            } else {
+                login_stack.visible_child_name = "button";
+            }
+        }
     }
 
     private void on_login () {
