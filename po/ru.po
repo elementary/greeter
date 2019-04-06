@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-28 23:26-0700\n"
+"POT-Creation-Date: 2019-04-04 19:01-0700\n"
 "PO-Revision-Date: 2018-11-19 00:07+0000\n"
 "Last-Translator: Kirill Romanov <djaler1@gmail.com>\n"
 "Language-Team: Russian <https://weblate.elementary.io/projects/desktop/"
@@ -41,16 +41,26 @@ msgstr "Пароль"
 msgid "Log In"
 msgstr "Войти"
 
-#: src/MainWindow.vala:51
+#: src/MainWindow.vala:59
 msgid "Log in as Guest"
 msgstr "Войти как гость"
 
-#: src/MainWindow.vala:53
+#: src/MainWindow.vala:61
 msgid "Manual Login…"
 msgstr "Ручной вход…"
 
-#: src/CapsLockRevealer.vala:27
+#: src/CapsLockRevealer.vala:56
+#, fuzzy
+msgid "Caps Lock & Num Lock are on"
+msgstr "Caps Lock включён"
+
+#: src/CapsLockRevealer.vala:58
 msgid "Caps Lock is on"
+msgstr "Caps Lock включён"
+
+#: src/CapsLockRevealer.vala:60
+#, fuzzy
+msgid "Num Lock is on"
 msgstr "Caps Lock включён"
 
 #: src/Cards/UserCard.vala:144

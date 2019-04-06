@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-28 23:26-0700\n"
+"POT-Creation-Date: 2019-04-04 19:01-0700\n"
 "PO-Revision-Date: 2018-11-18 01:13+0000\n"
 "Last-Translator: Cleiton Floss <cleitonfloss@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://weblate.elementary.io/projects/"
@@ -40,16 +40,26 @@ msgstr "Senha"
 msgid "Log In"
 msgstr "Entrar"
 
-#: src/MainWindow.vala:51
+#: src/MainWindow.vala:59
 msgid "Log in as Guest"
 msgstr "Entrar como convidado"
 
-#: src/MainWindow.vala:53
+#: src/MainWindow.vala:61
 msgid "Manual Login…"
 msgstr "Login manual…"
 
-#: src/CapsLockRevealer.vala:27
+#: src/CapsLockRevealer.vala:56
+#, fuzzy
+msgid "Caps Lock & Num Lock are on"
+msgstr "Caps Lock está ativado"
+
+#: src/CapsLockRevealer.vala:58
 msgid "Caps Lock is on"
+msgstr "Caps Lock está ativado"
+
+#: src/CapsLockRevealer.vala:60
+#, fuzzy
+msgid "Num Lock is on"
 msgstr "Caps Lock está ativado"
 
 #: src/Cards/UserCard.vala:144

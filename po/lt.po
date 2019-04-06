@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-28 23:26-0700\n"
+"POT-Creation-Date: 2019-04-04 19:01-0700\n"
 "PO-Revision-Date: 2018-11-19 11:19+0000\n"
 "Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian <https://weblate.elementary.io/projects/desktop/"
@@ -41,16 +41,26 @@ msgstr "Slaptažodis"
 msgid "Log In"
 msgstr "Prisijungti"
 
-#: src/MainWindow.vala:51
+#: src/MainWindow.vala:59
 msgid "Log in as Guest"
 msgstr "Prisijungti kaip svečias"
 
-#: src/MainWindow.vala:53
+#: src/MainWindow.vala:61
 msgid "Manual Login…"
 msgstr "Rankinis prisijungimas…"
 
-#: src/CapsLockRevealer.vala:27
+#: src/CapsLockRevealer.vala:56
+#, fuzzy
+msgid "Caps Lock & Num Lock are on"
+msgstr "Įjungtos DIDŽIOSIOS RAIDĖS"
+
+#: src/CapsLockRevealer.vala:58
 msgid "Caps Lock is on"
+msgstr "Įjungtos DIDŽIOSIOS RAIDĖS"
+
+#: src/CapsLockRevealer.vala:60
+#, fuzzy
+msgid "Num Lock is on"
 msgstr "Įjungtos DIDŽIOSIOS RAIDĖS"
 
 #: src/Cards/UserCard.vala:144
