@@ -388,35 +388,45 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.notify_property ("has-guest-account-hint");
 
         unowned LightDM.UserList lightdm_user_list = LightDM.UserList.get_instance ();
-        lightdm_user_list.users.foreach ((user) => {
-            add_card (user);
-        });
 
-        unowned string? select_user = lightdm_greeter.select_user_hint;
-        var user_to_select = (select_user != null) ? select_user : settings.last_user;
-
-        bool user_selected = false;
-        if (user_to_select != null) {
-            user_cards.head.foreach ((card) => {
-                if (card.lightdm_user.name == user_to_select) {
-                    switch_to_card (card);
-                    user_selected = true;
-                }
+        if (lightdm_user_list.length > 0) {
+            lightdm_user_list.users.foreach ((user) => {
+                add_card (user);
             });
-        }
 
-        if (!user_selected) {
-            unowned Greeter.UserCard user_card = (Greeter.UserCard) user_cards.peek_head ();
-            user_card.show_input = true;
-            try {
-                lightdm_greeter.authenticate (user_card.lightdm_user.name);
-            } catch (Error e) {
-                critical (e.message);
+            unowned string? select_user = lightdm_greeter.select_user_hint;
+            var user_to_select = (select_user != null) ? select_user : settings.last_user;
+
+            bool user_selected = false;
+            if (user_to_select != null) {
+                user_cards.head.foreach ((card) => {
+                    if (card.lightdm_user.name == user_to_select) {
+                        switch_to_card (card);
+                        user_selected = true;
+                    }
+                });
             }
-        }
 
-        if (lightdm_greeter.default_session_hint != null) {
-            get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
+            if (!user_selected) {
+                unowned Greeter.UserCard user_card = (Greeter.UserCard) user_cards.peek_head ();
+                user_card.show_input = true;
+                try {
+                    lightdm_greeter.authenticate (user_card.lightdm_user.name);
+                } catch (Error e) {
+                    critical (e.message);
+                }
+            }
+
+            if (lightdm_greeter.default_session_hint != null) {
+                get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
+            }
+       } else {
+            try {
+                var initial_setup = AppInfo.create_from_commandline ("io.elementary.initial-setup", null, GLib.AppInfoCreateFlags.NONE);
+                initial_setup.launch (null, null);
+            } catch (Error e) {
+                critical ("Unable to launch initial setup: %s", e.message);
+            }
         }
     }
 
