@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-28 23:26-0700\n"
-"PO-Revision-Date: 2019-04-08 12:53+0000\n"
+"PO-Revision-Date: 2019-04-17 20:53+0000\n"
 "Last-Translator: Ozgur Baskin <bebeto_baskin@yahoo.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/greeter/"
 "tr/>\n"
@@ -42,11 +42,11 @@ msgstr "Oturum Aç"
 
 #: src/MainWindow.vala:51
 msgid "Log in as Guest"
-msgstr "Misafir Olarak Oturum Aç"
+msgstr "Konuk Olarak Oturum Aç"
 
 #: src/MainWindow.vala:53
 msgid "Manual Login…"
-msgstr "Elle Giriş Yap…"
+msgstr "El İle Oturum Aç…"
 
 #: src/CapsLockRevealer.vala:27
 msgid "Caps Lock is on"
@@ -58,7 +58,7 @@ msgstr "Kullanıcı oturumu açıkken oturum değiştirilemez"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
-msgstr "Elle Giriş Yap"
+msgstr "El İle Oturum Aç"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
