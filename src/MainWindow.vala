@@ -420,7 +420,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             if (lightdm_greeter.default_session_hint != null) {
                 get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
             }
-        } else {
+        }
+        // else {
             try {
                 var initial_setup = AppInfo.create_from_commandline ("io.elementary.initial-setup", null, GLib.AppInfoCreateFlags.NONE);
                 initial_setup.launch (null, null);
@@ -435,7 +436,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
                 critical ("%s %s", error_text, e.message);
             }
-        }
+        // }
     }
 
     private void add_card (LightDM.User lightdm_user) {
