@@ -425,15 +425,19 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 var initial_setup = AppInfo.create_from_commandline ("io.elementary.initial-setup", null, GLib.AppInfoCreateFlags.NONE);
                 initial_setup.launch (null, null);
             } catch (Error e) {
-                string error_text = _("Unable to launch initial setup:");
+                string error_text = _("Unable to launch Initial Setup");
+                critical ("%s: %s", error_text, e.message);
 
-                try {
-                    Process.spawn_command_line_async ("zenity --error --width=256 --text=\"%s\n\n<tt>%s</tt>\"".printf (error_text, e.message));
-                } catch (Error e) {
-                    critical ("Unable to launch error dialog: %s", e.message);
-                }
+                var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
+                error_text,
+                _("Initial Setup creates your first user. Without it, you will not be able to log in and may need to reinstall the OS."),
+                "dialog-error",
+                Gtk.ButtonsType.CLOSE
+                );
 
-                critical ("%s %s", error_text, e.message);
+                error_dialog.show_error_details (e.message);
+                error_dialog.run ();
+                error_dialog.destroy ();
             }
         }
     }
