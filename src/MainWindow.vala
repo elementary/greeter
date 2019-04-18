@@ -422,8 +422,12 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         } else {
             try {
-                var initial_setup = AppInfo.create_from_commandline ("io.elementary.initial-setup", null, GLib.AppInfoCreateFlags.NONE);
-                initial_setup.launch (null, null);
+                /* We're not certain that scaling factor will change, but try to wait for GSD in case it does */
+                Timeout.add (500, () => {
+                    var initial_setup = AppInfo.create_from_commandline ("io.elementary.initial-setup", null, GLib.AppInfoCreateFlags.NONE);
+                    initial_setup.launch (null, null);
+                    return Source.REMOVE;
+                });
             } catch (Error e) {
                 string error_text = _("Unable to launch Initial Setup");
                 critical ("%s: %s", error_text, e.message);
