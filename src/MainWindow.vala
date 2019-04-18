@@ -420,12 +420,20 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             if (lightdm_greeter.default_session_hint != null) {
                 get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
             }
-       } else {
+        } else {
             try {
                 var initial_setup = AppInfo.create_from_commandline ("io.elementary.initial-setup", null, GLib.AppInfoCreateFlags.NONE);
                 initial_setup.launch (null, null);
             } catch (Error e) {
-                critical ("Unable to launch initial setup: %s", e.message);
+                string error_text = _("Unable to launch initial setup:");
+
+                try {
+                    Process.spawn_command_line_async ("zenity --error --width=256 --text=\"%s\n\n<tt>%s</tt>\"".printf (error_text, e.message));
+                } catch (Error e) {
+                    critical ("Unable to launch error dialog: %s", e.message);
+                }
+
+                critical ("%s %s", error_text, e.message);
             }
         }
     }
