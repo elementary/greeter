@@ -422,20 +422,28 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         }
         // else {
-            try {
-                var initial_setup = AppInfo.create_from_commandline ("io.elementary.initial-setup", null, GLib.AppInfoCreateFlags.NONE);
-                initial_setup.launch (null, null);
-            } catch (Error e) {
-                string error_text = _("Unable to launch initial setup:");
-
+            /* We're not certain that scaling factor will change, but try to wait for GSD in case it does */
+            Timeout.add (500, () => {
                 try {
-                    Process.spawn_command_line_async ("zenity --error --width=256 --text=\"%s\n\n<tt>%s</tt>\"".printf (error_text, e.message));
+                    var initial_setup = AppInfo.create_from_commandline ("io.elementary.initial-setup", null, GLib.AppInfoCreateFlags.NONE);
+                    initial_setup.launch (null, null);
                 } catch (Error e) {
-                    critical ("Unable to launch error dialog: %s", e.message);
-                }
+                    string error_text = _("Unable to Launch Initial Setup");
+                    critical ("%s: %s", error_text, e.message);
 
-                critical ("%s %s", error_text, e.message);
-            }
+                    var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
+                        error_text,
+                        _("Initial Setup creates your first user. Without it, you will not be able to log in and may need to reinstall the OS."),
+                        "dialog-error",
+                        Gtk.ButtonsType.CLOSE
+                    );
+
+                    error_dialog.show_error_details (e.message);
+                    error_dialog.run ();
+                    error_dialog.destroy ();
+                }
+                return Source.REMOVE;
+            });
         // }
     }
 
