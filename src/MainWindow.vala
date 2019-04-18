@@ -433,10 +433,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 critical ("%s: %s", error_text, e.message);
 
                 var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
-                error_text,
-                _("Initial Setup creates your first user. Without it, you will not be able to log in and may need to reinstall the OS."),
-                "dialog-error",
-                Gtk.ButtonsType.CLOSE
+                    error_text,
+                    _("Initial Setup creates your first user. Without it, you will not be able to log in and may need to reinstall the OS."),
+                    "dialog-error",
+                    Gtk.ButtonsType.CLOSE
                 );
 
                 error_dialog.show_error_details (e.message);
