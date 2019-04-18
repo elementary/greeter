@@ -429,7 +429,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     return Source.REMOVE;
                 });
             } catch (Error e) {
-                string error_text = _("Unable to launch Initial Setup");
+                string error_text = _("Unable to Launch Initial Setup");
                 critical ("%s: %s", error_text, e.message);
 
                 var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
