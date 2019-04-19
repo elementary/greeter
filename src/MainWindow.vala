@@ -442,14 +442,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     error_dialog.run ();
                     error_dialog.destroy ();
                 }
-
-                try {
-                    var terminal = AppInfo.create_from_commandline ("io.elementary.terminal", null, GLib.AppInfoCreateFlags.NONE);
-                    terminal.launch (null, null);
-                } catch (Error e) {
-                    critical (e.message);
-                }
-
                 return Source.REMOVE;
             });
         // }
