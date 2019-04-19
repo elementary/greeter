@@ -205,7 +205,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         unowned LightDM.UserList lightdm_user_list = LightDM.UserList.get_instance ();
         lightdm_user_list.user_added.connect(() => {
-            load_users ();
+            load_users.begin ();
         });
 
         manual_card.do_connect_username.connect (do_connect_username);
