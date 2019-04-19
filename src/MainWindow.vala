@@ -31,6 +31,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private Greeter.Settings settings;
     private Gtk.ToggleButton manual_login_button;
     private unowned Greeter.BaseCard current_card;
+    private unowned LightDM.UserList lightdm_user_list;
+
     private const uint[] NAVIGATION_KEYS = {
         Gdk.Key.Up,
         Gdk.Key.Down,
@@ -203,7 +205,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             maximize_window ();
         });
 
-        unowned LightDM.UserList lightdm_user_list = LightDM.UserList.get_instance ();
+        lightdm_user_list = LightDM.UserList.get_instance ();
         lightdm_user_list.user_added.connect(() => {
             load_users.begin ();
         });
@@ -391,8 +393,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         lightdm_greeter.notify_property ("show-manual-login-hint");
         lightdm_greeter.notify_property ("has-guest-account-hint");
-
-        unowned LightDM.UserList lightdm_user_list = LightDM.UserList.get_instance ();
 
         if (lightdm_user_list.length > 0) {
             lightdm_user_list.users.foreach ((user) => {
