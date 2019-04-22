@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 19:01-0700\n"
+"POT-Creation-Date: 2019-04-22 15:15-0700\n"
 "PO-Revision-Date: 2018-12-13 14:46+0000\n"
 "Last-Translator: Daniel Zvir <zvir.daniel@seznam.cz>\n"
 "Language-Team: Czech <https://weblate.elementary.io/projects/desktop/greeter/"
@@ -36,17 +36,27 @@ msgstr "Obnovit Předchozí Konfiguraci"
 msgid "Password"
 msgstr "Heslo"
 
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:66
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:68
 msgid "Log In"
 msgstr "Přihlásit se"
 
-#: src/MainWindow.vala:59
+#: src/MainWindow.vala:61
 msgid "Log in as Guest"
 msgstr "Přihlásit jako host"
 
-#: src/MainWindow.vala:61
+#: src/MainWindow.vala:63
 msgid "Manual Login…"
 msgstr "Ruční přihlášení…"
+
+#: src/MainWindow.vala:435
+msgid "Unable to Launch Initial Setup"
+msgstr ""
+
+#: src/MainWindow.vala:440
+msgid ""
+"Initial Setup creates your first user. Without it, you will not be able to "
+"log in and may need to reinstall the OS."
+msgstr ""
 
 #: src/CapsLockRevealer.vala:56
 #, fuzzy
@@ -62,7 +72,11 @@ msgstr "Caps Lock je zapnutý"
 msgid "Num Lock is on"
 msgstr "Caps Lock je zapnutý"
 
-#: src/Cards/UserCard.vala:144
+#: src/Cards/UserCard.vala:74
+msgid "Account disabled"
+msgstr ""
+
+#: src/Cards/UserCard.vala:159
 msgid "Session cannot be changed while user is logged in"
 msgstr ""
 

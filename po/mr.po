@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-28 23:26-0700\n"
+"POT-Creation-Date: 2019-04-22 15:15-0700\n"
 "PO-Revision-Date: 2019-04-08 12:53+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
 "Language-Team: Marathi <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -36,17 +36,27 @@ msgstr "मागील कॉन्फिगरेशन पुनर्सं�
 msgid "Password"
 msgstr "पासवर्ड"
 
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:66
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:68
 msgid "Log In"
 msgstr "लॉग इन"
 
-#: src/MainWindow.vala:59
+#: src/MainWindow.vala:61
 msgid "Log in as Guest"
 msgstr "अतिथी म्हणून लॉग इन करा"
 
-#: src/MainWindow.vala:61
+#: src/MainWindow.vala:63
 msgid "Manual Login…"
 msgstr "मॅन्युअल लॉग इन…"
+
+#: src/MainWindow.vala:435
+msgid "Unable to Launch Initial Setup"
+msgstr ""
+
+#: src/MainWindow.vala:440
+msgid ""
+"Initial Setup creates your first user. Without it, you will not be able to "
+"log in and may need to reinstall the OS."
+msgstr ""
 
 #: src/CapsLockRevealer.vala:56
 #, fuzzy
@@ -62,7 +72,11 @@ msgstr "कॅप्स लॉक चालू आहे"
 msgid "Num Lock is on"
 msgstr "कॅप्स लॉक चालू आहे"
 
-#: src/Cards/UserCard.vala:144
+#: src/Cards/UserCard.vala:74
+msgid "Account disabled"
+msgstr ""
+
+#: src/Cards/UserCard.vala:159
 msgid "Session cannot be changed while user is logged in"
 msgstr "वापरकर्ता लॉग इन असताना सत्र बदलले जाऊ शकत नाही"
 

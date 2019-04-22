@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-28 23:26-0700\n"
+"POT-Creation-Date: 2019-04-22 15:15-0700\n"
 "PO-Revision-Date: 2019-04-08 12:53+0000\n"
 "Last-Translator: Jung-Kyu Park <bagjunggyu@gmail.com>\n"
 "Language-Team: Korean <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -36,17 +36,27 @@ msgstr "이전 설정으로 되돌립니다"
 msgid "Password"
 msgstr "비밀번호"
 
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:66
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:68
 msgid "Log In"
 msgstr "로그인"
 
-#: src/MainWindow.vala:59
+#: src/MainWindow.vala:61
 msgid "Log in as Guest"
 msgstr "손님으로 로그인 하기"
 
-#: src/MainWindow.vala:61
+#: src/MainWindow.vala:63
 msgid "Manual Login…"
 msgstr "수동 로그인…"
+
+#: src/MainWindow.vala:435
+msgid "Unable to Launch Initial Setup"
+msgstr ""
+
+#: src/MainWindow.vala:440
+msgid ""
+"Initial Setup creates your first user. Without it, you will not be able to "
+"log in and may need to reinstall the OS."
+msgstr ""
 
 #: src/CapsLockRevealer.vala:56
 #, fuzzy
@@ -62,7 +72,11 @@ msgstr "Caps Lock 켜짐"
 msgid "Num Lock is on"
 msgstr "Caps Lock 켜짐"
 
-#: src/Cards/UserCard.vala:144
+#: src/Cards/UserCard.vala:74
+msgid "Account disabled"
+msgstr ""
+
+#: src/Cards/UserCard.vala:159
 msgid "Session cannot be changed while user is logged in"
 msgstr "사용자가 로그인 중일 땐 세션을 바꿀 수 없습니다"
 

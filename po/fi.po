@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 19:01-0700\n"
+"POT-Creation-Date: 2019-04-22 15:15-0700\n"
 "PO-Revision-Date: 2018-12-08 00:04+0000\n"
 "Last-Translator: Veli-Pekka Samuli Finnilä <vpf@tuta.io>\n"
 "Language-Team: Finnish <https://weblate.elementary.io/projects/desktop/"
@@ -36,17 +36,27 @@ msgstr "Palauta aiemmat asetukset"
 msgid "Password"
 msgstr "Salasana"
 
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:66
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:68
 msgid "Log In"
 msgstr "Kirjaudu sisään"
 
-#: src/MainWindow.vala:59
+#: src/MainWindow.vala:61
 msgid "Log in as Guest"
 msgstr "Kirjaudu sisään vieraana"
 
-#: src/MainWindow.vala:61
+#: src/MainWindow.vala:63
 msgid "Manual Login…"
 msgstr "Manuaalinen kirjautuminen…"
+
+#: src/MainWindow.vala:435
+msgid "Unable to Launch Initial Setup"
+msgstr ""
+
+#: src/MainWindow.vala:440
+msgid ""
+"Initial Setup creates your first user. Without it, you will not be able to "
+"log in and may need to reinstall the OS."
+msgstr ""
 
 #: src/CapsLockRevealer.vala:56
 #, fuzzy
@@ -62,7 +72,11 @@ msgstr "Caps Lock on päällä"
 msgid "Num Lock is on"
 msgstr "Caps Lock on päällä"
 
-#: src/Cards/UserCard.vala:144
+#: src/Cards/UserCard.vala:74
+msgid "Account disabled"
+msgstr ""
+
+#: src/Cards/UserCard.vala:159
 msgid "Session cannot be changed while user is logged in"
 msgstr ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 19:01-0700\n"
+"POT-Creation-Date: 2019-04-22 15:15-0700\n"
 "PO-Revision-Date: 2016-08-24 23:25+0000\n"
 "Last-Translator: Nate <natejms@outlook.com>\n"
 "Language-Team: French (Canada) <fr_CA@li.org>\n"
@@ -34,18 +34,28 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:66
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:68
 msgid "Log In"
 msgstr "Se Connecter"
 
-#: src/MainWindow.vala:59
+#: src/MainWindow.vala:61
 msgid "Log in as Guest"
 msgstr ""
 
-#: src/MainWindow.vala:61
+#: src/MainWindow.vala:63
 #, fuzzy
 msgid "Manual Login…"
 msgstr "Se Connecter Manuellement"
+
+#: src/MainWindow.vala:435
+msgid "Unable to Launch Initial Setup"
+msgstr ""
+
+#: src/MainWindow.vala:440
+msgid ""
+"Initial Setup creates your first user. Without it, you will not be able to "
+"log in and may need to reinstall the OS."
+msgstr ""
 
 #: src/CapsLockRevealer.vala:56
 msgid "Caps Lock & Num Lock are on"
@@ -59,7 +69,11 @@ msgstr ""
 msgid "Num Lock is on"
 msgstr ""
 
-#: src/Cards/UserCard.vala:144
+#: src/Cards/UserCard.vala:74
+msgid "Account disabled"
+msgstr ""
+
+#: src/Cards/UserCard.vala:159
 msgid "Session cannot be changed while user is logged in"
 msgstr ""
 
