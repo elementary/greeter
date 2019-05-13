@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-22 15:15-0700\n"
-"PO-Revision-Date: 2019-04-08 12:53+0000\n"
-"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"PO-Revision-Date: 2019-05-03 01:39+0000\n"
+"Last-Translator: Nuno Alexandre MS Ribeiro <nuno.anarresti@gmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/desktop/"
 "greeter/pt/>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.5.1\n"
+"X-Generator: Weblate 3.6\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:409
@@ -50,31 +50,31 @@ msgstr "Iniciar Sessão Manual…"
 
 #: src/MainWindow.vala:435
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Não foi possível abrir a Configuração Inicial"
 
 #: src/MainWindow.vala:440
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"A configuração Inicial cria o seu primeiro utilizador. Sem isso, não será "
+"capaz de iniciar sessão e poderá ter de reinstalar o sistema operativo."
 
 #: src/CapsLockRevealer.vala:56
-#, fuzzy
 msgid "Caps Lock & Num Lock are on"
-msgstr "O Caps Lock está ativado"
+msgstr "O Caps Lock e o Num Lock estão ativados"
 
 #: src/CapsLockRevealer.vala:58
 msgid "Caps Lock is on"
 msgstr "O Caps Lock está ativado"
 
 #: src/CapsLockRevealer.vala:60
-#, fuzzy
 msgid "Num Lock is on"
-msgstr "O Caps Lock está ativado"
+msgstr "O Num Lock está ativado"
 
 #: src/Cards/UserCard.vala:74
 msgid "Account disabled"
-msgstr ""
+msgstr "Conta desativada"
 
 #: src/Cards/UserCard.vala:159
 msgid "Session cannot be changed while user is logged in"
