@@ -272,5 +272,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
             entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
             return GLib.Source.REMOVE;
         });
+        password_entry.grab_focus_without_selecting ();
     }
 }
