@@ -40,10 +40,9 @@ public class Greeter.CapsLockRevealer : Gtk.Revealer {
 
         add (caps_lock_grid);
 
-        string label;
-
-        var keymap = Gdk.Keymap.get_for_display (Gdk.Display.get_default ());
+        weak Gdk.Keymap keymap = Gdk.Keymap.get_for_display (Gdk.Display.get_default ());
         keymap.state_changed.connect (() => {
+            unowned string? label = null;
             var caps_lock = keymap.get_caps_lock_state ();
             var num_lock = keymap.get_num_lock_state ();
 
@@ -60,7 +59,11 @@ public class Greeter.CapsLockRevealer : Gtk.Revealer {
                 label = _("Num Lock is on");
             }
 
-            lock_label.label = "<small>%s</small>".printf (GLib.Markup.escape_text (label, -1));
+            if (label == null) {
+                lock_label.label = null;
+            } else {
+                lock_label.label = "<small>%s</small>".printf (GLib.Markup.escape_text (label, -1));
+            }
         });
     }
 }
