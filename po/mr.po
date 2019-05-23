@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-22 15:15-0700\n"
-"PO-Revision-Date: 2019-04-08 12:53+0000\n"
+"PO-Revision-Date: 2019-05-14 23:14+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
 "Language-Team: Marathi <https://l10n.elementary.io/projects/desktop/greeter/"
 "mr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.5.1\n"
+"X-Generator: Weblate 3.6.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:409
@@ -50,31 +50,31 @@ msgstr "मॅन्युअल लॉग इन…"
 
 #: src/MainWindow.vala:435
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "आरंभिक सेटअप सुरू करण्यात अक्षम"
 
 #: src/MainWindow.vala:440
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"आरंभिक सेटअप आपला प्रथम वापरकर्ता तयार करतो. त्याशिवाय, आपण लॉग इन करण्यास "
+"सक्षम असणार नाही आणि ओएस पुन्हा स्थापित करण्याची आवश्यकता असू शकते."
 
 #: src/CapsLockRevealer.vala:56
-#, fuzzy
 msgid "Caps Lock & Num Lock are on"
-msgstr "कॅप्स लॉक चालू आहे"
+msgstr "कॅप्स लॉक आणि नेम लॉक चालू आहेत"
 
 #: src/CapsLockRevealer.vala:58
 msgid "Caps Lock is on"
 msgstr "कॅप्स लॉक चालू आहे"
 
 #: src/CapsLockRevealer.vala:60
-#, fuzzy
 msgid "Num Lock is on"
-msgstr "कॅप्स लॉक चालू आहे"
+msgstr "नेम लॉक चालू आहे"
 
 #: src/Cards/UserCard.vala:74
 msgid "Account disabled"
-msgstr ""
+msgstr "खाते अक्षम"
 
 #: src/Cards/UserCard.vala:159
 msgid "Session cannot be changed while user is logged in"
