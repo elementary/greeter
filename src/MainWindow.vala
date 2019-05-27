@@ -249,6 +249,20 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             return false;
         });
 
+        scroll_event.connect ((event) => {
+            switch (event.direction) {
+            case Gdk.ScrollDirection.UP:
+                activate_action ("next", null);
+                break;
+            case Gdk.ScrollDirection.DOWN:
+                activate_action ("previous", null);
+                break;
+            default:
+                break;
+            }
+            return false;
+        });
+
         // regrab focus when dpi changed
         get_screen ().monitors_changed.connect(() => {
             maximize_and_focus ();
@@ -502,6 +516,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         distance = (next_delta - index_delta) * natural_width;
         user_card.notify["reveal-ratio"].connect (notify_cb);
         user_card.show_input = true;
+        user_card.grab_focus ();
         if (index_delta != next_delta) {
             ((Greeter.UserCard) user_cards.peek_nth (index_delta)).show_input = false;
         }
