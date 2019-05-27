@@ -226,12 +226,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                                 } else {
                                     activate_action ("previous", null);
                                 }
+                                return true;
                             } else if (event.keyval == Gdk.Key.Right) {
                                 if (get_style_context ().direction == Gtk.TextDirection.RTL) {
                                     activate_action ("previous", null);
                                 } else {
                                     activate_action ("next", null);
                                 }
+                                return true;
                             }
                         }
                     }
