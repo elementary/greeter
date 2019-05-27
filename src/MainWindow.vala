@@ -254,10 +254,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         scroll_event.connect ((event) => {
             switch (event.direction) {
             case Gdk.ScrollDirection.UP:
-                activate_action ("next", null);
+                activate_action ("previous", null);
                 break;
             case Gdk.ScrollDirection.DOWN:
-                activate_action ("previous", null);
+                activate_action ("next", null);
                 break;
             default:
                 break;
