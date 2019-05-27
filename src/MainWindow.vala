@@ -249,6 +249,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             return false;
         });
 
+        add_events (Gdk.EventMask.SCROLL_MASK);
+
         scroll_event.connect ((event) => {
             switch (event.direction) {
             case Gdk.ScrollDirection.UP:
