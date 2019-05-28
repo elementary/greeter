@@ -27,8 +27,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
     public LightDM.User lightdm_user { get; construct; }
     public bool show_input { get; set; default = false; }
     public double reveal_ratio { get; private set; default = 0.0; }
+    public bool is_24h { get; set; default = true; }
 
     private Act.User act_user;
+    private Greeter.AccountsService greeter_act;
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private weak Gtk.StyleContext main_grid_style_context;
@@ -103,20 +105,22 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var background_path = lightdm_user.background;
 
         if (background_path == null) {
-            try {
-                string path = GLib.Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
+            string path = GLib.Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
+            if (GLib.FileUtils.test (path, FileTest.EXISTS)) {
                 var background_directory = GLib.File.new_for_path (path);
-                var enumerator = background_directory.enumerate_children (GLib.FileAttribute.STANDARD_NAME, GLib.FileQueryInfoFlags.NONE);
+                try {
+                    var enumerator = background_directory.enumerate_children (GLib.FileAttribute.STANDARD_NAME, GLib.FileQueryInfoFlags.NONE);
 
-                GLib.FileInfo file_info;
-                while ((file_info = enumerator.next_file ()) != null) {
-                    if (file_info.get_file_type () == GLib.FileType.REGULAR) {
-                        background_path = Path.build_filename (path, file_info.get_name ());
-                        break;
+                    GLib.FileInfo file_info;
+                    while ((file_info = enumerator.next_file ()) != null) {
+                        if (file_info.get_file_type () == GLib.FileType.REGULAR) {
+                            background_path = Path.build_filename (path, file_info.get_name ());
+                            break;
+                        }
                     }
+                } catch (Error e) {
+                    critical (e.message);
                 }
-            } catch (Error e) {
-                critical (e.message);
             }
         }
 
@@ -227,6 +231,24 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private void on_act_user_loaded () {
         if (!act_user.is_loaded) {
             return;
+        }
+
+        unowned string? act_path = act_user.get_object_path ();
+        if (act_path != null) {
+            try {
+                greeter_act = GLib.Bus.get_proxy_sync (GLib.BusType.SYSTEM,
+                                                       "org.freedesktop.Accounts",
+                                                       act_path,
+                                                       GLib.DBusProxyFlags.GET_INVALIDATED_PROPERTIES);
+                is_24h = greeter_act.time_format != "12h";
+                ((GLib.DBusProxy) greeter_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
+                    string time_format;
+                    changed_properties.lookup ("TimeFormat", "s", out time_format);
+                    is_24h = time_format != "12h";
+                });
+            } catch (Error e) {
+                critical (e.message);
+            }
         }
 
         if (act_user.locked) {
