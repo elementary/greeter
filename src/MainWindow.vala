@@ -30,6 +30,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private LightDM.Greeter lightdm_greeter;
     private Greeter.Settings settings;
     private Gtk.ToggleButton manual_login_button;
+    private Greeter.DateTimeWidget datetime_widget;
     private unowned Greeter.BaseCard current_card;
     private unowned LightDM.UserList lightdm_user_list;
 
@@ -78,7 +79,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             manual_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         } catch (Error e) {}
 
-        var datetime_widget = new Greeter.DateTimeWidget ();
+        datetime_widget = new Greeter.DateTimeWidget ();
         datetime_widget.halign = Gtk.Align.CENTER;
 
         user_cards = new GLib.Queue<unowned Greeter.UserCard> ();
@@ -282,7 +283,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void maximize_window () {
-        var monitor = Gdk.Display.get_default ().get_monitor_at_window ((Gdk.Window) this);
+        var monitor = Gdk.Display.get_default ().get_monitor_at_window (this.get_window ());
         var rect = monitor.get_geometry ();
         resize (rect.width, rect.height);
     }
@@ -490,12 +491,18 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     int distance = 0;
     int next_delta = 0;
+    weak GLib.Binding? binding = null;
     private void switch_to_card (Greeter.UserCard user_card) {
         if (next_delta != index_delta) {
             return;
         }
 
         current_card = user_card;
+        if (binding != null) {
+            binding.unbind ();
+        }
+
+        binding = user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE);
         next_delta = user_cards.index (user_card);
         int minimum_width, natural_width;
         user_card.get_preferred_width (out minimum_width, out natural_width);

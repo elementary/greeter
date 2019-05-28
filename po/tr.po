@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-22 15:15-0700\n"
-"PO-Revision-Date: 2019-04-17 20:53+0000\n"
+"PO-Revision-Date: 2019-05-27 22:29+0000\n"
 "Last-Translator: Ozgur Baskin <bebeto_baskin@yahoo.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/greeter/"
 "tr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.5.1\n"
+"X-Generator: Weblate 3.6.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:409
@@ -50,31 +50,31 @@ msgstr "El İle Oturum Aç…"
 
 #: src/MainWindow.vala:435
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "İlk Kurulum Başlatılamadı"
 
 #: src/MainWindow.vala:440
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"İlk Kurulum, ilk kullanıcınızı yaratır. Bu olmadan oturum açamazsınız ve "
+"işletim sistemini yeniden kurmanız gerekebilir."
 
 #: src/CapsLockRevealer.vala:56
-#, fuzzy
 msgid "Caps Lock & Num Lock are on"
-msgstr "Caps Lock açık"
+msgstr "Caps Lock ve Num Lock açık"
 
 #: src/CapsLockRevealer.vala:58
 msgid "Caps Lock is on"
 msgstr "Caps Lock açık"
 
 #: src/CapsLockRevealer.vala:60
-#, fuzzy
 msgid "Num Lock is on"
-msgstr "Caps Lock açık"
+msgstr "Num Lock açık"
 
 #: src/Cards/UserCard.vala:74
 msgid "Account disabled"
-msgstr ""
+msgstr "Hesap devre dışı bırakıldı"
 
 #: src/Cards/UserCard.vala:159
 msgid "Session cannot be changed while user is logged in"

@@ -1,0 +1,20 @@
+<node>
+  <interface name="io.elementary.greeter.AccountsService">
+
+    <annotation name="org.freedesktop.Accounts.VendorExtension" value="true"/>
+
+    <annotation name="org.freedesktop.Accounts.Authentication.ChangeOwn"
+                value="io.elementary.greeter.AccountsService.ModifyOwn"/>
+
+    <annotation name="org.freedesktop.Accounts.Authentication.ReadAny"
+                value="io.elementary.greeter.AccountsService.ReadAny"/>
+
+    <annotation name="org.freedesktop.Accounts.Authentication.ChangeAny"
+                value="io.elementary.greeter.AccountsService.ModifyAny"/>
+
+    <property name="TimeFormat" type="s" access="readwrite">
+      <annotation name="org.freedesktop.Accounts.DefaultValue.String" value="24h"/>
+    </property>
+
+  </interface>
+</node>

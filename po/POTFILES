@@ -20,3 +20,5 @@ src/Cards/UserCard.vala
 src/Cards/ManualCard.vala
 src/Cards/BaseCard.vala
 src/Cards/BackgroundImage.vala
+data/io.elementary.greeter.AccountsService.xml
+data/io.elementary.greeter.AccountsService.policy

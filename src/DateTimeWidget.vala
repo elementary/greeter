@@ -1,6 +1,9 @@
 public class Greeter.DateTimeWidget : Gtk.Grid {
+    public bool is_24h { get; set; default=true; }
+
     private Gtk.Label time_label;
     private Gtk.Label date_label;
+    private uint time_timeout = 0U;
 
     construct {
         orientation = Gtk.Orientation.VERTICAL;
@@ -27,13 +30,17 @@ public class Greeter.DateTimeWidget : Gtk.Grid {
 
         update_time ();
         update_date ();
+        notify["is-24h"].connect (() => {
+            GLib.Source.remove (time_timeout);
+            update_time ();
+        });
     }
 
     private bool update_time () {
         var now = new GLib.DateTime.now_local ();
-        time_label.label = now.format (Granite.DateTime.get_default_time_format (true, false));
+        time_label.label = now.format (Granite.DateTime.get_default_time_format (!is_24h, false));
         var delta = 60 - now.get_second ();
-        GLib.Timeout.add_seconds (delta, update_time);
+        time_timeout = GLib.Timeout.add_seconds (delta, update_time);
         return GLib.Source.REMOVE;
     }
     
