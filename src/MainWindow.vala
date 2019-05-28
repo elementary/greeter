@@ -250,6 +250,22 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             return false;
         });
 
+        add_events (Gdk.EventMask.SCROLL_MASK);
+
+        scroll_event.connect ((event) => {
+            switch (event.direction) {
+            case Gdk.ScrollDirection.UP:
+                activate_action ("previous", null);
+                break;
+            case Gdk.ScrollDirection.DOWN:
+                activate_action ("next", null);
+                break;
+            default:
+                break;
+            }
+            return false;
+        });
+
         // regrab focus when dpi changed
         get_screen ().monitors_changed.connect(() => {
             maximize_and_focus ();
