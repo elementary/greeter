@@ -29,6 +29,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private Gtk.Overlay main_overlay;
     private LightDM.Greeter lightdm_greeter;
     private Greeter.Settings settings;
+    private Gtk.GestureSwipe gesture_swipe;
     private Gtk.ToggleButton manual_login_button;
     private Greeter.DateTimeWidget datetime_widget;
     private unowned Greeter.BaseCard current_card;
@@ -213,6 +214,19 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         manual_card.do_connect_username.connect (do_connect_username);
         manual_card.do_connect.connect (do_connect);
+
+        //add_events (Gdk.EventMask.TOUCHPAD_GESTURE_MASK);
+        gesture_swipe = new Gtk.GestureSwipe (this);
+        //gesture_swipe.set_propagation_phase (BUBBLE);
+        //gesture_swipe.n_points = 2;
+        //gesture_swipe.touch_only = true;
+        gesture_swipe.swipe.connect ((velocity_x, velocity_y) => {
+            if (velocity_x < 0) {
+                activate_action ("next", null);
+            } else if (velocity_x > 0) {
+                activate_action ("previous", null);
+            }
+        });
 
         key_press_event.connect ((event) => {
             // arrow key is being used to navigate
