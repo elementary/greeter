@@ -260,6 +260,12 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             case Gdk.ScrollDirection.DOWN:
                 activate_action ("next", null);
                 break;
+            case Gdk.ScrollDirection.LEFT:
+                activate_action ("previous", null);
+                break;
+            case Gdk.ScrollDirection.RIGHT:
+                activate_action ("next", null);
+                break;
             default:
                 break;
             }
