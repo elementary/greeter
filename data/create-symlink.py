@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import os
 import sys
@@ -19,4 +19,6 @@ if os.path.isabs(src):
 
 if not os.path.exists(dest):
     print('Creating symbolic link: ' + dest + ' -> ' + src)
+    if not os.path.exists(os.path.dirname(dest)):
+        os.makedirs(os.path.dirname(dest))
     os.symlink(src, dest)
