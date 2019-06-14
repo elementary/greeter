@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-22 15:15-0700\n"
-"PO-Revision-Date: 2019-04-19 19:31+0000\n"
+"PO-Revision-Date: 2019-06-15 20:17+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/desktop/"
 "greeter/nb/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.5.1\n"
+"X-Generator: Weblate 3.6.1\n"
 "X-Launchpad-Export-Date: 2017-04-05 07:04+0000\n"
 
 #: compositor/WindowManager.vala:409
@@ -51,13 +51,15 @@ msgstr "Manuell innlogging…"
 
 #: src/MainWindow.vala:435
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Kunne ikke igangsette førstegangsoppsett"
 
 #: src/MainWindow.vala:440
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Førstegangsoppsett skaper din første bruker. Uten den, vil du ikke kunne "
+"logge inn, og vil kanskje måtte reinstallere OS-et."
 
 #: src/CapsLockRevealer.vala:56
 #, fuzzy
@@ -74,8 +76,9 @@ msgid "Num Lock is on"
 msgstr "Caps Lock er på"
 
 #: src/Cards/UserCard.vala:74
+#, fuzzy
 msgid "Account disabled"
-msgstr ""
+msgstr "Konto avskrudd"
 
 #: src/Cards/UserCard.vala:159
 msgid "Session cannot be changed while user is logged in"
