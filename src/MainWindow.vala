@@ -30,7 +30,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private LightDM.Greeter lightdm_greeter;
     private Greeter.Settings settings;
     private Gtk.ToggleButton manual_login_button;
+    private Greeter.DateTimeWidget datetime_widget;
     private unowned Greeter.BaseCard current_card;
+    private unowned LightDM.UserList lightdm_user_list;
+
     private const uint[] NAVIGATION_KEYS = {
         Gdk.Key.Up,
         Gdk.Key.Down,
@@ -76,7 +79,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             manual_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         } catch (Error e) {}
 
-        var datetime_widget = new Greeter.DateTimeWidget ();
+        datetime_widget = new Greeter.DateTimeWidget ();
         datetime_widget.halign = Gtk.Align.CENTER;
 
         user_cards = new GLib.Queue<unowned Greeter.UserCard> ();
@@ -203,6 +206,11 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             maximize_window ();
         });
 
+        lightdm_user_list = LightDM.UserList.get_instance ();
+        lightdm_user_list.user_added.connect(() => {
+            load_users.begin ();
+        });
+
         manual_card.do_connect_username.connect (do_connect_username);
         manual_card.do_connect.connect (do_connect);
 
@@ -242,6 +250,22 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             return false;
         });
 
+        add_events (Gdk.EventMask.SCROLL_MASK);
+
+        scroll_event.connect ((event) => {
+            switch (event.direction) {
+                case Gdk.ScrollDirection.UP:
+                case Gdk.ScrollDirection.LEFT:
+                    activate_action ("previous", null);
+                    break;
+                case Gdk.ScrollDirection.DOWN:
+                case Gdk.ScrollDirection.RIGHT:
+                    activate_action ("next", null);
+                    break;
+            }
+            return false;
+        });
+
         // regrab focus when dpi changed
         get_screen ().monitors_changed.connect(() => {
             maximize_and_focus ();
@@ -275,7 +299,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void maximize_window () {
-        var monitor = Gdk.Display.get_default ().get_monitor_at_window ((Gdk.Window) this);
+        var monitor = Gdk.Display.get_default ().get_monitor_at_window (this.get_window ());
         var rect = monitor.get_geometry ();
         resize (rect.width, rect.height);
     }
@@ -397,36 +421,61 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.notify_property ("show-manual-login-hint");
         lightdm_greeter.notify_property ("has-guest-account-hint");
 
-        unowned LightDM.UserList lightdm_user_list = LightDM.UserList.get_instance ();
-        lightdm_user_list.users.foreach ((user) => {
-            add_card (user);
-        });
-
-        unowned string? select_user = lightdm_greeter.select_user_hint;
-        var user_to_select = (select_user != null) ? select_user : settings.last_user;
-
-        bool user_selected = false;
-        if (user_to_select != null) {
-            user_cards.head.foreach ((card) => {
-                if (card.lightdm_user.name == user_to_select) {
-                    switch_to_card (card);
-                    user_selected = true;
-                }
+        if (lightdm_user_list.length > 0) {
+            lightdm_user_list.users.foreach ((user) => {
+                add_card (user);
             });
-        }
 
-        if (!user_selected) {
-            unowned Greeter.UserCard user_card = (Greeter.UserCard) user_cards.peek_head ();
-            user_card.show_input = true;
-            try {
-                lightdm_greeter.authenticate (user_card.lightdm_user.name);
-            } catch (Error e) {
-                critical (e.message);
+            unowned string? select_user = lightdm_greeter.select_user_hint;
+            var user_to_select = (select_user != null) ? select_user : settings.last_user;
+
+            bool user_selected = false;
+            if (user_to_select != null) {
+                user_cards.head.foreach ((card) => {
+                    if (card.lightdm_user.name == user_to_select) {
+                        switch_to_card (card);
+                        user_selected = true;
+                    }
+                });
             }
-        }
 
-        if (lightdm_greeter.default_session_hint != null) {
-            get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
+            if (!user_selected) {
+                unowned Greeter.UserCard user_card = (Greeter.UserCard) user_cards.peek_head ();
+                user_card.show_input = true;
+                try {
+                    lightdm_greeter.authenticate (user_card.lightdm_user.name);
+                } catch (Error e) {
+                    critical (e.message);
+                }
+            }
+
+            if (lightdm_greeter.default_session_hint != null) {
+                get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
+            }
+        } else {
+            /* We're not certain that scaling factor will change, but try to wait for GSD in case it does */
+            Timeout.add (500, () => {
+                try {
+                    var initial_setup = AppInfo.create_from_commandline ("io.elementary.initial-setup", null, GLib.AppInfoCreateFlags.NONE);
+                    initial_setup.launch (null, null);
+                } catch (Error e) {
+                    string error_text = _("Unable to Launch Initial Setup");
+                    critical ("%s: %s", error_text, e.message);
+
+                    var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
+                        error_text,
+                        _("Initial Setup creates your first user. Without it, you will not be able to log in and may need to reinstall the OS."),
+                        "dialog-error",
+                        Gtk.ButtonsType.CLOSE
+                    );
+
+                    error_dialog.show_error_details (e.message);
+                    error_dialog.run ();
+                    error_dialog.destroy ();
+                }
+
+                return Source.REMOVE;
+            });
         }
     }
 
@@ -468,12 +517,18 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     int distance = 0;
     int next_delta = 0;
+    weak GLib.Binding? binding = null;
     private void switch_to_card (Greeter.UserCard user_card) {
         if (next_delta != index_delta) {
             return;
         }
 
         current_card = user_card;
+        if (binding != null) {
+            binding.unbind ();
+        }
+
+        binding = user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE);
         next_delta = user_cards.index (user_card);
         int minimum_width, natural_width;
         user_card.get_preferred_width (out minimum_width, out natural_width);

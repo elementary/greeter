@@ -6,6 +6,7 @@
 You'll need the following dependencies:
 
 * gnome-settings-daemon >= 3.27
+* libaccountsservice-dev
 * libgdk-pixbuf2.0-dev
 * libgranite-dev
 * libgtk-3-dev

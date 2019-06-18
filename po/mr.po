@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 19:01-0700\n"
-"PO-Revision-Date: 2018-11-29 12:08+0000\n"
+"POT-Creation-Date: 2019-04-22 15:15-0700\n"
+"PO-Revision-Date: 2019-05-14 23:14+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
-"Language-Team: Marathi <https://weblate.elementary.io/projects/desktop/"
-"greeter/mr/>\n"
+"Language-Team: Marathi <https://l10n.elementary.io/projects/desktop/greeter/"
+"mr/>\n"
 "Language: mr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.0.1\n"
+"X-Generator: Weblate 3.6.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:409
@@ -36,35 +36,49 @@ msgstr "मागील कॉन्फिगरेशन पुनर्सं�
 msgid "Password"
 msgstr "पासवर्ड"
 
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:66
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:68
 msgid "Log In"
 msgstr "लॉग इन"
 
-#: src/MainWindow.vala:59
+#: src/MainWindow.vala:61
 msgid "Log in as Guest"
 msgstr "अतिथी म्हणून लॉग इन करा"
 
-#: src/MainWindow.vala:61
+#: src/MainWindow.vala:63
 msgid "Manual Login…"
 msgstr "मॅन्युअल लॉग इन…"
 
+#: src/MainWindow.vala:435
+msgid "Unable to Launch Initial Setup"
+msgstr "आरंभिक सेटअप सुरू करण्यात अक्षम"
+
+#: src/MainWindow.vala:440
+msgid ""
+"Initial Setup creates your first user. Without it, you will not be able to "
+"log in and may need to reinstall the OS."
+msgstr ""
+"आरंभिक सेटअप आपला प्रथम वापरकर्ता तयार करतो. त्याशिवाय, आपण लॉग इन करण्यास "
+"सक्षम असणार नाही आणि ओएस पुन्हा स्थापित करण्याची आवश्यकता असू शकते."
+
 #: src/CapsLockRevealer.vala:56
-#, fuzzy
 msgid "Caps Lock & Num Lock are on"
-msgstr "कॅप्स लॉक चालू आहे"
+msgstr "कॅप्स लॉक आणि नेम लॉक चालू आहेत"
 
 #: src/CapsLockRevealer.vala:58
 msgid "Caps Lock is on"
 msgstr "कॅप्स लॉक चालू आहे"
 
 #: src/CapsLockRevealer.vala:60
-#, fuzzy
 msgid "Num Lock is on"
-msgstr "कॅप्स लॉक चालू आहे"
+msgstr "नेम लॉक चालू आहे"
 
-#: src/Cards/UserCard.vala:144
+#: src/Cards/UserCard.vala:74
+msgid "Account disabled"
+msgstr "खाते अक्षम"
+
+#: src/Cards/UserCard.vala:159
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "वापरकर्ता लॉग इन असताना सत्र बदलले जाऊ शकत नाही"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"

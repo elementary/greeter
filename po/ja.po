@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 19:01-0700\n"
-"PO-Revision-Date: 2018-11-18 00:07+0000\n"
+"POT-Creation-Date: 2019-04-22 15:15-0700\n"
+"PO-Revision-Date: 2019-05-17 08:02+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
-"Language-Team: Japanese <https://weblate.elementary.io/projects/desktop/"
-"greeter/ja/>\n"
+"Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/greeter/"
+"ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.0.1\n"
+"X-Generator: Weblate 3.6.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:409
@@ -36,35 +36,49 @@ msgstr "前の設定へ戻す"
 msgid "Password"
 msgstr "パスワード"
 
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:66
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:68
 msgid "Log In"
 msgstr "ログイン"
 
-#: src/MainWindow.vala:59
+#: src/MainWindow.vala:61
 msgid "Log in as Guest"
 msgstr "ゲストとしてログイン"
 
-#: src/MainWindow.vala:61
+#: src/MainWindow.vala:63
 msgid "Manual Login…"
 msgstr "ユーザー名を指定してログイン…"
 
+#: src/MainWindow.vala:435
+msgid "Unable to Launch Initial Setup"
+msgstr "初回セットアップを起動できません"
+
+#: src/MainWindow.vala:440
+msgid ""
+"Initial Setup creates your first user. Without it, you will not be able to "
+"log in and may need to reinstall the OS."
+msgstr ""
+"初回セットアップでは、お使いのコンピューターの最初のユーザーを作成します。初回セットアップを行わないと、ログインできず、OS "
+"の再インストールが必要になる可能性があります。"
+
 #: src/CapsLockRevealer.vala:56
-#, fuzzy
 msgid "Caps Lock & Num Lock are on"
-msgstr "Caps Lock がオンになっています"
+msgstr "Caps Lock と Num Lock がオンになっています"
 
 #: src/CapsLockRevealer.vala:58
 msgid "Caps Lock is on"
 msgstr "Caps Lock がオンになっています"
 
 #: src/CapsLockRevealer.vala:60
-#, fuzzy
 msgid "Num Lock is on"
-msgstr "Caps Lock がオンになっています"
+msgstr "Num Lock がオンになっています"
 
-#: src/Cards/UserCard.vala:144
+#: src/Cards/UserCard.vala:74
+msgid "Account disabled"
+msgstr "アカウントは使用できません"
+
+#: src/Cards/UserCard.vala:159
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "ユーザーのログイン中はセッションを変更できません"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
