@@ -1,0 +1,26 @@
+# Turkish translations for extra package.
+# Copyright (C) 2019 THE extra'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the extra package.
+# Automatically generated, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: extra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-24 15:03-0700\n"
+"PO-Revision-Date: 2019-06-24 15:03-0700\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: data/greeter.appdata.xml.in:7
+msgid "Feedback"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:50
+msgid "elementary, Inc."
+msgstr ""
