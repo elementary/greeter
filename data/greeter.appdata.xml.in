@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2019 elementary, Inc. <contact@elementary.io> -->
 <component type="desktop-application">
-  <id>io.elementary.feedback</id>
+  <id>io.elementary.greeter</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0+</project_license>
-  <name>Feedback</name>
-  <summary></summary>
+  <name>Greeter</name>
+  <summary>Select a user to log in or resume a session with</summary>
   <description>
     <p></p>
   </description>
   <provides>
-    <binary>io.elementary.feedback</binary>
+    <binary>io.elementary.greeter</binary>
   </provides>
-  <screenshots>
-    <screenshot type="default">
-      <image>https://raw.githubusercontent.com/elementary/feedback/master/data/screenshot.png</image>
-    </screenshot>
-  </screenshots>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">none</content_attribute>
     <content_attribute id="violence-fantasy">none</content_attribute>
@@ -46,8 +41,9 @@
     <content_attribute id="money-purchasing">none</content_attribute>
     <content_attribute id="money-gambling">none</content_attribute>
   </content_rating>
-  <translation type="gettext">io.elementary.feedback</translation>
+  <translation type="gettext">io.elementary.greeter</translation>
+  <compulsory_for_desktop>Pantheon</compulsory_for_desktop>
   <developer_name>elementary, Inc.</developer_name>
   <url type="homepage">http://elementary.io</url>
-  <url type="bugtracker">https://github.com/elementary/feedback/issues</url>
+  <url type="bugtracker">https://github.com/elementary/greeter/issues</url>
 </component>
