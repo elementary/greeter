@@ -70,11 +70,11 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         extra_login_grid.column_homogeneous = true;
 
         try {
-            var settings = Gtk.Settings.get_default ();
-            settings.gtk_icon_theme_name = "elementary";
-            settings.gtk_theme_name = "elementary";
+            var gtksettings = Gtk.Settings.get_default ();
+            gtksettings.gtk_icon_theme_name = "elementary";
+            gtksettings.gtk_theme_name = "elementary";
 
-            var css_provider = Gtk.CssProvider.get_named (settings.gtk_theme_name, "dark");
+            var css_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, "dark");
             guest_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             manual_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         } catch (Error e) {}
@@ -307,9 +307,11 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void create_session_selection_action () {
-        var select_session_action = new GLib.SimpleAction.stateful ("select", GLib.VariantType.STRING, new GLib.Variant.string (""));
-        var vardict = new GLib.VariantDict ();
         unowned GLib.List<LightDM.Session> sessions = LightDM.get_sessions ();
+        weak LightDM.Session? first_session = sessions.nth_data (0);
+        var selected_session = new GLib.Variant.string (first_session != null ? first_session.key : "");
+        var select_session_action = new GLib.SimpleAction.stateful ("select", GLib.VariantType.STRING, selected_session);
+        var vardict = new GLib.VariantDict ();
         sessions.foreach ((session) => {
             vardict.insert_value (session.name, new GLib.Variant.string (session.key));
         });
@@ -373,7 +375,13 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             try {
                 lightdm_greeter.start_session_sync (action_group.get_action_state ("select").get_string ());
             } catch (Error e) {
-                error (e.message);
+                critical (e.message);
+                 if (current_card is Greeter.UserCard) {
+                     switch_to_card ((Greeter.UserCard) current_card);
+                 }
+
+                 current_card.connecting = false;
+                 current_card.wrong_credentials ();
             }
         } else {
             if (current_card is Greeter.UserCard) {
@@ -413,6 +421,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.notify_property ("show-manual-login-hint");
         lightdm_greeter.notify_property ("has-guest-account-hint");
 
+        if (lightdm_greeter.default_session_hint != null) {
+            get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
+        }
+
         if (lightdm_user_list.length > 0) {
             lightdm_user_list.users.foreach ((user) => {
                 add_card (user);
@@ -434,15 +446,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             if (!user_selected) {
                 unowned Greeter.UserCard user_card = (Greeter.UserCard) user_cards.peek_head ();
                 user_card.show_input = true;
-                try {
-                    lightdm_greeter.authenticate (user_card.lightdm_user.name);
-                } catch (Error e) {
-                    critical (e.message);
-                }
-            }
-
-            if (lightdm_greeter.default_session_hint != null) {
-                get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
+                switch_to_card (user_card);
             }
         } else {
             /* We're not certain that scaling factor will change, but try to wait for GSD in case it does */
@@ -530,6 +534,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         user_card.grab_focus ();
         if (index_delta != next_delta) {
             ((Greeter.UserCard) user_cards.peek_nth (index_delta)).show_input = false;
+        }
+
+        if (user_card.lightdm_user.session != null) {
+            get_action_group ("session").activate_action ("select", new GLib.Variant.string (user_card.lightdm_user.session));
         }
 
         if (lightdm_greeter.in_authentication) {
