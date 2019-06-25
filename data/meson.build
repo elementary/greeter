@@ -18,6 +18,15 @@ i18n.merge_file (
     type: 'desktop'
 )
 
+i18n.merge_file(
+    input: 'greeter.appdata.xml.in',
+    output: meson.project_name() + '.appdata.xml',
+    po_dir: join_paths(meson.source_root(), 'po', 'extra'),
+    type: 'xml',
+    install: true,
+    install_dir: join_paths(get_option('datadir'), 'metainfo'),
+)
+
 install_data(
     meson.project_name() + '.conf',
     install_dir: join_paths(get_option('sysconfdir'), 'lightdm')
