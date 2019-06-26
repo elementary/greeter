@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-22 15:15-0700\n"
+"POT-Creation-Date: 2019-06-26 22:43+0200\n"
 "PO-Revision-Date: 2019-05-20 05:14+0000\n"
 "Last-Translator: Rodrigo Oliveira <rod.oliveira@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.elementary.io/projects/"
@@ -36,23 +36,23 @@ msgstr "Restaurar a configuração anterior"
 msgid "Password"
 msgstr "Senha"
 
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:68
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
 msgid "Log In"
 msgstr "Entrar"
 
-#: src/MainWindow.vala:61
+#: src/MainWindow.vala:62
 msgid "Log in as Guest"
 msgstr "Entrar como convidado"
 
-#: src/MainWindow.vala:63
+#: src/MainWindow.vala:64
 msgid "Manual Login…"
 msgstr "Login manual…"
 
-#: src/MainWindow.vala:435
+#: src/MainWindow.vala:456
 msgid "Unable to Launch Initial Setup"
 msgstr "Não foi possível abrir a Configuração Inicial"
 
-#: src/MainWindow.vala:440
+#: src/MainWindow.vala:461
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -60,23 +60,23 @@ msgstr ""
 "A configuração inicial cria seu primeiro usuário. Sem isso, você não poderá "
 "efetuar login e poderá precisar reinstalar o sistema operacional."
 
-#: src/CapsLockRevealer.vala:56
+#: src/CapsLockRevealer.vala:55
 msgid "Caps Lock & Num Lock are on"
 msgstr "Caps Lock & Num Lock está ativado"
 
-#: src/CapsLockRevealer.vala:58
+#: src/CapsLockRevealer.vala:57
 msgid "Caps Lock is on"
 msgstr "Caps Lock está ativado"
 
-#: src/CapsLockRevealer.vala:60
+#: src/CapsLockRevealer.vala:59
 msgid "Num Lock is on"
 msgstr "Num Lock está ativado"
 
-#: src/Cards/UserCard.vala:74
+#: src/Cards/UserCard.vala:76
 msgid "Account disabled"
 msgstr "Conta desativada"
 
-#: src/Cards/UserCard.vala:159
+#: src/Cards/UserCard.vala:163
 msgid "Session cannot be changed while user is logged in"
 msgstr "A sessão não pode ser alterada enquanto o usuário está logado"
 
@@ -91,6 +91,30 @@ msgstr "Nome de usuário"
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
 msgstr "Tente nomedeusuario"
+
+#: data/io.elementary.greeter.AccountsService.policy:4
+msgid "Set properties of own user"
+msgstr ""
+
+#: data/io.elementary.greeter.AccountsService.policy:5
+msgid "Authentication is required to set one's own greeter properties."
+msgstr ""
+
+#: data/io.elementary.greeter.AccountsService.policy:14
+msgid "Get properties of any user"
+msgstr ""
+
+#: data/io.elementary.greeter.AccountsService.policy:15
+msgid "Authentication is required to get another user's greeter properties."
+msgstr ""
+
+#: data/io.elementary.greeter.AccountsService.policy:24
+msgid "Set properties of any user"
+msgstr ""
+
+#: data/io.elementary.greeter.AccountsService.policy:25
+msgid "Authentication is required to set another user's greeter properties."
+msgstr ""
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Passe seu dedo"
