@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-22 15:15-0700\n"
+"POT-Creation-Date: 2019-06-26 22:43+0200\n"
 "PO-Revision-Date: 2019-05-14 23:14+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
 "Language-Team: Marathi <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -36,47 +36,47 @@ msgstr "मागील कॉन्फिगरेशन पुनर्सं�
 msgid "Password"
 msgstr "पासवर्ड"
 
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:68
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
 msgid "Log In"
 msgstr "लॉग इन"
 
-#: src/MainWindow.vala:61
+#: src/MainWindow.vala:62
 msgid "Log in as Guest"
 msgstr "अतिथी म्हणून लॉग इन करा"
 
-#: src/MainWindow.vala:63
+#: src/MainWindow.vala:64
 msgid "Manual Login…"
 msgstr "मॅन्युअल लॉग इन…"
 
-#: src/MainWindow.vala:435
+#: src/MainWindow.vala:456
 msgid "Unable to Launch Initial Setup"
 msgstr "आरंभिक सेटअप सुरू करण्यात अक्षम"
 
-#: src/MainWindow.vala:440
+#: src/MainWindow.vala:461
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
-"आरंभिक सेटअप आपला प्रथम वापरकर्ता तयार करतो. त्याशिवाय, आपण लॉग इन करण्यास "
-"सक्षम असणार नाही आणि ओएस पुन्हा स्थापित करण्याची आवश्यकता असू शकते."
+"आरंभिक सेटअप आपला प्रथम वापरकर्ता तयार करतो. त्याशिवाय, आपण लॉग इन करण्यास सक्षम "
+"असणार नाही आणि ओएस पुन्हा स्थापित करण्याची आवश्यकता असू शकते."
 
-#: src/CapsLockRevealer.vala:56
+#: src/CapsLockRevealer.vala:55
 msgid "Caps Lock & Num Lock are on"
 msgstr "कॅप्स लॉक आणि नेम लॉक चालू आहेत"
 
-#: src/CapsLockRevealer.vala:58
+#: src/CapsLockRevealer.vala:57
 msgid "Caps Lock is on"
 msgstr "कॅप्स लॉक चालू आहे"
 
-#: src/CapsLockRevealer.vala:60
+#: src/CapsLockRevealer.vala:59
 msgid "Num Lock is on"
 msgstr "नेम लॉक चालू आहे"
 
-#: src/Cards/UserCard.vala:74
+#: src/Cards/UserCard.vala:76
 msgid "Account disabled"
 msgstr "खाते अक्षम"
 
-#: src/Cards/UserCard.vala:159
+#: src/Cards/UserCard.vala:163
 msgid "Session cannot be changed while user is logged in"
 msgstr "वापरकर्ता लॉग इन असताना सत्र बदलले जाऊ शकत नाही"
 
@@ -91,6 +91,30 @@ msgstr "वापरकर्तानाव(युजरनेम)"
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
 msgstr "वापरकर्तानाव वापरुन पहा"
+
+#: data/io.elementary.greeter.AccountsService.policy:4
+msgid "Set properties of own user"
+msgstr ""
+
+#: data/io.elementary.greeter.AccountsService.policy:5
+msgid "Authentication is required to set one's own greeter properties."
+msgstr ""
+
+#: data/io.elementary.greeter.AccountsService.policy:14
+msgid "Get properties of any user"
+msgstr ""
+
+#: data/io.elementary.greeter.AccountsService.policy:15
+msgid "Authentication is required to get another user's greeter properties."
+msgstr ""
+
+#: data/io.elementary.greeter.AccountsService.policy:24
+msgid "Set properties of any user"
+msgstr ""
+
+#: data/io.elementary.greeter.AccountsService.policy:25
+msgid "Authentication is required to set another user's greeter properties."
+msgstr ""
 
 #~ msgid "Swipe your finger"
 #~ msgstr "आपल्या बोटाने स्वाइप करा"

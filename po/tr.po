@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-22 15:15-0700\n"
+"POT-Creation-Date: 2019-06-26 22:43+0200\n"
 "PO-Revision-Date: 2019-05-27 22:29+0000\n"
 "Last-Translator: Ozgur Baskin <bebeto_baskin@yahoo.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -36,23 +36,23 @@ msgstr "Önceki Yapılandırmayı Geri Yükle"
 msgid "Password"
 msgstr "Parola"
 
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:68
+#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
 msgid "Log In"
 msgstr "Oturum Aç"
 
-#: src/MainWindow.vala:61
+#: src/MainWindow.vala:62
 msgid "Log in as Guest"
 msgstr "Konuk Olarak Oturum Aç"
 
-#: src/MainWindow.vala:63
+#: src/MainWindow.vala:64
 msgid "Manual Login…"
 msgstr "El İle Oturum Aç…"
 
-#: src/MainWindow.vala:435
+#: src/MainWindow.vala:456
 msgid "Unable to Launch Initial Setup"
 msgstr "İlk Kurulum Başlatılamadı"
 
-#: src/MainWindow.vala:440
+#: src/MainWindow.vala:461
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -60,23 +60,23 @@ msgstr ""
 "İlk Kurulum, ilk kullanıcınızı yaratır. Bu olmadan oturum açamazsınız ve "
 "işletim sistemini yeniden kurmanız gerekebilir."
 
-#: src/CapsLockRevealer.vala:56
+#: src/CapsLockRevealer.vala:55
 msgid "Caps Lock & Num Lock are on"
 msgstr "Caps Lock ve Num Lock açık"
 
-#: src/CapsLockRevealer.vala:58
+#: src/CapsLockRevealer.vala:57
 msgid "Caps Lock is on"
 msgstr "Caps Lock açık"
 
-#: src/CapsLockRevealer.vala:60
+#: src/CapsLockRevealer.vala:59
 msgid "Num Lock is on"
 msgstr "Num Lock açık"
 
-#: src/Cards/UserCard.vala:74
+#: src/Cards/UserCard.vala:76
 msgid "Account disabled"
 msgstr "Hesap devre dışı bırakıldı"
 
-#: src/Cards/UserCard.vala:159
+#: src/Cards/UserCard.vala:163
 msgid "Session cannot be changed while user is logged in"
 msgstr "Kullanıcı oturumu açıkken oturum değiştirilemez"
 
@@ -91,6 +91,30 @@ msgstr "Kullanıcı adı"
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
 msgstr "Kullanıcı adı dene"
+
+#: data/io.elementary.greeter.AccountsService.policy:4
+msgid "Set properties of own user"
+msgstr ""
+
+#: data/io.elementary.greeter.AccountsService.policy:5
+msgid "Authentication is required to set one's own greeter properties."
+msgstr ""
+
+#: data/io.elementary.greeter.AccountsService.policy:14
+msgid "Get properties of any user"
+msgstr ""
+
+#: data/io.elementary.greeter.AccountsService.policy:15
+msgid "Authentication is required to get another user's greeter properties."
+msgstr ""
+
+#: data/io.elementary.greeter.AccountsService.policy:24
+msgid "Set properties of any user"
+msgstr ""
+
+#: data/io.elementary.greeter.AccountsService.policy:25
+msgid "Authentication is required to set another user's greeter properties."
+msgstr ""
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Parmağınızı sürükleyin"
