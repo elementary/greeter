@@ -75,12 +75,7 @@ msgstr "Caps Lock er på"
 msgid "Num Lock is on"
 msgstr "Caps Lock er på"
 
-<<<<<<< HEAD
 #: src/Cards/UserCard.vala:76
-=======
-#: src/Cards/UserCard.vala:74
-#, fuzzy
->>>>>>> weblate/master
 msgid "Account disabled"
 msgstr "Konto avskrudd"
 
