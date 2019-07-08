@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-05-03 01:39+0000\n"
-"Last-Translator: Nuno Alexandre MS Ribeiro <nuno.anarresti@gmail.com>\n"
+"PO-Revision-Date: 2019-07-10 00:28+0000\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/desktop/"
 "greeter/pt/>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.6\n"
+"X-Generator: Weblate 3.6.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:409
@@ -96,27 +96,33 @@ msgstr "Tentar nome de utilizador"
 
 #: data/io.elementary.greeter.AccountsService.policy:4
 msgid "Set properties of own user"
-msgstr ""
+msgstr "Definir propriedades do próprio utilizador"
 
 #: data/io.elementary.greeter.AccountsService.policy:5
 msgid "Authentication is required to set one's own greeter properties."
 msgstr ""
+"A autenticação é necessária para definir as próprias propriedades de boas-"
+"vindas."
 
 #: data/io.elementary.greeter.AccountsService.policy:14
 msgid "Get properties of any user"
-msgstr ""
+msgstr "Obter propriedades de qualquer utilizador"
 
 #: data/io.elementary.greeter.AccountsService.policy:15
 msgid "Authentication is required to get another user's greeter properties."
 msgstr ""
+"A autenticação é necessária para obter as propriedades de boas-vindas de "
+"outro utilizador."
 
 #: data/io.elementary.greeter.AccountsService.policy:24
 msgid "Set properties of any user"
-msgstr ""
+msgstr "Definir propriedades de qualquer utilizador"
 
 #: data/io.elementary.greeter.AccountsService.policy:25
 msgid "Authentication is required to set another user's greeter properties."
 msgstr ""
+"A autenticação é necessária para definir as propriedades de boas-vindas de "
+"outro utilizador."
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Deslize o dedo"
