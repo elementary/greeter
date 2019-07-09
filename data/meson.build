@@ -32,12 +32,6 @@ install_data(
     install_dir: join_paths(get_option('sysconfdir'), 'lightdm')
 )
 
-meson.add_install_script(
-    'create-symlink.py',
-    join_paths(get_option('datadir'), 'dbus-1', 'interfaces', meson.project_name() + '.AccountsService.xml'),
-    join_paths(get_option('datadir'), 'accountsservice', 'interfaces', meson.project_name() + '.AccountsService.xml')
-)
-
 test (
     'Validate desktop file',
     find_program('desktop-file-validate'),
