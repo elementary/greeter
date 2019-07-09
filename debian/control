@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: Sergey "Shnatsel" Davidoff <sergey@elementaryos.org>
 Build-Depends: debhelper (>= 10.5.1),
                desktop-file-utils,
+               elementary-default-settings (>= 5.2),
                gettext,
                libaccountsservice-dev,
                libgdk-pixbuf2.0-dev,
