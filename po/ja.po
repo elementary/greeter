@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-05-17 08:02+0000\n"
+"PO-Revision-Date: 2019-07-01 20:28+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/greeter/"
 "ja/>\n"
@@ -95,27 +95,27 @@ msgstr "ユーザー名を試します"
 
 #: data/io.elementary.greeter.AccountsService.policy:4
 msgid "Set properties of own user"
-msgstr ""
+msgstr "自分のユーザーのプロパティーを設定"
 
 #: data/io.elementary.greeter.AccountsService.policy:5
 msgid "Authentication is required to set one's own greeter properties."
-msgstr ""
+msgstr "自分のユーザーの Greeter のプロパティーを設定するには認証が必要です。"
 
 #: data/io.elementary.greeter.AccountsService.policy:14
 msgid "Get properties of any user"
-msgstr ""
+msgstr "すべてのユーザーのプロパティーを取得"
 
 #: data/io.elementary.greeter.AccountsService.policy:15
 msgid "Authentication is required to get another user's greeter properties."
-msgstr ""
+msgstr "別のユーザーの Greeter のプロパティーを取得するには認証が必要です。"
 
 #: data/io.elementary.greeter.AccountsService.policy:24
 msgid "Set properties of any user"
-msgstr ""
+msgstr "すべてのユーザーのプロパティーを設定"
 
 #: data/io.elementary.greeter.AccountsService.policy:25
 msgid "Authentication is required to set another user's greeter properties."
-msgstr ""
+msgstr "別のユーザーの Greeter のプロパティーを設定するには認証が必要です。"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "指をスワイプしてください"

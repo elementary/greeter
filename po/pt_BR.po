@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-05-20 05:14+0000\n"
+"PO-Revision-Date: 2019-07-01 20:28+0000\n"
 "Last-Translator: Rodrigo Oliveira <rod.oliveira@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.elementary.io/projects/"
 "desktop/greeter/pt_BR/>\n"
@@ -94,27 +94,32 @@ msgstr "Tente nomedeusuario"
 
 #: data/io.elementary.greeter.AccountsService.policy:4
 msgid "Set properties of own user"
-msgstr ""
+msgstr "Definir propriedades do próprio usuário"
 
 #: data/io.elementary.greeter.AccountsService.policy:5
 msgid "Authentication is required to set one's own greeter properties."
 msgstr ""
+"A autenticação é necessária para definir as próprias propriedades do greeter."
 
 #: data/io.elementary.greeter.AccountsService.policy:14
 msgid "Get properties of any user"
-msgstr ""
+msgstr "Obter propriedades de qualquer usuário"
 
 #: data/io.elementary.greeter.AccountsService.policy:15
 msgid "Authentication is required to get another user's greeter properties."
 msgstr ""
+"A autenticação é necessária para obter as propriedades do greeter de outro "
+"usuário."
 
 #: data/io.elementary.greeter.AccountsService.policy:24
 msgid "Set properties of any user"
-msgstr ""
+msgstr "Definir propriedades de qualquer usuário"
 
 #: data/io.elementary.greeter.AccountsService.policy:25
 msgid "Authentication is required to set another user's greeter properties."
 msgstr ""
+"A autenticação é necessária para definir as propriedades do greeter de outro "
+"usuário."
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Passe seu dedo"
