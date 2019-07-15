@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-05-14 23:14+0000\n"
+"PO-Revision-Date: 2019-07-08 11:28+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
 "Language-Team: Marathi <https://l10n.elementary.io/projects/desktop/greeter/"
 "mr/>\n"
@@ -94,27 +94,29 @@ msgstr "वापरकर्तानाव वापरुन पहा"
 
 #: data/io.elementary.greeter.AccountsService.policy:4
 msgid "Set properties of own user"
-msgstr ""
+msgstr "स्वत: च्या वापरकर्त्याचे गुणधर्म सेट करा"
 
 #: data/io.elementary.greeter.AccountsService.policy:5
 msgid "Authentication is required to set one's own greeter properties."
-msgstr ""
+msgstr "स्वतःची ग्रेटर गुणधर्म सेट करण्यासाठी प्रमाणीकरण आवश्यक आहे."
 
 #: data/io.elementary.greeter.AccountsService.policy:14
 msgid "Get properties of any user"
-msgstr ""
+msgstr "कोणत्याही वापरकर्त्याचे गुणधर्म मिळवा"
 
 #: data/io.elementary.greeter.AccountsService.policy:15
 msgid "Authentication is required to get another user's greeter properties."
 msgstr ""
+"दुसर्या वापरकर्त्याचे ग्रेटर गुणधर्म मिळविण्यासाठी प्रमाणीकरण आवश्यक आहे."
 
 #: data/io.elementary.greeter.AccountsService.policy:24
 msgid "Set properties of any user"
-msgstr ""
+msgstr "कोणत्याही वापरकर्त्याचे गुणधर्म सेट करा"
 
 #: data/io.elementary.greeter.AccountsService.policy:25
 msgid "Authentication is required to set another user's greeter properties."
 msgstr ""
+"दुसर्या वापरकर्त्याचे ग्रेटर गुणधर्म सेट करण्यासाठी प्रमाणीकरण आवश्यक आहे."
 
 #~ msgid "Swipe your finger"
 #~ msgstr "आपल्या बोटाने स्वाइप करा"
