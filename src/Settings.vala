@@ -45,7 +45,7 @@ public class Greeter.Settings : GLib.Object {
     }
 
     construct {
-        var state_dir = GLib.Path.build_filename (GLib.Environment.get_user_cache_dir (), "unity-greeter");
+        var state_dir = GLib.Path.build_filename (GLib.Environment.get_user_cache_dir (), "io.elementary.greeter");
         GLib.DirUtils.create_with_parents (state_dir, 0775);
 
         unowned string? xdg_seat = GLib.Environment.get_variable ("XDG_SEAT");

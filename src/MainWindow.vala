@@ -301,7 +301,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void maximize_window () {
-        var monitor = Gdk.Display.get_default ().get_monitor_at_window (this.get_window ());
+        var monitor = Gdk.Display.get_default ().get_primary_monitor ();
         var rect = monitor.get_geometry ();
         resize (rect.width, rect.height);
     }
