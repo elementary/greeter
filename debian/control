@@ -4,7 +4,6 @@ Priority: optional
 Maintainer: Sergey "Shnatsel" Davidoff <sergey@elementaryos.org>
 Build-Depends: debhelper (>= 10.5.1),
                desktop-file-utils,
-               elementary-default-settings (>= 5.2),
                gettext,
                libaccountsservice-dev,
                libgdk-pixbuf2.0-dev,
@@ -22,6 +21,7 @@ Homepage: https://github.com/elementary/greeter
 Package: pantheon-greeter
 Architecture: any
 Depends: numlockx, ${misc:Depends}, ${shlibs:Depends}
+Recommends: elementary-default-settings (>= 5.2)
 Provides: lightdm-greeter
 Description: Pantheon Login Screen
  Clutter-powered LightDM greeter resembling Unity greeter written for Pantheon.
