@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-05-14 23:14+0000\n"
+"PO-Revision-Date: 2019-07-08 11:28+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.elementary.io/projects/desktop/greeter/"
 "ca/>\n"
@@ -94,27 +94,29 @@ msgstr "Proveu el nom d'usuari"
 
 #: data/io.elementary.greeter.AccountsService.policy:4
 msgid "Set properties of own user"
-msgstr ""
+msgstr "Estableix les propietats del mateix usuari"
 
 #: data/io.elementary.greeter.AccountsService.policy:5
 msgid "Authentication is required to set one's own greeter properties."
-msgstr ""
+msgstr "Cal autenticar per establir les pròpies propietats de la benvinguda."
 
 #: data/io.elementary.greeter.AccountsService.policy:14
 msgid "Get properties of any user"
-msgstr ""
+msgstr "Obtén propietats de qualsevol usuari"
 
 #: data/io.elementary.greeter.AccountsService.policy:15
 msgid "Authentication is required to get another user's greeter properties."
 msgstr ""
+"Cal autenticar per obtenir les propietats de benvinguda d’un altre usuari."
 
 #: data/io.elementary.greeter.AccountsService.policy:24
 msgid "Set properties of any user"
-msgstr ""
+msgstr "Establiu les propietats de qualsevol usuari"
 
 #: data/io.elementary.greeter.AccountsService.policy:25
 msgid "Authentication is required to set another user's greeter properties."
 msgstr ""
+"Cal autenticar per establir les propietats de benvinguda d’un altre usuari."
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Feu lliscar el dit."
