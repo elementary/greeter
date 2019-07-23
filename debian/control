@@ -21,6 +21,7 @@ Homepage: https://github.com/elementary/greeter
 Package: pantheon-greeter
 Architecture: any
 Depends: numlockx, ${misc:Depends}, ${shlibs:Depends}
+Recommends: elementary-default-settings (>= 5.2)
 Provides: lightdm-greeter
 Description: Pantheon Login Screen
  Clutter-powered LightDM greeter resembling Unity greeter written for Pantheon.
