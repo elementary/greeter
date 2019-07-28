@@ -227,12 +227,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                                 } else {
                                     activate_action ("previous", null);
                                 }
+                                return true;
                             } else if (event.keyval == Gdk.Key.Right) {
                                 if (get_style_context ().direction == Gtk.TextDirection.RTL) {
                                     activate_action ("previous", null);
                                 } else {
                                     activate_action ("next", null);
                                 }
+                                return true;
                             }
                         }
                     }
@@ -529,6 +531,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         distance = (next_delta - index_delta) * natural_width;
         user_card.notify["reveal-ratio"].connect (notify_cb);
         user_card.show_input = true;
+        user_card.grab_focus ();
         if (index_delta != next_delta) {
             ((Greeter.UserCard) user_cards.peek_nth (index_delta)).show_input = false;
         }
