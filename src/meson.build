@@ -38,7 +38,7 @@ executable(
     'CapsLockRevealer.vala',
     'DateTimeWidget.vala',
     'FPrintUtils.vala',
-    'GreeterAccountsServicePlugin.vala',
+    'PantheonAccountsServicePlugin.vala',
     'MainWindow.vala',
     'PasswordEntry.vala',
     'PromptText.vala',

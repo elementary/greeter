@@ -30,7 +30,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     public bool is_24h { get; set; default = true; }
 
     private Act.User act_user;
-    private Greeter.AccountsService greeter_act;
+    private Pantheon.AccountsService greeter_act;
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private weak Gtk.StyleContext main_grid_style_context;
