@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 elementary, Inc. (https://elementary.io)
+ * Copyright 2018–2019 elementary, Inc. (https://elementary.io)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -22,7 +22,6 @@
 public class Greeter.PasswordEntry : Gtk.Entry {
     construct {
         tooltip_text = _("Password");
-        placeholder_text = _("Password");
         primary_icon_name = "dialog-password-symbolic";
         secondary_icon_name = "go-jump-symbolic";
         secondary_icon_tooltip_text = _("Log In");
@@ -37,3 +36,4 @@ public class Greeter.PasswordEntry : Gtk.Entry {
         });
     }
 }
+
