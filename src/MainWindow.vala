@@ -273,6 +273,11 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             maximize_and_focus ();
         });
 
+        leave_notify_event.connect (() => {
+            maximize_and_focus ();
+            return false;
+        });
+
         destroy.connect (() => {
             Gtk.main_quit ();
         });
@@ -301,9 +306,13 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void maximize_window () {
-        var monitor = Gdk.Display.get_default ().get_primary_monitor ();
+        int x, y;
+        var display = Gdk.Display.get_default ();
+        display.get_pointer (null, out x, out y, null);
+        var monitor = display.get_monitor_at_point (x, y);
         var rect = monitor.get_geometry ();
         resize (rect.width, rect.height);
+        move (rect.x, rect.y);
     }
 
     private void create_session_selection_action () {
