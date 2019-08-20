@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2018-11-22 08:28+0000\n"
-"Last-Translator: Ciarán Ainsworth <ciaranainsworth@outlook.com>\n"
-"Language-Team: English (United Kingdom) <https://weblate.elementary.io/"
-"projects/desktop/greeter/en_GB/>\n"
+"PO-Revision-Date: 2019-08-22 00:22+0000\n"
+"Last-Translator: Ciarán Ainsworth <ciaranainsworth@posteo.net>\n"
+"Language-Team: English (United Kingdom) <https://l10n.elementary.io/projects/"
+"desktop/greeter/en_GB/>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.0.1\n"
+"X-Generator: Weblate 3.7.1\n"
 "X-Launchpad-Export-Date: 2017-03-14 06:58+0000\n"
 
 #: compositor/WindowManager.vala:409
@@ -50,35 +50,35 @@ msgstr "Manual Login…"
 
 #: src/MainWindow.vala:456
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Unable to Launch Initial Setup"
 
 #: src/MainWindow.vala:461
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Initial Setup creates your first user. Without it, you will not be able to "
+"log in and may need to reinstall the OS."
 
 #: src/CapsLockRevealer.vala:55
-#, fuzzy
 msgid "Caps Lock & Num Lock are on"
-msgstr "Caps Lock is on"
+msgstr "Caps Lock & Num Lock are on"
 
 #: src/CapsLockRevealer.vala:57
 msgid "Caps Lock is on"
 msgstr "Caps Lock is on"
 
 #: src/CapsLockRevealer.vala:59
-#, fuzzy
 msgid "Num Lock is on"
-msgstr "Caps Lock is on"
+msgstr "Num Lock is on"
 
 #: src/Cards/UserCard.vala:76
 msgid "Account disabled"
-msgstr ""
+msgstr "Account disabled"
 
 #: src/Cards/UserCard.vala:163
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "Session cannot be changed while user is logged in"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -94,27 +94,27 @@ msgstr "Try username"
 
 #: data/io.elementary.greeter.AccountsService.policy:4
 msgid "Set properties of own user"
-msgstr ""
+msgstr "Set properties of own user"
 
 #: data/io.elementary.greeter.AccountsService.policy:5
 msgid "Authentication is required to set one's own greeter properties."
-msgstr ""
+msgstr "Authentication is required to set one's own greeter properties."
 
 #: data/io.elementary.greeter.AccountsService.policy:14
 msgid "Get properties of any user"
-msgstr ""
+msgstr "Get properties of any user"
 
 #: data/io.elementary.greeter.AccountsService.policy:15
 msgid "Authentication is required to get another user's greeter properties."
-msgstr ""
+msgstr "Authentication is required to get another user's greeter properties."
 
 #: data/io.elementary.greeter.AccountsService.policy:24
 msgid "Set properties of any user"
-msgstr ""
+msgstr "Set properties of any user"
 
 #: data/io.elementary.greeter.AccountsService.policy:25
 msgid "Authentication is required to set another user's greeter properties."
-msgstr ""
+msgstr "Authentication is required to set another user's greeter properties."
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Swipe your finger"
