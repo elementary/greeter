@@ -9,6 +9,11 @@
   <description>
     <p></p>
   </description>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/elementary/greeter/master/data/screenshot.png</image>
+    </screenshot>
+  </screenshots>
   <provides>
     <binary>io.elementary.greeter</binary>
   </provides>
