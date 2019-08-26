@@ -1,5 +1,8 @@
-# Pantheon Greeter
+# Greeter
+
 [![l10n](https://l10n.elementary.io/widgets/desktop/greeter/svg-badge.svg)](https://l10n.elementary.io/projects/desktop/greeter)
+
+![Screenshot](data/screenshot.png?raw=true)
 
 ## Building and Installation
 
