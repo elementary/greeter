@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-05-27 22:29+0000\n"
+"PO-Revision-Date: 2019-08-27 22:22+0000\n"
 "Last-Translator: Ozgur Baskin <bebeto_baskin@yahoo.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/greeter/"
 "tr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 3.7.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:409
@@ -94,27 +94,33 @@ msgstr "Kullanıcı adı dene"
 
 #: data/io.elementary.greeter.AccountsService.policy:4
 msgid "Set properties of own user"
-msgstr ""
+msgstr "Kendi kullanıcınızın özelliklerini ayarlayın"
 
 #: data/io.elementary.greeter.AccountsService.policy:5
 msgid "Authentication is required to set one's own greeter properties."
 msgstr ""
+"Kişinin kendi kullanıcısının greeter özelliklerini ayarlamak için kimlik "
+"doğrulama gerekiyor."
 
 #: data/io.elementary.greeter.AccountsService.policy:14
 msgid "Get properties of any user"
-msgstr ""
+msgstr "Herhangi bir kullanıcının özelliklerini alın"
 
 #: data/io.elementary.greeter.AccountsService.policy:15
 msgid "Authentication is required to get another user's greeter properties."
 msgstr ""
+"Başka bir kullanıcının greeter özelliklerini almak için kimlik doğrulama "
+"gerekiyor."
 
 #: data/io.elementary.greeter.AccountsService.policy:24
 msgid "Set properties of any user"
-msgstr ""
+msgstr "Herhangi bir kullanıcının özelliklerini ayarlayın"
 
 #: data/io.elementary.greeter.AccountsService.policy:25
 msgid "Authentication is required to set another user's greeter properties."
 msgstr ""
+"Başka bir kullanıcının greeter özelliklerini ayarlamak için kimlik doğrulama "
+"gerekiyor."
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Parmağınızı sürükleyin"
