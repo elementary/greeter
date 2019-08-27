@@ -1,3 +1,9 @@
+pantheon-greeter (5.0) bionic; urgency=medium
+
+  * New upstream release.
+
+ -- Cody Garver <codygarver@gmail.com>  Mon, 26 Aug 2019 21:22:07 -0500
+
 pantheon-greeter (3.3.1) bionic; urgency=medium
 
   * New upstream release.
