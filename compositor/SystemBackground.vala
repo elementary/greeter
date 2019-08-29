@@ -40,14 +40,18 @@ public class Greeter.SystemBackground : Meta.BackgroundActor {
 
     public void refresh ()  {       
         if (system_background != null) {
-            this.set_wallpaper ();
+            this.set_wallpaper (null);
         }
     }
 
-    public void set_wallpaper ()  {
-        var texture_file = GLib.File.new_for_uri ("resource:///io/elementary/greeter/texture.png");
-        this.background.set_color (DEFAULT_BACKGROUND_COLOR);
-        this.background.set_file (texture_file, GDesktop.BackgroundStyle.WALLPAPER);
+    public void set_wallpaper (string? path)  {
+        if (path == null) {
+            this.background.set_color (DEFAULT_BACKGROUND_COLOR);
+            return;
+        }
+
+        var texture_file = File.new_for_path (path);
+        this.background.set_file (texture_file, GDesktop.BackgroundStyle.ZOOM);
     }
 
 }

@@ -27,6 +27,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     public LightDM.User lightdm_user { get; construct; }
     public bool show_input { get; set; default = false; }
     public double reveal_ratio { get; private set; default = 0.0; }
+    public string background_path { get; construct set; }
 
     private Gtk.Revealer form_revealer;
     private weak Gtk.StyleContext main_grid_style_context;
@@ -85,7 +86,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         form_revealer.add (form_grid);
         bind_property ("show-input", form_revealer, "reveal-child", GLib.BindingFlags.SYNC_CREATE);
 
-        var background_path = lightdm_user.background;
+        background_path = lightdm_user.background;
 
         if (background_path == null) {
             try {

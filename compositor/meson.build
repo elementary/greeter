@@ -9,7 +9,7 @@ m_dep = meson.get_compiler('c').find_library('m', required: false)
 mutter_dep = []
 libmutter_dep = []
 
-vala_flags = []
+vala_flags = [ '--pkg', 'cogl-fixes']
 compositor_c_args = []
 
 mutter318_dep = dependency('libmutter', version: ['>= 3.18.3', '< 3.19'], required: false)
@@ -129,6 +129,7 @@ compositor_files = files(
 	'DBus.vala',
 	'DBusAccelerator.vala',
 	'SystemBackground.vala',
+	'BlurActor.vala',
 	'Utils.vala'
 )
 
@@ -137,7 +138,7 @@ executable(
 	compositor_files,
 	compositor_resources,
 	config_header,
-	dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, mutter_dep],
+	dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, mutter_dep, lightdm_dep],
 	vala_args: vala_flags,
 	c_args: compositor_c_args,
 	build_rpath: mutter_typelib_dir,

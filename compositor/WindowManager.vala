@@ -72,6 +72,8 @@ namespace GreeterCompositor {
         Gee.HashSet<Meta.WindowActor> unminimizing = new Gee.HashSet<Meta.WindowActor> ();
         GLib.HashTable<Meta.Window, int> ws_assoc = new GLib.HashTable<Meta.Window, int> (direct_hash, direct_equal);
 
+        Greeter.SystemBackground system_background;
+
         public WindowManager () {
             info = Meta.PluginInfo () {name = "GreeterCompositor", version = Constants.VERSION, author = "elementary LLC.",
                 license = "GPLv3", description = "The greeter compositor"};
@@ -101,14 +103,16 @@ namespace GreeterCompositor {
 
             stage = Compositor.get_stage_for_screen (screen) as Clutter.Stage;
 
-            var system_background = new Greeter.SystemBackground (screen);
+            system_background = new Greeter.SystemBackground (screen);
             system_background.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.ALL, 0));
-            system_background.set_wallpaper ();
+            system_background.set_wallpaper (null);
             stage.insert_child_below (system_background, null);
 
             ui_group = new Clutter.Actor ();
             ui_group.reactive = true;
             stage.add_child (ui_group);
+
+            BlurActor.init (3, 4.4f, 50, ui_group);
 
             window_group = Compositor.get_window_group_for_screen (screen);
             stage.remove_child (window_group);
@@ -150,7 +154,22 @@ namespace GreeterCompositor {
             // let the session manager move to the next phase
             Meta.register_with_session ();
 
+            foreach (var workspace in get_screen ().get_workspaces ()) {
+                foreach (var window in workspace.list_windows ()) {
+                    if (window.get_window_type () == DESKTOP) {
+                        var actor = (Meta.WindowActor)window.get_compositor_private ();
+                        var blur_actor = new BlurActor (actor);
+                        actor.insert_child_below (blur_actor, null);
+                        break;
+                    }
+                }
+            }
+
             return false;
+        }
+
+        public void set_wallpaper (string path) {
+            system_background.set_wallpaper (path);
         }
 
         public uint32[] get_all_xids () {
@@ -280,6 +299,11 @@ namespace GreeterCompositor {
         }
 
         public override void map (WindowActor actor) {
+            if (actor.get_meta_window ().get_window_type () == DESKTOP) {
+                var blur_actor = new BlurActor (actor);
+                actor.insert_child_below (blur_actor, null);
+            }
+
             actor.show ();
             map_completed (actor);
             return;
