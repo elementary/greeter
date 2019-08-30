@@ -78,9 +78,15 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             settings.gtk_icon_theme_name = "elementary";
             settings.gtk_theme_name = "elementary";
 
-            var css_provider = Gtk.CssProvider.get_named (settings.gtk_theme_name, "dark");
-            guest_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-            manual_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            var dark_provider = Gtk.CssProvider.get_named (settings.gtk_theme_name, "dark");
+
+            unowned Gtk.StyleContext guest_button_context = guest_login_button.get_style_context ();
+            guest_button_context.add_provider (dark_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            guest_button_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+            unowned Gtk.StyleContext manual_button_context = manual_login_button.get_style_context ();
+            manual_button_context.add_provider (dark_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            manual_button_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         } catch (Error e) {}
 
         var datetime_widget = new Greeter.DateTimeWidget ();
