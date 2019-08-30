@@ -78,7 +78,18 @@ namespace GreeterCompositor
         uniform float half_height;
         uniform float offset;
         uniform float saturation;
-		uniform float brightness;
+        uniform float brightness;
+        uniform int add_noise;
+
+        // From http://byteblacksmith.com/improvements-to-the-canonical-one-liner-glsl-rand-for-opengl-es-2-0/
+        highp float random (vec2 co) {
+            const highp float a = 12.9898;
+            const highp float b = 78.233;
+            const highp float c = 43758.5453;
+            highp float dt = dot (co.xy, vec2 (a, b));
+            highp float sn = mod (dt, 3.14);
+            return fract (sin (sn) * c);
+        }
 
         vec3 saturate (vec3 rgb, float adjustment) {
             const vec3 W = vec3(0.2125, 0.7154, 0.0721);
@@ -99,6 +110,11 @@ namespace GreeterCompositor
             sum += texture2D (tex, uv + vec2(0.0, -halfpixel.y * 2.0) * offset);
             sum += texture2D (tex, uv + vec2(-halfpixel.x, -halfpixel.y) * offset) * 2.0;
             sum /= 12.0;
+
+            if (add_noise == 1) {
+                vec3 noise = vec3 (random (uv) * 0.01);
+                sum -= vec4 (noise, 0);
+            }
 
             vec3 mixed = saturate (sum.rgb, saturation) + vec3 (brightness, brightness, brightness);
             cogl_color_out = vec4 (mixed, sum.a) * cogl_color_in;
@@ -147,6 +163,7 @@ namespace GreeterCompositor
 
         static int saturation_location;
         static int brightness_location;
+        static int add_noise_location;
 
         static int copysample_tex_x_location;
         static int copysample_tex_y_location;
@@ -237,6 +254,7 @@ namespace GreeterCompositor
                 saturation_location = up_program.get_uniform_location ("saturation");     
                 brightness_location = up_program.get_uniform_location ("brightness");
                 up_offset_location = up_program.get_uniform_location ("offset");
+                add_noise_location = up_program.get_uniform_location ("add_noise");
 
                 CoglFixes.set_uniform_1i (up_program, tex_location, 0);
                 CoglFixes.set_uniform_1f (up_program, saturation_location, 1.0f);
@@ -461,11 +479,18 @@ namespace GreeterCompositor
 
             copy_target_texture ();
 
+            //  CoglFixes.set_uniform_1f (up_program, saturation_location, 1.0f);
+            //  CoglFixes.set_uniform_1f (up_program, brightness_location, 0.0f);
+            CoglFixes.set_uniform_1i (up_program, add_noise_location, 0);
+
             downsample ();
             upsample ();
 
             CoglFixes.set_uniform_1f (up_program, up_width_location, 0.5f / stage_width);
-            CoglFixes.set_uniform_1f (up_program, up_height_location, 0.5f / stage_height);    
+            CoglFixes.set_uniform_1f (up_program, up_height_location, 0.5f / stage_height);
+            //  CoglFixes.set_uniform_1f (up_program, saturation_location, 1.0f);
+            //  CoglFixes.set_uniform_1f (up_program, brightness_location, 0.0f);
+            CoglFixes.set_uniform_1i (up_program, add_noise_location, 1);
 
             uint8 paint_opacity = get_paint_opacity ();
 
@@ -476,17 +501,11 @@ namespace GreeterCompositor
             up_material.set_layer (0, texture);
             up_material.set_color4ub (paint_opacity, paint_opacity, paint_opacity, paint_opacity);
 
-            CoglFixes.set_uniform_1f (up_program, saturation_location, 1.4f);
-            CoglFixes.set_uniform_1f (up_program, brightness_location, 1.3f);
-
             Cogl.rectangle_with_texture_coords (
                 0, 0, width, height,
                 (x / 2) / source_width, (y / 2) / source_height,
                 ((x + transformed_width) / 2) / source_width,
                 ((y + transformed_height) / 2) / source_height);
-
-            CoglFixes.set_uniform_1f (up_program, saturation_location, 1.0f);
-            CoglFixes.set_uniform_1f (up_program, brightness_location, 0.0f);
 
             up_material.set_color4ub (255, 255, 255, 255);
         }
