@@ -29,6 +29,11 @@ public class Greeter.UserCard : Greeter.BaseCard {
     public double reveal_ratio { get; private set; default = 0.0; }
     public bool is_24h { get; set; default = true; }
 
+    public int sleep_inactive_ac_timeout { get; set; default = 1200; }
+    public int sleep_inactive_ac_type { get; set; default = 1; }
+    public int sleep_inactive_battery_timeout { get; set; default = 1200; }
+    public int sleep_inactive_battery_type { get; set; default = 1; }
+
     private Act.User act_user;
     private Pantheon.AccountsService greeter_act;
     private Gtk.Revealer form_revealer;
@@ -241,10 +246,19 @@ public class Greeter.UserCard : Greeter.BaseCard {
                                                        act_path,
                                                        GLib.DBusProxyFlags.GET_INVALIDATED_PROPERTIES);
                 is_24h = greeter_act.time_format != "12h";
+                sleep_inactive_ac_timeout = greeter_act.sleep_inactive_ac_timeout;
+                sleep_inactive_ac_type = greeter_act.sleep_inactive_ac_type;
+                sleep_inactive_battery_timeout = greeter_act.sleep_inactive_battery_timeout;
+                sleep_inactive_battery_type = greeter_act.sleep_inactive_battery_type;
                 ((GLib.DBusProxy) greeter_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
                     string time_format;
                     changed_properties.lookup ("TimeFormat", "s", out time_format);
                     is_24h = time_format != "12h";
+
+                    changed_properties.lookup ("SleepInactiveACTimeout", "i", out _sleep_inactive_ac_timeout);
+                    changed_properties.lookup ("SleepInactiveACType", "i", out _sleep_inactive_ac_type);
+                    changed_properties.lookup ("SleepInactiveBatteryTimeout", "i", out _sleep_inactive_battery_timeout);
+                    changed_properties.lookup ("SleepInactiveBatteryType", "i", out _sleep_inactive_battery_type);
                 });
             } catch (Error e) {
                 critical (e.message);

@@ -522,18 +522,30 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     int distance = 0;
     int next_delta = 0;
-    weak GLib.Binding? binding = null;
+    Gee.ArrayList<weak GLib.Binding?>? bindings = null;
     private void switch_to_card (Greeter.UserCard user_card) {
         if (next_delta != index_delta) {
             return;
         }
 
-        current_card = user_card;
-        if (binding != null) {
+        if (bindings == null) {
+            bindings = new Gee.ArrayList<weak GLib.Binding?> ();
+        }
+
+        foreach (weak GLib.Binding binding in bindings) {
             binding.unbind ();
         }
 
-        binding = user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE);
+        bindings.clear ();
+
+        current_card = user_card;
+
+        bindings.add (user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE));
+        bindings.add (user_card.bind_property ("sleep-inactive-ac-timeout", settings, "sleep-inactive-ac-timeout", GLib.BindingFlags.SYNC_CREATE));
+        bindings.add (user_card.bind_property ("sleep-inactive-ac-type", settings, "sleep-inactive-ac-type", GLib.BindingFlags.SYNC_CREATE));
+        bindings.add (user_card.bind_property ("sleep-inactive-battery-timeout", settings, "sleep-inactive-battery-timeout", GLib.BindingFlags.SYNC_CREATE));
+        bindings.add (user_card.bind_property ("sleep-inactive-battery-type", settings, "sleep-inactive-battery-type", GLib.BindingFlags.SYNC_CREATE));
+
         next_delta = user_cards.index (user_card);
         int minimum_width, natural_width;
         user_card.get_preferred_width (out minimum_width, out natural_width);
