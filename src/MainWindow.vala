@@ -387,6 +387,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     // Called after the credentials are checked, might be authenticated or not.
     private void authentication_complete () {
+        if (current_card is Greeter.UserCard) {
+             settings.last_user = ((Greeter.UserCard)current_card).lightdm_user.name;
+        }
+
         if (lightdm_greeter.is_authenticated) {
             var action_group = get_action_group ("session");
             try {
@@ -517,12 +521,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         });
 
         user_card.do_connect.connect (do_connect);
-
-        user_card.notify["child-revealed"].connect (() => {
-            if (user_card.child_revealed) {
-                settings.last_user = user_card.lightdm_user.name;
-            }
-        });
 
         card_size_group.add_widget (user_card);
         user_cards.push_tail (user_card);

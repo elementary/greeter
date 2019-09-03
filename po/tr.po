@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-08-27 22:22+0000\n"
-"Last-Translator: Ozgur Baskin <bebeto_baskin@yahoo.com>\n"
+"PO-Revision-Date: 2019-09-02 19:36+0000\n"
+"Last-Translator: Muha Aliss <muhaaliss@gmail.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/greeter/"
 "tr/>\n"
 "Language: tr\n"
@@ -94,13 +94,13 @@ msgstr "Kullanıcı adı dene"
 
 #: data/io.elementary.greeter.AccountsService.policy:4
 msgid "Set properties of own user"
-msgstr "Kendi kullanıcınızın özelliklerini ayarlayın"
+msgstr "Kullanıcını özelliklerinizi ayarlayın"
 
 #: data/io.elementary.greeter.AccountsService.policy:5
 msgid "Authentication is required to set one's own greeter properties."
 msgstr ""
-"Kişinin kendi kullanıcısının greeter özelliklerini ayarlamak için kimlik "
-"doğrulama gerekiyor."
+"Kullanıcı greeter özelliklerinizi ayarlayabilmek için kimliğinizi "
+"doğrulamanız gerekiyor."
 
 #: data/io.elementary.greeter.AccountsService.policy:14
 msgid "Get properties of any user"
