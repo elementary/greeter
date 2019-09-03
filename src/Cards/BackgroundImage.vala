@@ -37,8 +37,20 @@ public class Greeter.BackgroundImage : Gtk.EventBox {
             last_size_hash = new_hash;
             double full_ratio = (double)full_pixbuf.height / (double)full_pixbuf.width;
             fitting_pixbuf = new Gdk.Pixbuf (full_pixbuf.colorspace, full_pixbuf.has_alpha, full_pixbuf.bits_per_sample, width, height);
-            var scaled_pixbuf = full_pixbuf.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
-            scaled_pixbuf.copy_area (0, (scaled_pixbuf.height - height)/2, width, height, fitting_pixbuf, 0, 0);
+
+            // Get a scaled pixbuf that preserves aspect ratio but is at least as big as the desired destination pixbuf
+            Gdk.Pixbuf scaled_pixbuf;
+            if ((int)(width * full_ratio) < height) {
+                scaled_pixbuf = full_pixbuf.scale_simple ((int)(width * (1/full_ratio)), height, Gdk.InterpType.BILINEAR);
+            } else {
+                scaled_pixbuf = full_pixbuf.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
+            }
+
+            // Find the offset we need to center the source pixbuf on the destination
+            int y = ((height - scaled_pixbuf.height) / 2).abs ();
+            int x = ((width - scaled_pixbuf.width) / 2).abs ();
+
+            scaled_pixbuf.copy_area (x, y, width, height, fitting_pixbuf, 0, 0);
         }
 
         cr.save ();
