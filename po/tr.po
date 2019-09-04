@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-09-02 19:36+0000\n"
-"Last-Translator: Muha Aliss <muhaaliss@gmail.com>\n"
+"PO-Revision-Date: 2019-09-03 20:22+0000\n"
+"Last-Translator: Ozgur Baskin <bebeto_baskin@yahoo.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/greeter/"
 "tr/>\n"
 "Language: tr\n"
@@ -57,7 +57,7 @@ msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
-"İlk Kurulum, ilk kullanıcınızı yaratır. Bu olmadan oturum açamazsınız ve "
+"İlk Kurulum, ilk kullanıcınızı oluşturur. Bu olmadan oturum açamazsınız ve "
 "işletim sistemini yeniden kurmanız gerekebilir."
 
 #: src/CapsLockRevealer.vala:55
@@ -94,7 +94,7 @@ msgstr "Kullanıcı adı dene"
 
 #: data/io.elementary.greeter.AccountsService.policy:4
 msgid "Set properties of own user"
-msgstr "Kullanıcını özelliklerinizi ayarlayın"
+msgstr "Kullanıcı özelliklerinizi ayarlayın"
 
 #: data/io.elementary.greeter.AccountsService.policy:5
 msgid "Authentication is required to set one's own greeter properties."
