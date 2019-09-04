@@ -42,7 +42,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var username_label = new Gtk.Label (lightdm_user.display_name);
         username_label.margin = 24;
         username_label.hexpand = true;
-        username_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+
+        unowned Gtk.StyleContext username_label_context = username_label.get_style_context ();
+        username_label_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
+        username_label_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         password_entry = new Greeter.PasswordEntry ();
 
@@ -204,7 +207,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             reveal_ratio = (double)alloc.height/(double)total_height;
         });
 
-        form_revealer.notify["child-revealed"].connect (() => {
+        notify["show-input"].connect (() => {
             update_collapsed_class ();
         });
 
@@ -274,7 +277,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private void update_collapsed_class () {
-        if (form_revealer.child_revealed) {
+        if (show_input) {
             main_grid_style_context.remove_class ("collapsed");
         } else {
             main_grid_style_context.add_class ("collapsed");
