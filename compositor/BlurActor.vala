@@ -80,14 +80,14 @@ namespace GreeterCompositor
         uniform float saturation;
         uniform float brightness;
         uniform int add_noise;
-
+        
         // From http://byteblacksmith.com/improvements-to-the-canonical-one-liner-glsl-rand-for-opengl-es-2-0/
-        highp float random (vec2 co) {
-            const highp float a = 12.9898;
-            const highp float b = 78.233;
-            const highp float c = 43758.5453;
-            highp float dt = dot (co.xy, vec2 (a, b));
-            highp float sn = mod (dt, 3.14);
+        float random (vec2 co) {
+            const float a = 12.9898;
+            const float b = 78.233;
+            const float c = 43758.5453;
+            float dt = dot (co.xy, vec2 (a, b));
+            float sn = mod (dt, 3.14);
             return fract (sin (sn) * c);
         }
 
@@ -112,7 +112,7 @@ namespace GreeterCompositor
             sum /= 12.0;
 
             if (add_noise == 1) {
-                vec3 noise = vec3 (random (uv) * 0.01);
+                vec3 noise = vec3 (random (uv) * 0.015);
                 sum -= vec4 (noise, 0);
             }
 
