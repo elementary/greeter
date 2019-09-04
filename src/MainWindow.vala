@@ -21,7 +21,7 @@
 
 [DBus (name = "org.pantheon.greeter")]
 public interface IGreeterCompositor : Object {
-    public abstract void set_wallpaper (string path) throws Error;
+    public abstract void set_wallpaper (string? path) throws Error;
 }
 
 public class Greeter.MainWindow : Gtk.ApplicationWindow {
@@ -56,7 +56,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         type_hint = Gdk.WindowTypeHint.DESKTOP;
         get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         
-        compositor = Bus.get_proxy_sync<IGreeterCompositor> (BusType.SESSION, "org.pantheon.greeter", "/org/pantheon/greeter");
+        watch_compositor ();
 
         settings = new Greeter.Settings ();
         create_session_selection_action ();
@@ -421,9 +421,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         if (!user_selected) {
             unowned Greeter.UserCard user_card = (Greeter.UserCard) user_cards.peek_head ();
             user_card.show_input = true;
-            if (compositor != null && user_card.background_path != null) {
-                compositor.set_wallpaper (user_card.background_path);
-            }
+            update_compositor_wallpaper (user_card);
 
             try {
                 lightdm_greeter.authenticate (user_card.lightdm_user.name);
@@ -491,9 +489,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             ((Greeter.UserCard) user_cards.peek_nth (index_delta)).show_input = false;
         }
 
-        if (compositor != null && user_card.background_path != null) {
-            compositor.set_wallpaper (user_card.background_path);
-        }
+        update_compositor_wallpaper (user_card);
 
         if (lightdm_greeter.in_authentication) {
             try {
@@ -547,6 +543,42 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 lightdm_greeter.respond (credential);
             } catch (Error e) {
                 critical (e.message);
+            }
+        }
+    }
+
+    private void watch_compositor () {
+        Bus.watch_name (
+            BusType.SESSION, "org.pantheon.greeter", BusNameWatcherFlags.NONE,
+            (conn, name, name_owner) => {
+                conn.get_proxy.begin<IGreeterCompositor> ("org.pantheon.greeter", "/org/pantheon/greeter", 0, null, (obj, res) => {
+                    try {
+                        compositor = conn.get_proxy.end (res);
+                        if (current_card != null) {
+                            update_compositor_wallpaper (current_card);
+                        }
+                    } catch (Error e) {
+                        warning (e.message);
+                        compositor = null;
+                    }
+                });
+            },
+            () => {
+                compositor = null;
+            }
+        );
+    }
+
+    private void update_compositor_wallpaper (Greeter.BaseCard base_card) {
+        if (compositor != null) {
+            try {
+                if (base_card is Greeter.UserCard) {
+                    compositor.set_wallpaper (((Greeter.UserCard)base_card).background_path);
+                } else {
+                    compositor.set_wallpaper (null);
+                }
+            } catch (Error e) {
+                warning (e.message);
             }
         }
     }

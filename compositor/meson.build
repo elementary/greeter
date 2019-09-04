@@ -128,7 +128,8 @@ compositor_files = files(
 	'MediaFeedback.vala',
 	'DBus.vala',
 	'DBusAccelerator.vala',
-	'SystemBackground.vala',
+	'BackgroundContainer.vala',
+	'RendererInfo.vala',
 	'BlurActor.vala',
 	'Utils.vala'
 )
