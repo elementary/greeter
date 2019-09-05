@@ -4,7 +4,8 @@ namespace GreeterCompositor
 {
     public class BackgroundContainer : Meta.BackgroundGroup
     {
-        const string DEFAULT_BACKGROUND_PATH = "default";
+        const string DEFAULT_BACKGROUND_PATH = "/usr/share/backgrounds/elementaryos-default";
+        const string DEFAULT_GRAY_BACKGROUND = "default";
         const Clutter.Color DEFAULT_BACKGROUND_COLOR = { 0x2e, 0x34, 0x36, 0xff };
         public Meta.Screen screen { get; construct; }
 
@@ -23,9 +24,14 @@ namespace GreeterCompositor
 
         public static void refresh ()
         {
-            var actor = actors[DEFAULT_BACKGROUND_PATH];
+            var actor = actors[DEFAULT_GRAY_BACKGROUND];
             if (actor != null) {
                 actor.background.set_color (DEFAULT_BACKGROUND_COLOR);
+            } else {
+                actor = actors[DEFAULT_BACKGROUND_PATH];
+                if (actor != null) {
+                    actor.background.set_color (DEFAULT_BACKGROUND_COLOR);
+                }
             }
         }
 
@@ -34,11 +40,19 @@ namespace GreeterCompositor
             Object (screen: screen);
         }
 
+        /**
+         * If path is null then show the gray background.
+         * If path is "" then show default background.
+         */
         public async void set_wallpaper (string? path)
         {
             yield wait_for_previous_transition ();
 
-            path = path ?? DEFAULT_BACKGROUND_PATH;
+            if (path == null) {
+                path = DEFAULT_GRAY_BACKGROUND;
+            } else if (path == "") {
+                path = DEFAULT_BACKGROUND_PATH;
+            }
 
             Meta.BackgroundActor? new_background_actor;
             if (path == current_actor_path) {
@@ -50,12 +64,12 @@ namespace GreeterCompositor
             } else {
                 var new_background = new Meta.Background (screen);
 
-                if (path == null) {
-                    new_background.set_color (DEFAULT_BACKGROUND_COLOR);
-                } else {
-                    var texture_file = File.new_for_path (path);
+                var texture_file = File.new_for_path (path);
+                if (path != DEFAULT_GRAY_BACKGROUND && texture_file.query_exists ()) {
                     new_background.set_file (texture_file, GDesktop.BackgroundStyle.ZOOM);
                     yield wait_for_load (texture_file);
+                } else {
+                    new_background.set_color (DEFAULT_BACKGROUND_COLOR);
                 }
 
                 new_background_actor = new Meta.BackgroundActor (screen, 0);

@@ -21,7 +21,7 @@
 
 [DBus (name = "org.pantheon.greeter")]
 public interface IGreeterCompositor : Object {
-    public abstract void set_wallpaper (string? path) throws Error;
+    public abstract void set_wallpaper (string path) throws Error;
 }
 
 public class Greeter.MainWindow : Gtk.ApplicationWindow {
@@ -573,9 +573,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         if (compositor != null) {
             try {
                 if (base_card is Greeter.UserCard) {
-                    compositor.set_wallpaper (((Greeter.UserCard)base_card).background_path);
+                    compositor.set_wallpaper (((Greeter.UserCard)base_card).background_path ?? "");
                 } else {
-                    compositor.set_wallpaper (null);
+                    compositor.set_wallpaper ("");
                 }
             } catch (Error e) {
                 warning (e.message);

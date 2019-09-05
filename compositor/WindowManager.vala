@@ -109,10 +109,6 @@ namespace GreeterCompositor {
             ui_group.reactive = true;
             stage.add_child (ui_group);
 
-            if (BlurActor.get_supported (this) && BlurActor.get_enabled_by_default ()) {
-                BlurActor.init (3, 4.4f, 50, ui_group);
-            }
-
             window_group = Compositor.get_window_group_for_screen (screen);
             stage.remove_child (window_group);
             ui_group.add_child (window_group);
@@ -153,13 +149,16 @@ namespace GreeterCompositor {
             // let the session manager move to the next phase
             Meta.register_with_session ();
 
-            foreach (var workspace in get_screen ().get_workspaces ()) {
-                foreach (var window in workspace.list_windows ()) {
-                    if (window.get_window_type () == DESKTOP) {
-                        var actor = (Meta.WindowActor)window.get_compositor_private ();
-                        var blur_actor = new BlurActor (actor);
-                        actor.insert_child_below (blur_actor, null);
-                        break;
+            if (BlurActor.get_supported (this)) {
+                BlurActor.init (3, 4.4f, 50, ui_group);
+                foreach (var workspace in get_screen ().get_workspaces ()) {
+                    foreach (var window in workspace.list_windows ()) {
+                        if (window.get_window_type () == DESKTOP) {
+                            var actor = (Meta.WindowActor)window.get_compositor_private ();
+                            var blur_actor = new BlurActor (actor);
+                            actor.insert_child_below (blur_actor, null);
+                            break;
+                        }
                     }
                 }
             }

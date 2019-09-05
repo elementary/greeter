@@ -220,7 +220,7 @@ namespace GreeterCompositor
 
         Meta.Rectangle actor_rect;
         Meta.Rectangle tex_rect;
-        Clutter.Matrix? prev_transform;
+        Clutter.Size prev_size;
 
         bool is_dock = false;
         uint current_handle;
@@ -392,6 +392,7 @@ namespace GreeterCompositor
                 window.notify["window-type"].connect (update_window_type);
             }
 
+            prev_size = Clutter.Size.alloc ();
             handle_notifier.updated.connect (update_current_handle);
             update_window_type ();
         }
@@ -465,8 +466,10 @@ namespace GreeterCompositor
             float transformed_width, transformed_height;
             get_transformed_size (out transformed_width, out transformed_height);
 
-            Clutter.Matrix? transform = get_transform ();
-            if (!use_cache || (prev_transform == null || !Cogl.Matrix.equal ((void*)prev_transform, (void*)transform))) {
+            Clutter.Size size = Clutter.Size.alloc ();
+            size.width = transformed_width;
+            size.height = transformed_height;
+            if (!use_cache || !size.equals (prev_size)) {
                 double sx, sy;
                 ui_group.get_scale (out sx, out sy);
 
@@ -497,6 +500,8 @@ namespace GreeterCompositor
 
                 downsample ();
                 upsample ();
+
+                prev_size = size;
             }
 
             CoglFixes.set_uniform_1f (up_program, up_width_location, 0.5f / stage_width);
@@ -519,8 +524,6 @@ namespace GreeterCompositor
                 ((y + transformed_height) / 2) / source_height);
 
             up_material.set_color4ub (255, 255, 255, 255);
-
-            prev_transform = transform;
         }
 
         void update_window_type ()
