@@ -149,7 +149,7 @@ namespace GreeterCompositor {
             // let the session manager move to the next phase
             Meta.register_with_session ();
 
-            if (BlurActor.get_supported (this)) {
+            if (BlurActor.get_supported (this) && BlurActor.get_enabled_by_default ()) {
                 BlurActor.init (3, 4.4f, 50, ui_group);
                 foreach (var workspace in get_screen ().get_workspaces ()) {
                     foreach (var window in workspace.list_windows ()) {
