@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-08-22 00:22+0000\n"
+"PO-Revision-Date: 2019-09-07 21:22+0000\n"
 "Last-Translator: Ozgur Baskin <bebeto_baskin@yahoo.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/tr/>\n"
@@ -25,7 +25,7 @@ msgstr "Greeter"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
-msgstr ""
+msgstr "Cihazınızın kilidini veya oturumunuzu açın"
 
 #: data/greeter.appdata.xml.in:46
 msgid "elementary, Inc."
