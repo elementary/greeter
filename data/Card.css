@@ -13,3 +13,7 @@
 .shake {
     animation: shake 0.4s ease-in-out 1;
 }
+
+.card.collapsed label.h2 {
+    font-size: 1.5em;
+}
