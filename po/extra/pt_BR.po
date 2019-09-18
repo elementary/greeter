@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-07-01 20:28+0000\n"
-"Last-Translator: Rodrigo Oliveira <rod.oliveira@gmail.com>\n"
+"PO-Revision-Date: 2019-09-10 22:22+0000\n"
+"Last-Translator: Michael Leocádio <leocadiomichael@outlook.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.elementary.io/projects/"
 "desktop/greeter-extra/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 3.7.1\n"
 
 #: data/greeter.appdata.xml.in:7
 msgid "Greeter"
@@ -25,7 +25,7 @@ msgstr "Greeter"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
-msgstr "Desbloquear ou efetuar login no seu dispositivo"
+msgstr "Desbloquear ou efetuar login em seu dispositivo"
 
 #: data/greeter.appdata.xml.in:46
 msgid "elementary, Inc."
