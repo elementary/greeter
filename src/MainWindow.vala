@@ -379,11 +379,20 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     // Called after the credentials are checked, might be authenticated or not.
     private void authentication_complete () {
-        if (current_card is Greeter.UserCard) {
-             settings.last_user = ((Greeter.UserCard)current_card).lightdm_user.name;
+        var user_card = current_card as Greeter.UserCard;
+        if (user_card != null) {
+             settings.last_user = user_card.lightdm_user.name;
         }
 
         if (lightdm_greeter.is_authenticated) {
+            // Copy user's power settings to lightdm user
+            if (user_card != null) {
+                settings.sleep_inactive_ac_timeout = user_card.sleep_inactive_ac_timeout;
+                settings.sleep_inactive_ac_type = user_card.sleep_inactive_ac_type;
+                settings.sleep_inactive_battery_timeout = user_card.sleep_inactive_battery_timeout;
+                settings.sleep_inactive_battery_type = user_card.sleep_inactive_battery_type;
+            }
+
             var action_group = get_action_group ("session");
             try {
                 lightdm_greeter.start_session_sync (action_group.get_action_state ("select").get_string ());
@@ -520,30 +529,18 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     int distance = 0;
     int next_delta = 0;
-    Gee.ArrayList<weak GLib.Binding?>? bindings = null;
+    weak GLib.Binding? binding = null;
     private void switch_to_card (Greeter.UserCard user_card) {
         if (next_delta != index_delta) {
             return;
         }
 
-        if (bindings == null) {
-            bindings = new Gee.ArrayList<weak GLib.Binding?> ();
-        }
-
-        foreach (weak GLib.Binding binding in bindings) {
+        current_card = user_card;
+        if (binding != null) {
             binding.unbind ();
         }
 
-        bindings.clear ();
-
-        current_card = user_card;
-
-        bindings.add (user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE));
-        bindings.add (user_card.bind_property ("sleep-inactive-ac-timeout", settings, "sleep-inactive-ac-timeout", GLib.BindingFlags.SYNC_CREATE));
-        bindings.add (user_card.bind_property ("sleep-inactive-ac-type", settings, "sleep-inactive-ac-type", GLib.BindingFlags.SYNC_CREATE));
-        bindings.add (user_card.bind_property ("sleep-inactive-battery-timeout", settings, "sleep-inactive-battery-timeout", GLib.BindingFlags.SYNC_CREATE));
-        bindings.add (user_card.bind_property ("sleep-inactive-battery-type", settings, "sleep-inactive-battery-type", GLib.BindingFlags.SYNC_CREATE));
-
+        binding = user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE);
         next_delta = user_cards.index (user_card);
         int minimum_width, natural_width;
         user_card.get_preferred_width (out minimum_width, out natural_width);
