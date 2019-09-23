@@ -29,9 +29,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     public double reveal_ratio { get; private set; default = 0.0; }
     public bool is_24h { get; set; default = true; }
 
-    public int sleep_inactive_ac_timeout { get; set; default = 1200; }
     public int sleep_inactive_ac_type { get; set; default = 1; }
-    public int sleep_inactive_battery_timeout { get; set; default = 1200; }
     public int sleep_inactive_battery_type { get; set; default = 1; }
 
     private Act.User act_user;
@@ -249,10 +247,13 @@ public class Greeter.UserCard : Greeter.BaseCard {
                                                        act_path,
                                                        GLib.DBusProxyFlags.GET_INVALIDATED_PROPERTIES);
                 is_24h = greeter_act.time_format != "12h";
-                sleep_inactive_ac_timeout = greeter_act.sleep_inactive_ac_timeout;
+                // Make greeter's screen sleep after 3 minutes of inactivity.
+                sleep_inactive_ac_timeout = 180;
+                sleep_inactive_battery_timeout = 180;
+                // set the sleep type after the screen timeout. (either 'sleep' or 'nothing')
                 sleep_inactive_ac_type = greeter_act.sleep_inactive_ac_type;
-                sleep_inactive_battery_timeout = greeter_act.sleep_inactive_battery_timeout;
                 sleep_inactive_battery_type = greeter_act.sleep_inactive_battery_type;
+
                 ((GLib.DBusProxy) greeter_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
                     string time_format;
                     changed_properties.lookup ("TimeFormat", "s", out time_format);
