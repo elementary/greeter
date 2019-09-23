@@ -29,6 +29,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
     public double reveal_ratio { get; private set; default = 0.0; }
     public bool is_24h { get; set; default = true; }
 
+    // Make greeter's screen sleep after 3 minutes of inactivity.
+    public int sleep_inactive_ac_timeout { get; set; default = 180; }
+    public int sleep_inactive_battery_timeout { get; set; default = 180; }
+
     public int sleep_inactive_ac_type { get; set; default = 1; }
     public int sleep_inactive_battery_type { get; set; default = 1; }
 
@@ -247,9 +251,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
                                                        act_path,
                                                        GLib.DBusProxyFlags.GET_INVALIDATED_PROPERTIES);
                 is_24h = greeter_act.time_format != "12h";
-                // Make greeter's screen sleep after 3 minutes of inactivity.
-                sleep_inactive_ac_timeout = 180;
-                sleep_inactive_battery_timeout = 180;
                 // set the sleep type after the screen timeout. (either 'sleep' or 'nothing')
                 sleep_inactive_ac_type = greeter_act.sleep_inactive_ac_type;
                 sleep_inactive_battery_type = greeter_act.sleep_inactive_battery_type;
