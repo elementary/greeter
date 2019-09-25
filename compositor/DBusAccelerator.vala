@@ -1,7 +1,7 @@
-/* 
+/*
  * Copyright 2015 Nicolas Bruguier, Corentin Noël
  * Copyright 2018 elementary LLC. (https://elementary.io)
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -31,15 +31,15 @@ namespace GreeterCompositor {
      */
     [Flags]
     public enum ActionMode {
-        NONE          = 0,
-        NORMAL        = 1 << 0,
-        OVERVIEW      = 1 << 1,
-        LOCK_SCREEN   = 1 << 2,
+        NONE = 0,
+        NORMAL = 1 << 0,
+        OVERVIEW = 1 << 1,
+        LOCK_SCREEN = 1 << 2,
         UNLOCK_SCREEN = 1 << 3,
-        LOGIN_SCREEN  = 1 << 4,
-        SYSTEM_MODAL  = 1 << 5,
+        LOGIN_SCREEN = 1 << 4,
+        SYSTEM_MODAL = 1 << 5,
         LOOKING_GLASS = 1 << 6,
-        POPUP         = 1 << 7,
+        POPUP = 1 << 7,
     }
 
     public struct Accelerator {
