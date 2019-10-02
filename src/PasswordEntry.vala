@@ -36,4 +36,3 @@ public class Greeter.PasswordEntry : Gtk.Entry {
         });
     }
 }
-

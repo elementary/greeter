@@ -41,7 +41,7 @@ public class Greeter.BackgroundImage : Gtk.EventBox {
             // Get a scaled pixbuf that preserves aspect ratio but is at least as big as the desired destination pixbuf
             Gdk.Pixbuf scaled_pixbuf;
             if ((int)(width * full_ratio) < height) {
-                scaled_pixbuf = full_pixbuf.scale_simple ((int)(width * (1/full_ratio)), height, Gdk.InterpType.BILINEAR);
+                scaled_pixbuf = full_pixbuf.scale_simple ((int)(width * (1 / full_ratio)), height, Gdk.InterpType.BILINEAR);
             } else {
                 scaled_pixbuf = full_pixbuf.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
             }
@@ -54,7 +54,7 @@ public class Greeter.BackgroundImage : Gtk.EventBox {
         }
 
         cr.save ();
-        cr.scale (1.0/scale, 1.0/scale);
+        cr.scale (1.0 / scale, 1.0 / scale);
         cr.new_sub_path ();
         cr.arc (width - radius, radius, radius, -Math.PI_2, 0);
         cr.line_to (width, height);
@@ -63,7 +63,7 @@ public class Greeter.BackgroundImage : Gtk.EventBox {
         cr.arc (radius, radius, radius, Math.PI, Math.PI + Math.PI_2);
         cr.close_path ();
         Gdk.cairo_set_source_pixbuf (cr, fitting_pixbuf, 0, 0);
-        cr.clip();
+        cr.clip ();
         cr.paint ();
         cr.restore ();
         return true;
