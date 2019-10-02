@@ -61,7 +61,7 @@ namespace Greeter.FPrintUtils {
         // These messages are taken from here: 
         //  - https://gitlab.freedesktop.org/libfprint/fprintd/blob/master/pam/fingerprint-strings.h
         //  - https://gitlab.freedesktop.org/libfprint/fprintd/blob/master/pam/pam_fprintd.c
-        
+
         if (text == fprintd_message ("An unknown error occured")) {
             return MessageText.FPRINT_ERROR;
         } else if (text == fprintd_message ("An unknown error occurred")) {
@@ -86,19 +86,19 @@ namespace Greeter.FPrintUtils {
             return MessageText.FPRINT_TIMEOUT;
         } else if (text == "Login failed") {
             return MessageText.FAILED;
-        } 
+        }
 
         return MessageText.OTHER;
     }
 
-    private bool check_fprintd_string(string text, string action, string position) {
-        const string[] fingers = {
+    private bool check_fprintd_string (string text, string action, string position) {
+        const string[] FINGERS = {
             "finger",
             "left thumb", "left index finger", "left middle finger", "left ring finger", "left little finger",
             "right thumb", "right index finger", "right middle finger", "right ring finger", "right little finger"
         };
 
-        foreach (unowned string finger in fingers) {
+        foreach (unowned string finger in FINGERS) {
             // Place your finger on %s
             var english_string = action.concat (" your ", finger, " ", position, " %s");
 

@@ -27,7 +27,7 @@ public class Greeter.SubprocessSupervisor : GLib.Object {
     private GLib.SubprocessFlags flags;
     public SubprocessSupervisor (string[] exec) throws GLib.Error {
         this.exec = exec;
-        flags = GLib.SubprocessFlags.STDIN_INHERIT|GLib.SubprocessFlags.STDOUT_SILENCE|GLib.SubprocessFlags.STDERR_MERGE;
+        flags = GLib.SubprocessFlags.STDIN_INHERIT | GLib.SubprocessFlags.STDOUT_SILENCE | GLib.SubprocessFlags.STDERR_MERGE;
         ensure_run.begin ();
     }
 
