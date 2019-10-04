@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-26 22:43+0200\n"
 "PO-Revision-Date: 2019-10-05 03:23+0000\n"
-"Last-Translator: colindemian <colindemian@outlook.com>\n"
+"Last-Translator: jheng <jheng@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "desktop/greeter/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -59,18 +59,16 @@ msgid ""
 msgstr "初始设置将会创建您的第一个账户，若缺少初始账户，您将无法登录并且可能需要重新安装操作系统。"
 
 #: src/CapsLockRevealer.vala:55
-#, fuzzy
 msgid "Caps Lock & Num Lock are on"
-msgstr "大写锁定已打开"
+msgstr "大写锁定和数字锁定已打开"
 
 #: src/CapsLockRevealer.vala:57
 msgid "Caps Lock is on"
 msgstr "大写锁定已打开"
 
 #: src/CapsLockRevealer.vala:59
-#, fuzzy
 msgid "Num Lock is on"
-msgstr "大写锁定已打开"
+msgstr "数字锁定已打开"
 
 #: src/Cards/UserCard.vala:76
 msgid "Account disabled"
