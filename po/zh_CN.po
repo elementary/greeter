@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-26 22:43+0200\n"
 "PO-Revision-Date: 2019-10-04 02:19+0000\n"
-"Last-Translator: colindemian <colindemian@outlook.com>\n"
+"Last-Translator: jheng <jheng@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "desktop/greeter/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -50,13 +50,13 @@ msgstr "手动登录…"
 
 #: src/MainWindow.vala:456
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "无法启动初始化设置"
 
 #: src/MainWindow.vala:461
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
-msgstr ""
+msgstr "初始设置创建您第一个用户，如果没有它，您将无法登录并且可能需要重新安装操作系统。"
 
 #: src/CapsLockRevealer.vala:55
 #, fuzzy
