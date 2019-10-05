@@ -51,7 +51,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         this.bind_property ("connecting", password_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
         var fingerprint_image = new Gtk.Image.from_icon_name ("fingerprint-symbolic", Gtk.IconSize.BUTTON);
-        this.bind_property ("use-fingerprint", fingerprint_image, "no-show-all", GLib.BindingFlags.INVERT_BOOLEAN|GLib.BindingFlags.SYNC_CREATE);
+        this.bind_property ("use-fingerprint", fingerprint_image, "no-show-all", GLib.BindingFlags.INVERT_BOOLEAN | GLib.BindingFlags.SYNC_CREATE);
         this.bind_property ("use-fingerprint", fingerprint_image, "visible", GLib.BindingFlags.SYNC_CREATE);
 
         var session_button = new Greeter.SessionButton ();
@@ -204,7 +204,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         // This makes all the animations synchonous
         form_revealer.size_allocate.connect ((alloc) => {
             var total_height = form_grid.get_allocated_height () + form_grid.margin_top + form_grid.margin_bottom;
-            reveal_ratio = (double)alloc.height/(double)total_height;
+            reveal_ratio = (double)alloc.height / (double)total_height;
         });
 
         notify["show-input"].connect (() => {

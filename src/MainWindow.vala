@@ -57,7 +57,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         settings = new Greeter.Settings ();
         create_session_selection_action ();
 
-        set_visual (get_screen ().get_rgba_visual());
+        set_visual (get_screen ().get_rgba_visual ());
 
         var guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
 
@@ -109,8 +109,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 int minimum_height, natural_height;
                 widget.get_preferred_width (out minimum_width, out natural_width);
                 widget.get_preferred_height (out minimum_height, out natural_height);
-                allocation.x = main_overlay.get_allocated_width ()/2 - natural_width/2 + index * natural_width - animation_delta;
-                allocation.y = main_overlay.get_allocated_height ()/2 - natural_height/2;
+                allocation.x = main_overlay.get_allocated_width () / 2 - natural_width / 2 + index * natural_width - animation_delta;
+                allocation.y = main_overlay.get_allocated_height () / 2 - natural_height / 2;
                 allocation.width = natural_width;
                 allocation.height = natural_height;
                 return true;
@@ -207,7 +207,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         });
 
         lightdm_user_list = LightDM.UserList.get_instance ();
-        lightdm_user_list.user_added.connect(() => {
+        lightdm_user_list.user_added.connect (() => {
             load_users.begin ();
         });
 
@@ -269,7 +269,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         });
 
         // regrab focus when dpi changed
-        get_screen ().monitors_changed.connect(() => {
+        get_screen ().monitors_changed.connect (() => {
             maximize_and_focus ();
         });
 

@@ -43,7 +43,7 @@ public class Greeter.DateTimeWidget : Gtk.Grid {
         time_timeout = GLib.Timeout.add_seconds (delta, update_time);
         return GLib.Source.REMOVE;
     }
-    
+
     private bool update_date () {
         var now = new GLib.DateTime.now_local ();
         date_label.label = now.format (Granite.DateTime.get_default_date_format (true, true, false));
