@@ -78,7 +78,6 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     private void on_login () {
         connecting = true;
         do_connect (password_entry.text);
-        password_entry.text = "";
         password_entry.sensitive = false;
     }
 
@@ -100,6 +99,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
 
     public override void wrong_credentials () {
         focus_username_entry ();
+        password_entry.text = "";
         weak Gtk.StyleContext grid_style_context = main_grid.get_style_context ();
         weak Gtk.StyleContext username_entry_style_context = username_entry.get_style_context ();
         weak Gtk.StyleContext password_entry_style_context = password_entry.get_style_context ();

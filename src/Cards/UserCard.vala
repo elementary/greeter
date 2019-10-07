@@ -272,8 +272,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         } else {
             do_connect ();
         }
-
-        password_entry.text = "";
     }
 
     private void update_collapsed_class () {
@@ -289,6 +287,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     public override void wrong_credentials () {
+        password_entry.text = "";
         weak Gtk.StyleContext entry_style_context = password_entry.get_style_context ();
         entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
         main_grid_style_context.add_class ("shake");
