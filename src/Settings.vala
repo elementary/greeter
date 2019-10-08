@@ -44,6 +44,17 @@ public class Greeter.Settings : GLib.Object {
         }
     }
 
+    public bool activate_numlock {
+        get {
+            try {
+                return settings.get_boolean ("greeter", "activate-numlock");
+            } catch (Error e) {
+                debug (e.message);
+                return false;
+            }
+        }
+    }
+
     construct {
         var state_dir = GLib.Path.build_filename (GLib.Environment.get_user_cache_dir (), "io.elementary.greeter");
         GLib.DirUtils.create_with_parents (state_dir, 0775);
