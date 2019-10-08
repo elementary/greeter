@@ -1,7 +1,7 @@
-/* 
+/*
  * Copyright 2012-2014 Tom Beckmann, Rico Tzschichholz
  * Copyright 2018 elementary LLC. (https://elementary.io)
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -178,7 +178,7 @@ namespace GreeterCompositor {
             var next = active.get_neighbor (direction);
 
             //dont allow empty workspaces to be created by moving, if we have dynamic workspaces
-            if (Prefs.get_dynamic_workspaces () && Utils.get_n_windows (active) == 1 && next.index () ==  screen.n_workspaces - 1) {
+            if (Prefs.get_dynamic_workspaces () && Utils.get_n_windows (active) == 1 && next.index () == screen.n_workspaces - 1) {
                 Utils.bell (screen);
                 return;
             }
@@ -192,7 +192,7 @@ namespace GreeterCompositor {
         }
 
         public void get_current_cursor_position (out int x, out int y) {
-            Gdk.Display.get_default ().get_default_seat ().get_pointer ().get_position (null, out x, out y);  
+            Gdk.Display.get_default ().get_default_seat ().get_pointer ().get_position (null, out x, out y);
         }
 
         public override void show_window_menu_for_rect (Meta.Window window, Meta.WindowMenuType menu, Meta.Rectangle rect) {

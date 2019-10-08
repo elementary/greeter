@@ -21,7 +21,7 @@
 
 public class Greeter.SystemBackground : Meta.BackgroundActor {
     const Clutter.Color DEFAULT_BACKGROUND_COLOR = { 0x2e, 0x34, 0x36, 0xff };
-    
+
     static Meta.Background? system_background = null;
 
     public signal void loaded ();
@@ -38,17 +38,16 @@ public class Greeter.SystemBackground : Meta.BackgroundActor {
         background = system_background;
     }
 
-    public void refresh ()  {       
+    public void refresh () {
         if (system_background != null) {
             this.set_wallpaper ();
         }
     }
 
-    public void set_wallpaper ()  {
+    public void set_wallpaper () {
         var texture_file = GLib.File.new_for_uri ("resource:///io/elementary/greeter/texture.png");
         this.background.set_color (DEFAULT_BACKGROUND_COLOR);
         this.background.set_file (texture_file, GDesktop.BackgroundStyle.WALLPAPER);
     }
 
 }
-
