@@ -24,28 +24,32 @@ public class Greeter.SettingsDaemon : Object {
 
     public void start () {
 #if UBUNTU_PATCHED_GSD
-        string[] disabled = { "org.gnome.settings-daemon.plugins.background",
-                              "org.gnome.settings-daemon.plugins.clipboard",
-                              "org.gnome.settings-daemon.plugins.font",
-                              "org.gnome.settings-daemon.plugins.gconf",
-                              "org.gnome.settings-daemon.plugins.gsdwacom",
-                              "org.gnome.settings-daemon.plugins.housekeeping",
-                              "org.gnome.settings-daemon.plugins.keybindings",
-                              "org.gnome.settings-daemon.plugins.keyboard",
-                              "org.gnome.settings-daemon.plugins.mouse",
-                              "org.gnome.settings-daemon.plugins.print-notifications",
-                              "org.gnome.settings-daemon.plugins.smartcard",
-                              "org.gnome.settings-daemon.plugins.wacom" };
+        string[] disabled = {
+            "org.gnome.settings-daemon.plugins.background",
+            "org.gnome.settings-daemon.plugins.clipboard",
+            "org.gnome.settings-daemon.plugins.font",
+            "org.gnome.settings-daemon.plugins.gconf",
+            "org.gnome.settings-daemon.plugins.gsdwacom",
+            "org.gnome.settings-daemon.plugins.housekeeping",
+            "org.gnome.settings-daemon.plugins.keybindings",
+            "org.gnome.settings-daemon.plugins.keyboard",
+            "org.gnome.settings-daemon.plugins.mouse",
+            "org.gnome.settings-daemon.plugins.print-notifications",
+            "org.gnome.settings-daemon.plugins.smartcard",
+            "org.gnome.settings-daemon.plugins.wacom"
+        };
 
-        string[] enabled =  { "org.gnome.settings-daemon.plugins.a11y-keyboard",
-                              "org.gnome.settings-daemon.plugins.a11y-settings",
-                              "org.gnome.settings-daemon.plugins.color",
-                              "org.gnome.settings-daemon.plugins.cursor",
-                              "org.gnome.settings-daemon.plugins.media-keys",
-                              "org.gnome.settings-daemon.plugins.power",
-                              "org.gnome.settings-daemon.plugins.sound",
-                              "org.gnome.settings-daemon.plugins.xrandr",
-                              "org.gnome.settings-daemon.plugins.xsettings" };
+        string[] enabled = {
+            "org.gnome.settings-daemon.plugins.a11y-keyboard",
+            "org.gnome.settings-daemon.plugins.a11y-settings",
+            "org.gnome.settings-daemon.plugins.color",
+            "org.gnome.settings-daemon.plugins.cursor",
+            "org.gnome.settings-daemon.plugins.media-keys",
+            "org.gnome.settings-daemon.plugins.power",
+            "org.gnome.settings-daemon.plugins.sound",
+            "org.gnome.settings-daemon.plugins.xrandr",
+            "org.gnome.settings-daemon.plugins.xsettings"
+        };
 
         foreach (var schema in disabled) {
             set_plugin_enabled (schema, false);
@@ -112,22 +116,21 @@ public class Greeter.SettingsDaemon : Object {
 }
 
 [DBus (name="org.gnome.SessionManager")]
-public class Greeter.GnomeSessionManager : GLib.Object
-{
+public class Greeter.GnomeSessionManager : GLib.Object {
     private Gee.ArrayList<Greeter.GnomeSessionManagerClient> clients;
     private Gee.ArrayList<unowned Greeter.GnomeSessionManagerClient> inhibitors;
 
-    public string session_name { owned get; set; default = "pantheon"; } 
-    public string renderer { owned get; set; default = ""; } 
-    public bool session_is_active {  get; set; default = true; } 
-    public uint inhibited_actions {  get; set; default = 0; }
+    public string session_name { owned get; set; default = "pantheon"; }
+    public string renderer { owned get; set; default = ""; }
+    public bool session_is_active { get; set; default = true; }
+    public uint inhibited_actions { get; set; default = 0; }
 
-    public signal void client_added (GLib.ObjectPath id); 
-    public signal void client_removed (GLib.ObjectPath id); 
-    public signal void inhibitor_added (GLib.ObjectPath id); 
-    public signal void inhibitor_removed (GLib.ObjectPath id); 
-    public signal void session_running (); 
-    public signal void session_over (); 
+    public signal void client_added (GLib.ObjectPath id);
+    public signal void client_removed (GLib.ObjectPath id);
+    public signal void inhibitor_added (GLib.ObjectPath id);
+    public signal void inhibitor_removed (GLib.ObjectPath id);
+    public signal void session_running ();
+    public signal void session_over ();
 
     construct {
         clients = new Gee.ArrayList<Greeter.GnomeSessionManagerClient> ();
@@ -135,7 +138,6 @@ public class Greeter.GnomeSessionManager : GLib.Object
     }
 
     public void setenv (string variable, string value) throws GLib.Error {
-        
     }
 
     public string get_locale (int category) throws GLib.Error {
@@ -190,7 +192,7 @@ public class Greeter.GnomeSessionManager : GLib.Object
     }
 
     public void uninhibit (uint inhibit_cookie) throws GLib.Error {
-        
+
     }
 
     public bool is_inhibited (uint flags) throws GLib.Error {
@@ -212,11 +214,11 @@ public class Greeter.GnomeSessionManager : GLib.Object
     }
 
     public void shutdown () throws GLib.Error {
-        
+
     }
 
     public void reboot () throws GLib.Error {
-        
+
     }
 
     public bool can_shutdown () throws GLib.Error {
@@ -224,7 +226,7 @@ public class Greeter.GnomeSessionManager : GLib.Object
     }
 
     public void logout (uint mode) throws GLib.Error {
-        
+
     }
 
     public bool is_session_running () throws GLib.Error {
@@ -235,7 +237,7 @@ public class Greeter.GnomeSessionManager : GLib.Object
 [DBus (name = "org.gnome.SessionManager.Client")]
 public class Greeter.GnomeSessionManagerClient : GLib.Object {
     static uint32 serial_id = 0;
-    
+
     private string app_id;
     private string startup_id;
     private uint32 process_id;
@@ -281,6 +283,5 @@ public class Greeter.GnomeSessionManagerClient : GLib.Object {
     }
 
     public void stop () throws GLib.Error {
-        
     }
 }

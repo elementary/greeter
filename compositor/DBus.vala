@@ -1,7 +1,7 @@
-/* 
+/*
  * Copyright 2012-2014 Tom Beckmann, Jacob Parker
  * Copyright 2018 elementary LLC. (https://elementary.io)
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -61,6 +61,6 @@ public class GreeterCompositor.DBus {
     }
 
     private DBus () {
-        
+
     }
 }
