@@ -1,6 +1,6 @@
 # Greeter
 
-[![l10n](https://l10n.elementary.io/widgets/desktop/greeter/svg-badge.svg)](https://l10n.elementary.io/projects/desktop/greeter)
+[![Translation status](https://l10n.elementary.io/widgets/desktop/-/greeter/svg-badge.svg)](https://l10n.elementary.io/engage/desktop/?utm_source=widget)
 
 ![Screenshot](data/screenshot.png?raw=true)
 
