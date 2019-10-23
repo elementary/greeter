@@ -293,6 +293,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         });
 
         maximize_window ();
+
+        if (settings.activate_numlock) {
+            try {
+                Process.spawn_async (null, { "numlockx", "on" }, null, SpawnFlags.SEARCH_PATH, null, null);
+            } catch (Error e) {
+                warning ("Unable to spawn numlockx to set numlock state");
+            }
+        }
     }
 
     private void maximize_and_focus () {
@@ -387,41 +395,26 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             var action_group = get_action_group ("session");
             try {
                 lightdm_greeter.start_session_sync (action_group.get_action_state ("select").get_string ());
+                return;
             } catch (Error e) {
-                critical (e.message);
-                 if (current_card is Greeter.UserCard) {
-                     switch_to_card ((Greeter.UserCard) current_card);
-                 }
-
-                 current_card.connecting = false;
-                 current_card.wrong_credentials ();
+                var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
+                    _("Unable to Log In"),
+                    _("Starting the session has failed."),
+                    "dialog-error",
+                    Gtk.ButtonsType.CLOSE
+                );
+                error_dialog.show_error_details (e.message);
+                error_dialog.run ();
+                error_dialog.destroy ();
             }
-        } else {
-            if (current_card is Greeter.UserCard) {
-                switch_to_card ((Greeter.UserCard) current_card);
-            }
-
-            current_card.connecting = false;
-            current_card.wrong_credentials ();
         }
-        /*if (lightdm.is_authenticated) {
-            // Check if the LoginMask actually got userinput that confirms
-            // that the user wants to start a session now.
-            if (had_prompt) {
-                // If yes, start a session
-                awaiting_start_session = true;
-                login_successful ();
-            } else {
-                message ("Auth complete, but we await user-interaction before we"
-                        + "start a session");
-                // If no, send a prompt and await the confirmation via respond.
-                // This variables is checked in respond as a special case.
-                awaiting_confirmation = true;
-                current_login.show_prompt (PromptType.CONFIRM_LOGIN);
-            }
-        } else {
-            current_login.not_authenticated ();
-        }*/
+
+        if (current_card is Greeter.UserCard) {
+            switch_to_card ((Greeter.UserCard) current_card);
+        }
+
+        current_card.connecting = false;
+        current_card.wrong_credentials ();
     }
 
     private async void load_users () {

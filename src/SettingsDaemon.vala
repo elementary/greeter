@@ -36,7 +36,6 @@ public class Greeter.SettingsDaemon : Object {
             "org.gnome.settings-daemon.plugins.mouse",
             "org.gnome.settings-daemon.plugins.print-notifications",
             "org.gnome.settings-daemon.plugins.smartcard",
-            "org.gnome.settings-daemon.plugins.sound",
             "org.gnome.settings-daemon.plugins.wacom"
         };
 
@@ -47,6 +46,7 @@ public class Greeter.SettingsDaemon : Object {
             "org.gnome.settings-daemon.plugins.cursor",
             "org.gnome.settings-daemon.plugins.media-keys",
             "org.gnome.settings-daemon.plugins.power",
+            "org.gnome.settings-daemon.plugins.sound",
             "org.gnome.settings-daemon.plugins.xrandr",
             "org.gnome.settings-daemon.plugins.xsettings"
         };
@@ -100,6 +100,7 @@ public class Greeter.SettingsDaemon : Object {
             "gsd-a11y-settings",
             "gsd-color",
             "gsd-media-keys",
+            "gsd-sound",
             "gsd-power",
             "gsd-xsettings"
         };
