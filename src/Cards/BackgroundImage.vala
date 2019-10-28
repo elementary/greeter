@@ -10,7 +10,8 @@ public class Greeter.BackgroundImage : Gtk.EventBox {
         var monitor = display.get_monitor_at_point (x, y);
         var rect = monitor.get_geometry ();
 
-        height_request = rect.height / 4; // NOTE: display height / 4
+        // NOTE: display height / 4
+        height_request = rect.height / get_scale_factor () / 4;
     }
 
     public BackgroundImage (string? path) {

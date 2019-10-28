@@ -159,7 +159,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var avatar_overlay = new Gtk.Overlay ();
         avatar_overlay.valign = Gtk.Align.START;
         avatar_overlay.halign = Gtk.Align.CENTER;
-        avatar_overlay.margin_top = rect.height / 4 - 50; // NOTE: background_image height - 50
+        // NOTE: background_image height - 50
+        avatar_overlay.margin_top = rect.height / get_scale_factor () / 4 - 50;
         avatar_overlay.add (avatar);
 
         if (lightdm_user.logged_in) {

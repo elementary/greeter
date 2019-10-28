@@ -6,6 +6,16 @@ public class Greeter.DateTimeWidget : Gtk.Grid {
     private uint time_timeout = 0U;
 
     construct {
+        int x, y;
+        var display = Gdk.Display.get_default ();
+        display.get_pointer (null, out x, out y, null);
+        var monitor = display.get_monitor_at_point (x, y);
+        var rect = monitor.get_geometry ();
+        var scale = get_scale_factor ();
+
+        // NOTE: Display height divided by 12
+        margin_top = rect.height / scale / 16;
+
         orientation = Gtk.Orientation.VERTICAL;
 
         var css_provider = new Gtk.CssProvider ();
