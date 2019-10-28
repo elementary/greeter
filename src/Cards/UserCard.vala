@@ -150,10 +150,16 @@ public class Greeter.UserCard : Greeter.BaseCard {
             avatar = new Granite.Widgets.Avatar.with_default_icon (64);
         }
 
+        int x, y;
+        var display = Gdk.Display.get_default ();
+        display.get_pointer (null, out x, out y, null);
+        var monitor = display.get_monitor_at_point (x, y);
+        var rect = monitor.get_geometry ();
+
         var avatar_overlay = new Gtk.Overlay ();
         avatar_overlay.valign = Gtk.Align.START;
         avatar_overlay.halign = Gtk.Align.CENTER;
-        avatar_overlay.margin_top = 100;
+        avatar_overlay.margin_top = rect.height / 4 - 50; // NOTE: background_image height - 50
         avatar_overlay.add (avatar);
 
         if (lightdm_user.logged_in) {

@@ -34,7 +34,13 @@ public abstract class Greeter.BaseCard : Gtk.Revealer {
     }
 
     construct {
-        width_request = 350;
+        int x, y;
+        var display = Gdk.Display.get_default ();
+        display.get_pointer (null, out x, out y, null);
+        var monitor = display.get_monitor_at_point (x, y);
+        var rect = monitor.get_geometry ();
+
+        width_request = rect.width / 4; // NOTE: Display width divided by 4
         reveal_child = true;
         transition_type = Gtk.RevealerTransitionType.CROSSFADE;
         halign = Gtk.Align.CENTER;
