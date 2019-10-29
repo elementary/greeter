@@ -3,11 +3,11 @@ public class Greeter.BackgroundImage : Gtk.EventBox {
     private Gdk.Pixbuf full_pixbuf;
     private Gdk.Pixbuf fitting_pixbuf;
 
-    construct {
-        height_request = 150;
-    }
-
     public BackgroundImage (string? path) {
+        Object (
+            height_request: 150
+        );
+
         if (path == null) {
             path = "/usr/share/backgrounds/elementaryos-default";
         }
