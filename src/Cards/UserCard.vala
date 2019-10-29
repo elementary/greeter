@@ -37,8 +37,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Greeter.PasswordEntry password_entry;
 
     construct {
-        need_password = true;
-
         var username_label = new Gtk.Label (lightdm_user.display_name);
         username_label.margin = 24;
         username_label.hexpand = true;
@@ -283,7 +281,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     public UserCard (LightDM.User lightdm_user) {
-        Object (lightdm_user: lightdm_user);
+        Object (
+            lightdm_user: lightdm_user,
+            need_password: true
+        );
     }
 
     public override void wrong_credentials () {
