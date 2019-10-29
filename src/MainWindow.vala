@@ -48,10 +48,15 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         css_provider.load_from_resource ("/io/elementary/greeter/MainWindow.css");
     }
 
+    public MainWindow () {
+        Object (
+            app_paintable: true,
+            decorated: false,
+            type_hint: Gdk.WindowTypeHint.DESKTOP
+        );
+    }
+
     construct {
-        app_paintable = true;
-        decorated = false;
-        type_hint = Gdk.WindowTypeHint.DESKTOP;
         get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         settings = new Greeter.Settings ();
