@@ -5,9 +5,13 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     private Gtk.Entry username_entry;
     private Gtk.Grid main_grid;
 
-    construct {
-        width_request = 350;
+    public ManualCard () {
+        Object (
+            width_request: 350
+        );
+    }
 
+    construct {
         var icon = new Gtk.Image ();
         icon.icon_name = "avatar-default";
         icon.pixel_size = 64;
