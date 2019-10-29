@@ -24,9 +24,13 @@ public class Greeter.CapsLockRevealer : Gtk.Revealer {
     private Gtk.Image num_lock_image;
     private Gtk.Label lock_label;
 
-    construct {
-        transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
+    public CapsLockRevealer () {
+        Object (
+            transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN
+        );
+    }
 
+    construct {
         caps_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-capslock-symbolic", Gtk.IconSize.MENU);
         caps_lock_image.use_fallback = true;
         caps_lock_image.visible = false;
