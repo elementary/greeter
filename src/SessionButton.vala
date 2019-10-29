@@ -20,6 +20,12 @@
  */
 
 public class Greeter.SessionButton : Gtk.MenuButton {
+    public SessionButton () {
+        Object (
+            direction: Gtk.ArrowType.DOWN
+        );
+    }
+
     construct {
         var settings_list = new Gtk.ListBox ();
         settings_list.margin_bottom = 3;
@@ -37,7 +43,6 @@ public class Greeter.SessionButton : Gtk.MenuButton {
 
         var cog_image = new Gtk.Image.from_icon_name ("open-menu-symbolic", Gtk.IconSize.BUTTON);
 
-        direction = Gtk.ArrowType.DOWN;
         popover = settings_popover;
         get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
         add (cog_image);
