@@ -9,6 +9,7 @@ src/Application.vala
 src/FPrintUtils.vala
 src/MainWindow.vala
 src/PantheonAccountsServicePlugin.vala
+src/PromptText.vala
 src/SettingsDaemon.vala
 src/Settings.vala
 src/SubprocessSupervisor.vala
@@ -19,5 +20,4 @@ src/Widgets/BackgroundImage.vala
 src/Widgets/CapsLockRevealer.vala
 src/Widgets/DateTimeWidget.vala
 src/Widgets/PasswordEntry.vala
-src/Widgets/PromptText.vala
 src/Widgets/SessionButton.vala
