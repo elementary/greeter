@@ -44,6 +44,7 @@ namespace GreeterCompositor {
 
     public struct Accelerator {
         public string name;
+        public Meta.KeyBindingFlags grab_flags;
         public ActionMode flags;
     }
 
@@ -74,7 +75,11 @@ namespace GreeterCompositor {
             wm = _wm;
             grabbed_accelerators = new GLib.List<GrabbedAccelerator> ();
 
+#if HAS_MUTTER330
+            wm.get_display ().accelerator_activated.connect (on_accelerator_activated);
+#else
             wm.get_screen ().get_display ().accelerator_activated.connect (on_accelerator_activated);
+#endif
         }
 
         private void on_accelerator_activated (uint action, uint device_id, uint timestamp) {
@@ -100,7 +105,14 @@ namespace GreeterCompositor {
                 }
             }
 
+#if HAS_MUTTER332
+            uint action = wm.get_display ().grab_accelerator (accelerator.name, accelerator.grab_flags);
+#elif HAS_MUTTER330
+            uint action = wm.get_display ().grab_accelerator (accelerator.name);
+#else
             uint action = wm.get_screen ().get_display ().grab_accelerator (accelerator.name);
+#endif
+
             if (action > 0) {
                 var accel = new GrabbedAccelerator ();
                 accel.action = action;
@@ -124,7 +136,11 @@ namespace GreeterCompositor {
         public bool ungrab_accelerator (uint action) throws GLib.Error {
             foreach (unowned GrabbedAccelerator accel in grabbed_accelerators) {
                 if (accel.action == action) {
+#if HAS_MUTTER330
+                    bool ret = wm.get_display ().ungrab_accelerator (action);
+#else
                     bool ret = wm.get_screen ().get_display ().ungrab_accelerator (action);
+#endif
                     grabbed_accelerators.remove (accel);
                     return ret;
                 }
