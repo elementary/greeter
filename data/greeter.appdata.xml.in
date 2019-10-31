@@ -43,7 +43,6 @@
         </ul>
       </description>
     </release>
-    </release>
   </releases>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">none</content_attribute>
@@ -77,6 +76,6 @@
   <translation type="gettext">io.elementary.greeter</translation>
   <compulsory_for_desktop>Pantheon</compulsory_for_desktop>
   <developer_name>elementary, Inc.</developer_name>
-  <url type="homepage">http://elementary.io</url>
+  <url type="homepage">https://elementary.io</url>
   <url type="bugtracker">https://github.com/elementary/greeter/issues</url>
 </component>
