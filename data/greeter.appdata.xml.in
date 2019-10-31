@@ -17,6 +17,33 @@
   <provides>
     <binary>io.elementary.greeter</binary>
   </provides>
+  <releases>
+    <release version="5.0.1" date="2019-10-31" urgency="medium">
+      <description>
+        <ul>
+          <li>Save last user on attempted login</li>
+          <li>Handle all background aspect ratios</li>
+          <li>Give non-focused user cards smaller usernames</li>
+          <li>Better respect NumLock settings</li>
+          <li>Enable sounds in greeter</li>
+          <li>Select password text on error instead of immediately clearing it</li>
+          <li>Code cleanup</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
+    <release version="5.0" date="2019-08-26" urgency="medium">
+      <description>
+        <p>Extensive overhaul</p>
+        <ul>
+          <li>New card-based appearance</li>
+          <li>Improved HiDPI support</li>
+          <li>AccountsService functionality</li>
+          <li>Various bug fixes</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">none</content_attribute>
     <content_attribute id="violence-fantasy">none</content_attribute>
@@ -49,6 +76,6 @@
   <translation type="gettext">io.elementary.greeter</translation>
   <compulsory_for_desktop>Pantheon</compulsory_for_desktop>
   <developer_name>elementary, Inc.</developer_name>
-  <url type="homepage">http://elementary.io</url>
+  <url type="homepage">https://elementary.io</url>
   <url type="bugtracker">https://github.com/elementary/greeter/issues</url>
 </component>
