@@ -1,3 +1,29 @@
+pantheon-greeter (5.0.1) bionic; urgency=medium
+
+  * Release 5.0.1 (#378)
+  * Update translations
+  * Add Release to Actions
+  * Widgets: organize in subdirectory (#375)
+  * Clear password entry on error (#369)
+  * Launch GSD Sound (#350)
+  * MainWindow: Throw an error dialog on failed login (#335)
+  * Respect numlock setting (#340)
+  * run installation in CI (#367)
+  * Add Lint to CI (#365)
+  * Fix code style issues (#366)
+  * Built with GitHub CI (#364)
+  * Delete CODE_OF_CONDUCT.md
+  * Compositor: lint the remaining compositor files with vala-lint
+    (#362)
+  * Utils: Lint file using vala-lint (#361)
+  * Delete FUNDING.yml
+  * UserCard: Make collapsed cards have smaller usernames (#331)
+  * Handle all background aspect ratios (#339)
+  * Save last user on attempted login (#338)
+  * Remove blue line from texture (#329)
+
+ -- Sergey "Shnatsel" Davidoff <sergey@elementaryos.org>  Thu, 31 Oct 2019 21:12:28 +0000
+
 pantheon-greeter (5.0) bionic; urgency=medium
 
   * New upstream release.
