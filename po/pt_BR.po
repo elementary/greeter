@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
+"POT-Creation-Date: 2019-10-31 14:44-0600\n"
 "PO-Revision-Date: 2019-07-01 20:28+0000\n"
 "Last-Translator: Rodrigo Oliveira <rod.oliveira@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.elementary.io/projects/"
@@ -32,14 +32,6 @@ msgstr "Manter essa configuração"
 msgid "Restore Previous Configuration"
 msgstr "Restaurar a configuração anterior"
 
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "Senha"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "Entrar"
-
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
 msgstr "Entrar como convidado"
@@ -48,37 +40,26 @@ msgstr "Entrar como convidado"
 msgid "Manual Login…"
 msgstr "Login manual…"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:401
+#, fuzzy
+msgid "Unable to Log In"
+msgstr "Não foi possível abrir a Configuração Inicial"
+
+#: src/MainWindow.vala:402
+msgid "Starting the session has failed."
+msgstr ""
+
+#: src/MainWindow.vala:464
 msgid "Unable to Launch Initial Setup"
 msgstr "Não foi possível abrir a Configuração Inicial"
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:469
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
 "A configuração inicial cria seu primeiro usuário. Sem isso, você não poderá "
 "efetuar login e poderá precisar reinstalar o sistema operacional."
-
-#: src/CapsLockRevealer.vala:55
-msgid "Caps Lock & Num Lock are on"
-msgstr "Caps Lock & Num Lock está ativado"
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "Caps Lock está ativado"
-
-#: src/CapsLockRevealer.vala:59
-msgid "Num Lock is on"
-msgstr "Num Lock está ativado"
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr "Conta desativada"
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr "A sessão não pode ser alterada enquanto o usuário está logado"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -92,34 +73,57 @@ msgstr "Nome de usuário"
 msgid "Try username"
 msgstr "Tente nomedeusuario"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
-msgstr "Definir propriedades do próprio usuário"
+#: src/Cards/UserCard.vala:73 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "Entrar"
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
-msgstr ""
-"A autenticação é necessária para definir as próprias propriedades do greeter."
+#: src/Cards/UserCard.vala:79
+msgid "Account disabled"
+msgstr "Conta desativada"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr "Obter propriedades de qualquer usuário"
+#: src/Cards/UserCard.vala:166
+msgid "Session cannot be changed while user is logged in"
+msgstr "A sessão não pode ser alterada enquanto o usuário está logado"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr ""
-"A autenticação é necessária para obter as propriedades do greeter de outro "
-"usuário."
+#: src/Widgets/CapsLockRevealer.vala:70
+msgid "Caps Lock & Num Lock are on"
+msgstr "Caps Lock & Num Lock está ativado"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr "Definir propriedades de qualquer usuário"
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "Caps Lock está ativado"
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr ""
-"A autenticação é necessária para definir as propriedades do greeter de outro "
-"usuário."
+#: src/Widgets/CapsLockRevealer.vala:74
+msgid "Num Lock is on"
+msgstr "Num Lock está ativado"
+
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "Senha"
+
+#~ msgid "Set properties of own user"
+#~ msgstr "Definir propriedades do próprio usuário"
+
+#~ msgid "Authentication is required to set one's own greeter properties."
+#~ msgstr ""
+#~ "A autenticação é necessária para definir as próprias propriedades do "
+#~ "greeter."
+
+#~ msgid "Get properties of any user"
+#~ msgstr "Obter propriedades de qualquer usuário"
+
+#~ msgid "Authentication is required to get another user's greeter properties."
+#~ msgstr ""
+#~ "A autenticação é necessária para obter as propriedades do greeter de "
+#~ "outro usuário."
+
+#~ msgid "Set properties of any user"
+#~ msgstr "Definir propriedades de qualquer usuário"
+
+#~ msgid "Authentication is required to set another user's greeter properties."
+#~ msgstr ""
+#~ "A autenticação é necessária para definir as propriedades do greeter de "
+#~ "outro usuário."
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Passe seu dedo"

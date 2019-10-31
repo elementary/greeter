@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
+"POT-Creation-Date: 2019-10-31 14:44-0600\n"
 "PO-Revision-Date: 2019-07-08 11:28+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -32,14 +32,6 @@ msgstr "Conserver cette configuration"
 msgid "Restore Previous Configuration"
 msgstr "Restaurer la configuration précédente"
 
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "Mot de passe"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "Connexion"
-
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
 msgstr "Connexion en tant qu'invité"
@@ -48,38 +40,26 @@ msgstr "Connexion en tant qu'invité"
 msgid "Manual Login…"
 msgstr "Connexion manuelle…"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:401
+#, fuzzy
+msgid "Unable to Log In"
+msgstr "Impossible de lancer la configuration initiale"
+
+#: src/MainWindow.vala:402
+msgid "Starting the session has failed."
+msgstr ""
+
+#: src/MainWindow.vala:464
 msgid "Unable to Launch Initial Setup"
 msgstr "Impossible de lancer la configuration initiale"
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:469
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
 "L'installation initiale créé votre premier utilisateur. Sans cela, vous ne "
 "pourriez pas vous connecter et devriez réinstaller le système d'exploitation."
-
-#: src/CapsLockRevealer.vala:55
-msgid "Caps Lock & Num Lock are on"
-msgstr "Le verrouillage des majuscules et du pavé numérique est actif"
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "Le verrouillage des majuscules est actif"
-
-#: src/CapsLockRevealer.vala:59
-msgid "Num Lock is on"
-msgstr "Le verrouillage du pavé numérique est actif"
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr "Compte désactivé"
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr ""
-"La session ne peut pas être modifiée tant que l'utilisateur est connecté"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -93,35 +73,58 @@ msgstr "Nom d'utilisateur"
 msgid "Try username"
 msgstr "Essayer le nom d'utilisateur"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
-msgstr "Définir les propriétés de son propre utilisateur"
+#: src/Cards/UserCard.vala:73 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "Connexion"
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
+#: src/Cards/UserCard.vala:79
+msgid "Account disabled"
+msgstr "Compte désactivé"
+
+#: src/Cards/UserCard.vala:166
+msgid "Session cannot be changed while user is logged in"
 msgstr ""
-"Une authentification est nécessaire pour définir ses propres propriétés de "
-"Greeter."
+"La session ne peut pas être modifiée tant que l'utilisateur est connecté"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr "Obtenir les propriétés de n'importe quel utilisateur"
+#: src/Widgets/CapsLockRevealer.vala:70
+msgid "Caps Lock & Num Lock are on"
+msgstr "Le verrouillage des majuscules et du pavé numérique est actif"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr ""
-"Une authentification est nécessaire pour obtenir les propriétés de Greeter "
-"d'un autre utilisateur."
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "Le verrouillage des majuscules est actif"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr "Définir les propriétés de n'importe quel utilisateur"
+#: src/Widgets/CapsLockRevealer.vala:74
+msgid "Num Lock is on"
+msgstr "Le verrouillage du pavé numérique est actif"
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr ""
-"Une authentification est nécessaire pour définir les propriétés de Greeter "
-"d'un autre utilisateur."
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "Mot de passe"
+
+#~ msgid "Set properties of own user"
+#~ msgstr "Définir les propriétés de son propre utilisateur"
+
+#~ msgid "Authentication is required to set one's own greeter properties."
+#~ msgstr ""
+#~ "Une authentification est nécessaire pour définir ses propres propriétés "
+#~ "de Greeter."
+
+#~ msgid "Get properties of any user"
+#~ msgstr "Obtenir les propriétés de n'importe quel utilisateur"
+
+#~ msgid "Authentication is required to get another user's greeter properties."
+#~ msgstr ""
+#~ "Une authentification est nécessaire pour obtenir les propriétés de "
+#~ "Greeter d'un autre utilisateur."
+
+#~ msgid "Set properties of any user"
+#~ msgstr "Définir les propriétés de n'importe quel utilisateur"
+
+#~ msgid "Authentication is required to set another user's greeter properties."
+#~ msgstr ""
+#~ "Une authentification est nécessaire pour définir les propriétés de "
+#~ "Greeter d'un autre utilisateur."
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Glissez votre doigt"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
+"POT-Creation-Date: 2019-10-31 14:44-0600\n"
 "PO-Revision-Date: 2019-07-01 20:28+0000\n"
 "Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian <https://l10n.elementary.io/projects/desktop/"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1 ? 0 : n%10>=2 && (n%100<10 || "
-"n%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 0 : n%10>=2 && (n%100<10 || n"
+"%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3;\n"
 "X-Generator: Weblate 3.6.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
@@ -33,14 +33,6 @@ msgstr "Palikti šią konfigūraciją"
 msgid "Restore Previous Configuration"
 msgstr "Atkurti ankstesnę konfigūraciją"
 
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "Slaptažodis"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "Prisijungti"
-
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
 msgstr "Prisijungti kaip svečias"
@@ -49,37 +41,26 @@ msgstr "Prisijungti kaip svečias"
 msgid "Manual Login…"
 msgstr "Rankinis prisijungimas…"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:401
+#, fuzzy
+msgid "Unable to Log In"
+msgstr "Nepavyko paleisti pradinės sąrankos"
+
+#: src/MainWindow.vala:402
+msgid "Starting the session has failed."
+msgstr ""
+
+#: src/MainWindow.vala:464
 msgid "Unable to Launch Initial Setup"
 msgstr "Nepavyko paleisti pradinės sąrankos"
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:469
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
 "Pradinė sąranka sukuria jūsų pirmąjį naudotoją. Be jo, jūs negalėsite "
 "prisijungti ir jums gali tekti iš naujo įdiegti operacinę sistemą."
-
-#: src/CapsLockRevealer.vala:55
-msgid "Caps Lock & Num Lock are on"
-msgstr "Įjungtos DIDŽIOSIOS RAIDĖS ir skaitmenų klavišai"
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "Įjungtos DIDŽIOSIOS RAIDĖS"
-
-#: src/CapsLockRevealer.vala:59
-msgid "Num Lock is on"
-msgstr "Įjungti skaitmenų klavišai"
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr "Paskyra išjungta"
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr "Seansas negali būti pakeistas, kol naudotojas yra prisijungęs"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -93,32 +74,56 @@ msgstr "Naudotojo vardas"
 msgid "Try username"
 msgstr "Išbandyti naudotojo vardą"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
-msgstr "Nustatyti savo naudotojo savybes"
+#: src/Cards/UserCard.vala:73 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "Prisijungti"
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
-msgstr "Norint nustatyti savo sveikintojo savybes, reikia nustatyti tapatybę."
+#: src/Cards/UserCard.vala:79
+msgid "Account disabled"
+msgstr "Paskyra išjungta"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr "Gauti bet kurio naudotojo savybes"
+#: src/Cards/UserCard.vala:166
+msgid "Session cannot be changed while user is logged in"
+msgstr "Seansas negali būti pakeistas, kol naudotojas yra prisijungęs"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr ""
-"Norint gauti kito naudotojo sveikintojo savybes, reikia nustatyti tapatybę."
+#: src/Widgets/CapsLockRevealer.vala:70
+msgid "Caps Lock & Num Lock are on"
+msgstr "Įjungtos DIDŽIOSIOS RAIDĖS ir skaitmenų klavišai"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr "Nustatyti bet kurio naudotojo savybes"
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "Įjungtos DIDŽIOSIOS RAIDĖS"
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr ""
-"Norint nustatyti kito naudotojo sveikintojo savybes, reikia nustatyti "
-"tapatybę."
+#: src/Widgets/CapsLockRevealer.vala:74
+msgid "Num Lock is on"
+msgstr "Įjungti skaitmenų klavišai"
+
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "Slaptažodis"
+
+#~ msgid "Set properties of own user"
+#~ msgstr "Nustatyti savo naudotojo savybes"
+
+#~ msgid "Authentication is required to set one's own greeter properties."
+#~ msgstr ""
+#~ "Norint nustatyti savo sveikintojo savybes, reikia nustatyti tapatybę."
+
+#~ msgid "Get properties of any user"
+#~ msgstr "Gauti bet kurio naudotojo savybes"
+
+#~ msgid "Authentication is required to get another user's greeter properties."
+#~ msgstr ""
+#~ "Norint gauti kito naudotojo sveikintojo savybes, reikia nustatyti "
+#~ "tapatybę."
+
+#~ msgid "Set properties of any user"
+#~ msgstr "Nustatyti bet kurio naudotojo savybes"
+
+#~ msgid "Authentication is required to set another user's greeter properties."
+#~ msgstr ""
+#~ "Norint nustatyti kito naudotojo sveikintojo savybes, reikia nustatyti "
+#~ "tapatybę."
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Perbraukite savo pirštu"

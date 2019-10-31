@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
+"POT-Creation-Date: 2019-10-31 14:44-0600\n"
 "PO-Revision-Date: 2019-04-08 12:53+0000\n"
 "Last-Translator: Piotr Strebski <strebski@gmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -33,14 +33,6 @@ msgstr "Zachowaj tę konfigurację"
 msgid "Restore Previous Configuration"
 msgstr "Przywróć poprzednie ustawienia"
 
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "Hasło"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "Zaloguj się"
-
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
 msgstr "Zaloguj się jako gość"
@@ -49,37 +41,23 @@ msgstr "Zaloguj się jako gość"
 msgid "Manual Login…"
 msgstr "Ręczne logowanie…"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:401
+msgid "Unable to Log In"
+msgstr ""
+
+#: src/MainWindow.vala:402
+msgid "Starting the session has failed."
+msgstr ""
+
+#: src/MainWindow.vala:464
 msgid "Unable to Launch Initial Setup"
 msgstr ""
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:469
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
-
-#: src/CapsLockRevealer.vala:55
-#, fuzzy
-msgid "Caps Lock & Num Lock are on"
-msgstr "Caps Lock jest włączony"
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "Caps Lock jest włączony"
-
-#: src/CapsLockRevealer.vala:59
-#, fuzzy
-msgid "Num Lock is on"
-msgstr "Caps Lock jest włączony"
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr ""
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr "Niemożliwa jest zmiana sesji, gdy użytkownik pozostaje zalogowany"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -93,29 +71,35 @@ msgstr "Nazwa użytkownika"
 msgid "Try username"
 msgstr "Wypróbuj nazwę użytkownika"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
+#: src/Cards/UserCard.vala:73 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "Zaloguj się"
+
+#: src/Cards/UserCard.vala:79
+msgid "Account disabled"
 msgstr ""
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
-msgstr ""
+#: src/Cards/UserCard.vala:166
+msgid "Session cannot be changed while user is logged in"
+msgstr "Niemożliwa jest zmiana sesji, gdy użytkownik pozostaje zalogowany"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:70
+#, fuzzy
+msgid "Caps Lock & Num Lock are on"
+msgstr "Caps Lock jest włączony"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "Caps Lock jest włączony"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:74
+#, fuzzy
+msgid "Num Lock is on"
+msgstr "Caps Lock jest włączony"
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr ""
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "Hasło"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Przeciągnij palcem"

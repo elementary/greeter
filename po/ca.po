@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
+"POT-Creation-Date: 2019-10-31 14:44-0600\n"
 "PO-Revision-Date: 2019-07-08 11:28+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -32,14 +32,6 @@ msgstr "Mantén aquesta configuració"
 msgid "Restore Previous Configuration"
 msgstr "Restaura la configuració anterior"
 
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "Contrasenya"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "Inicia la sessió"
-
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
 msgstr "Entra com a convidat"
@@ -48,37 +40,26 @@ msgstr "Entra com a convidat"
 msgid "Manual Login…"
 msgstr "Inici de sessió manual…"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:401
+#, fuzzy
+msgid "Unable to Log In"
+msgstr "No es pot obrir la configuració inicial."
+
+#: src/MainWindow.vala:402
+msgid "Starting the session has failed."
+msgstr ""
+
+#: src/MainWindow.vala:464
 msgid "Unable to Launch Initial Setup"
 msgstr "No es pot obrir la configuració inicial."
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:469
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
 "La configuració inicial crea el primer usuari. Sense, no podreu iniciar "
 "sessió i potser haureu de reinstal·lar el SO."
-
-#: src/CapsLockRevealer.vala:55
-msgid "Caps Lock & Num Lock are on"
-msgstr "Els bloqueigs numèric i de les majúscules estan activats."
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "El bloqueig de les majúscules està activat."
-
-#: src/CapsLockRevealer.vala:59
-msgid "Num Lock is on"
-msgstr "El bloqueig numèric està activat."
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr "Compte inhabilitat"
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr "La sessió no es pot canviar mentre l'usuari sigui a la sessió."
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -92,31 +73,55 @@ msgstr "Nom d'usuari"
 msgid "Try username"
 msgstr "Proveu el nom d'usuari"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
-msgstr "Estableix les propietats del mateix usuari"
+#: src/Cards/UserCard.vala:73 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "Inicia la sessió"
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
-msgstr "Cal autenticar per establir les pròpies propietats de la benvinguda."
+#: src/Cards/UserCard.vala:79
+msgid "Account disabled"
+msgstr "Compte inhabilitat"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr "Obtén propietats de qualsevol usuari"
+#: src/Cards/UserCard.vala:166
+msgid "Session cannot be changed while user is logged in"
+msgstr "La sessió no es pot canviar mentre l'usuari sigui a la sessió."
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr ""
-"Cal autenticar per obtenir les propietats de benvinguda d’un altre usuari."
+#: src/Widgets/CapsLockRevealer.vala:70
+msgid "Caps Lock & Num Lock are on"
+msgstr "Els bloqueigs numèric i de les majúscules estan activats."
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr "Establiu les propietats de qualsevol usuari"
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "El bloqueig de les majúscules està activat."
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr ""
-"Cal autenticar per establir les propietats de benvinguda d’un altre usuari."
+#: src/Widgets/CapsLockRevealer.vala:74
+msgid "Num Lock is on"
+msgstr "El bloqueig numèric està activat."
+
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "Contrasenya"
+
+#~ msgid "Set properties of own user"
+#~ msgstr "Estableix les propietats del mateix usuari"
+
+#~ msgid "Authentication is required to set one's own greeter properties."
+#~ msgstr ""
+#~ "Cal autenticar per establir les pròpies propietats de la benvinguda."
+
+#~ msgid "Get properties of any user"
+#~ msgstr "Obtén propietats de qualsevol usuari"
+
+#~ msgid "Authentication is required to get another user's greeter properties."
+#~ msgstr ""
+#~ "Cal autenticar per obtenir les propietats de benvinguda d’un altre usuari."
+
+#~ msgid "Set properties of any user"
+#~ msgstr "Establiu les propietats de qualsevol usuari"
+
+#~ msgid "Authentication is required to set another user's greeter properties."
+#~ msgstr ""
+#~ "Cal autenticar per establir les propietats de benvinguda d’un altre "
+#~ "usuari."
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Feu lliscar el dit."

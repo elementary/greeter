@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
+"POT-Creation-Date: 2019-10-31 14:44-0600\n"
 "PO-Revision-Date: 2019-07-01 20:28+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -32,14 +32,6 @@ msgstr "この設定を保つ"
 msgid "Restore Previous Configuration"
 msgstr "前の設定へ戻す"
 
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "パスワード"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "ログイン"
-
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
 msgstr "ゲストとしてログイン"
@@ -48,11 +40,20 @@ msgstr "ゲストとしてログイン"
 msgid "Manual Login…"
 msgstr "ユーザー名を指定してログイン…"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:401
+#, fuzzy
+msgid "Unable to Log In"
+msgstr "初回セットアップを起動できません"
+
+#: src/MainWindow.vala:402
+msgid "Starting the session has failed."
+msgstr ""
+
+#: src/MainWindow.vala:464
 msgid "Unable to Launch Initial Setup"
 msgstr "初回セットアップを起動できません"
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:469
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -60,26 +61,6 @@ msgstr ""
 "初回セットアップでは、お使いのコンピューターの最初のユーザーを作成します。初"
 "回セットアップを行わないと、ログインできず、OS の再インストールが必要になる可"
 "能性があります。"
-
-#: src/CapsLockRevealer.vala:55
-msgid "Caps Lock & Num Lock are on"
-msgstr "Caps Lock と Num Lock がオンになっています"
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "Caps Lock がオンになっています"
-
-#: src/CapsLockRevealer.vala:59
-msgid "Num Lock is on"
-msgstr "Num Lock がオンになっています"
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr "アカウントは使用できません"
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr "ユーザーのログイン中はセッションを変更できません"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -93,29 +74,52 @@ msgstr "ユーザー名"
 msgid "Try username"
 msgstr "ユーザー名を試します"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
-msgstr "自分のユーザーのプロパティーを設定"
+#: src/Cards/UserCard.vala:73 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "ログイン"
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
-msgstr "自分のユーザーの Greeter のプロパティーを設定するには認証が必要です。"
+#: src/Cards/UserCard.vala:79
+msgid "Account disabled"
+msgstr "アカウントは使用できません"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr "すべてのユーザーのプロパティーを取得"
+#: src/Cards/UserCard.vala:166
+msgid "Session cannot be changed while user is logged in"
+msgstr "ユーザーのログイン中はセッションを変更できません"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr "別のユーザーの Greeter のプロパティーを取得するには認証が必要です。"
+#: src/Widgets/CapsLockRevealer.vala:70
+msgid "Caps Lock & Num Lock are on"
+msgstr "Caps Lock と Num Lock がオンになっています"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr "すべてのユーザーのプロパティーを設定"
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "Caps Lock がオンになっています"
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr "別のユーザーの Greeter のプロパティーを設定するには認証が必要です。"
+#: src/Widgets/CapsLockRevealer.vala:74
+msgid "Num Lock is on"
+msgstr "Num Lock がオンになっています"
+
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "パスワード"
+
+#~ msgid "Set properties of own user"
+#~ msgstr "自分のユーザーのプロパティーを設定"
+
+#~ msgid "Authentication is required to set one's own greeter properties."
+#~ msgstr ""
+#~ "自分のユーザーの Greeter のプロパティーを設定するには認証が必要です。"
+
+#~ msgid "Get properties of any user"
+#~ msgstr "すべてのユーザーのプロパティーを取得"
+
+#~ msgid "Authentication is required to get another user's greeter properties."
+#~ msgstr "別のユーザーの Greeter のプロパティーを取得するには認証が必要です。"
+
+#~ msgid "Set properties of any user"
+#~ msgstr "すべてのユーザーのプロパティーを設定"
+
+#~ msgid "Authentication is required to set another user's greeter properties."
+#~ msgstr "別のユーザーの Greeter のプロパティーを設定するには認証が必要です。"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "指をスワイプしてください"
