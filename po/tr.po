@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-31 14:44-0600\n"
-"PO-Revision-Date: 2019-09-03 20:22+0000\n"
+"PO-Revision-Date: 2019-11-03 00:24+0000\n"
 "Last-Translator: Ozgur Baskin <bebeto_baskin@yahoo.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/greeter/"
 "tr/>\n"
@@ -41,13 +41,12 @@ msgid "Manual Login…"
 msgstr "El İle Oturum Aç…"
 
 #: src/MainWindow.vala:401
-#, fuzzy
 msgid "Unable to Log In"
-msgstr "İlk Kurulum Başlatılamadı"
+msgstr "Oturum Açılamıyor"
 
 #: src/MainWindow.vala:402
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Oturumu başlatmak başarısız oldu."
 
 #: src/MainWindow.vala:464
 msgid "Unable to Launch Initial Setup"
