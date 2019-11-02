@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
+"POT-Creation-Date: 2019-10-31 14:44-0600\n"
 "PO-Revision-Date: 2019-09-18 16:22+0000\n"
 "Last-Translator: Daniel R. <riesp@pm.me>\n"
 "Language-Team: Galician <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -32,14 +32,6 @@ msgstr "Manter esta configuración"
 msgid "Restore Previous Configuration"
 msgstr "Restablecer configuración anterior"
 
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "Contrasinal"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "Acceder"
-
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
 msgstr "Acceder como invitado"
@@ -48,37 +40,26 @@ msgstr "Acceder como invitado"
 msgid "Manual Login…"
 msgstr "Acceso manual…"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:401
+#, fuzzy
+msgid "Unable to Log In"
+msgstr "Non se puido iniciar a configuración inicial"
+
+#: src/MainWindow.vala:402
+msgid "Starting the session has failed."
+msgstr ""
+
+#: src/MainWindow.vala:464
 msgid "Unable to Launch Initial Setup"
 msgstr "Non se puido iniciar a configuración inicial"
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:469
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
 "Configuración Inicial crea a súa primeira conta de usuario. Sen ela, non "
 "poderá acceder ao sistema e quizais teña que reinstalalo."
-
-#: src/CapsLockRevealer.vala:55
-msgid "Caps Lock & Num Lock are on"
-msgstr "Bloq Maiús e Bloq Núm activadas"
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "Bloq Maiús activada"
-
-#: src/CapsLockRevealer.vala:59
-msgid "Num Lock is on"
-msgstr "Bloq Núm activada"
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr "Conta desactivada"
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr "Non se pode cambiar de sesión mentres o usuario ten a sesión iniciada"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -92,33 +73,55 @@ msgstr "Nome de usuario"
 msgid "Try username"
 msgstr "Probe un nome de usuario"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
-msgstr "Establecer propiedades do propio usuario"
+#: src/Cards/UserCard.vala:73 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "Acceder"
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
-msgstr ""
-"Precisa autenticarse para establecer as súas propias propiedades da pantalla "
-"de acceso."
+#: src/Cards/UserCard.vala:79
+msgid "Account disabled"
+msgstr "Conta desactivada"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr "Obter as propiedades de calquera usuario"
+#: src/Cards/UserCard.vala:166
+msgid "Session cannot be changed while user is logged in"
+msgstr "Non se pode cambiar de sesión mentres o usuario ten a sesión iniciada"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr ""
-"Precisa autenticarse para obter as propiedades de pantalla doutro usuario."
+#: src/Widgets/CapsLockRevealer.vala:70
+msgid "Caps Lock & Num Lock are on"
+msgstr "Bloq Maiús e Bloq Núm activadas"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr "Establecer propiedades de calquera conta"
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "Bloq Maiús activada"
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr ""
-"Precisa autenticarse para obter as propiedades de pantalla doutro usuario."
+#: src/Widgets/CapsLockRevealer.vala:74
+msgid "Num Lock is on"
+msgstr "Bloq Núm activada"
+
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "Contrasinal"
+
+#~ msgid "Set properties of own user"
+#~ msgstr "Establecer propiedades do propio usuario"
+
+#~ msgid "Authentication is required to set one's own greeter properties."
+#~ msgstr ""
+#~ "Precisa autenticarse para establecer as súas propias propiedades da "
+#~ "pantalla de acceso."
+
+#~ msgid "Get properties of any user"
+#~ msgstr "Obter as propiedades de calquera usuario"
+
+#~ msgid "Authentication is required to get another user's greeter properties."
+#~ msgstr ""
+#~ "Precisa autenticarse para obter as propiedades de pantalla doutro usuario."
+
+#~ msgid "Set properties of any user"
+#~ msgstr "Establecer propiedades de calquera conta"
+
+#~ msgid "Authentication is required to set another user's greeter properties."
+#~ msgstr ""
+#~ "Precisa autenticarse para obter as propiedades de pantalla doutro usuario."
 
 #~ msgid "Guest session"
 #~ msgstr "Sesión de convidado"
