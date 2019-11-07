@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-06 00:40+0000\n"
-"PO-Revision-Date: 2019-11-07 10:24+0000\n"
+"PO-Revision-Date: 2019-11-09 12:24+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/pt/>\n"
@@ -33,7 +33,7 @@ msgstr "Guardar o último utilizador na tentativa de iniciar sessão"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Handle all background aspect ratios"
-msgstr "Trata de todas as relações de aspecto do fundo"
+msgstr "Trata de todas as relações de aspeto do fundo"
 
 #: data/greeter.appdata.xml.in:26
 msgid "Give non-focused user cards smaller usernames"
