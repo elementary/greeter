@@ -76,45 +76,86 @@ namespace GreeterCompositor {
             info = Meta.PluginInfo () {name = "GreeterCompositor", version = Constants.VERSION, author = "elementary LLC.",
                 license = "GPLv3", description = "The greeter compositor"};
 
+#if !HAS_MUTTER332
             Prefs.set_ignore_request_hide_titlebar (true);
+#endif
         }
 
         public override void start () {
             Util.later_add (LaterType.BEFORE_REDRAW, show_stage);
 
+#if HAS_MUTTER330
+            unowned Meta.Display display = get_display ();
+#elif HAS_MUTTER322
+            unowned Meta.Display display = get_screen ().get_display ();
+#endif
 #if HAS_MUTTER322
-            get_screen ().get_display ().gl_video_memory_purged.connect (refresh_background);
+            display.gl_video_memory_purged.connect (() => {
+                refresh_background ();
+            });
 #endif
         }
 
         void refresh_background () {
+#if HAS_MUTTER330
+            unowned Meta.Display display = get_display ();
+            var system_background = new Greeter.SystemBackground (display);
+#else
             var screen = get_screen ();
             var system_background = new Greeter.SystemBackground (screen);
+#endif
+
             system_background.refresh ();
         }
 
         bool show_stage () {
+#if HAS_MUTTER330
+            unowned Meta.Display display = get_display ();
+#else
             var screen = get_screen ();
+#endif
             MediaFeedback.init ();
             DBus.init (this);
             DBusAccelerator.init (this);
 
+#if HAS_MUTTER330
+            stage = Compositor.get_stage_for_display (display) as Clutter.Stage;
+#else
             stage = Compositor.get_stage_for_screen (screen) as Clutter.Stage;
+#endif
 
+#if HAS_MUTTER330
+            var system_background = new Greeter.SystemBackground (display);
+#else
             var system_background = new Greeter.SystemBackground (screen);
+#endif
+
+#if HAS_MUTTER334
+            system_background.background_actor.add_constraint (new Clutter.BindConstraint (stage,
+                Clutter.BindCoordinate.ALL, 0));
+            stage.insert_child_below (system_background.background_actor, null);
+#else
             system_background.add_constraint (new Clutter.BindConstraint (stage, Clutter.BindCoordinate.ALL, 0));
-            system_background.set_wallpaper ();
             stage.insert_child_below (system_background, null);
+#endif
 
             ui_group = new Clutter.Actor ();
             ui_group.reactive = true;
             stage.add_child (ui_group);
 
+#if HAS_MUTTER330
+            window_group = Compositor.get_window_group_for_display (display);
+#else
             window_group = Compositor.get_window_group_for_screen (screen);
+#endif
             stage.remove_child (window_group);
             ui_group.add_child (window_group);
 
+#if HAS_MUTTER330
+            top_window_group = Compositor.get_top_window_group_for_display (display);
+#else
             top_window_group = Compositor.get_top_window_group_for_screen (screen);
+#endif
             stage.remove_child (top_window_group);
             ui_group.add_child (top_window_group);
 
@@ -156,10 +197,21 @@ namespace GreeterCompositor {
         public uint32[] get_all_xids () {
             var list = new Gee.ArrayList<uint32> ();
 
-            foreach (var workspace in get_screen ().get_workspaces ()) {
-                foreach (var window in workspace.list_windows ())
+#if HAS_MUTTER330
+            unowned Meta.Display display = get_display ();
+            unowned Meta.WorkspaceManager manager = display.get_workspace_manager ();
+            for (int i = 0; i < manager.get_n_workspaces (); i++) {
+                foreach (var window in manager.get_workspace_by_index (i).list_windows ()) {
                     list.add ((uint32)window.get_xwindow ());
+                }
             }
+#else
+            foreach (var workspace in get_screen ().get_workspaces ()) {
+                foreach (var window in workspace.list_windows ()) {
+                    list.add ((uint32)window.get_xwindow ());
+                }
+            }
+#endif
 
             return list.to_array ();
         }
@@ -171,6 +223,19 @@ namespace GreeterCompositor {
             if (window == null)
                 return;
 
+#if HAS_MUTTER330
+            unowned Meta.Display display = get_display ();
+            unowned Meta.WorkspaceManager manager = display.get_workspace_manager ();
+
+            var active = manager.get_active_workspace ();
+            var next = active.get_neighbor (direction);
+
+            //dont allow empty workspaces to be created by moving, if we have dynamic workspaces
+            if (Prefs.get_dynamic_workspaces () && Utils.get_n_windows (active) == 1 && next.index () == manager.n_workspaces - 1) {
+                Utils.bell (display);
+                return;
+            }
+#else
             var screen = get_screen ();
             var display = screen.get_display ();
 
@@ -182,6 +247,7 @@ namespace GreeterCompositor {
                 Utils.bell (screen);
                 return;
             }
+#endif
 
             moving = window;
 
@@ -214,6 +280,39 @@ namespace GreeterCompositor {
             if (!Prefs.get_dynamic_workspaces ())
                 return;
 
+#if HAS_MUTTER330
+            unowned Meta.Display display = get_display ();
+            var time = display.get_current_time ();
+            unowned Meta.Workspace win_ws = window.get_workspace ();
+            unowned Meta.WorkspaceManager manager = display.get_workspace_manager ();
+
+            if (which_change == Meta.SizeChange.FULLSCREEN) {
+                // Do nothing if the current workspace would be empty
+                if (Utils.get_n_windows (win_ws) <= 1)
+                    return;
+
+                var old_ws_index = win_ws.index ();
+                var new_ws_index = old_ws_index + 1;
+                //InternalUtils.insert_workspace_with_window (new_ws_index, window);
+
+                var new_ws_obj = manager.get_workspace_by_index (new_ws_index);
+                window.change_workspace (new_ws_obj);
+                new_ws_obj.activate_with_focus (window, time);
+
+                ws_assoc.insert (window, old_ws_index);
+            } else if (ws_assoc.contains (window)) {
+                var old_ws_index = ws_assoc.get (window);
+                var new_ws_index = win_ws.index ();
+
+                if (new_ws_index != old_ws_index && old_ws_index < manager.get_n_workspaces ()) {
+                    var old_ws_obj = manager.get_workspace_by_index (old_ws_index);
+                    window.change_workspace (old_ws_obj);
+                    old_ws_obj.activate_with_focus (window, time);
+                }
+
+                ws_assoc.remove (window);
+            }
+#else
             unowned Meta.Screen screen = get_screen ();
             var time = screen.get_display ().get_current_time ();
             unowned Meta.Workspace win_ws = window.get_workspace ();
@@ -244,6 +343,7 @@ namespace GreeterCompositor {
 
                 ws_assoc.remove (window);
             }
+#endif
         }
 
         public override void size_change (Meta.WindowActor actor, Meta.SizeChange which_change, Meta.Rectangle old_frame_rect, Meta.Rectangle old_buffer_rect) {
@@ -347,8 +447,13 @@ namespace GreeterCompositor {
             if (windows == null || parents == null)
                 return;
 
+#if HAS_MUTTER330
+            unowned Meta.Display display = get_display ();
+            var active_workspace = display.get_workspace_manager ().get_active_workspace ();
+#else
             var screen = get_screen ();
             var active_workspace = screen.get_active_workspace ();
+#endif
 
             for (var i = 0; i < windows.length (); i++) {
                 var actor = windows.nth_data (i);
