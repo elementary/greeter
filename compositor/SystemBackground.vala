@@ -19,7 +19,7 @@
  * Authors: Corentin Noël <corentin@elementary.io>
  */
 
-#if HAS_MUTTER334
+#if HAS_MUTTER332
     public class Greeter.SystemBackground : GLib.Object {
 #else
     public class Greeter.SystemBackground : Meta.BackgroundActor {
@@ -28,7 +28,7 @@
 
     static Meta.Background? system_background = null;
 
-#if HAS_MUTTER334
+#if HAS_MUTTER332
     public Meta.BackgroundActor background_actor { get; construct; }
 #endif
 
@@ -36,7 +36,7 @@
 
 #if HAS_MUTTER330
         public SystemBackground (Meta.Display display) {
-#if HAS_MUTTER334
+#if HAS_MUTTER332
             Object (background_actor: new Meta.BackgroundActor (display, 0));
 #else
             Object (meta_display: display, monitor: 0);
@@ -50,7 +50,7 @@
 
     construct {
         if (system_background == null) {
-#if HAS_MUTTER334
+#if HAS_MUTTER332
             system_background = new Meta.Background (background_actor.meta_display);
 #elif HAS_MUTTER330
             system_background = new Meta.Background (meta_display);
@@ -62,7 +62,7 @@
             system_background.set_file (texture_file, GDesktop.BackgroundStyle.WALLPAPER);
         }
 
-#if HAS_MUTTER334
+#if HAS_MUTTER332
             background_actor.background = system_background;
 #else
             background = system_background;
