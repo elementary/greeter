@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-06 00:40+0000\n"
-"PO-Revision-Date: 2019-11-11 12:24+0000\n"
+"PO-Revision-Date: 2019-11-15 23:24+0000\n"
 "Last-Translator: Daniel R. <riesp@pm.me>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/es/>\n"
@@ -29,31 +29,34 @@ msgstr "Desbloquear o iniciar sesión en su dispositivo"
 
 #: data/greeter.appdata.xml.in:24
 msgid "Save last user on attempted login"
-msgstr ""
+msgstr "Guardar último usuario en intento de inicio de sesión"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Handle all background aspect ratios"
-msgstr ""
+msgstr "Manejar todas las relaciones de aspecto de fondo"
 
 #: data/greeter.appdata.xml.in:26
 msgid "Give non-focused user cards smaller usernames"
 msgstr ""
+"Dar a las tarjetas de usuario no enfocadas nombres de usuario más pequeños"
 
 #: data/greeter.appdata.xml.in:27
 msgid "Better respect NumLock settings"
-msgstr ""
+msgstr "Mejor respeto de los ajustes de Bloq Num"
 
 #: data/greeter.appdata.xml.in:28
 msgid "Enable sounds in greeter"
-msgstr ""
+msgstr "Activar sonidos en greeter"
 
 #: data/greeter.appdata.xml.in:29
 msgid "Select password text on error instead of immediately clearing it"
 msgstr ""
+"Seleccionar el texto de la contraseña en caso de error en lugar de borrarlo "
+"inmediatamente"
 
 #: data/greeter.appdata.xml.in:30
 msgid "Code cleanup"
-msgstr ""
+msgstr "Limpieza de código"
 
 #: data/greeter.appdata.xml.in:31
 msgid "Updated translations"
@@ -61,23 +64,23 @@ msgstr "Traducciones actualizadas"
 
 #: data/greeter.appdata.xml.in:37
 msgid "Extensive overhaul"
-msgstr ""
+msgstr "Amplia revisión"
 
 #: data/greeter.appdata.xml.in:39
 msgid "New card-based appearance"
-msgstr ""
+msgstr "Nueva apariencia basada en tarjetas"
 
 #: data/greeter.appdata.xml.in:40
 msgid "Improved HiDPI support"
-msgstr ""
+msgstr "Compatibilidad mejorada de HiDPI"
 
 #: data/greeter.appdata.xml.in:41
 msgid "AccountsService functionality"
-msgstr ""
+msgstr "Funcionalidad AccountsService"
 
 #: data/greeter.appdata.xml.in:42
 msgid "Various bug fixes"
-msgstr ""
+msgstr "Varias correcciones de errores"
 
 #: data/greeter.appdata.xml.in:78
 msgid "elementary, Inc."
