@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-06 00:40+0000\n"
-"PO-Revision-Date: 2019-10-27 09:23+0000\n"
+"PO-Revision-Date: 2019-11-27 20:24+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/desktop/greeter/"
 "he/>\n"
@@ -41,13 +41,12 @@ msgid "Manual Login…"
 msgstr "כניסה ידנית…"
 
 #: src/MainWindow.vala:401
-#, fuzzy
 msgid "Unable to Log In"
-msgstr "לא ניתן להפעיל את ההתקנה הראשונית"
+msgstr "לא ניתן להיכנס"
 
 #: src/MainWindow.vala:402
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "הכניסה למערכת נכשלה."
 
 #: src/MainWindow.vala:464
 msgid "Unable to Launch Initial Setup"
