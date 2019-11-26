@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-06 00:40+0000\n"
-"PO-Revision-Date: 2019-11-09 12:24+0000\n"
+"PO-Revision-Date: 2019-11-27 20:24+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/he/>\n"
@@ -29,31 +29,31 @@ msgstr "שחרור נעילה או כניסה למכשיר שלך"
 
 #: data/greeter.appdata.xml.in:24
 msgid "Save last user on attempted login"
-msgstr ""
+msgstr "שמירת המשתמש האחרון בעת ניסיון כניסה"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Handle all background aspect ratios"
-msgstr ""
+msgstr "טיפול בכל יחסי התצוגה מאחורי הקלעים"
 
 #: data/greeter.appdata.xml.in:26
 msgid "Give non-focused user cards smaller usernames"
-msgstr ""
+msgstr "כרטיסי משתמשים שאינם במיקוד יקבלו שמות משתמשים קטנים יותר"
 
 #: data/greeter.appdata.xml.in:27
 msgid "Better respect NumLock settings"
-msgstr ""
+msgstr "ציות משופר להגדרות NumLock"
 
 #: data/greeter.appdata.xml.in:28
 msgid "Enable sounds in greeter"
-msgstr ""
+msgstr "הפעלת שמע ב־greeter (תכנית קבלת הפנים)"
 
 #: data/greeter.appdata.xml.in:29
 msgid "Select password text on error instead of immediately clearing it"
-msgstr ""
+msgstr "בחירת טקסט הססמה בעת שגיאה במקום למחוק אותו מיידית"
 
 #: data/greeter.appdata.xml.in:30
 msgid "Code cleanup"
-msgstr ""
+msgstr "ניקוי קוד"
 
 #: data/greeter.appdata.xml.in:31
 msgid "Updated translations"
@@ -61,23 +61,23 @@ msgstr "תרגומים עודכנו"
 
 #: data/greeter.appdata.xml.in:37
 msgid "Extensive overhaul"
-msgstr ""
+msgstr "שיפורים נרחבים"
 
 #: data/greeter.appdata.xml.in:39
 msgid "New card-based appearance"
-msgstr ""
+msgstr "הופעה חדשה מבוססת כרטיסים"
 
 #: data/greeter.appdata.xml.in:40
 msgid "Improved HiDPI support"
-msgstr ""
+msgstr "תמיכה משופרת ב־HiDPI (רזולוציה גבוהה)"
 
 #: data/greeter.appdata.xml.in:41
 msgid "AccountsService functionality"
-msgstr ""
+msgstr "תכונת AccountsService (שירות החשבונות)"
 
 #: data/greeter.appdata.xml.in:42
 msgid "Various bug fixes"
-msgstr ""
+msgstr "מגוון תיקוני תקלות"
 
 #: data/greeter.appdata.xml.in:78
 msgid "elementary, Inc."
