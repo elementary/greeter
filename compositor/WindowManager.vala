@@ -86,14 +86,12 @@ namespace GreeterCompositor {
 
 #if HAS_MUTTER330
             unowned Meta.Display display = get_display ();
-#elif HAS_MUTTER322
+#else
             unowned Meta.Display display = get_screen ().get_display ();
 #endif
-#if HAS_MUTTER322
             display.gl_video_memory_purged.connect (() => {
                 refresh_background ();
             });
-#endif
         }
 
         void refresh_background () {
