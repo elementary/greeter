@@ -117,9 +117,9 @@ namespace GreeterCompositor {
             DBusAccelerator.init (this);
 
 #if HAS_MUTTER330
-            stage = Compositor.get_stage_for_display (display) as Clutter.Stage;
+            stage = display.get_stage () as Clutter.Stage;
 #else
-            stage = Compositor.get_stage_for_screen (screen) as Clutter.Stage;
+            stage = screen.get_stage () as Clutter.Stage;
 #endif
 
 #if HAS_MUTTER330
@@ -142,17 +142,17 @@ namespace GreeterCompositor {
             stage.add_child (ui_group);
 
 #if HAS_MUTTER330
-            window_group = Compositor.get_window_group_for_display (display);
+            window_group = display.get_window_group ();
 #else
-            window_group = Compositor.get_window_group_for_screen (screen);
+            window_group = screen.get_window_group ();
 #endif
             stage.remove_child (window_group);
             ui_group.add_child (window_group);
 
 #if HAS_MUTTER330
-            top_window_group = Compositor.get_top_window_group_for_display (display);
+            top_window_group = display.get_top_window_group ();
 #else
-            top_window_group = Compositor.get_top_window_group_for_screen (screen);
+            top_window_group = screen.get_top_window_group ();
 #endif
             stage.remove_child (top_window_group);
             ui_group.add_child (top_window_group);
