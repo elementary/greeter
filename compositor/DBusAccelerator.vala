@@ -82,12 +82,20 @@ namespace GreeterCompositor {
 #endif
         }
 
+#if HAS_MUTTER334
+        private void on_accelerator_activated (uint action, Clutter.InputDevice device, uint timestamp) {
+#else
         private void on_accelerator_activated (uint action, uint device_id, uint timestamp) {
+#endif
             foreach (unowned GrabbedAccelerator accel in grabbed_accelerators) {
                 if (accel.action == action) {
                     if (ActionMode.LOGIN_SCREEN in accel.accelerator.flags) {
                         var parameters = new GLib.HashTable<string, Variant> (null, null);
+#if HAS_MUTTER334
+                        parameters.set ("device-id", new Variant.uint32 (device.id));
+#else
                         parameters.set ("device-id", new Variant.uint32 (device_id));
+#endif
                         parameters.set ("timestamp", new Variant.uint32 (timestamp));
 
                         accelerator_activated (action, parameters);
