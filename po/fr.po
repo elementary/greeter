@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-31 14:44-0600\n"
-"PO-Revision-Date: 2019-07-08 11:28+0000\n"
+"POT-Creation-Date: 2019-11-06 00:40+0000\n"
+"PO-Revision-Date: 2019-11-05 20:24+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/desktop/greeter/"
 "fr/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 3.7.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:409
@@ -41,13 +41,12 @@ msgid "Manual Login…"
 msgstr "Connexion manuelle…"
 
 #: src/MainWindow.vala:401
-#, fuzzy
 msgid "Unable to Log In"
-msgstr "Impossible de lancer la configuration initiale"
+msgstr "Impossible de se connecter"
 
 #: src/MainWindow.vala:402
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Le lancement de la session  a échoué."
 
 #: src/MainWindow.vala:464
 msgid "Unable to Launch Initial Setup"

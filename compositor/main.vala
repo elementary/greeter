@@ -39,7 +39,7 @@ namespace GreeterCompositor {
 
         Meta.Plugin.manager_set_plugin_type (typeof (GreeterCompositor.WindowManager));
 
-        Meta.set_wm_name ("Mutter(GreeterCompositor)");
+        Meta.Util.set_wm_name ("Mutter(GreeterCompositor)");
 
         /**
          * Prevent Meta.init () from causing gtk to load gail and at-bridge

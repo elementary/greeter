@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-10-05 03:23+0000\n"
+"POT-Creation-Date: 2019-11-06 00:40+0000\n"
+"PO-Revision-Date: 2019-12-03 09:24+0000\n"
 "Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "desktop/greeter-extra/zh_Hans/>\n"
@@ -27,6 +27,58 @@ msgstr "登录界面"
 msgid "Unlock or log in to your device"
 msgstr "解锁或登录设备"
 
-#: data/greeter.appdata.xml.in:46
+#: data/greeter.appdata.xml.in:24
+msgid "Save last user on attempted login"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:25
+msgid "Handle all background aspect ratios"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:26
+msgid "Give non-focused user cards smaller usernames"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:27
+msgid "Better respect NumLock settings"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:28
+msgid "Enable sounds in greeter"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:29
+msgid "Select password text on error instead of immediately clearing it"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:30
+msgid "Code cleanup"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:31
+msgid "Updated translations"
+msgstr "更新翻译"
+
+#: data/greeter.appdata.xml.in:37
+msgid "Extensive overhaul"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:39
+msgid "New card-based appearance"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:40
+msgid "Improved HiDPI support"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:41
+msgid "AccountsService functionality"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:42
+msgid "Various bug fixes"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:78
 msgid "elementary, Inc."
 msgstr "elementary, Inc."

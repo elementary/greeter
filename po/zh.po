@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-31 14:44-0600\n"
+"POT-Creation-Date: 2019-11-06 00:40+0000\n"
 "PO-Revision-Date: 2019-09-10 22:22+0000\n"
 "Last-Translator: James Qian <sotux82@gmail.com>\n"
 "Language-Team: Chinese <https://l10n.elementary.io/projects/desktop/greeter/"
