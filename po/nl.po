@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-06 00:40+0000\n"
-"PO-Revision-Date: 2019-12-15 23:07+0000\n"
-"Last-Translator: Daniel Foré <daniel@elementary.io>\n"
+"PO-Revision-Date: 2019-12-27 13:07+0000\n"
+"Last-Translator: Jaimie85 <alsemgeest@gmail.com>\n"
 "Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/greeter/nl/"
 ">\n"
 "Language: nl\n"
@@ -22,42 +22,44 @@ msgstr ""
 
 #: compositor/WindowManager.vala:409
 msgid "Does the display look OK?"
-msgstr "Ziet het beeldscherm er goed uit?"
+msgstr "Ziet het beeld er goed uit?"
 
 #: compositor/WindowManager.vala:412
 msgid "Keep This Configuration"
-msgstr "Behoud deze configuratie"
+msgstr "Behoud deze instellingen"
 
 #: compositor/WindowManager.vala:413
 msgid "Restore Previous Configuration"
-msgstr "Herstel vorige configuratie"
+msgstr "Vorige instellingen terugzetten"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
-msgstr ""
+msgstr "Aanmelden als gast"
 
 #: src/MainWindow.vala:64
-#, fuzzy
 msgid "Manual Login…"
-msgstr "Handmatig inloggen"
+msgstr "Handmatig inloggen…"
 
 #: src/MainWindow.vala:401
 msgid "Unable to Log In"
-msgstr ""
+msgstr "Het is niet mogelijk om in te loggen"
 
 #: src/MainWindow.vala:402
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Het starten van de sessie is mislukt."
 
 #: src/MainWindow.vala:464
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Het laden van de instellingen om te beginnen is mislukt"
 
 #: src/MainWindow.vala:469
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Het eerste instellingen scherm creëert de eerste gebruiker. Zonder eerste "
+"gebruiker kunt u niet inloggen en moet u waarschijnlijk het "
+"besturingssysteem opnieuw installeren."
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -65,15 +67,15 @@ msgstr "Handmatig inloggen"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr ""
+msgstr "Gebruikersnaam"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "Probeer gebruikersnaam"
 
 #: src/Cards/UserCard.vala:73 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
-msgstr "Aanmelden"
+msgstr "Inloggen"
 
 #: src/Cards/UserCard.vala:79
 msgid "Account disabled"
@@ -89,7 +91,7 @@ msgstr ""
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps lock staat aan"
 
 #: src/Widgets/CapsLockRevealer.vala:74
 msgid "Num Lock is on"
@@ -97,7 +99,7 @@ msgstr ""
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
-msgstr ""
+msgstr "Wachtwoord"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Swipe uw vinger"
