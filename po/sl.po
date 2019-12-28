@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-06 00:40+0000\n"
-"PO-Revision-Date: 2019-12-20 00:44+0000\n"
+"PO-Revision-Date: 2019-12-29 05:21+0000\n"
 "Last-Translator: Marko <marko.dolar@gmail.com>\n"
 "Language-Team: Slovenian <https://l10n.elementary.io/projects/desktop/"
 "greeter/sl/>\n"
@@ -43,21 +43,23 @@ msgstr "Ročna prijava…"
 
 #: src/MainWindow.vala:401
 msgid "Unable to Log In"
-msgstr ""
+msgstr "Ni se mogoče prijaviti"
 
 #: src/MainWindow.vala:402
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Zagon seje je spodletel."
 
 #: src/MainWindow.vala:464
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Ni mogoče zagnati začetne namestitve"
 
 #: src/MainWindow.vala:469
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Začetna namestitev ustvari prvega uporabnika. Brez njega se ne boste mogli "
+"prijaviti in boste morali verjetno ponovno namestiti operacijski sistem."
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -69,7 +71,7 @@ msgstr "Uporabniško ime"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "Poskusite uporabniško ime"
 
 #: src/Cards/UserCard.vala:73 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
@@ -77,23 +79,23 @@ msgstr "Prijava"
 
 #: src/Cards/UserCard.vala:79
 msgid "Account disabled"
-msgstr ""
+msgstr "Račun onemogočen"
 
 #: src/Cards/UserCard.vala:166
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "Seje ni mogoče zamenjate medtem ko je uporabnik prijavljen"
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
-msgstr ""
+msgstr "Caps Lock in Num Lock sta vklopljena"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps Lock je vklopljen"
 
 #: src/Widgets/CapsLockRevealer.vala:74
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Num Lock je vklopljen"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
