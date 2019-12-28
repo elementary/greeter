@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-06 00:40+0000\n"
-"PO-Revision-Date: 2019-12-27 13:07+0000\n"
+"PO-Revision-Date: 2019-12-28 10:28+0000\n"
 "Last-Translator: Jaimie85 <alsemgeest@gmail.com>\n"
 "Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/greeter/nl/"
 ">\n"
@@ -79,15 +79,15 @@ msgstr "Inloggen"
 
 #: src/Cards/UserCard.vala:79
 msgid "Account disabled"
-msgstr ""
+msgstr "Account uitgeschakeld"
 
 #: src/Cards/UserCard.vala:166
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "De sessie kan niet worden gewijzigd terwijl de gebruiker is ingelogd"
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
-msgstr ""
+msgstr "Caps Lock & Num Lock staan aan"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
@@ -95,7 +95,7 @@ msgstr "Caps lock staat aan"
 
 #: src/Widgets/CapsLockRevealer.vala:74
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Num Lock staat aan"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
