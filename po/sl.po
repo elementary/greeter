@@ -8,57 +8,58 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-06 00:40+0000\n"
-"PO-Revision-Date: 2018-07-03 18:57+0000\n"
-"Last-Translator: Jernej Virag <jernej@virag.si>\n"
-"Language-Team: Slovenian <https://weblate.elementary.io/projects/desktop/"
+"PO-Revision-Date: 2019-12-29 05:21+0000\n"
+"Last-Translator: Marko <marko.dolar@gmail.com>\n"
+"Language-Team: Slovenian <https://l10n.elementary.io/projects/desktop/"
 "greeter/sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 3.0.1\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:409
 msgid "Does the display look OK?"
-msgstr ""
+msgstr "Ali je slika na zaslonu videti v redu?"
 
 #: compositor/WindowManager.vala:412
 msgid "Keep This Configuration"
-msgstr ""
+msgstr "Ohrani to konfiguracijo"
 
 #: compositor/WindowManager.vala:413
 msgid "Restore Previous Configuration"
-msgstr ""
+msgstr "Obnovi prejšnjo konfiguracijo"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
-msgstr ""
+msgstr "Prijavi se kot gost"
 
 #: src/MainWindow.vala:64
-#, fuzzy
 msgid "Manual Login…"
-msgstr "Ročna prijava"
+msgstr "Ročna prijava…"
 
 #: src/MainWindow.vala:401
 msgid "Unable to Log In"
-msgstr ""
+msgstr "Ni se mogoče prijaviti"
 
 #: src/MainWindow.vala:402
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Zagon seje je spodletel."
 
 #: src/MainWindow.vala:464
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Ni mogoče zagnati začetne namestitve"
 
 #: src/MainWindow.vala:469
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Začetna namestitev ustvari prvega uporabnika. Brez njega se ne boste mogli "
+"prijaviti in boste morali verjetno ponovno namestiti operacijski sistem."
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -66,11 +67,11 @@ msgstr "Ročna prijava"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr ""
+msgstr "Uporabniško ime"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "Poskusite uporabniško ime"
 
 #: src/Cards/UserCard.vala:73 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
@@ -78,27 +79,27 @@ msgstr "Prijava"
 
 #: src/Cards/UserCard.vala:79
 msgid "Account disabled"
-msgstr ""
+msgstr "Račun onemogočen"
 
 #: src/Cards/UserCard.vala:166
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "Seje ni mogoče zamenjate medtem ko je uporabnik prijavljen"
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
-msgstr ""
+msgstr "Caps Lock in Num Lock sta vklopljena"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps Lock je vklopljen"
 
 #: src/Widgets/CapsLockRevealer.vala:74
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Num Lock je vklopljen"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
-msgstr ""
+msgstr "Geslo"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Poskenirajte prst"

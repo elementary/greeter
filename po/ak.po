@@ -4,28 +4,29 @@ msgstr ""
 "Project-Id-Version: Akan (Desktop)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-06 00:40+0000\n"
-"PO-Revision-Date: 2017-06-12 16:06+0000\n"
-"Last-Translator: Lawrence Aberba <karabutaworld@gmail.com>\n"
-"Language-Team: Akan <karabutaworld@gmail.com>\n"
+"PO-Revision-Date: 2019-12-15 23:07+0000\n"
+"Last-Translator: Daniel Foré <daniel@elementary.io>\n"
+"Language-Team: Akan <https://l10n.elementary.io/projects/desktop/greeter/ak/>"
+"\n"
 "Language: ak\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:409
 msgid "Does the display look OK?"
-msgstr ""
+msgstr "Wo hu biribiara yie?"
 
 #: compositor/WindowManager.vala:412
 msgid "Keep This Configuration"
-msgstr ""
+msgstr "Gyaw no sei ara"
 
 #: compositor/WindowManager.vala:413
 msgid "Restore Previous Configuration"
-msgstr ""
+msgstr "Fa to kan deeɛ no"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"

@@ -8,56 +8,58 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-06 00:40+0000\n"
-"PO-Revision-Date: 2018-06-07 00:08+0000\n"
-"Last-Translator: Dieter Debast <dieter_debast@hotmail.com>\n"
-"Language-Team: Dutch <https://weblate.elementary.io/projects/desktop/greeter/"
-"nl/>\n"
+"PO-Revision-Date: 2019-12-28 10:28+0000\n"
+"Last-Translator: Jaimie85 <alsemgeest@gmail.com>\n"
+"Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/greeter/nl/"
+">\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:409
 msgid "Does the display look OK?"
-msgstr ""
+msgstr "Ziet het beeld er goed uit?"
 
 #: compositor/WindowManager.vala:412
 msgid "Keep This Configuration"
-msgstr ""
+msgstr "Behoud deze instellingen"
 
 #: compositor/WindowManager.vala:413
 msgid "Restore Previous Configuration"
-msgstr ""
+msgstr "Vorige instellingen terugzetten"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
-msgstr ""
+msgstr "Aanmelden als gast"
 
 #: src/MainWindow.vala:64
-#, fuzzy
 msgid "Manual Login…"
-msgstr "Handmatig inloggen"
+msgstr "Handmatig inloggen…"
 
 #: src/MainWindow.vala:401
 msgid "Unable to Log In"
-msgstr ""
+msgstr "Het is niet mogelijk om in te loggen"
 
 #: src/MainWindow.vala:402
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Het starten van de sessie is mislukt."
 
 #: src/MainWindow.vala:464
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Het laden van de instellingen om te beginnen is mislukt"
 
 #: src/MainWindow.vala:469
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Het eerste instellingen scherm creëert de eerste gebruiker. Zonder eerste "
+"gebruiker kunt u niet inloggen en moet u waarschijnlijk het "
+"besturingssysteem opnieuw installeren."
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -65,39 +67,39 @@ msgstr "Handmatig inloggen"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr ""
+msgstr "Gebruikersnaam"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "Probeer gebruikersnaam"
 
 #: src/Cards/UserCard.vala:73 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
-msgstr "Aanmelden"
+msgstr "Inloggen"
 
 #: src/Cards/UserCard.vala:79
 msgid "Account disabled"
-msgstr ""
+msgstr "Account uitgeschakeld"
 
 #: src/Cards/UserCard.vala:166
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "De sessie kan niet worden gewijzigd terwijl de gebruiker is ingelogd"
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
-msgstr ""
+msgstr "Caps Lock & Num Lock staan aan"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps lock staat aan"
 
 #: src/Widgets/CapsLockRevealer.vala:74
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Num Lock staat aan"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
-msgstr ""
+msgstr "Wachtwoord"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Swipe uw vinger"
