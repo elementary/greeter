@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-06 00:40+0000\n"
+"POT-Creation-Date: 2020-02-13 22:30+0000\n"
 "PO-Revision-Date: 2019-07-01 20:27+0000\n"
 "Last-Translator: Daniel Foré <daniel@elementary.io>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/desktop/greeter-"
@@ -28,57 +28,61 @@ msgid "Unlock or log in to your device"
 msgstr ""
 
 #: data/greeter.appdata.xml.in:24
-msgid "Save last user on attempted login"
+msgid "Ensure that manual login is available when users are hidden"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:25
-msgid "Handle all background aspect ratios"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:26
-msgid "Give non-focused user cards smaller usernames"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:27
-msgid "Better respect NumLock settings"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:28
-msgid "Enable sounds in greeter"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:29
-msgid "Select password text on error instead of immediately clearing it"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:30
-msgid "Code cleanup"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:31
+#: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:39
 msgid "Updated translations"
 msgstr ""
 
+#: data/greeter.appdata.xml.in:32
+msgid "Save last user on attempted login"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:33
+msgid "Handle all background aspect ratios"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:34
+msgid "Give non-focused user cards smaller usernames"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:35
+msgid "Better respect NumLock settings"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:36
+msgid "Enable sounds in greeter"
+msgstr ""
+
 #: data/greeter.appdata.xml.in:37
+msgid "Select password text on error instead of immediately clearing it"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:38
+msgid "Code cleanup"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:45
 msgid "Extensive overhaul"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:39
+#: data/greeter.appdata.xml.in:47
 msgid "New card-based appearance"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:40
+#: data/greeter.appdata.xml.in:48
 msgid "Improved HiDPI support"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:41
+#: data/greeter.appdata.xml.in:49
 msgid "AccountsService functionality"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:42
+#: data/greeter.appdata.xml.in:50
 msgid "Various bug fixes"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:78
+#: data/greeter.appdata.xml.in:86
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
