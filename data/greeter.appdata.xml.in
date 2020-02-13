@@ -18,6 +18,14 @@
     <binary>io.elementary.greeter</binary>
   </provides>
   <releases>
+    <release version="5.0.2" date="2020-02-13" urgency="medium">
+      <description>
+        <ul>
+          <li>Ensure that manual login is available when users are hidden</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="5.0.1" date="2019-10-31" urgency="medium">
       <description>
         <ul>
