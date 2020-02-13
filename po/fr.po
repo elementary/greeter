@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-06 00:40+0000\n"
+"POT-Creation-Date: 2020-02-13 22:30+0000\n"
 "PO-Revision-Date: 2019-11-05 20:24+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -20,15 +20,15 @@ msgstr ""
 "X-Generator: Weblate 3.7.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:409
+#: compositor/WindowManager.vala:512
 msgid "Does the display look OK?"
 msgstr "L'affichage semble-t-il correct ?"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
 msgstr "Conserver cette configuration"
 
-#: compositor/WindowManager.vala:413
+#: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
 msgstr "Restaurer la configuration précédente"
 
@@ -40,19 +40,19 @@ msgstr "Connexion en tant qu'invité"
 msgid "Manual Login…"
 msgstr "Connexion manuelle…"
 
-#: src/MainWindow.vala:401
+#: src/MainWindow.vala:403
 msgid "Unable to Log In"
 msgstr "Impossible de se connecter"
 
-#: src/MainWindow.vala:402
+#: src/MainWindow.vala:404
 msgid "Starting the session has failed."
 msgstr "Le lancement de la session  a échoué."
 
-#: src/MainWindow.vala:464
+#: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
 msgstr "Impossible de lancer la configuration initiale"
 
-#: src/MainWindow.vala:469
+#: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -72,15 +72,15 @@ msgstr "Nom d'utilisateur"
 msgid "Try username"
 msgstr "Essayer le nom d'utilisateur"
 
-#: src/Cards/UserCard.vala:73 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Connexion"
 
-#: src/Cards/UserCard.vala:79
+#: src/Cards/UserCard.vala:84
 msgid "Account disabled"
 msgstr "Compte désactivé"
 
-#: src/Cards/UserCard.vala:166
+#: src/Cards/UserCard.vala:171
 msgid "Session cannot be changed while user is logged in"
 msgstr ""
 "La session ne peut pas être modifiée tant que l'utilisateur est connecté"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-06 00:40+0000\n"
+"POT-Creation-Date: 2020-02-13 22:30+0000\n"
 "PO-Revision-Date: 2019-11-22 03:24+0000\n"
 "Last-Translator: Rodrigo Oliveira <rod.oliveira@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.elementary.io/projects/"
@@ -20,15 +20,15 @@ msgstr ""
 "X-Generator: Weblate 3.7.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:409
+#: compositor/WindowManager.vala:512
 msgid "Does the display look OK?"
 msgstr "O vídeo está bom?"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
 msgstr "Manter essa configuração"
 
-#: compositor/WindowManager.vala:413
+#: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
 msgstr "Restaurar a configuração anterior"
 
@@ -40,19 +40,19 @@ msgstr "Entrar como convidado"
 msgid "Manual Login…"
 msgstr "Login manual…"
 
-#: src/MainWindow.vala:401
+#: src/MainWindow.vala:403
 msgid "Unable to Log In"
 msgstr "Não foi possível Iniciar Sessão"
 
-#: src/MainWindow.vala:402
+#: src/MainWindow.vala:404
 msgid "Starting the session has failed."
 msgstr "O início da sessão falhou."
 
-#: src/MainWindow.vala:464
+#: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
 msgstr "Não foi possível abrir a Configuração Inicial"
 
-#: src/MainWindow.vala:469
+#: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -72,15 +72,15 @@ msgstr "Nome de usuário"
 msgid "Try username"
 msgstr "Tente nomedeusuario"
 
-#: src/Cards/UserCard.vala:73 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Entrar"
 
-#: src/Cards/UserCard.vala:79
+#: src/Cards/UserCard.vala:84
 msgid "Account disabled"
 msgstr "Conta desativada"
 
-#: src/Cards/UserCard.vala:166
+#: src/Cards/UserCard.vala:171
 msgid "Session cannot be changed while user is logged in"
 msgstr "A sessão não pode ser alterada enquanto o usuário está logado"
 
