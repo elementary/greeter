@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-13 22:30+0000\n"
-"PO-Revision-Date: 2019-11-03 00:24+0000\n"
+"PO-Revision-Date: 2020-02-20 23:08+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/desktop/"
 "greeter/pt/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:512
@@ -26,11 +26,11 @@ msgstr "O ecrã parece-lhe estar bem?"
 
 #: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
-msgstr "Manter Esta Configuração"
+msgstr "Manter esta configuração"
 
 #: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
-msgstr "Restaurar as Configuração Anteriores"
+msgstr "Restaurar as configuração anteriores"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
