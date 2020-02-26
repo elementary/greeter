@@ -18,7 +18,7 @@
     <binary>io.elementary.greeter</binary>
   </provides>
   <releases>
-    <release version="5.0.2" date="2020-02-13" urgency="medium">
+    <release version="5.0.2" date="2020-02-25" urgency="medium">
       <description>
         <ul>
           <li>Ensure that manual login is available when users are hidden</li>
