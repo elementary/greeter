@@ -1,3 +1,23 @@
+pantheon-greeter (5.0.2) bionic; urgency=medium
+
+  * Release 5.0.2 (#409)
+  * Update translation files
+  * Update translation files
+  * Update translation template
+  * MainWindow: Use bind_property to make sure that either the manual
+    login card is visible or the user cards are there. (#407)
+  * Apply AccountsService power settings to lightdm user (#343)
+  * DBusAccelerator: the "accelerator-activated" has changed its
+    arguments (#390)
+  * Make mutter 3.28 the minimum version and synchronize .vapi with Gala
+    (#389)
+  * Fix MetaBackgroundActor build errors (#380)
+  * Adapt to the latest Mutter API (#377)
+  * Update translation template
+  * Add Gettext Updates to Actions
+
+ -- Sergey "Shnatsel" Davidoff <sergey@elementaryos.org>  Wed, 26 Feb 2020 06:36:08 +0000
+
 pantheon-greeter (5.0.1) bionic; urgency=medium
 
   * Release 5.0.1 (#378)
