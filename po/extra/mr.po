@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-13 22:30+0000\n"
-"PO-Revision-Date: 2019-11-27 20:24+0000\n"
+"PO-Revision-Date: 2020-03-01 15:09+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
-"Language-Team: Marathi <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/mr/>\n"
+"Language-Team: Marathi <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/mr/>\n"
 "Language: mr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 3.9.1\n"
 
 #: data/greeter.appdata.xml.in:7
 msgid "Greeter"
@@ -29,7 +29,7 @@ msgstr "डिव्हाइस अनलॉक करा किंवा आ�
 
 #: data/greeter.appdata.xml.in:24
 msgid "Ensure that manual login is available when users are hidden"
-msgstr ""
+msgstr "वापरकर्ते लपवलेले असताना मॅन्युअल लॉगिन उपलब्ध असल्याचे सुनिश्चित करा"
 
 #: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:39
 msgid "Updated translations"
@@ -45,43 +45,43 @@ msgstr "सर्व पार्श्वभूमी पैलू गुणो
 
 #: data/greeter.appdata.xml.in:34
 msgid "Give non-focused user cards smaller usernames"
-msgstr ""
+msgstr "केंद्रित नसलेल्या वापरकर्ता कार्डांना लहान वापरकर्तानावे द्या"
 
 #: data/greeter.appdata.xml.in:35
 msgid "Better respect NumLock settings"
-msgstr ""
+msgstr "नूमलॉक सेटिंग्जचा आदर करणे बरें"
 
 #: data/greeter.appdata.xml.in:36
 msgid "Enable sounds in greeter"
-msgstr ""
+msgstr "ग्रीटरमध्ये आवाज सक्षम करा"
 
 #: data/greeter.appdata.xml.in:37
 msgid "Select password text on error instead of immediately clearing it"
-msgstr ""
+msgstr "पासवर्ड मजकूर त्वरित साफ करण्याऐवजी एक त्रुटी मजकूर निवडा"
 
 #: data/greeter.appdata.xml.in:38
 msgid "Code cleanup"
-msgstr ""
+msgstr "कोडची साफसफाई"
 
 #: data/greeter.appdata.xml.in:45
 msgid "Extensive overhaul"
-msgstr ""
+msgstr "व्यापक तपासणी"
 
 #: data/greeter.appdata.xml.in:47
 msgid "New card-based appearance"
-msgstr ""
+msgstr "नवीन कार्ड-आधारित देखावा"
 
 #: data/greeter.appdata.xml.in:48
 msgid "Improved HiDPI support"
-msgstr ""
+msgstr "सुधारित हायडीपीआय समर्थन"
 
 #: data/greeter.appdata.xml.in:49
 msgid "AccountsService functionality"
-msgstr ""
+msgstr "अकाउंट्स सर्व्हिसची कार्यक्षमता"
 
 #: data/greeter.appdata.xml.in:50
 msgid "Various bug fixes"
-msgstr ""
+msgstr "विविध दोष निराकरणे"
 
 #: data/greeter.appdata.xml.in:86
 msgid "elementary, Inc."
