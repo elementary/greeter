@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-13 22:30+0000\n"
-"PO-Revision-Date: 2019-12-15 23:07+0000\n"
+"PO-Revision-Date: 2020-03-11 18:09+0000\n"
 "Last-Translator: nasserbinlaboun <nasser1990com@gmail.com>\n"
 "Language-Team: Arabic <https://l10n.elementary.io/projects/desktop/greeter/"
 "ar/>\n"
@@ -27,11 +27,11 @@ msgstr "هل الواجهة تبدو جيدة؟"
 
 #: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
-msgstr "استمر بهذه الإعدادات"
+msgstr "إحتفظ بهذه الإعدادات"
 
 #: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
-msgstr "إسترجع الإعدادات السابقة"
+msgstr "إسترجع إعدادات الضبط السابقة"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
@@ -61,7 +61,7 @@ msgstr ""
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
-msgstr "دخول يدوي"
+msgstr "تسجيل دخول يدوي"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
