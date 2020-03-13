@@ -2,7 +2,7 @@ project(
     'io.elementary.greeter',
     'vala', 'c',
     version: '5.0.2',
-    meson_version: '>= 0.42.0'
+    meson_version: '>= 0.49.0'
 )
 
 gnome = import('gnome')
@@ -32,3 +32,7 @@ subdir('src')
 subdir('compositor')
 subdir('data')
 subdir('po')
+vapigen = find_program('vapigen', required: false)
+if vapigen.found()
+	subdir('vapi')
+endif
