@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-13 22:30+0000\n"
-"PO-Revision-Date: 2019-11-07 10:24+0000\n"
+"PO-Revision-Date: 2020-03-17 15:09+0000\n"
 "Last-Translator: Shtonchjo <shtonchjo@gmail.com>\n"
 "Language-Team: Esperanto <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/eo/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 3.9.1\n"
 
 #: data/greeter.appdata.xml.in:7
 msgid "Greeter"
@@ -29,7 +29,7 @@ msgstr "Malŝlosi aŭ ensaluti vian aparaton"
 
 #: data/greeter.appdata.xml.in:24
 msgid "Ensure that manual login is available when users are hidden"
-msgstr ""
+msgstr "Certiĝi ke mana ensaluto maleblas kiam uzantoj estas kaŝitaj"
 
 #: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:39
 msgid "Updated translations"
