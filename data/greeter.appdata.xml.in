@@ -18,6 +18,14 @@
     <binary>io.elementary.greeter</binary>
   </provides>
   <releases>
+    <release version="5.0.3" date="2020-03-29" urgency="medium">
+      <description>
+        <ul>
+          <li>Fix an issue with media keys</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="5.0.2" date="2020-02-25" urgency="medium">
       <description>
         <ul>
