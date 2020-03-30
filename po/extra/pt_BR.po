@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13 22:30+0000\n"
+"POT-Creation-Date: 2020-03-30 16:32+0000\n"
 "PO-Revision-Date: 2020-03-29 21:09+0000\n"
 "Last-Translator: Rodrigo Oliveira <rod.oliveira@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.elementary.io/projects/"
@@ -28,62 +28,67 @@ msgid "Unlock or log in to your device"
 msgstr "Desbloquear ou efetuar login em seu dispositivo"
 
 #: data/greeter.appdata.xml.in:24
-msgid "Ensure that manual login is available when users are hidden"
+msgid "Fix an issue with media keys"
 msgstr ""
-"Verifique se o login manual está disponível quando os usuários estão ocultos"
 
-#: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:39
+#: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:33
+#: data/greeter.appdata.xml.in:47
 msgid "Updated translations"
 msgstr "Traduções atualizadas"
 
 #: data/greeter.appdata.xml.in:32
+msgid "Ensure that manual login is available when users are hidden"
+msgstr ""
+"Verifique se o login manual está disponível quando os usuários estão ocultos"
+
+#: data/greeter.appdata.xml.in:40
 msgid "Save last user on attempted login"
 msgstr "Salvar o último usuário na tentativa de login"
 
-#: data/greeter.appdata.xml.in:33
+#: data/greeter.appdata.xml.in:41
 msgid "Handle all background aspect ratios"
 msgstr "Manipula todas as proporções de fundo"
 
-#: data/greeter.appdata.xml.in:34
+#: data/greeter.appdata.xml.in:42
 msgid "Give non-focused user cards smaller usernames"
 msgstr "Atribua nomes de usuário menores aos cartões de usuário não focados"
 
-#: data/greeter.appdata.xml.in:35
+#: data/greeter.appdata.xml.in:43
 msgid "Better respect NumLock settings"
 msgstr "Respeitar as configurações do NumLock"
 
-#: data/greeter.appdata.xml.in:36
+#: data/greeter.appdata.xml.in:44
 msgid "Enable sounds in greeter"
 msgstr "Ativar sons em greeter"
 
-#: data/greeter.appdata.xml.in:37
+#: data/greeter.appdata.xml.in:45
 msgid "Select password text on error instead of immediately clearing it"
 msgstr "Selecione o texto da senha com erro em vez de limpá-lo imediatamente"
 
-#: data/greeter.appdata.xml.in:38
+#: data/greeter.appdata.xml.in:46
 msgid "Code cleanup"
 msgstr "Limpeza de código"
 
-#: data/greeter.appdata.xml.in:45
+#: data/greeter.appdata.xml.in:53
 msgid "Extensive overhaul"
 msgstr "Revisão profunda"
 
-#: data/greeter.appdata.xml.in:47
+#: data/greeter.appdata.xml.in:55
 msgid "New card-based appearance"
 msgstr "Nova aparência baseada em cartão"
 
-#: data/greeter.appdata.xml.in:48
+#: data/greeter.appdata.xml.in:56
 msgid "Improved HiDPI support"
 msgstr "Suporte ao HiDPI melhorado"
 
-#: data/greeter.appdata.xml.in:49
+#: data/greeter.appdata.xml.in:57
 msgid "AccountsService functionality"
 msgstr "Funcionalidade de Serviço de contas"
 
-#: data/greeter.appdata.xml.in:50
+#: data/greeter.appdata.xml.in:58
 msgid "Various bug fixes"
 msgstr "Várias correções de erros"
 
-#: data/greeter.appdata.xml.in:86
+#: data/greeter.appdata.xml.in:94
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
