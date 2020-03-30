@@ -44,7 +44,9 @@ namespace GreeterCompositor {
 
     public struct Accelerator {
         public string name;
+#if HAS_MUTTER332
         public Meta.KeyBindingFlags grab_flags;
+#endif
         public ActionMode flags;
     }
 
@@ -114,7 +116,7 @@ namespace GreeterCompositor {
             }
 
 #if HAS_MUTTER332
-            uint action = wm.get_display ().grab_accelerator (accelerator.name, accelerator.grab_flags);
+            uint action = wm.get_display ().grab_accelerator (accelerator.name, accelerator.flags);
 #elif HAS_MUTTER330
             uint action = wm.get_display ().grab_accelerator (accelerator.name);
 #else
@@ -169,8 +171,15 @@ namespace GreeterCompositor {
             if (parameters.contains ("label"))
                 label = parameters["label"].get_string ();
             int32 level = 0;
+#if HAS_MUTTER334
+            if (parameters.contains ("level")) {
+                var double_level = parameters["level"].get_double ();
+                level = (int)(double_level * 100);
+            }
+#else
             if (parameters.contains ("level"))
                 level = parameters["level"].get_int32 ();
+#endif
 
             MediaFeedback.send (icon, level);
         }
