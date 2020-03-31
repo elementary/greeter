@@ -44,10 +44,10 @@ namespace GreeterCompositor {
 
     public struct Accelerator {
         public string name;
+        public ActionMode flags;
 #if HAS_MUTTER332
         public Meta.KeyBindingFlags grab_flags;
 #endif
-        public ActionMode flags;
     }
 
     [Compact]
@@ -116,7 +116,7 @@ namespace GreeterCompositor {
             }
 
 #if HAS_MUTTER332
-            uint action = wm.get_display ().grab_accelerator (accelerator.name, accelerator.flags);
+            uint action = wm.get_display ().grab_accelerator (accelerator.name, accelerator.grab_flags);
 #elif HAS_MUTTER330
             uint action = wm.get_display ().grab_accelerator (accelerator.name);
 #else
