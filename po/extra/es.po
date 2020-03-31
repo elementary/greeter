@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-30 16:32+0000\n"
-"PO-Revision-Date: 2020-02-25 22:09+0000\n"
-"Last-Translator: Daniel R. <riesp@pm.me>\n"
-"Language-Team: Spanish <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/es/>\n"
+"PO-Revision-Date: 2020-03-31 10:23+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"Language-Team: Spanish <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:7
 msgid "Greeter"
-msgstr "Greeter"
+msgstr "Recibidor"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
-msgstr "Desbloquear o iniciar sesión en su dispositivo"
+msgstr "Desbloquee o acceda a su dispositivo"
 
 #: data/greeter.appdata.xml.in:24
 msgid "Fix an issue with media keys"
-msgstr ""
+msgstr "Solucionado un problema con las teclas multimedia"
 
 #: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:33
 #: data/greeter.appdata.xml.in:47
@@ -39,12 +39,12 @@ msgstr "Traducciones actualizadas"
 #: data/greeter.appdata.xml.in:32
 msgid "Ensure that manual login is available when users are hidden"
 msgstr ""
-"Se aseguró de que el inicio de sesión manual está disponible cuando los "
-"usuarios están ocultos"
+"Se aseguró de que el acceso manual esté disponible cuando los usuarios están "
+"ocultos"
 
 #: data/greeter.appdata.xml.in:40
 msgid "Save last user on attempted login"
-msgstr "Guardar último usuario en intento de inicio de sesión"
+msgstr "Se guarda la última cuenta al intentar acceder"
 
 #: data/greeter.appdata.xml.in:41
 msgid "Handle all background aspect ratios"
@@ -61,13 +61,11 @@ msgstr "Mejor respeto de los ajustes de Bloq Num"
 
 #: data/greeter.appdata.xml.in:44
 msgid "Enable sounds in greeter"
-msgstr "Activar sonidos en greeter"
+msgstr "Se activaron los sonidos en el recibidor"
 
 #: data/greeter.appdata.xml.in:45
 msgid "Select password text on error instead of immediately clearing it"
-msgstr ""
-"Seleccionar el texto de la contraseña en caso de error en lugar de borrarlo "
-"inmediatamente"
+msgstr "En caso de error, la contraseña se selecciona en lugar de vaciarse"
 
 #: data/greeter.appdata.xml.in:46
 msgid "Code cleanup"
