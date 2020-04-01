@@ -164,6 +164,7 @@ namespace GreeterCompositor {
             foreach (uint action in actions) {
                 ungrab_accelerator (action);
             }
+
             return true;
         }
 #endif
