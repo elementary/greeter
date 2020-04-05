@@ -1,3 +1,18 @@
+pantheon-greeter (5.0.3) bionic; urgency=medium
+
+  * Release 5.0.3 (#424)
+  * Support g-s-d UngrabAccelerators API (#423)
+  * DBusAccelerator: Fix grab_accelerator argument with Mutter >= 3.22
+    (#421)
+  * Update translation files
+  * Update translation template
+  * Update greeter.appdata.xml.in
+  * Add mutter version conditionals to media keys code (#420)
+  * compositor: Mutter 3.36 support (#415)
+  * README: Specify required Granite version (#410)
+
+ -- Sergey "Shnatsel" Davidoff <sergey@elementaryos.org>  Sun, 05 Apr 2020 17:50:07 +0000
+
 pantheon-greeter (5.0.2) bionic; urgency=medium
 
   * Release 5.0.2 (#409)
