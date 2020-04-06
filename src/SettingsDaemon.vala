@@ -80,7 +80,7 @@ public class Greeter.SettingsDaemon : Object {
 #if UBUNTU_PATCHED_GSD
     private void set_plugin_enabled (string schema_name, bool enabled) {
         var source = SettingsSchemaSource.get_default ();
-        var schema = source.lookup (schema_name, false);
+        var schema = source.lookup (schema_name, true);
         if (schema != null) {
             var settings = new GLib.Settings (schema_name);
             settings.set_boolean ("active", enabled);
