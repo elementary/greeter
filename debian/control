@@ -1,7 +1,7 @@
 Source: pantheon-greeter
 Section: x11
 Priority: optional
-Maintainer: Sergey "Shnatsel" Davidoff <sergey@elementaryos.org>
+Maintainer: elementary, Inc. <builds@elementary.io>
 Build-Depends: debhelper (>= 10.5.1),
                desktop-file-utils,
                gettext,
