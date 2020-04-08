@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-30 16:32+0000\n"
-"PO-Revision-Date: 2020-03-29 21:09+0000\n"
+"PO-Revision-Date: 2020-04-09 14:10+0000\n"
 "Last-Translator: Rodrigo Oliveira <rod.oliveira@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.elementary.io/projects/"
 "desktop/greeter-extra/pt_BR/>\n"
@@ -29,7 +29,7 @@ msgstr "Desbloquear ou efetuar login em seu dispositivo"
 
 #: data/greeter.appdata.xml.in:24
 msgid "Fix an issue with media keys"
-msgstr ""
+msgstr "Corrige um problema com teclas de mídia"
 
 #: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:33
 #: data/greeter.appdata.xml.in:47
