@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-30 16:32+0000\n"
-"PO-Revision-Date: 2020-02-17 22:06+0000\n"
+"PO-Revision-Date: 2020-04-09 14:10+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/pt/>\n"
@@ -29,12 +29,12 @@ msgstr "Desbloquear ou iniciar sessão no seu dispositivo"
 
 #: data/greeter.appdata.xml.in:24
 msgid "Fix an issue with media keys"
-msgstr ""
+msgstr "Corrige um problema com as teclas multimédia"
 
 #: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:33
 #: data/greeter.appdata.xml.in:47
 msgid "Updated translations"
-msgstr "Traduções atualizadas"
+msgstr "Traduções actualizadas"
 
 #: data/greeter.appdata.xml.in:32
 msgid "Ensure that manual login is available when users are hidden"
