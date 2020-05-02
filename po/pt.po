@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-13 22:30+0000\n"
-"PO-Revision-Date: 2020-02-20 23:08+0000\n"
+"PO-Revision-Date: 2020-05-03 15:10+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/desktop/"
 "greeter/pt/>\n"
@@ -34,7 +34,7 @@ msgstr "Restaurar as configuração anteriores"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
-msgstr "Iniciar Sessão como convidado"
+msgstr "Iniciar sessão como convidado"
 
 #: src/MainWindow.vala:64
 msgid "Manual Login…"
@@ -88,15 +88,15 @@ msgstr ""
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
-msgstr "O Caps Lock e o Num Lock estão ativados"
+msgstr "O Caps Lock e o Num Lock estão ligados"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
-msgstr "O Caps Lock está ativado"
+msgstr "O Caps Lock está ligado"
 
 #: src/Widgets/CapsLockRevealer.vala:74
 msgid "Num Lock is on"
-msgstr "O Num Lock está ativado"
+msgstr "O Num Lock está ligado"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
