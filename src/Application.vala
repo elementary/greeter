@@ -20,8 +20,6 @@
  */
 
 public int main (string[] args) {
-    Posix.mlockall (Posix.MCL_CURRENT | Posix.MCL_FUTURE);
-
     Intl.setlocale (LocaleCategory.ALL, "");
     Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
     Intl.textdomain (Constants.GETTEXT_PACKAGE);
