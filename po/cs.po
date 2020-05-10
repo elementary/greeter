@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-13 22:30+0000\n"
-"PO-Revision-Date: 2020-05-07 22:10+0000\n"
+"PO-Revision-Date: 2020-05-11 19:11+0000\n"
 "Last-Translator: p-bo <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/desktop/greeter/cs/"
 ">\n"
@@ -26,15 +26,15 @@ msgstr "Vypadá displej dobře?"
 
 #: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
-msgstr "Ponechat Tuto Konfiguraci"
+msgstr "Ponechat toto uspořádání"
 
 #: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
-msgstr "Obnovit Předchozí Konfiguraci"
+msgstr "Vrátit se zpět k předchozímu uspořádání"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
-msgstr "Přihlásit jako host"
+msgstr "Přihlásit se jako host"
 
 #: src/MainWindow.vala:64
 msgid "Manual Login…"
