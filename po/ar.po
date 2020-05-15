@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-13 22:30+0000\n"
-"PO-Revision-Date: 2020-03-11 18:09+0000\n"
+"PO-Revision-Date: 2020-05-16 04:10+0000\n"
 "Last-Translator: nasserbinlaboun <nasser1990com@gmail.com>\n"
 "Language-Team: Arabic <https://l10n.elementary.io/projects/desktop/greeter/"
 "ar/>\n"
@@ -99,7 +99,7 @@ msgstr "Caps Lock مفعل"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
-msgstr "كلمة المرور"
+msgstr "كلمة السر"
 
 #~ msgid "Guest session"
 #~ msgstr "الدخول كضيف"
