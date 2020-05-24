@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-30 16:32+0000\n"
-"PO-Revision-Date: 2019-12-18 19:12+0000\n"
+"PO-Revision-Date: 2020-05-25 19:11+0000\n"
 "Last-Translator: Ozgur Baskin <bebeto_baskin@yahoo.com>\n"
-"Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/tr/>\n"
+"Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgstr "Cihazınızın kilidini veya oturumunuzu açın"
 
 #: data/greeter.appdata.xml.in:24
 msgid "Fix an issue with media keys"
-msgstr ""
+msgstr "Ortam anahtarlarıyla ilgili bir sorun giderildi"
 
 #: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:33
 #: data/greeter.appdata.xml.in:47
@@ -78,7 +78,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:56
 msgid "Improved HiDPI support"
-msgstr ""
+msgstr "HiDPI desteği iyileştirildi"
 
 #: data/greeter.appdata.xml.in:57
 msgid "AccountsService functionality"
