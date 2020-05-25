@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-13 22:30+0000\n"
-"PO-Revision-Date: 2019-01-31 21:52+0000\n"
-"Last-Translator: Kaj Printz Madsen <kajprintz@gmail.com>\n"
-"Language-Team: Danish <https://weblate.elementary.io/projects/desktop/"
-"greeter/da/>\n"
+"PO-Revision-Date: 2020-05-25 19:11+0000\n"
+"Last-Translator: Rantyrant <diseasemonger@gmail.com>\n"
+"Language-Team: Danish <https://l10n.elementary.io/projects/desktop/greeter/"
+"da/>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.0.1\n"
+"X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-19 06:26+0000\n"
 
 #: compositor/WindowManager.vala:512
@@ -42,21 +42,24 @@ msgstr "Manuel Login…"
 
 #: src/MainWindow.vala:403
 msgid "Unable to Log In"
-msgstr ""
+msgstr "Kan ikke logge ind"
 
 #: src/MainWindow.vala:404
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Start af sessionen mislykkedes."
 
 #: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Kan ikke Starte Førstegangs Opsætningen"
 
 #: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Førstegangs Opsætningen laver din første bruger. Uden den, vil du være ude "
+"af stand til, at logge ind, og det kan være nødvendigt at geninstallere "
+"elementary OS."
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -76,25 +79,23 @@ msgstr "Log ind"
 
 #: src/Cards/UserCard.vala:84
 msgid "Account disabled"
-msgstr ""
+msgstr "Kontoen er deaktiveret"
 
 #: src/Cards/UserCard.vala:171
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "Sessionen kan ikke ændres når en bruger er logget ind"
 
 #: src/Widgets/CapsLockRevealer.vala:70
-#, fuzzy
 msgid "Caps Lock & Num Lock are on"
-msgstr "Caps Lock er aktiveret"
+msgstr "Caps Lock & Num Lock  er aktiveret"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
 msgstr "Caps Lock er aktiveret"
 
 #: src/Widgets/CapsLockRevealer.vala:74
-#, fuzzy
 msgid "Num Lock is on"
-msgstr "Caps Lock er aktiveret"
+msgstr "Num Lock er aktiveret"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
