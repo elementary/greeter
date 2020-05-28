@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-13 22:30+0000\n"
-"PO-Revision-Date: 2020-05-11 19:11+0000\n"
+"PO-Revision-Date: 2020-05-28 18:48+0000\n"
 "Last-Translator: p-bo <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/desktop/greeter/cs/"
 ">\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: compositor/WindowManager.vala:512
 msgid "Does the display look OK?"
-msgstr "Vypadá displej dobře?"
+msgstr "Je zobrazení v pořádku?"
 
 #: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
@@ -66,11 +66,11 @@ msgstr "Ruční přihlášení"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr "Přihlašovací jméno"
+msgstr "Uživatelské jméno"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr "Zkuste přihlašovací jméno"
+msgstr "Vyzkoušet uživatelské jméno"
 
 #: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
@@ -78,7 +78,7 @@ msgstr "Přihlásit se"
 
 #: src/Cards/UserCard.vala:84
 msgid "Account disabled"
-msgstr "Účet vypnut"
+msgstr "Účet znepřístupněn"
 
 #: src/Cards/UserCard.vala:171
 msgid "Session cannot be changed while user is logged in"
@@ -86,7 +86,7 @@ msgstr "Relace nemůže být změněna, pokud je přihlášen uživatel"
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
-msgstr "Caps Lock & Num Lock jsou zapnuté"
+msgstr "Caps Lock a Num Lock jsou zapnuté"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
