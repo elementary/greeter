@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-30 16:32+0000\n"
-"PO-Revision-Date: 2020-05-11 19:11+0000\n"
+"PO-Revision-Date: 2020-05-28 18:48+0000\n"
 "Last-Translator: p-bo <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/cs/>\n"
@@ -25,7 +25,7 @@ msgstr "Přihlašovací obrazovka"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
-msgstr "Odemkněte, nebo se přihlaste do svého zařízení"
+msgstr "Odemkněte nebo se přihlaste do svého počítače"
 
 #: data/greeter.appdata.xml.in:24
 msgid "Fix an issue with media keys"
@@ -43,51 +43,51 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:40
 msgid "Save last user on attempted login"
-msgstr ""
+msgstr "Je zapamatován naposledy přihlášený nebo zkoušený uživatel"
 
 #: data/greeter.appdata.xml.in:41
 msgid "Handle all background aspect ratios"
-msgstr ""
+msgstr "Zvládá už všechny poměry stran pozadí"
 
 #: data/greeter.appdata.xml.in:42
 msgid "Give non-focused user cards smaller usernames"
-msgstr ""
+msgstr "Nezaměřené karty uživatelů mají uživatelská jména menším písmem"
 
 #: data/greeter.appdata.xml.in:43
 msgid "Better respect NumLock settings"
-msgstr ""
+msgstr "Lepší zohlednění nastavení NumLock"
 
 #: data/greeter.appdata.xml.in:44
 msgid "Enable sounds in greeter"
-msgstr ""
+msgstr "Zapnutí zvuku na přihlašovací obrazovce"
 
 #: data/greeter.appdata.xml.in:45
 msgid "Select password text on error instead of immediately clearing it"
-msgstr ""
+msgstr "Vybrání textu hesla při chybě namísto jeho okamžitého vymazání"
 
 #: data/greeter.appdata.xml.in:46
 msgid "Code cleanup"
-msgstr ""
+msgstr "Údržba kódu"
 
 #: data/greeter.appdata.xml.in:53
 msgid "Extensive overhaul"
-msgstr ""
+msgstr "Rozsáhlé předělání"
 
 #: data/greeter.appdata.xml.in:55
 msgid "New card-based appearance"
-msgstr ""
+msgstr "Nové rozhraní, založené na kartách"
 
 #: data/greeter.appdata.xml.in:56
 msgid "Improved HiDPI support"
-msgstr ""
+msgstr "Vylepšena podpora pro vysoké rozlišení (HiDPI)"
 
 #: data/greeter.appdata.xml.in:57
 msgid "AccountsService functionality"
-msgstr ""
+msgstr "Funkce AccountsService"
 
 #: data/greeter.appdata.xml.in:58
 msgid "Various bug fixes"
-msgstr ""
+msgstr "Opravy dalších chyb"
 
 #: data/greeter.appdata.xml.in:94
 msgid "elementary, Inc."
