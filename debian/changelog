@@ -1,3 +1,9 @@
+pantheon-greeter (5.0.4) bionic; urgency=medium
+
+  * Release 5.0.4 (#441)
+
+ -- elementary, Inc. <builds@elementary.io>  Thu, 28 May 2020 18:49:45 +0000
+
 pantheon-greeter (5.0.3) bionic; urgency=medium
 
   * Release 5.0.3 (#424)
