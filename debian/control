@@ -1,4 +1,4 @@
-Source: pantheon-greeter
+Source: io.elementary.greeter
 Section: x11
 Priority: optional
 Maintainer: elementary, Inc. <builds@elementary.io>
@@ -18,7 +18,7 @@ Build-Depends: debhelper (>= 10.5.1),
 Standards-Version: 4.1.1
 Homepage: https://github.com/elementary/greeter
 
-Package: pantheon-greeter
+Package: io.elementary.greeter
 Architecture: any
 Depends: numlockx, lightdm, ${misc:Depends}, ${shlibs:Depends}
 Recommends: elementary-default-settings (>= 5.2)
@@ -26,3 +26,11 @@ Provides: lightdm-greeter
 Description: Pantheon Login Screen
  Clutter-powered LightDM greeter resembling Unity greeter written for Pantheon.
  It features smooth animations and a fancy transition from boot screen.
+
+Package: pantheon-greeter
+Architecture: any
+Depends: io.elementary.greeter, ${misc:Depends}
+Section: oldlibs
+Priority: optional
+Description: transitional dummy package
+ This is a transitional dummy package. It can safely be removed.
