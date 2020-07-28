@@ -1,100 +1,94 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
+"POT-Creation-Date: 2020-02-13 22:30+0000\n"
+"PO-Revision-Date: 2020-03-23 18:09+0000\n"
+"Last-Translator: Mejans <farga@mejans.fr>\n"
+"Language-Team: Occitan <https://l10n.elementary.io/projects/desktop/greeter/"
+"oc/>\n"
+"Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.9.1\n"
 
-#: compositor/WindowManager.vala:409
+#: compositor/WindowManager.vala:512
 msgid "Does the display look OK?"
-msgstr ""
+msgstr "L’afichatge sembla bon ?"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
-msgstr ""
+msgstr "Gardar aquesta configuracion"
 
-#: compositor/WindowManager.vala:413
+#: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
-msgstr ""
-
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr ""
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr ""
+msgstr "Restablir la configuracion precedenta"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
-msgstr ""
+msgstr "Connexion coma convidat"
 
 #: src/MainWindow.vala:64
 msgid "Manual Login…"
-msgstr ""
+msgstr "Connexion manuala…"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:403
+msgid "Unable to Log In"
+msgstr "Connexion impossibla"
+
+#: src/MainWindow.vala:404
+msgid "Starting the session has failed."
+msgstr "Lo lançament de la session a fracassat."
+
+#: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Impossiblar d’aviar la configuracion iniciala"
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
-
-#: src/CapsLockRevealer.vala:55
-msgid "Caps Lock & Num Lock are on"
-msgstr ""
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr ""
-
-#: src/CapsLockRevealer.vala:59
-msgid "Num Lock is on"
-msgstr ""
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr ""
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr ""
+"La configuracion iniciala crèa vòstre primièr utilizaire. Sens aquò, poiretz "
+"pas vos connectar e deuriatz benlèu tornar installar l’OS."
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
-msgstr ""
+msgstr "Connexion manuala"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr ""
+msgstr "Nom d’utilizaire"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "Ensajar lo nom d’utilizaire"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
-msgstr ""
+#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "Connexion"
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
-msgstr ""
+#: src/Cards/UserCard.vala:84
+msgid "Account disabled"
+msgstr "Compte desactivat"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr ""
+#: src/Cards/UserCard.vala:171
+msgid "Session cannot be changed while user is logged in"
+msgstr "Cambiament de session impossible se qualqu’un mai es connectat"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:70
+msgid "Caps Lock & Num Lock are on"
+msgstr "Las majusculas e las chifras son activadas"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "Majusculas activadas"
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:74
+msgid "Num Lock is on"
+msgstr "Chifras activadas"
+
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "Senhal"

@@ -7,38 +7,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2018-06-15 00:10+0000\n"
-"Last-Translator: Majer Tamás <mtamas@disroot.org>\n"
-"Language-Team: Hungarian <https://weblate.elementary.io/projects/desktop/"
+"POT-Creation-Date: 2020-02-13 22:30+0000\n"
+"PO-Revision-Date: 2019-12-15 23:07+0000\n"
+"Last-Translator: Daniel Foré <daniel@elementary.io>\n"
+"Language-Team: Hungarian <https://l10n.elementary.io/projects/desktop/"
 "greeter/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:409
+#: compositor/WindowManager.vala:512
 msgid "Does the display look OK?"
-msgstr ""
+msgstr "Megfelelően jelenik meg a kép?"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
-msgstr ""
+msgstr "Beállítások megtartása"
 
-#: compositor/WindowManager.vala:413
+#: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
-msgstr ""
-
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr ""
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "Bejelentkezés"
+msgstr "Az előző beállítások visszaállítása"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
@@ -49,34 +41,22 @@ msgstr ""
 msgid "Manual Login…"
 msgstr "Kézi bejelentkezés"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:403
+msgid "Unable to Log In"
+msgstr ""
+
+#: src/MainWindow.vala:404
+msgid "Starting the session has failed."
+msgstr ""
+
+#: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
 msgstr ""
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
-msgstr ""
-
-#: src/CapsLockRevealer.vala:55
-msgid "Caps Lock & Num Lock are on"
-msgstr ""
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr ""
-
-#: src/CapsLockRevealer.vala:59
-msgid "Num Lock is on"
-msgstr ""
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr ""
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
 msgstr ""
 
 #: src/Cards/ManualCard.vala:15
@@ -91,28 +71,32 @@ msgstr ""
 msgid "Try username"
 msgstr ""
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
+#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "Bejelentkezés"
+
+#: src/Cards/UserCard.vala:84
+msgid "Account disabled"
 msgstr ""
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
+#: src/Cards/UserCard.vala:171
+msgid "Session cannot be changed while user is logged in"
 msgstr ""
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
+#: src/Widgets/CapsLockRevealer.vala:70
+msgid "Caps Lock & Num Lock are on"
 msgstr ""
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
 msgstr ""
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
+#: src/Widgets/CapsLockRevealer.vala:74
+msgid "Num Lock is on"
 msgstr ""
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
 msgstr ""
 
 #~ msgid "Swipe your finger"

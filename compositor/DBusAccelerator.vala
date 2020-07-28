@@ -45,6 +45,9 @@ namespace GreeterCompositor {
     public struct Accelerator {
         public string name;
         public ActionMode flags;
+#if HAS_MUTTER332
+        public Meta.KeyBindingFlags grab_flags;
+#endif
     }
 
     [Compact]
@@ -74,15 +77,27 @@ namespace GreeterCompositor {
             wm = _wm;
             grabbed_accelerators = new GLib.List<GrabbedAccelerator> ();
 
+#if HAS_MUTTER330
+            wm.get_display ().accelerator_activated.connect (on_accelerator_activated);
+#else
             wm.get_screen ().get_display ().accelerator_activated.connect (on_accelerator_activated);
+#endif
         }
 
+#if HAS_MUTTER334
+        private void on_accelerator_activated (uint action, Clutter.InputDevice device, uint timestamp) {
+#else
         private void on_accelerator_activated (uint action, uint device_id, uint timestamp) {
+#endif
             foreach (unowned GrabbedAccelerator accel in grabbed_accelerators) {
                 if (accel.action == action) {
                     if (ActionMode.LOGIN_SCREEN in accel.accelerator.flags) {
                         var parameters = new GLib.HashTable<string, Variant> (null, null);
+#if HAS_MUTTER334
+                        parameters.set ("device-id", new Variant.uint32 (device.id));
+#else
                         parameters.set ("device-id", new Variant.uint32 (device_id));
+#endif
                         parameters.set ("timestamp", new Variant.uint32 (timestamp));
 
                         accelerator_activated (action, parameters);
@@ -100,7 +115,14 @@ namespace GreeterCompositor {
                 }
             }
 
+#if HAS_MUTTER332
+            uint action = wm.get_display ().grab_accelerator (accelerator.name, accelerator.grab_flags);
+#elif HAS_MUTTER330
+            uint action = wm.get_display ().grab_accelerator (accelerator.name);
+#else
             uint action = wm.get_screen ().get_display ().grab_accelerator (accelerator.name);
+#endif
+
             if (action > 0) {
                 var accel = new GrabbedAccelerator ();
                 accel.action = action;
@@ -124,7 +146,11 @@ namespace GreeterCompositor {
         public bool ungrab_accelerator (uint action) throws GLib.Error {
             foreach (unowned GrabbedAccelerator accel in grabbed_accelerators) {
                 if (accel.action == action) {
+#if HAS_MUTTER330
+                    bool ret = wm.get_display ().ungrab_accelerator (action);
+#else
                     bool ret = wm.get_screen ().get_display ().ungrab_accelerator (action);
+#endif
                     grabbed_accelerators.remove (accel);
                     return ret;
                 }
@@ -132,6 +158,16 @@ namespace GreeterCompositor {
 
             return false;
         }
+
+#if HAS_MUTTER334
+        public bool ungrab_accelerators (uint[] actions) throws DBusError, IOError {
+            foreach (uint action in actions) {
+                ungrab_accelerator (action);
+            }
+
+            return true;
+        }
+#endif
 
         [DBus (name = "ShowOSD")]
         public void show_osd (GLib.HashTable<string, Variant> parameters) throws GLib.Error {
@@ -145,8 +181,15 @@ namespace GreeterCompositor {
             if (parameters.contains ("label"))
                 label = parameters["label"].get_string ();
             int32 level = 0;
+#if HAS_MUTTER334
+            if (parameters.contains ("level")) {
+                var double_level = parameters["level"].get_double ();
+                level = (int)(double_level * 100);
+            }
+#else
             if (parameters.contains ("level"))
                 level = parameters["level"].get_int32 ();
+#endif
 
             MediaFeedback.send (icon, level);
         }

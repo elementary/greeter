@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-10-05 03:23+0000\n"
-"Last-Translator: jheng <jheng@outlook.com>\n"
+"POT-Creation-Date: 2020-02-13 22:30+0000\n"
+"PO-Revision-Date: 2020-05-28 18:48+0000\n"
+"Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "desktop/greeter/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -17,28 +17,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-14 06:58+0000\n"
 
-#: compositor/WindowManager.vala:409
+#: compositor/WindowManager.vala:512
 msgid "Does the display look OK?"
-msgstr "显示正常吗？"
+msgstr "显示看起来正常吗？"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
-msgstr "保存当前配置"
+msgstr "保持当前配置"
 
-#: compositor/WindowManager.vala:413
+#: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
 msgstr "恢复上次配置"
-
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "密码"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "登录"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
@@ -48,35 +40,25 @@ msgstr "以访客身份登入"
 msgid "Manual Login…"
 msgstr "手动登录…"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:403
+msgid "Unable to Log In"
+msgstr "无法登录"
+
+#: src/MainWindow.vala:404
+msgid "Starting the session has failed."
+msgstr "会话启动失败。"
+
+#: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
 msgstr "无法启动初始化设置"
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
-msgstr "初始设置将会创建您的第一个账户，若缺少初始账户，您将无法登录并且可能需要重新安装操作系统。"
-
-#: src/CapsLockRevealer.vala:55
-msgid "Caps Lock & Num Lock are on"
-msgstr "大写锁定和数字锁定已打开"
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "大写锁定已打开"
-
-#: src/CapsLockRevealer.vala:59
-msgid "Num Lock is on"
-msgstr "数字锁定已打开"
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr "账户已禁用"
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr "用户处于登入状态时无法更改会话"
+msgstr ""
+"初始设置将会创建您的第一个账户，若缺少初始账户，您将无法登录并且可能需要重新"
+"安装操作系统。"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -90,29 +72,51 @@ msgstr "用户名"
 msgid "Try username"
 msgstr "试试 username"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
-msgstr "配置个人账户登录界面"
+#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "登录"
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
-msgstr "配置个人账户登录界面需要管理员权限。"
+#: src/Cards/UserCard.vala:84
+msgid "Account disabled"
+msgstr "账户已禁用"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr "获取所有账户登录界面配置"
+#: src/Cards/UserCard.vala:171
+msgid "Session cannot be changed while user is logged in"
+msgstr "用户处于登入状态时无法更改会话"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr "获取所有账户登录界面配置需要管理员权限。"
+#: src/Widgets/CapsLockRevealer.vala:70
+msgid "Caps Lock & Num Lock are on"
+msgstr "大写锁定和数字锁定已打开"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr "配置所有账户的登录界面"
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "大写锁定已打开"
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr "配置所有账户的登录界面需要管理员权限。"
+#: src/Widgets/CapsLockRevealer.vala:74
+msgid "Num Lock is on"
+msgstr "数字锁定已打开"
+
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "密码"
+
+#~ msgid "Set properties of own user"
+#~ msgstr "配置个人账户登录界面"
+
+#~ msgid "Authentication is required to set one's own greeter properties."
+#~ msgstr "配置个人账户登录界面需要管理员权限。"
+
+#~ msgid "Get properties of any user"
+#~ msgstr "获取所有账户登录界面配置"
+
+#~ msgid "Authentication is required to get another user's greeter properties."
+#~ msgstr "获取所有账户登录界面配置需要管理员权限。"
+
+#~ msgid "Set properties of any user"
+#~ msgstr "配置所有账户的登录界面"
+
+#~ msgid "Authentication is required to set another user's greeter properties."
+#~ msgstr "配置所有账户的登录界面需要管理员权限。"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "滑动手指"

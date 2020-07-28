@@ -22,6 +22,7 @@
 public class Greeter.Settings : GLib.Object {
     private GLib.KeyFile state;
     private GLib.KeyFile settings;
+    private GLib.Settings power_settings;
     private string state_file;
 
     public string? last_user {
@@ -40,6 +41,38 @@ public class Greeter.Settings : GLib.Object {
                 state.save_to_file (state_file);
             } catch (Error e) {
                 critical ("Failed to write state: %s", e.message);
+            }
+        }
+    }
+
+    public int sleep_inactive_ac_timeout {
+        set {
+            if (power_settings != null) {
+                power_settings.set_int ("sleep-inactive-ac-timeout", value);
+            }
+        }
+    }
+
+    public int sleep_inactive_ac_type {
+        set {
+            if (power_settings != null) {
+                power_settings.set_enum ("sleep-inactive-ac-type", value);
+            }
+        }
+    }
+
+    public int sleep_inactive_battery_timeout {
+        set {
+            if (power_settings != null) {
+                power_settings.set_int ("sleep-inactive-battery-timeout", value);
+            }
+        }
+    }
+
+    public int sleep_inactive_battery_type {
+        set {
+            if (power_settings != null) {
+                power_settings.set_enum ("sleep-inactive-battery-type", value);
             }
         }
     }
@@ -78,5 +111,7 @@ public class Greeter.Settings : GLib.Object {
         } catch (Error e) {
             critical (e.message);
         }
+
+        power_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.power");
     }
 }

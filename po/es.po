@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-09-10 22:22+0000\n"
+"POT-Creation-Date: 2020-02-13 22:30+0000\n"
+"PO-Revision-Date: 2020-03-24 22:09+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/desktop/greeter/"
 "es/>\n"
@@ -17,28 +17,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:409
+#: compositor/WindowManager.vala:512
 msgid "Does the display look OK?"
 msgstr "¿Se ve bien la pantalla?"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
 msgstr "Mantener esta configuración"
 
-#: compositor/WindowManager.vala:413
+#: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
 msgstr "Restablecer configuración anterior"
-
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "Contraseña"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "Acceder"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
@@ -48,37 +40,25 @@ msgstr "Acceder como invitado"
 msgid "Manual Login…"
 msgstr "Acceso manual…"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:403
+msgid "Unable to Log In"
+msgstr "No se pudo acceder"
+
+#: src/MainWindow.vala:404
+msgid "Starting the session has failed."
+msgstr "El inicio de la sesión ha fallado."
+
+#: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
 msgstr "No se puede iniciar Configuración inicial"
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
 "Configuración inicial crea su primera cuenta de usuario. Sin ella, no podrá "
 "acceder al sistema y quizá tenga que reinstalarlo."
-
-#: src/CapsLockRevealer.vala:55
-msgid "Caps Lock & Num Lock are on"
-msgstr "Bloq Mayús y Bloq Núm activadas"
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "Bloq Mayús activada"
-
-#: src/CapsLockRevealer.vala:59
-msgid "Num Lock is on"
-msgstr "Bloq Núm activada"
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr "Cuenta desactivada"
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr "No se puede cambiar de sesión mientras haya accedido el usuario"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -92,35 +72,57 @@ msgstr "Nombre de usuario"
 msgid "Try username"
 msgstr "Pruebe un nombre de usuario"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
-msgstr "Establecer propiedades de la propia cuenta"
+#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "Acceder"
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
-msgstr ""
-"Necesita autenticarse para establecer sus propias propiedades de pantalla de "
-"acceso."
+#: src/Cards/UserCard.vala:84
+msgid "Account disabled"
+msgstr "Cuenta desactivada"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr "Obtener las propiedades de cualquier usuario"
+#: src/Cards/UserCard.vala:171
+msgid "Session cannot be changed while user is logged in"
+msgstr "No se puede cambiar de sesión mientras haya accedido el usuario"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr ""
-"Necesita autenticarse para obtener las propiedades de pantalla de acceso de "
-"otra cuenta."
+#: src/Widgets/CapsLockRevealer.vala:70
+msgid "Caps Lock & Num Lock are on"
+msgstr "Bloq Mayús y Bloq Núm activadas"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr "Establecer propiedades de cualquier cuenta"
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "Bloq Mayús activada"
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr ""
-"Necesita autenticarse para establecer las propiedades de pantalla de acceso "
-"de otra cuenta."
+#: src/Widgets/CapsLockRevealer.vala:74
+msgid "Num Lock is on"
+msgstr "Bloq Núm activada"
+
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "Contraseña"
+
+#~ msgid "Set properties of own user"
+#~ msgstr "Establecer propiedades de la propia cuenta"
+
+#~ msgid "Authentication is required to set one's own greeter properties."
+#~ msgstr ""
+#~ "Necesita autenticarse para establecer sus propias propiedades de pantalla "
+#~ "de acceso."
+
+#~ msgid "Get properties of any user"
+#~ msgstr "Obtener las propiedades de cualquier usuario"
+
+#~ msgid "Authentication is required to get another user's greeter properties."
+#~ msgstr ""
+#~ "Necesita autenticarse para obtener las propiedades de pantalla de acceso "
+#~ "de otra cuenta."
+
+#~ msgid "Set properties of any user"
+#~ msgstr "Establecer propiedades de cualquier cuenta"
+
+#~ msgid "Authentication is required to set another user's greeter properties."
+#~ msgstr ""
+#~ "Necesita autenticarse para establecer las propiedades de pantalla de "
+#~ "acceso de otra cuenta."
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Desliza tu dedo"

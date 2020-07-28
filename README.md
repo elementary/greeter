@@ -11,7 +11,7 @@ You'll need the following dependencies:
 * gnome-settings-daemon >= 3.27
 * libaccountsservice-dev
 * libgdk-pixbuf2.0-dev
-* libgranite-dev
+* libgranite-dev >= 5.2.3
 * libgtk-3-dev
 * liblightdm-gobject-1-dev
 * libmutter

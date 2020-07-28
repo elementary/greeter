@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
+"POT-Creation-Date: 2020-02-13 22:30+0000\n"
 "PO-Revision-Date: 2019-06-15 20:17+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/desktop/"
@@ -20,25 +20,17 @@ msgstr ""
 "X-Generator: Weblate 3.6.1\n"
 "X-Launchpad-Export-Date: 2017-04-05 07:04+0000\n"
 
-#: compositor/WindowManager.vala:409
+#: compositor/WindowManager.vala:512
 msgid "Does the display look OK?"
 msgstr "Ser skjermen OK ut?"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
 msgstr "Behold dette oppsettet"
 
-#: compositor/WindowManager.vala:413
+#: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
 msgstr "Gjenopprett tidligere oppsett"
-
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "Passord"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "Logg inn"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
@@ -49,39 +41,26 @@ msgstr "Logg inn som gjest"
 msgid "Manual Login…"
 msgstr "Manuell innlogging…"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:403
+#, fuzzy
+msgid "Unable to Log In"
+msgstr "Kunne ikke igangsette førstegangsoppsett"
+
+#: src/MainWindow.vala:404
+msgid "Starting the session has failed."
+msgstr ""
+
+#: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
 msgstr "Kunne ikke igangsette førstegangsoppsett"
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
 "Førstegangsoppsett skaper din første bruker. Uten den, vil du ikke kunne "
 "logge inn, og vil kanskje måtte reinstallere OS-et."
-
-#: src/CapsLockRevealer.vala:55
-#, fuzzy
-msgid "Caps Lock & Num Lock are on"
-msgstr "Caps Lock er på"
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "Caps Lock er på"
-
-#: src/CapsLockRevealer.vala:59
-#, fuzzy
-msgid "Num Lock is on"
-msgstr "Caps Lock er på"
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr "Konto avskrudd"
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr "Økten kan ikke endres mens en bruker er innlogget"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -95,29 +74,35 @@ msgstr "Brukernavn"
 msgid "Try username"
 msgstr "Prøv brukernavn"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
-msgstr ""
+#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "Logg inn"
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
-msgstr ""
+#: src/Cards/UserCard.vala:84
+msgid "Account disabled"
+msgstr "Konto avskrudd"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr ""
+#: src/Cards/UserCard.vala:171
+msgid "Session cannot be changed while user is logged in"
+msgstr "Økten kan ikke endres mens en bruker er innlogget"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:70
+#, fuzzy
+msgid "Caps Lock & Num Lock are on"
+msgstr "Caps Lock er på"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "Caps Lock er på"
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:74
+#, fuzzy
+msgid "Num Lock is on"
+msgstr "Caps Lock er på"
+
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "Passord"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Sveip med fingeren"

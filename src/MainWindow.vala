@@ -85,7 +85,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         user_cards = new GLib.Queue<unowned Greeter.UserCard> ();
 
         var manual_card = new Greeter.ManualCard ();
-        manual_card.reveal_child = false;
 
         main_overlay = new Gtk.Overlay ();
         main_overlay.vexpand = true;
@@ -119,13 +118,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             return false;
         });
 
+        manual_login_button.bind_property ("active", manual_card, "reveal-child", GLib.BindingFlags.SYNC_CREATE);
         manual_login_button.toggled.connect (() => {
             if (manual_login_button.active) {
-                user_cards.head.foreach ((card) => {
-                    card.reveal_child = false;
-                });
-                manual_card.reveal_child = true;
-
                 if (lightdm_greeter.in_authentication) {
                     try {
                         lightdm_greeter.cancel_authentication ();
@@ -136,11 +131,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
                 current_card = manual_card;
             } else {
-                manual_card.reveal_child = false;
-                user_cards.head.foreach ((card) => {
-                    card.reveal_child = true;
-                });
-
                 if (lightdm_greeter.in_authentication) {
                     try {
                         lightdm_greeter.cancel_authentication ();
@@ -201,6 +191,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 manual_login_button.show ();
             }
         });
+
+        lightdm_greeter.bind_property ("hide-users-hint", manual_login_button, "sensitive", GLib.BindingFlags.SYNC_CREATE | GLib.BindingFlags.INVERT_BOOLEAN);
+        lightdm_greeter.bind_property ("hide-users-hint", manual_login_button, "active", GLib.BindingFlags.SYNC_CREATE);
 
         notify["scale-factor"].connect (() => {
             maximize_window ();
@@ -387,11 +380,20 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     // Called after the credentials are checked, might be authenticated or not.
     private void authentication_complete () {
-        if (current_card is Greeter.UserCard) {
-             settings.last_user = ((Greeter.UserCard)current_card).lightdm_user.name;
+        var user_card = current_card as Greeter.UserCard;
+        if (user_card != null) {
+             settings.last_user = user_card.lightdm_user.name;
         }
 
         if (lightdm_greeter.is_authenticated) {
+            // Copy user's power settings to lightdm user
+            if (user_card != null) {
+                settings.sleep_inactive_ac_timeout = user_card.sleep_inactive_ac_timeout;
+                settings.sleep_inactive_ac_type = user_card.sleep_inactive_ac_type;
+                settings.sleep_inactive_battery_timeout = user_card.sleep_inactive_battery_timeout;
+                settings.sleep_inactive_battery_type = user_card.sleep_inactive_battery_type;
+            }
+
             var action_group = get_action_group ("session");
             try {
                 lightdm_greeter.start_session_sync (action_group.get_action_state ("select").get_string ());
@@ -479,11 +481,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 return Source.REMOVE;
             });
         }
+
+        lightdm_greeter.notify_property ("hide-users-hint");
     }
 
     private void add_card (LightDM.User lightdm_user) {
         var user_card = new Greeter.UserCard (lightdm_user);
         user_card.show_all ();
+        manual_login_button.bind_property ("active", user_card, "reveal-child", GLib.BindingFlags.SYNC_CREATE | GLib.BindingFlags.INVERT_BOOLEAN);
         main_overlay.add_overlay (user_card);
         user_card.focus_requested.connect (() => {
             switch_to_card (user_card);

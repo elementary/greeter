@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the extra package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: extra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-30 16:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: tn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/greeter.appdata.xml.in:7
+msgid "Greeter"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:8
+msgid "Unlock or log in to your device"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:24
+msgid "Fix an issue with media keys"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:33
+#: data/greeter.appdata.xml.in:47
+msgid "Updated translations"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:32
+msgid "Ensure that manual login is available when users are hidden"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:40
+msgid "Save last user on attempted login"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:41
+msgid "Handle all background aspect ratios"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:42
+msgid "Give non-focused user cards smaller usernames"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:43
+msgid "Better respect NumLock settings"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:44
+msgid "Enable sounds in greeter"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:45
+msgid "Select password text on error instead of immediately clearing it"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:46
+msgid "Code cleanup"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:53
+msgid "Extensive overhaul"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:55
+msgid "New card-based appearance"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:56
+msgid "Improved HiDPI support"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:57
+msgid "AccountsService functionality"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:58
+msgid "Various bug fixes"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:94
+msgid "elementary, Inc."
+msgstr ""

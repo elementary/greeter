@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-10-27 09:23+0000\n"
+"POT-Creation-Date: 2020-02-13 22:30+0000\n"
+"PO-Revision-Date: 2019-11-27 20:24+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/desktop/greeter/"
 "he/>\n"
@@ -20,25 +20,17 @@ msgstr ""
 "X-Generator: Weblate 3.7.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:409
+#: compositor/WindowManager.vala:512
 msgid "Does the display look OK?"
 msgstr "התצוגה נראית בסדר?"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
 msgstr "להשאיר את התצורה הזאת"
 
-#: compositor/WindowManager.vala:413
+#: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
 msgstr "שחזור התצורה הקודמת"
-
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "ססמה"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "כניסה"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
@@ -48,37 +40,25 @@ msgstr "כניסה כאורח"
 msgid "Manual Login…"
 msgstr "כניסה ידנית…"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:403
+msgid "Unable to Log In"
+msgstr "לא ניתן להיכנס"
+
+#: src/MainWindow.vala:404
+msgid "Starting the session has failed."
+msgstr "הכניסה למערכת נכשלה."
+
+#: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
 msgstr "לא ניתן להפעיל את ההתקנה הראשונית"
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
 "ההתקנה הראשונית יוצרת את המשתמש הראשון. בלעדיה, לא תהיה לך אפשרות להיכנס "
 "ואולי אף יהיה עליך להתקין את מערכת ההפעלה מחדש."
-
-#: src/CapsLockRevealer.vala:55
-msgid "Caps Lock & Num Lock are on"
-msgstr "ה־Caps Lock וה־Num Lock פעילים"
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "ה־Caps Lock פעיל"
-
-#: src/CapsLockRevealer.vala:59
-msgid "Num Lock is on"
-msgstr "ה־Num Lock פעיל"
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr "חשבון מושבת"
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr "לא ניתן להחליף הפעלה כשהמשתמש ביצע כניסה למערכת"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -92,29 +72,51 @@ msgstr "שם משתמש"
 msgid "Try username"
 msgstr "ניסיון של שם משתמש"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
-msgstr "הגדרת מאפייני המשתמש העצמי"
+#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "כניסה"
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
-msgstr "נדרש אימות כדי להגדיר את מאפייני קבלת הפנים של עצמך."
+#: src/Cards/UserCard.vala:84
+msgid "Account disabled"
+msgstr "חשבון מושבת"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr "קבלת מאפיינים על כל משתמש שהוא"
+#: src/Cards/UserCard.vala:171
+msgid "Session cannot be changed while user is logged in"
+msgstr "לא ניתן להחליף הפעלה כשהמשתמש ביצע כניסה למערכת"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr "נדרש אימות כדי לקבל מאפייני קבלת פנים של משתמש אחר."
+#: src/Widgets/CapsLockRevealer.vala:70
+msgid "Caps Lock & Num Lock are on"
+msgstr "ה־Caps Lock וה־Num Lock פעילים"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr "הגדרת מאפיינים לכל משתמש שהוא"
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "ה־Caps Lock פעיל"
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr "נדרש אימות כדי להגדיר את מאפייני קבלת הפנים למשתמש אחר."
+#: src/Widgets/CapsLockRevealer.vala:74
+msgid "Num Lock is on"
+msgstr "ה־Num Lock פעיל"
+
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "ססמה"
+
+#~ msgid "Set properties of own user"
+#~ msgstr "הגדרת מאפייני המשתמש העצמי"
+
+#~ msgid "Authentication is required to set one's own greeter properties."
+#~ msgstr "נדרש אימות כדי להגדיר את מאפייני קבלת הפנים של עצמך."
+
+#~ msgid "Get properties of any user"
+#~ msgstr "קבלת מאפיינים על כל משתמש שהוא"
+
+#~ msgid "Authentication is required to get another user's greeter properties."
+#~ msgstr "נדרש אימות כדי לקבל מאפייני קבלת פנים של משתמש אחר."
+
+#~ msgid "Set properties of any user"
+#~ msgstr "הגדרת מאפיינים לכל משתמש שהוא"
+
+#~ msgid "Authentication is required to set another user's greeter properties."
+#~ msgstr "נדרש אימות כדי להגדיר את מאפייני קבלת הפנים למשתמש אחר."
 
 #~ msgid "Swipe your finger"
 #~ msgstr "נא להעביר את האצבע"

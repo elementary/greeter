@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
+"POT-Creation-Date: 2020-02-13 22:30+0000\n"
 "PO-Revision-Date: 2019-07-01 20:28+0000\n"
 "Last-Translator: Fabio Zaramella <fabiozaramella@hotmail.it>\n"
 "Language-Team: Italian <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -20,25 +20,17 @@ msgstr ""
 "X-Generator: Weblate 3.6.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:409
+#: compositor/WindowManager.vala:512
 msgid "Does the display look OK?"
 msgstr "Lo schermo si vede bene?"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
 msgstr "Mantieni questa configurazione"
 
-#: compositor/WindowManager.vala:413
+#: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
 msgstr "Ripristina la configurazione precedente"
-
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "Password"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "Accedi"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
@@ -48,11 +40,20 @@ msgstr "Accedi come ospite"
 msgid "Manual Login…"
 msgstr "Accesso manuale…"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:403
+#, fuzzy
+msgid "Unable to Log In"
+msgstr "Impossibile avviare la configurazione iniziale"
+
+#: src/MainWindow.vala:404
+msgid "Starting the session has failed."
+msgstr ""
+
+#: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
 msgstr "Impossibile avviare la configurazione iniziale"
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -60,28 +61,6 @@ msgstr ""
 "La configurazione iniziale crea il tuo primo utente. Senza di essa non sarà "
 "possibile accedere e potrebbe essere necessario reinstallare il sistema "
 "operativo."
-
-#: src/CapsLockRevealer.vala:55
-msgid "Caps Lock & Num Lock are on"
-msgstr "Il blocco maiuscole e il blocco numeri sono attivi"
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "Il blocco maiuscole è attivo"
-
-#: src/CapsLockRevealer.vala:59
-msgid "Num Lock is on"
-msgstr "Il blocco numeri è attivo"
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr "Account disabilitato"
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr ""
-"La sessione non può essere cambiata mentre c'è un utente che ha effettuato "
-"l'accesso"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -95,35 +74,59 @@ msgstr "Nome utente"
 msgid "Try username"
 msgstr "Prova con il nome utente"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
-msgstr "Imposta i parametri del proprio utente"
+#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "Accedi"
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
+#: src/Cards/UserCard.vala:84
+msgid "Account disabled"
+msgstr "Account disabilitato"
+
+#: src/Cards/UserCard.vala:171
+msgid "Session cannot be changed while user is logged in"
 msgstr ""
-"L'autenticazione è richiesta per impostare i propri parametri per la "
-"schermata di sblocco."
+"La sessione non può essere cambiata mentre c'è un utente che ha effettuato "
+"l'accesso"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr "Ottieni i parametri di qualsiasi utente"
+#: src/Widgets/CapsLockRevealer.vala:70
+msgid "Caps Lock & Num Lock are on"
+msgstr "Il blocco maiuscole e il blocco numeri sono attivi"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr ""
-"L'autenticazione è richiesta per ottenere i parametri della schermata di "
-"sblocco di un altro utente."
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "Il blocco maiuscole è attivo"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr "Imposta i parametri per qualsiasi utente"
+#: src/Widgets/CapsLockRevealer.vala:74
+msgid "Num Lock is on"
+msgstr "Il blocco numeri è attivo"
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr ""
-"L'autenticazione è richiesta per impostare i parametri della schermata di "
-"sblocco di un altro utente."
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "Password"
+
+#~ msgid "Set properties of own user"
+#~ msgstr "Imposta i parametri del proprio utente"
+
+#~ msgid "Authentication is required to set one's own greeter properties."
+#~ msgstr ""
+#~ "L'autenticazione è richiesta per impostare i propri parametri per la "
+#~ "schermata di sblocco."
+
+#~ msgid "Get properties of any user"
+#~ msgstr "Ottieni i parametri di qualsiasi utente"
+
+#~ msgid "Authentication is required to get another user's greeter properties."
+#~ msgstr ""
+#~ "L'autenticazione è richiesta per ottenere i parametri della schermata di "
+#~ "sblocco di un altro utente."
+
+#~ msgid "Set properties of any user"
+#~ msgstr "Imposta i parametri per qualsiasi utente"
+
+#~ msgid "Authentication is required to set another user's greeter properties."
+#~ msgstr ""
+#~ "L'autenticazione è richiesta per impostare i parametri della schermata di "
+#~ "sblocco di un altro utente."
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Scorri con il dito"

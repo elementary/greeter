@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-03-16 21:27+0000\n"
+"POT-Creation-Date: 2020-02-13 22:30+0000\n"
+"PO-Revision-Date: 2020-05-16 04:10+0000\n"
 "Last-Translator: nasserbinlaboun <nasser1990com@gmail.com>\n"
 "Language-Team: Arabic <https://l10n.elementary.io/projects/desktop/greeter/"
 "ar/>\n"
@@ -18,28 +18,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 3.4\n"
+"X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:409
+#: compositor/WindowManager.vala:512
 msgid "Does the display look OK?"
 msgstr "هل الواجهة تبدو جيدة؟"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
 msgstr "إحتفظ بهذه الإعدادات"
 
-#: compositor/WindowManager.vala:413
+#: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
-msgstr "إسترجع الإعدادات السابقة"
-
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "كلمة المرور"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "الدخول"
+msgstr "إسترجع إعدادات الضبط السابقة"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
@@ -49,41 +41,27 @@ msgstr "تسجيل الدخول كضيف"
 msgid "Manual Login…"
 msgstr "تسجيل دخول يدوي…"
 
-#: src/MainWindow.vala:456
-msgid "Unable to Launch Initial Setup"
-msgstr ""
+#: src/MainWindow.vala:403
+msgid "Unable to Log In"
+msgstr "لا يمكن تسجيل الدخول"
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:404
+msgid "Starting the session has failed."
+msgstr "فشل في بدء الجلسة."
+
+#: src/MainWindow.vala:466
+msgid "Unable to Launch Initial Setup"
+msgstr "غير قادر على تشغيل التثبيت الاولي"
+
+#: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
 
-#: src/CapsLockRevealer.vala:55
-#, fuzzy
-msgid "Caps Lock & Num Lock are on"
-msgstr "Caps Lock مفعل"
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "Caps Lock مفعل"
-
-#: src/CapsLockRevealer.vala:59
-#, fuzzy
-msgid "Num Lock is on"
-msgstr "Caps Lock مفعل"
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr ""
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr ""
-
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
-msgstr "دخول يدوي"
+msgstr "تسجيل دخول يدوي"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
@@ -93,29 +71,35 @@ msgstr "اسم المستخدم"
 msgid "Try username"
 msgstr "جرب اسم المستخدم"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
+#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "الدخول"
+
+#: src/Cards/UserCard.vala:84
+msgid "Account disabled"
 msgstr ""
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
+#: src/Cards/UserCard.vala:171
+msgid "Session cannot be changed while user is logged in"
 msgstr ""
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:70
+#, fuzzy
+msgid "Caps Lock & Num Lock are on"
+msgstr "Caps Lock مفعل"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "Caps Lock مفعل"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:74
+#, fuzzy
+msgid "Num Lock is on"
+msgstr "Caps Lock مفعل"
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr ""
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "كلمة السر"
 
 #~ msgid "Guest session"
 #~ msgstr "الدخول كضيف"

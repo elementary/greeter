@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
+"POT-Creation-Date: 2020-02-13 22:30+0000\n"
 "PO-Revision-Date: 2019-05-22 09:03+0000\n"
 "Last-Translator: P.-H. Lin <cypressyew@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://l10n.elementary.io/projects/"
@@ -20,25 +20,17 @@ msgstr ""
 "X-Generator: Weblate 3.6.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:409
+#: compositor/WindowManager.vala:512
 msgid "Does the display look OK?"
 msgstr "顯示看起來 OK 嗎？"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
 msgstr "保留此設定"
 
-#: compositor/WindowManager.vala:413
+#: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
 msgstr "恢復先前設定"
-
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "密碼"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "登入"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
@@ -48,37 +40,26 @@ msgstr "以訪客身份登入"
 msgid "Manual Login…"
 msgstr "手動登入…"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:403
+#, fuzzy
+msgid "Unable to Log In"
+msgstr "無法啟動初始設定程式"
+
+#: src/MainWindow.vala:404
+msgid "Starting the session has failed."
+msgstr ""
+
+#: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
 msgstr "無法啟動初始設定程式"
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
 "初始設定程式建立您的第一個使用者。若無進行初始設定，您將會無法登入而且可能需"
 "要重新安裝作業系統。"
-
-#: src/CapsLockRevealer.vala:55
-msgid "Caps Lock & Num Lock are on"
-msgstr "Caps Lock 與 Num Lock 已啟用"
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "Caps Lock 已啟用"
-
-#: src/CapsLockRevealer.vala:59
-msgid "Num Lock is on"
-msgstr "Num Lock 已啟用"
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr "帳號已停用"
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr ""
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -92,29 +73,33 @@ msgstr "使用者名稱"
 msgid "Try username"
 msgstr ""
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
+#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "登入"
+
+#: src/Cards/UserCard.vala:84
+msgid "Account disabled"
+msgstr "帳號已停用"
+
+#: src/Cards/UserCard.vala:171
+msgid "Session cannot be changed while user is logged in"
 msgstr ""
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:70
+msgid "Caps Lock & Num Lock are on"
+msgstr "Caps Lock 與 Num Lock 已啟用"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "Caps Lock 已啟用"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:74
+msgid "Num Lock is on"
+msgstr "Num Lock 已啟用"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr ""
-
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr ""
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "密碼"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "滑動您的手指"

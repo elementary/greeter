@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-07-14 14:28+0000\n"
+"POT-Creation-Date: 2020-02-13 22:30+0000\n"
+"PO-Revision-Date: 2019-11-07 10:24+0000\n"
 "Last-Translator: Shtonchjo <shtonchjo@gmail.com>\n"
 "Language-Team: Esperanto <https://l10n.elementary.io/projects/desktop/"
 "greeter/eo/>\n"
@@ -17,28 +17,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 3.7.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:409
+#: compositor/WindowManager.vala:512
 msgid "Does the display look OK?"
 msgstr "Ĉu la ekrano aspektas bone?"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
 msgstr "Konservi la Agordojn"
 
-#: compositor/WindowManager.vala:413
+#: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
 msgstr "Restaŭri la Antaŭajn Agordojn"
-
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "Pasvorto"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "Ensaluti"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
@@ -48,37 +40,25 @@ msgstr "Ensaluti kiel Gasto"
 msgid "Manual Login…"
 msgstr "Mana ensaluto…"
 
-#: src/MainWindow.vala:456
+#: src/MainWindow.vala:403
+msgid "Unable to Log In"
+msgstr "Neeblis ensaluti"
+
+#: src/MainWindow.vala:404
+msgid "Starting the session has failed."
+msgstr "Startigo de la seanco fiaskis."
+
+#: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
 msgstr "Neeblis lanĉi la komencan agordadon"
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
 "La komenca agordo ne sukcesis krei uzanton. Sen tio, ne eblos ensaluti, kaj "
 "necesos reinstali la operaciumon."
-
-#: src/CapsLockRevealer.vala:55
-msgid "Caps Lock & Num Lock are on"
-msgstr "Maj. Bask. & Nom. Bask. ŝaltitaj"
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "Maj. Bask. ŝaltita"
-
-#: src/CapsLockRevealer.vala:59
-msgid "Num Lock is on"
-msgstr "Nom. Bask. ŝaltita"
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr "Konto malaktivigita"
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr "Neeblas ŝanĝi la seancon dum estas ensalutinto"
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -92,29 +72,51 @@ msgstr "Uzantonomo"
 msgid "Try username"
 msgstr "Provu uzantonomon"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
-msgstr "Difini ecojn de sia uzantokonto"
+#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "Ensaluti"
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
-msgstr "Aŭtentigo necesas por difini ies proprajn ecojn."
+#: src/Cards/UserCard.vala:84
+msgid "Account disabled"
+msgstr "Konto malaktivigita"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr "Vidi ies ajn ecojn"
+#: src/Cards/UserCard.vala:171
+msgid "Session cannot be changed while user is logged in"
+msgstr "Neeblas ŝanĝi la seancon dum estas ensalutinto"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr "Aŭtentigo necesas por vidi ies proprajn ecojn."
+#: src/Widgets/CapsLockRevealer.vala:70
+msgid "Caps Lock & Num Lock are on"
+msgstr "Maj. Bask. & Nom. Bask. ŝaltitaj"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr "Difini acojn de ajna uzanto"
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "Maj. Bask. ŝaltita"
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr "Aŭtentigo necesas por difini ies proprajn ecojn."
+#: src/Widgets/CapsLockRevealer.vala:74
+msgid "Num Lock is on"
+msgstr "Nom. Bask. ŝaltita"
+
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "Pasvorto"
+
+#~ msgid "Set properties of own user"
+#~ msgstr "Difini ecojn de sia uzantokonto"
+
+#~ msgid "Authentication is required to set one's own greeter properties."
+#~ msgstr "Aŭtentigo necesas por difini ies proprajn ecojn."
+
+#~ msgid "Get properties of any user"
+#~ msgstr "Vidi ies ajn ecojn"
+
+#~ msgid "Authentication is required to get another user's greeter properties."
+#~ msgstr "Aŭtentigo necesas por vidi ies proprajn ecojn."
+
+#~ msgid "Set properties of any user"
+#~ msgstr "Difini acojn de ajna uzanto"
+
+#~ msgid "Authentication is required to set another user's greeter properties."
+#~ msgstr "Aŭtentigo necesas por difini ies proprajn ecojn."
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Ŝovumi vian fingron"

@@ -7,78 +7,58 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2018-12-13 14:46+0000\n"
-"Last-Translator: Daniel Zvir <zvir.daniel@seznam.cz>\n"
-"Language-Team: Czech <https://weblate.elementary.io/projects/desktop/greeter/"
-"cs/>\n"
+"POT-Creation-Date: 2020-02-13 22:30+0000\n"
+"PO-Revision-Date: 2020-06-07 12:11+0000\n"
+"Last-Translator: p-bo <pavel.borecki@gmail.com>\n"
+"Language-Team: Czech <https://l10n.elementary.io/projects/desktop/greeter/cs/"
+">\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 3.0.1\n"
+"X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:409
+#: compositor/WindowManager.vala:512
 msgid "Does the display look OK?"
-msgstr "Vypadá displej dobře?"
+msgstr "Je zobrazení v pořádku?"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:515
 msgid "Keep This Configuration"
-msgstr "Ponechat Tuto Konfiguraci"
+msgstr "Ponechat toto uspořádání"
 
-#: compositor/WindowManager.vala:413
+#: compositor/WindowManager.vala:516
 msgid "Restore Previous Configuration"
-msgstr "Obnovit Předchozí Konfiguraci"
-
-#: src/PasswordEntry.vala:24 src/PasswordEntry.vala:25
-msgid "Password"
-msgstr "Heslo"
-
-#: src/PasswordEntry.vala:28 src/Cards/UserCard.vala:70
-msgid "Log In"
-msgstr "Přihlásit se"
+msgstr "Vrátit se zpět k předchozímu uspořádání"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
-msgstr "Přihlásit jako host"
+msgstr "Přihlásit se jako host"
 
 #: src/MainWindow.vala:64
 msgid "Manual Login…"
 msgstr "Ruční přihlášení…"
 
-#: src/MainWindow.vala:456
-msgid "Unable to Launch Initial Setup"
-msgstr ""
+#: src/MainWindow.vala:403
+msgid "Unable to Log In"
+msgstr "Nedaří se přihlásit"
 
-#: src/MainWindow.vala:461
+#: src/MainWindow.vala:404
+msgid "Starting the session has failed."
+msgstr "Spuštění relace se nezdařilo."
+
+#: src/MainWindow.vala:466
+msgid "Unable to Launch Initial Setup"
+msgstr "Nedaří se spustit prvotní nastavení"
+
+#: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
-
-#: src/CapsLockRevealer.vala:55
-#, fuzzy
-msgid "Caps Lock & Num Lock are on"
-msgstr "Caps Lock je zapnutý"
-
-#: src/CapsLockRevealer.vala:57
-msgid "Caps Lock is on"
-msgstr "Caps Lock je zapnutý"
-
-#: src/CapsLockRevealer.vala:59
-#, fuzzy
-msgid "Num Lock is on"
-msgstr "Caps Lock je zapnutý"
-
-#: src/Cards/UserCard.vala:76
-msgid "Account disabled"
-msgstr ""
-
-#: src/Cards/UserCard.vala:163
-msgid "Session cannot be changed while user is logged in"
-msgstr ""
+"Prvotní nastavení pro vás vytvoří uživatelský účet (první v systému). Bez "
+"něj se nebudete moci přihlásit a možná bude třeba systém přeinstalovat."
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -86,35 +66,39 @@ msgstr "Ruční přihlášení"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr "Přihlašovací jméno"
+msgstr "Uživatelské jméno"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr "Zkuste přihlašovací jméno"
+msgstr "Vyzkoušet uživatelské jméno"
 
-#: data/io.elementary.greeter.AccountsService.policy:4
-msgid "Set properties of own user"
-msgstr ""
+#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
+msgid "Log In"
+msgstr "Přihlásit se"
 
-#: data/io.elementary.greeter.AccountsService.policy:5
-msgid "Authentication is required to set one's own greeter properties."
-msgstr ""
+#: src/Cards/UserCard.vala:84
+msgid "Account disabled"
+msgstr "Účet znepřístupněn"
 
-#: data/io.elementary.greeter.AccountsService.policy:14
-msgid "Get properties of any user"
-msgstr ""
+#: src/Cards/UserCard.vala:171
+msgid "Session cannot be changed while user is logged in"
+msgstr "Relace nemůže být změněna, pokud je přihlášen uživatel"
 
-#: data/io.elementary.greeter.AccountsService.policy:15
-msgid "Authentication is required to get another user's greeter properties."
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:70
+msgid "Caps Lock & Num Lock are on"
+msgstr "Caps Lock a Num Lock jsou zapnuté"
 
-#: data/io.elementary.greeter.AccountsService.policy:24
-msgid "Set properties of any user"
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:72
+msgid "Caps Lock is on"
+msgstr "Caps Lock je zapnutý"
 
-#: data/io.elementary.greeter.AccountsService.policy:25
-msgid "Authentication is required to set another user's greeter properties."
-msgstr ""
+#: src/Widgets/CapsLockRevealer.vala:74
+msgid "Num Lock is on"
+msgstr "Num Lock je zapnutý"
+
+#: src/Widgets/PasswordEntry.vala:24
+msgid "Password"
+msgstr "Heslo"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Přejeďte prstem"

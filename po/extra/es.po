@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 22:43+0200\n"
-"PO-Revision-Date: 2019-10-06 14:23+0000\n"
-"Last-Translator: Daniel R. <riesp@pm.me>\n"
+"POT-Creation-Date: 2020-03-30 16:32+0000\n"
+"PO-Revision-Date: 2020-03-31 10:23+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/es/>\n"
 "Language: es\n"
@@ -17,16 +17,80 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 3.9.1\n"
 
 #: data/greeter.appdata.xml.in:7
 msgid "Greeter"
-msgstr "Greeter"
+msgstr "Recibidor"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
-msgstr "Desbloquear o iniciar sesión en su dispositivo"
+msgstr "Desbloquee o acceda a su dispositivo"
+
+#: data/greeter.appdata.xml.in:24
+msgid "Fix an issue with media keys"
+msgstr "Solucionado un problema con las teclas multimedia"
+
+#: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:33
+#: data/greeter.appdata.xml.in:47
+msgid "Updated translations"
+msgstr "Traducciones actualizadas"
+
+#: data/greeter.appdata.xml.in:32
+msgid "Ensure that manual login is available when users are hidden"
+msgstr ""
+"Se aseguró de que el acceso manual esté disponible cuando los usuarios están "
+"ocultos"
+
+#: data/greeter.appdata.xml.in:40
+msgid "Save last user on attempted login"
+msgstr "Se guarda la última cuenta al intentar acceder"
+
+#: data/greeter.appdata.xml.in:41
+msgid "Handle all background aspect ratios"
+msgstr "Manejar todas las relaciones de aspecto de fondo"
+
+#: data/greeter.appdata.xml.in:42
+msgid "Give non-focused user cards smaller usernames"
+msgstr ""
+"Dar a las tarjetas de usuario no enfocadas nombres de usuario más pequeños"
+
+#: data/greeter.appdata.xml.in:43
+msgid "Better respect NumLock settings"
+msgstr "Mejor respeto de los ajustes de Bloq Num"
+
+#: data/greeter.appdata.xml.in:44
+msgid "Enable sounds in greeter"
+msgstr "Se activaron los sonidos en el recibidor"
+
+#: data/greeter.appdata.xml.in:45
+msgid "Select password text on error instead of immediately clearing it"
+msgstr "En caso de error, la contraseña se selecciona en lugar de vaciarse"
 
 #: data/greeter.appdata.xml.in:46
+msgid "Code cleanup"
+msgstr "Limpieza de código"
+
+#: data/greeter.appdata.xml.in:53
+msgid "Extensive overhaul"
+msgstr "Amplia revisión"
+
+#: data/greeter.appdata.xml.in:55
+msgid "New card-based appearance"
+msgstr "Nueva apariencia basada en tarjetas"
+
+#: data/greeter.appdata.xml.in:56
+msgid "Improved HiDPI support"
+msgstr "Compatibilidad mejorada de HiDPI"
+
+#: data/greeter.appdata.xml.in:57
+msgid "AccountsService functionality"
+msgstr "Funcionalidad AccountsService"
+
+#: data/greeter.appdata.xml.in:58
+msgid "Various bug fixes"
+msgstr "Varias correcciones de errores"
+
+#: data/greeter.appdata.xml.in:94
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
