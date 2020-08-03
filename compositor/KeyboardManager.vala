@@ -79,6 +79,12 @@ namespace GreeterCompositor {
             if (!sources.is_of_type (sources_variant_type))
                 return;
 
+            // If GSettings doesn't have any keyboard layouts, don't set one
+            // and leave the system default
+            if (sources.n_children () == 0) {
+                return;
+            }
+
             var current = settings.get_uint ("current");
             unowned string? type = null, name = null;
             if (sources.n_children () > current)
