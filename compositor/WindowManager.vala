@@ -117,6 +117,10 @@ namespace GreeterCompositor {
             DBusAccelerator.init (this);
 
 #if HAS_MUTTER330
+            KeyboardManager.init (display);
+#endif
+
+#if HAS_MUTTER330
             stage = display.get_stage () as Clutter.Stage;
 #else
             stage = screen.get_stage () as Clutter.Stage;

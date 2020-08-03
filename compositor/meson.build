@@ -75,13 +75,14 @@ mutter_typelib_dir = libmutter_dep.get_pkgconfig_variable('typelibdir')
 
 # Here is the real Compositor work
 compositor_files = files(
-  'main.vala',
-  'WindowManager.vala',
-  'MediaFeedback.vala',
-  'DBus.vala',
   'DBusAccelerator.vala',
+  'DBus.vala',
+  'KeyboardManager.vala',
+  'main.vala',
+  'MediaFeedback.vala',
   'SystemBackground.vala',
-  'Utils.vala'
+  'Utils.vala',
+  'WindowManager.vala'
 )
 
 executable(
