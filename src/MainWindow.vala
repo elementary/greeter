@@ -529,6 +529,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             binding.unbind ();
         }
 
+        user_card.set_keyboard_layouts ();
+
         binding = user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE);
         next_delta = user_cards.index (user_card);
         int minimum_width, natural_width;

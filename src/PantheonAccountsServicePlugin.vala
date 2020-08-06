@@ -10,3 +10,14 @@ interface Pantheon.AccountsService : Object {
     public abstract int sleep_inactive_battery_timeout { get; set; }
     public abstract int sleep_inactive_battery_type { get; set; }
 }
+
+[DBus (name = "io.elementary.SettingsDaemon.AccountsService")]
+interface Pantheon.SettingsDaemon.AccountsService : Object {
+    public struct KeyboardLayout {
+        public string backend;
+        public string name;
+    }
+
+    public abstract KeyboardLayout[] keyboard_layouts { owned get; set; }
+    public abstract uint active_keyboard_layout { get; set; }
+}

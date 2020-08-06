@@ -36,10 +36,13 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private Act.User act_user;
     private Pantheon.AccountsService greeter_act;
+    private Pantheon.SettingsDaemon.AccountsService settings_act;
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private weak Gtk.StyleContext main_grid_style_context;
     private Greeter.PasswordEntry password_entry;
+
+    private bool needs_keyboard_layout_set = false;
 
     construct {
         need_password = true;
@@ -248,6 +251,11 @@ public class Greeter.UserCard : Greeter.BaseCard {
                                                        "org.freedesktop.Accounts",
                                                        act_path,
                                                        GLib.DBusProxyFlags.GET_INVALIDATED_PROPERTIES);
+
+                settings_act = GLib.Bus.get_proxy_sync (GLib.BusType.SYSTEM,
+                                                        "org.freedesktop.Accounts",
+                                                        act_path,
+                                                        GLib.DBusProxyFlags.GET_INVALIDATED_PROPERTIES);
                 is_24h = greeter_act.time_format != "12h";
                 sleep_inactive_ac_timeout = greeter_act.sleep_inactive_ac_timeout;
                 sleep_inactive_ac_type = greeter_act.sleep_inactive_ac_type;
@@ -266,6 +274,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
             } catch (Error e) {
                 critical (e.message);
             }
+        }
+
+        if (needs_keyboard_layout_set) {
+            set_keyboard_layouts ();
         }
 
         if (act_user.locked) {
@@ -294,6 +306,29 @@ public class Greeter.UserCard : Greeter.BaseCard {
         } else {
             main_grid_style_context.add_class ("collapsed");
         }
+    }
+
+    public void set_keyboard_layouts () {
+        if (!act_user.is_loaded) {
+            needs_keyboard_layout_set = true;
+            return;
+        }
+
+        var settings = new GLib.Settings ("org.gnome.desktop.input-sources");
+
+        Variant[] elements = {};
+        foreach (var layout in settings_act.keyboard_layouts) {
+            GLib.Variant first = new GLib.Variant.string (layout.backend);
+            GLib.Variant second = new GLib.Variant.string (layout.name);
+            GLib.Variant result = new GLib.Variant.tuple ({first, second});
+
+            elements += result;
+        }
+
+        GLib.Variant list = new GLib.Variant.array (new VariantType ("(ss)"), elements);
+        settings.set_value ("sources", list);
+
+        settings.set_value ("current", settings_act.active_keyboard_layout);
     }
 
     public UserCard (LightDM.User lightdm_user) {
