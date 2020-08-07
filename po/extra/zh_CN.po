@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-30 16:32+0000\n"
-"PO-Revision-Date: 2020-05-28 18:48+0000\n"
-"Last-Translator: colindemian <colindemian@outlook.com>\n"
+"PO-Revision-Date: 2020-08-08 11:13+0000\n"
+"Last-Translator: imgradeone Yan <imgradeone@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "desktop/greeter-extra/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -38,7 +38,7 @@ msgstr "翻译更新"
 
 #: data/greeter.appdata.xml.in:32
 msgid "Ensure that manual login is available when users are hidden"
-msgstr ""
+msgstr "当有用户被隐藏时，将可以使用手动登录"
 
 #: data/greeter.appdata.xml.in:40
 msgid "Save last user on attempted login"
@@ -58,15 +58,15 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:44
 msgid "Enable sounds in greeter"
-msgstr ""
+msgstr "在登录界面里启用音效"
 
 #: data/greeter.appdata.xml.in:45
 msgid "Select password text on error instead of immediately clearing it"
-msgstr ""
+msgstr "密码出错时选中输入框，而不是立刻清空"
 
 #: data/greeter.appdata.xml.in:46
 msgid "Code cleanup"
-msgstr ""
+msgstr "代码整理"
 
 #: data/greeter.appdata.xml.in:53
 msgid "Extensive overhaul"
@@ -78,7 +78,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:56
 msgid "Improved HiDPI support"
-msgstr ""
+msgstr "HiDPI 支持改进"
 
 #: data/greeter.appdata.xml.in:57
 msgid "AccountsService functionality"
@@ -86,7 +86,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:58
 msgid "Various bug fixes"
-msgstr ""
+msgstr "一些 bug 修复"
 
 #: data/greeter.appdata.xml.in:94
 msgid "elementary, Inc."
