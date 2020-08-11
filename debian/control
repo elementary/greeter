@@ -21,7 +21,7 @@ Homepage: https://github.com/elementary/greeter
 Package: io.elementary.greeter
 Architecture: any
 Depends: numlockx, lightdm, ${misc:Depends}, ${shlibs:Depends}
-Conflicts: pantheon-greeter
+Breaks: pantheon-greeter
 Replaces: pantheon-greeter
 Recommends: elementary-default-settings (>= 5.2)
 Provides: lightdm-greeter
