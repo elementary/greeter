@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-13 22:30+0000\n"
-"PO-Revision-Date: 2019-06-15 20:17+0000\n"
-"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"PO-Revision-Date: 2020-08-23 18:13+0000\n"
+"Last-Translator: Nils K <slx@nilsk.net>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/desktop/"
 "greeter/nb/>\n"
 "Language: nb\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-04-05 07:04+0000\n"
 
 #: compositor/WindowManager.vala:512
@@ -37,18 +37,16 @@ msgid "Log in as Guest"
 msgstr "Logg inn som gjest"
 
 #: src/MainWindow.vala:64
-#, fuzzy
 msgid "Manual Login…"
 msgstr "Manuell innlogging…"
 
 #: src/MainWindow.vala:403
-#, fuzzy
 msgid "Unable to Log In"
-msgstr "Kunne ikke igangsette førstegangsoppsett"
+msgstr "Kunne ikke logge inn"
 
 #: src/MainWindow.vala:404
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Kunne ikke starte økten."
 
 #: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
@@ -87,7 +85,6 @@ msgid "Session cannot be changed while user is logged in"
 msgstr "Økten kan ikke endres mens en bruker er innlogget"
 
 #: src/Widgets/CapsLockRevealer.vala:70
-#, fuzzy
 msgid "Caps Lock & Num Lock are on"
 msgstr "Caps Lock er på"
 
@@ -96,9 +93,8 @@ msgid "Caps Lock is on"
 msgstr "Caps Lock er på"
 
 #: src/Widgets/CapsLockRevealer.vala:74
-#, fuzzy
 msgid "Num Lock is on"
-msgstr "Caps Lock er på"
+msgstr "Num Lock er på"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
