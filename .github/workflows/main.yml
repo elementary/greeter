@@ -34,4 +34,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Lint
-      run: io.elementary.vala-lint -d .
+      run: |
+        io.elementary.vala-lint -d compositor
+        io.elementary.vala-lint -d src
+        
