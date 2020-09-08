@@ -72,7 +72,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         try {
             var gtksettings = Gtk.Settings.get_default ();
             gtksettings.gtk_icon_theme_name = "elementary";
-            gtksettings.gtk_theme_name = "elementary";
+            gtksettings.gtk_theme_name = "io.elementary.stylesheet.blueberry";
 
             var css_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, "dark");
             guest_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
