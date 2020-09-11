@@ -1,9 +1,16 @@
+[DBus (name = "org.freedesktop.login1.Manager")]
+interface LoginManager : Object {
+    public signal void prepare_for_sleep (bool start);
+}
+
 public class Greeter.DateTimeWidget : Gtk.Grid {
     public bool is_24h { get; set; default=true; }
 
     private Gtk.Label time_label;
     private Gtk.Label date_label;
     private uint time_timeout = 0U;
+
+    private LoginManager lm = null;
 
     construct {
         orientation = Gtk.Orientation.VERTICAL;
@@ -34,6 +41,20 @@ public class Greeter.DateTimeWidget : Gtk.Grid {
             GLib.Source.remove (time_timeout);
             update_time ();
         });
+
+        try {
+            lm = Bus.get_proxy_sync (BusType.SESSION, "org.freedesktop.login1.Manager",
+                                                    "/org/freedesktop/login1/Manager");
+            lm.prepare_for_sleep.connect ((start) => {
+                warning ("VJR prepare for sleep signal");
+                if (start) {
+                    GLib.Source.remove (time_timeout);
+                    time_timeout = GLib.Timeout.add_seconds (5, update_time);
+                }
+            });
+        } catch (IOError e) {
+            warning ("VJR: " + e.message);
+        }
     }
 
     private bool update_time () {
@@ -41,6 +62,7 @@ public class Greeter.DateTimeWidget : Gtk.Grid {
         time_label.label = now.format (Granite.DateTime.get_default_time_format (!is_24h, false));
         var delta = 60 - now.get_second ();
         time_timeout = GLib.Timeout.add_seconds (delta, update_time);
+        warning ("VJR update_time");
         return GLib.Source.REMOVE;
     }
 
