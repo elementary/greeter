@@ -8,7 +8,7 @@ public class Greeter.DateTimeWidget : Gtk.Grid {
 
     private Gtk.Label time_label;
     private Gtk.Label date_label;
-    private uint time_timeout = 0U;
+    private uint timeout_id = 0U;
 
     private LoginManager login_manager;
 
@@ -35,19 +35,19 @@ public class Greeter.DateTimeWidget : Gtk.Grid {
         add (time_label);
         add (date_label);
 
-        update_time ();
-        update_date ();
+        update_labels ();
+
         notify["is-24h"].connect (() => {
-            GLib.Source.remove (time_timeout);
-            update_time ();
+            GLib.Source.remove (timeout_id);
+            update_labels ();
         });
 
         try {
             login_manager = Bus.get_proxy_sync (BusType.SYSTEM, "org.freedesktop.login1", "/org/freedesktop/login1");
             login_manager.prepare_for_sleep.connect ((start) => {
                 if (start) {
-                    GLib.Source.remove (time_timeout);
-                    time_timeout = GLib.Timeout.add_seconds (1, update_time);
+                    GLib.Source.remove (timeout_id);
+                    timeout_id = GLib.Timeout.add_seconds (1, update_labels);
                 }
             });
         } catch (IOError e) {
@@ -55,19 +55,12 @@ public class Greeter.DateTimeWidget : Gtk.Grid {
         }
     }
 
-    private bool update_time () {
+    private bool update_labels () {
         var now = new GLib.DateTime.now_local ();
         time_label.label = now.format (Granite.DateTime.get_default_time_format (!is_24h, false));
-        var delta = 60 - now.get_second ();
-        time_timeout = GLib.Timeout.add_seconds (delta, update_time);
-        return GLib.Source.REMOVE;
-    }
-
-    private bool update_date () {
-        var now = new GLib.DateTime.now_local ();
         date_label.label = now.format (Granite.DateTime.get_default_date_format (true, true, false));
-        var delta = 24 * 60 * 60 - (now.get_second () + now.get_minute () * 60 + now.get_hour () * 60 * 60);
-        GLib.Timeout.add_seconds (delta, update_date);
+        var delta = 60 - now.get_second ();
+        timeout_id = GLib.Timeout.add_seconds (delta, update_labels);
         return GLib.Source.REMOVE;
     }
 }
