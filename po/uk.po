@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-13 22:30+0000\n"
-"PO-Revision-Date: 2020-09-16 01:14+0000\n"
+"PO-Revision-Date: 2020-09-19 01:14+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/desktop/"
 "greeter/uk/>\n"
@@ -35,7 +35,7 @@ msgstr "Повернути попередню конфігурацію"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
-msgstr ""
+msgstr "Увійти як гість"
 
 #: src/MainWindow.vala:64
 #, fuzzy
@@ -66,7 +66,7 @@ msgstr "Ввійти вручну"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr ""
+msgstr "Ім'я користувача"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
@@ -78,7 +78,7 @@ msgstr "Увійти"
 
 #: src/Cards/UserCard.vala:84
 msgid "Account disabled"
-msgstr ""
+msgstr "Обліковий запис вимкнено"
 
 #: src/Cards/UserCard.vala:171
 msgid "Session cannot be changed while user is logged in"
@@ -86,19 +86,19 @@ msgstr ""
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
-msgstr ""
+msgstr "Увімкнено Caps Lock та Num Lock"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Увімкнено Caps Lock"
 
 #: src/Widgets/CapsLockRevealer.vala:74
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Увімкнено Num Lock"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Проведіть своїм пальцем"
