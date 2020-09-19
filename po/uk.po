@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-13 22:30+0000\n"
-"PO-Revision-Date: 2020-09-19 01:14+0000\n"
+"PO-Revision-Date: 2020-09-20 20:14+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/desktop/"
 "greeter/uk/>\n"
@@ -38,9 +38,8 @@ msgid "Log in as Guest"
 msgstr "Увійти як гість"
 
 #: src/MainWindow.vala:64
-#, fuzzy
 msgid "Manual Login…"
-msgstr "Ввійти вручну"
+msgstr "Увійти власноруч…"
 
 #: src/MainWindow.vala:403
 msgid "Unable to Log In"
@@ -52,13 +51,15 @@ msgstr "Не вдалося розпочати сеанс."
 
 #: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Не вдалося запустити початкове налаштування"
 
 #: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Початкове налаштування створює вашого першого користувача. Без нього, ви не "
+"зможете увійти і, можливо, доведеться перевстановити ОС."
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -70,7 +71,7 @@ msgstr "Ім'я користувача"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "Спробуйте ім'я користувача"
 
 #: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
@@ -82,7 +83,7 @@ msgstr "Обліковий запис вимкнено"
 
 #: src/Cards/UserCard.vala:171
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "Сеанс неможливо змінити поки користувач увійшов"
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
