@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-13 22:30+0000\n"
-"PO-Revision-Date: 2020-09-20 20:14+0000\n"
+"PO-Revision-Date: 2020-09-22 14:23+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/desktop/"
 "greeter/uk/>\n"
@@ -63,7 +63,7 @@ msgstr ""
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
-msgstr "Ввійти вручну"
+msgstr "Увійти власноруч"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
