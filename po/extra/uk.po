@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-30 16:32+0000\n"
-"PO-Revision-Date: 2020-09-11 19:31+0000\n"
+"PO-Revision-Date: 2020-09-22 14:23+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/uk/>\n"
@@ -22,15 +22,15 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:7
 msgid "Greeter"
-msgstr ""
+msgstr "Екран вітання"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
-msgstr ""
+msgstr "Розблокуйте або увійдіть до свого пристрою"
 
 #: data/greeter.appdata.xml.in:24
 msgid "Fix an issue with media keys"
-msgstr ""
+msgstr "Виправлено проблему з мультимедійними клавішами"
 
 #: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:33
 #: data/greeter.appdata.xml.in:47
@@ -40,54 +40,55 @@ msgstr "Оновлено переклади"
 #: data/greeter.appdata.xml.in:32
 msgid "Ensure that manual login is available when users are hidden"
 msgstr ""
+"Переконайтесь, що власноручний вхід доступний, коли користувачів приховано"
 
 #: data/greeter.appdata.xml.in:40
 msgid "Save last user on attempted login"
-msgstr ""
+msgstr "Зберігається останній користувач за спроби входу"
 
 #: data/greeter.appdata.xml.in:41
 msgid "Handle all background aspect ratios"
-msgstr ""
+msgstr "Обробляйте всіх пропорції тла"
 
 #: data/greeter.appdata.xml.in:42
 msgid "Give non-focused user cards smaller usernames"
-msgstr ""
+msgstr "Несфокусовані картки користувача отримали зменшені імена користувачів"
 
 #: data/greeter.appdata.xml.in:43
 msgid "Better respect NumLock settings"
-msgstr ""
+msgstr "Поліпшено підтримку параметрів NumLock"
 
 #: data/greeter.appdata.xml.in:44
 msgid "Enable sounds in greeter"
-msgstr ""
+msgstr "Увімкнено звуки для екрана вітання"
 
 #: data/greeter.appdata.xml.in:45
 msgid "Select password text on error instead of immediately clearing it"
-msgstr ""
+msgstr "Вибір тексту пароля за помилки замість негайного його очищення"
 
 #: data/greeter.appdata.xml.in:46
 msgid "Code cleanup"
-msgstr ""
+msgstr "Очищено код"
 
 #: data/greeter.appdata.xml.in:53
 msgid "Extensive overhaul"
-msgstr ""
+msgstr "Значна переробка"
 
 #: data/greeter.appdata.xml.in:55
 msgid "New card-based appearance"
-msgstr ""
+msgstr "Новий, заснований на картках, зовнішній вигляд"
 
 #: data/greeter.appdata.xml.in:56
 msgid "Improved HiDPI support"
-msgstr ""
+msgstr "Поліпшено підтримку HiDPI"
 
 #: data/greeter.appdata.xml.in:57
 msgid "AccountsService functionality"
-msgstr ""
+msgstr "Функціональність AccountsService"
 
 #: data/greeter.appdata.xml.in:58
 msgid "Various bug fixes"
-msgstr ""
+msgstr "Різні виправлення"
 
 #: data/greeter.appdata.xml.in:94
 msgid "elementary, Inc."
