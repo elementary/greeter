@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-30 16:32+0000\n"
+"POT-Creation-Date: 2020-10-03 19:37+0000\n"
 "PO-Revision-Date: 2020-04-05 17:48+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
-"Language-Team: Marathi <https://l10n.elementary.io/projects/desktop/"
-"greeter-extra/mr/>\n"
+"Language-Team: Marathi <https://l10n.elementary.io/projects/desktop/greeter-"
+"extra/mr/>\n"
 "Language: mr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,67 +27,67 @@ msgstr "ग्रीटर"
 msgid "Unlock or log in to your device"
 msgstr "डिव्हाइस अनलॉक करा किंवा आपल्या डिव्हाइसवर लॉग इन करा"
 
-#: data/greeter.appdata.xml.in:24
-msgid "Fix an issue with media keys"
-msgstr "मीडिया की सह अडचणीचे निराकरण करा"
-
-#: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:33
-#: data/greeter.appdata.xml.in:47
+#: data/greeter.appdata.xml.in:24 data/greeter.appdata.xml.in:32
+#: data/greeter.appdata.xml.in:40 data/greeter.appdata.xml.in:54
 msgid "Updated translations"
 msgstr "अद्ययावत भाषांतर"
 
-#: data/greeter.appdata.xml.in:32
+#: data/greeter.appdata.xml.in:31
+msgid "Fix an issue with media keys"
+msgstr "मीडिया की सह अडचणीचे निराकरण करा"
+
+#: data/greeter.appdata.xml.in:39
 msgid "Ensure that manual login is available when users are hidden"
 msgstr "वापरकर्ते लपवलेले असताना मॅन्युअल लॉगिन उपलब्ध असल्याचे सुनिश्चित करा"
 
-#: data/greeter.appdata.xml.in:40
+#: data/greeter.appdata.xml.in:47
 msgid "Save last user on attempted login"
 msgstr "प्रयत्न केलेल्या लॉगिनवर शेवटचा वापरकर्ता जतन करा"
 
-#: data/greeter.appdata.xml.in:41
+#: data/greeter.appdata.xml.in:48
 msgid "Handle all background aspect ratios"
 msgstr "सर्व पार्श्वभूमी पैलू गुणोत्तर हाताळा"
 
-#: data/greeter.appdata.xml.in:42
+#: data/greeter.appdata.xml.in:49
 msgid "Give non-focused user cards smaller usernames"
 msgstr "केंद्रित नसलेल्या वापरकर्ता कार्डांना लहान वापरकर्तानावे द्या"
 
-#: data/greeter.appdata.xml.in:43
+#: data/greeter.appdata.xml.in:50
 msgid "Better respect NumLock settings"
 msgstr "नूमलॉक सेटिंग्जचा आदर करणे बरें"
 
-#: data/greeter.appdata.xml.in:44
+#: data/greeter.appdata.xml.in:51
 msgid "Enable sounds in greeter"
 msgstr "ग्रीटरमध्ये आवाज सक्षम करा"
 
-#: data/greeter.appdata.xml.in:45
+#: data/greeter.appdata.xml.in:52
 msgid "Select password text on error instead of immediately clearing it"
 msgstr "पासवर्ड मजकूर त्वरित साफ करण्याऐवजी एक त्रुटी मजकूर निवडा"
 
-#: data/greeter.appdata.xml.in:46
+#: data/greeter.appdata.xml.in:53
 msgid "Code cleanup"
 msgstr "कोडची साफसफाई"
 
-#: data/greeter.appdata.xml.in:53
+#: data/greeter.appdata.xml.in:60
 msgid "Extensive overhaul"
 msgstr "व्यापक तपासणी"
 
-#: data/greeter.appdata.xml.in:55
+#: data/greeter.appdata.xml.in:62
 msgid "New card-based appearance"
 msgstr "नवीन कार्ड-आधारित देखावा"
 
-#: data/greeter.appdata.xml.in:56
+#: data/greeter.appdata.xml.in:63
 msgid "Improved HiDPI support"
 msgstr "सुधारित हायडीपीआय समर्थन"
 
-#: data/greeter.appdata.xml.in:57
+#: data/greeter.appdata.xml.in:64
 msgid "AccountsService functionality"
 msgstr "अकाउंट्स सर्व्हिसची कार्यक्षमता"
 
-#: data/greeter.appdata.xml.in:58
+#: data/greeter.appdata.xml.in:65
 msgid "Various bug fixes"
 msgstr "विविध दोष निराकरणे"
 
-#: data/greeter.appdata.xml.in:94
+#: data/greeter.appdata.xml.in:101
 msgid "elementary, Inc."
 msgstr "एलिमेंटरी,Inc."
