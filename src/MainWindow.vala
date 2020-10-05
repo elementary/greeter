@@ -307,13 +307,13 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void maximize_window () {
-        int x, y;
         var display = Gdk.Display.get_default ();
         unowned Gdk.Seat seat = display.get_default_seat ();
         unowned Gdk.Device? pointer = seat.get_pointer ();
 
         Gdk.Monitor? monitor;
         if (pointer != null) {
+            int x, y;
             pointer.get_position (null, out x, out y);
             monitor = display.get_monitor_at_point (x, y);
         } else {
