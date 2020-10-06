@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13 22:30+0000\n"
+"POT-Creation-Date: 2020-10-03 19:37+0000\n"
 "PO-Revision-Date: 2020-08-08 11:13+0000\n"
 "Last-Translator: imgradeone Yan <imgradeone@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
@@ -20,15 +20,15 @@ msgstr ""
 "X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-14 06:58+0000\n"
 
-#: compositor/WindowManager.vala:512
+#: compositor/WindowManager.vala:516
 msgid "Does the display look OK?"
 msgstr "显示看起来正常吗？"
 
-#: compositor/WindowManager.vala:515
+#: compositor/WindowManager.vala:519
 msgid "Keep This Configuration"
 msgstr "保持当前配置"
 
-#: compositor/WindowManager.vala:516
+#: compositor/WindowManager.vala:520
 msgid "Restore Previous Configuration"
 msgstr "恢复上次的配置"
 
@@ -72,15 +72,15 @@ msgstr "用户名"
 msgid "Try username"
 msgstr "试试 username"
 
-#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:81 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "登录"
 
-#: src/Cards/UserCard.vala:84
+#: src/Cards/UserCard.vala:87
 msgid "Account disabled"
 msgstr "账户已禁用"
 
-#: src/Cards/UserCard.vala:171
+#: src/Cards/UserCard.vala:174
 msgid "Session cannot be changed while user is logged in"
 msgstr "用户处于登入状态时无法更改会话"
 

@@ -160,7 +160,7 @@ namespace GreeterCompositor {
         }
 
 #if HAS_MUTTER334
-        public bool ungrab_accelerators (uint[] actions) throws DBusError, IOError {
+        public bool ungrab_accelerators (uint[] actions) throws GLib.Error {
             foreach (uint action in actions) {
                 ungrab_accelerator (action);
             }

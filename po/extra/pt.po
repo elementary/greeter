@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-30 16:32+0000\n"
+"POT-Creation-Date: 2020-10-03 19:37+0000\n"
 "PO-Revision-Date: 2020-04-23 19:10+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/desktop/"
@@ -27,71 +27,71 @@ msgstr "Boas-vindas"
 msgid "Unlock or log in to your device"
 msgstr "Desbloquear ou iniciar sessão no seu dispositivo"
 
-#: data/greeter.appdata.xml.in:24
-msgid "Fix an issue with media keys"
-msgstr "Corrige um problema com as teclas multimédia"
-
-#: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:33
-#: data/greeter.appdata.xml.in:47
+#: data/greeter.appdata.xml.in:24 data/greeter.appdata.xml.in:32
+#: data/greeter.appdata.xml.in:40 data/greeter.appdata.xml.in:54
 msgid "Updated translations"
 msgstr "Traduções atualizadas"
 
-#: data/greeter.appdata.xml.in:32
+#: data/greeter.appdata.xml.in:31
+msgid "Fix an issue with media keys"
+msgstr "Corrige um problema com as teclas multimédia"
+
+#: data/greeter.appdata.xml.in:39
 msgid "Ensure that manual login is available when users are hidden"
 msgstr ""
 "Certifique-se de que o iniciar sessão manual está disponível quando os "
 "utilizadores estão ocultos"
 
-#: data/greeter.appdata.xml.in:40
+#: data/greeter.appdata.xml.in:47
 msgid "Save last user on attempted login"
 msgstr "Guardar o último utilizador na tentativa de iniciar sessão"
 
-#: data/greeter.appdata.xml.in:41
+#: data/greeter.appdata.xml.in:48
 msgid "Handle all background aspect ratios"
 msgstr "Trata de todas as relações de aspeto do fundo"
 
-#: data/greeter.appdata.xml.in:42
+#: data/greeter.appdata.xml.in:49
 msgid "Give non-focused user cards smaller usernames"
 msgstr ""
 "Atribuir nomes de utilizadores menores aos cartões de utilizador não-focados"
 
-#: data/greeter.appdata.xml.in:43
+#: data/greeter.appdata.xml.in:50
 msgid "Better respect NumLock settings"
 msgstr "Melhor respeito pelas definições do NumLock"
 
-#: data/greeter.appdata.xml.in:44
+#: data/greeter.appdata.xml.in:51
 msgid "Enable sounds in greeter"
 msgstr "Ativar sons no Boas-vindas"
 
-#: data/greeter.appdata.xml.in:45
+#: data/greeter.appdata.xml.in:52
 msgid "Select password text on error instead of immediately clearing it"
 msgstr ""
 "Selecione o texto da palavra-passe no erro em vez de o limpar imediatamente"
 
-#: data/greeter.appdata.xml.in:46
+#: data/greeter.appdata.xml.in:53
 msgid "Code cleanup"
 msgstr "Limpeza do código"
 
-#: data/greeter.appdata.xml.in:53
+#: data/greeter.appdata.xml.in:60
 msgid "Extensive overhaul"
 msgstr "Revisão profunda"
 
-#: data/greeter.appdata.xml.in:55
+#: data/greeter.appdata.xml.in:62
 msgid "New card-based appearance"
 msgstr "Nova aparência baseada em cartão"
 
-#: data/greeter.appdata.xml.in:56
+#: data/greeter.appdata.xml.in:63
 msgid "Improved HiDPI support"
 msgstr "Suporte a HiDPI melhorado"
 
-#: data/greeter.appdata.xml.in:57
+#: data/greeter.appdata.xml.in:64
 msgid "AccountsService functionality"
 msgstr "Funcionalidade de Serviço de contas"
 
-#: data/greeter.appdata.xml.in:58
+#: data/greeter.appdata.xml.in:65
 msgid "Various bug fixes"
 msgstr "Várias correções de erros"
 
-#: data/greeter.appdata.xml.in:94
+#: data/greeter.appdata.xml.in:101
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
