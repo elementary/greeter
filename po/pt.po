@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-03 19:37+0000\n"
-"PO-Revision-Date: 2020-05-03 15:10+0000\n"
+"PO-Revision-Date: 2020-10-10 01:42+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/desktop/"
 "greeter/pt/>\n"
@@ -38,7 +38,7 @@ msgstr "Iniciar sessão como convidado"
 
 #: src/MainWindow.vala:64
 msgid "Manual Login…"
-msgstr "Iniciar Sessão Manual…"
+msgstr "Início de sessão manual…"
 
 #: src/MainWindow.vala:403
 msgid "Unable to Log In"
@@ -46,7 +46,7 @@ msgstr "Não foi possível iniciar sessão"
 
 #: src/MainWindow.vala:404
 msgid "Starting the session has failed."
-msgstr "O início da sessão falhou."
+msgstr "Falha ao iniciar sessão."
 
 #: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
@@ -62,7 +62,7 @@ msgstr ""
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
-msgstr "Iniciar Sessão Manual"
+msgstr "Início de sessão manual"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
@@ -74,7 +74,7 @@ msgstr "Tentar nome de utilizador"
 
 #: src/Cards/UserCard.vala:81 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
-msgstr "Iniciar Sessão"
+msgstr "Iniciar sessão"
 
 #: src/Cards/UserCard.vala:87
 msgid "Account disabled"
@@ -100,7 +100,7 @@ msgstr "O Num Lock está ligado"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
-msgstr "Palavra passe"
+msgstr "Palavra-passe"
 
 #~ msgid "Set properties of own user"
 #~ msgstr "Definir propriedades do próprio utilizador"

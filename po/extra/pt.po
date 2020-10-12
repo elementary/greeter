@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-03 19:37+0000\n"
-"PO-Revision-Date: 2020-04-23 19:10+0000\n"
+"PO-Revision-Date: 2020-10-10 01:42+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/pt/>\n"
@@ -39,7 +39,7 @@ msgstr "Corrige um problema com as teclas multimédia"
 #: data/greeter.appdata.xml.in:39
 msgid "Ensure that manual login is available when users are hidden"
 msgstr ""
-"Certifique-se de que o iniciar sessão manual está disponível quando os "
+"Certifique-se de que o início de sessão manual está disponível quando os "
 "utilizadores estão ocultos"
 
 #: data/greeter.appdata.xml.in:47
@@ -53,7 +53,7 @@ msgstr "Trata de todas as relações de aspeto do fundo"
 #: data/greeter.appdata.xml.in:49
 msgid "Give non-focused user cards smaller usernames"
 msgstr ""
-"Atribuir nomes de utilizadores menores aos cartões de utilizador não-focados"
+"Dar aos cartões de utilizador não focados nomes de utilizador mais pequenos"
 
 #: data/greeter.appdata.xml.in:50
 msgid "Better respect NumLock settings"
@@ -86,7 +86,7 @@ msgstr "Suporte a HiDPI melhorado"
 
 #: data/greeter.appdata.xml.in:64
 msgid "AccountsService functionality"
-msgstr "Funcionalidade de Serviço de contas"
+msgstr "Funcionalidade de Serviço de Contas"
 
 #: data/greeter.appdata.xml.in:65
 msgid "Various bug fixes"
