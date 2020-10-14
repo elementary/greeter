@@ -3,6 +3,7 @@ gobject_dep = dependency('gobject-2.0')
 glib_dep = dependency('glib-2.0')
 gtk_dep = dependency('gtk+-3.0')
 granite_dep = dependency('granite')
+hdy_dep = dependency('libhandy-1', version: '>= 0.90.0')
 lightdm_dep = dependency('liblightdm-gobject-1')
 
 install_path = join_paths(get_option('prefix'), get_option('sbindir'))
@@ -51,7 +52,7 @@ executable(
     'Widgets/PasswordEntry.vala',
     'Widgets/SessionButton.vala',
     config_header,
-    dependencies: [ actservice_dep, gobject_dep, glib_dep, gtk_dep, granite_dep, lightdm_dep ],
+    dependencies: [ actservice_dep, gobject_dep, glib_dep, gtk_dep, granite_dep, hdy_dep, lightdm_dep ],
     install : true,
     install_dir: install_path
 )
