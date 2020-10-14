@@ -13,6 +13,7 @@ You'll need the following dependencies:
 * libgdk-pixbuf2.0-dev
 * libgranite-dev >= 5.2.3
 * libgtk-3-dev
+* libhandy-1-dev >= 0.90.0
 * liblightdm-gobject-1-dev
 * libmutter
 * libwingpanel-2.0-dev
