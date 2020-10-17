@@ -151,12 +151,17 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         update_collapsed_class ();
 
-        Granite.Widgets.Avatar avatar;
-        if (lightdm_user.image != null) {
-            avatar = new Granite.Widgets.Avatar.from_file (lightdm_user.image, 64);
-        } else {
-            avatar = new Granite.Widgets.Avatar.with_default_icon (64);
-        }
+        var avatar = new Hdy.Avatar (64, lightdm_user.display_name, true) {
+            margin = 6
+        };
+        avatar.set_image_load_func ((size) => {
+            try {
+                return new Gdk.Pixbuf.from_file_at_size (lightdm_user.image, size, size);
+            } catch (Error e) {
+                debug (e.message);
+                return null;
+            }
+        });
 
         var avatar_overlay = new Gtk.Overlay ();
         avatar_overlay.valign = Gtk.Align.START;
