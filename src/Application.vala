@@ -23,6 +23,10 @@ public int main (string[] args) {
     Intl.setlocale (LocaleCategory.ALL, "");
     Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
     Intl.textdomain (Constants.GETTEXT_PACKAGE);
+    
+    // Ensure we present ourselves as Pantheon so we pick up the right GSettings
+    // overrides
+    GLib.Environment.set_variable ("XDG_CURRENT_DESKTOP", "Pantheon", true);
 
     var settings_daemon = new Greeter.SettingsDaemon ();
     settings_daemon.start ();
