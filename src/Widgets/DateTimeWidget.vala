@@ -45,9 +45,9 @@ public class Greeter.DateTimeWidget : Gtk.Grid {
         try {
             login_manager = Bus.get_proxy_sync (BusType.SYSTEM, "org.freedesktop.login1", "/org/freedesktop/login1");
             login_manager.prepare_for_sleep.connect ((start) => {
-                if (start) {
+                if (!start) {
                     GLib.Source.remove (timeout_id);
-                    timeout_id = GLib.Timeout.add_seconds (1, update_labels);
+                    update_labels ();
                 }
             });
         } catch (IOError e) {
