@@ -15,11 +15,7 @@ conf_data.set('GETTEXT_PACKAGE', meson.project_name())
 gsd_dir = get_option('gsd-dir')
 
 if gsd_dir == ''
-    if ubuntu_patched_gsd
-        gsd_dir = join_paths(get_option('prefix'), 'lib', 'gnome-settings-daemon' + '/')
-    else
-        gsd_dir = join_paths(get_option('prefix'), get_option('libexecdir') + '/')
-    endif
+    gsd_dir = join_paths(get_option('prefix'), get_option('libexecdir') + '/')
 endif
 
 message('Path to gnome-settings-daemon: ' + gsd_dir)
