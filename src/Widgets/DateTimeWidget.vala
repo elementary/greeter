@@ -1,9 +1,16 @@
+[DBus (name = "org.freedesktop.login1.Manager")]
+interface LoginManager : GLib.Object {
+    public signal void prepare_for_sleep (bool start);
+}
+
 public class Greeter.DateTimeWidget : Gtk.Grid {
     public bool is_24h { get; set; default=true; }
 
     private Gtk.Label time_label;
     private Gtk.Label date_label;
-    private uint time_timeout = 0U;
+    private uint timeout_id = 0U;
+
+    private LoginManager login_manager;
 
     construct {
         orientation = Gtk.Orientation.VERTICAL;
@@ -28,27 +35,41 @@ public class Greeter.DateTimeWidget : Gtk.Grid {
         add (time_label);
         add (date_label);
 
-        update_time ();
-        update_date ();
+        update_labels ();
+
         notify["is-24h"].connect (() => {
-            GLib.Source.remove (time_timeout);
-            update_time ();
+            GLib.Source.remove (timeout_id);
+            update_labels ();
         });
+
+        setup_for_sleep.begin ();
     }
 
-    private bool update_time () {
+    private async void setup_for_sleep () {
+        try {
+            login_manager = yield Bus.get_proxy (
+                BusType.SYSTEM,
+                "org.freedesktop.login1",
+                "/org/freedesktop/login1"
+            );
+
+            login_manager.prepare_for_sleep.connect ((start) => {
+                if (!start) {
+                    GLib.Source.remove (timeout_id);
+                    update_labels ();
+                }
+            });
+        } catch (IOError e) {
+            warning (e.message);
+        }
+    }
+
+    private bool update_labels () {
         var now = new GLib.DateTime.now_local ();
         time_label.label = now.format (Granite.DateTime.get_default_time_format (!is_24h, false));
-        var delta = 60 - now.get_second ();
-        time_timeout = GLib.Timeout.add_seconds (delta, update_time);
-        return GLib.Source.REMOVE;
-    }
-
-    private bool update_date () {
-        var now = new GLib.DateTime.now_local ();
         date_label.label = now.format (Granite.DateTime.get_default_date_format (true, true, false));
-        var delta = 24 * 60 * 60 - (now.get_second () + now.get_minute () * 60 + now.get_hour () * 60 * 60);
-        GLib.Timeout.add_seconds (delta, update_date);
+        var delta = 60 - now.get_second ();
+        timeout_id = GLib.Timeout.add_seconds (delta, update_labels);
         return GLib.Source.REMOVE;
     }
 }
