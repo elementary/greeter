@@ -46,20 +46,22 @@ public class Greeter.DateTimeWidget : Gtk.Grid {
     }
 
     private async void setup_for_sleep () {
-        Bus.get_proxy.begin<LoginManager> (BusType.SYSTEM, "org.freedesktop.login1", "/org/freedesktop/login1",
-            0, null, (obj, res) => {
-            try {
-                login_manager = Bus.get_proxy.end<LoginManager> (res);
-            } catch (IOError e) {
-                warning (e.message);
-            }
+        try {
+            login_manager = yield Bus.get_proxy (
+                BusType.SYSTEM,
+                "org.freedesktop.login1",
+                "/org/freedesktop/login1"
+            );
+
             login_manager.prepare_for_sleep.connect ((start) => {
                 if (!start) {
                     GLib.Source.remove (timeout_id);
                     update_labels ();
                 }
             });
-        });
+        } catch (IOError e) {
+            warning (e.message);
+        }
     }
 
     private bool update_labels () {
