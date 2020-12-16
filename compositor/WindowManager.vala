@@ -72,7 +72,7 @@ namespace GreeterCompositor {
         Gee.HashSet<Meta.WindowActor> unminimizing = new Gee.HashSet<Meta.WindowActor> ();
         GLib.HashTable<Meta.Window, int> ws_assoc = new GLib.HashTable<Meta.Window, int> (direct_hash, direct_equal);
 
-        public WindowManager () {
+        construct {
             info = Meta.PluginInfo () {name = "GreeterCompositor", version = Constants.VERSION, author = "elementary LLC.",
                 license = "GPLv3", description = "The greeter compositor"};
 
@@ -82,7 +82,7 @@ namespace GreeterCompositor {
         }
 
         public override void start () {
-            Util.later_add (LaterType.BEFORE_REDRAW, show_stage);
+            show_stage ();
 
 #if HAS_MUTTER330
             unowned Meta.Display display = get_display ();
@@ -106,7 +106,7 @@ namespace GreeterCompositor {
             system_background.refresh ();
         }
 
-        bool show_stage () {
+        void show_stage () {
 #if HAS_MUTTER330
             unowned Meta.Display display = get_display ();
 #else
@@ -192,8 +192,6 @@ namespace GreeterCompositor {
 
             // let the session manager move to the next phase
             Meta.register_with_session ();
-
-            return false;
         }
 
         public uint32[] get_all_xids () {

@@ -62,7 +62,9 @@
             system_background.set_file (texture_file, GDesktop.BackgroundStyle.WALLPAPER);
         }
 
-#if HAS_MUTTER332
+#if HAS_MUTTER338
+            ((Meta.BackgroundContent)background_actor.content).background = system_background;
+#elif HAS_MUTTER332
             background_actor.background = system_background;
 #else
             background = system_background;
