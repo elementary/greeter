@@ -252,6 +252,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         unowned string? act_path = act_user.get_object_path ();
         if (act_path != null) {
             try {
+
                 greeter_act = GLib.Bus.get_proxy_sync (GLib.BusType.SYSTEM,
                                                        "org.freedesktop.Accounts",
                                                        act_path,
@@ -261,12 +262,16 @@ public class Greeter.UserCard : Greeter.BaseCard {
                                                         "org.freedesktop.Accounts",
                                                         act_path,
                                                         GLib.DBusProxyFlags.GET_INVALIDATED_PROPERTIES);
+
                 is_24h = greeter_act.time_format != "12h";
                 sleep_inactive_ac_timeout = greeter_act.sleep_inactive_ac_timeout;
                 sleep_inactive_ac_type = greeter_act.sleep_inactive_ac_type;
                 sleep_inactive_battery_timeout = greeter_act.sleep_inactive_battery_timeout;
                 sleep_inactive_battery_type = greeter_act.sleep_inactive_battery_type;
+                prefers_color_scheme = greeter_act.prefers_color_scheme;
+                prefers_accent_color = greeter_act.prefers_accent_color;
                 ((GLib.DBusProxy) greeter_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
+
                     string time_format;
                     changed_properties.lookup ("TimeFormat", "s", out time_format);
                     is_24h = time_format != "12h";
@@ -275,6 +280,13 @@ public class Greeter.UserCard : Greeter.BaseCard {
                     changed_properties.lookup ("SleepInactiveACType", "i", out _sleep_inactive_ac_type);
                     changed_properties.lookup ("SleepInactiveBatteryTimeout", "i", out _sleep_inactive_battery_timeout);
                     changed_properties.lookup ("SleepInactiveBatteryType", "i", out _sleep_inactive_battery_type);
+
+                    int prefers_color_scheme_out;
+                    changed_properties.lookup ("PrefersColorScheme", "i", out prefers_color_scheme_out);
+                    prefers_color_scheme = prefers_color_scheme_out;
+                    int prefers_accent_color_out;
+                    changed_properties.lookup ("PrefersColorScheme", "i", out prefers_accent_color_out);
+                    prefers_accent_color = prefers_accent_color_out;
                 });
             } catch (Error e) {
                 critical (e.message);
