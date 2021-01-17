@@ -59,6 +59,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         set_visual (get_screen ().get_rgba_visual ());
 
+        var open_terminal_button = new Gtk.Button.with_label (_("Open Terminal"));
+
         var guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
 
         manual_login_button = new Gtk.ToggleButton.with_label (_("Manual Login…"));
@@ -69,12 +71,16 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         extra_login_grid.column_spacing = 12;
         extra_login_grid.column_homogeneous = true;
 
+        extra_login_grid.attach (open_terminal_button, 0, 0);
+        open_terminal_button.show ();
+
         try {
             var gtksettings = Gtk.Settings.get_default ();
             gtksettings.gtk_icon_theme_name = "elementary";
             gtksettings.gtk_theme_name = "io.elementary.stylesheet.blueberry";
 
             var css_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, "dark");
+            open_terminal_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             guest_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             manual_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         } catch (Error e) {}
@@ -148,6 +154,31 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         });
 
+        open_terminal_button.clicked.connect (() => {
+            Timeout.add (500, () => {
+                try {
+                    var terminal = AppInfo.create_from_commandline ("io.elementary.terminal", null, GLib.AppInfoCreateFlags.NONE);
+                    terminal.launch (null, null);
+                } catch (Error e) {
+                    string error_text = _("Unable to Launch Terminal");
+                    critical ("%s: %s", error_text, e.message);
+
+                    var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
+                        error_text,
+                        e.message,
+                        "dialog-error",
+                        Gtk.ButtonsType.CLOSE
+                    );
+
+                    error_dialog.show_error_details (e.message);
+                    error_dialog.run ();
+                    error_dialog.destroy ();
+                }
+
+                return Source.REMOVE;
+            });
+        });
+
         guest_login_button.clicked.connect (() => {
             try {
                 lightdm_greeter.authenticate_as_guest ();
@@ -180,14 +211,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         lightdm_greeter.notify["has-guest-account-hint"].connect (() => {
             if (lightdm_greeter.has_guest_account_hint && guest_login_button.parent == null) {
-                extra_login_grid.attach (guest_login_button, 0, 0);
+                extra_login_grid.attach (guest_login_button, 1, 0);
                 guest_login_button.show ();
             }
         });
 
         lightdm_greeter.notify["show-manual-login-hint"].connect (() => {
             if (lightdm_greeter.show_manual_login_hint && manual_login_button.parent == null) {
-                extra_login_grid.attach (manual_login_button, 1, 0);
+                extra_login_grid.attach (manual_login_button, 2, 0);
                 manual_login_button.show ();
             }
         });
