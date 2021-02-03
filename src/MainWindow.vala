@@ -34,6 +34,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private unowned Greeter.BaseCard current_card;
     private unowned LightDM.UserList lightdm_user_list;
 
+    private bool installer_mode = false;
+
     private const uint[] NAVIGATION_KEYS = {
         Gdk.Key.Up,
         Gdk.Key.Down,
@@ -405,7 +407,21 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
             var action_group = get_action_group ("session");
             try {
-                lightdm_greeter.start_session_sync (action_group.get_action_state ("select").get_string ());
+                var session = action_group.get_action_state ("select").get_string ();
+                if (installer_mode) {
+                    critical ("installer mode");
+                    var demo_mode_file = GLib.File.new_for_path ("/var/lib/lightdm-data/lightdm/demo-mode");
+                    if (demo_mode_file.query_exists ()) {
+                        critical ("pantheon");
+                        session = "pantheon";
+                        demo_mode_file.@delete ();
+                    } else {
+                        critical ("installer");
+                        session = "installer";
+                    }
+                }
+
+                lightdm_greeter.start_session_sync (session);
                 return;
             } catch (Error e) {
                 var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
@@ -440,6 +456,12 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         if (lightdm_greeter.default_session_hint != null) {
             get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
+        }
+
+        var installer_desktop = new DesktopAppInfo ("io.elementary.installer.desktop");
+        if (installer_desktop != null) {
+            critical ("enabling installer mode");
+            installer_mode = true;
         }
 
         if (lightdm_user_list.length > 0) {
