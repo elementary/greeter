@@ -56,7 +56,7 @@ if mutter334_dep.found()
 	vala_flags = ['--define', 'HAS_MUTTER330', '--define', 'HAS_MUTTER332', '--define', 'HAS_MUTTER334']
 endif
 
-mutter336_dep = dependency('libmutter-6', version: ['>= 3.35.1', '< 3.38'], required: false)
+mutter336_dep = dependency('libmutter-6', version: ['>= 3.35.1', '< 3.37'], required: false)
 if mutter336_dep.found()
 	libmutter_dep = dependency('libmutter-6', version: '>= 3.35.1')
 	mutter_dep = [
@@ -67,6 +67,17 @@ if mutter336_dep.found()
 	vala_flags = ['--define', 'HAS_MUTTER330', '--define', 'HAS_MUTTER332', '--define', 'HAS_MUTTER334', '--define', 'HAS_MUTTER336']
 endif
 
+mutter338_dep = dependency('libmutter-7', version: ['>= 3.37', '< 3.39'], required: false)
+if mutter338_dep.found()
+	libmutter_dep = dependency('libmutter-7', version: '>= 3.37')
+	mutter_dep = [
+	    libmutter_dep,
+		dependency('mutter-cogl-7'), dependency('mutter-cogl-pango-7'),
+		dependency('mutter-clutter-7')
+	]
+	vala_flags = ['--define', 'HAS_MUTTER330', '--define', 'HAS_MUTTER332', '--define', 'HAS_MUTTER334', '--define', 'HAS_MUTTER336', '--define', 'HAS_MUTTER338']
+endif
+
 if mutter_dep.length() == 0
 	error ('No supported mutter library found!')
 endif
@@ -75,13 +86,14 @@ mutter_typelib_dir = libmutter_dep.get_pkgconfig_variable('typelibdir')
 
 # Here is the real Compositor work
 compositor_files = files(
-  'main.vala',
-  'WindowManager.vala',
-  'MediaFeedback.vala',
-  'DBus.vala',
   'DBusAccelerator.vala',
+  'DBus.vala',
+  'KeyboardManager.vala',
+  'main.vala',
+  'MediaFeedback.vala',
   'SystemBackground.vala',
-  'Utils.vala'
+  'Utils.vala',
+  'WindowManager.vala'
 )
 
 executable(

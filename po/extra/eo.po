@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-30 16:32+0000\n"
+"POT-Creation-Date: 2020-10-03 19:37+0000\n"
 "PO-Revision-Date: 2020-03-17 15:09+0000\n"
 "Last-Translator: Shtonchjo <shtonchjo@gmail.com>\n"
 "Language-Team: Esperanto <https://l10n.elementary.io/projects/desktop/"
@@ -27,67 +27,67 @@ msgstr "Salutilo"
 msgid "Unlock or log in to your device"
 msgstr "Malŝlosi aŭ ensaluti vian aparaton"
 
-#: data/greeter.appdata.xml.in:24
-msgid "Fix an issue with media keys"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:33
-#: data/greeter.appdata.xml.in:47
+#: data/greeter.appdata.xml.in:24 data/greeter.appdata.xml.in:32
+#: data/greeter.appdata.xml.in:40 data/greeter.appdata.xml.in:54
 msgid "Updated translations"
 msgstr "Ĝisdatigitaj tradukoj"
 
-#: data/greeter.appdata.xml.in:32
+#: data/greeter.appdata.xml.in:31
+msgid "Fix an issue with media keys"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:39
 msgid "Ensure that manual login is available when users are hidden"
 msgstr "Certiĝi ke mana ensaluto maleblas kiam uzantoj estas kaŝitaj"
 
-#: data/greeter.appdata.xml.in:40
+#: data/greeter.appdata.xml.in:47
 msgid "Save last user on attempted login"
 msgstr "Registri la lastan uzanton ĉe ensaluta provo"
 
-#: data/greeter.appdata.xml.in:41
+#: data/greeter.appdata.xml.in:48
 msgid "Handle all background aspect ratios"
 msgstr "Pritrakti ĉiujn fonajn proporciojn"
 
-#: data/greeter.appdata.xml.in:42
+#: data/greeter.appdata.xml.in:49
 msgid "Give non-focused user cards smaller usernames"
 msgstr "Malgrandigi la uzantonomojn de ne fokusitaj uzanto-kartoj"
 
-#: data/greeter.appdata.xml.in:43
+#: data/greeter.appdata.xml.in:50
 msgid "Better respect NumLock settings"
 msgstr "Pli respekti la agordojn de la nombrobaskula klavo"
 
-#: data/greeter.appdata.xml.in:44
+#: data/greeter.appdata.xml.in:51
 msgid "Enable sounds in greeter"
 msgstr "Ebligi la sonojn de la salutilo"
 
-#: data/greeter.appdata.xml.in:45
+#: data/greeter.appdata.xml.in:52
 msgid "Select password text on error instead of immediately clearing it"
 msgstr "Elekti la pasvortan tekston ĉe eraro, anstataŭ tuj forigi ĝin"
 
-#: data/greeter.appdata.xml.in:46
+#: data/greeter.appdata.xml.in:53
 msgid "Code cleanup"
 msgstr "Koda purigado"
 
-#: data/greeter.appdata.xml.in:53
+#: data/greeter.appdata.xml.in:60
 msgid "Extensive overhaul"
 msgstr "Plena revizio"
 
-#: data/greeter.appdata.xml.in:55
+#: data/greeter.appdata.xml.in:62
 msgid "New card-based appearance"
 msgstr "Nova fasado bazita sur kartoj"
 
-#: data/greeter.appdata.xml.in:56
+#: data/greeter.appdata.xml.in:63
 msgid "Improved HiDPI support"
 msgstr "Plibonigita subteno de HiDPI"
 
-#: data/greeter.appdata.xml.in:57
+#: data/greeter.appdata.xml.in:64
 msgid "AccountsService functionality"
 msgstr "AccountsService-funkcio"
 
-#: data/greeter.appdata.xml.in:58
+#: data/greeter.appdata.xml.in:65
 msgid "Various bug fixes"
 msgstr "Diversaj sencimigoj"
 
-#: data/greeter.appdata.xml.in:94
+#: data/greeter.appdata.xml.in:101
 msgid "elementary, Inc."
 msgstr "elementary, Inc."

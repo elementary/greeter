@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13 22:30+0000\n"
-"PO-Revision-Date: 2019-12-15 23:07+0000\n"
-"Last-Translator: Daniel Foré <daniel@elementary.io>\n"
+"POT-Creation-Date: 2020-10-03 19:37+0000\n"
+"PO-Revision-Date: 2020-09-22 14:23+0000\n"
+"Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/desktop/"
 "greeter/uk/>\n"
 "Language: uk\n"
@@ -21,84 +21,85 @@ msgstr ""
 "X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:512
+#: compositor/WindowManager.vala:516
 msgid "Does the display look OK?"
 msgstr "Зображення на екрані виглядає нормально?"
 
-#: compositor/WindowManager.vala:515
+#: compositor/WindowManager.vala:519
 msgid "Keep This Configuration"
 msgstr "Залишити поточну конфігурацію"
 
-#: compositor/WindowManager.vala:516
+#: compositor/WindowManager.vala:520
 msgid "Restore Previous Configuration"
 msgstr "Повернути попередню конфігурацію"
 
 #: src/MainWindow.vala:62
 msgid "Log in as Guest"
-msgstr ""
+msgstr "Увійти як гість"
 
 #: src/MainWindow.vala:64
-#, fuzzy
 msgid "Manual Login…"
-msgstr "Ввійти вручну"
+msgstr "Увійти власноруч…"
 
 #: src/MainWindow.vala:403
 msgid "Unable to Log In"
-msgstr ""
+msgstr "Не вдалося увійти"
 
 #: src/MainWindow.vala:404
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Не вдалося розпочати сеанс."
 
 #: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Не вдалося запустити початкове налаштування"
 
 #: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Початкове налаштування створює вашого першого користувача. Без нього, ви не "
+"зможете увійти і, можливо, доведеться перевстановити ОС."
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
-msgstr "Ввійти вручну"
+msgstr "Увійти власноруч"
 
 #: src/Cards/ManualCard.vala:22
 msgid "Username"
-msgstr ""
+msgstr "Ім'я користувача"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "Спробуйте ім'я користувача"
 
-#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:81 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Увійти"
 
-#: src/Cards/UserCard.vala:84
+#: src/Cards/UserCard.vala:87
 msgid "Account disabled"
-msgstr ""
+msgstr "Обліковий запис вимкнено"
 
-#: src/Cards/UserCard.vala:171
+#: src/Cards/UserCard.vala:174
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "Сеанс неможливо змінити поки користувач увійшов"
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
-msgstr ""
+msgstr "Увімкнено Caps Lock та Num Lock"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Увімкнено Caps Lock"
 
 #: src/Widgets/CapsLockRevealer.vala:74
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Увімкнено Num Lock"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Проведіть своїм пальцем"

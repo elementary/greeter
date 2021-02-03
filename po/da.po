@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13 22:30+0000\n"
+"POT-Creation-Date: 2020-10-03 19:37+0000\n"
 "PO-Revision-Date: 2020-05-25 19:11+0000\n"
 "Last-Translator: Rantyrant <diseasemonger@gmail.com>\n"
 "Language-Team: Danish <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -20,15 +20,15 @@ msgstr ""
 "X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-19 06:26+0000\n"
 
-#: compositor/WindowManager.vala:512
+#: compositor/WindowManager.vala:516
 msgid "Does the display look OK?"
 msgstr "Ser skærmen OK ud?"
 
-#: compositor/WindowManager.vala:515
+#: compositor/WindowManager.vala:519
 msgid "Keep This Configuration"
 msgstr "Behold Denne Konfiguration"
 
-#: compositor/WindowManager.vala:516
+#: compositor/WindowManager.vala:520
 msgid "Restore Previous Configuration"
 msgstr "Gendan Forrige Konfiguration"
 
@@ -73,15 +73,15 @@ msgstr "Brugernavn"
 msgid "Try username"
 msgstr "Prøv brugernavn"
 
-#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:81 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Log ind"
 
-#: src/Cards/UserCard.vala:84
+#: src/Cards/UserCard.vala:87
 msgid "Account disabled"
 msgstr "Kontoen er deaktiveret"
 
-#: src/Cards/UserCard.vala:171
+#: src/Cards/UserCard.vala:174
 msgid "Session cannot be changed while user is logged in"
 msgstr "Sessionen kan ikke ændres når en bruger er logget ind"
 

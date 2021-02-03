@@ -7,28 +7,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13 22:30+0000\n"
-"PO-Revision-Date: 2019-01-03 00:04+0000\n"
-"Last-Translator: Jörg Arnold <j.ar@mailbox.org>\n"
-"Language-Team: German <https://weblate.elementary.io/projects/desktop/"
-"greeter/de/>\n"
+"POT-Creation-Date: 2020-10-03 19:37+0000\n"
+"PO-Revision-Date: 2020-11-12 20:15+0000\n"
+"Last-Translator: Uwe S <saabisto@gmx.de>\n"
+"Language-Team: German <https://l10n.elementary.io/projects/desktop/greeter/"
+"de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.0.1\n"
+"X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:512
+#: compositor/WindowManager.vala:516
 msgid "Does the display look OK?"
 msgstr "Ist die Bildschirmanzeige korrekt?"
 
-#: compositor/WindowManager.vala:515
+#: compositor/WindowManager.vala:519
 msgid "Keep This Configuration"
 msgstr "Diese Einstellung speichern"
 
-#: compositor/WindowManager.vala:516
+#: compositor/WindowManager.vala:520
 msgid "Restore Previous Configuration"
 msgstr "Vorherige Einstellung wiederherstellen"
 
@@ -38,25 +38,28 @@ msgstr "Als Gast anmelden"
 
 #: src/MainWindow.vala:64
 msgid "Manual Login…"
-msgstr "Manuelle Anmeldung…"
+msgstr "Manuell anmelden …"
 
 #: src/MainWindow.vala:403
 msgid "Unable to Log In"
-msgstr ""
+msgstr "Anmelden fehlgeschlagen."
 
 #: src/MainWindow.vala:404
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Start der Sitzung fehlgeschlagen."
 
 #: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Ersteinrichtung konnte nicht gestartet werden"
 
 #: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Bei der Ersteinrichtung wird der erste Benutzerkonto angelegt. Ohne dieses "
+"ist eine Anmeldung nicht möglich und das Betriebssystem muss möglicherweise "
+"erneut installiert werden."
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -68,37 +71,36 @@ msgstr "Benutzername"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr "Versuchen Sie den Benutzernamen"
+msgstr "Benutzernamen eingeben"
 
-#: src/Cards/UserCard.vala:78 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:81 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Anmelden"
 
-#: src/Cards/UserCard.vala:84
+#: src/Cards/UserCard.vala:87
 msgid "Account disabled"
-msgstr ""
+msgstr "Konto deaktiviert"
 
-#: src/Cards/UserCard.vala:171
+#: src/Cards/UserCard.vala:174
 msgid "Session cannot be changed while user is logged in"
 msgstr ""
+"Eine Sitzung kann nicht geändert werden, solange der Benutzer angemeldet ist"
 
 #: src/Widgets/CapsLockRevealer.vala:70
-#, fuzzy
 msgid "Caps Lock & Num Lock are on"
-msgstr "Feststelltaste ist aktiviert"
+msgstr "Feststelltaste und Num-Lock-Taste sind aktiviert"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
 msgstr "Feststelltaste ist aktiviert"
 
 #: src/Widgets/CapsLockRevealer.vala:74
-#, fuzzy
 msgid "Num Lock is on"
-msgstr "Feststelltaste ist aktiviert"
+msgstr "Num-Lock-Taste ist aktiviert"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
-msgstr "Kennwort"
+msgstr "Passwort"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Wischen Sie mit dem Finger"

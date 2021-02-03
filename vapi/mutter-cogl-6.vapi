@@ -82,6 +82,9 @@ namespace Cogl {
 		public void set_layer_filters (int layer_index, Cogl.MaterialFilter min_filter, Cogl.MaterialFilter mag_filter);
 		[Version (deprecated = true, deprecated_since = "1.16")]
 		public void set_layer_matrix (int layer_index, Cogl.Matrix matrix);
+#if HAS_MUTTER338
+		public void set_layer_max_mipmap_level (int layer, int max_level);
+#endif
 		[Version (deprecated = true, deprecated_since = "1.16", since = "1.4")]
 		public bool set_layer_point_sprite_coords_enabled (int layer_index, bool enable) throws GLib.Error;
 		[Version (deprecated = true, deprecated_since = "1.16", since = "1.4")]
@@ -311,7 +314,7 @@ namespace Cogl {
 		[Version (since = "1.8")]
 		public void set_n_vertices (int n_vertices);
 	}
-	[CCode (cheader_filename = "cogl/cogl.h", cname = "CoglHandle", ref_function = "cogl_program_ref", type_id = "cogl_handle_get_gtype ()", unref_function = "cogl_program_unref")]
+	[CCode (cheader_filename = "cogl/cogl.h", cname = "CoglHandle", ref_function = "cogl_object_ref", type_id = "cogl_handle_get_gtype ()", unref_function = "cogl_object_unref")]
 	[Compact]
 	public class Program : Cogl.Handle {
 		[CCode (cheader_filename = "cogl/cogl.h")]
@@ -342,7 +345,13 @@ namespace Cogl {
 		[Version (deprecated = true, deprecated_since = "1.16", since = "1.4")]
 		public void set_uniform_matrix (int uniform_location, int dimensions, bool transpose, [CCode (array_length_cname = "count", array_length_pos = 2.5)] float[] value);
 	}
-	[CCode (cheader_filename = "cogl/cogl.h", cname = "CoglHandle", ref_function = "cogl_shader_ref", type_id = "cogl_handle_get_gtype ()", unref_function = "cogl_shader_unref")]
+#if HAS_MUTTER338
+	[CCode (cheader_filename = "cogl/cogl.h", has_type_id = false)]
+	[Compact]
+	public class Scanout {
+	}
+#endif
+	[CCode (cheader_filename = "cogl/cogl.h", cname = "CoglHandle", ref_function = "cogl_object_ref", type_id = "cogl_handle_get_gtype ()", unref_function = "cogl_object_unref")]
 	[Compact]
 	public class Shader : Cogl.Handle {
 		[CCode (cheader_filename = "cogl/cogl.h", cname = "cogl_create_shader")]
@@ -376,6 +385,12 @@ namespace Cogl {
 		[Version (since = "1.16")]
 		public Texture2DSliced.from_bitmap (Cogl.Bitmap bmp, int max_waste);
 	}
+#if HAS_MUTTER338
+	[CCode (cheader_filename = "cogl/cogl.h", has_type_id = false)]
+	[Compact]
+	public class TraceContext {
+	}
+#endif
 	[CCode (cheader_filename = "cogl/cogl.h", type_id = "cogl_framebuffer_get_gtype ()")]
 	public interface Framebuffer : Cogl.Object {
 		[Version (since = "1.8")]
@@ -399,6 +414,7 @@ namespace Cogl {
 		public static uint32 error_quark ();
 		[Version (since = "1.10")]
 		public void finish ();
+		public void flush ();
 		[Version (since = "1.10")]
 		public void frustum (float left, float right, float bottom, float top, float z_near, float z_far);
 		[Version (since = "1.8")]
@@ -485,8 +501,10 @@ namespace Cogl {
 		public void set_stereo_mode (Cogl.StereoMode stereo_mode);
 		[Version (since = "1.8")]
 		public void set_viewport (float x, float y, float width, float height);
+#if !HAS_MUTTER338
 		[CCode (cheader_filename = "cogl-path/cogl-path.h")]
 		public void stroke_path (Cogl.Pipeline pipeline, Cogl.Path path);
+#endif
 		[Version (since = "1.10")]
 		public void transform (Cogl.Matrix matrix);
 		[Version (since = "1.10")]
@@ -500,13 +518,13 @@ namespace Cogl {
 		public static Cogl.Texture from_bitmap (Cogl.Bitmap bitmap, Cogl.TextureFlags flags, Cogl.PixelFormat internal_format);
 		[CCode (cheader_filename = "cogl/cogl.h", cname = "cogl_texture_new_from_data")]
 		[Version (deprecated = true, deprecated_since = "1.18", since = "0.8")]
-		public static Cogl.Texture from_data (int width, int height, Cogl.TextureFlags flags, Cogl.PixelFormat format, Cogl.PixelFormat internal_format, int rowstride, uint8 data);
+		public static Cogl.Texture from_data (int width, int height, Cogl.TextureFlags flags, Cogl.PixelFormat format, Cogl.PixelFormat internal_format, int rowstride, [CCode (array_length = false)] uint8[] data);
 		[CCode (cheader_filename = "cogl/cogl.h", cname = "cogl_texture_new_from_file")]
 		[Version (deprecated = true, deprecated_since = "1.18", since = "0.8")]
 		public static Cogl.Texture from_file (string filename, Cogl.TextureFlags flags, Cogl.PixelFormat internal_format) throws GLib.Error;
 		[Version (since = "1.18")]
 		public Cogl.TextureComponents get_components ();
-		public int get_data (Cogl.PixelFormat format, uint rowstride, [CCode (array_length = false, type = "uint8_t*")] uint8[] data);
+		public int get_data (Cogl.PixelFormat format, uint rowstride, [CCode (array_length = false)] uint8[] data);
 		public bool get_gl_texture (out uint out_gl_handle, out uint out_gl_target);
 		public uint get_height ();
 		public int get_max_waste ();
@@ -517,7 +535,7 @@ namespace Cogl {
 		[Version (deprecated = true, deprecated_since = "1.18", since = "1.0")]
 		public static Cogl.Texture new_from_bitmap (Cogl.Bitmap bitmap, Cogl.TextureFlags flags, Cogl.PixelFormat internal_format);
 		[Version (deprecated = true, deprecated_since = "1.18", since = "0.8")]
-		public static Cogl.Texture new_from_data (int width, int height, Cogl.TextureFlags flags, Cogl.PixelFormat format, Cogl.PixelFormat internal_format, int rowstride, [CCode (array_length = false, type = "const uint8_t*")] uint8[] data);
+		public static Cogl.Texture new_from_data (int width, int height, Cogl.TextureFlags flags, Cogl.PixelFormat format, Cogl.PixelFormat internal_format, int rowstride, [CCode (array_length = false)] uint8[] data);
 		[Version (deprecated = true, deprecated_since = "1.18", since = "0.8")]
 		public static Cogl.Texture new_from_file (string filename, Cogl.TextureFlags flags, Cogl.PixelFormat internal_format) throws GLib.Error;
 		[Version (deprecated = true, deprecated_since = "1.18", since = "1.2")]
@@ -526,10 +544,10 @@ namespace Cogl {
 		public static Cogl.Texture new_with_size (uint width, uint height, Cogl.TextureFlags flags, Cogl.PixelFormat internal_format);
 		[Version (since = "1.18")]
 		public void set_components (Cogl.TextureComponents components);
-		public bool set_data (Cogl.PixelFormat format, int rowstride, [CCode (array_length = false, type = "const uint8_t*")] uint8[] data, int level) throws GLib.Error;
+		public bool set_data (Cogl.PixelFormat format, int rowstride, [CCode (array_length = false)] uint8[] data, int level) throws GLib.Error;
 		[Version (since = "1.18")]
 		public void set_premultiplied (bool premultiplied);
-		public bool set_region (int src_x, int src_y, int dst_x, int dst_y, uint dst_width, uint dst_height, int width, int height, Cogl.PixelFormat format, uint rowstride, [CCode (array_length = false, type = "const uint8_t*")] uint8[] data);
+		public bool set_region (int src_x, int src_y, int dst_x, int dst_y, uint dst_width, uint dst_height, int width, int height, Cogl.PixelFormat format, uint rowstride, [CCode (array_length = false)] uint8[] data);
 		[Version (since = "1.8")]
 		public bool set_region_from_bitmap (int src_x, int src_y, int dst_x, int dst_y, uint dst_width, uint dst_height, Cogl.Bitmap bitmap);
 		[CCode (cheader_filename = "cogl/cogl.h", cname = "cogl_texture_new_with_size")]
@@ -683,6 +701,13 @@ namespace Cogl {
 		public float ty;
 		public Cogl.Color color;
 	}
+#if HAS_MUTTER338
+	[CCode (cheader_filename = "cogl/cogl.h", has_type_id = false)]
+	public struct TraceHead {
+		public uint64 begin_time;
+		public weak string name;
+	}
+#endif
 	[CCode (cheader_filename = "cogl/cogl.h", has_type_id = false)]
 	[Version (since = "1.4")]
 	public struct UserDataKey {
@@ -824,6 +849,10 @@ namespace Cogl {
 		OGL_FEATURE_ID_TEXTURE_RG,
 		[CCode (cname = "COGL_FEATURE_ID_BUFFER_AGE")]
 		OGL_FEATURE_ID_BUFFER_AGE,
+#if HAS_MUTTER338
+		[CCode (cname = "COGL_FEATURE_ID_BLIT_FRAMEBUFFER")]
+		OGL_FEATURE_ID_BLIT_FRAMEBUFFER,
+#endif
 		[CCode (cname = "COGL_FEATURE_ID_TEXTURE_EGL_IMAGE_EXTERNAL")]
 		OGL_FEATURE_ID_TEXTURE_EGL_IMAGE_EXTERNAL
 	}
@@ -1138,6 +1167,16 @@ namespace Cogl {
 	[CCode (cheader_filename = "cogl/cogl.h")]
 	[Version (deprecated = true, deprecated_since = "1.16")]
 	public static void set_depth_test_enabled (bool setting);
+	[CCode (cheader_filename = "cogl/cogl.h")]
+	public static void set_tracing_disabled_on_thread (GLib.MainContext main_context);
+	[CCode (cheader_filename = "cogl/cogl.h")]
+	public static void set_tracing_enabled_on_thread (GLib.MainContext main_context, string group, string filename);
+	[CCode (cheader_filename = "cogl/cogl.h")]
+	public static void set_tracing_enabled_on_thread_with_fd (GLib.MainContext main_context, string group, int fd);
+#if HAS_MUTTER338
+	[CCode (cheader_filename = "cogl/cogl.h")]
+	public static void trace_end (Cogl.TraceHead head);
+#endif
 	[CCode (cheader_filename = "cogl/cogl.h")]
 	[Version (since = "1.10")]
 	public static uint32 x11_onscreen_get_window_xid (Cogl.Onscreen onscreen);

@@ -2,15 +2,15 @@
 
 [CCode (cprefix = "CoglPango", gir_namespace = "CoglPango", gir_version = "6", lower_case_cprefix = "cogl_pango_")]
 namespace CoglPango {
-	[CCode (cheader_filename = "cogl-pango.h", type_id = "cogl_pango_renderer_get_type ()")]
-	public class Renderer : Pango.Renderer {
-		[CCode (has_construct_function = false)]
-		protected Renderer ();
-		[NoAccessorMethod]
-		public void* context { construct; }
-	}
+#if HAS_MUTTER338
 	[CCode (cheader_filename = "cogl-pango.h")]
 	public interface FontMap : Pango.CairoFontMap, GLib.Object {
+#else
+	[CCode (cheader_filename = "cogl-pango.h", type_id = "pango_font_map_get_type ()")]
+	public class FontMap : Pango.FontMap {
+		[CCode (has_construct_function = false)]
+		protected FontMap ();
+#endif
 		[Version (since = "1.0")]
 		public void clear_glyph_cache ();
 		public Pango.Context create_context ();
@@ -24,6 +24,13 @@ namespace CoglPango {
 		public void set_resolution (double dpi);
 		[Version (since = "1.0")]
 		public void set_use_mipmapping (bool value);
+	}
+	[CCode (cheader_filename = "cogl-pango.h", type_id = "cogl_pango_renderer_get_type ()")]
+	public class Renderer : Pango.Renderer {
+		[CCode (has_construct_function = false)]
+		protected Renderer ();
+		[NoAccessorMethod]
+		public void* context { construct; }
 	}
 	[CCode (cheader_filename = "cogl-pango.h")]
 	[Version (since = "1.0")]

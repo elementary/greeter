@@ -72,7 +72,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         try {
             var gtksettings = Gtk.Settings.get_default ();
             gtksettings.gtk_icon_theme_name = "elementary";
-            gtksettings.gtk_theme_name = "elementary";
+            gtksettings.gtk_theme_name = "io.elementary.stylesheet.blueberry";
 
             var css_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, "dark");
             guest_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -307,10 +307,19 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void maximize_window () {
-        int x, y;
         var display = Gdk.Display.get_default ();
-        display.get_pointer (null, out x, out y, null);
-        var monitor = display.get_monitor_at_point (x, y);
+        unowned Gdk.Seat seat = display.get_default_seat ();
+        unowned Gdk.Device? pointer = seat.get_pointer ();
+
+        Gdk.Monitor? monitor;
+        if (pointer != null) {
+            int x, y;
+            pointer.get_position (null, out x, out y);
+            monitor = display.get_monitor_at_point (x, y);
+        } else {
+            monitor = display.get_primary_monitor ();
+        }
+
         var rect = monitor.get_geometry ();
         resize (rect.width, rect.height);
         move (rect.x, rect.y);
@@ -528,6 +537,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         if (binding != null) {
             binding.unbind ();
         }
+
+        user_card.set_keyboard_layouts ();
 
         binding = user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE);
         next_delta = user_cards.index (user_card);
