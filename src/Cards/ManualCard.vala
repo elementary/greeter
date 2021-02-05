@@ -1,3 +1,22 @@
+/*
+ * Copyright 2018–2021 elementary, Inc. (https://elementary.io)
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301 USA.
+ */
+
 public class Greeter.ManualCard : Greeter.BaseCard {
     public signal void do_connect_username (string username);
 
@@ -5,58 +24,67 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     private Gtk.Entry username_entry;
     private Gtk.Grid main_grid;
 
+    private const int ERROR_SHAKE_DURATION = 450;
+
     construct {
         width_request = 350;
 
-        var icon = new Gtk.Image ();
-        icon.icon_name = "avatar-default";
-        icon.pixel_size = 64;
+        var icon = new Gtk.Image () {
+            icon_name = "avatar-default",
+            pixel_size = 64
+        };
 
-        var label = new Gtk.Label (_("Manual Login"));
-        label.hexpand = true;
-        label.margin_bottom = 16;
+        var label = new Gtk.Label (_("Manual Login")) {
+            hexpand = true,
+            margin_bottom = 16
+        };
         label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
-        username_entry = new Gtk.Entry ();
-        username_entry.hexpand = true;
-        username_entry.placeholder_text = _("Username");
-        username_entry.primary_icon_name = "avatar-default-symbolic";
-        username_entry.input_purpose = Gtk.InputPurpose.FREE_FORM;
-        username_entry.secondary_icon_name = "go-jump-symbolic";
-        username_entry.secondary_icon_tooltip_text = _("Try username");
+        username_entry = new Gtk.Entry () {
+            hexpand = true,
+            input_purpose = Gtk.InputPurpose.FREE_FORM,
+            placeholder_text = _("Username"),
+            primary_icon_name = "avatar-default-symbolic",
+            secondary_icon_name = "go-jump-symbolic",
+            secondary_icon_tooltip_text = _("Try username")
+        };
 
-        password_entry = new Greeter.PasswordEntry ();
-        password_entry.sensitive = false;
-        password_entry.secondary_icon_name = "";
+        password_entry = new Greeter.PasswordEntry () {
+            secondary_icon_name = "",
+            sensitive = false
+        };
 
         var caps_lock_revealer = new Greeter.CapsLockRevealer ();
 
-        var password_grid = new Gtk.Grid ();
-        password_grid.row_spacing = 6;
-        password_grid.orientation = Gtk.Orientation.VERTICAL;
+        var password_grid = new Gtk.Grid () {
+            orientation = Gtk.Orientation.VERTICAL,
+            row_spacing = 6
+        };
         password_grid.add (password_entry);
         password_grid.add (caps_lock_revealer);
 
         var session_button = new Greeter.SessionButton ();
 
-        var form_grid = new Gtk.Grid ();
-        form_grid.orientation = Gtk.Orientation.VERTICAL;
-        form_grid.column_spacing = 6;
-        form_grid.row_spacing = 12;
-        form_grid.margin = 24;
-        form_grid.attach (icon, 0, 0, 2, 1);
-        form_grid.attach (label, 0, 1, 2, 1);
+        var form_grid = new Gtk.Grid () {
+            column_spacing = 6,
+            margin = 24,
+            orientation = Gtk.Orientation.VERTICAL,
+            row_spacing = 12
+        };
+        form_grid.attach (icon, 0, 0, 2);
+        form_grid.attach (label, 0, 1, 2);
         form_grid.attach (username_entry, 0, 2);
         form_grid.attach (password_grid, 0, 3);
         form_grid.attach (session_button, 1, 2, 1, 2);
 
-        main_grid = new Gtk.Grid ();
-        main_grid.margin = 12;
+        main_grid = new Gtk.Grid () {
+            margin = 12
+        };
         main_grid.add (form_grid);
 
-        var main_grid_style_context = main_grid.get_style_context ();
+        weak Gtk.StyleContext main_grid_style_context = main_grid.get_style_context ();
         main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
-        main_grid_style_context.add_class ("rounded");
+        main_grid_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
         main_grid_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         add (main_grid);
@@ -84,6 +112,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     private void focus_username_entry () {
         password_entry.secondary_icon_name = "";
         password_entry.sensitive = false;
+
         username_entry.secondary_icon_name = "go-jump-symbolic";
         username_entry.sensitive = true;
         username_entry.grab_focus_without_selecting ();
@@ -92,6 +121,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     private void focus_password_entry () {
         username_entry.secondary_icon_name = "";
         username_entry.sensitive = false;
+
         password_entry.secondary_icon_name = "go-jump-symbolic";
         password_entry.sensitive = true;
         password_entry.grab_focus_without_selecting ();
@@ -100,16 +130,21 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     public override void wrong_credentials () {
         focus_username_entry ();
         password_entry.text = "";
-        weak Gtk.StyleContext grid_style_context = main_grid.get_style_context ();
+
         weak Gtk.StyleContext username_entry_style_context = username_entry.get_style_context ();
-        weak Gtk.StyleContext password_entry_style_context = password_entry.get_style_context ();
         username_entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+
+        weak Gtk.StyleContext password_entry_style_context = password_entry.get_style_context ();
         password_entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+
+        weak Gtk.StyleContext grid_style_context = main_grid.get_style_context ();
         grid_style_context.add_class ("shake");
-        GLib.Timeout.add (450, () => {
+
+        GLib.Timeout.add (ERROR_SHAKE_DURATION, () => {
             grid_style_context.remove_class ("shake");
             username_entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
             password_entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+
             return GLib.Source.REMOVE;
         });
     }
@@ -122,13 +157,17 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         username_entry.grab_focus_without_selecting ();
         username_entry.secondary_icon_name = "";
         username_entry.text = "";
-        weak Gtk.StyleContext grid_style_context = main_grid.get_style_context ();
+
         weak Gtk.StyleContext entry_style_context = username_entry.get_style_context ();
         entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+
+        weak Gtk.StyleContext grid_style_context = main_grid.get_style_context ();
         grid_style_context.add_class ("shake");
-        GLib.Timeout.add (450, () => {
+
+        GLib.Timeout.add (ERROR_SHAKE_DURATION, () => {
             grid_style_context.remove_class ("shake");
             entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+
             return GLib.Source.REMOVE;
         });
     }
