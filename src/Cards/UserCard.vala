@@ -399,7 +399,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         main_grid_style_context.add_class ("shake");
 
-        GLib.Timeout.add (450, () => {
+        GLib.Timeout.add (ERROR_SHAKE_DURATION, () => {
             main_grid_style_context.remove_class ("shake");
             entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
             return GLib.Source.REMOVE;

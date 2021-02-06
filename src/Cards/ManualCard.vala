@@ -24,8 +24,6 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     private Gtk.Entry username_entry;
     private Gtk.Grid main_grid;
 
-    private const int ERROR_SHAKE_DURATION = 450;
-
     construct {
         width_request = 350;
 

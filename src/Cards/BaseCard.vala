@@ -28,6 +28,8 @@ public abstract class Greeter.BaseCard : Gtk.Revealer {
     public bool need_password { get; set; default = false; }
     public bool use_fingerprint { get; set; default = false; }
 
+    public const int ERROR_SHAKE_DURATION = 450;
+
     static construct {
         css_provider = new Gtk.CssProvider ();
         css_provider.load_from_resource ("/io/elementary/greeter/Card.css");
