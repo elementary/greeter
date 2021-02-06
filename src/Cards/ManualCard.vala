@@ -68,7 +68,6 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         var form_grid = new Gtk.Grid () {
             column_spacing = 6,
             margin = 24,
-            orientation = Gtk.Orientation.VERTICAL,
             row_spacing = 12
         };
         form_grid.attach (icon, 0, 0, 2);
