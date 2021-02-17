@@ -12,7 +12,6 @@ Build-Depends: debhelper (>= 10.5.1),
                libhandy-1-dev,
                liblightdm-gobject-1-dev (>= 1.2.1),
                libmutter-6-dev | libmutter-5-dev | libmutter-4-dev | libmutter-3-dev | libmutter-2-dev,
-               libwingpanel-2.0-dev,
                libx11-dev,
                meson,
                valac (>= 0.26)
