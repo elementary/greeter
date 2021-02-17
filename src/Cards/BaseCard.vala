@@ -28,6 +28,9 @@ public abstract class Greeter.BaseCard : Gtk.Revealer {
     public bool need_password { get; set; default = false; }
     public bool use_fingerprint { get; set; default = false; }
 
+    public int prefers_color_scheme { get; set; default = 0; }
+    public int prefers_accent_color { get; set; default = 0; }
+
     static construct {
         css_provider = new Gtk.CssProvider ();
         css_provider.load_from_resource ("/io/elementary/greeter/Card.css");

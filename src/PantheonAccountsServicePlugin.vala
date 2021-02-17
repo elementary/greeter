@@ -9,6 +9,12 @@ interface Pantheon.AccountsService : Object {
 
     public abstract int sleep_inactive_battery_timeout { get; set; }
     public abstract int sleep_inactive_battery_type { get; set; }
+
+    [DBus (name = "PrefersColorScheme")]
+    public abstract int prefers_color_scheme { get; set; }
+
+    [DBus (name = "PrefersAccentColor")]
+    public abstract int prefers_accent_color { get; set; }
 }
 
 [DBus (name = "io.elementary.SettingsDaemon.AccountsService")]
