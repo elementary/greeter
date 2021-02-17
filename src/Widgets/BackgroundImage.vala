@@ -4,7 +4,14 @@ public class Greeter.BackgroundImage : Gtk.EventBox {
     private Gdk.Pixbuf fitting_pixbuf;
 
     construct {
-        height_request = 150;
+        int x, y;
+        var display = Gdk.Display.get_default ();
+        display.get_pointer (null, out x, out y, null);
+        var monitor = display.get_monitor_at_point (x, y);
+        var rect = monitor.get_geometry ();
+
+        // NOTE: display height / 4
+        height_request = rect.height / get_scale_factor () / 4;
     }
 
     public BackgroundImage (string? path) {

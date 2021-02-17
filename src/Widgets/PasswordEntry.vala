@@ -21,13 +21,15 @@
 
 public class Greeter.PasswordEntry : Gtk.Entry {
     construct {
-        tooltip_text = _("Password");
+        halign = Gtk.Align.CENTER;
+        hexpand = true;
+        input_purpose = Gtk.InputPurpose.PASSWORD;
+        max_width_chars = 48;
         primary_icon_name = "dialog-password-symbolic";
         secondary_icon_name = "go-jump-symbolic";
         secondary_icon_tooltip_text = _("Log In");
-        hexpand = true;
+        tooltip_text = _("Password");
         visibility = false;
-        input_purpose = Gtk.InputPurpose.PASSWORD;
 
         icon_press.connect ((pos, event) => {
             if (pos == Gtk.EntryIconPosition.SECONDARY) {
