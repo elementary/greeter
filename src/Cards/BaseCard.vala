@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 elementary, Inc. (https://elementary.io)
+ * Copyright 2018–2021 elementary, Inc. (https://elementary.io)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -27,6 +27,8 @@ public abstract class Greeter.BaseCard : Gtk.Revealer {
     public bool connecting { get; set; default = false; }
     public bool need_password { get; set; default = false; }
     public bool use_fingerprint { get; set; default = false; }
+
+    protected const int ERROR_SHAKE_DURATION = 450;
 
     static construct {
         css_provider = new Gtk.CssProvider ();
