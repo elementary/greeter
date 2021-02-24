@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-03 19:37+0000\n"
-"PO-Revision-Date: 2020-11-12 20:15+0000\n"
+"PO-Revision-Date: 2021-02-25 19:53+0000\n"
 "Last-Translator: Uwe S <saabisto@gmx.de>\n"
 "Language-Team: German <https://l10n.elementary.io/projects/desktop/greeter/"
 "de/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.4.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:516
@@ -42,7 +42,7 @@ msgstr "Manuell anmelden …"
 
 #: src/MainWindow.vala:403
 msgid "Unable to Log In"
-msgstr "Anmelden fehlgeschlagen."
+msgstr "Anmelden fehlgeschlagen"
 
 #: src/MainWindow.vala:404
 msgid "Starting the session has failed."
