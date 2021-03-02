@@ -15,7 +15,7 @@ jobs:
     - name: Install Dependencies
       run: |
         apt update
-        apt install -y desktop-file-utils libaccountsservice-dev libclutter-gtk-1.0-dev libgdk-pixbuf2.0-dev libgranite-dev libgtk-3-dev libhandy-1-dev liblightdm-gobject-1-dev libwingpanel-2.0-dev libx11-dev meson libmutter-6-dev libgnome-desktop-3-dev valac
+        apt install -y desktop-file-utils libaccountsservice-dev libclutter-gtk-1.0-dev libgdk-pixbuf2.0-dev libgranite-dev libgtk-3-dev libhandy-1-dev liblightdm-gobject-1-dev libx11-dev meson libmutter-6-dev libgnome-desktop-3-dev valac
     - name: Build
       env:
         DESTDIR: out
