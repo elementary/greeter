@@ -407,7 +407,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
             var action_group = get_action_group ("session");
             try {
-                var session = action_group.get_action_state ("select").get_string ();
+                unowned var session = action_group.get_action_state ("select").get_string ();
 
                 // If the greeter is running on the install medium, check if the Installer has signalled
                 // that it wants the greeter to launch the live (demo) session by means of touching a file
