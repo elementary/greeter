@@ -82,13 +82,7 @@ namespace GreeterCompositor {
          * @param backward  Whether to get the previous one instead
          */
         public static Meta.Window get_next_window (Meta.Workspace workspace, bool backward = false) {
-#if HAS_MUTTER330
             var display = workspace.get_display ();
-#else
-            var screen = workspace.get_screen ();
-            var display = screen.get_display ();
-#endif
-
             var window = display.get_tab_next (Meta.TabList.NORMAL, workspace, null, backward);
 
             if (window == null) {
@@ -165,7 +159,6 @@ namespace GreeterCompositor {
 
             return container;
         }
-#if HAS_MUTTER330
         /**
         * Ring the system bell, will most likely emit a <beep> error sound or, if the
         * audible bell is disabled, flash the display
@@ -179,20 +172,5 @@ namespace GreeterCompositor {
                 display.get_compositor ().flash_display (display);
             }
         }
-#else
-        /**
-         * Ring the system bell, will most likely emit a <beep> error sound or, if the
-         * audible bell is disabled, flash the screen
-         *
-         * @param screen The screen to flash, if necessary
-         */
-        public static void bell (Meta.Screen screen) {
-            if (Meta.Prefs.bell_is_audible ()) {
-                Gdk.beep ();
-            } else {
-                screen.get_display ().get_compositor ().flash_screen (screen);
-            }
-        }
-#endif
     }
 }
