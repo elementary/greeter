@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-03 19:37+0000\n"
 "PO-Revision-Date: 2021-03-09 20:27+0000\n"
-"Last-Translator: Katto <1uckycat@outlook.com>\n"
+"Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/ru/>\n"
 "Language: ru\n"
@@ -43,7 +43,7 @@ msgstr "Учтите, что авторизация вручную доступ�
 
 #: data/greeter.appdata.xml.in:47
 msgid "Save last user on attempted login"
-msgstr "Сохранять последнего пользователя при попытке авторизации"
+msgstr "Сохраняйте последнего пользователя при попытке авторизации"
 
 #: data/greeter.appdata.xml.in:48
 msgid "Handle all background aspect ratios"
@@ -52,14 +52,16 @@ msgstr ""
 #: data/greeter.appdata.xml.in:49
 msgid "Give non-focused user cards smaller usernames"
 msgstr ""
+"Не сфокусированные карточки пользователя получили уменьшенные имена "
+"пользователей"
 
 #: data/greeter.appdata.xml.in:50
 msgid "Better respect NumLock settings"
-msgstr ""
+msgstr "Улучшена поддержка параметров NumLock"
 
 #: data/greeter.appdata.xml.in:51
 msgid "Enable sounds in greeter"
-msgstr ""
+msgstr "Включены звуки для экрана приветствия"
 
 #: data/greeter.appdata.xml.in:52
 msgid "Select password text on error instead of immediately clearing it"
@@ -71,7 +73,7 @@ msgstr "Очистка кода"
 
 #: data/greeter.appdata.xml.in:60
 msgid "Extensive overhaul"
-msgstr ""
+msgstr "Значительная переработка"
 
 #: data/greeter.appdata.xml.in:62
 msgid "New card-based appearance"
