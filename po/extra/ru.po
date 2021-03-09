@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-03 19:37+0000\n"
-"PO-Revision-Date: 2021-03-02 21:50+0000\n"
+"PO-Revision-Date: 2021-03-09 20:22+0000\n"
 "Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/ru/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:7
 msgid "Greeter"
-msgstr ""
+msgstr "Экран приветствия"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
@@ -35,11 +35,11 @@ msgstr "Обновлены переводы"
 
 #: data/greeter.appdata.xml.in:31
 msgid "Fix an issue with media keys"
-msgstr ""
+msgstr "Исправлена проблема с мультимедийными клавишами"
 
 #: data/greeter.appdata.xml.in:39
 msgid "Ensure that manual login is available when users are hidden"
-msgstr ""
+msgstr "Убедитесь, что ручной вход доступен, когда пользователи скрыты"
 
 #: data/greeter.appdata.xml.in:47
 msgid "Save last user on attempted login"
