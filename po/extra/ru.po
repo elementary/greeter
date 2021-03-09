@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-03 19:37+0000\n"
-"PO-Revision-Date: 2021-03-09 20:23+0000\n"
+"PO-Revision-Date: 2021-03-09 20:27+0000\n"
 "Last-Translator: Katto <1uckycat@outlook.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/ru/>\n"
@@ -67,7 +67,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:53
 msgid "Code cleanup"
-msgstr ""
+msgstr "Очистка кода"
 
 #: data/greeter.appdata.xml.in:60
 msgid "Extensive overhaul"
@@ -75,7 +75,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:62
 msgid "New card-based appearance"
-msgstr ""
+msgstr "Новый основанный на карточках интерфейс"
 
 #: data/greeter.appdata.xml.in:63
 msgid "Improved HiDPI support"
