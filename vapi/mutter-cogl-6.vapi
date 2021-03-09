@@ -35,12 +35,28 @@ namespace Cogl {
 		[CCode (cheader_filename = "cogl/cogl.h", cname = "cogl_has_feature")]
 		[Version (since = "1.10")]
 		public bool has_feature (Cogl.FeatureID feature);
+#if HAS_MUTTER338
+		public bool is_hardware_accelerated ();
+#endif
 	}
 	[CCode (cheader_filename = "cogl/cogl.h", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "cogl_frame_closure_get_gtype ()")]
 	[Compact]
 	[Version (since = "1.14")]
 	public class FrameClosure {
 	}
+#if HAS_MUTTER338
+	[CCode (cheader_filename = "cogl/cogl.h", type_id = "cogl_frame_info_get_gtype ()")]
+	public class FrameInfo : Cogl.Object {
+		[CCode (has_construct_function = false)]
+		protected FrameInfo ();
+		[Version (since = "1.14")]
+		public int64 get_frame_counter ();
+		[Version (since = "1.14")]
+		public int64 get_presentation_time ();
+		[Version (since = "1.14")]
+		public float get_refresh_rate ();
+	}
+#endif
 	[CCode (cheader_filename = "cogl/cogl.h", ref_function = "cogl_object_ref", type_id = "cogl_handle_get_gtype ()", unref_function = "cogl_object_unref")]
 	[Compact]
 	public class Handle {
@@ -82,9 +98,6 @@ namespace Cogl {
 		public void set_layer_filters (int layer_index, Cogl.MaterialFilter min_filter, Cogl.MaterialFilter mag_filter);
 		[Version (deprecated = true, deprecated_since = "1.16")]
 		public void set_layer_matrix (int layer_index, Cogl.Matrix matrix);
-#if HAS_MUTTER338
-		public void set_layer_max_mipmap_level (int layer, int max_level);
-#endif
 		[Version (deprecated = true, deprecated_since = "1.16", since = "1.4")]
 		public bool set_layer_point_sprite_coords_enabled (int layer_index, bool enable) throws GLib.Error;
 		[Version (deprecated = true, deprecated_since = "1.16", since = "1.4")]
@@ -109,6 +122,9 @@ namespace Cogl {
 		[CCode (cheader_filename = "cogl/cogl.h", cname = "cogl_is_framebuffer")]
 		[Version (since = "1.10")]
 		public bool is_framebuffer ();
+		[Version (since = "2.0")]
+		[CCode (cheader_filename = "cogl/cogl.h", cname = "cogl_is_frame_info")]
+		public bool is_frame_info ();
 		[CCode (cheader_filename = "cogl/cogl.h", cname = "cogl_is_offscreen")]
 		public bool is_offscreen ();
 		[CCode (cheader_filename = "cogl/cogl.h", cname = "cogl_is_onscreen")]
@@ -141,6 +157,10 @@ namespace Cogl {
 		protected Onscreen ();
 		[Version (since = "1.16")]
 		public Cogl.OnscreenDirtyClosure add_dirty_callback ([CCode (delegate_target_pos = 1.5)] Cogl.OnscreenDirtyCallback callback, Cogl.UserDataDestroyCallback? destroy);
+#if HAS_MUTTER338
+		[Version (since = "1.14")]
+		public Cogl.FrameClosure add_frame_callback ([CCode (delegate_target_pos = 1.5)] Cogl.FrameCallback callback, Cogl.UserDataDestroyCallback? destroy);
+#endif
 		[Version (since = "2.0")]
 		public Cogl.OnscreenResizeClosure add_resize_callback ([CCode (delegate_target_pos = 1.5)] Cogl.OnscreenResizeCallback callback, Cogl.UserDataDestroyCallback? destroy);
 		[Version (since = "1.14")]
@@ -161,12 +181,21 @@ namespace Cogl {
 		public void set_resizable (bool resizable);
 		[Version (since = "2.0")]
 		public void show ();
+#if HAS_MUTTER338
+		[Version (since = "1.10")]
+		public void swap_buffers (Cogl.FrameInfo frame_info);
+		[Version (since = "1.16")]
+		public void swap_buffers_with_damage (int rectangles, int n_rectangles, Cogl.FrameInfo frame_info);
+		[Version (since = "1.10")]
+		public void swap_region (int rectangles, int n_rectangles, Cogl.FrameInfo frame_info);
+#else
 		[Version (since = "1.10")]
 		public void swap_buffers ();
 		[Version (since = "1.16")]
 		public void swap_buffers_with_damage (int rectangles, int n_rectangles);
 		[Version (since = "1.10")]
 		public void swap_region (int rectangles, int n_rectangles);
+#endif
 	}
 	[CCode (cheader_filename = "cogl/cogl.h", copy_function = "g_boxed_copy", free_function = "g_boxed_free", type_id = "cogl_onscreen_dirty_closure_get_gtype ()")]
 	[Compact]
@@ -245,6 +274,9 @@ namespace Cogl {
 		public void set_layer_filters (int layer_index, Cogl.PipelineFilter min_filter, Cogl.PipelineFilter mag_filter);
 		[Version (since = "1.10")]
 		public void set_layer_matrix (int layer_index, Cogl.Matrix matrix);
+#if HAS_MUTTER338
+		public void set_layer_max_mipmap_level (int layer, int max_level);
+#endif
 		[Version (since = "1.10")]
 		public void set_layer_null_texture (int layer_index);
 		[Version (since = "2.0")]
@@ -972,6 +1004,12 @@ namespace Cogl {
 		BGRA_1010102,
 		ARGB_2101010,
 		ABGR_2101010,
+#if HAS_MUTTER338
+		RGBA_FP_16161616,
+		BGRA_FP_16161616,
+		ARGB_FP_16161616,
+		ABGR_FP_16161616,
+#endif
 		RGBA_8888_PRE,
 		BGRA_8888_PRE,
 		ARGB_8888_PRE,
@@ -982,6 +1020,12 @@ namespace Cogl {
 		BGRA_1010102_PRE,
 		ARGB_2101010_PRE,
 		ABGR_2101010_PRE,
+#if HAS_MUTTER338
+		RGBA_FP_16161616_PRE,
+		BGRA_FP_16161616_PRE,
+		ARGB_FP_16161616_PRE,
+		ABGR_FP_16161616_PRE,
+#endif
 		DEPTH_16,
 		DEPTH_32,
 		DEPTH_24_STENCIL_8;
@@ -1048,7 +1092,9 @@ namespace Cogl {
 	[CCode (cheader_filename = "cogl/cogl.h", cprefix = "COGL_WINSYS_FEATURE_", has_type_id = false)]
 	public enum WinsysFeature {
 		MULTIPLE_ONSCREEN,
+#if !HAS_MUTTER338
 		SWAP_THROTTLE,
+#endif
 		VBLANK_COUNTER,
 		VBLANK_WAIT,
 		TEXTURE_FROM_PIXMAP,
@@ -1104,6 +1150,11 @@ namespace Cogl {
 	[CCode (cheader_filename = "cogl/cogl.h", instance_pos = 1.9)]
 	[Version (since = "0.10")]
 	public delegate void FeatureCallback (Cogl.FeatureID feature);
+#if HAS_MUTTER338
+	[CCode (cheader_filename = "cogl/cogl.h", instance_pos = 3.9)]
+	[Version (since = "1.14")]
+	public delegate void FrameCallback (Cogl.Onscreen onscreen, Cogl.FrameEvent event, Cogl.FrameInfo info);
+#endif
 	[CCode (cheader_filename = "cogl/cogl.h", instance_pos = 2.9)]
 	[Version (since = "1.16")]
 	public delegate void OnscreenDirtyCallback (Cogl.Onscreen onscreen, Cogl.OnscreenDirtyInfo info);
