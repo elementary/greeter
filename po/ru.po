@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-03 19:37+0000\n"
 "PO-Revision-Date: 2021-03-09 16:26+0000\n"
-"Last-Translator: Katto <1uckycat@outlook.com>\n"
+"Last-Translator: Eugene Dementyev <evgeniy.dementyev@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/desktop/greeter/"
 "ru/>\n"
 "Language: ru\n"
@@ -47,7 +47,7 @@ msgstr "Не удалось войти"
 
 #: src/MainWindow.vala:404
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Не удалось запустить сеанс."
 
 #: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
@@ -81,7 +81,7 @@ msgstr ""
 
 #: src/Cards/UserCard.vala:174
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "Сессия не может быть изменена, пока пользователь в системе"
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
