@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-03 19:37+0000\n"
-"PO-Revision-Date: 2021-03-05 14:37+0000\n"
+"PO-Revision-Date: 2021-03-09 16:26+0000\n"
 "Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/desktop/greeter/"
 "ru/>\n"
@@ -47,17 +47,19 @@ msgstr "Не удалось войти"
 
 #: src/MainWindow.vala:404
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Не удалось запустить сеанс."
 
 #: src/MainWindow.vala:466
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Не удалось запустить начальную настройку"
 
 #: src/MainWindow.vala:471
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Начальная настройка создает вашего первого пользователя. Без него, вы не "
+"сможете войти и, возможно, придется переустановить ОС."
 
 #: src/Cards/ManualCard.vala:15
 msgid "Manual Login"
@@ -69,7 +71,7 @@ msgstr "Имя пользователя"
 
 #: src/Cards/ManualCard.vala:26
 msgid "Try username"
-msgstr ""
+msgstr "Попробуйте имя пользователя"
 
 #: src/Cards/UserCard.vala:81 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
@@ -77,25 +79,23 @@ msgstr "Войти"
 
 #: src/Cards/UserCard.vala:87
 msgid "Account disabled"
-msgstr ""
+msgstr "Учетная запись отключена"
 
 #: src/Cards/UserCard.vala:174
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "Сессия не может быть изменена, пока пользователь в системе"
 
 #: src/Widgets/CapsLockRevealer.vala:70
-#, fuzzy
 msgid "Caps Lock & Num Lock are on"
-msgstr "Caps Lock включён"
+msgstr "Caps Lock и Num Lock включены"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
 msgstr "Caps Lock включён"
 
 #: src/Widgets/CapsLockRevealer.vala:74
-#, fuzzy
 msgid "Num Lock is on"
-msgstr "Caps Lock включён"
+msgstr "Num Lock включён"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
