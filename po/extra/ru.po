@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-03 19:37+0000\n"
-"PO-Revision-Date: 2021-03-10 00:03+0000\n"
+"PO-Revision-Date: 2021-03-17 12:58+0000\n"
 "Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/ru/>\n"
@@ -47,7 +47,7 @@ msgstr "Сохраняйте последнего пользователя пр�
 
 #: data/greeter.appdata.xml.in:48
 msgid "Handle all background aspect ratios"
-msgstr ""
+msgstr "Обрабатывайте все соотношения сторон фона"
 
 #: data/greeter.appdata.xml.in:49
 msgid "Give non-focused user cards smaller usernames"
@@ -65,7 +65,7 @@ msgstr "Включены звуки для экрана приветствия"
 
 #: data/greeter.appdata.xml.in:52
 msgid "Select password text on error instead of immediately clearing it"
-msgstr ""
+msgstr "Выделение текста пароля из-за ошибки, вместо его мгновенной очистки"
 
 #: data/greeter.appdata.xml.in:53
 msgid "Code cleanup"
