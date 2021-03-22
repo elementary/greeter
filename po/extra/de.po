@@ -8,24 +8,25 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-03 19:37+0000\n"
-"PO-Revision-Date: 2020-03-14 13:09+0000\n"
-"Last-Translator: Tucan Holmes <tucan.web.swiss@gmail.com>\n"
-"Language-Team: German <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/de/>\n"
+"PO-Revision-Date: 2021-03-14 17:42+0000\n"
+"Last-Translator: Uwe S <saabisto@gmx.de>\n"
+"Language-Team: German <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/greeter.appdata.xml.in:7
+#, fuzzy
 msgid "Greeter"
-msgstr ""
+msgstr "Anmelden"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
-msgstr ""
+msgstr "Gerät entsperren oder daran anmelden"
 
 #: data/greeter.appdata.xml.in:24 data/greeter.appdata.xml.in:32
 #: data/greeter.appdata.xml.in:40 data/greeter.appdata.xml.in:54
