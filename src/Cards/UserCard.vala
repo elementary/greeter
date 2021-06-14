@@ -49,7 +49,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         var username_label = new Gtk.Label (lightdm_user.display_name) {
             hexpand = true,
-            margin = 24
+            margin = 24,
+            margin_bottom = 0
         };
 
         unowned Gtk.StyleContext username_label_context = username_label.get_style_context ();
@@ -133,7 +134,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var form_grid = new Gtk.Grid () {
             column_spacing = 6,
             margin = 24,
-            margin_top = 0,
             row_spacing = 12
         };
         form_grid.add (login_stack);
