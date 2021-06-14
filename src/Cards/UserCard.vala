@@ -197,14 +197,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var avatar = new Hdy.Avatar (64, lightdm_user.display_name, true) {
             margin = 6
         };
-        avatar.set_image_load_func ((size) => {
-            try {
-                return new Gdk.Pixbuf.from_file_at_size (lightdm_user.image, size, size);
-            } catch (Error e) {
-                debug (e.message);
-                return null;
-            }
-        });
+        avatar.loadable_icon = new FileIcon (File.new_for_path (lightdm_user.image));
 
         var avatar_overlay = new Gtk.Overlay () {
             halign = Gtk.Align.CENTER,
