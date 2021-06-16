@@ -88,6 +88,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         var manual_card = new Greeter.ManualCard ();
 
         carousel = new Hdy.Carousel () {
+            interactive = false,
             vexpand = true
         };
         carousel.add (manual_card);
