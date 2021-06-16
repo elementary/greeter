@@ -533,7 +533,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         user_cards.push_tail (user_card);
     }
 
-    int distance = 0;
     int next_delta = 0;
     weak GLib.Binding? binding = null;
     private void switch_to_card (Greeter.UserCard user_card) {
@@ -584,9 +583,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         unowned var user_card = (Greeter.UserCard) obj;
         if (user_card.reveal_ratio == 1.0) {
             index_delta = next_delta;
-            distance = 0;
             user_card.notify["reveal-ratio"].disconnect (notify_cb);
-            user_card.queue_allocate ();
             return;
         }
     }
