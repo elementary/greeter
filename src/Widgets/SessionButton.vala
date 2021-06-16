@@ -21,9 +21,10 @@
 
 public class Greeter.SessionButton : Gtk.MenuButton {
     construct {
-        var settings_list = new Gtk.ListBox ();
-        settings_list.margin_bottom = 3;
-        settings_list.margin_top = 3;
+        var settings_list = new Gtk.ListBox () {
+            margin_bottom = 3,
+            margin_top = 3
+        };
         settings_list.set_sort_func ((row1, row2) => {
             var child1 = (Gtk.ModelButton) row1.get_child ();
             var child2 = (Gtk.ModelButton) row2.get_child ();
@@ -31,8 +32,9 @@ public class Greeter.SessionButton : Gtk.MenuButton {
             return child1.text.collate (child2.text);
         });
 
-        var settings_popover = new Gtk.Popover (this);
-        settings_popover.position = Gtk.PositionType.BOTTOM;
+        var settings_popover = new Gtk.Popover (this) {
+            position = Gtk.PositionType.BOTTOM
+        };
         settings_popover.add (settings_list);
 
         var cog_image = new Gtk.Image.from_icon_name ("open-menu-symbolic", Gtk.IconSize.BUTTON);
@@ -52,9 +54,10 @@ public class Greeter.SessionButton : Gtk.MenuButton {
                 GLib.Variant? val = null;
                 string? key = null;
                 while (iter.next ("{sv}", out key, out val)) {
-                    var radio = new Gtk.ModelButton ();
-                    radio.text = key;
-                    radio.set_detailed_action_name (GLib.Action.print_detailed_name ("session.select", val));
+                    var radio = new Gtk.ModelButton () {
+                        text = key
+                    };
+                    radio.set_detailed_action_name (Action.print_detailed_name ("session.select", val));
 
                     settings_list.add (radio);
                 }
