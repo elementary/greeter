@@ -25,8 +25,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
     private int index_delta = 0;
-    private int animation_delta = 0;
-    private Gtk.Overlay main_overlay;
+    private Hdy.Carousel carousel;
     private LightDM.Greeter lightdm_greeter;
     private Greeter.Settings settings;
     private Gtk.ToggleButton manual_login_button;
@@ -88,37 +87,20 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         var manual_card = new Greeter.ManualCard ();
 
-        main_overlay = new Gtk.Overlay ();
-        main_overlay.vexpand = true;
-        main_overlay.add_overlay (manual_card);
+        carousel = new Hdy.Carousel () {
+            vexpand = true
+        };
+        carousel.add (manual_card);
 
         var main_grid = new Gtk.Grid ();
         main_grid.margin_top = main_grid.margin_bottom = 24;
         main_grid.row_spacing = 24;
         main_grid.orientation = Gtk.Orientation.VERTICAL;
         main_grid.add (datetime_widget);
-        main_grid.add (main_overlay);
+        main_grid.add (carousel);
         main_grid.add (extra_login_grid);
 
         add (main_grid);
-
-        main_overlay.get_child_position.connect ((widget, out allocation) => {
-            if (widget is Greeter.UserCard && widget.is_visible ()) {
-                unowned Greeter.UserCard card = (Greeter.UserCard)widget;
-                var index = user_cards.index (card) - index_delta;
-                int minimum_width, natural_width;
-                int minimum_height, natural_height;
-                widget.get_preferred_width (out minimum_width, out natural_width);
-                widget.get_preferred_height (out minimum_height, out natural_height);
-                allocation.x = main_overlay.get_allocated_width () / 2 - natural_width / 2 + index * natural_width - animation_delta;
-                allocation.y = main_overlay.get_allocated_height () / 2 - natural_height / 2;
-                allocation.width = natural_width;
-                allocation.height = natural_height;
-                return true;
-            }
-
-            return false;
-        });
 
         manual_login_button.bind_property ("active", manual_card, "reveal-child", GLib.BindingFlags.SYNC_CREATE);
         manual_login_button.toggled.connect (() => {
@@ -519,8 +501,11 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private void add_card (LightDM.User lightdm_user) {
         var user_card = new Greeter.UserCard (lightdm_user);
         user_card.show_all ();
+
         manual_login_button.bind_property ("active", user_card, "reveal-child", GLib.BindingFlags.SYNC_CREATE | GLib.BindingFlags.INVERT_BOOLEAN);
-        main_overlay.add_overlay (user_card);
+
+        carousel.add (user_card);
+
         user_card.focus_requested.connect (() => {
             switch_to_card (user_card);
         });
@@ -564,12 +549,13 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         binding = user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE);
         next_delta = user_cards.index (user_card);
-        int minimum_width, natural_width;
-        user_card.get_preferred_width (out minimum_width, out natural_width);
-        distance = (next_delta - index_delta) * natural_width;
+
+        carousel.scroll_to (user_card);
+
         user_card.notify["reveal-ratio"].connect (notify_cb);
         user_card.show_input = true;
         user_card.grab_focus ();
+
         if (index_delta != next_delta) {
             ((Greeter.UserCard) user_cards.peek_nth (index_delta)).show_input = false;
         }
@@ -594,18 +580,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void notify_cb (GLib.Object obj, GLib.ParamSpec spec) {
-        unowned Greeter.UserCard user_card = (Greeter.UserCard) obj;
+        unowned var user_card = (Greeter.UserCard) obj;
         if (user_card.reveal_ratio == 1.0) {
             index_delta = next_delta;
-            animation_delta = 0;
             distance = 0;
             user_card.notify["reveal-ratio"].disconnect (notify_cb);
             user_card.queue_allocate ();
             return;
         }
-
-        animation_delta = (int) (user_card.reveal_ratio * distance);
-        main_overlay.queue_allocate ();
     }
 
     private void do_connect_username (string username) {
