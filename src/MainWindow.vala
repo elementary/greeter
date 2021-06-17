@@ -69,7 +69,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         extra_login_grid.valign = Gtk.Align.END;
         extra_login_grid.column_spacing = 12;
         extra_login_grid.column_homogeneous = true;
-        extra_login_grid.attach (manual_login_button, 1, 0);
 
         try {
             var gtksettings = Gtk.Settings.get_default ();
