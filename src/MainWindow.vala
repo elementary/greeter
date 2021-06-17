@@ -88,7 +88,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         var manual_card = new Greeter.ManualCard ();
 
         carousel = new Hdy.Carousel () {
-            interactive = false,
+            allow_long_swipes = true,
             vexpand = true
         };
         carousel.add (manual_card);
@@ -141,22 +141,22 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         });
 
-        GLib.ActionEntry entries[] = {
-            GLib.ActionEntry () {
-                name = "previous",
-                activate = go_previous
-            },
-            GLib.ActionEntry () {
-                name = "next",
-                activate = go_next
-            }
-        };
+        // GLib.ActionEntry entries[] = {
+        //     GLib.ActionEntry () {
+        //         name = "previous",
+        //         activate = go_previous
+        //     },
+        //     GLib.ActionEntry () {
+        //         name = "next",
+        //         activate = go_next
+        //     }
+        // };
 
         card_size_group = new Gtk.SizeGroup (Gtk.SizeGroupMode.HORIZONTAL);
         card_size_group.add_widget (extra_login_grid);
         card_size_group.add_widget (manual_card);
 
-        add_action_entries (entries, this);
+        // add_action_entries (entries, this);
 
         lightdm_greeter = new LightDM.Greeter ();
         lightdm_greeter.show_message.connect (show_message);
@@ -192,58 +192,50 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         manual_card.do_connect_username.connect (do_connect_username);
         manual_card.do_connect.connect (do_connect);
 
-        key_press_event.connect ((event) => {
-            // arrow key is being used to navigate
-            if (event.keyval in NAVIGATION_KEYS) {
-                if (current_card is UserCard) {
-                    weak Gtk.Widget? current_focus = get_focus ();
-                    if (current_focus is Gtk.Entry && current_focus.is_ancestor (current_card)) {
-                        if (((Gtk.Entry) current_focus).text == "") {
-                            if (event.keyval == Gdk.Key.Left) {
-                                if (get_style_context ().direction == Gtk.TextDirection.RTL) {
-                                    activate_action ("next", null);
-                                } else {
-                                    activate_action ("previous", null);
-                                }
-                                return true;
-                            } else if (event.keyval == Gdk.Key.Right) {
-                                if (get_style_context ().direction == Gtk.TextDirection.RTL) {
-                                    activate_action ("previous", null);
-                                } else {
-                                    activate_action ("next", null);
-                                }
-                                return true;
-                            }
-                        }
-                    }
-                }
+        // key_press_event.connect ((event) => {
+        //     // arrow key is being used to navigate
+        //     if (event.keyval in NAVIGATION_KEYS) {
+        //         if (current_card is UserCard) {
+        //             weak Gtk.Widget? current_focus = get_focus ();
+        //             if (current_focus is Gtk.Entry && current_focus.is_ancestor (current_card)) {
+        //                 if (((Gtk.Entry) current_focus).text == "") {
+        //                     if (event.keyval == Gdk.Key.Left) {
+        //                         if (get_style_context ().direction == Gtk.TextDirection.RTL) {
+        //                             activate_action ("next", null);
+        //                         } else {
+        //                             activate_action ("previous", null);
+        //                         }
+        //                         return true;
+        //                     } else if (event.keyval == Gdk.Key.Right) {
+        //                         if (get_style_context ().direction == Gtk.TextDirection.RTL) {
+        //                             activate_action ("previous", null);
+        //                         } else {
+        //                             activate_action ("next", null);
+        //                         }
+        //                         return true;
+        //                     }
+        //                 }
+        //             }
+        //         }
 
-                return false;
+        //         return false;
+        //     }
+
+        //     // Don't focus if it is a modifier or if search_box is already focused
+        //     weak Gtk.Widget? current_focus = get_focus ();
+        //     if ((event.is_modifier == 0) && (current_focus == null || !current_focus.is_ancestor (current_card))) {
+        //         current_card.grab_focus ();
+        //     }
+
+        //     return false;
+        // });
+
+        carousel.page_changed.connect ((index) => {
+            var children = carousel.get_children ();
+
+            if (children.nth_data (index) is Greeter.UserCard) {
+                switch_to_card ((Greeter.UserCard) children.nth_data (index));
             }
-
-            // Don't focus if it is a modifier or if search_box is already focused
-            weak Gtk.Widget? current_focus = get_focus ();
-            if ((event.is_modifier == 0) && (current_focus == null || !current_focus.is_ancestor (current_card))) {
-                current_card.grab_focus ();
-            }
-
-            return false;
-        });
-
-        add_events (Gdk.EventMask.SCROLL_MASK);
-
-        scroll_event.connect ((event) => {
-            switch (event.direction) {
-                case Gdk.ScrollDirection.UP:
-                case Gdk.ScrollDirection.LEFT:
-                    activate_action ("previous", null);
-                    break;
-                case Gdk.ScrollDirection.DOWN:
-                case Gdk.ScrollDirection.RIGHT:
-                    activate_action ("next", null);
-                    break;
-            }
-            return false;
         });
 
         // regrab focus when dpi changed
@@ -614,17 +606,17 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
     }
 
-    private void go_previous (GLib.SimpleAction action, GLib.Variant? parameter) {
-        unowned Greeter.UserCard? next_card = (Greeter.UserCard) user_cards.peek_nth (index_delta - 1);
-        if (next_card != null) {
-            switch_to_card (next_card);
-        }
-    }
+    // private void go_previous (GLib.SimpleAction action, GLib.Variant? parameter) {
+    //     unowned Greeter.UserCard? next_card = (Greeter.UserCard) user_cards.peek_nth (index_delta - 1);
+    //     if (next_card != null) {
+    //         switch_to_card (next_card);
+    //     }
+    // }
 
-    private void go_next (GLib.SimpleAction action, GLib.Variant? parameter) {
-        unowned Greeter.UserCard? next_card = (Greeter.UserCard) user_cards.peek_nth (index_delta + 1);
-        if (next_card != null) {
-            switch_to_card (next_card);
-        }
-    }
+    // private void go_next (GLib.SimpleAction action, GLib.Variant? parameter) {
+    //     unowned Greeter.UserCard? next_card = (Greeter.UserCard) user_cards.peek_nth (index_delta + 1);
+    //     if (next_card != null) {
+    //         switch_to_card (next_card);
+    //     }
+    // }
 }
