@@ -69,6 +69,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         extra_login_grid.valign = Gtk.Align.END;
         extra_login_grid.column_spacing = 12;
         extra_login_grid.column_homogeneous = true;
+        extra_login_grid.attach (manual_login_button, 1, 0);
 
         try {
             var gtksettings = Gtk.Settings.get_default ();
@@ -91,19 +92,23 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             allow_long_swipes = true,
             vexpand = true
         };
-        carousel.add (manual_card);
+
+        var manual_login_stack = new Gtk.Stack () {
+            transition_type = Gtk.StackTransitionType.CROSSFADE
+        };
+        manual_login_stack.add (carousel);
+        manual_login_stack.add (manual_card);
 
         var main_grid = new Gtk.Grid ();
         main_grid.margin_top = main_grid.margin_bottom = 24;
         main_grid.row_spacing = 24;
         main_grid.orientation = Gtk.Orientation.VERTICAL;
         main_grid.add (datetime_widget);
-        main_grid.add (carousel);
+        main_grid.add (manual_login_stack);
         main_grid.add (extra_login_grid);
 
         add (main_grid);
 
-        manual_login_button.bind_property ("active", manual_card, "reveal-child", GLib.BindingFlags.SYNC_CREATE);
         manual_login_button.toggled.connect (() => {
             if (manual_login_button.active) {
                 if (lightdm_greeter.in_authentication) {
@@ -114,6 +119,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     }
                 }
 
+                manual_login_stack.visible_child = manual_card;
                 current_card = manual_card;
             } else {
                 if (lightdm_greeter.in_authentication) {
@@ -124,6 +130,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     }
                 }
 
+                manual_login_stack.visible_child = carousel;
                 current_card = user_cards.peek_nth (index_delta);
                 try {
                     lightdm_greeter.authenticate (((UserCard) current_card).lightdm_user.name);
@@ -494,8 +501,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private void add_card (LightDM.User lightdm_user) {
         var user_card = new Greeter.UserCard (lightdm_user);
         user_card.show_all ();
-
-        manual_login_button.bind_property ("active", user_card, "reveal-child", GLib.BindingFlags.SYNC_CREATE | GLib.BindingFlags.INVERT_BOOLEAN);
 
         carousel.add (user_card);
 
