@@ -29,6 +29,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     public double reveal_ratio { get; private set; default = 0.0; }
     public bool is_24h { get; set; default = true; }
 
+    public int prefers_accent_color { get; set; default = 6; }
     public int sleep_inactive_ac_timeout { get; set; default = 1200; }
     public int sleep_inactive_ac_type { get; set; default = 1; }
     public int sleep_inactive_battery_timeout { get; set; default = 1200; }
@@ -39,8 +40,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Pantheon.SettingsDaemon.AccountsService settings_act;
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
-    private weak Gtk.StyleContext main_grid_style_context;
     private Greeter.PasswordEntry password_entry;
+
+    private weak Gtk.StyleContext main_grid_style_context;
+    private weak Gtk.StyleContext password_entry_context;
 
     private bool needs_keyboard_layout_set = false;
 
@@ -53,11 +56,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
             margin_bottom = 12
         };
 
-        unowned Gtk.StyleContext username_label_context = username_label.get_style_context ();
+        unowned var username_label_context = username_label.get_style_context ();
         username_label_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
         username_label_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         password_entry = new Greeter.PasswordEntry ();
+        password_entry_context = password_entry.get_style_context ();
 
         bind_property (
             "connecting",
@@ -280,9 +284,48 @@ public class Greeter.UserCard : Greeter.BaseCard {
             }
         });
 
+        update_style ();
+        notify["prefers-accent-color"].connect (() => {
+            update_style ();
+        });
+
         grab_focus.connect (() => {
             password_entry.grab_focus_without_selecting ();
         });
+    }
+
+    private void update_style () {
+        var gtksettings = Gtk.Settings.get_default ();
+        gtksettings.gtk_icon_theme_name = "elementary";
+        gtksettings.gtk_theme_name = "io.elementary.stylesheet." + accent_to_string (prefers_accent_color);
+
+        var style_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, null);
+        password_entry_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+    }
+
+    private string accent_to_string (int i) {
+        switch (i) {
+            case 1:
+                return "strawberry";
+            case 2:
+                return "orange";
+            case 3:
+                return "banana";
+            case 4:
+                return "lime";
+            case 5:
+                return "mint";
+            case 7:
+                return "grape";
+            case 8:
+                return "bubblegum";
+            case 9:
+                return "cocoa";
+            case 10:
+                return "slate";
+            default:
+                return "blueberry";
+        }
     }
 
     private void on_act_user_loaded () {
@@ -308,6 +351,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
                 );
 
                 is_24h = greeter_act.time_format != "12h";
+                prefers_accent_color = greeter_act.prefers_accent_color;
                 sleep_inactive_ac_timeout = greeter_act.sleep_inactive_ac_timeout;
                 sleep_inactive_ac_type = greeter_act.sleep_inactive_ac_type;
                 sleep_inactive_battery_timeout = greeter_act.sleep_inactive_battery_timeout;
@@ -318,6 +362,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
                     changed_properties.lookup ("TimeFormat", "s", out time_format);
                     is_24h = time_format != "12h";
 
+                    changed_properties.lookup ("PrefersAccentColor", "i", out _prefers_accent_color);
                     changed_properties.lookup ("SleepInactiveACTimeout", "i", out _sleep_inactive_ac_timeout);
                     changed_properties.lookup ("SleepInactiveACType", "i", out _sleep_inactive_ac_type);
                     changed_properties.lookup ("SleepInactiveBatteryTimeout", "i", out _sleep_inactive_battery_timeout);
