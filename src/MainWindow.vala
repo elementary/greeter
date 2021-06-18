@@ -88,22 +88,26 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         var manual_card = new Greeter.ManualCard ();
 
         carousel = new Hdy.Carousel () {
-            interactive = false,
+            allow_long_swipes = true,
             vexpand = true
         };
-        carousel.add (manual_card);
+
+        var manual_login_stack = new Gtk.Stack () {
+            transition_type = Gtk.StackTransitionType.CROSSFADE
+        };
+        manual_login_stack.add (carousel);
+        manual_login_stack.add (manual_card);
 
         var main_grid = new Gtk.Grid ();
         main_grid.margin_top = main_grid.margin_bottom = 24;
         main_grid.row_spacing = 24;
         main_grid.orientation = Gtk.Orientation.VERTICAL;
         main_grid.add (datetime_widget);
-        main_grid.add (carousel);
+        main_grid.add (manual_login_stack);
         main_grid.add (extra_login_grid);
 
         add (main_grid);
 
-        manual_login_button.bind_property ("active", manual_card, "reveal-child", GLib.BindingFlags.SYNC_CREATE);
         manual_login_button.toggled.connect (() => {
             if (manual_login_button.active) {
                 if (lightdm_greeter.in_authentication) {
@@ -114,6 +118,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     }
                 }
 
+                manual_login_stack.visible_child = manual_card;
                 current_card = manual_card;
             } else {
                 if (lightdm_greeter.in_authentication) {
@@ -124,6 +129,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     }
                 }
 
+                manual_login_stack.visible_child = carousel;
                 current_card = user_cards.peek_nth (index_delta);
                 try {
                     lightdm_greeter.authenticate (((UserCard) current_card).lightdm_user.name);
@@ -230,20 +236,12 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             return false;
         });
 
-        add_events (Gdk.EventMask.SCROLL_MASK);
+        carousel.page_changed.connect ((index) => {
+            var children = carousel.get_children ();
 
-        scroll_event.connect ((event) => {
-            switch (event.direction) {
-                case Gdk.ScrollDirection.UP:
-                case Gdk.ScrollDirection.LEFT:
-                    activate_action ("previous", null);
-                    break;
-                case Gdk.ScrollDirection.DOWN:
-                case Gdk.ScrollDirection.RIGHT:
-                    activate_action ("next", null);
-                    break;
+            if (children.nth_data (index) is Greeter.UserCard) {
+                switch_to_card ((Greeter.UserCard) children.nth_data (index));
             }
-            return false;
         });
 
         // regrab focus when dpi changed
@@ -503,8 +501,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         var user_card = new Greeter.UserCard (lightdm_user);
         user_card.show_all ();
 
-        manual_login_button.bind_property ("active", user_card, "reveal-child", GLib.BindingFlags.SYNC_CREATE | GLib.BindingFlags.INVERT_BOOLEAN);
-
         carousel.add (user_card);
 
         user_card.focus_requested.connect (() => {
@@ -617,14 +613,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private void go_previous (GLib.SimpleAction action, GLib.Variant? parameter) {
         unowned Greeter.UserCard? next_card = (Greeter.UserCard) user_cards.peek_nth (index_delta - 1);
         if (next_card != null) {
-            switch_to_card (next_card);
+            carousel.scroll_to (next_card);
         }
     }
 
     private void go_next (GLib.SimpleAction action, GLib.Variant? parameter) {
         unowned Greeter.UserCard? next_card = (Greeter.UserCard) user_cards.peek_nth (index_delta + 1);
         if (next_card != null) {
-            switch_to_card (next_card);
+            carousel.scroll_to (next_card);
         }
     }
 }
