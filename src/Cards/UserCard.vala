@@ -296,7 +296,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void update_style () {
         var gtksettings = Gtk.Settings.get_default ();
-        gtksettings.gtk_icon_theme_name = "elementary";
         gtksettings.gtk_theme_name = "io.elementary.stylesheet." + accent_to_string (prefers_accent_color);
 
         var style_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, null);
