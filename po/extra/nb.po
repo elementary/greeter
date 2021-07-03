@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-03 19:37+0000\n"
-"PO-Revision-Date: 2020-08-23 18:13+0000\n"
-"Last-Translator: Nils K <slx@nilsk.net>\n"
+"PO-Revision-Date: 2021-07-03 09:52+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/nb/>\n"
 "Language: nb\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/greeter.appdata.xml.in:7
 msgid "Greeter"
@@ -42,51 +42,55 @@ msgstr "Sørg for at manuell innlogging er tilgjengelig når brukere er skjult"
 
 #: data/greeter.appdata.xml.in:47
 msgid "Save last user on attempted login"
-msgstr ""
+msgstr "Lagre siste bruker ved forsøkt innlogging"
 
 #: data/greeter.appdata.xml.in:48
 msgid "Handle all background aspect ratios"
-msgstr ""
+msgstr "Håndtering av alle bakgrunnsaspektforhold"
 
 #: data/greeter.appdata.xml.in:49
 msgid "Give non-focused user cards smaller usernames"
-msgstr ""
+msgstr "Ikke-fokuserte brukerkort gitt mindre brukernavn"
 
 #: data/greeter.appdata.xml.in:50
 msgid "Better respect NumLock settings"
-msgstr ""
+msgstr "Bedret respekt for NumLock-innstillinger"
 
 #: data/greeter.appdata.xml.in:51
+#, fuzzy
 msgid "Enable sounds in greeter"
-msgstr ""
+msgstr "Lyder i velkomst"
 
 #: data/greeter.appdata.xml.in:52
 msgid "Select password text on error instead of immediately clearing it"
-msgstr ""
+msgstr "Velg passordstekst ved feil istedenfor å tømme umiddelbart"
 
 #: data/greeter.appdata.xml.in:53
+#, fuzzy
 msgid "Code cleanup"
-msgstr ""
+msgstr "Opprydding i Kode"
 
 #: data/greeter.appdata.xml.in:60
 msgid "Extensive overhaul"
-msgstr ""
+msgstr "Omfattende omkalfatrering"
 
 #: data/greeter.appdata.xml.in:62
 msgid "New card-based appearance"
-msgstr ""
+msgstr "Nytt kort-basert utseende"
 
 #: data/greeter.appdata.xml.in:63
 msgid "Improved HiDPI support"
-msgstr ""
+msgstr "Forbedret HiDPI-støtte"
 
 #: data/greeter.appdata.xml.in:64
+#, fuzzy
 msgid "AccountsService functionality"
-msgstr ""
+msgstr "KontoTjeneste-funksjonalitet"
 
 #: data/greeter.appdata.xml.in:65
+#, fuzzy
 msgid "Various bug fixes"
-msgstr ""
+msgstr "Forskjellige feilfikser"
 
 #: data/greeter.appdata.xml.in:101
 msgid "elementary, Inc."
