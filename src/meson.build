@@ -3,7 +3,7 @@ gobject_dep = dependency('gobject-2.0')
 glib_dep = dependency('glib-2.0')
 gtk_dep = dependency('gtk+-3.0')
 granite_dep = dependency('granite', version: '>= 5.5.0')
-hdy_dep = dependency('libhandy-1', version: '>= 0.90.0')
+hdy_dep = dependency('libhandy-1', version: '>= 1.1.90')
 lightdm_dep = dependency('liblightdm-gobject-1')
 
 install_path = join_paths(get_option('prefix'), get_option('sbindir'))
