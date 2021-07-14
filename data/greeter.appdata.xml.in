@@ -18,6 +18,17 @@
     <binary>io.elementary.greeter</binary>
   </provides>
   <releases>
+    <release version="6.0.0" date="2021-07-14" urgency="medium">
+      <description>
+        <ul>
+          <li>Add multitouch finger tracking</li>
+          <li>Add keyboard layout support</li>
+          <li>New colorful avatar fallbacks</li>
+          <li>Fix clock when resuming from sleep</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="5.0.4" date="2020-05-28" urgency="medium">
       <description>
         <ul>
