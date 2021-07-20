@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-03 19:37+0000\n"
 "PO-Revision-Date: 2021-07-20 06:30+0000\n"
-"Last-Translator: supaeasy <ismo+github@wolffson.ch>\n"
+"Last-Translator: Jenga500 <Wolfgang-Z@gmx.at>\n"
 "Language-Team: German <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/de/>\n"
 "Language: de\n"
@@ -61,7 +61,7 @@ msgstr "NumLock Einstellung wird besser beachtet"
 
 #: data/greeter.appdata.xml.in:51
 msgid "Enable sounds in greeter"
-msgstr ""
+msgstr "Aktiviere Sounds im Anmeldebildschirm"
 
 #: data/greeter.appdata.xml.in:52
 msgid "Select password text on error instead of immediately clearing it"
@@ -73,7 +73,7 @@ msgstr "Code Aufräumarbeiten"
 
 #: data/greeter.appdata.xml.in:60
 msgid "Extensive overhaul"
-msgstr ""
+msgstr "Umfangreiche Überholung"
 
 #: data/greeter.appdata.xml.in:62
 msgid "New card-based appearance"
