@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-03 19:37+0000\n"
-"PO-Revision-Date: 2021-07-03 09:52+0000\n"
+"PO-Revision-Date: 2021-07-22 02:17+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/nb/>\n"
@@ -93,5 +93,6 @@ msgid "Various bug fixes"
 msgstr "Forskjellige feilfikser"
 
 #: data/greeter.appdata.xml.in:101
+#, fuzzy
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
