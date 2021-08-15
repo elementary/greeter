@@ -26,7 +26,7 @@ public class Greeter.SystemBackground : Clutter.Canvas {
     private unowned Meta.Display display;
     private Gdk.Pixbuf input_pixbuf;
     private Gdk.Pixbuf background;
-    private Gdk.Pixbuf set_background;
+    private Granite.Drawing.BufferSurface surface;
 
     public SystemBackground (Meta.Plugin plugin) {
         display = plugin.get_display ();
@@ -100,15 +100,14 @@ public class Greeter.SystemBackground : Clutter.Canvas {
             Gdk.Pixbuf new_pixbuf = new Gdk.Pixbuf (background.colorspace, background.has_alpha, background.bits_per_sample, width, height);
             scaled_pixbuf.copy_area (x, y, width, height, new_pixbuf, 0, 0);
 
-            var surface = new Granite.Drawing.BufferSurface (new_pixbuf.width, new_pixbuf.height);
+            surface = new Granite.Drawing.BufferSurface (new_pixbuf.width, new_pixbuf.height);
             Gdk.cairo_set_source_pixbuf (surface.context, new_pixbuf, 0, 0);
             surface.context.paint ();
             surface.exponential_blur (20);
             surface.context.paint ();
-            set_background = Gdk.pixbuf_get_from_surface (surface.surface, 0, 0, new_pixbuf.width, new_pixbuf.height);
         }
 
-        Gdk.cairo_set_source_pixbuf (cr, set_background, 0, 0);
+        cr.set_source_surface (surface.surface, 0, 0);
         cr.paint ();
         cr.restore ();
         return true;
