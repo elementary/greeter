@@ -75,7 +75,6 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         var scale = get_scale_factor ();
         var width = (int) (cr_width * scale);
         var height = (int) (cr_height * scale);
-        var radius = 5 * scale;
 
         if (input_pixbuf == null) {
             //Gray Color
@@ -108,17 +107,8 @@ public class Greeter.SystemBackground : Clutter.Canvas {
             surface.context.paint ();
             set_background = Gdk.pixbuf_get_from_surface (surface.surface, 0, 0, new_pixbuf.width, new_pixbuf.height);
         }
-        cr.save ();
-        cr.scale (1.0 / scale, 1.0 / scale);
-        cr.new_sub_path ();
-        cr.arc (width - radius, radius, radius, -Math.PI_2, 0);
-        cr.line_to (width, height);
-        cr.line_to (0, height);
 
-        cr.arc (radius, radius, radius, Math.PI, Math.PI + Math.PI_2);
-        cr.close_path ();
         Gdk.cairo_set_source_pixbuf (cr, set_background, 0, 0);
-        cr.clip ();
         cr.paint ();
         cr.restore ();
         return true;
