@@ -60,6 +60,8 @@ namespace GreeterCompositor {
 
         //ScreenSaver? screensaver;
 
+        Greeter.SystemBackground system_background;
+
         Window? moving; //place for the window that is being moved over
 
         //Gee.LinkedList<ModalProxy> modal_stack = new Gee.LinkedList<ModalProxy> ();
@@ -87,9 +89,6 @@ namespace GreeterCompositor {
         }
 
         void refresh_background () {
-            unowned Meta.Display display = get_display ();
-            var system_background = new Greeter.SystemBackground (display);
-
             system_background.refresh ();
         }
 
@@ -102,10 +101,7 @@ namespace GreeterCompositor {
 
             stage = display.get_stage () as Clutter.Stage;
 
-            var system_background = new Greeter.SystemBackground (display);
-            system_background.background_actor.add_constraint (new Clutter.BindConstraint (stage,
-                Clutter.BindCoordinate.ALL, 0));
-            stage.insert_child_below (system_background.background_actor, null);
+            system_background = new Greeter.SystemBackground (this);
 
             ui_group = new Clutter.Actor ();
             ui_group.reactive = true;
@@ -164,6 +160,10 @@ namespace GreeterCompositor {
             }
 
             return list.to_array ();
+        }
+
+        public void set_wallpaper (string path) {
+            system_background.set_wallpaper.begin (path);
         }
 
         /**

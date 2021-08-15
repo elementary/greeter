@@ -23,6 +23,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     public signal void go_left ();
     public signal void go_right ();
     public signal void focus_requested ();
+    public string background_path { get; construct set; }
 
     public LightDM.User lightdm_user { get; construct; }
     public bool show_input { get; set; default = false; }
@@ -159,7 +160,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             GLib.BindingFlags.SYNC_CREATE
         );
 
-        var background_path = lightdm_user.background;
+        background_path = lightdm_user.background;
 
         if (background_path == null) {
             string path = GLib.Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
