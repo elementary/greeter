@@ -23,6 +23,7 @@
 public class Greeter.SystemBackground : Clutter.Canvas {
     private const string DEFAULT_BACKGROUND_PATH = "/usr/share/backgrounds/elementaryos-default";
     private const string DEFAULT_GRAY_BACKGROUND = "default";
+    private uint last_size_hash = 0;
     private unowned Meta.Display display;
     private Gdk.Pixbuf input_pixbuf;
     private Gdk.Pixbuf background;
@@ -30,12 +31,20 @@ public class Greeter.SystemBackground : Clutter.Canvas {
 
     public SystemBackground (Meta.Plugin plugin) {
         display = plugin.get_display ();
+        display.notify["focus-window"].connect (refresh);
+        display.gl_video_memory_purged.connect (refresh);
         var stage = display.get_stage () as Clutter.Stage;
         stage.content = this;
     }
 
     public void refresh () {
-        re_draw ();
+        //update size of background if size screen changed
+        int width, height;
+        display.get_size (out width, out height);
+        var new_hash = GLib.int_hash (width) + GLib.int_hash (height);
+        if (new_hash != last_size_hash) {
+            re_draw ();
+        }
     }
 
     private Gdk.Pixbuf load_file (string input) {
@@ -67,7 +76,9 @@ public class Greeter.SystemBackground : Clutter.Canvas {
     private void re_draw () {
         int width, height;
         display.get_size (out width, out height);
+        last_size_hash = GLib.int_hash (width) + GLib.int_hash (height);
         set_size (width, height);
+        background = null;
         invalidate ();
     }
 
@@ -81,6 +92,7 @@ public class Greeter.SystemBackground : Clutter.Canvas {
             cr.set_source_rgba (0.19, 0.21, 0.22, 1);
             cr.rectangle (0, 0, width, height);
             cr.fill ();
+            cr.restore ();
             return true;
         }
 

@@ -81,15 +81,6 @@ namespace GreeterCompositor {
 
         public override void start () {
             show_stage ();
-
-            unowned Meta.Display display = get_display ();
-            display.gl_video_memory_purged.connect (() => {
-                refresh_background ();
-            });
-        }
-
-        void refresh_background () {
-            system_background.refresh ();
         }
 
         void show_stage () {
