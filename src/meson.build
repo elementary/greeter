@@ -11,6 +11,7 @@ install_path = join_paths(get_option('prefix'), get_option('sbindir'))
 conf_data = configuration_data()
 conf_data.set('CONF_DIR', join_paths(get_option('sysconfdir'), 'lightdm'))
 conf_data.set('GETTEXT_PACKAGE', meson.project_name())
+conf_data.set('LOCALE_DIR', join_paths(get_option('prefix'), get_option('localedir')))
 
 gsd_dir = get_option('gsd-dir')
 
