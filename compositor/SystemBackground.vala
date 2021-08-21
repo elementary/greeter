@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301 USA.
  *
  * Authors: Corentin Noël <corentin@elementary.io>
- *          TorikulHabib <torik.habib@gmail.io>
+ *          TorikulHabib <torik.habib@gmail.com>
  */
 
 public class Greeter.SystemBackground : Clutter.Canvas {
@@ -25,9 +25,7 @@ public class Greeter.SystemBackground : Clutter.Canvas {
     private const string DEFAULT_GRAY_BACKGROUND = "default";
     private uint last_size_hash = 0;
     private unowned Meta.Display display;
-    private Gdk.Pixbuf input_pixbuf;
     private Gdk.Pixbuf background;
-    private Granite.Drawing.BufferSurface surface;
 
     public SystemBackground (Meta.Plugin plugin) {
         display = plugin.get_display ();
@@ -54,7 +52,13 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         } catch (Error e) {
             GLib.warning (e.message);
         }
-        return pixbuf;
+
+        var surface = new Granite.Drawing.BufferSurface (pixbuf.width, pixbuf.height);
+        Gdk.cairo_set_source_pixbuf (surface.context, pixbuf, 0, 0);
+        surface.context.paint ();
+        surface.exponential_blur (35);
+        surface.context.paint ();
+        return Gdk.pixbuf_get_from_surface (surface.surface, 0, 0, pixbuf.width, pixbuf.height);
     }
 
     public async void set_wallpaper (string path) {
@@ -66,9 +70,9 @@ public class Greeter.SystemBackground : Clutter.Canvas {
 
         var texture_file = File.new_for_path (path);
         if (path != DEFAULT_GRAY_BACKGROUND && texture_file.query_exists ()) {
-            input_pixbuf = load_file (path);
+            background = load_file (path);
         } else {
-            input_pixbuf = null;
+            background = null;
         }
         re_draw ();
     }
@@ -78,7 +82,6 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         display.get_size (out width, out height);
         last_size_hash = GLib.int_hash (width) + GLib.int_hash (height);
         set_size (width, height);
-        background = null;
         invalidate ();
     }
 
@@ -87,7 +90,7 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         var width = (int) (cr_width * scale);
         var height = (int) (cr_height * scale);
 
-        if (input_pixbuf == null) {
+        if (background == null) {
             //Gray Color
             cr.set_source_rgba (0.19, 0.21, 0.22, 1);
             cr.rectangle (0, 0, width, height);
@@ -96,32 +99,23 @@ public class Greeter.SystemBackground : Clutter.Canvas {
             return true;
         }
 
-        if (background != input_pixbuf) {
-            background = input_pixbuf;
-            Gdk.Pixbuf scaled_pixbuf;
-            double full_ratio = (double)background.height / (double)background.width;
-            if ((width * full_ratio) < height) {
-                scaled_pixbuf = background.scale_simple ((int)(width * (1 / full_ratio)), height, Gdk.InterpType.BILINEAR);
-            } else {
-                scaled_pixbuf = background.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
-            }
-
-            int y = ((height - scaled_pixbuf.height) / 2).abs ();
-            int x = ((width - scaled_pixbuf.width) / 2).abs ();
-
-            Gdk.Pixbuf new_pixbuf = new Gdk.Pixbuf (background.colorspace, background.has_alpha, background.bits_per_sample, width, height);
-            scaled_pixbuf.copy_area (x, y, width, height, new_pixbuf, 0, 0);
-
-            surface = new Granite.Drawing.BufferSurface (new_pixbuf.width, new_pixbuf.height);
-            Gdk.cairo_set_source_pixbuf (surface.context, new_pixbuf, 0, 0);
-            surface.context.paint ();
-            surface.exponential_blur (20);
-            surface.context.paint ();
+        Gdk.Pixbuf scaled_pixbuf;
+        double full_ratio = (double)background.height / (double)background.width;
+        if ((width * full_ratio) < height) {
+            scaled_pixbuf = background.scale_simple ((int)(width * (1 / full_ratio)), height, Gdk.InterpType.BILINEAR);
+        } else {
+            scaled_pixbuf = background.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
         }
 
-        cr.set_source_surface (surface.surface, 0, 0);
+        int y = ((height - scaled_pixbuf.height) / 2).abs ();
+        int x = ((width - scaled_pixbuf.width) / 2).abs ();
+
+        Gdk.Pixbuf new_pixbuf = new Gdk.Pixbuf (background.colorspace, background.has_alpha, background.bits_per_sample, width, height);
+        scaled_pixbuf.copy_area (x, y, width, height, new_pixbuf, 0, 0);
+
+        Gdk.cairo_set_source_pixbuf (cr, new_pixbuf, 0, 0);
         cr.paint ();
         cr.restore ();
-        return true;
+        return false;
     }
 }
