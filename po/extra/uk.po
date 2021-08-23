@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-23 18:15+0000\n"
-"PO-Revision-Date: 2021-07-03 20:17+0000\n"
+"PO-Revision-Date: 2021-08-23 22:49+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/uk/>\n"
@@ -30,19 +30,19 @@ msgstr "Розблокуйте або увійдіть до свого прис�
 
 #: data/greeter.appdata.xml.in:24
 msgid "Add multitouch finger tracking"
-msgstr ""
+msgstr "Додано жести пальцями"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Add keyboard layout support"
-msgstr ""
+msgstr "Додано підтримку розкладки клавіатури"
 
 #: data/greeter.appdata.xml.in:26
 msgid "New colorful avatar fallbacks"
-msgstr ""
+msgstr "Нові барвисті аватари"
 
 #: data/greeter.appdata.xml.in:27
 msgid "Fix clock when resuming from sleep"
-msgstr ""
+msgstr "Виправлено роботу годинника після пробудження пристрою"
 
 #: data/greeter.appdata.xml.in:28 data/greeter.appdata.xml.in:35
 #: data/greeter.appdata.xml.in:43 data/greeter.appdata.xml.in:51
