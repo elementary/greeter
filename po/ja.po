@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-03 19:37+0000\n"
+"POT-Creation-Date: 2021-08-23 18:15+0000\n"
 "PO-Revision-Date: 2019-11-03 00:24+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -20,39 +20,39 @@ msgstr ""
 "X-Generator: Weblate 3.7.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:516
+#: compositor/WindowManager.vala:412
 msgid "Does the display look OK?"
 msgstr "ディスプレイの設定に問題はありませんか？"
 
-#: compositor/WindowManager.vala:519
+#: compositor/WindowManager.vala:415
 msgid "Keep This Configuration"
 msgstr "この設定を保つ"
 
-#: compositor/WindowManager.vala:520
+#: compositor/WindowManager.vala:416
 msgid "Restore Previous Configuration"
 msgstr "前の設定へ戻す"
 
-#: src/MainWindow.vala:62
+#: src/MainWindow.vala:63
 msgid "Log in as Guest"
 msgstr "ゲストとしてログイン"
 
-#: src/MainWindow.vala:64
+#: src/MainWindow.vala:65
 msgid "Manual Login…"
 msgstr "ユーザー名を指定してログイン…"
 
-#: src/MainWindow.vala:403
+#: src/MainWindow.vala:409
 msgid "Unable to Log In"
 msgstr "ログインできません"
 
-#: src/MainWindow.vala:404
+#: src/MainWindow.vala:410
 msgid "Starting the session has failed."
 msgstr "セッションを開始できませんでした。"
 
-#: src/MainWindow.vala:466
+#: src/MainWindow.vala:478
 msgid "Unable to Launch Initial Setup"
 msgstr "初回セットアップを起動できません"
 
-#: src/MainWindow.vala:471
+#: src/MainWindow.vala:483
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -61,27 +61,27 @@ msgstr ""
 "回セットアップを行わないと、ログインできず、OS の再インストールが必要になる可"
 "能性があります。"
 
-#: src/Cards/ManualCard.vala:15
+#: src/Cards/ManualCard.vala:35
 msgid "Manual Login"
 msgstr "ユーザー名を指定してログイン"
 
-#: src/Cards/ManualCard.vala:22
+#: src/Cards/ManualCard.vala:44
 msgid "Username"
 msgstr "ユーザー名"
 
-#: src/Cards/ManualCard.vala:26
+#: src/Cards/ManualCard.vala:47
 msgid "Try username"
 msgstr "ユーザー名を試します"
 
-#: src/Cards/UserCard.vala:81 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:110 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "ログイン"
 
-#: src/Cards/UserCard.vala:87
+#: src/Cards/UserCard.vala:122
 msgid "Account disabled"
 msgstr "アカウントは使用できません"
 
-#: src/Cards/UserCard.vala:174
+#: src/Cards/UserCard.vala:223
 msgid "Session cannot be changed while user is logged in"
 msgstr "ユーザーのログイン中はセッションを変更できません"
 

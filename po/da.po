@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-03 19:37+0000\n"
+"POT-Creation-Date: 2021-08-23 18:15+0000\n"
 "PO-Revision-Date: 2020-05-25 19:11+0000\n"
 "Last-Translator: Rantyrant <diseasemonger@gmail.com>\n"
 "Language-Team: Danish <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -20,39 +20,39 @@ msgstr ""
 "X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-19 06:26+0000\n"
 
-#: compositor/WindowManager.vala:516
+#: compositor/WindowManager.vala:412
 msgid "Does the display look OK?"
 msgstr "Ser skærmen OK ud?"
 
-#: compositor/WindowManager.vala:519
+#: compositor/WindowManager.vala:415
 msgid "Keep This Configuration"
 msgstr "Behold Denne Konfiguration"
 
-#: compositor/WindowManager.vala:520
+#: compositor/WindowManager.vala:416
 msgid "Restore Previous Configuration"
 msgstr "Gendan Forrige Konfiguration"
 
-#: src/MainWindow.vala:62
+#: src/MainWindow.vala:63
 msgid "Log in as Guest"
 msgstr "Log ind som Gæst"
 
-#: src/MainWindow.vala:64
+#: src/MainWindow.vala:65
 msgid "Manual Login…"
 msgstr "Manuel Login…"
 
-#: src/MainWindow.vala:403
+#: src/MainWindow.vala:409
 msgid "Unable to Log In"
 msgstr "Kan ikke logge ind"
 
-#: src/MainWindow.vala:404
+#: src/MainWindow.vala:410
 msgid "Starting the session has failed."
 msgstr "Start af sessionen mislykkedes."
 
-#: src/MainWindow.vala:466
+#: src/MainWindow.vala:478
 msgid "Unable to Launch Initial Setup"
 msgstr "Kan ikke Starte Førstegangs Opsætningen"
 
-#: src/MainWindow.vala:471
+#: src/MainWindow.vala:483
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -61,27 +61,27 @@ msgstr ""
 "af stand til, at logge ind, og det kan være nødvendigt at geninstallere "
 "elementary OS."
 
-#: src/Cards/ManualCard.vala:15
+#: src/Cards/ManualCard.vala:35
 msgid "Manual Login"
 msgstr "Manuelt login"
 
-#: src/Cards/ManualCard.vala:22
+#: src/Cards/ManualCard.vala:44
 msgid "Username"
 msgstr "Brugernavn"
 
-#: src/Cards/ManualCard.vala:26
+#: src/Cards/ManualCard.vala:47
 msgid "Try username"
 msgstr "Prøv brugernavn"
 
-#: src/Cards/UserCard.vala:81 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:110 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Log ind"
 
-#: src/Cards/UserCard.vala:87
+#: src/Cards/UserCard.vala:122
 msgid "Account disabled"
 msgstr "Kontoen er deaktiveret"
 
-#: src/Cards/UserCard.vala:174
+#: src/Cards/UserCard.vala:223
 msgid "Session cannot be changed while user is logged in"
 msgstr "Sessionen kan ikke ændres når en bruger er logget ind"
 
