@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-03 19:37+0000\n"
+"POT-Creation-Date: 2021-08-23 18:15+0000\n"
 "PO-Revision-Date: 2020-05-14 14:10+0000\n"
 "Last-Translator: nasserbinlaboun <nasser1990com@gmail.com>\n"
 "Language-Team: Arabic <https://l10n.elementary.io/projects/desktop/greeter-"
@@ -28,67 +28,84 @@ msgstr "شاشة الترحيب"
 msgid "Unlock or log in to your device"
 msgstr "الغي القفل أو سجل الدخول إلى جهازك"
 
-#: data/greeter.appdata.xml.in:24 data/greeter.appdata.xml.in:32
-#: data/greeter.appdata.xml.in:40 data/greeter.appdata.xml.in:54
+#: data/greeter.appdata.xml.in:24
+msgid "Add multitouch finger tracking"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:25
+msgid "Add keyboard layout support"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:26
+msgid "New colorful avatar fallbacks"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:27
+msgid "Fix clock when resuming from sleep"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:28 data/greeter.appdata.xml.in:35
+#: data/greeter.appdata.xml.in:43 data/greeter.appdata.xml.in:51
+#: data/greeter.appdata.xml.in:65
 msgid "Updated translations"
 msgstr "ترجمات محدثة"
 
-#: data/greeter.appdata.xml.in:31
+#: data/greeter.appdata.xml.in:42
 msgid "Fix an issue with media keys"
 msgstr "أصلح المشاكل الخاصة بأزرار الوسائط المتعددة"
 
-#: data/greeter.appdata.xml.in:39
+#: data/greeter.appdata.xml.in:50
 msgid "Ensure that manual login is available when users are hidden"
 msgstr "تأكد من أن تسجيل الدخول اليدوي متاح عندما تكون حسابات المستخدمين مخفية"
 
-#: data/greeter.appdata.xml.in:47
+#: data/greeter.appdata.xml.in:58
 msgid "Save last user on attempted login"
 msgstr "احفظ آخر محاولة تسجيل دخول"
 
-#: data/greeter.appdata.xml.in:48
+#: data/greeter.appdata.xml.in:59
 msgid "Handle all background aspect ratios"
 msgstr "تحكم بجميع قياسات الخلفية"
 
-#: data/greeter.appdata.xml.in:49
+#: data/greeter.appdata.xml.in:60
 msgid "Give non-focused user cards smaller usernames"
 msgstr "يعطي صورة حساب غير مضغوطة بأسماء صغيرة"
 
-#: data/greeter.appdata.xml.in:50
+#: data/greeter.appdata.xml.in:61
 msgid "Better respect NumLock settings"
 msgstr "إحترام أكثر لإعدادات الNumLock"
 
-#: data/greeter.appdata.xml.in:51
+#: data/greeter.appdata.xml.in:62
 msgid "Enable sounds in greeter"
 msgstr "تفعيل الأصوات في شاشة الترحيب"
 
-#: data/greeter.appdata.xml.in:52
+#: data/greeter.appdata.xml.in:63
 msgid "Select password text on error instead of immediately clearing it"
 msgstr "اختر نص كلمة السر عند حدوث خطأ بدلا من مسحها مباشرة"
 
-#: data/greeter.appdata.xml.in:53
+#: data/greeter.appdata.xml.in:64
 msgid "Code cleanup"
 msgstr "تنظيف الشيفرة المصدرية"
 
-#: data/greeter.appdata.xml.in:60
+#: data/greeter.appdata.xml.in:71
 msgid "Extensive overhaul"
 msgstr "اعادة تجديد واسعة"
 
-#: data/greeter.appdata.xml.in:62
+#: data/greeter.appdata.xml.in:73
 msgid "New card-based appearance"
 msgstr "مظهر جديد على شكل بطاقات"
 
-#: data/greeter.appdata.xml.in:63
+#: data/greeter.appdata.xml.in:74
 msgid "Improved HiDPI support"
 msgstr "دعم ( HiDpi ) محسن"
 
-#: data/greeter.appdata.xml.in:64
+#: data/greeter.appdata.xml.in:75
 msgid "AccountsService functionality"
 msgstr "خصائص إدارة الحسابات"
 
-#: data/greeter.appdata.xml.in:65
+#: data/greeter.appdata.xml.in:76
 msgid "Various bug fixes"
 msgstr "تصليح أخطاء متنوعة"
 
-#: data/greeter.appdata.xml.in:101
+#: data/greeter.appdata.xml.in:112
 msgid "elementary, Inc."
 msgstr "اليمينتري المتحدة."
