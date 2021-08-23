@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-03 19:37+0000\n"
 "PO-Revision-Date: 2021-08-23 11:26+0000\n"
-"Last-Translator: Szabó Gyuszi <gyhun95@gmail.com>\n"
+"Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/desktop/"
 "greeter/hu/>\n"
 "Language: hu\n"
@@ -82,8 +82,7 @@ msgstr "Fiók letiltva"
 
 #: src/Cards/UserCard.vala:174
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
-"A munkamenet nem változtatható meg addig, míg a felhasználó be van lépve."
+msgstr "A munkamenet nem változtatható meg, míg a felhasználó be van lépve."
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
@@ -91,7 +90,7 @@ msgstr "A Caps Lock és a Num Lock be van kapcsolva"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps Lock bekapcsolva"
 
 #: src/Widgets/CapsLockRevealer.vala:74
 msgid "Num Lock is on"
@@ -99,7 +98,7 @@ msgstr ""
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
-msgstr ""
+msgstr "Jelszó"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Csúsztassa az ujját"
