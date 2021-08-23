@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-23 18:15+0000\n"
-"PO-Revision-Date: 2020-04-09 14:10+0000\n"
+"PO-Revision-Date: 2021-08-23 22:49+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: Hebrew <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/he/>\n"
+"Language-Team: Hebrew <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/he/>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/greeter.appdata.xml.in:7
 msgid "Greeter"
@@ -29,19 +29,19 @@ msgstr "שחרור נעילה או כניסה למכשיר שלך"
 
 #: data/greeter.appdata.xml.in:24
 msgid "Add multitouch finger tracking"
-msgstr ""
+msgstr "נוסף מעקב אחר מספר אצבעות במקביל"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Add keyboard layout support"
-msgstr ""
+msgstr "נוספה תמיכה בפריסות מקלדת"
 
 #: data/greeter.appdata.xml.in:26
 msgid "New colorful avatar fallbacks"
-msgstr ""
+msgstr "תמונות ייצוגיות צבעוניות חדשות לנסיגה"
 
 #: data/greeter.appdata.xml.in:27
 msgid "Fix clock when resuming from sleep"
-msgstr ""
+msgstr "תוקן השעון בעת חזרה ממצב שינה"
 
 #: data/greeter.appdata.xml.in:28 data/greeter.appdata.xml.in:35
 #: data/greeter.appdata.xml.in:43 data/greeter.appdata.xml.in:51
