@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-23 18:15+0000\n"
-"PO-Revision-Date: 2021-08-24 18:33+0000\n"
+"PO-Revision-Date: 2021-08-24 23:08+0000\n"
 "Last-Translator: Mejans <farga@mejans.fr>\n"
 "Language-Team: Occitan <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/oc/>\n"
@@ -56,30 +56,33 @@ msgstr "Correccion d’un problèma amb las tòcas de mèdia"
 #: data/greeter.appdata.xml.in:50
 msgid "Ensure that manual login is available when users are hidden"
 msgstr ""
+"Asseguratz-vos que la connexion manuala es disponibla quand los utilizaires "
+"son amagats"
 
 #: data/greeter.appdata.xml.in:58
 msgid "Save last user on attempted login"
-msgstr ""
+msgstr "Enregistrar la darrièra temptativa de connexion"
 
 #: data/greeter.appdata.xml.in:59
 msgid "Handle all background aspect ratios"
-msgstr ""
+msgstr "Gestion de tot racio de rèireplan"
 
 #: data/greeter.appdata.xml.in:60
 msgid "Give non-focused user cards smaller usernames"
-msgstr ""
+msgstr "Las cartas utilizaire sens focus an un nom d’utilizaire mai petit"
 
 #: data/greeter.appdata.xml.in:61
 msgid "Better respect NumLock settings"
-msgstr ""
+msgstr "Respèct dels paramètres de verrolhatge numeric"
 
 #: data/greeter.appdata.xml.in:62
 msgid "Enable sounds in greeter"
-msgstr ""
+msgstr "Activacion dels sons"
 
 #: data/greeter.appdata.xml.in:63
 msgid "Select password text on error instead of immediately clearing it"
 msgstr ""
+"Seleccion del senhal al moment d’una error allòc de lo suprimir dirèctament"
 
 #: data/greeter.appdata.xml.in:64
 msgid "Code cleanup"
@@ -87,11 +90,11 @@ msgstr "Netejatge del còdi"
 
 #: data/greeter.appdata.xml.in:71
 msgid "Extensive overhaul"
-msgstr ""
+msgstr "Refonda complèta"
 
 #: data/greeter.appdata.xml.in:73
 msgid "New card-based appearance"
-msgstr ""
+msgstr "Aparéncia novèla basada sus las cartas"
 
 #: data/greeter.appdata.xml.in:74
 msgid "Improved HiDPI support"
