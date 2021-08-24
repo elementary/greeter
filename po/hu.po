@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-23 18:15+0000\n"
-"PO-Revision-Date: 2021-08-24 00:13+0000\n"
+"PO-Revision-Date: 2021-08-24 02:12+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/desktop/"
 "greeter/hu/>\n"
@@ -82,7 +82,7 @@ msgstr "Fiók letiltva"
 
 #: src/Cards/UserCard.vala:223
 msgid "Session cannot be changed while user is logged in"
-msgstr "A munkamenet nem változtatható meg, amíg egy felhasználó be van lépve."
+msgstr "A munkamenet nem változtatható meg, míg a felhasználó be van lépve"
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
