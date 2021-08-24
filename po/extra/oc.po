@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-23 18:15+0000\n"
-"PO-Revision-Date: 2020-08-29 20:13+0000\n"
+"PO-Revision-Date: 2021-08-24 18:33+0000\n"
 "Last-Translator: Mejans <farga@mejans.fr>\n"
-"Language-Team: Occitan <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/oc/>\n"
+"Language-Team: Occitan <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/oc/>\n"
 "Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/greeter.appdata.xml.in:7
 msgid "Greeter"
@@ -29,19 +29,19 @@ msgstr "Desverrolhar o vos connectar a l’aparelh"
 
 #: data/greeter.appdata.xml.in:24
 msgid "Add multitouch finger tracking"
-msgstr ""
+msgstr "Apondon dels gèsts multi-tòca"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Add keyboard layout support"
-msgstr ""
+msgstr "Apondon de la presa en carga dels agençaments de clavièr"
 
 #: data/greeter.appdata.xml.in:26
 msgid "New colorful avatar fallbacks"
-msgstr ""
+msgstr "Avatars novèls colorats per defaut"
 
 #: data/greeter.appdata.xml.in:27
 msgid "Fix clock when resuming from sleep"
-msgstr ""
+msgstr "Correccion de l’ora de sortida de velha"
 
 #: data/greeter.appdata.xml.in:28 data/greeter.appdata.xml.in:35
 #: data/greeter.appdata.xml.in:43 data/greeter.appdata.xml.in:51
@@ -83,7 +83,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:64
 msgid "Code cleanup"
-msgstr ""
+msgstr "Netejatge del còdi"
 
 #: data/greeter.appdata.xml.in:71
 msgid "Extensive overhaul"
@@ -95,15 +95,15 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:74
 msgid "Improved HiDPI support"
-msgstr ""
+msgstr "Melhora presa en carga del HiDPI"
 
 #: data/greeter.appdata.xml.in:75
 msgid "AccountsService functionality"
-msgstr ""
+msgstr "Foncionalitat d'AccountsService"
 
 #: data/greeter.appdata.xml.in:76
 msgid "Various bug fixes"
-msgstr "Un fum de bug corregits"
+msgstr "Bugs divèrses corregits"
 
 #: data/greeter.appdata.xml.in:112
 msgid "elementary, Inc."
