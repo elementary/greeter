@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-23 18:15+0000\n"
 "PO-Revision-Date: 2021-08-24 00:13+0000\n"
-"Last-Translator: mateszabo2001 <mateszabo2001@gmail.com>\n"
+"Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/desktop/"
 "greeter/hu/>\n"
 "Language: hu\n"
@@ -86,7 +86,7 @@ msgstr "A munkamenet nem változtatható meg, amíg egy felhasználó be van lé
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
-msgstr "A Caps Lock és Num Lock be vannak kapcsolva"
+msgstr "A Caps Lock és a Num Lock be vannak kapcsolva"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
