@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-23 18:15+0000\n"
-"PO-Revision-Date: 2021-08-24 02:12+0000\n"
+"PO-Revision-Date: 2021-08-24 18:33+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/desktop/"
 "greeter/hu/>\n"
@@ -26,11 +26,11 @@ msgstr "Megfelelően jelenik meg a kép?"
 
 #: compositor/WindowManager.vala:415
 msgid "Keep This Configuration"
-msgstr "Beállítások megtartása"
+msgstr "Beállítás megtartása"
 
 #: compositor/WindowManager.vala:416
 msgid "Restore Previous Configuration"
-msgstr "Az előző beállítások visszaállítása"
+msgstr "Az előző beállítás visszaállítása"
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
