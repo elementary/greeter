@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-23 18:15+0000\n"
-"PO-Revision-Date: 2021-04-26 12:57+0000\n"
-"Last-Translator: samermi1 <abugahgah@gmail.com>\n"
+"PO-Revision-Date: 2021-08-27 18:48+0000\n"
+"Last-Translator: Muhammad Al-Jayyousi <m7md.j99@protonmail.com>\n"
 "Language-Team: Arabic <https://l10n.elementary.io/projects/desktop/greeter/"
 "ar/>\n"
 "Language: ar\n"
@@ -23,15 +23,15 @@ msgstr ""
 
 #: compositor/WindowManager.vala:412
 msgid "Does the display look OK?"
-msgstr "هل الواجهة تبدو جيدة؟"
+msgstr "هل تبدو شاشة العرض جيدة؟"
 
 #: compositor/WindowManager.vala:415
 msgid "Keep This Configuration"
-msgstr "إحتفظ بهذه الإعدادات"
+msgstr "احتفظ بهذه الإعدادات"
 
 #: compositor/WindowManager.vala:416
 msgid "Restore Previous Configuration"
-msgstr "إسترجع إعدادات الضبط السابقة"
+msgstr "استرجع الإعدادات السابقة"
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
