@@ -28,6 +28,19 @@ namespace GreeterCompositor {
     }
 
     public static int main (string[] args) {
+
+#if HAS_MUTTER41
+        var ctx = new Meta.Context ("Mutter(GreeterCompositor)");
+        ctx.add_option_entries (GreeterCompositor.OPTIONS, Constants.GETTEXT_PACKAGE);
+        try {
+            ctx.configure (ref args);
+        } catch (Error e) {
+            stderr.printf ("Error initializing: %s\n", e.message);
+            return Posix.EXIT_FAILURE;
+        }
+
+        ctx.set_plugin_gtype (typeof (GreeterCompositor.WindowManager));
+#else
         unowned OptionContext ctx = Meta.get_option_context ();
         ctx.add_main_entries (GreeterCompositor.OPTIONS, null);
         try {
@@ -40,7 +53,17 @@ namespace GreeterCompositor {
         Meta.Plugin.manager_set_plugin_type (typeof (GreeterCompositor.WindowManager));
 
         Meta.Util.set_wm_name ("Mutter(GreeterCompositor)");
+#endif
 
+
+#if HAS_MUTTER41
+        try {
+            ctx.setup ();
+        } catch (Error e) {
+            stderr.printf ("Failed to setup: %s\n", e.message);
+            return Posix.EXIT_FAILURE;
+        }
+#else
         /**
          * Prevent Meta.init () from causing gtk to load gail and at-bridge
          * Taken from Gnome-Shell main.c
@@ -50,8 +73,27 @@ namespace GreeterCompositor {
         Meta.init ();
         GLib.Environment.unset_variable ("NO_GAIL");
         GLib.Environment.unset_variable ("NO_AT_BRIDGE");
+#endif
 
         typeof (GreeterCompositor.Utils).class_ref ();
+#if HAS_MUTTER41
+        try {
+            ctx.start ();
+        } catch (Error e) {
+            stderr.printf ("Failed to start: %s\n", e.message);
+            return Posix.EXIT_FAILURE;
+        }
+
+        try {
+            ctx.run_main_loop ();
+        } catch (Error e) {
+            stderr.printf ("Greeter Compositor terminated with a failure: %s\n", e.message);
+            return Posix.EXIT_FAILURE;
+        }
+
+        return Posix.EXIT_SUCCESS;
+#else
         return Meta.run ();
+#endif
     }
 }
