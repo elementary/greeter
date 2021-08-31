@@ -4,6 +4,7 @@ glib_dep = [dependency('gio-2.0'), dependency('gio-unix-2.0'), dependency('gmodu
 gtk_dep = [dependency('gtk+-3.0'), dependency('gdk-x11-3.0')]
 gee_dep = dependency('gee-0.8')
 m_dep = meson.get_compiler('c').find_library('m', required: false)
+posix_dep = meson.get_compiler('vala').find_library('posix', required: false)
 
 # Mutter is a complicated library with many API changes, copied from Gala.
 mutter_dep = []
@@ -46,6 +47,17 @@ if mutter40_dep.found()
 	vala_flags = ['--define', 'HAS_MUTTER338', '--define', 'HAS_MUTTER40']
 endif
 
+mutter41_dep = dependency('libmutter-9', version: ['>= 41', '< 42'], required: false)
+if mutter41_dep.found()
+	libmutter_dep = dependency('libmutter-9', version: '>= 41')
+	mutter_dep = [
+		libmutter_dep,
+		dependency('mutter-cogl-9'), dependency('mutter-cogl-pango-9'),
+		dependency('mutter-clutter-9')
+	]
+	vala_flags = ['--define', 'HAS_MUTTER338', '--define', 'HAS_MUTTER40', '--define', 'HAS_MUTTER41']
+endif
+
 if mutter_dep.length() == 0
 	error ('No supported mutter library found!')
 endif
@@ -69,7 +81,7 @@ executable(
   compositor_files,
   compositor_resources,
   config_header,
-  dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, mutter_dep],
+  dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, posix_dep, mutter_dep],
   vala_args: vala_flags,
   c_args: compositor_c_args,
   build_rpath: mutter_typelib_dir,
