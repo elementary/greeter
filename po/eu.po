@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-03 19:37+0000\n"
+"POT-Creation-Date: 2021-08-23 18:15+0000\n"
 "PO-Revision-Date: 2013-06-12 04:40+0000\n"
 "Last-Translator: Ibai Oihanguren Sala <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
@@ -18,65 +18,65 @@ msgstr ""
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 "X-Generator: Launchpad (build 18330)\n"
 
-#: compositor/WindowManager.vala:516
+#: compositor/WindowManager.vala:412
 msgid "Does the display look OK?"
 msgstr ""
 
-#: compositor/WindowManager.vala:519
+#: compositor/WindowManager.vala:415
 msgid "Keep This Configuration"
 msgstr ""
 
-#: compositor/WindowManager.vala:520
+#: compositor/WindowManager.vala:416
 msgid "Restore Previous Configuration"
 msgstr ""
 
-#: src/MainWindow.vala:62
+#: src/MainWindow.vala:63
 msgid "Log in as Guest"
 msgstr ""
 
-#: src/MainWindow.vala:64
+#: src/MainWindow.vala:65
 msgid "Manual Login…"
 msgstr ""
 
-#: src/MainWindow.vala:403
+#: src/MainWindow.vala:409
 msgid "Unable to Log In"
 msgstr ""
 
-#: src/MainWindow.vala:404
+#: src/MainWindow.vala:410
 msgid "Starting the session has failed."
 msgstr ""
 
-#: src/MainWindow.vala:466
+#: src/MainWindow.vala:478
 msgid "Unable to Launch Initial Setup"
 msgstr ""
 
-#: src/MainWindow.vala:471
+#: src/MainWindow.vala:483
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
 
-#: src/Cards/ManualCard.vala:15
+#: src/Cards/ManualCard.vala:35
 msgid "Manual Login"
 msgstr ""
 
-#: src/Cards/ManualCard.vala:22
+#: src/Cards/ManualCard.vala:44
 msgid "Username"
 msgstr ""
 
-#: src/Cards/ManualCard.vala:26
+#: src/Cards/ManualCard.vala:47
 msgid "Try username"
 msgstr ""
 
-#: src/Cards/UserCard.vala:81 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:110 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr ""
 
-#: src/Cards/UserCard.vala:87
+#: src/Cards/UserCard.vala:122
 msgid "Account disabled"
 msgstr ""
 
-#: src/Cards/UserCard.vala:174
+#: src/Cards/UserCard.vala:223
 msgid "Session cannot be changed while user is logged in"
 msgstr ""
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-03 19:37+0000\n"
-"PO-Revision-Date: 2021-08-14 21:06+0000\n"
+"POT-Creation-Date: 2021-08-23 18:15+0000\n"
+"PO-Revision-Date: 2021-08-28 15:19+0000\n"
 "Last-Translator: roxfr <roxfr@outlook.fr>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/desktop/greeter/"
 "fr/>\n"
@@ -20,39 +20,39 @@ msgstr ""
 "X-Generator: Weblate 4.4.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:516
+#: compositor/WindowManager.vala:412
 msgid "Does the display look OK?"
 msgstr "L'affichage semble-t-il correct ?"
 
-#: compositor/WindowManager.vala:519
+#: compositor/WindowManager.vala:415
 msgid "Keep This Configuration"
 msgstr "Conserver cette configuration"
 
-#: compositor/WindowManager.vala:520
+#: compositor/WindowManager.vala:416
 msgid "Restore Previous Configuration"
 msgstr "Restaurer la configuration précédente"
 
-#: src/MainWindow.vala:62
+#: src/MainWindow.vala:63
 msgid "Log in as Guest"
 msgstr "Connexion en tant qu'invité"
 
-#: src/MainWindow.vala:64
+#: src/MainWindow.vala:65
 msgid "Manual Login…"
 msgstr "Connexion manuelle…"
 
-#: src/MainWindow.vala:403
+#: src/MainWindow.vala:409
 msgid "Unable to Log In"
 msgstr "Impossible de se connecter"
 
-#: src/MainWindow.vala:404
+#: src/MainWindow.vala:410
 msgid "Starting the session has failed."
 msgstr "Le lancement de la session a échoué."
 
-#: src/MainWindow.vala:466
+#: src/MainWindow.vala:478
 msgid "Unable to Launch Initial Setup"
 msgstr "Impossible de lancer la configuration initiale"
 
-#: src/MainWindow.vala:471
+#: src/MainWindow.vala:483
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -60,42 +60,42 @@ msgstr ""
 "L'installation initiale créé votre premier utilisateur. Sans cela, vous ne "
 "pourriez pas vous connecter et devriez réinstaller le système d'exploitation."
 
-#: src/Cards/ManualCard.vala:15
+#: src/Cards/ManualCard.vala:35
 msgid "Manual Login"
 msgstr "Connexion manuelle"
 
-#: src/Cards/ManualCard.vala:22
+#: src/Cards/ManualCard.vala:44
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: src/Cards/ManualCard.vala:26
+#: src/Cards/ManualCard.vala:47
 msgid "Try username"
 msgstr "Essayer le nom d'utilisateur"
 
-#: src/Cards/UserCard.vala:81 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:110 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Connexion"
 
-#: src/Cards/UserCard.vala:87
+#: src/Cards/UserCard.vala:122
 msgid "Account disabled"
 msgstr "Compte désactivé"
 
-#: src/Cards/UserCard.vala:174
+#: src/Cards/UserCard.vala:223
 msgid "Session cannot be changed while user is logged in"
 msgstr ""
 "La session ne peut pas être modifiée tant que l'utilisateur est connecté"
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
-msgstr "Le verrouillage des majuscules et du pavé numérique sont activés"
+msgstr "Verr Maj & Verr Num activés"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
-msgstr "Le verrouillage des majuscules est activé"
+msgstr "Verr Maj activé"
 
 #: src/Widgets/CapsLockRevealer.vala:74
 msgid "Num Lock is on"
-msgstr "Le verrouillage du pavé numérique est activé"
+msgstr "Verr Num activé"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
