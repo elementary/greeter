@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-23 18:15+0000\n"
 "PO-Revision-Date: 2021-09-02 21:39+0000\n"
-"Last-Translator: mateszabo2001 <mateszabo2001@gmail.com>\n"
+"Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/desktop/"
 "greeter/hu/>\n"
 "Language: hu\n"
@@ -50,7 +50,7 @@ msgstr "A munkamenet indítása sikertelen."
 
 #: src/MainWindow.vala:478
 msgid "Unable to Launch Initial Setup"
-msgstr "A kezdeti beállítóablak indítása sikertelen"
+msgstr "Nem lehet elindítani a Kezdeti beállításokat"
 
 #: src/MainWindow.vala:483
 msgid ""
