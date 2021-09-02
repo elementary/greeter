@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-23 18:15+0000\n"
-"PO-Revision-Date: 2021-09-02 21:33+0000\n"
+"PO-Revision-Date: 2021-09-02 21:39+0000\n"
 "Last-Translator: mateszabo2001 <mateszabo2001@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/hu/>\n"
@@ -25,7 +25,7 @@ msgstr "Üdvözlő"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
-msgstr ""
+msgstr "Feloldás vagy bejelentkezés az eszlözbe"
 
 #: data/greeter.appdata.xml.in:24
 msgid "Add multitouch finger tracking"
@@ -56,6 +56,8 @@ msgstr ""
 #: data/greeter.appdata.xml.in:50
 msgid "Ensure that manual login is available when users are hidden"
 msgstr ""
+"Győződj meg róla, hogy a kézi bejelentkezés elérhető, amikor a felhasználók "
+"rejtve vannak"
 
 #: data/greeter.appdata.xml.in:58
 msgid "Save last user on attempted login"
