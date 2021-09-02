@@ -38,7 +38,7 @@ msgstr "Bejelentkezés Vendégként"
 
 #: src/MainWindow.vala:65
 msgid "Manual Login…"
-msgstr "Kézi bejelentkezés…"
+msgstr "Kézi bejelentkezés"
 
 #: src/MainWindow.vala:409
 msgid "Unable to Log In"
