@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-23 18:15+0000\n"
 "PO-Revision-Date: 2021-09-02 21:37+0000\n"
-"Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
+"Last-Translator: Szabó Gyuszi <gyhun95@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/desktop/"
 "greeter/hu/>\n"
 "Language: hu\n"
@@ -34,7 +34,7 @@ msgstr "Előző beállítások visszaállítása"
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
-msgstr "Vendégként való bejelentkezés"
+msgstr "Bejelentkezés Vendégként"
 
 #: src/MainWindow.vala:65
 msgid "Manual Login…"
