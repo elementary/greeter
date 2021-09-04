@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-23 18:15+0000\n"
-"PO-Revision-Date: 2021-08-27 18:48+0000\n"
+"PO-Revision-Date: 2021-09-04 17:03+0000\n"
 "Last-Translator: Muhammad Al-Jayyousi <m7md.j99@protonmail.com>\n"
 "Language-Team: Arabic <https://l10n.elementary.io/projects/desktop/greeter/"
 "ar/>\n"
@@ -35,7 +35,7 @@ msgstr "استرجع الإعدادات السابقة"
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
-msgstr "تسجيل الدخول كضيف"
+msgstr "سجل الدخول كضيف"
 
 #: src/MainWindow.vala:65
 msgid "Manual Login…"
@@ -43,7 +43,7 @@ msgstr "تسجيل دخول يدوي…"
 
 #: src/MainWindow.vala:409
 msgid "Unable to Log In"
-msgstr "لا يمكن تسجيل الدخول"
+msgstr "تعذر تسجيل الدخول"
 
 #: src/MainWindow.vala:410
 msgid "Starting the session has failed."
@@ -51,13 +51,15 @@ msgstr "فشل في بدء الجلسة."
 
 #: src/MainWindow.vala:478
 msgid "Unable to Launch Initial Setup"
-msgstr "غير قادر على تشغيل التنصيب الابتدائي"
+msgstr "تعذر تشغيل برنامج الإعداد الأولي"
 
 #: src/MainWindow.vala:483
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"يقوم برنامج الإعداد الأولي بإنشاء حساب المستخدم الأول الخاص بك. بدونه، لن "
+"تتمكن من تسجيل الدخول وقد تضطر لإعادة تثبيت نظام التشغيل."
 
 #: src/Cards/ManualCard.vala:35
 msgid "Manual Login"
@@ -73,33 +75,31 @@ msgstr "جرب اسم المستخدم"
 
 #: src/Cards/UserCard.vala:110 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
-msgstr "الدخول"
+msgstr "سجل الدخول"
 
 #: src/Cards/UserCard.vala:122
 msgid "Account disabled"
-msgstr ""
+msgstr "الحساب معطل"
 
 #: src/Cards/UserCard.vala:223
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "لا يمكن تغيير الجلسة بينما المستخدم مسجل دخوله"
 
 #: src/Widgets/CapsLockRevealer.vala:70
-#, fuzzy
 msgid "Caps Lock & Num Lock are on"
-msgstr "Caps Lock مفعل"
+msgstr "مفتاحا الحروف الكبيرة والأرقام مفعلان"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
-msgstr "Caps Lock مفعل"
+msgstr "مفتاح الحروف الكبيرة مفعل"
 
 #: src/Widgets/CapsLockRevealer.vala:74
-#, fuzzy
 msgid "Num Lock is on"
-msgstr "Caps Lock مفعل"
+msgstr "مفتاح الأرقام مفعل"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
-msgstr "كلمة السر"
+msgstr "كلمة المرور"
 
 #~ msgid "Guest session"
 #~ msgstr "الدخول كضيف"
