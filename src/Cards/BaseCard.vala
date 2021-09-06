@@ -27,6 +27,9 @@ public abstract class Greeter.BaseCard : Gtk.Revealer {
     public bool connecting { get; set; default = false; }
     public bool need_password { get; set; default = false; }
     public bool use_fingerprint { get; set; default = false; }
+	
+	public int prefers_color_scheme { get; set; default = 0; }
+    public int prefers_accent_color { get; set; default = 0; }
 
     protected const int ERROR_SHAKE_DURATION = 450;
 

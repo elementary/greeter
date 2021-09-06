@@ -287,6 +287,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         if (current_card != null) {
             current_card.grab_focus ();
         }
+		user_style ();
     }
 
     private void maximize_window () {
@@ -540,6 +541,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         if (binding != null) {
             binding.unbind ();
         }
+		
+		user_style ();
 
         user_card.set_keyboard_layouts ();
 
@@ -621,6 +624,51 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         unowned Greeter.UserCard? next_card = (Greeter.UserCard) user_cards.peek_nth (index_delta + 1);
         if (next_card != null) {
             carousel.scroll_to (next_card);
+        }
+    }
+	
+	
+    private void user_style () {
+        var gtksettings = Gtk.Settings.get_default ();
+        if (current_card.prefers_color_scheme == 1) {
+            gtksettings.gtk_application_prefer_dark_theme = true;
+        } else {
+            gtksettings.gtk_application_prefer_dark_theme = false;
+        }
+        switch (current_card.prefers_accent_color) {
+            case 1:
+                gtksettings.gtk_theme_name = "io.elementary.stylesheet.strawberry";
+                break;
+            case 2:
+                gtksettings.gtk_theme_name = "io.elementary.stylesheet.orange";
+                break;
+            case 3:
+                gtksettings.gtk_theme_name = "io.elementary.stylesheet.banana";
+                break;
+            case 4:
+                gtksettings.gtk_theme_name = "io.elementary.stylesheet.lime";
+                break;
+            case 5:
+                gtksettings.gtk_theme_name = "io.elementary.stylesheet.mint";
+                break;
+            case 6:
+                gtksettings.gtk_theme_name = "io.elementary.stylesheet.blueberry";
+                break;
+            case 7:
+                gtksettings.gtk_theme_name = "io.elementary.stylesheet.grape";
+                break;
+            case 8:
+                gtksettings.gtk_theme_name = "io.elementary.stylesheet.bubblegum";
+                break;
+            case 9:
+                gtksettings.gtk_theme_name = "io.elementary.stylesheet.cocoa";
+                break;
+            case 10:
+                gtksettings.gtk_theme_name = "io.elementary.stylesheet.slate";
+                break;
+            default:
+                gtksettings.gtk_theme_name = "io.elementary.stylesheet.blueberry";
+                break;
         }
     }
 }
