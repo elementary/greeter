@@ -287,7 +287,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         if (current_card != null) {
             current_card.grab_focus ();
         }
-		user_style ();
     }
 
     private void maximize_window () {
@@ -307,6 +306,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         var rect = monitor.get_geometry ();
         resize (rect.width, rect.height);
         move (rect.x, rect.y);
+        user_style ();
     }
 
     private void create_session_selection_action () {
