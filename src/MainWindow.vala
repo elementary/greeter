@@ -446,6 +446,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
 
         if (lightdm_user_list.length > 0) {
+            datetime_widget.visible = true;
+
             lightdm_user_list.users.foreach ((user) => {
                 add_card (user);
             });
@@ -469,6 +471,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 switch_to_card (user_card);
             }
         } else {
+            datetime_widget.visible = false;
+
             /* We're not certain that scaling factor will change, but try to wait for GSD in case it does */
             Timeout.add (500, () => {
                 try {
