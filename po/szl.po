@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 18:15+0000\n"
+"POT-Creation-Date: 2021-09-10 18:01+0000\n"
 "PO-Revision-Date: 2020-02-25 22:09+0000\n"
 "Last-Translator: gkkulik <g.kulik@o2.pl>\n"
 "Language-Team: Silesian <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -14,15 +14,15 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 3.9.1\n"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:419
 msgid "Does the display look OK?"
 msgstr "Wyglōndo ekran dobrze?"
 
-#: compositor/WindowManager.vala:415
+#: compositor/WindowManager.vala:422
 msgid "Keep This Configuration"
 msgstr "Trzim ta kōnfiguracyjo"
 
-#: compositor/WindowManager.vala:416
+#: compositor/WindowManager.vala:423
 msgid "Restore Previous Configuration"
 msgstr "Prziwrōć wczaśniyjszo kōnfiguracyjo"
 
@@ -42,11 +42,11 @@ msgstr "Niy szło sie wlogować"
 msgid "Starting the session has failed."
 msgstr "Niy szło sztartnōńć sesyje."
 
-#: src/MainWindow.vala:478
+#: src/MainWindow.vala:482
 msgid "Unable to Launch Initial Setup"
 msgstr "Niy szło sztartnōńć poczōntkowyj kōnfiguracyje"
 
-#: src/MainWindow.vala:483
+#: src/MainWindow.vala:487
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."

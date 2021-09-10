@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 18:15+0000\n"
+"POT-Creation-Date: 2021-09-10 18:01+0000\n"
 "PO-Revision-Date: 2021-09-02 21:46+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/desktop/"
@@ -20,15 +20,15 @@ msgstr ""
 "X-Generator: Weblate 4.4.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:419
 msgid "Does the display look OK?"
 msgstr "Megfelelően jelenik meg a kép?"
 
-#: compositor/WindowManager.vala:415
+#: compositor/WindowManager.vala:422
 msgid "Keep This Configuration"
 msgstr "Beállítás megtartása"
 
-#: compositor/WindowManager.vala:416
+#: compositor/WindowManager.vala:423
 msgid "Restore Previous Configuration"
 msgstr "Előző beállítások visszaállítása"
 
@@ -48,11 +48,11 @@ msgstr "Sikertelen bejelentkezés"
 msgid "Starting the session has failed."
 msgstr "A munkamenet indítása sikertelen."
 
-#: src/MainWindow.vala:478
+#: src/MainWindow.vala:482
 msgid "Unable to Launch Initial Setup"
 msgstr "Nem lehet elindítani a Kezdeti beállításokat"
 
-#: src/MainWindow.vala:483
+#: src/MainWindow.vala:487
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."

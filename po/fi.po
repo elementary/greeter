@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 18:15+0000\n"
+"POT-Creation-Date: 2021-09-10 18:01+0000\n"
 "PO-Revision-Date: 2019-11-05 20:24+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -20,15 +20,15 @@ msgstr ""
 "X-Generator: Weblate 3.7.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:419
 msgid "Does the display look OK?"
 msgstr "Näyttääkö kaikki kelvolliselta?"
 
-#: compositor/WindowManager.vala:415
+#: compositor/WindowManager.vala:422
 msgid "Keep This Configuration"
 msgstr "Säilytä nämä asetukset"
 
-#: compositor/WindowManager.vala:416
+#: compositor/WindowManager.vala:423
 msgid "Restore Previous Configuration"
 msgstr "Palauta aiemmat asetukset"
 
@@ -48,11 +48,11 @@ msgstr "Kirjautuminen ei onnistu"
 msgid "Starting the session has failed."
 msgstr "Istunnon käynnistäminen epäonnistui."
 
-#: src/MainWindow.vala:478
+#: src/MainWindow.vala:482
 msgid "Unable to Launch Initial Setup"
 msgstr "Alkuvalmistelua ei voitu käynnistää"
 
-#: src/MainWindow.vala:483
+#: src/MainWindow.vala:487
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."

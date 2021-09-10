@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 18:15+0000\n"
+"POT-Creation-Date: 2021-09-10 18:01+0000\n"
 "PO-Revision-Date: 2019-07-03 14:49+0000\n"
 "Last-Translator: Jung-Kyu Park <bagjunggyu@gmail.com>\n"
 "Language-Team: Korean <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -20,15 +20,15 @@ msgstr ""
 "X-Generator: Weblate 3.6.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:419
 msgid "Does the display look OK?"
 msgstr "화면이 잘 나오나요?"
 
-#: compositor/WindowManager.vala:415
+#: compositor/WindowManager.vala:422
 msgid "Keep This Configuration"
 msgstr "설정을 이대로 유지합니다"
 
-#: compositor/WindowManager.vala:416
+#: compositor/WindowManager.vala:423
 msgid "Restore Previous Configuration"
 msgstr "이전 설정으로 되돌립니다"
 
@@ -49,11 +49,11 @@ msgstr "초기 설정을 실행할 수 없습니다"
 msgid "Starting the session has failed."
 msgstr ""
 
-#: src/MainWindow.vala:478
+#: src/MainWindow.vala:482
 msgid "Unable to Launch Initial Setup"
 msgstr "초기 설정을 실행할 수 없습니다"
 
-#: src/MainWindow.vala:483
+#: src/MainWindow.vala:487
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."

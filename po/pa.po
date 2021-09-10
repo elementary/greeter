@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 18:15+0000\n"
+"POT-Creation-Date: 2021-09-10 18:01+0000\n"
 "PO-Revision-Date: 2021-08-12 13:02+0000\n"
 "Last-Translator: elSolus <tumbleweed@tuta.io>\n"
 "Language-Team: Punjabi <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -13,15 +13,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: compositor/WindowManager.vala:412
+#: compositor/WindowManager.vala:419
 msgid "Does the display look OK?"
 msgstr "ਕੀ ਡਿਸਪਲੇਅ ਵੇਖਣ ਨੂੰ ਠੀਕ ਲੱਗਦੀ ਹੈ?"
 
-#: compositor/WindowManager.vala:415
+#: compositor/WindowManager.vala:422
 msgid "Keep This Configuration"
 msgstr "ਇਹੀ ਸੈਟਿੰਗ ਰੱਖੋ"
 
-#: compositor/WindowManager.vala:416
+#: compositor/WindowManager.vala:423
 msgid "Restore Previous Configuration"
 msgstr ""
 
@@ -41,11 +41,11 @@ msgstr ""
 msgid "Starting the session has failed."
 msgstr ""
 
-#: src/MainWindow.vala:478
+#: src/MainWindow.vala:482
 msgid "Unable to Launch Initial Setup"
 msgstr ""
 
-#: src/MainWindow.vala:483
+#: src/MainWindow.vala:487
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
