@@ -18,6 +18,14 @@
     <binary>io.elementary.greeter</binary>
   </provides>
   <releases>
+    <release version="6.0.1" date="2021-09-10" urgency="medium">
+      <description>
+        <ul>
+          <li>Hide clock during initial setup</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="6.0.0" date="2021-07-14" urgency="medium">
       <description>
         <ul>
