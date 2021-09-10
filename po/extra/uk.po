@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-10 18:01+0000\n"
-"PO-Revision-Date: 2021-08-23 22:49+0000\n"
+"PO-Revision-Date: 2021-09-10 19:19+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/uk/>\n"
@@ -30,7 +30,7 @@ msgstr "Розблокуйте або увійдіть до свого прис�
 
 #: data/greeter.appdata.xml.in:24
 msgid "Hide clock during initial setup"
-msgstr ""
+msgstr "Ховання годинника під час установлення"
 
 #: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:36
 #: data/greeter.appdata.xml.in:43 data/greeter.appdata.xml.in:51
