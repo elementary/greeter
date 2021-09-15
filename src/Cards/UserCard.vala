@@ -297,9 +297,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private void update_style () {
         var gtksettings = Gtk.Settings.get_default ();
         gtksettings.gtk_theme_name = "io.elementary.stylesheet." + accent_to_string (prefers_accent_color);
-
-        var style_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, null);
-        password_entry_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     private string accent_to_string (int i) {
@@ -350,11 +347,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
                 );
 
                 is_24h = greeter_act.time_format != "12h";
-                prefers_accent_color = greeter_act.prefers_accent_color;
                 sleep_inactive_ac_timeout = greeter_act.sleep_inactive_ac_timeout;
                 sleep_inactive_ac_type = greeter_act.sleep_inactive_ac_type;
                 sleep_inactive_battery_timeout = greeter_act.sleep_inactive_battery_timeout;
                 sleep_inactive_battery_type = greeter_act.sleep_inactive_battery_type;
+				prefers_color_scheme = greeter_act.prefers_color_scheme;
+                prefers_accent_color = greeter_act.prefers_accent_color;
 
                 ((GLib.DBusProxy) greeter_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
                     string time_format;
@@ -366,6 +364,13 @@ public class Greeter.UserCard : Greeter.BaseCard {
                     changed_properties.lookup ("SleepInactiveACType", "i", out _sleep_inactive_ac_type);
                     changed_properties.lookup ("SleepInactiveBatteryTimeout", "i", out _sleep_inactive_battery_timeout);
                     changed_properties.lookup ("SleepInactiveBatteryType", "i", out _sleep_inactive_battery_type);
+					
+                    int prefers_color_scheme_out;
+                    changed_properties.lookup ("PrefersColorScheme", "i", out prefers_color_scheme_out);
+                    prefers_color_scheme = prefers_color_scheme_out;
+                    int prefers_accent_color_out;
+                    changed_properties.lookup ("PrefersColorScheme", "i", out prefers_accent_color_out);
+                    prefers_accent_color = prefers_accent_color_out;
                 });
             } catch (Error e) {
                 critical (e.message);
