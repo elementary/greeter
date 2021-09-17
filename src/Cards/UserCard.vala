@@ -452,7 +452,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         });
     }
 
-
     private class SelectionCheck : Gtk.Spinner {
         private static Gtk.CssProvider check_provider;
 
