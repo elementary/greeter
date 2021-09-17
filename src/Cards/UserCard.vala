@@ -42,6 +42,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
 
+    private unowned Gtk.StyleContext logged_in_context;
     private weak Gtk.StyleContext main_grid_style_context;
     private weak Gtk.StyleContext password_entry_context;
 
@@ -213,10 +214,14 @@ public class Greeter.UserCard : Greeter.BaseCard {
         };
         avatar_overlay.add (avatar);
 
-        if (lightdm_user.logged_in) {
-            var logged_in = new Gtk.Image.from_icon_name ("selection-checked", Gtk.IconSize.LARGE_TOOLBAR);
-            logged_in.halign = logged_in.valign = Gtk.Align.END;
+        var logged_in = new SelectionCheck () {
+            halign = Gtk.Align.END,
+            valign = Gtk.Align.END
+        };
 
+        logged_in_context = logged_in.get_style_context ();
+
+        if (lightdm_user.logged_in) {
             avatar_overlay.add_overlay (logged_in);
 
             session_button.sensitive = false;
@@ -299,6 +304,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         gtksettings.gtk_theme_name = "io.elementary.stylesheet." + accent_to_string (prefers_accent_color);
 
         var style_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, null);
+        logged_in_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         password_entry_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
@@ -444,5 +450,22 @@ public class Greeter.UserCard : Greeter.BaseCard {
             entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
             return GLib.Source.REMOVE;
         });
+    }
+
+    private class SelectionCheck : Gtk.Spinner {
+        private static Gtk.CssProvider check_provider;
+
+        class construct {
+            set_css_name (Gtk.STYLE_CLASS_CHECK);
+        }
+
+        static construct {
+            check_provider = new Gtk.CssProvider ();
+            check_provider.load_from_resource ("/io/elementary/greeter/Check.css");
+        }
+
+        construct {
+            get_style_context ().add_provider (check_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
+        }
     }
 }
