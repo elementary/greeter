@@ -2,6 +2,7 @@
 <gresources>
   <gresource prefix="/io/elementary/greeter">
     <file alias="Card.css" compressed="true">Card.css</file>
+    <file alias="Check.css" compressed="true">Check.css</file>
     <file alias="DateTime.css" compressed="true">DateTime.css</file>
     <file alias="MainWindow.css" compressed="true">MainWindow.css</file>
   </gresource>
