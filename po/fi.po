@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 18:01+0000\n"
+"POT-Creation-Date: 2021-09-22 20:53+0000\n"
 "PO-Revision-Date: 2019-11-05 20:24+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -73,15 +73,15 @@ msgstr "Käyttäjänimi"
 msgid "Try username"
 msgstr "Kokeile käyttäjänimeä"
 
-#: src/Cards/UserCard.vala:110 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:111 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Kirjaudu sisään"
 
-#: src/Cards/UserCard.vala:122
+#: src/Cards/UserCard.vala:123
 msgid "Account disabled"
 msgstr "Tili on poistettu käytöstä"
 
-#: src/Cards/UserCard.vala:223
+#: src/Cards/UserCard.vala:228
 msgid "Session cannot be changed while user is logged in"
 msgstr "Istuntoa ei voi vaihtaa, kun käyttäjä on sisäänkirjautuneena"
 

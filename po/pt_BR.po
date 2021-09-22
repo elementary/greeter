@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 18:01+0000\n"
+"POT-Creation-Date: 2021-09-22 20:53+0000\n"
 "PO-Revision-Date: 2019-11-22 03:24+0000\n"
 "Last-Translator: Rodrigo Oliveira <rod.oliveira@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.elementary.io/projects/"
@@ -72,15 +72,15 @@ msgstr "Nome de usuário"
 msgid "Try username"
 msgstr "Tente nomedeusuario"
 
-#: src/Cards/UserCard.vala:110 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:111 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Entrar"
 
-#: src/Cards/UserCard.vala:122
+#: src/Cards/UserCard.vala:123
 msgid "Account disabled"
 msgstr "Conta desativada"
 
-#: src/Cards/UserCard.vala:223
+#: src/Cards/UserCard.vala:228
 msgid "Session cannot be changed while user is logged in"
 msgstr "A sessão não pode ser alterada enquanto o usuário está logado"
 

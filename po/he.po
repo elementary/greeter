@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 18:01+0000\n"
+"POT-Creation-Date: 2021-09-22 20:53+0000\n"
 "PO-Revision-Date: 2019-11-27 20:24+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -72,15 +72,15 @@ msgstr "שם משתמש"
 msgid "Try username"
 msgstr "ניסיון של שם משתמש"
 
-#: src/Cards/UserCard.vala:110 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:111 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "כניסה"
 
-#: src/Cards/UserCard.vala:122
+#: src/Cards/UserCard.vala:123
 msgid "Account disabled"
 msgstr "חשבון מושבת"
 
-#: src/Cards/UserCard.vala:223
+#: src/Cards/UserCard.vala:228
 msgid "Session cannot be changed while user is logged in"
 msgstr "לא ניתן להחליף הפעלה כשהמשתמש ביצע כניסה למערכת"
 
