@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 18:01+0000\n"
+"POT-Creation-Date: 2021-09-22 20:53+0000\n"
 "PO-Revision-Date: 2021-09-11 06:58+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: Hebrew <https://l10n.elementary.io/projects/desktop/"
-"greeter-extra/he/>\n"
+"Language-Team: Hebrew <https://l10n.elementary.io/projects/desktop/greeter-"
+"extra/he/>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,88 +27,100 @@ msgstr "מקבל הפנים"
 msgid "Unlock or log in to your device"
 msgstr "שחרור נעילה או כניסה למכשיר שלך"
 
-#: data/greeter.appdata.xml.in:24
+#: data/greeter.appdata.xml.in:23
+msgid "Improvements:"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:25
 msgid "Hide clock during initial setup"
 msgstr "השעון מוסתר במהלך ההתקנה הראשונית"
 
-#: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:36
-#: data/greeter.appdata.xml.in:43 data/greeter.appdata.xml.in:51
-#: data/greeter.appdata.xml.in:59 data/greeter.appdata.xml.in:73
+#: data/greeter.appdata.xml.in:26
+msgid "Use selected accent color for logged in checkmark"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:28
+msgid "Minor updates:"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:30 data/greeter.appdata.xml.in:41
+#: data/greeter.appdata.xml.in:48 data/greeter.appdata.xml.in:56
+#: data/greeter.appdata.xml.in:64 data/greeter.appdata.xml.in:78
 msgid "Updated translations"
 msgstr "תרגומים עודכנו"
 
-#: data/greeter.appdata.xml.in:32
+#: data/greeter.appdata.xml.in:37
 msgid "Add multitouch finger tracking"
 msgstr "נוסף מעקב אחר מספר אצבעות במקביל"
 
-#: data/greeter.appdata.xml.in:33
+#: data/greeter.appdata.xml.in:38
 msgid "Add keyboard layout support"
 msgstr "נוספה תמיכה בפריסות מקלדת"
 
-#: data/greeter.appdata.xml.in:34
+#: data/greeter.appdata.xml.in:39
 msgid "New colorful avatar fallbacks"
 msgstr "תמונות ייצוגיות צבעוניות חדשות לנסיגה"
 
-#: data/greeter.appdata.xml.in:35
+#: data/greeter.appdata.xml.in:40
 msgid "Fix clock when resuming from sleep"
 msgstr "תוקן השעון בעת חזרה ממצב שינה"
 
-#: data/greeter.appdata.xml.in:50
+#: data/greeter.appdata.xml.in:55
 msgid "Fix an issue with media keys"
 msgstr "תיקון תקלה עם מקשי מדיה"
 
-#: data/greeter.appdata.xml.in:58
+#: data/greeter.appdata.xml.in:63
 msgid "Ensure that manual login is available when users are hidden"
 msgstr "יש לוודא שכניסה ידנית זמינה כאשר המשתמשים מוסתרים"
 
-#: data/greeter.appdata.xml.in:66
+#: data/greeter.appdata.xml.in:71
 msgid "Save last user on attempted login"
 msgstr "שמירת המשתמש האחרון בעת ניסיון כניסה"
 
-#: data/greeter.appdata.xml.in:67
+#: data/greeter.appdata.xml.in:72
 msgid "Handle all background aspect ratios"
 msgstr "טיפול בכל יחסי התצוגה מאחורי הקלעים"
 
-#: data/greeter.appdata.xml.in:68
+#: data/greeter.appdata.xml.in:73
 msgid "Give non-focused user cards smaller usernames"
 msgstr "כרטיסי משתמשים שאינם במיקוד יקבלו שמות משתמשים קטנים יותר"
 
-#: data/greeter.appdata.xml.in:69
+#: data/greeter.appdata.xml.in:74
 msgid "Better respect NumLock settings"
 msgstr "ציות משופר להגדרות NumLock"
 
-#: data/greeter.appdata.xml.in:70
+#: data/greeter.appdata.xml.in:75
 msgid "Enable sounds in greeter"
 msgstr "הפעלת שמע ב־greeter (תכנית קבלת הפנים)"
 
-#: data/greeter.appdata.xml.in:71
+#: data/greeter.appdata.xml.in:76
 msgid "Select password text on error instead of immediately clearing it"
 msgstr "בחירת טקסט הססמה בעת שגיאה במקום למחוק אותו מיידית"
 
-#: data/greeter.appdata.xml.in:72
+#: data/greeter.appdata.xml.in:77
 msgid "Code cleanup"
 msgstr "ניקוי קוד"
 
-#: data/greeter.appdata.xml.in:79
+#: data/greeter.appdata.xml.in:84
 msgid "Extensive overhaul"
 msgstr "שיפורים נרחבים"
 
-#: data/greeter.appdata.xml.in:81
+#: data/greeter.appdata.xml.in:86
 msgid "New card-based appearance"
 msgstr "הופעה חדשה מבוססת כרטיסים"
 
-#: data/greeter.appdata.xml.in:82
+#: data/greeter.appdata.xml.in:87
 msgid "Improved HiDPI support"
 msgstr "תמיכה משופרת ב־HiDPI (רזולוציה גבוהה)"
 
-#: data/greeter.appdata.xml.in:83
+#: data/greeter.appdata.xml.in:88
 msgid "AccountsService functionality"
 msgstr "תכונת AccountsService (שירות החשבונות)"
 
-#: data/greeter.appdata.xml.in:84
+#: data/greeter.appdata.xml.in:89
 msgid "Various bug fixes"
 msgstr "מגוון תיקוני תקלות"
 
-#: data/greeter.appdata.xml.in:120
+#: data/greeter.appdata.xml.in:125
 msgid "elementary, Inc."
 msgstr "elementary בע״מ"
