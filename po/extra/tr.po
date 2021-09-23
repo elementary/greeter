@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 20:53+0000\n"
-"PO-Revision-Date: 2021-09-11 12:53+0000\n"
+"PO-Revision-Date: 2021-09-23 21:29+0000\n"
 "Last-Translator: Özgür Baskin <queeup@zoho.com>\n"
-"Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/tr/>\n"
+"Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgstr "Cihazınızın kilidini veya oturumunuzu açın"
 
 #: data/greeter.appdata.xml.in:23
 msgid "Improvements:"
-msgstr ""
+msgstr "İyileştirmeler:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Hide clock during initial setup"
@@ -37,11 +37,11 @@ msgstr " "
 
 #: data/greeter.appdata.xml.in:26
 msgid "Use selected accent color for logged in checkmark"
-msgstr ""
+msgstr " "
 
 #: data/greeter.appdata.xml.in:28
 msgid "Minor updates:"
-msgstr ""
+msgstr "Küçük güncellemeler:"
 
 #: data/greeter.appdata.xml.in:30 data/greeter.appdata.xml.in:41
 #: data/greeter.appdata.xml.in:48 data/greeter.appdata.xml.in:56
