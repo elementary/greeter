@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 20:53+0000\n"
-"PO-Revision-Date: 2021-09-11 15:24+0000\n"
+"PO-Revision-Date: 2021-09-23 09:23+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/ca/>\n"
+"Language-Team: Catalan <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgstr "Desbloquegeu o entreu al dispositiu"
 
 #: data/greeter.appdata.xml.in:23
 msgid "Improvements:"
-msgstr ""
+msgstr "Millores:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Hide clock during initial setup"
@@ -38,10 +38,12 @@ msgstr "S'amaga el rellotge durant la configuració inicial."
 #: data/greeter.appdata.xml.in:26
 msgid "Use selected accent color for logged in checkmark"
 msgstr ""
+"S'usa el color d’accentuació seleccionat per a la marca de verificació de "
+"sessió iniciada."
 
 #: data/greeter.appdata.xml.in:28
 msgid "Minor updates:"
-msgstr ""
+msgstr "Actualitzacions menors:"
 
 #: data/greeter.appdata.xml.in:30 data/greeter.appdata.xml.in:41
 #: data/greeter.appdata.xml.in:48 data/greeter.appdata.xml.in:56
