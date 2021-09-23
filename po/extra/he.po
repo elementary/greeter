@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 20:53+0000\n"
-"PO-Revision-Date: 2021-09-22 23:35+0000\n"
+"PO-Revision-Date: 2021-09-23 07:58+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/he/>\n"
@@ -37,11 +37,11 @@ msgstr "השעון מוסתר במהלך ההתקנה הראשונית"
 
 #: data/greeter.appdata.xml.in:26
 msgid "Use selected accent color for logged in checkmark"
-msgstr ""
+msgstr "ייעשה שימוש בצבע המוביל הנבחר לסימון כניסה למערכת"
 
 #: data/greeter.appdata.xml.in:28
 msgid "Minor updates:"
-msgstr ""
+msgstr "עדכונים משניים:"
 
 #: data/greeter.appdata.xml.in:30 data/greeter.appdata.xml.in:41
 #: data/greeter.appdata.xml.in:48 data/greeter.appdata.xml.in:56
