@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 20:53+0000\n"
-"PO-Revision-Date: 2021-09-26 19:28+0000\n"
+"PO-Revision-Date: 2021-09-29 13:27+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/hu/>\n"
@@ -41,7 +41,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:28
 msgid "Minor updates:"
-msgstr ""
+msgstr "Apróbb frissítések:"
 
 #: data/greeter.appdata.xml.in:30 data/greeter.appdata.xml.in:41
 #: data/greeter.appdata.xml.in:48 data/greeter.appdata.xml.in:56
