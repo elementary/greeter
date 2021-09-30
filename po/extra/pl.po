@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 20:53+0000\n"
-"PO-Revision-Date: 2021-09-29 10:46+0000\n"
+"PO-Revision-Date: 2021-09-30 11:23+0000\n"
 "Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/pl/>\n"
@@ -30,7 +30,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:23
 msgid "Improvements:"
-msgstr ""
+msgstr "Ulepszenia:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Hide clock during initial setup"
@@ -42,7 +42,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:28
 msgid "Minor updates:"
-msgstr ""
+msgstr "Mniejsze aktualizacje:"
 
 #: data/greeter.appdata.xml.in:30 data/greeter.appdata.xml.in:41
 #: data/greeter.appdata.xml.in:48 data/greeter.appdata.xml.in:56
