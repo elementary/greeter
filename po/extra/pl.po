@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 20:53+0000\n"
 "PO-Revision-Date: 2021-10-01 08:03+0000\n"
-"Last-Translator: webrunner1981 <adrian.ambroziak1@unilodz.eu>\n"
+"Last-Translator: nikkehtine <nwarunek@protonmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/pl/>\n"
 "Language: pl\n"
@@ -77,7 +77,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:71
 msgid "Save last user on attempted login"
-msgstr ""
+msgstr "Zapisz ostatniego użytkownika przy próbie zalogowania"
 
 #: data/greeter.appdata.xml.in:72
 msgid "Handle all background aspect ratios"
@@ -93,7 +93,7 @@ msgstr "Lepiej przestrzegaj ustawień NumLock"
 
 #: data/greeter.appdata.xml.in:75
 msgid "Enable sounds in greeter"
-msgstr ""
+msgstr "Włącz dźwięki na ekranie logowania"
 
 #: data/greeter.appdata.xml.in:76
 msgid "Select password text on error instead of immediately clearing it"
