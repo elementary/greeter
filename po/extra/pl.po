@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 20:53+0000\n"
 "PO-Revision-Date: 2021-10-01 07:57+0000\n"
-"Last-Translator: nikkehtine <nwarunek@protonmail.com>\n"
+"Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/pl/>\n"
 "Language: pl\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
-msgstr ""
+msgstr "Odblokuj lub zaloguj się do swojego urządzenia"
 
 #: data/greeter.appdata.xml.in:23
 msgid "Improvements:"
@@ -34,11 +34,11 @@ msgstr "Ulepszenia:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Hide clock during initial setup"
-msgstr ""
+msgstr "Schowano zegar podczas pierwszego ustawiania"
 
 #: data/greeter.appdata.xml.in:26
 msgid "Use selected accent color for logged in checkmark"
-msgstr ""
+msgstr "Użyto wybranego koloru akcentowego dla znacznika zalogowania"
 
 #: data/greeter.appdata.xml.in:28
 msgid "Minor updates:"
@@ -52,19 +52,19 @@ msgstr "Zaktualizowano tłumaczenia"
 
 #: data/greeter.appdata.xml.in:37
 msgid "Add multitouch finger tracking"
-msgstr ""
+msgstr "Dodano śledzenie wielu palców"
 
 #: data/greeter.appdata.xml.in:38
 msgid "Add keyboard layout support"
-msgstr ""
+msgstr "Dodano wsparcie dla układu klawiatury"
 
 #: data/greeter.appdata.xml.in:39
 msgid "New colorful avatar fallbacks"
-msgstr ""
+msgstr "Nowe kolorowe awatary zastępcze"
 
 #: data/greeter.appdata.xml.in:40
 msgid "Fix clock when resuming from sleep"
-msgstr ""
+msgstr "Naprawiono zegar podczas wybudzania komputera ze stanu wstrzymania"
 
 #: data/greeter.appdata.xml.in:55
 msgid "Fix an issue with media keys"
