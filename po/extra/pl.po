@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 20:53+0000\n"
-"PO-Revision-Date: 2021-10-01 08:03+0000\n"
-"Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
+"PO-Revision-Date: 2021-10-01 10:11+0000\n"
+"Last-Translator: webrunner1981 <adrian.ambroziak1@unilodz.eu>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/pl/>\n"
 "Language: pl\n"
@@ -103,11 +103,11 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:77
 msgid "Code cleanup"
-msgstr ""
+msgstr "Czyszczenie kodu"
 
 #: data/greeter.appdata.xml.in:84
 msgid "Extensive overhaul"
-msgstr ""
+msgstr "Rozległy przegląd"
 
 #: data/greeter.appdata.xml.in:86
 msgid "New card-based appearance"
@@ -115,15 +115,15 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:87
 msgid "Improved HiDPI support"
-msgstr ""
+msgstr "Ulepszona obsługa HiDPI"
 
 #: data/greeter.appdata.xml.in:88
 msgid "AccountsService functionality"
-msgstr ""
+msgstr "Funkcjonalność usługi kont"
 
 #: data/greeter.appdata.xml.in:89
 msgid "Various bug fixes"
-msgstr ""
+msgstr "Różne poprawki błędów"
 
 #: data/greeter.appdata.xml.in:125
 msgid "elementary, Inc."
