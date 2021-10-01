@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 20:53+0000\n"
 "PO-Revision-Date: 2021-10-01 08:03+0000\n"
-"Last-Translator: nikkehtine <nwarunek@protonmail.com>\n"
+"Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/pl/>\n"
 "Language: pl\n"
@@ -73,7 +73,7 @@ msgstr "Naprawiono problem z klawiszami multimedialnymi"
 #: data/greeter.appdata.xml.in:63
 msgid "Ensure that manual login is available when users are hidden"
 msgstr ""
-"Upewnij się, że manualne logowanie jest dostępne, gdy użytkownicy są ukryci"
+"Upewniono się, że manualne logowanie jest dostępne, gdy użytkownicy są ukryci"
 
 #: data/greeter.appdata.xml.in:71
 msgid "Save last user on attempted login"
