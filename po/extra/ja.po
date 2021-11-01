@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 20:53+0000\n"
-"PO-Revision-Date: 2021-09-23 13:39+0000\n"
+"PO-Revision-Date: 2021-11-01 03:11+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/ja/>\n"
@@ -33,7 +33,7 @@ msgstr "改善点:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Hide clock during initial setup"
-msgstr "初期セットアップ中は時計を表示しないように修正"
+msgstr "初期設定の間は時計を表示しないように修正"
 
 #: data/greeter.appdata.xml.in:26
 msgid "Use selected accent color for logged in checkmark"
