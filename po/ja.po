@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 20:53+0000\n"
-"PO-Revision-Date: 2021-11-01 03:13+0000\n"
+"PO-Revision-Date: 2021-11-16 10:37+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/greeter/"
 "ja/>\n"
@@ -86,15 +86,15 @@ msgstr "ユーザーのログイン中はセッションを変更できません
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
-msgstr "Caps Lock と Num Lock がオンになっています"
+msgstr "Caps Lock と Num Lock は有効です"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
-msgstr "Caps Lock がオンになっています"
+msgstr "Caps Lock は有効です"
 
 #: src/Widgets/CapsLockRevealer.vala:74
 msgid "Num Lock is on"
-msgstr "Num Lock がオンになっています"
+msgstr "Num Lock は有効です"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
