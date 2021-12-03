@@ -394,8 +394,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private void on_login () {
-        if(connecting)
+        if (connecting) {
             return;
+        }
+
         connecting = true;
         if (need_password) {
             do_connect (password_entry.text);
