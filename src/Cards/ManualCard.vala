@@ -101,8 +101,10 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     }
 
     private void on_login () {
-        if(connecting)
+        if (connecting) {
             return;
+        }
+
         connecting = true;
         do_connect (password_entry.text);
         password_entry.sensitive = false;
