@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 20:53+0000\n"
-"PO-Revision-Date: 2020-10-10 01:42+0000\n"
+"PO-Revision-Date: 2021-12-22 17:09+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/pt/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/greeter.appdata.xml.in:7
 msgid "Greeter"
@@ -29,7 +29,7 @@ msgstr "Desbloquear ou iniciar sessão no seu dispositivo"
 
 #: data/greeter.appdata.xml.in:23
 msgid "Improvements:"
-msgstr ""
+msgstr "Melhorias:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Hide clock during initial setup"
