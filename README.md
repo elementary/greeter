@@ -16,7 +16,6 @@ You'll need the following dependencies:
 * libhandy-1-dev >= 0.90.0
 * liblightdm-gobject-1-dev
 * libmutter-6-dev
-* libwingpanel-3.0-dev
 * libx11-dev
 * meson
 * valac
