@@ -9,7 +9,6 @@ desktop_in = configure_file (
 )
 
 i18n.merge_file (
-    'desktop',
     input: desktop_in,
     output: meson.project_name() + '.desktop',
     install: true,
