@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 20:53+0000\n"
-"PO-Revision-Date: 2022-01-10 02:34+0000\n"
+"PO-Revision-Date: 2022-01-11 03:35+0000\n"
 "Last-Translator: p-bo <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/cs/>\n"
@@ -33,15 +33,15 @@ msgstr "Vylepšení:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Hide clock during initial setup"
-msgstr ""
+msgstr "V úvodním nastavení skryty hodiny"
 
 #: data/greeter.appdata.xml.in:26
 msgid "Use selected accent color for logged in checkmark"
-msgstr ""
+msgstr "Použít zvolenou barvu zvýraznění pro zatržítko u přihlášených"
 
 #: data/greeter.appdata.xml.in:28
 msgid "Minor updates:"
-msgstr ""
+msgstr "Drobné aktualizace:"
 
 #: data/greeter.appdata.xml.in:30 data/greeter.appdata.xml.in:41
 #: data/greeter.appdata.xml.in:48 data/greeter.appdata.xml.in:56
@@ -51,19 +51,19 @@ msgstr "Aktualizovány překlady"
 
 #: data/greeter.appdata.xml.in:37
 msgid "Add multitouch finger tracking"
-msgstr ""
+msgstr "Přidáno vícedotykové sledování prstu"
 
 #: data/greeter.appdata.xml.in:38
 msgid "Add keyboard layout support"
-msgstr ""
+msgstr "Přidána podpora pro rozložení klávesnice"
 
 #: data/greeter.appdata.xml.in:39
 msgid "New colorful avatar fallbacks"
-msgstr ""
+msgstr "Nové náhradní plnobarevné profilové obrázky"
 
 #: data/greeter.appdata.xml.in:40
 msgid "Fix clock when resuming from sleep"
-msgstr ""
+msgstr "Opraven čas při návratu z režimu spánku"
 
 #: data/greeter.appdata.xml.in:55
 msgid "Fix an issue with media keys"
