@@ -19,8 +19,14 @@
  * Authors: Corentin Noël <corentin@elementary.io>
  */
 
-public abstract class Greeter.BaseCard : Gtk.Revealer {
+public abstract class Greeter.BaseCard : Gtk.Widget {
     public signal void do_connect (string? credential = null);
+
+    public Gtk.Widget child {
+        set {
+            revealer.child = value;
+        }
+    }
 
     protected static Gtk.CssProvider css_provider;
 
@@ -30,27 +36,33 @@ public abstract class Greeter.BaseCard : Gtk.Revealer {
 
     protected const int ERROR_SHAKE_DURATION = 450;
 
+    protected Gtk.Revealer revealer;
+
     static construct {
         css_provider = new Gtk.CssProvider ();
         css_provider.load_from_resource ("/io/elementary/greeter/Card.css");
     }
 
     construct {
-        width_request = 350;
-        reveal_child = true;
-        transition_type = Gtk.RevealerTransitionType.CROSSFADE;
         halign = Gtk.Align.CENTER;
         valign = Gtk.Align.CENTER;
-        events |= Gdk.EventMask.BUTTON_RELEASE_MASK;
+        // events |= Gdk.EventMask.BUTTON_RELEASE_MASK;
 
-        notify["child-revealed"].connect (() => {
-            if (!child_revealed) {
+        revealer = new Gtk.Revealer () {
+            width_request = 350,
+            reveal_child = true,
+            transition_type = Gtk.RevealerTransitionType.CROSSFADE
+        };
+        revealer.set_parent (this);
+
+        revealer.notify["child-revealed"].connect (() => {
+            if (!revealer.child_revealed) {
                 visible = false;
             }
         });
 
-        notify["reveal-child"].connect (() => {
-            if (reveal_child) {
+        revealer.notify["reveal-child"].connect (() => {
+            if (revealer.reveal_child) {
                 visible = true;
             }
         });

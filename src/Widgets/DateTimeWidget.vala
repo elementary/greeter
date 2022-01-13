@@ -3,7 +3,7 @@ interface LoginManager : GLib.Object {
     public signal void prepare_for_sleep (bool start);
 }
 
-public class Greeter.DateTimeWidget : Gtk.Revealer {
+public class Greeter.DateTimeWidget : Gtk.Box {
     public bool is_24h { get; set; default=true; }
 
     private Gtk.Label time_label;
@@ -30,14 +30,9 @@ public class Greeter.DateTimeWidget : Gtk.Revealer {
         date_label_style_context.add_class ("date");
         date_label_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        var grid = new Gtk.Grid () {
-            orientation = Gtk.Orientation.VERTICAL
-        };
-        grid.add (time_label);
-        grid.add (date_label);
-
-        transition_type = Gtk.RevealerTransitionType.CROSSFADE;
-        add (grid);
+        orientation = Gtk.Orientation.VERTICAL;
+        append (time_label);
+        append (date_label);
 
         update_labels ();
 

@@ -25,11 +25,12 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
     private int index_delta = 0;
-    private Hdy.Carousel carousel;
+    private Adw.Carousel carousel;
     private LightDM.Greeter lightdm_greeter;
     private Greeter.Settings settings;
     private Gtk.ToggleButton manual_login_button;
     private Greeter.DateTimeWidget datetime_widget;
+    private Gtk.Revealer datetime_revealer;
     private unowned Greeter.BaseCard current_card;
     private unowned LightDM.UserList lightdm_user_list;
 
@@ -50,15 +51,15 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     construct {
-        app_paintable = true;
+        // app_paintable = true;
         decorated = false;
-        type_hint = Gdk.WindowTypeHint.DESKTOP;
+        // type_hint = Gdk.WindowTypeHint.DESKTOP;
         get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         settings = new Greeter.Settings ();
         create_session_selection_action ();
 
-        set_visual (get_screen ().get_rgba_visual ());
+        // set_visual (get_screen ().get_rgba_visual ());
 
         var guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
 
@@ -75,19 +76,24 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             gtksettings.gtk_icon_theme_name = "elementary";
             gtksettings.gtk_theme_name = "io.elementary.stylesheet.blueberry";
 
-            var css_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, "dark");
-            guest_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-            manual_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            // var css_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, "dark");
+            // guest_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            // manual_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         } catch (Error e) {}
 
         datetime_widget = new Greeter.DateTimeWidget ();
         datetime_widget.halign = Gtk.Align.CENTER;
 
+        datetime_revealer = new Gtk.Revealer () {
+            child = datetime_widget,
+            transition_type = Gtk.RevealerTransitionType.CROSSFADE
+        };
+
         user_cards = new GLib.Queue<unowned Greeter.UserCard> ();
 
         var manual_card = new Greeter.ManualCard ();
 
-        carousel = new Hdy.Carousel () {
+        carousel = new Adw.Carousel () {
             allow_long_swipes = true,
             vexpand = true
         };
@@ -95,18 +101,18 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         var manual_login_stack = new Gtk.Stack () {
             transition_type = Gtk.StackTransitionType.CROSSFADE
         };
-        manual_login_stack.add (carousel);
-        manual_login_stack.add (manual_card);
+        manual_login_stack.add_child (carousel);
+        manual_login_stack.add_child (manual_card);
 
-        var main_grid = new Gtk.Grid ();
-        main_grid.margin_top = main_grid.margin_bottom = 24;
-        main_grid.row_spacing = 24;
-        main_grid.orientation = Gtk.Orientation.VERTICAL;
-        main_grid.add (datetime_widget);
-        main_grid.add (manual_login_stack);
-        main_grid.add (extra_login_grid);
+        var main_grid = new Gtk.Box (Gtk.Orientation.VERTICAL, 24) {
+            margin_top = 24,
+            margin_bottom = 24
+        };
+        main_grid.append (datetime_revealer);
+        main_grid.append (manual_login_stack);
+        main_grid.append (extra_login_grid);
 
-        add (main_grid);
+        child = main_grid;
 
         manual_login_button.toggled.connect (() => {
             if (manual_login_button.active) {
@@ -198,65 +204,61 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         manual_card.do_connect_username.connect (do_connect_username);
         manual_card.do_connect.connect (do_connect);
 
-        key_press_event.connect ((event) => {
-            // arrow key is being used to navigate
-            if (event.keyval in NAVIGATION_KEYS) {
-                if (current_card is UserCard) {
-                    weak Gtk.Widget? current_focus = get_focus ();
-                    if (current_focus is Gtk.Entry && current_focus.is_ancestor (current_card)) {
-                        if (((Gtk.Entry) current_focus).text == "") {
-                            if (event.keyval == Gdk.Key.Left) {
-                                if (get_style_context ().direction == Gtk.TextDirection.RTL) {
-                                    activate_action ("next", null);
-                                } else {
-                                    activate_action ("previous", null);
-                                }
-                                return true;
-                            } else if (event.keyval == Gdk.Key.Right) {
-                                if (get_style_context ().direction == Gtk.TextDirection.RTL) {
-                                    activate_action ("previous", null);
-                                } else {
-                                    activate_action ("next", null);
-                                }
-                                return true;
-                            }
-                        }
-                    }
-                }
+        // key_press_event.connect ((event) => {
+        //     // arrow key is being used to navigate
+        //     if (event.keyval in NAVIGATION_KEYS) {
+        //         if (current_card is UserCard) {
+        //             weak Gtk.Widget? current_focus = get_focus ();
+        //             if (current_focus is Gtk.Entry && current_focus.is_ancestor (current_card)) {
+        //                 if (((Gtk.Entry) current_focus).text == "") {
+        //                     if (event.keyval == Gdk.Key.Left) {
+        //                         if (get_style_context ().direction == Gtk.TextDirection.RTL) {
+        //                             activate_action ("next", null);
+        //                         } else {
+        //                             activate_action ("previous", null);
+        //                         }
+        //                         return true;
+        //                     } else if (event.keyval == Gdk.Key.Right) {
+        //                         if (get_style_context ().direction == Gtk.TextDirection.RTL) {
+        //                             activate_action ("previous", null);
+        //                         } else {
+        //                             activate_action ("next", null);
+        //                         }
+        //                         return true;
+        //                     }
+        //                 }
+        //             }
+        //         }
 
-                return false;
-            }
+        //         return false;
+        //     }
 
-            // Don't focus if it is a modifier or if search_box is already focused
-            weak Gtk.Widget? current_focus = get_focus ();
-            if ((event.is_modifier == 0) && (current_focus == null || !current_focus.is_ancestor (current_card))) {
-                current_card.grab_focus ();
-            }
+        //     // Don't focus if it is a modifier or if search_box is already focused
+        //     weak Gtk.Widget? current_focus = get_focus ();
+        //     if ((event.is_modifier == 0) && (current_focus == null || !current_focus.is_ancestor (current_card))) {
+        //         current_card.grab_focus ();
+        //     }
 
-            return false;
-        });
+        //     return false;
+        // });
 
-        carousel.page_changed.connect ((index) => {
-            var children = carousel.get_children ();
+        // carousel.page_changed.connect ((index) => {
+        //     var children = carousel.get_children ();
 
-            if (children.nth_data (index) is Greeter.UserCard) {
-                switch_to_card ((Greeter.UserCard) children.nth_data (index));
-            }
-        });
+        //     if (children.nth_data (index) is Greeter.UserCard) {
+        //         switch_to_card ((Greeter.UserCard) children.nth_data (index));
+        //     }
+        // });
 
-        // regrab focus when dpi changed
-        get_screen ().monitors_changed.connect (() => {
-            maximize_and_focus ();
-        });
+        // // regrab focus when dpi changed
+        // get_screen ().monitors_changed.connect (() => {
+        //     maximize_and_focus ();
+        // });
 
-        leave_notify_event.connect (() => {
-            maximize_and_focus ();
-            return false;
-        });
-
-        destroy.connect (() => {
-            Gtk.main_quit ();
-        });
+        // leave_notify_event.connect (() => {
+        //     maximize_and_focus ();
+        //     return false;
+        // });
 
         load_users.begin (() => {
             /* A significant delay is required in order for the window and card to be focused at
@@ -294,18 +296,18 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         unowned Gdk.Seat seat = display.get_default_seat ();
         unowned Gdk.Device? pointer = seat.get_pointer ();
 
-        Gdk.Monitor? monitor;
-        if (pointer != null) {
-            int x, y;
-            pointer.get_position (null, out x, out y);
-            monitor = display.get_monitor_at_point (x, y);
-        } else {
-            monitor = display.get_primary_monitor ();
-        }
+        // Gdk.Monitor? monitor;
+        // if (pointer != null) {
+        //     int x, y;
+        //     pointer.get_position (null, out x, out y);
+        //     monitor = display.get_monitor_at_point (x, y);
+        // } else {
+        //     monitor = display.get_primary_monitor ();
+        // }
 
-        var rect = monitor.get_geometry ();
-        resize (rect.width, rect.height);
-        move (rect.x, rect.y);
+        // var rect = monitor.get_geometry ();
+        // resize (rect.width, rect.height);
+        // move (rect.x, rect.y);
     }
 
     private void create_session_selection_action () {
@@ -386,35 +388,35 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 settings.sleep_inactive_battery_type = user_card.sleep_inactive_battery_type;
             }
 
-            var action_group = get_action_group ("session");
-            try {
-                unowned var session = action_group.get_action_state ("select").get_string ();
+            // var action_group = get_action_group ("session");
+            // try {
+            //     unowned var session = action_group.get_action_state ("select").get_string ();
 
-                // If the greeter is running on the install medium, check if the Installer has signalled
-                // that it wants the greeter to launch the live (demo) session by means of touching a file
-                if (installer_mode) {
-                    var demo_mode_file = File.new_for_path ("/var/lib/lightdm/demo-mode");
-                    if (demo_mode_file.query_exists ()) {
-                        demo_mode_file.@delete ();
-                        session = "pantheon";
-                    } else {
-                        session = "installer";
-                    }
-                }
+            //     // If the greeter is running on the install medium, check if the Installer has signalled
+            //     // that it wants the greeter to launch the live (demo) session by means of touching a file
+            //     if (installer_mode) {
+            //         var demo_mode_file = File.new_for_path ("/var/lib/lightdm/demo-mode");
+            //         if (demo_mode_file.query_exists ()) {
+            //             demo_mode_file.@delete ();
+            //             session = "pantheon";
+            //         } else {
+            //             session = "installer";
+            //         }
+            //     }
 
-                lightdm_greeter.start_session_sync (session);
-                return;
-            } catch (Error e) {
-                var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
-                    _("Unable to Log In"),
-                    _("Starting the session has failed."),
-                    "dialog-error",
-                    Gtk.ButtonsType.CLOSE
-                );
-                error_dialog.show_error_details (e.message);
-                error_dialog.run ();
-                error_dialog.destroy ();
-            }
+            //     lightdm_greeter.start_session_sync (session);
+            //     return;
+            // } catch (Error e) {
+            //     var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
+            //         _("Unable to Log In"),
+            //         _("Starting the session has failed."),
+            //         "dialog-error",
+            //         Gtk.ButtonsType.CLOSE
+            //     );
+            //     error_dialog.show_error_details (e.message);
+            //     error_dialog.present ();
+            //     error_dialog.destroy ();
+            // }
         }
 
         if (current_card is Greeter.UserCard) {
@@ -435,9 +437,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.notify_property ("show-manual-login-hint");
         lightdm_greeter.notify_property ("has-guest-account-hint");
 
-        if (lightdm_greeter.default_session_hint != null) {
-            get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
-        }
+        // if (lightdm_greeter.default_session_hint != null) {
+        //     get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
+        // }
 
         // Check if the installer is installed
         var installer_desktop = new DesktopAppInfo ("io.elementary.installer.desktop");
@@ -446,7 +448,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
 
         if (lightdm_user_list.length > 0) {
-            datetime_widget.reveal_child = true;
+            datetime_revealer.reveal_child = true;
 
             lightdm_user_list.users.foreach ((user) => {
                 add_card (user);
@@ -471,7 +473,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 switch_to_card (user_card);
             }
         } else {
-            datetime_widget.reveal_child = false;
+            datetime_revealer.reveal_child = false;
 
             /* We're not certain that scaling factor will change, but try to wait for GSD in case it does */
             Timeout.add (500, () => {
@@ -490,7 +492,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     );
 
                     error_dialog.show_error_details (e.message);
-                    error_dialog.run ();
+                    error_dialog.present ();
                     error_dialog.destroy ();
                 }
 
@@ -503,29 +505,28 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private void add_card (LightDM.User lightdm_user) {
         var user_card = new Greeter.UserCard (lightdm_user);
-        user_card.show_all ();
 
-        carousel.add (user_card);
+        carousel.append (user_card);
 
         user_card.focus_requested.connect (() => {
             switch_to_card (user_card);
         });
 
-        user_card.go_left.connect (() => {
-            if (get_style_context ().direction == Gtk.TextDirection.RTL) {
-                activate_action ("next", null);
-            } else {
-                activate_action ("previous", null);
-            }
-        });
+        // user_card.go_left.connect (() => {
+        //     if (get_style_context ().direction == Gtk.TextDirection.RTL) {
+        //         activate_action ("next", null);
+        //     } else {
+        //         activate_action ("previous", null);
+        //     }
+        // });
 
-        user_card.go_right.connect (() => {
-            if (get_style_context ().direction == Gtk.TextDirection.RTL) {
-                activate_action ("previous", null);
-            } else {
-                activate_action ("next", null);
-            }
-        });
+        // user_card.go_right.connect (() => {
+        //     if (get_style_context ().direction == Gtk.TextDirection.RTL) {
+        //         activate_action ("previous", null);
+        //     } else {
+        //         activate_action ("next", null);
+        //     }
+        // });
 
         user_card.do_connect.connect (do_connect);
 
@@ -560,9 +561,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             ((Greeter.UserCard) user_cards.peek_nth (index_delta)).show_input = false;
         }
 
-        if (user_card.lightdm_user.session != null) {
-            get_action_group ("session").activate_action ("select", new GLib.Variant.string (user_card.lightdm_user.session));
-        }
+        // if (user_card.lightdm_user.session != null) {
+        //     get_action_group ("session").activate_action ("select", new GLib.Variant.string (user_card.lightdm_user.session));
+        // }
 
         if (lightdm_greeter.in_authentication) {
             try {

@@ -19,40 +19,46 @@
  * Authors: Corentin Noël <corentin@elementary.io>
  */
 
-public int main (string[] args) {
-    Intl.setlocale (LocaleCategory.ALL, "");
-    Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
-    Intl.textdomain (Constants.GETTEXT_PACKAGE);
-    Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALE_DIR);
-
-    // Ensure we present ourselves as Pantheon so we pick up the right GSettings
-    // overrides
-    GLib.Environment.set_variable ("XDG_CURRENT_DESKTOP", "Pantheon", true);
-
-    var settings_daemon = new Greeter.SettingsDaemon ();
-    settings_daemon.start ();
-
-    Gtk.init (ref args);
-
-    Greeter.SubprocessSupervisor compositor;
-    Greeter.SubprocessSupervisor wingpanel;
-
-    try {
-        compositor = new Greeter.SubprocessSupervisor ({"io.elementary.greeter-compositor"});
-    } catch (Error e) {
-        critical (e.message);
+public class Greeter.App : Gtk.Application {
+    construct {
+        application_id = "io.elementary.greeter";
+        flags = ApplicationFlags.FLAGS_NONE;
+        Intl.setlocale (LocaleCategory.ALL, "");
+        Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
+        Intl.textdomain (Constants.GETTEXT_PACKAGE);
+        Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALE_DIR);
     }
 
-    var window = new Greeter.MainWindow ();
-    window.show_all ();
+    public override void activate () {
+        Greeter.SubprocessSupervisor compositor;
+        Greeter.SubprocessSupervisor wingpanel;
 
-    try {
-        wingpanel = new Greeter.SubprocessSupervisor ({"io.elementary.wingpanel", "-g"});
-    } catch (Error e) {
-        critical (e.message);
+        try {
+            compositor = new Greeter.SubprocessSupervisor ({"io.elementary.greeter-compositor"});
+        } catch (Error e) {
+            critical (e.message);
+        }
+
+        var window = new Greeter.MainWindow () {
+            application = this
+        };
+        window.present ();
+
+        try {
+            wingpanel = new Greeter.SubprocessSupervisor ({"io.elementary.wingpanel", "-g"});
+        } catch (Error e) {
+            critical (e.message);
+        }
     }
 
-    Gtk.main ();
+    public static int main (string[] args) {
+        // Ensure we present ourselves as Pantheon so we pick up the right GSettings
+        // overrides
+        GLib.Environment.set_variable ("XDG_CURRENT_DESKTOP", "Pantheon", true);
 
-    return 0;
+        var settings_daemon = new Greeter.SettingsDaemon ();
+        settings_daemon.start ();
+
+        return new Greeter.App ().run (args);
+    }
 }

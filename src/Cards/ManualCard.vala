@@ -52,52 +52,48 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             sensitive = false
         };
 
-        var caps_lock_revealer = new Greeter.CapsLockRevealer ();
-
-        var password_grid = new Gtk.Grid () {
-            orientation = Gtk.Orientation.VERTICAL,
-            row_spacing = 6
-        };
-        password_grid.add (password_entry);
-        password_grid.add (caps_lock_revealer);
-
         var session_button = new Greeter.SessionButton ();
 
         var form_grid = new Gtk.Grid () {
             column_spacing = 6,
-            margin = 24,
+            margin_top = 24,
+            margin_end = 24,
+            margin_bottom = 24,
+            margin_start = 24,
             row_spacing = 12
         };
         form_grid.attach (icon, 0, 0, 2);
         form_grid.attach (label, 0, 1, 2);
         form_grid.attach (username_entry, 0, 2);
-        form_grid.attach (password_grid, 0, 3);
+        form_grid.attach (password_entry, 0, 3);
         form_grid.attach (session_button, 1, 2, 1, 2);
 
         main_grid = new Gtk.Grid () {
-            margin = 12
+            margin_top = 12,
+            margin_end = 12,
+            margin_bottom = 12,
+            margin_start = 12
         };
-        main_grid.add (form_grid);
+        main_grid.attach (form_grid, 0, 0);
+        main_grid.add_css_class (Granite.STYLE_CLASS_CARD);
+        main_grid.add_css_class (Granite.STYLE_CLASS_ROUNDED);
 
-        weak Gtk.StyleContext main_grid_style_context = main_grid.get_style_context ();
-        main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
-        main_grid_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
-        main_grid_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        main_grid.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        add (main_grid);
+        child = main_grid;
 
         bind_property ("connecting", username_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
         bind_property ("connecting", password_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
 
         username_entry.activate.connect (() => do_connect_username (username_entry.text));
         password_entry.activate.connect (on_login);
-        grab_focus.connect (() => {
-            if (username_entry.sensitive) {
-                username_entry.grab_focus_without_selecting ();
-            } else {
-                password_entry.grab_focus_without_selecting ();
-            }
-        });
+        // grab_focus.connect (() => {
+        //     if (username_entry.sensitive) {
+        //         username_entry.grab_focus_without_selecting ();
+        //     } else {
+        //         password_entry.grab_focus_without_selecting ();
+        //     }
+        // });
     }
 
     private void on_login () {
@@ -129,18 +125,18 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         password_entry.text = "";
 
         weak Gtk.StyleContext username_entry_style_context = username_entry.get_style_context ();
-        username_entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+        username_entry_style_context.add_class (Granite.STYLE_CLASS_ERROR);
 
         weak Gtk.StyleContext password_entry_style_context = password_entry.get_style_context ();
-        password_entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+        password_entry_style_context.add_class (Granite.STYLE_CLASS_ERROR);
 
         weak Gtk.StyleContext grid_style_context = main_grid.get_style_context ();
         grid_style_context.add_class ("shake");
 
         GLib.Timeout.add (ERROR_SHAKE_DURATION, () => {
             grid_style_context.remove_class ("shake");
-            username_entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
-            password_entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            username_entry_style_context.remove_class (Granite.STYLE_CLASS_ERROR);
+            password_entry_style_context.remove_class (Granite.STYLE_CLASS_ERROR);
 
             return GLib.Source.REMOVE;
         });
@@ -156,14 +152,14 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         username_entry.text = "";
 
         weak Gtk.StyleContext entry_style_context = username_entry.get_style_context ();
-        entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+        entry_style_context.add_class (Granite.STYLE_CLASS_ERROR);
 
         weak Gtk.StyleContext grid_style_context = main_grid.get_style_context ();
         grid_style_context.add_class ("shake");
 
         GLib.Timeout.add (ERROR_SHAKE_DURATION, () => {
             grid_style_context.remove_class ("shake");
-            entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            entry_style_context.remove_class (Granite.STYLE_CLASS_ERROR);
 
             return GLib.Source.REMOVE;
         });
