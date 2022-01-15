@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-22 20:53+0000\n"
-"PO-Revision-Date: 2020-04-14 07:10+0000\n"
-"Last-Translator: Jaimie85 <alsemgeest@gmail.com>\n"
-"Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/nl/>\n"
+"PO-Revision-Date: 2022-01-15 13:42+0000\n"
+"Last-Translator: Dennis ten Hoove <dennistenhoove@protonmail.com>\n"
+"Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/greeter.appdata.xml.in:7
 msgid "Greeter"
@@ -29,7 +29,7 @@ msgstr "Ontgrendel uw apparaat of log in"
 
 #: data/greeter.appdata.xml.in:23
 msgid "Improvements:"
-msgstr ""
+msgstr "Verbeteringen:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Hide clock during initial setup"
@@ -41,7 +41,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:28
 msgid "Minor updates:"
-msgstr ""
+msgstr "Kleine updates:"
 
 #: data/greeter.appdata.xml.in:30 data/greeter.appdata.xml.in:41
 #: data/greeter.appdata.xml.in:48 data/greeter.appdata.xml.in:56
