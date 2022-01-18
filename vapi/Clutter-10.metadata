@@ -10,7 +10,6 @@ Units struct
 
 *.ref unowned
 
-init.argv unowned
 Actor
 	.apply_transform.matrix ref
 	.get_abs_allocation_vertices.verts out=false
@@ -22,7 +21,6 @@ Image
 
 // ???
 Actor.has_pointer#method name="get_has_pointer"
-InitError errordomain=false
 ScriptError errordomain
 ImageError errordomain
 
@@ -49,14 +47,9 @@ TextBuffer.get_text#virtual_method name="get_text_with_length"
 
 // virtual/abstract distinction
 Container
-	.lower virtual
-	.raise virtual
 	.*_child_meta#virtual_method virtual
 
 // Default values
-Container
-	.lower.sibling nullable default=null
-	.raise.sibling nullable default=null
 Stage.read_pixels
 	.width default=-1
 	.height default=-1
@@ -94,8 +87,6 @@ Script
 
 // Skipped upstream for unknown reasons
 Interval.register_progress_func skip=false
-get_option_group skip=false
-get_option_group_without_init skip=false
 threads_add_idle skip=false
 threads_add_idle_full skip=false
 threads_add_timeout skip=false
@@ -147,14 +138,15 @@ DeviceEvent struct=false base_type="Clutter.Event"
 IMEvent struct=false base_type="Clutter.Event"
 KeyEvent struct=false base_type="Clutter.Event"
 MotionEvent struct=false base_type="Clutter.Event"
-ScrollEvent struct=false base_type="Clutter.Event"
-TouchEvent struct=false base_type="Clutter.Event"
-TouchpadPinchEvent struct=false base_type="Clutter.Event"
-TouchpadSwipeEvent struct=false base_type="Clutter.Event"
-ProximityEvent struct=false base_type="Clutter.Event"
 PadButtonEvent struct=false base_type="Clutter.Event"
 PadRingEvent struct=false base_type="Clutter.Event"
 PadStripEvent struct=false base_type="Clutter.Event"
+ProximityEvent struct=false base_type="Clutter.Event"
+ScrollEvent struct=false base_type="Clutter.Event"
+TouchEvent struct=false base_type="Clutter.Event"
+TouchpadHoldEvent struct=false base_type="Clutter.Event"
+TouchpadPinchEvent struct=false base_type="Clutter.Event"
+TouchpadSwipeEvent struct=false base_type="Clutter.Event"
 
 // Keysyms used to be CLUTTER_X instead of CLUTTER_KEY_X
 *#constant skip
