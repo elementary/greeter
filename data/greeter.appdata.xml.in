@@ -18,6 +18,18 @@
     <binary>io.elementary.greeter</binary>
   </provides>
   <releases>
+    <release version="6.0.2" date="2022-02-28" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Fix a random issue where Greeter does not load correctly on boot</li>
+        </ul>
+        <p>Minor updates:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="6.0.1" date="2021-09-22" urgency="medium">
       <description>
         <p>Improvements:</p>
