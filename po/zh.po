@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 20:53+0000\n"
+"POT-Creation-Date: 2022-02-28 16:21+0000\n"
 "PO-Revision-Date: 2019-09-10 22:22+0000\n"
 "Last-Translator: James Qian <sotux82@gmail.com>\n"
 "Language-Team: Chinese <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -63,15 +63,15 @@ msgstr ""
 msgid "Try username"
 msgstr ""
 
-#: src/Cards/UserCard.vala:111 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:112 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "登录"
 
-#: src/Cards/UserCard.vala:123
+#: src/Cards/UserCard.vala:124
 msgid "Account disabled"
 msgstr ""
 
-#: src/Cards/UserCard.vala:228
+#: src/Cards/UserCard.vala:229
 msgid "Session cannot be changed while user is logged in"
 msgstr ""
 

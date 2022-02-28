@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 20:53+0000\n"
+"POT-Creation-Date: 2022-02-28 16:21+0000\n"
 "PO-Revision-Date: 2021-11-16 10:37+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -57,8 +57,8 @@ msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
-"“初期設定”では、デバイスの最初のユーザーを作成します。“初期設定”が起動しないとログインできないため、OS "
-"の再インストールが必要になる可能性があります。"
+"“初期設定”では、デバイスの最初のユーザーを作成します。“初期設定”が起動しない"
+"とログインできないため、OS の再インストールが必要になる可能性があります。"
 
 #: src/Cards/ManualCard.vala:35
 msgid "Manual Login"
@@ -72,15 +72,15 @@ msgstr "ユーザー名"
 msgid "Try username"
 msgstr "ユーザー名を試します"
 
-#: src/Cards/UserCard.vala:111 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:112 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "ログイン"
 
-#: src/Cards/UserCard.vala:123
+#: src/Cards/UserCard.vala:124
 msgid "Account disabled"
 msgstr "アカウントは使用できません"
 
-#: src/Cards/UserCard.vala:228
+#: src/Cards/UserCard.vala:229
 msgid "Session cannot be changed while user is logged in"
 msgstr "ユーザーのログイン中はセッションを変更できません"
 
