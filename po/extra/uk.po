@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-28 16:21+0000\n"
-"PO-Revision-Date: 2021-09-22 22:27+0000\n"
+"PO-Revision-Date: 2022-03-01 19:45+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/uk/>\n"
@@ -34,7 +34,7 @@ msgstr "Удосконалення:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Fix a random issue where Greeter does not load correctly on boot"
-msgstr ""
+msgstr "Виправлено проблему, коли екран привітання неправильно завантажується"
 
 #: data/greeter.appdata.xml.in:27 data/greeter.appdata.xml.in:40
 msgid "Minor updates:"
