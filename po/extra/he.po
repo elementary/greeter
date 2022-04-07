@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-28 16:21+0000\n"
-"PO-Revision-Date: 2022-03-01 08:05+0000\n"
+"PO-Revision-Date: 2022-04-07 22:05+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/he/>\n"
@@ -44,7 +44,7 @@ msgstr "עדכונים משניים:"
 #: data/greeter.appdata.xml.in:68 data/greeter.appdata.xml.in:76
 #: data/greeter.appdata.xml.in:90
 msgid "Updated translations"
-msgstr "תרגומים עודכנו"
+msgstr "תרגומים עדכניים"
 
 #: data/greeter.appdata.xml.in:37
 msgid "Hide clock during initial setup"
