@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-28 16:21+0000\n"
-"PO-Revision-Date: 2022-03-01 03:26+0000\n"
+"PO-Revision-Date: 2022-04-09 02:45+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/ja/>\n"
@@ -37,7 +37,7 @@ msgstr "起動時に Greeter が適切に読み込まれないことがある不
 
 #: data/greeter.appdata.xml.in:27 data/greeter.appdata.xml.in:40
 msgid "Minor updates:"
-msgstr "軽微なアップデート:"
+msgstr "そのほかのアップデート:"
 
 #: data/greeter.appdata.xml.in:29 data/greeter.appdata.xml.in:42
 #: data/greeter.appdata.xml.in:53 data/greeter.appdata.xml.in:60
