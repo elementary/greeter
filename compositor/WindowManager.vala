@@ -52,6 +52,8 @@ namespace GreeterCompositor {
          */
         public Meta.BackgroundGroup background_group { get; protected set; }
 
+        public Greeter.SystemBackground system_background { get; private set; }
+
         Meta.PluginInfo info;
 
         //WindowSwitcher? winswitcher = null;
@@ -88,7 +90,12 @@ namespace GreeterCompositor {
 
         void refresh_background () {
             unowned Meta.Display display = get_display ();
-            var system_background = new Greeter.SystemBackground (display);
+
+            stage.remove_child (system_background.background_actor);
+            system_background = new Greeter.SystemBackground (display);
+            system_background.background_actor.add_constraint (new Clutter.BindConstraint (stage,
+                Clutter.BindCoordinate.ALL, 0));
+            stage.insert_child_below (system_background.background_actor, null);
 
             system_background.refresh ();
         }
@@ -98,11 +105,12 @@ namespace GreeterCompositor {
             MediaFeedback.init ();
             DBus.init (this);
             DBusAccelerator.init (this);
+            DBusBackgroundManager.init (this);
             KeyboardManager.init (display);
 
             stage = display.get_stage () as Clutter.Stage;
 
-            var system_background = new Greeter.SystemBackground (display);
+            system_background = new Greeter.SystemBackground (display);
             system_background.background_actor.add_constraint (new Clutter.BindConstraint (stage,
                 Clutter.BindCoordinate.ALL, 0));
             stage.insert_child_below (system_background.background_actor, null);
