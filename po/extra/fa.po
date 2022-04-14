@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-28 16:21+0000\n"
-"PO-Revision-Date: 2019-06-24 15:03-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-04-14 22:02+0000\n"
+"Last-Translator: Pikhosh <pikhosh@gmail.com>\n"
+"Language-Team: Persian <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/fa/>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/greeter.appdata.xml.in:7
 msgid "Greeter"
@@ -22,7 +25,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
-msgstr ""
+msgstr "قفل دستگاه خود را باز کرده یا وارد شوید"
 
 #: data/greeter.appdata.xml.in:23 data/greeter.appdata.xml.in:35
 msgid "Improvements:"
@@ -41,7 +44,7 @@ msgstr ""
 #: data/greeter.appdata.xml.in:68 data/greeter.appdata.xml.in:76
 #: data/greeter.appdata.xml.in:90
 msgid "Updated translations"
-msgstr ""
+msgstr "ترجمه های بروز شده"
 
 #: data/greeter.appdata.xml.in:37
 msgid "Hide clock during initial setup"
@@ -69,15 +72,15 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:67
 msgid "Fix an issue with media keys"
-msgstr ""
+msgstr "رفع مشکل کلیدهای رسانه ای"
 
 #: data/greeter.appdata.xml.in:75
 msgid "Ensure that manual login is available when users are hidden"
-msgstr ""
+msgstr "اطمینان حاصل کنید که ورود دستی در صورت مخفی بودن کاربران در دسترس است"
 
 #: data/greeter.appdata.xml.in:83
 msgid "Save last user on attempted login"
-msgstr ""
+msgstr "ذخیره آخرین کاربر در هنگام ورود به سیستم"
 
 #: data/greeter.appdata.xml.in:84
 msgid "Handle all background aspect ratios"
@@ -93,7 +96,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:87
 msgid "Enable sounds in greeter"
-msgstr ""
+msgstr "فعال سازی اصوات در Greeter"
 
 #: data/greeter.appdata.xml.in:88
 msgid "Select password text on error instead of immediately clearing it"
@@ -101,7 +104,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:89
 msgid "Code cleanup"
-msgstr ""
+msgstr "پاکسازی کد"
 
 #: data/greeter.appdata.xml.in:96
 msgid "Extensive overhaul"
