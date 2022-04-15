@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-28 16:21+0000\n"
-"PO-Revision-Date: 2022-04-04 21:19+0000\n"
+"PO-Revision-Date: 2022-04-15 22:18+0000\n"
 "Last-Translator: Aga Ismael <agaesmaeel@gmail.com>\n"
 "Language-Team: Kurdish (Central) <https://l10n.elementary.io/projects/"
 "desktop/greeter-extra/ckb/>\n"
@@ -21,11 +21,11 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:7
 msgid "Greeter"
-msgstr ""
+msgstr "گریتەر"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
-msgstr ""
+msgstr "قوفڵ بکەوە یان بچۆرە ناو ئامێرەکەتەوە"
 
 #: data/greeter.appdata.xml.in:23 data/greeter.appdata.xml.in:35
 msgid "Improvements:"
@@ -34,6 +34,8 @@ msgstr "پێشکەوتنەکان:"
 #: data/greeter.appdata.xml.in:25
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr ""
+"چارسەرکردنی کێشەیەک کاتێک گریتەر بە شێوەیەکی دروست لە کاتی بووتدا نەدەکەوتە "
+"کار"
 
 #: data/greeter.appdata.xml.in:27 data/greeter.appdata.xml.in:40
 msgid "Minor updates:"
@@ -48,11 +50,11 @@ msgstr "وەرگێڕانەکان نوێکراونەوە"
 
 #: data/greeter.appdata.xml.in:37
 msgid "Hide clock during initial setup"
-msgstr ""
+msgstr "شاردنەوەی کاتژمێر لە ماوەی دامەزراندنی سەرەتایی"
 
 #: data/greeter.appdata.xml.in:38
 msgid "Use selected accent color for logged in checkmark"
-msgstr ""
+msgstr "بەکارهێنانی ڕەنگی ئەکسێنتی دیاریکراو بۆ چوونە ژور لە چێکمارکەکاندا"
 
 #: data/greeter.appdata.xml.in:49
 msgid "Add multitouch finger tracking"
