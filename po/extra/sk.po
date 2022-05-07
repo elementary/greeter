@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-28 16:21+0000\n"
-"PO-Revision-Date: 2022-05-07 01:27+0000\n"
+"PO-Revision-Date: 2022-05-07 15:04+0000\n"
 "Last-Translator: JohnDumpling <john_dumpling@protonmail.com>\n"
 "Language-Team: Slovak <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/sk/>\n"
@@ -29,7 +29,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:23 data/greeter.appdata.xml.in:35
 msgid "Improvements:"
-msgstr ""
+msgstr "Vylepšenia:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Fix a random issue where Greeter does not load correctly on boot"
@@ -37,14 +37,14 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:27 data/greeter.appdata.xml.in:40
 msgid "Minor updates:"
-msgstr ""
+msgstr "Menšie aktualizácie:"
 
 #: data/greeter.appdata.xml.in:29 data/greeter.appdata.xml.in:42
 #: data/greeter.appdata.xml.in:53 data/greeter.appdata.xml.in:60
 #: data/greeter.appdata.xml.in:68 data/greeter.appdata.xml.in:76
 #: data/greeter.appdata.xml.in:90
 msgid "Updated translations"
-msgstr "Aktualizácia prekladov"
+msgstr "Aktualizované preklady"
 
 #: data/greeter.appdata.xml.in:37
 msgid "Hide clock during initial setup"
