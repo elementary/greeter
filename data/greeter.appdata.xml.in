@@ -18,6 +18,18 @@
     <binary>io.elementary.greeter</binary>
   </provides>
   <releases>
+    <release version="6.1.0" date="2022-05-08" urgency="medium">
+      <description>
+        <p>New Features:</p>
+        <ul>
+          <li>Provide panel background color interface</li>
+        </ul>
+        <p>Minor updates:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="6.0.2" date="2022-02-28" urgency="medium">
       <description>
         <p>Improvements:</p>
