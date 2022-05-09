@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-28 16:21+0000\n"
+"POT-Creation-Date: 2022-05-09 18:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: compositor/WindowManager.vala:419
+#: compositor/WindowManager.vala:427
 msgid "Does the display look OK?"
 msgstr ""
 
-#: compositor/WindowManager.vala:422
+#: compositor/WindowManager.vala:430
 msgid "Keep This Configuration"
 msgstr ""
 
-#: compositor/WindowManager.vala:423
+#: compositor/WindowManager.vala:431
 msgid "Restore Previous Configuration"
 msgstr ""
 
