@@ -1,3 +1,9 @@
+io.elementary.greeter (6.1.0) bionic; urgency=medium
+
+  * Release 6.1.0 (#608)
+
+ -- elementary, Inc. <builds@elementary.io>  Tue, 10 May 2022 16:53:57 +0000
+
 io.elementary.greeter (6.0.2) bionic; urgency=medium
 
   * Release 6.0.2 (#599)
