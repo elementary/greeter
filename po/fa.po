@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-28 16:21+0000\n"
+"POT-Creation-Date: 2022-05-09 18:18+0000\n"
 "PO-Revision-Date: 2022-04-14 22:02+0000\n"
 "Last-Translator: Pikhosh <pikhosh@gmail.com>\n"
 "Language-Team: Persian <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -20,15 +20,15 @@ msgstr ""
 "X-Generator: Weblate 4.4.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:419
+#: compositor/WindowManager.vala:427
 msgid "Does the display look OK?"
 msgstr "آیا صفحه خوب به‌نظر می‌اید؟"
 
-#: compositor/WindowManager.vala:422
+#: compositor/WindowManager.vala:430
 msgid "Keep This Configuration"
 msgstr "همین پیکربندی را نگه‌دار"
 
-#: compositor/WindowManager.vala:423
+#: compositor/WindowManager.vala:431
 msgid "Restore Previous Configuration"
 msgstr "بازیابی پیکربندی قبلی"
 

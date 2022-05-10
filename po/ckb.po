@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-28 16:21+0000\n"
+"POT-Creation-Date: 2022-05-09 18:18+0000\n"
 "PO-Revision-Date: 2022-04-15 20:31+0000\n"
 "Last-Translator: Aga Ismael <agaesmaeel@gmail.com>\n"
 "Language-Team: Kurdish (Central) <https://l10n.elementary.io/projects/"
@@ -15,15 +15,15 @@ msgstr ""
 "X-Generator: Weblate 4.4.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:419
+#: compositor/WindowManager.vala:427
 msgid "Does the display look OK?"
 msgstr "ئەم ڕونمایە کێشەی نییە؟"
 
-#: compositor/WindowManager.vala:422
+#: compositor/WindowManager.vala:430
 msgid "Keep This Configuration"
 msgstr "هێشتنەوەی ئەم ڕێکخستنە"
 
-#: compositor/WindowManager.vala:423
+#: compositor/WindowManager.vala:431
 msgid "Restore Previous Configuration"
 msgstr "گەڕاندنەوەی ڕێکخستنی پێشتر"
 
