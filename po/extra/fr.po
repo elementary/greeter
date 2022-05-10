@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-09 18:18+0000\n"
-"PO-Revision-Date: 2022-03-01 19:45+0000\n"
+"PO-Revision-Date: 2022-05-10 11:11+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
-"Language-Team: French <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/fr/>\n"
+"Language-Team: French <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,11 +29,11 @@ msgstr "Déverrouillez ou connectez-vous à votre appareil"
 
 #: data/greeter.appdata.xml.in:23
 msgid "New Features:"
-msgstr ""
+msgstr "Nouvelles fonctionnalités :"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Provide panel background color interface"
-msgstr ""
+msgstr "Ajout d'une interface pour la couleur d'arrière-plan du panneau"
 
 #: data/greeter.appdata.xml.in:27 data/greeter.appdata.xml.in:39
 #: data/greeter.appdata.xml.in:52
