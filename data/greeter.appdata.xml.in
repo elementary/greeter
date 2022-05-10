@@ -18,7 +18,7 @@
     <binary>io.elementary.greeter</binary>
   </provides>
   <releases>
-    <release version="6.1.0" date="2022-05-08" urgency="medium">
+    <release version="6.1.0" date="2022-05-09" urgency="medium">
       <description>
         <p>New Features:</p>
         <ul>
