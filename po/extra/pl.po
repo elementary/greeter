@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-09 18:18+0000\n"
-"PO-Revision-Date: 2022-04-08 16:06+0000\n"
+"PO-Revision-Date: 2022-05-10 11:11+0000\n"
 "Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
-"Language-Team: Polish <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/pl/>\n"
+"Language-Team: Polish <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,11 +30,11 @@ msgstr "Odblokuj lub zaloguj się do swojego urządzenia"
 
 #: data/greeter.appdata.xml.in:23
 msgid "New Features:"
-msgstr ""
+msgstr "Nowe funkcje:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Provide panel background color interface"
-msgstr ""
+msgstr "Dodano interfejs dla koloru tła panelu"
 
 #: data/greeter.appdata.xml.in:27 data/greeter.appdata.xml.in:39
 #: data/greeter.appdata.xml.in:52
