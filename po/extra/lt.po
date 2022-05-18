@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-09 18:18+0000\n"
+"POT-Creation-Date: 2022-05-18 04:12+0000\n"
 "PO-Revision-Date: 2019-07-01 20:28+0000\n"
 "Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian <https://l10n.elementary.io/projects/desktop/"
@@ -22,8 +22,8 @@ msgstr ""
 "X-Generator: Weblate 3.6.1\n"
 
 #: data/greeter.appdata.xml.in:7
-msgid "Greeter"
-msgstr "Sveikintojas"
+msgid "Login &amp; Lock Screen"
+msgstr ""
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
@@ -140,3 +140,6 @@ msgstr ""
 #: data/greeter.appdata.xml.in:149
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
+
+#~ msgid "Greeter"
+#~ msgstr "Sveikintojas"

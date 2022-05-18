@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-09 18:18+0000\n"
+"POT-Creation-Date: 2022-05-18 04:12+0000\n"
 "PO-Revision-Date: 2019-12-15 23:07+0000\n"
 "Last-Translator: Daniel Foré <daniel@elementary.io>\n"
 "Language-Team: Bosnian <https://l10n.elementary.io/projects/desktop/greeter-"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Generator: Weblate 3.9.1\n"
 
 #: data/greeter.appdata.xml.in:7
-msgid "Greeter"
+msgid "Login &amp; Lock Screen"
 msgstr ""
 
 #: data/greeter.appdata.xml.in:8

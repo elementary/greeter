@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-09 18:18+0000\n"
+"POT-Creation-Date: 2022-05-18 04:12+0000\n"
 "PO-Revision-Date: 2020-03-01 15:09+0000\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://l10n.elementary.io/projects/"
@@ -20,8 +20,8 @@ msgstr ""
 "X-Generator: Weblate 3.9.1\n"
 
 #: data/greeter.appdata.xml.in:7
-msgid "Greeter"
-msgstr "歡迎程式"
+msgid "Login &amp; Lock Screen"
+msgstr ""
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
@@ -138,3 +138,6 @@ msgstr ""
 #: data/greeter.appdata.xml.in:149
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
+
+#~ msgid "Greeter"
+#~ msgstr "歡迎程式"

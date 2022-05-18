@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-09 18:18+0000\n"
+"POT-Creation-Date: 2022-05-18 04:12+0000\n"
 "PO-Revision-Date: 2022-04-15 22:18+0000\n"
 "Last-Translator: Aga Ismael <agaesmaeel@gmail.com>\n"
 "Language-Team: Kurdish (Central) <https://l10n.elementary.io/projects/"
@@ -20,8 +20,8 @@ msgstr ""
 "X-Generator: Weblate 4.4.2\n"
 
 #: data/greeter.appdata.xml.in:7
-msgid "Greeter"
-msgstr "گریتەر"
+msgid "Login &amp; Lock Screen"
+msgstr ""
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
@@ -140,3 +140,6 @@ msgstr ""
 #: data/greeter.appdata.xml.in:149
 msgid "elementary, Inc."
 msgstr "کۆمپانیای ئێلەمێنتەری هاوپشک."
+
+#~ msgid "Greeter"
+#~ msgstr "گریتەر"
