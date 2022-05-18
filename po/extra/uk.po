@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-18 04:12+0000\n"
-"PO-Revision-Date: 2022-05-09 23:25+0000\n"
+"PO-Revision-Date: 2022-05-18 14:07+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/uk/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:7
 msgid "Login &amp; Lock Screen"
-msgstr ""
+msgstr "Вхід та екран блокування"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
