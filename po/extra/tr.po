@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-18 04:12+0000\n"
-"PO-Revision-Date: 2022-05-13 22:04+0000\n"
+"PO-Revision-Date: 2022-05-18 22:50+0000\n"
 "Last-Translator: Özgür Baskin <queeup@zoho.com>\n"
-"Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/tr/>\n"
+"Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:7
 msgid "Login &amp; Lock Screen"
-msgstr ""
+msgstr "Oturum Açma ve Kilit Ekranı"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
