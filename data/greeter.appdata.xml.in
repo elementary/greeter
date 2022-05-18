@@ -4,7 +4,7 @@
   <id>io.elementary.greeter</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0+</project_license>
-  <name>Greeter</name>
+  <name>Login &amp; Lock Screen</name>
   <summary>Unlock or log in to your device</summary>
   <description>
     <p></p>
