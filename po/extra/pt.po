@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-18 04:12+0000\n"
-"PO-Revision-Date: 2021-12-22 17:09+0000\n"
+"PO-Revision-Date: 2022-05-19 15:08+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/pt/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:7
 msgid "Login &amp; Lock Screen"
-msgstr ""
+msgstr "Iniciar sessão e Bloquear ecrã"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
