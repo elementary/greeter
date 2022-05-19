@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-18 04:12+0000\n"
-"PO-Revision-Date: 2022-03-04 15:11+0000\n"
+"PO-Revision-Date: 2022-05-19 12:02+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/hu/>\n"
@@ -29,7 +29,7 @@ msgstr "Feloldás vagy bejelentkezés az eszlözbe"
 
 #: data/greeter.appdata.xml.in:23
 msgid "New Features:"
-msgstr ""
+msgstr "Új funkciók:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Provide panel background color interface"
