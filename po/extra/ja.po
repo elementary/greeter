@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-18 04:12+0000\n"
-"PO-Revision-Date: 2022-05-18 14:07+0000\n"
+"PO-Revision-Date: 2022-05-20 21:02+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/ja/>\n"
@@ -33,7 +33,7 @@ msgstr "新機能:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Provide panel background color interface"
-msgstr ""
+msgstr "パネルの背景色インターフェースを追加"
 
 #: data/greeter.appdata.xml.in:27 data/greeter.appdata.xml.in:39
 #: data/greeter.appdata.xml.in:52
