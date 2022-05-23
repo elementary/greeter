@@ -33,8 +33,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private unowned Greeter.BaseCard current_card;
     private unowned LightDM.UserList lightdm_user_list;
 
-    private bool installer_mode = false;
-
     private const uint[] NAVIGATION_KEYS = {
         Gdk.Key.Up,
         Gdk.Key.Down,
@@ -389,19 +387,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             var action_group = get_action_group ("session");
             try {
                 unowned var session = action_group.get_action_state ("select").get_string ();
-
-                // If the greeter is running on the install medium, check if the Installer has signalled
-                // that it wants the greeter to launch the live (demo) session by means of touching a file
-                if (installer_mode) {
-                    var demo_mode_file = File.new_for_path ("/var/lib/lightdm/demo-mode");
-                    if (demo_mode_file.query_exists ()) {
-                        demo_mode_file.@delete ();
-                        session = "pantheon";
-                    } else {
-                        session = "installer";
-                    }
-                }
-
                 lightdm_greeter.start_session_sync (session);
                 return;
             } catch (Error e) {
@@ -439,12 +424,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
         }
 
-        // Check if the installer is installed
-        var installer_desktop = new DesktopAppInfo ("io.elementary.installer.desktop");
-        if (installer_desktop != null) {
-            installer_mode = true;
-        }
-
         if (lightdm_user_list.length > 0) {
             datetime_widget.reveal_child = true;
 
@@ -476,8 +455,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             /* We're not certain that scaling factor will change, but try to wait for GSD in case it does */
             Timeout.add (500, () => {
                 try {
-                    var initial_setup = AppInfo.create_from_commandline ("io.elementary.initial-setup", null, GLib.AppInfoCreateFlags.NONE);
-                    initial_setup.launch (null, null);
+                    var installer_desktop = new DesktopAppInfo ("io.elementary.installer.desktop");
+                    if (installer_desktop != null) {
+                        var installer = new DesktopAppInfo ("io.elementary.installer");
+                        installer.launch (null, null);
+                    } else {
+                        var initial_setup = new DesktopAppInfo ("io.elementary.initial-setup");
+                        initial_setup.launch (null, null);
+                    }
                 } catch (Error e) {
                     string error_text = _("Unable to Launch Initial Setup");
                     critical ("%s: %s", error_text, e.message);
