@@ -443,6 +443,11 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         var installer_desktop = new DesktopAppInfo ("io.elementary.installer.desktop");
         if (installer_desktop != null) {
             installer_mode = true;
+            try {
+                lightdm_greeter.authenticate ("elementary");
+            } catch (Error e) {
+                critical ("Couldn't launch installer session: %s", e.message)
+            }
         }
 
         if (lightdm_user_list.length > 0) {
