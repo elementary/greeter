@@ -446,7 +446,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             try {
                 lightdm_greeter.authenticate ("elementary");
             } catch (Error e) {
-                critical ("Couldn't launch installer session: %s", e.message)
+                critical ("Couldn't launch installer session: %s", e.message);
             }
         }
 
