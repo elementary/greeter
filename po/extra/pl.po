@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 20:53+0000\n"
-"PO-Revision-Date: 2021-10-01 10:11+0000\n"
+"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"PO-Revision-Date: 2022-05-18 14:07+0000\n"
 "Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/pl/>\n"
@@ -21,108 +21,127 @@ msgstr ""
 "X-Generator: Weblate 4.4.2\n"
 
 #: data/greeter.appdata.xml.in:7
-msgid "Greeter"
-msgstr "Blokada ekranu"
+msgid "Login &amp; Lock Screen"
+msgstr "Logowanie &amp; Ekran blokady"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
 msgstr "Odblokuj lub zaloguj się do swojego urządzenia"
 
 #: data/greeter.appdata.xml.in:23
-msgid "Improvements:"
-msgstr "Ulepszenia:"
+msgid "New Features:"
+msgstr "Nowe funkcje:"
 
 #: data/greeter.appdata.xml.in:25
-msgid "Hide clock during initial setup"
-msgstr "Schowano zegar podczas pierwszego ustawiania"
+msgid "Provide panel background color interface"
+msgstr "Dodano interfejs dla koloru tła panelu"
 
-#: data/greeter.appdata.xml.in:26
-msgid "Use selected accent color for logged in checkmark"
-msgstr "Użyto wybranego koloru akcentowego dla znacznika zalogowania"
-
-#: data/greeter.appdata.xml.in:28
+#: data/greeter.appdata.xml.in:27 data/greeter.appdata.xml.in:39
+#: data/greeter.appdata.xml.in:52
 msgid "Minor updates:"
 msgstr "Mniejsze aktualizacje:"
 
-#: data/greeter.appdata.xml.in:30 data/greeter.appdata.xml.in:41
-#: data/greeter.appdata.xml.in:48 data/greeter.appdata.xml.in:56
-#: data/greeter.appdata.xml.in:64 data/greeter.appdata.xml.in:78
+#: data/greeter.appdata.xml.in:29 data/greeter.appdata.xml.in:41
+#: data/greeter.appdata.xml.in:54 data/greeter.appdata.xml.in:65
+#: data/greeter.appdata.xml.in:72 data/greeter.appdata.xml.in:80
+#: data/greeter.appdata.xml.in:88 data/greeter.appdata.xml.in:102
 msgid "Updated translations"
-msgstr "Zaktualizowano tłumaczenia"
+msgstr "Aktualizacja tłumaczeń"
+
+#: data/greeter.appdata.xml.in:35 data/greeter.appdata.xml.in:47
+msgid "Improvements:"
+msgstr "Ulepszenia:"
 
 #: data/greeter.appdata.xml.in:37
+msgid "Fix a random issue where Greeter does not load correctly on boot"
+msgstr ""
+"Naprawiono losowy problem uniemożliwiający Powitaniu załadowanie się przy "
+"starcie"
+
+#: data/greeter.appdata.xml.in:49
+msgid "Hide clock during initial setup"
+msgstr "Schowano zegar podczas pierwszego ustawiania"
+
+#: data/greeter.appdata.xml.in:50
+msgid "Use selected accent color for logged in checkmark"
+msgstr "Użyto wybranego koloru akcentowego dla znacznika zalogowania"
+
+#: data/greeter.appdata.xml.in:61
 msgid "Add multitouch finger tracking"
 msgstr "Dodano śledzenie wielu palców"
 
-#: data/greeter.appdata.xml.in:38
+#: data/greeter.appdata.xml.in:62
 msgid "Add keyboard layout support"
 msgstr "Dodano wsparcie dla układu klawiatury"
 
-#: data/greeter.appdata.xml.in:39
+#: data/greeter.appdata.xml.in:63
 msgid "New colorful avatar fallbacks"
 msgstr "Nowe kolorowe awatary zastępcze"
 
-#: data/greeter.appdata.xml.in:40
+#: data/greeter.appdata.xml.in:64
 msgid "Fix clock when resuming from sleep"
 msgstr "Naprawiono zegar podczas wybudzania komputera ze stanu wstrzymania"
 
-#: data/greeter.appdata.xml.in:55
+#: data/greeter.appdata.xml.in:79
 msgid "Fix an issue with media keys"
 msgstr "Naprawiono problem z klawiszami multimedialnymi"
 
-#: data/greeter.appdata.xml.in:63
+#: data/greeter.appdata.xml.in:87
 msgid "Ensure that manual login is available when users are hidden"
 msgstr ""
 "Upewniono się, że manualne logowanie jest dostępne, gdy użytkownicy są ukryci"
 
-#: data/greeter.appdata.xml.in:71
+#: data/greeter.appdata.xml.in:95
 msgid "Save last user on attempted login"
 msgstr "Zapisz ostatniego użytkownika przy próbie zalogowania"
 
-#: data/greeter.appdata.xml.in:72
+#: data/greeter.appdata.xml.in:96
 msgid "Handle all background aspect ratios"
 msgstr "Obsługa wszystkich proporcji tła"
 
-#: data/greeter.appdata.xml.in:73
+#: data/greeter.appdata.xml.in:97
 msgid "Give non-focused user cards smaller usernames"
 msgstr "Nadaj nieokreślonym kartom użytkownika mniejsze nazwy użytkowników"
 
-#: data/greeter.appdata.xml.in:74
+#: data/greeter.appdata.xml.in:98
 msgid "Better respect NumLock settings"
 msgstr "Lepiej przestrzegaj ustawień NumLock"
 
-#: data/greeter.appdata.xml.in:75
+#: data/greeter.appdata.xml.in:99
 msgid "Enable sounds in greeter"
 msgstr "Włącz dźwięki na ekranie logowania"
 
-#: data/greeter.appdata.xml.in:76
+#: data/greeter.appdata.xml.in:100
 msgid "Select password text on error instead of immediately clearing it"
 msgstr "Zaznacz hasło przy błędzie zamiast natychmiast je usuwać"
 
-#: data/greeter.appdata.xml.in:77
+#: data/greeter.appdata.xml.in:101
 msgid "Code cleanup"
 msgstr "Czyszczenie kodu"
 
-#: data/greeter.appdata.xml.in:84
+#: data/greeter.appdata.xml.in:108
 msgid "Extensive overhaul"
 msgstr "Rozległy przegląd"
 
-#: data/greeter.appdata.xml.in:86
+#: data/greeter.appdata.xml.in:110
 msgid "New card-based appearance"
 msgstr "Nowy interfejs oparty na kartach"
 
-#: data/greeter.appdata.xml.in:87
+#: data/greeter.appdata.xml.in:111
 msgid "Improved HiDPI support"
 msgstr "Ulepszona obsługa HiDPI"
 
-#: data/greeter.appdata.xml.in:88
+#: data/greeter.appdata.xml.in:112
 msgid "AccountsService functionality"
 msgstr "Funkcjonalność usługi kont"
 
-#: data/greeter.appdata.xml.in:89
+#: data/greeter.appdata.xml.in:113
 msgid "Various bug fixes"
 msgstr "Różne poprawki błędów"
 
-#: data/greeter.appdata.xml.in:125
+#: data/greeter.appdata.xml.in:149
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
+
+#~ msgid "Greeter"
+#~ msgstr "Blokada ekranu"

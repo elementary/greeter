@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 20:53+0000\n"
+"POT-Creation-Date: 2022-05-18 04:12+0000\n"
 "PO-Revision-Date: 2021-09-02 21:46+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/desktop/"
@@ -20,15 +20,15 @@ msgstr ""
 "X-Generator: Weblate 4.4.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:419
+#: compositor/WindowManager.vala:427
 msgid "Does the display look OK?"
 msgstr "Megfelelően jelenik meg a kép?"
 
-#: compositor/WindowManager.vala:422
+#: compositor/WindowManager.vala:430
 msgid "Keep This Configuration"
 msgstr "Beállítás megtartása"
 
-#: compositor/WindowManager.vala:423
+#: compositor/WindowManager.vala:431
 msgid "Restore Previous Configuration"
 msgstr "Előző beállítások visszaállítása"
 
@@ -72,15 +72,15 @@ msgstr "Felhasználónév"
 msgid "Try username"
 msgstr "Próbálja a felhasználónevet"
 
-#: src/Cards/UserCard.vala:111 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:112 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Bejelentkezés"
 
-#: src/Cards/UserCard.vala:123
+#: src/Cards/UserCard.vala:124
 msgid "Account disabled"
 msgstr "Fiók letiltva"
 
-#: src/Cards/UserCard.vala:228
+#: src/Cards/UserCard.vala:229
 msgid "Session cannot be changed while user is logged in"
 msgstr "A munkamenet nem változtatható meg, míg a felhasználó be van lépve"
 

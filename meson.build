@@ -1,7 +1,7 @@
 project(
     'io.elementary.greeter',
     'vala', 'c',
-    version: '6.0.1',
+    version: '6.1.0',
     meson_version: '>= 0.49.0'
 )
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 20:53+0000\n"
+"POT-Creation-Date: 2022-05-18 04:12+0000\n"
 "PO-Revision-Date: 2021-08-28 15:19+0000\n"
 "Last-Translator: roxfr <roxfr@outlook.fr>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -20,15 +20,15 @@ msgstr ""
 "X-Generator: Weblate 4.4.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:419
+#: compositor/WindowManager.vala:427
 msgid "Does the display look OK?"
 msgstr "L'affichage semble-t-il correct ?"
 
-#: compositor/WindowManager.vala:422
+#: compositor/WindowManager.vala:430
 msgid "Keep This Configuration"
 msgstr "Conserver cette configuration"
 
-#: compositor/WindowManager.vala:423
+#: compositor/WindowManager.vala:431
 msgid "Restore Previous Configuration"
 msgstr "Restaurer la configuration précédente"
 
@@ -72,15 +72,15 @@ msgstr "Nom d'utilisateur"
 msgid "Try username"
 msgstr "Essayer le nom d'utilisateur"
 
-#: src/Cards/UserCard.vala:111 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:112 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Connexion"
 
-#: src/Cards/UserCard.vala:123
+#: src/Cards/UserCard.vala:124
 msgid "Account disabled"
 msgstr "Compte désactivé"
 
-#: src/Cards/UserCard.vala:228
+#: src/Cards/UserCard.vala:229
 msgid "Session cannot be changed while user is logged in"
 msgstr ""
 "La session ne peut pas être modifiée tant que l'utilisateur est connecté"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 20:53+0000\n"
-"PO-Revision-Date: 2021-09-22 22:27+0000\n"
+"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"PO-Revision-Date: 2022-05-18 14:07+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/uk/>\n"
@@ -21,108 +21,125 @@ msgstr ""
 "X-Generator: Weblate 4.4.2\n"
 
 #: data/greeter.appdata.xml.in:7
-msgid "Greeter"
-msgstr "Екран вітання"
+msgid "Login &amp; Lock Screen"
+msgstr "Вхід та екран блокування"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
 msgstr "Розблокуйте або увійдіть до свого пристрою"
 
 #: data/greeter.appdata.xml.in:23
-msgid "Improvements:"
-msgstr "Удосконалення:"
+msgid "New Features:"
+msgstr "Нові функції:"
 
 #: data/greeter.appdata.xml.in:25
-msgid "Hide clock during initial setup"
-msgstr "Ховання годинника під час установлення"
+msgid "Provide panel background color interface"
+msgstr "Додано панель кольору тла інтерфейсу"
 
-#: data/greeter.appdata.xml.in:26
-msgid "Use selected accent color for logged in checkmark"
-msgstr "Прапорці забарвлюються в обраний основний колір"
-
-#: data/greeter.appdata.xml.in:28
+#: data/greeter.appdata.xml.in:27 data/greeter.appdata.xml.in:39
+#: data/greeter.appdata.xml.in:52
 msgid "Minor updates:"
 msgstr "Незначні оновлення:"
 
-#: data/greeter.appdata.xml.in:30 data/greeter.appdata.xml.in:41
-#: data/greeter.appdata.xml.in:48 data/greeter.appdata.xml.in:56
-#: data/greeter.appdata.xml.in:64 data/greeter.appdata.xml.in:78
+#: data/greeter.appdata.xml.in:29 data/greeter.appdata.xml.in:41
+#: data/greeter.appdata.xml.in:54 data/greeter.appdata.xml.in:65
+#: data/greeter.appdata.xml.in:72 data/greeter.appdata.xml.in:80
+#: data/greeter.appdata.xml.in:88 data/greeter.appdata.xml.in:102
 msgid "Updated translations"
 msgstr "Оновлено переклади"
 
+#: data/greeter.appdata.xml.in:35 data/greeter.appdata.xml.in:47
+msgid "Improvements:"
+msgstr "Удосконалення:"
+
 #: data/greeter.appdata.xml.in:37
+msgid "Fix a random issue where Greeter does not load correctly on boot"
+msgstr "Виправлено проблему, коли екран привітання неправильно завантажується"
+
+#: data/greeter.appdata.xml.in:49
+msgid "Hide clock during initial setup"
+msgstr "Ховання годинника під час установлення"
+
+#: data/greeter.appdata.xml.in:50
+msgid "Use selected accent color for logged in checkmark"
+msgstr "Прапорці забарвлюються в обраний основний колір"
+
+#: data/greeter.appdata.xml.in:61
 msgid "Add multitouch finger tracking"
 msgstr "Додано жести пальцями"
 
-#: data/greeter.appdata.xml.in:38
+#: data/greeter.appdata.xml.in:62
 msgid "Add keyboard layout support"
 msgstr "Додано підтримку розкладки клавіатури"
 
-#: data/greeter.appdata.xml.in:39
+#: data/greeter.appdata.xml.in:63
 msgid "New colorful avatar fallbacks"
 msgstr "Нові барвисті аватари"
 
-#: data/greeter.appdata.xml.in:40
+#: data/greeter.appdata.xml.in:64
 msgid "Fix clock when resuming from sleep"
 msgstr "Виправлено роботу годинника після пробудження пристрою"
 
-#: data/greeter.appdata.xml.in:55
+#: data/greeter.appdata.xml.in:79
 msgid "Fix an issue with media keys"
 msgstr "Виправлено проблему з мультимедійними клавішами"
 
-#: data/greeter.appdata.xml.in:63
+#: data/greeter.appdata.xml.in:87
 msgid "Ensure that manual login is available when users are hidden"
 msgstr ""
 "Переконайтесь, що власноручний вхід доступний, коли користувачів приховано"
 
-#: data/greeter.appdata.xml.in:71
+#: data/greeter.appdata.xml.in:95
 msgid "Save last user on attempted login"
 msgstr "Зберігається останній користувач за спроби входу"
 
-#: data/greeter.appdata.xml.in:72
+#: data/greeter.appdata.xml.in:96
 msgid "Handle all background aspect ratios"
 msgstr "Обробляйте всіх пропорції тла"
 
-#: data/greeter.appdata.xml.in:73
+#: data/greeter.appdata.xml.in:97
 msgid "Give non-focused user cards smaller usernames"
 msgstr "Несфокусовані картки користувача отримали зменшені імена користувачів"
 
-#: data/greeter.appdata.xml.in:74
+#: data/greeter.appdata.xml.in:98
 msgid "Better respect NumLock settings"
 msgstr "Поліпшено підтримку налаштувань NumLock"
 
-#: data/greeter.appdata.xml.in:75
+#: data/greeter.appdata.xml.in:99
 msgid "Enable sounds in greeter"
 msgstr "Увімкнено звуки для екрана вітання"
 
-#: data/greeter.appdata.xml.in:76
+#: data/greeter.appdata.xml.in:100
 msgid "Select password text on error instead of immediately clearing it"
 msgstr "Вибір тексту пароля за помилки замість негайного його очищення"
 
-#: data/greeter.appdata.xml.in:77
+#: data/greeter.appdata.xml.in:101
 msgid "Code cleanup"
 msgstr "Очищено код"
 
-#: data/greeter.appdata.xml.in:84
+#: data/greeter.appdata.xml.in:108
 msgid "Extensive overhaul"
 msgstr "Значна переробка"
 
-#: data/greeter.appdata.xml.in:86
+#: data/greeter.appdata.xml.in:110
 msgid "New card-based appearance"
 msgstr "Новий, заснований на картках, зовнішній вигляд"
 
-#: data/greeter.appdata.xml.in:87
+#: data/greeter.appdata.xml.in:111
 msgid "Improved HiDPI support"
 msgstr "Поліпшено підтримку HiDPI"
 
-#: data/greeter.appdata.xml.in:88
+#: data/greeter.appdata.xml.in:112
 msgid "AccountsService functionality"
 msgstr "Функціональність AccountsService"
 
-#: data/greeter.appdata.xml.in:89
+#: data/greeter.appdata.xml.in:113
 msgid "Various bug fixes"
 msgstr "Різні виправлення"
 
-#: data/greeter.appdata.xml.in:125
+#: data/greeter.appdata.xml.in:149
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
+
+#~ msgid "Greeter"
+#~ msgstr "Екран вітання"
