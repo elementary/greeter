@@ -551,7 +551,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         binding = user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE);
         next_delta = user_cards.index (user_card);
 
-        carousel.scroll_to (user_card);
+        carousel.scroll_to (user_card, true);
 
         user_card.notify["reveal-ratio"].connect (notify_cb);
         user_card.show_input = true;
@@ -618,14 +618,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private void go_previous (GLib.SimpleAction action, GLib.Variant? parameter) {
         unowned Greeter.UserCard? next_card = (Greeter.UserCard) user_cards.peek_nth (index_delta - 1);
         if (next_card != null) {
-            carousel.scroll_to (next_card);
+            carousel.scroll_to (next_card, true);
         }
     }
 
     private void go_next (GLib.SimpleAction action, GLib.Variant? parameter) {
         unowned Greeter.UserCard? next_card = (Greeter.UserCard) user_cards.peek_nth (index_delta + 1);
         if (next_card != null) {
-            carousel.scroll_to (next_card);
+            carousel.scroll_to (next_card, true);
         }
     }
 }
