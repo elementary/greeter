@@ -53,13 +53,11 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     construct {
         // app_paintable = true;
         decorated = false;
-        // type_hint = Gdk.WindowTypeHint.DESKTOP;
         get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        remove_css_class ("background");
 
         settings = new Greeter.Settings ();
         create_session_selection_action ();
-
-        // set_visual (get_screen ().get_rgba_visual ());
 
         var guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
 
@@ -193,7 +191,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.bind_property ("hide-users-hint", manual_login_button, "active", GLib.BindingFlags.SYNC_CREATE);
 
         notify["scale-factor"].connect (() => {
-            maximize_window ();
+            maximize ();
         });
 
         lightdm_user_list = LightDM.UserList.get_instance ();
@@ -242,13 +240,11 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         //     return false;
         // });
 
-        // carousel.page_changed.connect ((index) => {
-        //     var children = carousel.get_children ();
-
-        //     if (children.nth_data (index) is Greeter.UserCard) {
-        //         switch_to_card ((Greeter.UserCard) children.nth_data (index));
-        //     }
-        // });
+        carousel.page_changed.connect ((index) => {
+            if (carousel.get_nth_page (index) is Greeter.UserCard) {
+                switch_to_card ((Greeter.UserCard) carousel.get_nth_page (index));
+            }
+        });
 
         // // regrab focus when dpi changed
         // get_screen ().monitors_changed.connect (() => {
@@ -270,7 +266,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             });
         });
 
-        maximize_window ();
+        maximize ();
 
         if (settings.activate_numlock) {
             try {
@@ -283,31 +279,12 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private void maximize_and_focus () {
         present ();
-        maximize_window ();
+        maximize ();
         get_style_context ().add_class ("initialized");
 
         if (current_card != null) {
             current_card.grab_focus ();
         }
-    }
-
-    private void maximize_window () {
-        var display = Gdk.Display.get_default ();
-        unowned Gdk.Seat seat = display.get_default_seat ();
-        unowned Gdk.Device? pointer = seat.get_pointer ();
-
-        // Gdk.Monitor? monitor;
-        // if (pointer != null) {
-        //     int x, y;
-        //     pointer.get_position (null, out x, out y);
-        //     monitor = display.get_monitor_at_point (x, y);
-        // } else {
-        //     monitor = display.get_primary_monitor ();
-        // }
-
-        // var rect = monitor.get_geometry ();
-        // resize (rect.width, rect.height);
-        // move (rect.x, rect.y);
     }
 
     private void create_session_selection_action () {
@@ -327,9 +304,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         });
 
-        var action_group = new GLib.SimpleActionGroup ();
-        action_group.add_action (select_session_action);
-        insert_action_group ("session", action_group);
+        add_action (select_session_action);
     }
 
     private void show_message (string text, LightDM.MessageType type) {
@@ -388,35 +363,34 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 settings.sleep_inactive_battery_type = user_card.sleep_inactive_battery_type;
             }
 
-            // var action_group = get_action_group ("session");
-            // try {
-            //     unowned var session = action_group.get_action_state ("select").get_string ();
+            try {
+                unowned var session = get_action_state ("select").get_string ();
 
-            //     // If the greeter is running on the install medium, check if the Installer has signalled
-            //     // that it wants the greeter to launch the live (demo) session by means of touching a file
-            //     if (installer_mode) {
-            //         var demo_mode_file = File.new_for_path ("/var/lib/lightdm/demo-mode");
-            //         if (demo_mode_file.query_exists ()) {
-            //             demo_mode_file.@delete ();
-            //             session = "pantheon";
-            //         } else {
-            //             session = "installer";
-            //         }
-            //     }
+                // If the greeter is running on the install medium, check if the Installer has signalled
+                // that it wants the greeter to launch the live (demo) session by means of touching a file
+                if (installer_mode) {
+                    var demo_mode_file = File.new_for_path ("/var/lib/lightdm/demo-mode");
+                    if (demo_mode_file.query_exists ()) {
+                        demo_mode_file.@delete ();
+                        session = "pantheon";
+                    } else {
+                        session = "installer";
+                    }
+                }
 
-            //     lightdm_greeter.start_session_sync (session);
-            //     return;
-            // } catch (Error e) {
-            //     var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
-            //         _("Unable to Log In"),
-            //         _("Starting the session has failed."),
-            //         "dialog-error",
-            //         Gtk.ButtonsType.CLOSE
-            //     );
-            //     error_dialog.show_error_details (e.message);
-            //     error_dialog.present ();
-            //     error_dialog.destroy ();
-            // }
+                lightdm_greeter.start_session_sync (session);
+                return;
+            } catch (Error e) {
+                var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
+                    _("Unable to Log In"),
+                    _("Starting the session has failed."),
+                    "dialog-error",
+                    Gtk.ButtonsType.CLOSE
+                );
+                error_dialog.show_error_details (e.message);
+                error_dialog.present ();
+                error_dialog.destroy ();
+            }
         }
 
         if (current_card is Greeter.UserCard) {
@@ -437,9 +411,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.notify_property ("show-manual-login-hint");
         lightdm_greeter.notify_property ("has-guest-account-hint");
 
-        // if (lightdm_greeter.default_session_hint != null) {
-        //     get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
-        // }
+        if (lightdm_greeter.default_session_hint != null) {
+            activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
+        }
 
         // Check if the installer is installed
         var installer_desktop = new DesktopAppInfo ("io.elementary.installer.desktop");
@@ -512,21 +486,13 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             switch_to_card (user_card);
         });
 
-        // user_card.go_left.connect (() => {
-        //     if (get_style_context ().direction == Gtk.TextDirection.RTL) {
-        //         activate_action ("next", null);
-        //     } else {
-        //         activate_action ("previous", null);
-        //     }
-        // });
+        user_card.go_left.connect (() => {
+            activate_action ("previous", null);
+        });
 
-        // user_card.go_right.connect (() => {
-        //     if (get_style_context ().direction == Gtk.TextDirection.RTL) {
-        //         activate_action ("previous", null);
-        //     } else {
-        //         activate_action ("next", null);
-        //     }
-        // });
+        user_card.go_right.connect (() => {
+            activate_action ("next", null);
+        });
 
         user_card.do_connect.connect (do_connect);
 
@@ -561,9 +527,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             ((Greeter.UserCard) user_cards.peek_nth (index_delta)).show_input = false;
         }
 
-        // if (user_card.lightdm_user.session != null) {
-        //     get_action_group ("session").activate_action ("select", new GLib.Variant.string (user_card.lightdm_user.session));
-        // }
+        if (user_card.lightdm_user.session != null) {
+            activate_action ("select", new GLib.Variant.string (user_card.lightdm_user.session));
+        }
 
         if (lightdm_greeter.in_authentication) {
             try {
@@ -616,14 +582,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void go_previous (GLib.SimpleAction action, GLib.Variant? parameter) {
-        unowned Greeter.UserCard? next_card = (Greeter.UserCard) user_cards.peek_nth (index_delta - 1);
+        unowned Greeter.UserCard? next_card = (Greeter.UserCard) carousel.get_nth_page (index_delta - 1);
         if (next_card != null) {
             carousel.scroll_to (next_card, true);
         }
     }
 
     private void go_next (GLib.SimpleAction action, GLib.Variant? parameter) {
-        unowned Greeter.UserCard? next_card = (Greeter.UserCard) user_cards.peek_nth (index_delta + 1);
+        unowned Greeter.UserCard? next_card = (Greeter.UserCard) carousel.get_nth_page (index_delta + 1);
         if (next_card != null) {
             carousel.scroll_to (next_card, true);
         }
