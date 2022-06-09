@@ -24,10 +24,8 @@ public class Greeter.SubprocessSupervisor : GLib.Object {
 
     private GLib.Subprocess subprocess;
     private string[] exec;
-    private GLib.SubprocessFlags flags;
     public SubprocessSupervisor (string[] exec) throws GLib.Error {
         this.exec = exec;
-        flags = GLib.SubprocessFlags.STDIN_INHERIT | GLib.SubprocessFlags.STDOUT_SILENCE | GLib.SubprocessFlags.STDERR_MERGE;
         ensure_run.begin ();
     }
 
@@ -38,7 +36,7 @@ public class Greeter.SubprocessSupervisor : GLib.Object {
 
     private async void ensure_run () {
         try {
-            subprocess = new GLib.Subprocess.newv (exec, flags);
+            subprocess = new GLib.Subprocess.newv (exec, GLib.SubprocessFlags.STDIN_INHERIT | GLib.SubprocessFlags.STDERR_MERGE);
             if (!yield subprocess.wait_check_async ()) {
                 ensure_run.begin ();
             }
