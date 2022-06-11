@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-18 04:12+0000\n"
-"PO-Revision-Date: 2022-05-19 15:08+0000\n"
+"PO-Revision-Date: 2022-06-11 23:34+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/pt/>\n"
@@ -29,16 +29,16 @@ msgstr "Desbloquear ou iniciar sessão no seu dispositivo"
 
 #: data/greeter.appdata.xml.in:23
 msgid "New Features:"
-msgstr ""
+msgstr "Novas funcionalidades:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Provide panel background color interface"
-msgstr ""
+msgstr "Fornece interface de cor de fundo do painel"
 
 #: data/greeter.appdata.xml.in:27 data/greeter.appdata.xml.in:39
 #: data/greeter.appdata.xml.in:52
 msgid "Minor updates:"
-msgstr ""
+msgstr "Pequenas atualizações:"
 
 #: data/greeter.appdata.xml.in:29 data/greeter.appdata.xml.in:41
 #: data/greeter.appdata.xml.in:54 data/greeter.appdata.xml.in:65
