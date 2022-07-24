@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-18 04:12+0000\n"
-"PO-Revision-Date: 2022-07-13 08:43+0000\n"
+"PO-Revision-Date: 2022-07-24 16:43+0000\n"
 "Last-Translator: кубик круглый <megarainbow29@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/ru/>\n"
@@ -34,7 +34,7 @@ msgstr "Новые возможности:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Provide panel background color interface"
-msgstr ""
+msgstr "Верхней панели теперь предоставляется информация о цвете заднего фона"
 
 #: data/greeter.appdata.xml.in:27 data/greeter.appdata.xml.in:39
 #: data/greeter.appdata.xml.in:52
@@ -55,6 +55,8 @@ msgstr "Улучшения:"
 #: data/greeter.appdata.xml.in:37
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr ""
+"Исправлена ошибка, при которой Greeter не загружался корректно при запуске "
+"системы"
 
 #: data/greeter.appdata.xml.in:49
 msgid "Hide clock during initial setup"
