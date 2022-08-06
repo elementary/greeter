@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-18 04:12+0000\n"
-"PO-Revision-Date: 2019-07-03 14:49+0000\n"
+"PO-Revision-Date: 2022-08-06 23:36+0000\n"
 "Last-Translator: Jung-Kyu Park <bagjunggyu@gmail.com>\n"
 "Language-Team: Korean <https://l10n.elementary.io/projects/desktop/greeter/"
 "ko/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.4.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:427
@@ -41,13 +41,12 @@ msgid "Manual Login…"
 msgstr "수동 로그인…"
 
 #: src/MainWindow.vala:409
-#, fuzzy
 msgid "Unable to Log In"
-msgstr "초기 설정을 실행할 수 없습니다"
+msgstr "로그인할 수 없습니다"
 
 #: src/MainWindow.vala:410
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "세션 시작 실패했습니다."
 
 #: src/MainWindow.vala:482
 msgid "Unable to Launch Initial Setup"
