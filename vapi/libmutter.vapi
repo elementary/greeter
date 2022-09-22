@@ -316,6 +316,9 @@ namespace Meta {
 		public void destroy ();
 		public bool filter_keybinding (Meta.KeyBinding binding);
 		public void flash_display (Meta.Display display);
+#if HAS_MUTTER42
+		public unowned Meta.Laters get_laters ();
+#endif
 		public void hide_tile_preview ();
 		public void hide_window (Meta.Window window, Meta.CompEffect effect);
 		public void manage ();
@@ -354,6 +357,10 @@ namespace Meta {
 		public unowned Meta.Display get_display ();
 		public bool is_replacing ();
 		public void notify_ready ();
+#if HAS_MUTTER42
+		public bool raise_rlimit_nofile () throws GLib.Error;
+		public bool restore_rlimit_nofile () throws GLib.Error;
+#endif
 		public bool run_main_loop () throws GLib.Error;
 		public void set_gnome_wm_keybindings (string wm_keybindings);
 		public void set_plugin_gtype (GLib.Type plugin_gtype);
@@ -376,7 +383,7 @@ namespace Meta {
 		protected CursorTracker ();
 		public void get_hot (out int x, out int y);
 #if HAS_MUTTER40
-		public void get_pointer (Graphene.Point coords, out Clutter.ModifierType mods);
+		public void get_pointer (out Graphene.Point coords, out Clutter.ModifierType mods);
 #else
 		public void get_pointer (out int x, out int y, out Clutter.ModifierType mods);
 #endif
@@ -511,6 +518,9 @@ namespace Meta {
 		public signal void window_entered_monitor (int object, Meta.Window p0);
 		public signal void window_left_monitor (int object, Meta.Window p0);
 		public signal void window_marked_urgent (Meta.Window object);
+#if HAS_MUTTER42
+		public signal void window_visibility_updated ([CCode (type = "gpointer")] GLib.List<weak Meta.Window> unplaced, [CCode (type = "gpointer")] GLib.List<weak Meta.Window> should_show, [CCode (type = "gpointer")] GLib.List<weak Meta.Window> should_hide);
+#endif
 		public signal void workareas_changed ();
 		public signal void x11_display_closing ();
 		public signal void x11_display_opened ();
@@ -562,6 +572,14 @@ namespace Meta {
 		[CCode (cheader_filename = "meta/keybindings.h", cname = "meta_keybindings_set_custom_handler")]
 		public static bool set_custom_handler (string name, owned Meta.KeyHandlerFunc? handler);
 	}
+#if HAS_MUTTER42
+	[CCode (cheader_filename = "meta/types.h", has_type_id = false)]
+	[Compact]
+	public class Laters {
+		public uint add (Meta.LaterType when, owned GLib.SourceFunc func);
+		public void remove (uint later_id);
+	}
+#endif
 	[CCode (cheader_filename = "meta/meta-launch-context.h", type_id = "meta_launch_context_get_type ()")]
 	public class LaunchContext : GLib.AppLaunchContext {
 		[CCode (has_construct_function = false)]
@@ -607,7 +625,9 @@ namespace Meta {
 	public abstract class Plugin : GLib.Object {
 		[CCode (has_construct_function = false)]
 		protected Plugin ();
+#if !HAS_MUTTER42
 		public bool begin_modal (Meta.ModalOptions options, uint32 timestamp);
+#endif
 		public void complete_display_change (bool ok);
 		[NoWrapper]
 		public virtual void confirm_display_change ();
@@ -618,7 +638,9 @@ namespace Meta {
 		[NoWrapper]
 		public virtual void destroy (Meta.WindowActor actor);
 		public void destroy_completed (Meta.WindowActor actor);
+#if !HAS_MUTTER42
 		public void end_modal (uint32 timestamp);
+#endif
 		public unowned Meta.Display get_display ();
 		public unowned Meta.PluginInfo? get_info ();
 		[NoWrapper]
@@ -767,19 +789,19 @@ namespace Meta {
 		public unowned GLib.SList<Meta.StartupSequence> get_sequences ();
 		[NoAccessorMethod]
 		public Meta.Display display { owned get; construct; }
-		public signal void changed ([CCode (type = "gpointer")] Meta.StartupSequence object);
+		public signal void changed (Meta.StartupSequence object);
 	}
 	[CCode (cheader_filename = "meta/meta-startup-notification.h", type_id = "meta_startup_sequence_get_type ()")]
 	public class StartupSequence : GLib.Object {
 		[CCode (has_construct_function = false)]
 		protected StartupSequence ();
-		public unowned string get_application_id ();
+		public unowned string? get_application_id ();
 		public bool get_completed ();
-		public unowned string get_icon_name ();
+		public unowned string? get_icon_name ();
 		public unowned string get_id ();
 		public unowned string get_name ();
 		public uint64 get_timestamp ();
-		public unowned string get_wmclass ();
+		public unowned string? get_wmclass ();
 		public int get_workspace ();
 		public string application_id { get; construct; }
 		public string icon_name { get; construct; }
@@ -840,7 +862,7 @@ namespace Meta {
 		public void foreach_transient (Meta.WindowForeachFunc func);
 		public Meta.Rectangle frame_rect_to_client_rect (Meta.Rectangle frame_rect);
 		public Meta.Rectangle get_buffer_rect ();
-		public unowned string get_client_machine ();
+		public unowned string? get_client_machine ();
 		public Meta.WindowClientType get_client_type ();
 		public unowned GLib.Object get_compositor_private ();
 		public unowned string get_description ();
@@ -849,32 +871,32 @@ namespace Meta {
 		public unowned Cairo.Region? get_frame_bounds ();
 		public Meta.Rectangle get_frame_rect ();
 		public Meta.FrameType get_frame_type ();
-		public unowned Meta.Group get_group ();
-		public unowned string get_gtk_app_menu_object_path ();
-		public unowned string get_gtk_application_id ();
-		public unowned string get_gtk_application_object_path ();
-		public unowned string get_gtk_menubar_object_path ();
-		public unowned string get_gtk_theme_variant ();
-		public unowned string get_gtk_unique_bus_name ();
-		public unowned string get_gtk_window_object_path ();
+		public unowned Meta.Group? get_group ();
+		public unowned string? get_gtk_app_menu_object_path ();
+		public unowned string? get_gtk_application_id ();
+		public unowned string? get_gtk_application_object_path ();
+		public unowned string? get_gtk_menubar_object_path ();
+		public unowned string? get_gtk_theme_variant ();
+		public unowned string? get_gtk_unique_bus_name ();
+		public unowned string? get_gtk_window_object_path ();
 		public bool get_icon_geometry (out Meta.Rectangle rect);
 		public uint64 get_id ();
 		public Meta.StackLayer get_layer ();
 		public Meta.MaximizeFlags get_maximized ();
 		public int get_monitor ();
-		public unowned string get_mutter_hints ();
+		public unowned string? get_mutter_hints ();
 		public int get_pid ();
 		public unowned string get_role ();
-		public unowned string get_sandboxed_app_id ();
+		public unowned string? get_sandboxed_app_id ();
 		public uint get_stable_sequence ();
-		public unowned string get_startup_id ();
+		public unowned string? get_startup_id ();
 		public unowned Meta.Window? get_tile_match ();
 		public unowned string get_title ();
-		public unowned Meta.Window get_transient_for ();
+		public unowned Meta.Window? get_transient_for ();
 		public uint32 get_user_time ();
 		public Meta.WindowType get_window_type ();
-		public unowned string get_wm_class ();
-		public unowned string get_wm_class_instance ();
+		public unowned string? get_wm_class ();
+		public unowned string? get_wm_class_instance ();
 		public Meta.Rectangle get_work_area_all_monitors ();
 		public Meta.Rectangle get_work_area_current_monitor ();
 		public Meta.Rectangle get_work_area_for_monitor (int which_monitor);
@@ -1394,7 +1416,9 @@ namespace Meta {
 	public enum GrabOp {
 		NONE,
 		WINDOW_BASE,
+#if !HAS_MUTTER42
 		COMPOSITOR,
+#endif
 		WAYLAND_POPUP,
 		FRAME_BUTTON,
 		MOVING,
@@ -1568,12 +1592,14 @@ namespace Meta {
 		VERTICAL,
 		BOTH
 	}
+#if !HAS_MUTTER42
 	[CCode (cheader_filename = "meta/meta-plugin.h", cprefix = "META_MODAL_", type_id = "meta_modal_options_get_type ()")]
 	[Flags]
 	public enum ModalOptions {
 		POINTER_ALREADY_GRABBED,
 		KEYBOARD_ALREADY_GRABBED
 	}
+#endif
 	[CCode (cheader_filename = "meta/meta-monitor-manager.h", cprefix = "META_MONITOR_SWITCH_CONFIG_", type_id = "meta_monitor_switch_config_type_get_type ()")]
 	public enum MonitorSwitchConfigType {
 		ALL_MIRROR,
