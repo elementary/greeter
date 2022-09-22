@@ -423,24 +423,28 @@ namespace GreeterCompositor {
         }
 
         public override void confirm_display_change () {
-            var pid = Util.show_dialog ("--question",
-                _("Does the display look OK?"),
-                "30",
-                null,
-                _("Keep This Configuration"),
-                _("Restore Previous Configuration"),
-                "preferences-desktop-display",
-                0,
-                null, null);
+            var dialog = new AccessDialog (
+                _("Keep new display settings?"),
+                _("Changes will automatically revert after 30 seconds."),
+                "preferences-desktop-display"
+            ) {
+                accept_label = _("Keep Settings"),
+                deny_label = _("Use Previous Settings")
+            };
 
-            ChildWatch.add (pid, (pid, status) => {
-                var ok = false;
-                try {
-                    ok = Process.check_exit_status (status);
-                } catch (Error e) {}
+            dialog.show.connect (() => {
+                Timeout.add_seconds (30, () => {
+                    dialog.close ();
 
-                complete_display_change (ok);
+                    return Source.REMOVE;
+                });
             });
+
+            dialog.response.connect ((res) => {
+                complete_display_change (res == 0);
+            });
+
+            dialog.show ();
         }
 
         public override unowned Meta.PluginInfo? plugin_info () {
