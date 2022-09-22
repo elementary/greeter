@@ -93,6 +93,7 @@ compositor_files = files(
   'DBus.vala',
   'DBusAccelerator.vala',
   'DBusBackgroundManager.vala',
+  'Dialogs.vala',
   'KeyboardManager.vala',
   'main.vala',
   'MediaFeedback.vala',
