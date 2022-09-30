@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"POT-Creation-Date: 2022-09-30 10:51+0000\n"
 "PO-Revision-Date: 2017-02-25 05:03+0000\n"
 "Last-Translator: Aoibhe Ní Ghnímh <Unknown>\n"
 "Language-Team: Irish <ga@li.org>\n"
@@ -19,15 +19,19 @@ msgstr ""
 "X-Generator: Launchpad (build 18330)\n"
 
 #: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
+msgid "Keep new display settings?"
 msgstr ""
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
+#: compositor/WindowManager.vala:428
+msgid "Changes will automatically revert after 30 seconds."
 msgstr ""
 
 #: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
+msgid "Keep Settings"
+msgstr ""
+
+#: compositor/WindowManager.vala:432
+msgid "Use Previous Settings"
 msgstr ""
 
 #: src/MainWindow.vala:63

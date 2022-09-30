@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"POT-Creation-Date: 2022-09-30 10:51+0000\n"
 "PO-Revision-Date: 2019-12-28 10:28+0000\n"
 "Last-Translator: Jaimie85 <alsemgeest@gmail.com>\n"
 "Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/greeter/nl/"
@@ -21,16 +21,20 @@ msgstr ""
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
-msgstr "Ziet het beeld er goed uit?"
+msgid "Keep new display settings?"
+msgstr ""
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
-msgstr "Behoud deze instellingen"
+#: compositor/WindowManager.vala:428
+msgid "Changes will automatically revert after 30 seconds."
+msgstr ""
 
 #: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
-msgstr "Vorige instellingen terugzetten"
+msgid "Keep Settings"
+msgstr ""
+
+#: compositor/WindowManager.vala:432
+msgid "Use Previous Settings"
+msgstr ""
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -100,6 +104,15 @@ msgstr "Num Lock staat aan"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Wachtwoord"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Ziet het beeld er goed uit?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Behoud deze instellingen"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Vorige instellingen terugzetten"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Swipe uw vinger"

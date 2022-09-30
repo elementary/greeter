@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"POT-Creation-Date: 2022-09-30 10:51+0000\n"
 "PO-Revision-Date: 2019-11-05 20:24+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -21,16 +21,20 @@ msgstr ""
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
-msgstr "Näyttääkö kaikki kelvolliselta?"
+msgid "Keep new display settings?"
+msgstr ""
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
-msgstr "Säilytä nämä asetukset"
+#: compositor/WindowManager.vala:428
+msgid "Changes will automatically revert after 30 seconds."
+msgstr ""
 
 #: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
-msgstr "Palauta aiemmat asetukset"
+msgid "Keep Settings"
+msgstr ""
+
+#: compositor/WindowManager.vala:432
+msgid "Use Previous Settings"
+msgstr ""
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -100,6 +104,15 @@ msgstr "Num Lock on päällä"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Salasana"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Näyttääkö kaikki kelvolliselta?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Säilytä nämä asetukset"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Palauta aiemmat asetukset"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Vedä sormesi"

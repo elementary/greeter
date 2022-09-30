@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"POT-Creation-Date: 2022-09-30 10:51+0000\n"
 "PO-Revision-Date: 2020-10-10 01:42+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/desktop/"
@@ -21,16 +21,20 @@ msgstr ""
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
-msgstr "O ecrã parece-lhe estar bem?"
+msgid "Keep new display settings?"
+msgstr ""
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
-msgstr "Manter esta configuração"
+#: compositor/WindowManager.vala:428
+msgid "Changes will automatically revert after 30 seconds."
+msgstr ""
 
 #: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
-msgstr "Restaurar as configuração anteriores"
+msgid "Keep Settings"
+msgstr ""
+
+#: compositor/WindowManager.vala:432
+msgid "Use Previous Settings"
+msgstr ""
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -101,6 +105,15 @@ msgstr "O Num Lock está ligado"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Palavra-passe"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "O ecrã parece-lhe estar bem?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Manter esta configuração"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Restaurar as configuração anteriores"
 
 #~ msgid "Set properties of own user"
 #~ msgstr "Definir propriedades do próprio utilizador"

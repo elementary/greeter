@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"POT-Creation-Date: 2022-09-30 10:51+0000\n"
 "PO-Revision-Date: 2019-11-03 00:24+0000\n"
 "Last-Translator: Ozgur Baskin <bebeto_baskin@yahoo.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -21,16 +21,20 @@ msgstr ""
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
-msgstr "Ekran iyi görünüyor mu?"
+msgid "Keep new display settings?"
+msgstr ""
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
-msgstr "Bu Yapılandırmayı Koru"
+#: compositor/WindowManager.vala:428
+msgid "Changes will automatically revert after 30 seconds."
+msgstr ""
 
 #: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
-msgstr "Önceki Yapılandırmayı Geri Yükle"
+msgid "Keep Settings"
+msgstr ""
+
+#: compositor/WindowManager.vala:432
+msgid "Use Previous Settings"
+msgstr ""
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -99,6 +103,15 @@ msgstr "Num Lock açık"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Parola"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Ekran iyi görünüyor mu?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Bu Yapılandırmayı Koru"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Önceki Yapılandırmayı Geri Yükle"
 
 #~ msgid "Set properties of own user"
 #~ msgstr "Kullanıcı özelliklerinizi ayarlayın"

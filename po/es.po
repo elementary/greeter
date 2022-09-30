@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"POT-Creation-Date: 2022-09-30 10:51+0000\n"
 "PO-Revision-Date: 2020-03-24 22:09+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -21,16 +21,20 @@ msgstr ""
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
-msgstr "¿Se ve bien la pantalla?"
+msgid "Keep new display settings?"
+msgstr ""
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
-msgstr "Mantener esta configuración"
+#: compositor/WindowManager.vala:428
+msgid "Changes will automatically revert after 30 seconds."
+msgstr ""
 
 #: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
-msgstr "Restablecer configuración anterior"
+msgid "Keep Settings"
+msgstr ""
+
+#: compositor/WindowManager.vala:432
+msgid "Use Previous Settings"
+msgstr ""
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -99,6 +103,15 @@ msgstr "Bloq Núm activada"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Contraseña"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "¿Se ve bien la pantalla?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Mantener esta configuración"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Restablecer configuración anterior"
 
 #~ msgid "Set properties of own user"
 #~ msgstr "Establecer propiedades de la propia cuenta"

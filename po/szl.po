@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"POT-Creation-Date: 2022-09-30 10:51+0000\n"
 "PO-Revision-Date: 2020-02-25 22:09+0000\n"
 "Last-Translator: gkkulik <g.kulik@o2.pl>\n"
 "Language-Team: Silesian <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -15,16 +15,20 @@ msgstr ""
 "X-Generator: Weblate 3.9.1\n"
 
 #: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
-msgstr "Wyglōndo ekran dobrze?"
+msgid "Keep new display settings?"
+msgstr ""
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
-msgstr "Trzim ta kōnfiguracyjo"
+#: compositor/WindowManager.vala:428
+msgid "Changes will automatically revert after 30 seconds."
+msgstr ""
 
 #: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
-msgstr "Prziwrōć wczaśniyjszo kōnfiguracyjo"
+msgid "Keep Settings"
+msgstr ""
+
+#: compositor/WindowManager.vala:432
+msgid "Use Previous Settings"
+msgstr ""
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -93,3 +97,12 @@ msgstr "Num Lock je aktywny"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Hasło"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Wyglōndo ekran dobrze?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Trzim ta kōnfiguracyjo"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Prziwrōć wczaśniyjszo kōnfiguracyjo"

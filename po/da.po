@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"POT-Creation-Date: 2022-09-30 10:51+0000\n"
 "PO-Revision-Date: 2020-05-25 19:11+0000\n"
 "Last-Translator: Rantyrant <diseasemonger@gmail.com>\n"
 "Language-Team: Danish <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -21,16 +21,20 @@ msgstr ""
 "X-Launchpad-Export-Date: 2017-03-19 06:26+0000\n"
 
 #: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
-msgstr "Ser skærmen OK ud?"
+msgid "Keep new display settings?"
+msgstr ""
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
-msgstr "Behold Denne Konfiguration"
+#: compositor/WindowManager.vala:428
+msgid "Changes will automatically revert after 30 seconds."
+msgstr ""
 
 #: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
-msgstr "Gendan Forrige Konfiguration"
+msgid "Keep Settings"
+msgstr ""
+
+#: compositor/WindowManager.vala:432
+msgid "Use Previous Settings"
+msgstr ""
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -100,6 +104,15 @@ msgstr "Num Lock er aktiveret"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Adgangskode"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Ser skærmen OK ud?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Behold Denne Konfiguration"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Gendan Forrige Konfiguration"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Stryg med fingeren"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"POT-Creation-Date: 2022-09-30 10:51+0000\n"
 "PO-Revision-Date: 2019-12-15 23:07+0000\n"
 "Last-Translator: Daniel Foré <daniel@elementary.io>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/desktop/"
@@ -20,16 +20,20 @@ msgstr ""
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
-msgstr "Apakah tampilannya terlihat baik?"
+msgid "Keep new display settings?"
+msgstr ""
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
-msgstr "Simpan Pengaturan Ini"
+#: compositor/WindowManager.vala:428
+msgid "Changes will automatically revert after 30 seconds."
+msgstr ""
 
 #: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
-msgstr "Kembalikan Pengaturan Sebelumnya"
+msgid "Keep Settings"
+msgstr ""
+
+#: compositor/WindowManager.vala:432
+msgid "Use Previous Settings"
+msgstr ""
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -97,6 +101,15 @@ msgstr ""
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr ""
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Apakah tampilannya terlihat baik?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Simpan Pengaturan Ini"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Kembalikan Pengaturan Sebelumnya"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Gesekkan jari Anda"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"POT-Creation-Date: 2022-09-30 10:51+0000\n"
 "PO-Revision-Date: 2018-11-22 00:02+0000\n"
 "Last-Translator: Elvis Mujanović <elvis.mujanovic@gmail.com>\n"
 "Language-Team: Bosnian <https://weblate.elementary.io/projects/desktop/"
@@ -22,16 +22,20 @@ msgstr ""
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
-msgstr "Da li ekran izgleda dobro?"
+msgid "Keep new display settings?"
+msgstr ""
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
-msgstr "Zadrži ovu konfiguraciju"
+#: compositor/WindowManager.vala:428
+msgid "Changes will automatically revert after 30 seconds."
+msgstr ""
 
 #: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
-msgstr "Vrati na prethodnu konfiguraciju"
+msgid "Keep Settings"
+msgstr ""
+
+#: compositor/WindowManager.vala:432
+msgid "Use Previous Settings"
+msgstr ""
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -100,6 +104,15 @@ msgstr "Caps Lock uključen"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Lozinka"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Da li ekran izgleda dobro?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Zadrži ovu konfiguraciju"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Vrati na prethodnu konfiguraciju"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Skenirajte svoj prst"
