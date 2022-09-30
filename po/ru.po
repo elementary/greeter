@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-30 10:51+0000\n"
-"PO-Revision-Date: 2022-09-30 11:52+0000\n"
+"PO-Revision-Date: 2022-09-30 14:55+0000\n"
 "Last-Translator: lenemter <lenemter@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/desktop/greeter/"
 "ru/>\n"
@@ -62,8 +62,8 @@ msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
-"Начальная настройка создает вашего первого пользователя. Без него, вы не "
-"сможете войти и, возможно, придется переустановить ОС."
+"Начальная настройка создаёт вашего первого пользователя. Без него, вы не "
+"сможете войти и, возможно, вам придётся переустановить ОС."
 
 #: src/Cards/ManualCard.vala:35
 msgid "Manual Login"
@@ -83,7 +83,7 @@ msgstr "Войти"
 
 #: src/Cards/UserCard.vala:124
 msgid "Account disabled"
-msgstr "Учетная запись отключена"
+msgstr "Учётная запись отключена"
 
 #: src/Cards/UserCard.vala:229
 msgid "Session cannot be changed while user is logged in"
