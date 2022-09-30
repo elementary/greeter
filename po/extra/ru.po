@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-18 04:12+0000\n"
-"PO-Revision-Date: 2022-07-24 16:43+0000\n"
-"Last-Translator: кубик круглый <megarainbow29@gmail.com>\n"
+"PO-Revision-Date: 2022-09-30 10:48+0000\n"
+"Last-Translator: lenemter <lenemter@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/ru/>\n"
 "Language: ru\n"
@@ -96,7 +96,7 @@ msgstr "Сохраняйте последнего пользователя пр�
 
 #: data/greeter.appdata.xml.in:96
 msgid "Handle all background aspect ratios"
-msgstr "Обрабатывайте все соотношения сторон фона"
+msgstr "Поддержка всех соотношения сторон фона"
 
 #: data/greeter.appdata.xml.in:97
 msgid "Give non-focused user cards smaller usernames"
