@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 20:53+0000\n"
+"POT-Creation-Date: 2022-09-30 10:51+0000\n"
 "PO-Revision-Date: 2017-02-25 05:03+0000\n"
 "Last-Translator: Aoibhe Ní Ghnímh <Unknown>\n"
 "Language-Team: Irish <ga@li.org>\n"
@@ -18,16 +18,20 @@ msgstr ""
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 "X-Generator: Launchpad (build 18330)\n"
 
-#: compositor/WindowManager.vala:419
-msgid "Does the display look OK?"
+#: compositor/WindowManager.vala:427
+msgid "Keep new display settings?"
 msgstr ""
 
-#: compositor/WindowManager.vala:422
-msgid "Keep This Configuration"
+#: compositor/WindowManager.vala:428
+msgid "Changes will automatically revert after 30 seconds."
 msgstr ""
 
-#: compositor/WindowManager.vala:423
-msgid "Restore Previous Configuration"
+#: compositor/WindowManager.vala:431
+msgid "Keep Settings"
+msgstr ""
+
+#: compositor/WindowManager.vala:432
+msgid "Use Previous Settings"
 msgstr ""
 
 #: src/MainWindow.vala:63
@@ -68,15 +72,15 @@ msgstr ""
 msgid "Try username"
 msgstr ""
 
-#: src/Cards/UserCard.vala:111 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:112 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Logáil Isteach"
 
-#: src/Cards/UserCard.vala:123
+#: src/Cards/UserCard.vala:124
 msgid "Account disabled"
 msgstr ""
 
-#: src/Cards/UserCard.vala:228
+#: src/Cards/UserCard.vala:229
 msgid "Session cannot be changed while user is logged in"
 msgstr ""
 

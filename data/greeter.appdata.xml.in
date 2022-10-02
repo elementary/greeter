@@ -4,7 +4,7 @@
   <id>io.elementary.greeter</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0+</project_license>
-  <name>Greeter</name>
+  <name>Login &amp; Lock Screen</name>
   <summary>Unlock or log in to your device</summary>
   <description>
     <p></p>
@@ -18,6 +18,30 @@
     <binary>io.elementary.greeter</binary>
   </provides>
   <releases>
+    <release version="6.1.0" date="2022-05-09" urgency="medium">
+      <description>
+        <p>New Features:</p>
+        <ul>
+          <li>Provide panel background color interface</li>
+        </ul>
+        <p>Minor updates:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
+    <release version="6.0.2" date="2022-02-28" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Fix a random issue where Greeter does not load correctly on boot</li>
+        </ul>
+        <p>Minor updates:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="6.0.1" date="2021-09-22" urgency="medium">
       <description>
         <p>Improvements:</p>

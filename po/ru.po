@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 20:53+0000\n"
-"PO-Revision-Date: 2021-03-09 16:26+0000\n"
-"Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
+"POT-Creation-Date: 2022-09-30 10:51+0000\n"
+"PO-Revision-Date: 2022-09-30 14:55+0000\n"
+"Last-Translator: lenemter <lenemter@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/desktop/greeter/"
 "ru/>\n"
 "Language: ru\n"
@@ -21,17 +21,21 @@ msgstr ""
 "X-Generator: Weblate 4.4.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:419
-msgid "Does the display look OK?"
-msgstr "Монитор настроен правильно?"
+#: compositor/WindowManager.vala:427
+msgid "Keep new display settings?"
+msgstr "Сохранить новые настройки экрана?"
 
-#: compositor/WindowManager.vala:422
-msgid "Keep This Configuration"
-msgstr "Сохранить текущие настройки"
+#: compositor/WindowManager.vala:428
+msgid "Changes will automatically revert after 30 seconds."
+msgstr "Изменения автоматически отменятся через 30 секунд."
 
-#: compositor/WindowManager.vala:423
-msgid "Restore Previous Configuration"
-msgstr "Восстановить предыдущие настройки"
+#: compositor/WindowManager.vala:431
+msgid "Keep Settings"
+msgstr "Сохранить настройки"
+
+#: compositor/WindowManager.vala:432
+msgid "Use Previous Settings"
+msgstr "Использовать предыдущие настройки"
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -58,8 +62,8 @@ msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
-"Начальная настройка создает вашего первого пользователя. Без него, вы не "
-"сможете войти и, возможно, придется переустановить ОС."
+"Начальная настройка создаёт вашего первого пользователя. Без него, вы не "
+"сможете войти и, возможно, вам придётся переустановить ОС."
 
 #: src/Cards/ManualCard.vala:35
 msgid "Manual Login"
@@ -73,15 +77,15 @@ msgstr "Имя пользователя"
 msgid "Try username"
 msgstr "Попробуйте имя пользователя"
 
-#: src/Cards/UserCard.vala:111 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:112 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Войти"
 
-#: src/Cards/UserCard.vala:123
+#: src/Cards/UserCard.vala:124
 msgid "Account disabled"
-msgstr "Учетная запись отключена"
+msgstr "Учётная запись отключена"
 
-#: src/Cards/UserCard.vala:228
+#: src/Cards/UserCard.vala:229
 msgid "Session cannot be changed while user is logged in"
 msgstr "Сессия не может быть изменена, пока пользователь в системе"
 
@@ -100,6 +104,15 @@ msgstr "Num Lock включён"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Пароль"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Монитор настроен правильно?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Сохранить текущие настройки"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Восстановить предыдущие настройки"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Проведите пальцем"

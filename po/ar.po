@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 20:53+0000\n"
+"POT-Creation-Date: 2022-09-30 10:51+0000\n"
 "PO-Revision-Date: 2021-09-04 17:03+0000\n"
 "Last-Translator: Muhammad Al-Jayyousi <m7md.j99@protonmail.com>\n"
 "Language-Team: Arabic <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -21,17 +21,21 @@ msgstr ""
 "X-Generator: Weblate 4.4.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:419
-msgid "Does the display look OK?"
-msgstr "هل تبدو شاشة العرض جيدة؟"
+#: compositor/WindowManager.vala:427
+msgid "Keep new display settings?"
+msgstr ""
 
-#: compositor/WindowManager.vala:422
-msgid "Keep This Configuration"
-msgstr "احتفظ بهذه الإعدادات"
+#: compositor/WindowManager.vala:428
+msgid "Changes will automatically revert after 30 seconds."
+msgstr ""
 
-#: compositor/WindowManager.vala:423
-msgid "Restore Previous Configuration"
-msgstr "استرجع الإعدادات السابقة"
+#: compositor/WindowManager.vala:431
+msgid "Keep Settings"
+msgstr ""
+
+#: compositor/WindowManager.vala:432
+msgid "Use Previous Settings"
+msgstr ""
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -73,15 +77,15 @@ msgstr "اسم المستخدم"
 msgid "Try username"
 msgstr "جرب اسم المستخدم"
 
-#: src/Cards/UserCard.vala:111 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:112 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "سجل الدخول"
 
-#: src/Cards/UserCard.vala:123
+#: src/Cards/UserCard.vala:124
 msgid "Account disabled"
 msgstr "الحساب معطل"
 
-#: src/Cards/UserCard.vala:228
+#: src/Cards/UserCard.vala:229
 msgid "Session cannot be changed while user is logged in"
 msgstr "لا يمكن تغيير الجلسة بينما المستخدم مسجل دخوله"
 
@@ -100,6 +104,15 @@ msgstr "مفتاح الأرقام مفعل"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "كلمة المرور"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "هل تبدو شاشة العرض جيدة؟"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "احتفظ بهذه الإعدادات"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "استرجع الإعدادات السابقة"
 
 #~ msgid "Guest session"
 #~ msgstr "الدخول كضيف"

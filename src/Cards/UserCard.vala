@@ -42,6 +42,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
 
+    private SelectionCheck logged_in;
     private unowned Gtk.StyleContext logged_in_context;
     private weak Gtk.StyleContext main_grid_style_context;
     private weak Gtk.StyleContext password_entry_context;
@@ -214,7 +215,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         };
         avatar_overlay.add (avatar);
 
-        var logged_in = new SelectionCheck () {
+        logged_in = new SelectionCheck () {
             halign = Gtk.Align.END,
             valign = Gtk.Align.END
         };

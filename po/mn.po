@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 20:53+0000\n"
+"POT-Creation-Date: 2022-09-30 10:51+0000\n"
 "PO-Revision-Date: 2019-12-15 23:07+0000\n"
 "Last-Translator: Daniel Foré <daniel@elementary.io>\n"
 "Language-Team: Mongolian <https://l10n.elementary.io/projects/desktop/"
@@ -20,17 +20,21 @@ msgstr ""
 "X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:419
-msgid "Does the display look OK?"
-msgstr "Дэлгэц таньд таалагдаж байна уу?"
+#: compositor/WindowManager.vala:427
+msgid "Keep new display settings?"
+msgstr ""
 
-#: compositor/WindowManager.vala:422
-msgid "Keep This Configuration"
-msgstr "Энэ тохиргоог хадгалах"
+#: compositor/WindowManager.vala:428
+msgid "Changes will automatically revert after 30 seconds."
+msgstr ""
 
-#: compositor/WindowManager.vala:423
-msgid "Restore Previous Configuration"
-msgstr "Өмнөх тохиргооруу буцах"
+#: compositor/WindowManager.vala:431
+msgid "Keep Settings"
+msgstr ""
+
+#: compositor/WindowManager.vala:432
+msgid "Use Previous Settings"
+msgstr ""
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -71,15 +75,15 @@ msgstr ""
 msgid "Try username"
 msgstr ""
 
-#: src/Cards/UserCard.vala:111 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:112 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Нэвтрэх"
 
-#: src/Cards/UserCard.vala:123
+#: src/Cards/UserCard.vala:124
 msgid "Account disabled"
 msgstr ""
 
-#: src/Cards/UserCard.vala:228
+#: src/Cards/UserCard.vala:229
 msgid "Session cannot be changed while user is logged in"
 msgstr ""
 
@@ -98,6 +102,15 @@ msgstr ""
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr ""
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Дэлгэц таньд таалагдаж байна уу?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Энэ тохиргоог хадгалах"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Өмнөх тохиргооруу буцах"
 
 #~ msgid "Guest session"
 #~ msgstr "Зочиноор нэвтрэх"

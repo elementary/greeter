@@ -19,7 +19,7 @@
  * Authors: Corentin Noël <corentin@elementary.io>
  */
 
-    public class Greeter.SystemBackground : GLib.Object {
+public class Greeter.SystemBackground : GLib.Object {
     const Clutter.Color DEFAULT_BACKGROUND_COLOR = { 0x2e, 0x34, 0x36, 0xff };
 
     static Meta.Background? system_background = null;

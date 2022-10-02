@@ -58,6 +58,28 @@ if mutter41_dep.found()
 	vala_flags = ['--define', 'HAS_MUTTER338', '--define', 'HAS_MUTTER40', '--define', 'HAS_MUTTER41']
 endif
 
+mutter42_dep = dependency('libmutter-10', version: ['>= 42', '< 43'], required: false)
+if mutter42_dep.found()
+	libmutter_dep = dependency('libmutter-10', version: '>= 42')
+	mutter_dep = [
+		libmutter_dep,
+		dependency('mutter-cogl-10'), dependency('mutter-cogl-pango-10'),
+		dependency('mutter-clutter-10')
+	]
+	vala_flags = ['--define', 'HAS_MUTTER338', '--define', 'HAS_MUTTER40', '--define', 'HAS_MUTTER41', '--define', 'HAS_MUTTER42']
+endif
+
+mutter43_dep = dependency('libmutter-11', version: ['>= 43', '< 44'], required: false)
+if mutter43_dep.found()
+	libmutter_dep = dependency('libmutter-11', version: '>= 43')
+	mutter_dep = [
+		libmutter_dep,
+		dependency('mutter-cogl-11'), dependency('mutter-cogl-pango-11'),
+		dependency('mutter-clutter-11')
+	]
+	vala_flags = ['--define', 'HAS_MUTTER338', '--define', 'HAS_MUTTER40', '--define', 'HAS_MUTTER41', '--define', 'HAS_MUTTER42', '--define', 'HAS_MUTTER43']
+endif
+
 if mutter_dep.length() == 0
 	error ('No supported mutter library found!')
 endif
@@ -66,8 +88,12 @@ mutter_typelib_dir = libmutter_dep.get_pkgconfig_variable('typelibdir')
 
 # Here is the real Compositor work
 compositor_files = files(
-  'DBusAccelerator.vala',
+  'BackgroundManager.vala',
+  'BackgroundUtils.vala',
   'DBus.vala',
+  'DBusAccelerator.vala',
+  'DBusBackgroundManager.vala',
+  'Dialogs.vala',
   'KeyboardManager.vala',
   'main.vala',
   'MediaFeedback.vala',
