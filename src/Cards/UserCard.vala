@@ -395,6 +395,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private void on_login () {
+        if (connecting) {
+            return;
+        }
+
         connecting = true;
         if (need_password) {
             do_connect (password_entry.text);
@@ -439,7 +443,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     public override void wrong_credentials () {
-        password_entry.grab_focus ();
 
         weak Gtk.StyleContext entry_style_context = password_entry.get_style_context ();
         entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
@@ -449,6 +452,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
         GLib.Timeout.add (ERROR_SHAKE_DURATION, () => {
             main_grid_style_context.remove_class ("shake");
             entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+
+            connecting = false;
+            password_entry.grab_focus ();
             return GLib.Source.REMOVE;
         });
     }

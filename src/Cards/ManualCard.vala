@@ -101,6 +101,10 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     }
 
     private void on_login () {
+        if (connecting) {
+            return;
+        }
+
         connecting = true;
         do_connect (password_entry.text);
         password_entry.sensitive = false;
@@ -125,7 +129,6 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     }
 
     public override void wrong_credentials () {
-        focus_username_entry ();
         password_entry.text = "";
 
         weak Gtk.StyleContext username_entry_style_context = username_entry.get_style_context ();
@@ -142,6 +145,8 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             username_entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
             password_entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
 
+            connecting = false;
+            focus_username_entry ();
             return GLib.Source.REMOVE;
         });
     }
