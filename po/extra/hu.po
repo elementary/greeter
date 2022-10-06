@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-30 10:51+0000\n"
-"PO-Revision-Date: 2022-05-19 12:02+0000\n"
+"PO-Revision-Date: 2022-10-07 12:57+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/hu/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:7
 msgid "Login &amp; Lock Screen"
-msgstr ""
+msgstr "Bejelentkezési és lezárási képernyő"
 
 #: data/greeter.appdata.xml.in:8
 msgid "Unlock or log in to your device"
@@ -33,7 +33,7 @@ msgstr "Új funkciók:"
 
 #: data/greeter.appdata.xml.in:25
 msgid "Provide panel background color interface"
-msgstr ""
+msgstr "Interfész a panel háttérszínéhez"
 
 #: data/greeter.appdata.xml.in:27 data/greeter.appdata.xml.in:39
 #: data/greeter.appdata.xml.in:52
