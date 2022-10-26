@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-30 10:51+0000\n"
-"PO-Revision-Date: 2022-05-18 14:07+0000\n"
+"PO-Revision-Date: 2022-10-27 18:57+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/uk/>\n"
@@ -46,7 +46,7 @@ msgstr "Незначні оновлення:"
 #: data/greeter.appdata.xml.in:72 data/greeter.appdata.xml.in:80
 #: data/greeter.appdata.xml.in:88 data/greeter.appdata.xml.in:102
 msgid "Updated translations"
-msgstr "Оновлено переклади"
+msgstr "Оновлені переклади"
 
 #: data/greeter.appdata.xml.in:35 data/greeter.appdata.xml.in:47
 msgid "Improvements:"
