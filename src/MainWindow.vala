@@ -18,10 +18,14 @@
  *
  * Authors: Corentin Noël <corentin@elementary.io>
  */
-
+ [DBus (name = "org.pantheon.greeter")]
+ public interface IGreeterCompositor : Object {
+     public abstract void set_wallpaper (string path) throws Error;
+ }
+ 
 public class Greeter.MainWindow : Gtk.ApplicationWindow {
     protected static Gtk.CssProvider css_provider;
-
+    private IGreeterCompositor? compositor;
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
     private int index_delta = 0;
@@ -54,6 +58,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         decorated = false;
         type_hint = Gdk.WindowTypeHint.DESKTOP;
         get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        watch_compositor ();
 
         settings = new Greeter.Settings ();
         create_session_selection_action ();
@@ -306,6 +311,42 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         var rect = monitor.get_geometry ();
         resize (rect.width, rect.height);
         move (rect.x, rect.y);
+    }
+
+    private void watch_compositor () {
+        Bus.watch_name (
+            BusType.SESSION, "org.pantheon.greeter", BusNameWatcherFlags.NONE,
+            (conn, name, name_owner) => {
+                conn.get_proxy.begin<IGreeterCompositor> ("org.pantheon.greeter", "/org/pantheon/greeter", 0, null, (obj, res) => {
+                    try {
+                        compositor = conn.get_proxy.end (res);
+                        if (current_card != null) {
+                            update_compositor_wallpaper (current_card);
+                        }
+                    } catch (Error e) {
+                        warning (e.message);
+                        compositor = null;
+                    }
+                });
+            },
+            () => {
+                compositor = null;
+            }
+        );
+    }
+
+    private void update_compositor_wallpaper (Greeter.BaseCard base_card) {
+        if (compositor != null) {
+            try {
+                if (base_card is Greeter.UserCard) {
+                    compositor.set_wallpaper (base_card.lightdm_user.background ?? "");
+                } else {
+                    compositor.set_wallpaper ("");
+                }
+            } catch (Error e) {
+                warning (e.message);
+            }
+        }
     }
 
     private void create_session_selection_action () {
@@ -576,6 +617,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         } catch (Error e) {
             critical (e.message);
         }
+        update_compositor_wallpaper (user_card);
     }
 
     private void notify_cb (GLib.Object obj, GLib.ParamSpec spec) {

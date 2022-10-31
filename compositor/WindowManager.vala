@@ -181,6 +181,9 @@ namespace GreeterCompositor {
             return list.to_array ();
         }
 
+        public void set_wallpaper (string path) {
+            system_background.set_wallpaper.begin (path);
+        }
         /**
          * {@inheritDoc}
          */
