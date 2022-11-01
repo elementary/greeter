@@ -24,7 +24,6 @@ public class Greeter.SystemBackground : Clutter.Canvas {
     private const string DEFAULT_BACKGROUND_PATH = "/usr/share/backgrounds/elementaryos-default";
     private const string DEFAULT_GRAY_BACKGROUND = "default";
     private Gdk.Pixbuf background;
-    private uint last_size_hash = 0;
     private uint remove_time = 0;
     private int fadebg = 0;
 
@@ -41,7 +40,17 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         background_actor.content = this;
     }
 
-    public async void set_wallpaper (string path) throws Error {
+    private async void load_blured (string path, out Gdk.Pixbuf? blured) throws Error {
+        var pixbuf = new Gdk.Pixbuf.from_file (path);
+        var surface = new Gala.Drawing.BufferSurface (pixbuf.width, pixbuf.height);
+        Gdk.cairo_set_source_pixbuf (surface.context, pixbuf, 0, 0);
+        surface.context.paint ();
+        surface.fast_blur (16);
+        surface.context.paint ();
+        blured = surface.load_to_pixbuf ();
+    }
+
+    public async void set_wallpaper (string path) {
         if (path == null) {
             path = DEFAULT_GRAY_BACKGROUND;
         } else if (path == "") {
@@ -49,28 +58,32 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         }
 
         if (path != DEFAULT_GRAY_BACKGROUND && GLib.FileUtils.test (path, GLib.FileTest.EXISTS)) {
-            var pixbuf = new Gdk.Pixbuf.from_file (path);
-            var surface = new Granite.Drawing.BufferSurface (pixbuf.width, pixbuf.height);
-            Gdk.cairo_set_source_pixbuf (surface.context, pixbuf, 0, 0);
-            surface.context.paint ();
-            surface.fast_blur (10);
-            surface.context.paint ();
-            background = surface.load_to_pixbuf ();
-        } else {
-            background = null;
+            load_blured.begin (path, (obj, res)=> {
+                try {
+                    load_blured.end (res, out background);
+                    if (remove_time > 0) {
+                        Source.remove (remove_time);
+                    }
+                    remove_time = fadebg = 0;
+                    remove_time = Idle.add (()=> {
+                        fadebg++;
+                        re_draw ();
+                        if (fadebg > 10) {
+                            remove_time = 0;
+                            return false;
+                        }
+                        return true;
+                    });
+                } catch (Error e) {
+                    warning (e.message);
+                }
+            });
         }
-        if (remove_time > 0) {
-            Source.remove (remove_time);
-        }
-        remove_time = 0;
-        fadebg = 0;
-        remove_time = Timeout.add (160, fade_timer);
     }
 
     private void re_draw () {
         int width, height;
         background_actor.meta_display.get_size (out width, out height);
-        last_size_hash = GLib.int_hash (width) + GLib.int_hash (height);
         set_size (width, height);
         invalidate ();
     }
@@ -85,28 +98,28 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         var width = (int) (cr_width * scale);
         var height = (int) (cr_height * scale);
         double alpha = 0.0;
-        if (fadebg < 2) {
+        if (fadebg < 1) {
             alpha = 1.0;
-        } else if (fadebg < 4) {
+        } else if (fadebg < 2) {
+            alpha = 0.9;
+        } else if (fadebg < 3) {
             alpha = 0.8;
-        } else if (fadebg < 6) {
+        } else if (fadebg < 4) {
+            alpha = 0.7;
+        } else if (fadebg < 5) {
             alpha = 0.6;
-        } else if (fadebg < 8) {
+        } else if (fadebg < 6) {
+            alpha = 0.5;
+        } else if (fadebg < 7) {
             alpha = 0.4;
-        } else if (fadebg < 10) {
+        } else if (fadebg < 8) {
+            alpha = 0.3;
+        } else if (fadebg < 9) {
             alpha = 0.2;
-        } else if (fadebg < 11) {
+        } else if (fadebg < 10) {
+            alpha = 0.1;
+        } else {
             alpha = 0.0;
-        }
-
-        if (background == null) {
-            //Gray Color
-            cr.set_source_rgba (0.19, 0.21, 0.22, 1);
-            cr.rectangle (0, 0, width, height);
-            cr.fill ();
-            cr.restore ();
-            cr.paint_with_alpha (alpha);
-            return true;
         }
 
         Gdk.Pixbuf scaled_pixbuf;
@@ -128,15 +141,5 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         cr.restore ();
         cr.paint_with_alpha (alpha);
         return false;
-    }
-
-    private bool fade_timer () {
-        fadebg++;
-        re_draw ();
-        if (fadebg > 10) {
-            remove_time = 0;
-            return false;
-        }
-        return true;
     }
 }
