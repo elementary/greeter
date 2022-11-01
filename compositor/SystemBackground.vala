@@ -23,6 +23,7 @@ public class Greeter.SystemBackground : Clutter.Canvas {
     const Clutter.Color DEFAULT_BACKGROUND_COLOR = { 0x2e, 0x34, 0x36, 0xff };
     private const string DEFAULT_BACKGROUND_PATH = "/usr/share/backgrounds/elementaryos-default";
     private const string DEFAULT_GRAY_BACKGROUND = "default";
+    private Gdk.Pixbuf new_pixbuf;
     private Gdk.Pixbuf background;
     private uint remove_time = 0;
     private int fadebg = 0;
@@ -65,7 +66,7 @@ public class Greeter.SystemBackground : Clutter.Canvas {
                         Source.remove (remove_time);
                     }
                     remove_time = fadebg = 0;
-                    remove_time = Idle.add (()=> {
+                    remove_time = Timeout.add (100, ()=> {
                         re_draw ();
                         if (fadebg > 10) {
                             remove_time = 0;
@@ -99,7 +100,19 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         var height = (int) (cr_height * scale);
         double alpha = 0.0;
         if (fadebg < 1) {
+            //Scale Pixbuf
+            Gdk.Pixbuf scaled_pixbuf;
             alpha = 0.95;
+            double full_ratio = (double)background.height / (double)background.width;
+            if ((width * full_ratio) < height) {
+                scaled_pixbuf = background.scale_simple ((int)(width * (1 / full_ratio)), height, Gdk.InterpType.BILINEAR);
+            } else {
+                scaled_pixbuf = background.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
+            }
+            int y = ((height - scaled_pixbuf.height) / 2).abs ();
+            int x = ((width - scaled_pixbuf.width) / 2).abs ();
+            new_pixbuf = new Gdk.Pixbuf (background.colorspace, background.has_alpha, background.bits_per_sample, width, height);
+            scaled_pixbuf.copy_area (x, y, width, height, new_pixbuf, 0, 0);
         } else if (fadebg < 2) {
             alpha = 0.9;
         } else if (fadebg < 3) {
@@ -121,20 +134,6 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         } else {
             alpha = 0.0;
         }
-
-        Gdk.Pixbuf scaled_pixbuf;
-        double full_ratio = (double)background.height / (double)background.width;
-        if ((width * full_ratio) < height) {
-            scaled_pixbuf = background.scale_simple ((int)(width * (1 / full_ratio)), height, Gdk.InterpType.BILINEAR);
-        } else {
-            scaled_pixbuf = background.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
-        }
-
-        int y = ((height - scaled_pixbuf.height) / 2).abs ();
-        int x = ((width - scaled_pixbuf.width) / 2).abs ();
-
-        Gdk.Pixbuf new_pixbuf = new Gdk.Pixbuf (background.colorspace, background.has_alpha, background.bits_per_sample, width, height);
-        scaled_pixbuf.copy_area (x, y, width, height, new_pixbuf, 0, 0);
 
         Gdk.cairo_set_source_pixbuf (cr, new_pixbuf, 0, 0);
         cr.paint ();
