@@ -66,12 +66,12 @@ public class Greeter.SystemBackground : Clutter.Canvas {
                     }
                     remove_time = fadebg = 0;
                     remove_time = Idle.add (()=> {
-                        fadebg++;
                         re_draw ();
                         if (fadebg > 10) {
                             remove_time = 0;
                             return false;
                         }
+                        fadebg++;
                         return true;
                     });
                 } catch (Error e) {
@@ -99,7 +99,7 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         var height = (int) (cr_height * scale);
         double alpha = 0.0;
         if (fadebg < 1) {
-            alpha = 1.0;
+            alpha = 0.95;
         } else if (fadebg < 2) {
             alpha = 0.9;
         } else if (fadebg < 3) {
