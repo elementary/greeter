@@ -339,7 +339,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         if (compositor != null) {
             try {
                 if (base_card is Greeter.UserCard) {
-                    compositor.set_wallpaper (base_card.lightdm_user.background ?? "");
+                    compositor.set_wallpaper (((Greeter.UserCard)base_card).lightdm_user.background ?? "");
                 } else {
                     compositor.set_wallpaper ("");
                 }
