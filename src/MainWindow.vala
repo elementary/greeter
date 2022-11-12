@@ -22,7 +22,7 @@
  public interface IGreeterCompositor : Object {
      public abstract void set_wallpaper (string path) throws Error;
  }
- 
+
 public class Greeter.MainWindow : Gtk.ApplicationWindow {
     protected static Gtk.CssProvider css_provider;
     private IGreeterCompositor? compositor;
