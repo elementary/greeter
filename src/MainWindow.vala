@@ -193,7 +193,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         lightdm_user_list = LightDM.UserList.get_instance ();
         lightdm_user_list.user_added.connect (() => {
-            load_users.begin ();
+            //load_users.begin ();
         });
 
         manual_card.do_connect_username.connect (do_connect_username);
@@ -518,6 +518,22 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
                     var permission = new Polkit.Permission.sync ("org.freedesktop.systemd1.manage-units", new Polkit.UnixProcess (Posix.getpid ()));
                     get_systemd_interface_instance ();
+
+                    Systemd.Bus bus;
+                    int result = Systemd.default_user (out bus);
+                    if (result < 0) {
+                        throw new FileError.ACCES ("default_system failed");
+                    }
+                    result = Systemd.set_allow_interactive_authorization (bus, 0);
+                    if (result < 0) {
+                        throw new FileError.ACCES ("set_allow_interactive_authorization failed");
+                    }
+
+                    result = bus.set_allow_interactive_authorization (0);
+                    if (result < 0) {
+                        throw new FileError.ACCES ("BUS-set_allow_interactive_authorization failed");
+                    }
+
                     Variant unit;
                     systemd_interface_instance.restart_unit ("lightdm.service", "replace" /*, out unit*/);
                 } catch (Error e) {
