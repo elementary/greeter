@@ -108,7 +108,7 @@ public class Greeter.SystemBackground : Clutter.Canvas {
                 var new_pixbuf = new Gdk.Pixbuf (background.colorspace, background.has_alpha, background.bits_per_sample, width, height);
                 scaled_pixbuf.copy_area (x, y, width, height, new_pixbuf, 0, 0);
                 pfblured = new_pixbuf;
-                alpha = 1.0;
+                alpha = 0.95;
                 break;
             case 2 :
                 alpha = 0.9;
