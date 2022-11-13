@@ -60,7 +60,7 @@ public class Greeter.SystemBackground : Clutter.Canvas {
                         Source.remove (remove_time);
                     }
                     remove_time = fadebg = 0;
-                    remove_time = Timeout.add (100, ()=> {
+                    remove_time = Timeout.add (50, ()=> {
                         re_draw ();
                         if (fadebg > 10) {
                             remove_time = 0;
@@ -90,14 +90,13 @@ public class Greeter.SystemBackground : Clutter.Canvas {
     public override bool draw (Cairo.Context cr, int cr_width, int cr_height) {
         Clutter.cairo_clear (cr);
         var scale = get_scale_factor ();
-        var width = (int) (cr_width * scale);
-        var height = (int) (cr_height * scale);
+        var width = (int) (cr_width * scale).abs ();
+        var height = (int) (cr_height * scale).abs ();
         double alpha = 0.0;
         switch (fadebg) {
             case 1 : 
                 //Scale Pixbuf
                 Gdk.Pixbuf scaled_pixbuf;
-                alpha = 0.95;
                 double full_ratio = (double)background.height / (double)background.width;
                 if ((width * full_ratio) < height) {
                     scaled_pixbuf = background.scale_simple ((int)(width * (1 / full_ratio)), height, Gdk.InterpType.BILINEAR);
@@ -108,12 +107,8 @@ public class Greeter.SystemBackground : Clutter.Canvas {
                 int x = ((width - scaled_pixbuf.width) / 2).abs ();
                 var new_pixbuf = new Gdk.Pixbuf (background.colorspace, background.has_alpha, background.bits_per_sample, width, height);
                 scaled_pixbuf.copy_area (x, y, width, height, new_pixbuf, 0, 0);
-                var surface = new Gala.Drawing.BufferSurface (new_pixbuf.width, new_pixbuf.height);
-                Gdk.cairo_set_source_pixbuf (surface.context, new_pixbuf, 0, 0);
-                surface.context.paint ();
-                surface.gaussian_blur (20);
-                surface.context.paint ();
-                pfblured = surface.load_to_pixbuf ();
+                pfblured = new_pixbuf;
+                alpha = 1.0;
                 break;
             case 2 :
                 alpha = 0.9;
@@ -141,6 +136,14 @@ public class Greeter.SystemBackground : Clutter.Canvas {
                 break;
             case 10 :
                 alpha = 0.1;
+                break;
+            case 11 :
+                var surface = new Gala.Drawing.BufferSurface (pfblured.width, pfblured.height);
+                Gdk.cairo_set_source_pixbuf (surface.context, pfblured, 0, 0);
+                surface.context.paint ();
+                surface.gaussian_blur (20);
+                surface.context.paint ();
+                pfblured = surface.load_to_pixbuf ();
                 break;
         }
         Gdk.cairo_set_source_pixbuf (cr, pfblured, 0, 0);
