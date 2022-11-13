@@ -145,6 +145,9 @@ public class Greeter.SystemBackground : Clutter.Canvas {
                 surface.context.paint ();
                 pfblured = surface.load_to_pixbuf ();
                 break;
+            default : 
+                alpha = 1.0;
+                break;
         }
         Gdk.cairo_set_source_pixbuf (cr, pfblured, 0, 0);
         cr.paint ();
