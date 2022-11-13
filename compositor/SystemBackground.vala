@@ -23,7 +23,7 @@ public class Greeter.SystemBackground : Clutter.Canvas {
     const Clutter.Color DEFAULT_BACKGROUND_COLOR = { 0x2e, 0x34, 0x36, 0xff };
     private const string DEFAULT_BACKGROUND_PATH = "/usr/share/backgrounds/elementaryos-default";
     private const string DEFAULT_GRAY_BACKGROUND = "default";
-    private Gdk.Pixbuf new_pixbuf;
+    private Gdk.Pixbuf pfblured;
     private Gdk.Pixbuf background;
     private uint remove_time = 0;
     private int fadebg = 0;
@@ -42,13 +42,7 @@ public class Greeter.SystemBackground : Clutter.Canvas {
     }
 
     private async void load_blured (string path, out Gdk.Pixbuf? blured) throws Error {
-        var pixbuf = new Gdk.Pixbuf.from_file (path);
-        var surface = new Gala.Drawing.BufferSurface (pixbuf.width, pixbuf.height);
-        Gdk.cairo_set_source_pixbuf (surface.context, pixbuf, 0, 0);
-        surface.context.paint ();
-        surface.fast_blur (16);
-        surface.context.paint ();
-        blured = surface.load_to_pixbuf ();
+        blured = new Gdk.Pixbuf.from_file (path);
     }
 
     public async void set_wallpaper (string path) {
@@ -99,43 +93,57 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         var width = (int) (cr_width * scale);
         var height = (int) (cr_height * scale);
         double alpha = 0.0;
-        if (fadebg < 1) {
-            //Scale Pixbuf
-            Gdk.Pixbuf scaled_pixbuf;
-            alpha = 0.95;
-            double full_ratio = (double)background.height / (double)background.width;
-            if ((width * full_ratio) < height) {
-                scaled_pixbuf = background.scale_simple ((int)(width * (1 / full_ratio)), height, Gdk.InterpType.BILINEAR);
-            } else {
-                scaled_pixbuf = background.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
-            }
-            int y = ((height - scaled_pixbuf.height) / 2).abs ();
-            int x = ((width - scaled_pixbuf.width) / 2).abs ();
-            new_pixbuf = new Gdk.Pixbuf (background.colorspace, background.has_alpha, background.bits_per_sample, width, height);
-            scaled_pixbuf.copy_area (x, y, width, height, new_pixbuf, 0, 0);
-        } else if (fadebg < 2) {
-            alpha = 0.9;
-        } else if (fadebg < 3) {
-            alpha = 0.8;
-        } else if (fadebg < 4) {
-            alpha = 0.7;
-        } else if (fadebg < 5) {
-            alpha = 0.6;
-        } else if (fadebg < 6) {
-            alpha = 0.5;
-        } else if (fadebg < 7) {
-            alpha = 0.4;
-        } else if (fadebg < 8) {
-            alpha = 0.3;
-        } else if (fadebg < 9) {
-            alpha = 0.2;
-        } else if (fadebg < 10) {
-            alpha = 0.1;
-        } else {
-            alpha = 0.0;
+        switch (fadebg) {
+            case 1 : 
+                //Scale Pixbuf
+                Gdk.Pixbuf scaled_pixbuf;
+                alpha = 0.95;
+                double full_ratio = (double)background.height / (double)background.width;
+                if ((width * full_ratio) < height) {
+                    scaled_pixbuf = background.scale_simple ((int)(width * (1 / full_ratio)), height, Gdk.InterpType.BILINEAR);
+                } else {
+                    scaled_pixbuf = background.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
+                }
+                int y = ((height - scaled_pixbuf.height) / 2).abs ();
+                int x = ((width - scaled_pixbuf.width) / 2).abs ();
+                var new_pixbuf = new Gdk.Pixbuf (background.colorspace, background.has_alpha, background.bits_per_sample, width, height);
+                scaled_pixbuf.copy_area (x, y, width, height, new_pixbuf, 0, 0);
+                var surface = new Gala.Drawing.BufferSurface (new_pixbuf.width, new_pixbuf.height);
+                Gdk.cairo_set_source_pixbuf (surface.context, new_pixbuf, 0, 0);
+                surface.context.paint ();
+                surface.gaussian_blur (20);
+                surface.context.paint ();
+                pfblured = surface.load_to_pixbuf ();
+                break;
+            case 2 :
+                alpha = 0.9;
+                break;
+            case 3 :
+                alpha = 0.8;
+                break;
+            case 4 :
+                alpha = 0.7;
+                break;
+            case 5 :
+                alpha = 0.6;
+                break;
+            case 6 :
+                alpha = 0.5;
+                break;
+            case 7 :
+                alpha = 0.4;
+                break;
+            case 8 :
+                alpha = 0.3;
+                break;
+            case 9 :
+                alpha = 0.2;
+                break;
+            case 10 :
+                alpha = 0.1;
+                break;
         }
-
-        Gdk.cairo_set_source_pixbuf (cr, new_pixbuf, 0, 0);
+        Gdk.cairo_set_source_pixbuf (cr, pfblured, 0, 0);
         cr.paint ();
         cr.restore ();
         cr.paint_with_alpha (alpha);
