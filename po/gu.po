@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-30 10:51+0000\n"
+"POT-Creation-Date: 2022-11-15 18:05+0000\n"
 "PO-Revision-Date: 2016-04-24 20:16+0000\n"
 "Last-Translator: ભાવિન દોશી <Unknown>\n"
 "Language-Team: Gujarati <gu@li.org>\n"
@@ -50,11 +50,11 @@ msgstr ""
 msgid "Starting the session has failed."
 msgstr ""
 
-#: src/MainWindow.vala:482
+#: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
 msgstr ""
 
-#: src/MainWindow.vala:487
+#: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
