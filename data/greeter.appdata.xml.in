@@ -18,6 +18,18 @@
     <binary>io.elementary.greeter</binary>
   </provides>
   <releases>
+    <release version="6.1.1" date="2022-11-14" urgency="medium">
+      <description>
+        <p>Minor updates:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/greeter/issues/551">Login input blocked after pressing enter</issue>
+      </issues>
+    </release>
+
     <release version="6.1.0" date="2022-05-09" urgency="medium">
       <description>
         <p>New Features:</p>
