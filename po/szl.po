@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-30 10:51+0000\n"
+"POT-Creation-Date: 2022-11-15 18:05+0000\n"
 "PO-Revision-Date: 2020-02-25 22:09+0000\n"
 "Last-Translator: gkkulik <g.kulik@o2.pl>\n"
 "Language-Team: Silesian <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -46,11 +46,11 @@ msgstr "Niy szło sie wlogować"
 msgid "Starting the session has failed."
 msgstr "Niy szło sztartnōńć sesyje."
 
-#: src/MainWindow.vala:482
+#: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
 msgstr "Niy szło sztartnōńć poczōntkowyj kōnfiguracyje"
 
-#: src/MainWindow.vala:487
+#: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
