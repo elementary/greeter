@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-30 10:51+0000\n"
+"POT-Creation-Date: 2022-11-15 18:05+0000\n"
 "PO-Revision-Date: 2020-08-23 18:13+0000\n"
 "Last-Translator: Nils K <slx@nilsk.net>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/desktop/"
@@ -52,11 +52,11 @@ msgstr "Kunne ikke logge inn"
 msgid "Starting the session has failed."
 msgstr "Kunne ikke starte økten."
 
-#: src/MainWindow.vala:482
+#: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
 msgstr "Kunne ikke igangsette førstegangsoppsett"
 
-#: src/MainWindow.vala:487
+#: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."

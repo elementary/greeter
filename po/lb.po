@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-30 10:51+0000\n"
+"POT-Creation-Date: 2022-11-15 18:05+0000\n"
 "PO-Revision-Date: 2019-12-15 23:07+0000\n"
 "Last-Translator: Daniel Foré <daniel@elementary.io>\n"
 "Language-Team: Luxembourgish <https://l10n.elementary.io/projects/desktop/"
@@ -47,11 +47,11 @@ msgstr ""
 msgid "Starting the session has failed."
 msgstr ""
 
-#: src/MainWindow.vala:482
+#: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
 msgstr ""
 
-#: src/MainWindow.vala:487
+#: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
