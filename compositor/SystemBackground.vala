@@ -25,8 +25,8 @@ public class Greeter.SystemBackground : Clutter.Canvas {
     private const string DEFAULT_GRAY_BACKGROUND = "default";
     private Gdk.Pixbuf pfblured;
     private Gdk.Pixbuf background;
-    private uint remove_time = 0;
-    private int fadebg = 0;
+    private double fadebg = 0.0;
+    private Clutter.Timeline timeline;
 
     public Meta.BackgroundActor background_actor { get; construct; }
 
@@ -39,6 +39,15 @@ public class Greeter.SystemBackground : Clutter.Canvas {
     construct {
         background_actor.background_color = DEFAULT_BACKGROUND_COLOR;
         background_actor.content = this;
+        timeline = new Clutter.Timeline.for_actor (background_actor, 2500);
+        timeline.new_frame.connect ((ms)=> {
+            fadebg = 1.0 - (((double) ms * 4.0) / 10000);
+            re_draw ();
+        });
+        timeline.started.connect (()=> {
+            fadebg = 1.0;
+            re_draw ();
+        });
     }
 
     private async void load_blured (string path, out Gdk.Pixbuf? blured) throws Error {
@@ -51,24 +60,12 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         } else if (path == "") {
             path = DEFAULT_BACKGROUND_PATH;
         }
-
+        timeline.stop ();
         if (path != DEFAULT_GRAY_BACKGROUND && GLib.FileUtils.test (path, GLib.FileTest.EXISTS)) {
             load_blured.begin (path, (obj, res)=> {
                 try {
                     load_blured.end (res, out background);
-                    if (remove_time > 0) {
-                        Source.remove (remove_time);
-                    }
-                    remove_time = fadebg = 0;
-                    remove_time = Timeout.add (50, ()=> {
-                        re_draw ();
-                        if (fadebg > 10) {
-                            remove_time = 0;
-                            return false;
-                        }
-                        fadebg++;
-                        return true;
-                    });
+                    timeline.start ();
                 } catch (Error e) {
                     warning (e.message);
                 }
@@ -92,67 +89,32 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         var scale = get_scale_factor ();
         var width = (int) (cr_width * scale).abs ();
         var height = (int) (cr_height * scale).abs ();
-        double alpha = 0.0;
-        switch (fadebg) {
-            case 1 : 
-                //Scale Pixbuf
-                Gdk.Pixbuf scaled_pixbuf;
-                double full_ratio = (double)background.height / (double)background.width;
-                if ((width * full_ratio) < height) {
-                    scaled_pixbuf = background.scale_simple ((int)(height * full_ratio), height, Gdk.InterpType.BILINEAR);
-                } else {
-                    scaled_pixbuf = background.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
-                }
-                int y = ((height - scaled_pixbuf.height) / 2).abs ();
-                int x = ((width - scaled_pixbuf.width) / 2).abs ();
-                var new_pixbuf = new Gdk.Pixbuf (background.colorspace, background.has_alpha, background.bits_per_sample, width, height);
-                scaled_pixbuf.copy_area (x, y, width, height, new_pixbuf, 0, 0);
-                pfblured = new_pixbuf;
-                alpha = 0.95;
-                break;
-            case 2 :
-                alpha = 0.9;
-                break;
-            case 3 :
-                alpha = 0.8;
-                break;
-            case 4 :
-                alpha = 0.7;
-                break;
-            case 5 :
-                alpha = 0.6;
-                break;
-            case 6 :
-                alpha = 0.5;
-                break;
-            case 7 :
-                alpha = 0.4;
-                break;
-            case 8 :
-                alpha = 0.3;
-                break;
-            case 9 :
-                alpha = 0.2;
-                break;
-            case 10 :
-                alpha = 0.1;
-                break;
-            case 11 :
-                var surface = new Gala.Drawing.BufferSurface (pfblured.width, pfblured.height);
-                Gdk.cairo_set_source_pixbuf (surface.context, pfblured, 0, 0);
-                surface.context.paint ();
-                surface.gaussian_blur (20);
-                surface.context.paint ();
-                pfblured = surface.load_to_pixbuf ();
-                break;
-            default : 
-                alpha = 1.0;
-                break;
+        if (fadebg == 1.0) {
+            //Scale Pixbuf
+            Gdk.Pixbuf scaled_pixbuf;
+            double full_ratio = (double)background.height / (double)background.width;
+            if ((width * full_ratio) < height) {
+                scaled_pixbuf = background.scale_simple ((int)(height * full_ratio), height, Gdk.InterpType.BILINEAR);
+            } else {
+                scaled_pixbuf = background.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
+            }
+            int y = ((height - scaled_pixbuf.height) / 2).abs ();
+            int x = ((width - scaled_pixbuf.width) / 2).abs ();
+            var new_pixbuf = new Gdk.Pixbuf (background.colorspace, background.has_alpha, background.bits_per_sample, width, height);
+            scaled_pixbuf.copy_area (x, y, width, height, new_pixbuf, 0, 0);
+            pfblured = new_pixbuf;
+        } else if (fadebg == 0.0) {
+            var surface = new Gala.Drawing.BufferSurface (pfblured.width, pfblured.height);
+            Gdk.cairo_set_source_pixbuf (surface.context, pfblured, 0, 0);
+            surface.context.paint ();
+            surface.gaussian_blur (20);
+            surface.context.paint ();
+            pfblured = surface.load_to_pixbuf ();
         }
         Gdk.cairo_set_source_pixbuf (cr, pfblured, 0, 0);
         cr.paint ();
         cr.restore ();
-        cr.paint_with_alpha (alpha);
+        cr.paint_with_alpha (fadebg);
         return false;
     }
 }
