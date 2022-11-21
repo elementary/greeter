@@ -23,9 +23,7 @@ public class Greeter.SystemBackground : Clutter.Canvas {
     const Clutter.Color DEFAULT_BACKGROUND_COLOR = { 0x2e, 0x34, 0x36, 0xff };
     private const string DEFAULT_BACKGROUND_PATH = "/usr/share/backgrounds/elementaryos-default";
     private const string DEFAULT_GRAY_BACKGROUND = "default";
-    private Gdk.Pixbuf pfblured;
     private Gdk.Pixbuf background;
-    private double fadebg = 0.0;
     private Clutter.Timeline timeline;
 
     public Meta.BackgroundActor background_actor { get; construct; }
@@ -39,13 +37,12 @@ public class Greeter.SystemBackground : Clutter.Canvas {
     construct {
         background_actor.background_color = DEFAULT_BACKGROUND_COLOR;
         background_actor.content = this;
-        timeline = new Clutter.Timeline.for_actor (background_actor, 2500);
+        timeline = new Clutter.Timeline.for_actor (background_actor, 1500);
         timeline.new_frame.connect ((ms)=> {
-            fadebg = 1.0 - (((double) ms * 4.0) / 10000);
-            re_draw ();
+            background_actor.opacity = (uint) ((ms * 1.7) / 10);
         });
         timeline.started.connect (()=> {
-            fadebg = 1.0;
+            background_actor.opacity = 255;
             re_draw ();
         });
     }
@@ -89,32 +86,25 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         var scale = get_scale_factor ();
         var width = (int) (cr_width * scale).abs ();
         var height = (int) (cr_height * scale).abs ();
-        if (fadebg == 1.0) {
-            //Scale Pixbuf
-            Gdk.Pixbuf scaled_pixbuf;
-            double full_ratio = (double)background.height / (double)background.width;
-            if ((width * full_ratio) < height) {
-                scaled_pixbuf = background.scale_simple ((int)(height * full_ratio), height, Gdk.InterpType.BILINEAR);
-            } else {
-                scaled_pixbuf = background.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
-            }
-            int y = ((height - scaled_pixbuf.height) / 2).abs ();
-            int x = ((width - scaled_pixbuf.width) / 2).abs ();
-            var new_pixbuf = new Gdk.Pixbuf (background.colorspace, background.has_alpha, background.bits_per_sample, width, height);
-            scaled_pixbuf.copy_area (x, y, width, height, new_pixbuf, 0, 0);
-            pfblured = new_pixbuf;
-        } else if (fadebg == 0.0) {
-            var surface = new Gala.Drawing.BufferSurface (pfblured.width, pfblured.height);
-            Gdk.cairo_set_source_pixbuf (surface.context, pfblured, 0, 0);
-            surface.context.paint ();
-            surface.gaussian_blur (20);
-            surface.context.paint ();
-            pfblured = surface.load_to_pixbuf ();
+        Gdk.Pixbuf scaled_pixbuf;
+        double full_ratio = (double)background.height / (double)background.width;
+        if ((width * full_ratio) < height) {
+            scaled_pixbuf = background.scale_simple ((int)(height * full_ratio), height, Gdk.InterpType.BILINEAR);
+        } else {
+            scaled_pixbuf = background.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
         }
-        Gdk.cairo_set_source_pixbuf (cr, pfblured, 0, 0);
+        int y = ((height - scaled_pixbuf.height) / 2).abs ();
+        int x = ((width - scaled_pixbuf.width) / 2).abs ();
+        var new_pixbuf = new Gdk.Pixbuf (background.colorspace, background.has_alpha, background.bits_per_sample, width, height);
+        scaled_pixbuf.copy_area (x, y, width, height, new_pixbuf, 0, 0);
+        var surface = new Gala.Drawing.BufferSurface (new_pixbuf.width, new_pixbuf.height);
+        Gdk.cairo_set_source_pixbuf (surface.context, new_pixbuf, 0, 0);
+        surface.context.paint ();
+        surface.gaussian_blur (15);
+        surface.context.paint ();
+        Gdk.cairo_set_source_pixbuf (cr, surface.load_to_pixbuf (), 0, 0);
         cr.paint ();
         cr.restore ();
-        cr.paint_with_alpha (fadebg);
         return false;
     }
 }
