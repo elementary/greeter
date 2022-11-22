@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-30 10:51+0000\n"
+"POT-Creation-Date: 2022-11-15 18:05+0000\n"
 "PO-Revision-Date: 2021-09-29 20:42+0000\n"
 "Last-Translator: Alvaro <alvaroaraoz_92@hotmail.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/desktop/greeter-"
@@ -27,118 +27,119 @@ msgstr ""
 msgid "Unlock or log in to your device"
 msgstr "Desbloquee o acceda a su dispositivo"
 
-#: data/greeter.appdata.xml.in:23
-msgid "New Features:"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:25
-msgid "Provide panel background color interface"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:27 data/greeter.appdata.xml.in:39
-#: data/greeter.appdata.xml.in:52
+#: data/greeter.appdata.xml.in:23 data/greeter.appdata.xml.in:39
+#: data/greeter.appdata.xml.in:51 data/greeter.appdata.xml.in:64
 msgid "Minor updates:"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:29 data/greeter.appdata.xml.in:41
-#: data/greeter.appdata.xml.in:54 data/greeter.appdata.xml.in:65
-#: data/greeter.appdata.xml.in:72 data/greeter.appdata.xml.in:80
-#: data/greeter.appdata.xml.in:88 data/greeter.appdata.xml.in:102
+#: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:41
+#: data/greeter.appdata.xml.in:53 data/greeter.appdata.xml.in:66
+#: data/greeter.appdata.xml.in:77 data/greeter.appdata.xml.in:84
+#: data/greeter.appdata.xml.in:92 data/greeter.appdata.xml.in:100
+#: data/greeter.appdata.xml.in:114
 msgid "Updated translations"
 msgstr "Traducciones actualizadas"
 
-#: data/greeter.appdata.xml.in:35 data/greeter.appdata.xml.in:47
+#: data/greeter.appdata.xml.in:35
+msgid "New Features:"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:37
+msgid "Provide panel background color interface"
+msgstr ""
+
+#: data/greeter.appdata.xml.in:47 data/greeter.appdata.xml.in:59
 msgid "Improvements:"
 msgstr "Mejoras:"
 
-#: data/greeter.appdata.xml.in:37
+#: data/greeter.appdata.xml.in:49
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:49
+#: data/greeter.appdata.xml.in:61
 msgid "Hide clock during initial setup"
 msgstr "Ocultar el reloj durante la configuración inicial"
 
-#: data/greeter.appdata.xml.in:50
+#: data/greeter.appdata.xml.in:62
 msgid "Use selected accent color for logged in checkmark"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:61
+#: data/greeter.appdata.xml.in:73
 msgid "Add multitouch finger tracking"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:62
+#: data/greeter.appdata.xml.in:74
 msgid "Add keyboard layout support"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:63
+#: data/greeter.appdata.xml.in:75
 msgid "New colorful avatar fallbacks"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:64
+#: data/greeter.appdata.xml.in:76
 msgid "Fix clock when resuming from sleep"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:79
+#: data/greeter.appdata.xml.in:91
 msgid "Fix an issue with media keys"
 msgstr "Solucionado un problema con las teclas multimedia"
 
-#: data/greeter.appdata.xml.in:87
+#: data/greeter.appdata.xml.in:99
 msgid "Ensure that manual login is available when users are hidden"
 msgstr ""
 "Se aseguró de que el acceso manual esté disponible cuando los usuarios están "
 "ocultos"
 
-#: data/greeter.appdata.xml.in:95
+#: data/greeter.appdata.xml.in:107
 msgid "Save last user on attempted login"
 msgstr "Se guarda la última cuenta al intentar acceder"
 
-#: data/greeter.appdata.xml.in:96
+#: data/greeter.appdata.xml.in:108
 msgid "Handle all background aspect ratios"
 msgstr "Manejar todas las relaciones de aspecto de fondo"
 
-#: data/greeter.appdata.xml.in:97
+#: data/greeter.appdata.xml.in:109
 msgid "Give non-focused user cards smaller usernames"
 msgstr ""
 "Dar a las tarjetas de usuario no enfocadas nombres de usuario más pequeños"
 
-#: data/greeter.appdata.xml.in:98
+#: data/greeter.appdata.xml.in:110
 msgid "Better respect NumLock settings"
 msgstr "Mejor respeto de los ajustes de Bloq Num"
 
-#: data/greeter.appdata.xml.in:99
+#: data/greeter.appdata.xml.in:111
 msgid "Enable sounds in greeter"
 msgstr "Se activaron los sonidos en el recibidor"
 
-#: data/greeter.appdata.xml.in:100
+#: data/greeter.appdata.xml.in:112
 msgid "Select password text on error instead of immediately clearing it"
 msgstr "En caso de error, la contraseña se selecciona en lugar de vaciarse"
 
-#: data/greeter.appdata.xml.in:101
+#: data/greeter.appdata.xml.in:113
 msgid "Code cleanup"
 msgstr "Limpieza de código"
 
-#: data/greeter.appdata.xml.in:108
+#: data/greeter.appdata.xml.in:120
 msgid "Extensive overhaul"
 msgstr "Amplia revisión"
 
-#: data/greeter.appdata.xml.in:110
+#: data/greeter.appdata.xml.in:122
 msgid "New card-based appearance"
 msgstr "Nueva apariencia basada en tarjetas"
 
-#: data/greeter.appdata.xml.in:111
+#: data/greeter.appdata.xml.in:123
 msgid "Improved HiDPI support"
 msgstr "Compatibilidad mejorada de HiDPI"
 
-#: data/greeter.appdata.xml.in:112
+#: data/greeter.appdata.xml.in:124
 msgid "AccountsService functionality"
 msgstr "Funcionalidad AccountsService"
 
-#: data/greeter.appdata.xml.in:113
+#: data/greeter.appdata.xml.in:125
 msgid "Various bug fixes"
 msgstr "Varias correcciones de errores"
 
-#: data/greeter.appdata.xml.in:149
+#: data/greeter.appdata.xml.in:161
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
