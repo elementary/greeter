@@ -7,8 +7,8 @@
   <vendor_url>https://elementary.io/</vendor_url>
 
   <action id="io.elementary.greeter.restart">
-    <description>Restart Greeter</description>
-    <message>Authentication is required to restart Greeter</message>
+    <description>Restart the Login & Lock screen</description>
+    <message>Permission is needed to restart the Login & Lock Screen</message>
     <icon_name>preferences-system</icon_name>
     <defaults>
       <allow_any>auth_admin</allow_any>
