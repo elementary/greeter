@@ -461,7 +461,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             installer_mode = true;
         }
 
-        if (lightdm_user_list.length > 1) {
+        if (lightdm_user_list.length > 0) {
             datetime_widget.reveal_child = true;
 
             lightdm_user_list.users.foreach ((user) => {
