@@ -34,7 +34,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private unowned LightDM.UserList lightdm_user_list;
 
     private bool installer_mode = false;
-    private bool initial_setup_mode = false;
 
     private const uint[] NAVIGATION_KEYS = {
         Gdk.Key.Up,
@@ -193,7 +192,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         lightdm_user_list = LightDM.UserList.get_instance ();
         lightdm_user_list.user_added.connect (() => {
-            //load_users.begin ();
+            load_users.begin ();
         });
 
         manual_card.do_connect_username.connect (do_connect_username);
@@ -425,7 +424,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         current_card.wrong_credentials ();
     }
 
-[DBus (name = "org.freedesktop.systemd1.Manager")]
+    [DBus (name = "org.freedesktop.systemd1.Manager")]
     interface SystemdInterface : Object {
          public abstract void restart_unit (string name, string mode) throws GLib.Error;
     }
@@ -446,8 +445,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private async void load_users () {
-        if (initial_setup_mode) return;
-
         try {
             yield lightdm_greeter.connect_to_daemon (null);
         } catch (Error e) {
@@ -495,47 +492,15 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         } else {
             datetime_widget.reveal_child = false;
 
-            initial_setup_mode = true;
-
             /* We're not certain that scaling factor will change, but try to wait for GSD in case it does */
             Timeout.add (500, () => {
                 try {
-                    //var initial_setup = AppInfo.create_from_commandline ("io.elementary.initial-setup", null, GLib.AppInfoCreateFlags.NONE);
-                    //initial_setup.launch (null, null);
                     GLib.Subprocess setup = new GLib.Subprocess.newv ({"io.elementary.initial-setup"}, GLib.SubprocessFlags.NONE);
                     setup.wait ();
 
-                    //GLib.Subprocess wing = new GLib.Subprocess.newv ({"killall", "io.elementary.wingpanel"}, GLib.SubprocessFlags.NONE);
-                    //wing.wait ();
-
-                    //GLib.Subprocess comp = new GLib.Subprocess.newv ({"killall", "io.elementary.greeter-compositor"}, GLib.SubprocessFlags.NONE);
-                    //comp.wait ();
-
-                    //GLib.Subprocess killdm = new GLib.Subprocess.newv ({"pkexec", "service", "lightdm", "restart"}, GLib.SubprocessFlags.NONE);
-                    //killdm.wait ();
-
-                    //Application.get_default ().quit ();
-
-                    var permission = new Polkit.Permission.sync ("org.freedesktop.systemd1.manage-units", new Polkit.UnixProcess (Posix.getpid ()));
                     get_systemd_interface_instance ();
 
-                    Systemd.Bus bus;
-                    int result = Systemd.default_user (out bus);
-                    if (result < 0) {
-                        throw new FileError.ACCES ("default_system failed");
-                    }
-                    result = Systemd.set_allow_interactive_authorization (bus, 0);
-                    if (result < 0) {
-                        throw new FileError.ACCES ("set_allow_interactive_authorization failed");
-                    }
-
-                    result = bus.set_allow_interactive_authorization (0);
-                    if (result < 0) {
-                        throw new FileError.ACCES ("BUS-set_allow_interactive_authorization failed");
-                    }
-
-                    Variant unit;
-                    systemd_interface_instance.restart_unit ("lightdm.service", "replace" /*, out unit*/);
+                    systemd_interface_instance.restart_unit ("lightdm.service", "replace");
                 } catch (Error e) {
                     string error_text = _("Unable to Launch Initial Setup");
                     critical ("%s: %s", error_text, e.message);

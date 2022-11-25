@@ -1,3 +1,4 @@
+/*
 [CCode (cheader_filename = "systemd/sd-bus.h")]
 namespace Systemd {
     [CCode (cname="sd_bus_set_allow_interactive_authorization")]
@@ -23,3 +24,4 @@ namespace Systemd {
 	}
 }
 
+*/
