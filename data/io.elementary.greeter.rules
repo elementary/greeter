@@ -1,0 +1,12 @@
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.systemd1.manage-units") {
+        if (action.lookup("unit") == "lightdm.service") {
+            var verb = action.lookup("verb");
+            if (verb == "replace") {
+                if (subject.user == "lightdm") {
+                    return polkit.Result.YES;
+                }
+            }
+        }
+    }
+});

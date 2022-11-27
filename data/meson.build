@@ -35,6 +35,11 @@ i18n.merge_file(
 )
 
 install_data(
+    'io.elementary.greeter.rules',
+    install_dir: join_paths(get_option('datadir'), 'polkit-1', 'rules.d')
+)
+
+install_data(
     meson.project_name() + '.conf',
     install_dir: join_paths(get_option('sysconfdir'), 'lightdm')
 )
