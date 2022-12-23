@@ -35,6 +35,11 @@ i18n.merge_file(
 )
 
 install_data(
+    'io.elementary.greeter.pkla',
+    install_dir: join_paths(get_option('sharedstatedir'), 'polkit-1', 'localauthority', '10-vendor.d')
+)
+
+install_data(
     meson.project_name() + '.conf',
     install_dir: join_paths(get_option('sysconfdir'), 'lightdm')
 )

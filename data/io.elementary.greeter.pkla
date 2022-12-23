@@ -1,0 +1,4 @@
+[Restart]
+Identity=unix-user:lightdm
+Action=io.elementary.greeter.restart
+ResultActive=yes
