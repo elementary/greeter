@@ -26,14 +26,6 @@ i18n.merge_file(
     install_dir: join_paths(get_option('datadir'), 'metainfo'),
 )
 
-i18n.merge_file(
-    input: 'io.elementary.greeter.policy.in',
-    output: 'io.elementary.greeter.policy',
-    po_dir: join_paths(meson.source_root (), 'po', 'extra'),
-    install_dir: join_paths(get_option('datadir'), 'polkit-1', 'actions'),
-    install: true
-)
-
 install_data(
     'io.elementary.greeter.pkla',
     install_dir: join_paths(get_option('sharedstatedir'), 'polkit-1', 'localauthority', '10-vendor.d')
