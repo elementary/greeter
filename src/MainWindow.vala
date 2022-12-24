@@ -495,8 +495,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     GLib.Subprocess setup = new GLib.Subprocess.newv ({"io.elementary.initial-setup"}, GLib.SubprocessFlags.NONE);
                     setup.wait ();
 
-                    var permission = new Polkit.Permission.sync ("org.freedesktop.systemd1.manage-units", new Polkit.UnixProcess (Posix.getpid ()));
-
                     get_systemd_interface_instance ();
 
                     systemd_interface_instance.restart_unit ("lightdm.service", "replace");
