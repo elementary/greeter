@@ -21,11 +21,6 @@ using Meta;
 namespace GreeterCompositor {
 
     public class WindowManager : Meta.Plugin {
-        const uint GL_VENDOR = 0x1F00;
-        const string LOGIND_DBUS_NAME = "org.freedesktop.login1";
-        const string LOGIND_DBUS_OBJECT_PATH = "/org/freedesktop/login1";
-
-        delegate unowned string? GlQueryFunc (uint id);
 
         /**
          * {@inheritDoc}
@@ -47,11 +42,6 @@ namespace GreeterCompositor {
          */
         public Clutter.Actor top_window_group { get; protected set; }
 
-        /**
-         * {@inheritDoc}
-         */
-        public Meta.BackgroundGroup background_group { get; protected set; }
-
         public Greeter.SystemBackground system_background { get; private set; }
 
         Meta.PluginInfo info;
@@ -61,8 +51,6 @@ namespace GreeterCompositor {
         //ActivatableComponent? window_overview = null;
 
         //ScreenSaver? screensaver;
-
-        Window? moving; //place for the window that is being moved over
 
         //Gee.LinkedList<ModalProxy> modal_stack = new Gee.LinkedList<ModalProxy> ();
 
@@ -181,37 +169,6 @@ namespace GreeterCompositor {
             return list.to_array ();
         }
 
-        /**
-         * {@inheritDoc}
-         */
-        public void move_window (Window? window, MotionDirection direction) {
-            if (window == null)
-                return;
-
-            unowned Meta.Display display = get_display ();
-            unowned Meta.WorkspaceManager manager = display.get_workspace_manager ();
-
-            var active = manager.get_active_workspace ();
-            var next = active.get_neighbor (direction);
-
-            //dont allow empty workspaces to be created by moving, if we have dynamic workspaces
-            if (Prefs.get_dynamic_workspaces () && Utils.get_n_windows (active) == 1 && next.index () == manager.n_workspaces - 1) {
-                Utils.bell (display);
-                return;
-            }
-
-            moving = window;
-
-            if (!window.is_on_all_workspaces ())
-                window.change_workspace (next);
-
-            next.activate_with_focus (window, display.get_current_time ());
-        }
-
-        public void get_current_cursor_position (out int x, out int y) {
-            Gdk.Display.get_default ().get_default_seat ().get_pointer ().get_position (null, out x, out y);
-        }
-
         public override void show_window_menu_for_rect (Meta.Window window, Meta.WindowMenuType menu, Meta.Rectangle rect) {
             show_window_menu (window, menu, rect.x, rect.y);
         }
@@ -277,6 +234,7 @@ namespace GreeterCompositor {
 
                 switch (which_change) {
                     case Meta.SizeChange.MAXIMIZE:
+                    case Meta.SizeChange.UNMAXIMIZE:
                         break;
                     case Meta.SizeChange.FULLSCREEN:
                     case Meta.SizeChange.UNFULLSCREEN:
@@ -351,76 +309,11 @@ namespace GreeterCompositor {
             end_animation (ref maximizing, actor);
         }
 
-        /*workspace switcher*/
-        List<Clutter.Actor>? windows;
-        List<Clutter.Actor>? parents;
-        List<Clutter.Actor>? tmp_actors;
-
         public override void switch_workspace (int from, int to, MotionDirection direction) {
             switch_workspace_completed ();
             return;
         }
 
-        void end_switch_workspace () {
-            if (windows == null || parents == null)
-                return;
-
-            unowned Meta.Display display = get_display ();
-            var active_workspace = display.get_workspace_manager ().get_active_workspace ();
-
-            for (var i = 0; i < windows.length (); i++) {
-                var actor = windows.nth_data (i);
-                actor.set_translation (0.0f, 0.0f, 0.0f);
-
-                if (actor is Meta.BackgroundGroup) {
-                    actor.x = 0;
-                    // thankfully mutter will take care of stacking it at the right place for us
-                    clutter_actor_reparent (actor, window_group);
-                    continue;
-                }
-
-                var window = actor as WindowActor;
-
-                if (window == null || !window.is_destroyed ())
-                    clutter_actor_reparent (actor, parents.nth_data (i));
-
-                if (window == null || window.is_destroyed ())
-                    continue;
-
-                kill_window_effects (window);
-
-                var meta_window = window.get_meta_window ();
-                if (meta_window.get_workspace () != active_workspace
-                    && !meta_window.is_on_all_workspaces ())
-                    window.hide ();
-
-                // some static windows may have been faded out
-                if (actor.opacity < 255U) {
-                    actor.save_easing_state ();
-                    actor.set_easing_duration (300);
-                    actor.opacity = 255U;
-                    actor.restore_easing_state ();
-                }
-            }
-
-            if (tmp_actors != null) {
-                foreach (var actor in tmp_actors) {
-                    actor.destroy ();
-                }
-
-                tmp_actors = null;
-            }
-
-            windows = null;
-            parents = null;
-            moving = null;
-
-            switch_workspace_completed ();
-        }
-
-        public override void kill_switch_workspace () {
-            end_switch_workspace ();
-        }
 
         public override void confirm_display_change () {
             var dialog = new AccessDialog (
@@ -449,16 +342,6 @@ namespace GreeterCompositor {
 
         public override unowned Meta.PluginInfo? plugin_info () {
             return info;
-        }
-
-        static void clutter_actor_reparent (Clutter.Actor actor, Clutter.Actor new_parent) {
-            if (actor == new_parent)
-                return;
-
-            actor.ref ();
-            actor.get_parent ().remove_child (actor);
-            new_parent.add_child (actor);
-            actor.unref ();
         }
     }
 
