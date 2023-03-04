@@ -1,11 +1,12 @@
 /*
- * Copyright 2021 elementary, Inc. (https://elementary.io)
+ * Copyright 2021-2023 elementary, Inc. (https://elementary.io)
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
  namespace GreeterCompositor {
     [DBus (name = "org.freedesktop.impl.portal.Access")]
     public interface AccessPortal : Object {
+        [DBus (timeout = 2147483647)] // timeout = int.MAX; value got from <limits.h>
         public abstract async void access_dialog (
             ObjectPath request_path,
             string app_id,
@@ -24,6 +25,8 @@
     }
 
     public class AccessDialog : Object {
+        public signal void response (uint response);
+
         public Meta.Window parent { owned get; construct set; }
 
         public string title { get; construct; }
@@ -31,8 +34,6 @@
         public string icon { get; construct; }
         public string accept_label { get; set; }
         public string deny_label { get; set; }
-
-        public signal void response (uint response);
 
         const string PANTHEON_PORTAL_NAME = "org.freedesktop.impl.portal.desktop.pantheon";
         const string FDO_PORTAL_PATH = "/org/freedesktop/portal/desktop";
@@ -83,34 +84,32 @@
             options["deny_label"] = deny_label;
             options["icon"] = icon;
 
-            portal.access_dialog.begin (path, app_id, parent_handler, title, body, "", options, on_response);
+            portal.access_dialog.begin (path, app_id, parent_handler, title, body, "", options, (obj, res) => {
+                uint ret;
+
+                try {
+                    portal.access_dialog.end (res, out ret);
+                } catch (Error e) {
+                    warning (e.message);
+                    ret = 2;
+                }
+
+                on_response (ret);
+                path = null;
+            });
         }
 
         public void close () {
-            if (path != null) {
-                try {
-                    Request request = Bus.get_proxy_sync (BusType.SESSION, PANTHEON_PORTAL_NAME, path);
-                    request.close ();
-                } catch (Error e) {
-                    warning (e.message);
-                }
-
+            try {
+                Bus.get_proxy_sync<Request> (BusType.SESSION, PANTHEON_PORTAL_NAME, path).close ();
                 path = null;
+            } catch (Error e) {
+                warning (e.message);
             }
         }
 
-        protected virtual void on_response (Object? obj, AsyncResult? res) {
-            uint ret;
-
-            try {
-                portal.access_dialog.end (res, out ret);
-            } catch (Error e) {
-                warning (e.message);
-                ret = 2;
-            }
-
-            response (ret);
-            close ();
+        protected virtual void on_response (uint response_id) {
+            response (response_id);
         }
     }
 }
