@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-15 18:05+0000\n"
+"POT-Creation-Date: 2023-03-04 11:42+0000\n"
 "PO-Revision-Date: 2019-11-18 15:24+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
 "Language-Team: Marathi <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -20,19 +20,22 @@ msgstr ""
 "X-Generator: Weblate 3.7.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:427
+#: compositor/WindowManager.vala:321
+#, c-format
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] ""
+msgstr[1] ""
+
+#: compositor/WindowManager.vala:328
 msgid "Keep new display settings?"
 msgstr ""
 
-#: compositor/WindowManager.vala:428
-msgid "Changes will automatically revert after 30 seconds."
-msgstr ""
-
-#: compositor/WindowManager.vala:431
+#: compositor/WindowManager.vala:332
 msgid "Keep Settings"
 msgstr ""
 
-#: compositor/WindowManager.vala:432
+#: compositor/WindowManager.vala:333
 msgid "Use Previous Settings"
 msgstr ""
 
