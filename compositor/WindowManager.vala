@@ -146,11 +146,7 @@ namespace GreeterCompositor {
 
             Idle.add (() => {
                 // let the session manager move to the next phase
-#if HAS_MUTTER41
                 display.get_context ().notify_ready ();
-#else
-                Meta.register_with_session ();
-#endif
                 return GLib.Source.REMOVE;
             });
         }

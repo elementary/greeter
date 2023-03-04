@@ -1,1 +1,1 @@
-mutter-cogl-pango-8.vapi
+mutter-cogl-pango.vapi
