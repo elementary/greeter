@@ -21,11 +21,6 @@ using Meta;
 namespace GreeterCompositor {
 
     public class WindowManager : Meta.Plugin {
-        const uint GL_VENDOR = 0x1F00;
-        const string LOGIND_DBUS_NAME = "org.freedesktop.login1";
-        const string LOGIND_DBUS_OBJECT_PATH = "/org/freedesktop/login1";
-
-        delegate unowned string? GlQueryFunc (uint id);
 
         /**
          * {@inheritDoc}
@@ -46,11 +41,6 @@ namespace GreeterCompositor {
          * {@inheritDoc}
          */
         public Clutter.Actor top_window_group { get; protected set; }
-
-        /**
-         * {@inheritDoc}
-         */
-        public Meta.BackgroundGroup background_group { get; protected set; }
 
         public Greeter.SystemBackground system_background { get; private set; }
 
