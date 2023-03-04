@@ -1,1 +1,1 @@
-mutter-cogl-6.vapi
+mutter-cogl.vapi
