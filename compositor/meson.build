@@ -14,16 +14,6 @@ vala_flags = []
 compositor_c_args =['-DCLUTTER_ENABLE_COMPOSITOR_API', '-DCLUTTER_ENABLE_EXPERIMENTAL_API',
 		'-DCOGL_ENABLE_EXPERIMENTAL_API', '-DCOGL_ENABLE_EXPERIMENTAL_2_0_API']
 
-mutter41_dep = dependency('libmutter-9', version: ['>= 41', '< 42'], required: false)
-if mutter41_dep.found()
-	libmutter_dep = dependency('libmutter-9', version: '>= 41')
-	mutter_dep = [
-		libmutter_dep,
-		dependency('mutter-cogl-9'), dependency('mutter-cogl-pango-9'),
-		dependency('mutter-clutter-9')
-	]
-endif
-
 mutter42_dep = dependency('libmutter-10', version: ['>= 42', '< 43'], required: false)
 if mutter42_dep.found()
 	libmutter_dep = dependency('libmutter-10', version: '>= 42')
@@ -32,7 +22,6 @@ if mutter42_dep.found()
 		dependency('mutter-cogl-10'), dependency('mutter-cogl-pango-10'),
 		dependency('mutter-clutter-10')
 	]
-	vala_flags = ['--define', 'HAS_MUTTER42']
 endif
 
 mutter43_dep = dependency('libmutter-11', version: ['>= 43', '< 44'], required: false)
@@ -43,7 +32,7 @@ if mutter43_dep.found()
 		dependency('mutter-cogl-11'), dependency('mutter-cogl-pango-11'),
 		dependency('mutter-clutter-11')
 	]
-	vala_flags = ['--define', 'HAS_MUTTER42', '--define', 'HAS_MUTTER43']
+	vala_flags = ['--define', 'HAS_MUTTER43']
 endif
 
 if mutter_dep.length() == 0
