@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-04 11:42+0000\n"
-"PO-Revision-Date: 2022-11-09 14:29+0000\n"
+"PO-Revision-Date: 2023-03-07 13:25+0000\n"
 "Last-Translator: David Hewitt <davidmhewitt@gmail.com>\n"
 "Language-Team: English (United Kingdom) <https://l10n.elementary.io/projects/"
 "desktop/greeter/en_GB/>\n"
@@ -21,12 +21,11 @@ msgstr ""
 "X-Launchpad-Export-Date: 2017-03-14 06:58+0000\n"
 
 #: compositor/WindowManager.vala:321
-#, fuzzy, c-format
-#| msgid "Changes will automatically revert after 30 seconds."
+#, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
-msgstr[0] "Changes will automatically revert after 30 seconds."
-msgstr[1] "Changes will automatically revert after 30 seconds."
+msgstr[0] "Changes will automatically revert after %i second."
+msgstr[1] "Changes will automatically revert after %i seconds."
 
 #: compositor/WindowManager.vala:328
 msgid "Keep new display settings?"
