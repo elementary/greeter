@@ -453,7 +453,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         GLib.Timeout.add (ERROR_SHAKE_DURATION, () => {
             main_box_style_context.remove_class ("shake");
             entry_style_context.remove_class (Granite.STYLE_CLASS_ERROR);
-            
+
             connecting = false;
             password_entry.grab_focus ();
 
