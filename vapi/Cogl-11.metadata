@@ -2,24 +2,17 @@
 
 Color struct
 
-Material base_type="Cogl.Handle"
-MaterialLayer base_type="Cogl.Handle"
-
 _ColorSizeCheck skip
 _TextureVertexSizeCheck skip
 
-Color.equal symbol_type=method
-  .v1 type="Cogl.Color"
-  .v2 type="Cogl.Color"
+Color.equal.v1 type="Cogl.Color"
+Color.equal.v2 type="Cogl.Color"
+color_equal skip
 
-color_equal.v1 type="Cogl.Color"
-color_equal.v2 type="Cogl.Color"
-color_equal symbol_type=method
+Context.free_timestamp_query.query owned
 
-texture_new_* name="texture_new_(.+)" parent="Cogl.Texture"
 Texture
   .get_data.data type="uint8[]"
-  .new_from_data.data type="uint8[]"
   .set_data.data type="uint8[]"
   .set_region.data type="uint8[]"
 
@@ -50,6 +43,7 @@ is_frame_info parent="Cogl.Object" symbol_type="method" instance_idx=0
 is_pipeline parent="Cogl.Object" symbol_type="method" instance_idx=0
 is_texture_2d parent="Cogl.Object" symbol_type="method" instance_idx=0
 is_texture_2d_sliced parent="Cogl.Object" symbol_type="method" instance_idx=0
+is_snippet parent="Cogl.Object" symbol_type="method" instance_idx=0
 
 create_program type="unowned Cogl.Program" name="create" parent="Cogl.Program"
 create_shader type="unowned Cogl.Shader" name="create" parent="Cogl.Shader"
@@ -61,6 +55,8 @@ has_feature parent="Cogl.Context" symbol_type="method" instance_idx=0
 Bitmap.error_quark parent="Cogl.BitmapError" name="quark"
 Texture.error_quark parent="Cogl.TextureError" name="quark"
 texture_error_quark skip
+Scanout.error_quark parent="Cogl.ScanoutError" name="quark"
+scanout_error_quark skip
 
 BitmapError errordomain
 BlendStringError errordomain
@@ -68,3 +64,6 @@ RendererError errordomain
 SystemError errordomain
 TextureError errordomain
 FramebufferError errordomain
+ScanoutError errordomain
+
+Offscreen sealed

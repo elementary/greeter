@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
-"PO-Revision-Date: 2019-11-05 20:24+0000\n"
+"POT-Creation-Date: 2023-03-04 11:42+0000\n"
+"PO-Revision-Date: 2023-03-07 13:25+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://l10n.elementary.io/projects/desktop/greeter/"
 "fi/>\n"
@@ -17,20 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 4.14.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
-msgstr "Näyttääkö kaikki kelvolliselta?"
+#: compositor/WindowManager.vala:321
+#, c-format
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] "Muutokset perutaan automaattisesti %i sekunnin jälkeen."
+msgstr[1] "Muutokset perutaan automaattisesti %i sekunnin jälkeen."
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
-msgstr "Säilytä nämä asetukset"
+#: compositor/WindowManager.vala:328
+msgid "Keep new display settings?"
+msgstr "Säilytetäänkö uudet näyttöasetukset?"
 
-#: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
-msgstr "Palauta aiemmat asetukset"
+#: compositor/WindowManager.vala:332
+msgid "Keep Settings"
+msgstr "Säilytä asetukset"
+
+#: compositor/WindowManager.vala:333
+msgid "Use Previous Settings"
+msgstr "Käytä aiempia asetuksia"
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -48,11 +55,11 @@ msgstr "Kirjautuminen ei onnistu"
 msgid "Starting the session has failed."
 msgstr "Istunnon käynnistäminen epäonnistui."
 
-#: src/MainWindow.vala:482
+#: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
 msgstr "Alkuvalmistelua ei voitu käynnistää"
 
-#: src/MainWindow.vala:487
+#: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -100,6 +107,15 @@ msgstr "Num Lock on päällä"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Salasana"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Näyttääkö kaikki kelvolliselta?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Säilytä nämä asetukset"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Palauta aiemmat asetukset"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Vedä sormesi"

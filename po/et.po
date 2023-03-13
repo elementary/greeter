@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"POT-Creation-Date: 2023-03-04 11:42+0000\n"
 "PO-Revision-Date: 2019-12-15 23:07+0000\n"
 "Last-Translator: Daniel Foré <daniel@elementary.io>\n"
 "Language-Team: Estonian <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -20,17 +20,24 @@ msgstr ""
 "X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-04-05 07:04+0000\n"
 
-#: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
-msgstr "Kas ekraani pilt tundub korras olevat?"
+#: compositor/WindowManager.vala:321
+#, c-format
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] ""
+msgstr[1] ""
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
-msgstr "Kinnita praegune seadistus"
+#: compositor/WindowManager.vala:328
+msgid "Keep new display settings?"
+msgstr ""
 
-#: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
-msgstr "Taasta eelmine seadistus"
+#: compositor/WindowManager.vala:332
+msgid "Keep Settings"
+msgstr ""
+
+#: compositor/WindowManager.vala:333
+msgid "Use Previous Settings"
+msgstr ""
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -49,11 +56,11 @@ msgstr ""
 msgid "Starting the session has failed."
 msgstr ""
 
-#: src/MainWindow.vala:482
+#: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
 msgstr ""
 
-#: src/MainWindow.vala:487
+#: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -98,6 +105,15 @@ msgstr ""
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Parool"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Kas ekraani pilt tundub korras olevat?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Kinnita praegune seadistus"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Taasta eelmine seadistus"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Pühi näpuga"

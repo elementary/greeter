@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"POT-Creation-Date: 2023-03-04 11:42+0000\n"
 "PO-Revision-Date: 2019-09-10 22:22+0000\n"
 "Last-Translator: James Qian <sotux82@gmail.com>\n"
 "Language-Team: Chinese <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -13,16 +13,22 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 3.7.1\n"
 
-#: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
+#: compositor/WindowManager.vala:321
+#, c-format
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] ""
+
+#: compositor/WindowManager.vala:328
+msgid "Keep new display settings?"
 msgstr ""
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
+#: compositor/WindowManager.vala:332
+msgid "Keep Settings"
 msgstr ""
 
-#: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
+#: compositor/WindowManager.vala:333
+msgid "Use Previous Settings"
 msgstr ""
 
 #: src/MainWindow.vala:63
@@ -41,11 +47,11 @@ msgstr ""
 msgid "Starting the session has failed."
 msgstr ""
 
-#: src/MainWindow.vala:482
+#: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
 msgstr ""
 
-#: src/MainWindow.vala:487
+#: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."

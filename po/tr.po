@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
-"PO-Revision-Date: 2019-11-03 00:24+0000\n"
-"Last-Translator: Ozgur Baskin <bebeto_baskin@yahoo.com>\n"
+"POT-Creation-Date: 2023-03-04 11:42+0000\n"
+"PO-Revision-Date: 2022-09-30 14:55+0000\n"
+"Last-Translator: Özgür Baskin <queeup@zoho.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/greeter/"
 "tr/>\n"
 "Language: tr\n"
@@ -17,20 +17,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 4.4.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
-msgstr "Ekran iyi görünüyor mu?"
+#: compositor/WindowManager.vala:321
+#, fuzzy, c-format
+#| msgid "Changes will automatically revert after 30 seconds."
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] "Değişiklikler 30 saniye sonra otomatik olarak geri alınır."
+msgstr[1] "Değişiklikler 30 saniye sonra otomatik olarak geri alınır."
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
-msgstr "Bu Yapılandırmayı Koru"
+#: compositor/WindowManager.vala:328
+msgid "Keep new display settings?"
+msgstr "Yeni görüntü ayarları korunsun mu?"
 
-#: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
-msgstr "Önceki Yapılandırmayı Geri Yükle"
+#: compositor/WindowManager.vala:332
+msgid "Keep Settings"
+msgstr "Ayarları Koru"
+
+#: compositor/WindowManager.vala:333
+msgid "Use Previous Settings"
+msgstr "Önceki Ayarları Kullan"
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -48,11 +56,11 @@ msgstr "Oturum Açılamıyor"
 msgid "Starting the session has failed."
 msgstr "Oturumu başlatmak başarısız oldu."
 
-#: src/MainWindow.vala:482
+#: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
 msgstr "İlk Kurulum Başlatılamadı"
 
-#: src/MainWindow.vala:487
+#: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -99,6 +107,15 @@ msgstr "Num Lock açık"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Parola"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Ekran iyi görünüyor mu?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Bu Yapılandırmayı Koru"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Önceki Yapılandırmayı Geri Yükle"
 
 #~ msgid "Set properties of own user"
 #~ msgstr "Kullanıcı özelliklerinizi ayarlayın"

@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
-"PO-Revision-Date: 2019-12-28 10:28+0000\n"
-"Last-Translator: Jaimie85 <alsemgeest@gmail.com>\n"
+"POT-Creation-Date: 2023-03-04 11:42+0000\n"
+"PO-Revision-Date: 2023-02-10 14:25+0000\n"
+"Last-Translator: Dennis ten Hoove <dennistenhoove@protonmail.com>\n"
 "Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/greeter/nl/"
 ">\n"
 "Language: nl\n"
@@ -17,20 +17,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.14.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
-msgstr "Ziet het beeld er goed uit?"
+#: compositor/WindowManager.vala:321
+#, fuzzy, c-format
+#| msgid "Changes will automatically revert after 30 seconds."
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] "Wijzigingen worden na 30 seconden automatisch teruggedraaid."
+msgstr[1] "Wijzigingen worden na 30 seconden automatisch teruggedraaid."
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
-msgstr "Behoud deze instellingen"
+#: compositor/WindowManager.vala:328
+msgid "Keep new display settings?"
+msgstr "Nieuwe scherminstellingen behouden?"
 
-#: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
-msgstr "Vorige instellingen terugzetten"
+#: compositor/WindowManager.vala:332
+msgid "Keep Settings"
+msgstr "Instellingen behouden"
+
+#: compositor/WindowManager.vala:333
+msgid "Use Previous Settings"
+msgstr "Vorige instellingen gebruiken"
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -48,11 +56,11 @@ msgstr "Het is niet mogelijk om in te loggen"
 msgid "Starting the session has failed."
 msgstr "Het starten van de sessie is mislukt."
 
-#: src/MainWindow.vala:482
+#: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
 msgstr "Het laden van de instellingen om te beginnen is mislukt"
 
-#: src/MainWindow.vala:487
+#: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -100,6 +108,15 @@ msgstr "Num Lock staat aan"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Wachtwoord"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Ziet het beeld er goed uit?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Behoud deze instellingen"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Vorige instellingen terugzetten"
 
 #~ msgid "Swipe your finger"
 #~ msgstr "Swipe uw vinger"

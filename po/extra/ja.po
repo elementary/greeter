@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"POT-Creation-Date: 2023-03-04 11:42+0000\n"
 "PO-Revision-Date: 2022-05-20 21:02+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
-"Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/"
-"greeter-extra/ja/>\n"
+"Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/greeter-"
+"extra/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,118 +27,119 @@ msgstr "ログイン・ロック画面"
 msgid "Unlock or log in to your device"
 msgstr "お使いのデバイスのロックを解除したりログインしたりします"
 
-#: data/greeter.appdata.xml.in:23
-msgid "New Features:"
-msgstr "新機能:"
-
-#: data/greeter.appdata.xml.in:25
-msgid "Provide panel background color interface"
-msgstr "パネルの背景色インターフェースを追加"
-
-#: data/greeter.appdata.xml.in:27 data/greeter.appdata.xml.in:39
-#: data/greeter.appdata.xml.in:52
+#: data/greeter.appdata.xml.in:23 data/greeter.appdata.xml.in:39
+#: data/greeter.appdata.xml.in:51 data/greeter.appdata.xml.in:64
 msgid "Minor updates:"
 msgstr "そのほかのアップデート:"
 
-#: data/greeter.appdata.xml.in:29 data/greeter.appdata.xml.in:41
-#: data/greeter.appdata.xml.in:54 data/greeter.appdata.xml.in:65
-#: data/greeter.appdata.xml.in:72 data/greeter.appdata.xml.in:80
-#: data/greeter.appdata.xml.in:88 data/greeter.appdata.xml.in:102
+#: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:41
+#: data/greeter.appdata.xml.in:53 data/greeter.appdata.xml.in:66
+#: data/greeter.appdata.xml.in:77 data/greeter.appdata.xml.in:84
+#: data/greeter.appdata.xml.in:92 data/greeter.appdata.xml.in:100
+#: data/greeter.appdata.xml.in:114
 msgid "Updated translations"
 msgstr "翻訳の更新"
 
-#: data/greeter.appdata.xml.in:35 data/greeter.appdata.xml.in:47
+#: data/greeter.appdata.xml.in:35
+msgid "New Features:"
+msgstr "新機能:"
+
+#: data/greeter.appdata.xml.in:37
+msgid "Provide panel background color interface"
+msgstr "パネルの背景色インターフェースを追加"
+
+#: data/greeter.appdata.xml.in:47 data/greeter.appdata.xml.in:59
 msgid "Improvements:"
 msgstr "改善点:"
 
-#: data/greeter.appdata.xml.in:37
+#: data/greeter.appdata.xml.in:49
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr "起動時に Greeter が適切に読み込まれないことがある不具合を修正"
 
-#: data/greeter.appdata.xml.in:49
+#: data/greeter.appdata.xml.in:61
 msgid "Hide clock during initial setup"
 msgstr "初期設定の間は時計を表示しないように修正"
 
-#: data/greeter.appdata.xml.in:50
+#: data/greeter.appdata.xml.in:62
 msgid "Use selected accent color for logged in checkmark"
 msgstr ""
 "ログイン中かどうかを表示するチェックマークに、ユーザーが選択したアクセントカ"
 "ラーを使用するように修正"
 
-#: data/greeter.appdata.xml.in:61
+#: data/greeter.appdata.xml.in:73
 msgid "Add multitouch finger tracking"
 msgstr "マルチタッチを検知する機能を追加"
 
-#: data/greeter.appdata.xml.in:62
+#: data/greeter.appdata.xml.in:74
 msgid "Add keyboard layout support"
 msgstr "キーボードレイアウトへの対応を追加"
 
-#: data/greeter.appdata.xml.in:63
+#: data/greeter.appdata.xml.in:75
 msgid "New colorful avatar fallbacks"
 msgstr "アバター画像未設定時に背景を色付きで表示するように変更"
 
-#: data/greeter.appdata.xml.in:64
+#: data/greeter.appdata.xml.in:76
 msgid "Fix clock when resuming from sleep"
 msgstr "スリープからの復帰時に時刻が間違っている不具合を修正"
 
-#: data/greeter.appdata.xml.in:79
+#: data/greeter.appdata.xml.in:91
 msgid "Fix an issue with media keys"
 msgstr "メディアキーに関する不具合を修正"
 
-#: data/greeter.appdata.xml.in:87
+#: data/greeter.appdata.xml.in:99
 msgid "Ensure that manual login is available when users are hidden"
 msgstr "ユーザーが非表示の場合にユーザー名を指定したログインができるように修正"
 
-#: data/greeter.appdata.xml.in:95
+#: data/greeter.appdata.xml.in:107
 msgid "Save last user on attempted login"
 msgstr "ログイン試行時に最後に使用したユーザーを記録するように修正"
 
-#: data/greeter.appdata.xml.in:96
+#: data/greeter.appdata.xml.in:108
 msgid "Handle all background aspect ratios"
 msgstr "どの解像度の壁紙でも表示できるように修正"
 
-#: data/greeter.appdata.xml.in:97
+#: data/greeter.appdata.xml.in:109
 msgid "Give non-focused user cards smaller usernames"
 msgstr ""
 "フォーカスされていないユーザーカードのユーザー名を小さいフォントサイズに変更"
 
-#: data/greeter.appdata.xml.in:98
+#: data/greeter.appdata.xml.in:110
 msgid "Better respect NumLock settings"
 msgstr "NumLock の設定を反映するように修正"
 
-#: data/greeter.appdata.xml.in:99
+#: data/greeter.appdata.xml.in:111
 msgid "Enable sounds in greeter"
 msgstr "Greeter 内でのサウンドを有効化"
 
-#: data/greeter.appdata.xml.in:100
+#: data/greeter.appdata.xml.in:112
 msgid "Select password text on error instead of immediately clearing it"
 msgstr "ログインエラー時にパスワードを消去せずに、選択するように修正"
 
-#: data/greeter.appdata.xml.in:101
+#: data/greeter.appdata.xml.in:113
 msgid "Code cleanup"
 msgstr "コードのクリーンアップ"
 
-#: data/greeter.appdata.xml.in:108
+#: data/greeter.appdata.xml.in:120
 msgid "Extensive overhaul"
 msgstr "大規模な改良"
 
-#: data/greeter.appdata.xml.in:110
+#: data/greeter.appdata.xml.in:122
 msgid "New card-based appearance"
 msgstr "カードスタイルの新しいデザイン"
 
-#: data/greeter.appdata.xml.in:111
+#: data/greeter.appdata.xml.in:123
 msgid "Improved HiDPI support"
 msgstr "HiDPI への対応を改善"
 
-#: data/greeter.appdata.xml.in:112
+#: data/greeter.appdata.xml.in:124
 msgid "AccountsService functionality"
 msgstr "AccountsService の機能を有効化"
 
-#: data/greeter.appdata.xml.in:113
+#: data/greeter.appdata.xml.in:125
 msgid "Various bug fixes"
 msgstr "さまざまなバグ修正"
 
-#: data/greeter.appdata.xml.in:149
+#: data/greeter.appdata.xml.in:161
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 

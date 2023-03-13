@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
-"PO-Revision-Date: 2021-11-16 10:37+0000\n"
+"POT-Creation-Date: 2023-03-04 11:42+0000\n"
+"PO-Revision-Date: 2023-03-07 13:25+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/greeter/"
 "ja/>\n"
@@ -17,20 +17,26 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 4.14.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
-msgstr "ディスプレイの設定に問題はありませんか？"
+#: compositor/WindowManager.vala:321
+#, c-format
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] "変更は%i秒後に自動的に元に戻ります。"
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
-msgstr "この設定を保つ"
+#: compositor/WindowManager.vala:328
+msgid "Keep new display settings?"
+msgstr "新しいディスプレイの設定を維持しますか？"
 
-#: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
-msgstr "前の設定へ戻す"
+#: compositor/WindowManager.vala:332
+msgid "Keep Settings"
+msgstr "設定を維持"
+
+#: compositor/WindowManager.vala:333
+msgid "Use Previous Settings"
+msgstr "以前の設定を使う"
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -48,11 +54,11 @@ msgstr "ログインできません"
 msgid "Starting the session has failed."
 msgstr "セッションを開始できませんでした。"
 
-#: src/MainWindow.vala:482
+#: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
 msgstr "“初期設定”を起動できません"
 
-#: src/MainWindow.vala:487
+#: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -99,6 +105,15 @@ msgstr "Num Lock は有効です"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "パスワード"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "ディスプレイの設定に問題はありませんか？"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "この設定を保つ"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "前の設定へ戻す"
 
 #~ msgid "Set properties of own user"
 #~ msgstr "自分のユーザーのプロパティーを設定"

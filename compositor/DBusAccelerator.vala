@@ -50,7 +50,9 @@ namespace GreeterCompositor {
 
     [Compact]
     private class GrabbedAccelerator {
-        public Accelerator accelerator;
+        public string name;
+        public ActionMode flags;
+        public Meta.KeyBindingFlags grab_flags;
         public uint action;
     }
 
@@ -69,22 +71,19 @@ namespace GreeterCompositor {
         public signal void accelerator_activated (uint action, GLib.HashTable<string, Variant> parameters);
 
         WindowManager wm;
-        GLib.List<GrabbedAccelerator> grabbed_accelerators;
+        GLib.HashTable<unowned string, GrabbedAccelerator> grabbed_accelerators;
 
         DBusAccelerator (WindowManager _wm) {
             wm = _wm;
-            grabbed_accelerators = new GLib.List<GrabbedAccelerator> ();
+            grabbed_accelerators = new HashTable<unowned string, GrabbedAccelerator> (str_hash, str_equal);
             wm.get_display ().accelerator_activated.connect (on_accelerator_activated);
         }
 
         private void on_accelerator_activated (uint action, Clutter.InputDevice device, uint timestamp) {
-            foreach (unowned GrabbedAccelerator accel in grabbed_accelerators) {
+            foreach (unowned GrabbedAccelerator accel in grabbed_accelerators.get_values ()) {
                 if (accel.action == action) {
-                    if (ActionMode.LOGIN_SCREEN in accel.accelerator.flags) {
+                    if (ActionMode.LOGIN_SCREEN in accel.flags) {
                         var parameters = new GLib.HashTable<string, Variant> (null, null);
-#if !HAS_MUTTER40
-                        parameters.set ("device-id", new Variant.uint32 (device.id));
-#endif
                         parameters.set ("timestamp", new Variant.uint32 (timestamp));
                         if (device.device_node != null) {
                             parameters.set ("device-node", new Variant.string (device.device_node));
@@ -98,39 +97,40 @@ namespace GreeterCompositor {
             }
         }
 
-        private uint grab_accelerator (Accelerator accelerator) {
-            foreach (unowned GrabbedAccelerator accel in grabbed_accelerators) {
-                if (accel.accelerator.name == accelerator.name) {
-                    return accel.action;
-                }
+        public uint grab_accelerator (string accelerator, ActionMode flags, Meta.KeyBindingFlags grab_flags) throws GLib.DBusError, GLib.IOError {
+            unowned var found_accel = grabbed_accelerators[accelerator];
+            if (found_accel != null) {
+                return found_accel.action;
             }
 
-            uint action = wm.get_display ().grab_accelerator (accelerator.name, accelerator.grab_flags);
-            if (action > 0) {
+            uint action = wm.get_display ().grab_accelerator (accelerator, grab_flags);
+            if (action != Meta.KeyBindingFlags.NONE) {
                 var accel = new GrabbedAccelerator ();
                 accel.action = action;
-                accel.accelerator = accelerator;
-                grabbed_accelerators.append ((owned)accel);
+                accel.name = accelerator;
+                accel.flags = flags;
+                accel.grab_flags = grab_flags;
+                grabbed_accelerators.insert (accel.name, (owned) accel);
             }
 
             return action;
         }
 
-        public uint[] grab_accelerators (Accelerator[] accelerators) throws GLib.Error {
+        public uint[] grab_accelerators (Accelerator[] accelerators) throws GLib.DBusError, GLib.IOError {
             uint[] actions = {};
 
             foreach (unowned Accelerator accelerator in accelerators) {
-                actions += grab_accelerator (accelerator);
+                actions += grab_accelerator (accelerator.name, accelerator.flags, accelerator.grab_flags);
             }
 
             return actions;
         }
 
-        public bool ungrab_accelerator (uint action) throws GLib.Error {
-            foreach (unowned GrabbedAccelerator accel in grabbed_accelerators) {
+        public bool ungrab_accelerator (uint action) throws GLib.DBusError, GLib.IOError {
+            foreach (unowned GrabbedAccelerator accel in grabbed_accelerators.get_values ()) {
                 if (accel.action == action) {
                     bool ret = wm.get_display ().ungrab_accelerator (action);
-                    grabbed_accelerators.remove (accel);
+                    grabbed_accelerators.remove (accel.name);
                     return ret;
                 }
             }
@@ -138,7 +138,7 @@ namespace GreeterCompositor {
             return false;
         }
 
-        public bool ungrab_accelerators (uint[] actions) throws GLib.Error {
+        public bool ungrab_accelerators (uint[] actions) throws GLib.DBusError, GLib.IOError {
             foreach (uint action in actions) {
                 ungrab_accelerator (action);
             }
@@ -147,7 +147,7 @@ namespace GreeterCompositor {
         }
 
         [DBus (name = "ShowOSD")]
-        public void show_osd (GLib.HashTable<string, Variant> parameters) throws GLib.Error {
+        public void show_osd (GLib.HashTable<string, Variant> parameters) throws GLib.DBusError, GLib.IOError {
             int32 monitor_index = -1;
             if (parameters.contains ("monitor"))
                 monitor_index = parameters["monitor"].get_int32 ();

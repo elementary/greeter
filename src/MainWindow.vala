@@ -397,7 +397,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             switch_to_card ((Greeter.UserCard) current_card);
         }
 
-        current_card.connecting = false;
         current_card.wrong_credentials ();
     }
 

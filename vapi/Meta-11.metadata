@@ -34,11 +34,13 @@ CompEffect cheader_filename="meta/compositor.h"
 CloseDialog cheader_filename="meta/meta-close-dialog.h"
 CloseDialogResponse cheader_filename="meta/meta-close-dialog.h"
 Context cheader_filename="meta/meta-context.h"
+CompositorType cheader_filename="meta/meta-enums.h"
 Cursor cheader_filename="meta/common.h"
 CursorTracker cheader_filename="meta/meta-cursor-tracker.h"
 CursorTracker.get_for_display parent="Meta.Display" symbol_type="method" instance_idx=0 name="get_cursor_tracker"
 CursorTracker.get_pointer.mods out
 DebugTopic cheader_filename="meta/util.h"
+DebugPaintFlag cheader_filename="meta/util.h"
 Direction cheader_filename="meta/common.h"
 Display cheader_filename="meta/display.h"
 DisplayCorner cheader_filename="meta/display.h"
@@ -51,12 +53,14 @@ FrameBorders cheader_filename="meta/common.h"
 FrameFlags cheader_filename="meta/common.h"
 FrameType cheader_filename="meta/common.h"
 GrabOp cheader_filename="meta/common.h"
+Gravity cheader_filename="meta/common.h"
 Group cheader_filename="meta/group.h"
 Group.property_notify.event type="X.Event" ref
 IdleMonitor cheader_filename="meta/meta-idle-monitor.h"
 IdleMonitorWatchFunc cheader_filename="meta/meta-idle-monitor.h"
 InhibitShortcutsDialog cheader_filename="meta/meta-inhibit-shortcuts-dialog.h"
 InhibitShortcutsDialogResponse cheader_filename="meta/meta-inhibit-shortcuts-dialog.h"
+KeyboardA11yFlags cheader_filename="meta/meta-enums.h"
 KeyBinding cheader_filename="meta/keybindings.h"
 keybindings_set_custom_handler parent="Meta.KeyBinding" name="set_custom_handler" cheader_filename="meta/keybindings.h"
 KeyBindingAction cheader_filename="meta/prefs.h"
@@ -65,10 +69,10 @@ KeyHandlerFunc cheader_filename="meta/prefs.h"
 KeyHandlerFunc.event type="Clutter.KeyEvent?"
 KeyHandlerFunc.window nullable
 LaunchContext cheader_filename="meta/meta-launch-context.h"
+Laters cheader_filename="meta/types.h"
 LaterType cheader_filename="meta/util.h"
 LocaleDirection cheader_filename="meta/util.h"
 MaximizeFlags cheader_filename="meta/window.h"
-ModalOptions cheader_filename="meta/meta-plugin.h"
 MonitorManager cheader_filename="meta/meta-monitor-manager.h"
 MonitorSwitchConfigType cheader_filename="meta/meta-monitor-manager.h"
 MotionDirection cheader_filename="meta/common.h"
@@ -108,6 +112,7 @@ Theme cheader_filename="meta/theme.h"
 theme_get_default cheader_filename="meta/theme.h"
 theme_new cheader_filename="meta/theme.h"
 VirtualModifier cheader_filename="meta/common.h"
+WaylandClient cheader_filename="meta/meta-wayland-client.h"
 Workspace cheader_filename="meta/workspace.h"
 WorkspaceManager cheader_filename="meta/meta-workspace-manager.h"
 Window cheader_filename="meta/window.h"
@@ -123,6 +128,9 @@ WindowShape cheader_filename="meta/meta-window-shape.h"
 WindowType cheader_filename="meta/window.h"
 X11Display cheader_filename="meta/meta-x11-display.h"
 
+// As per https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/2287
+MonitorManager.monitor_privacy_screen_changed skip
+
 rect skip
 prefs_* parent="Meta.Prefs" name="prefs_(.+)" cheader_filename="meta/prefs.h"
 
@@ -130,6 +138,7 @@ g_utf8_strndup skip
 
 preference_to_string cheader_filename="meta/prefs.h"
 frame_type_to_string cheader_filename="meta/util.h"
+topic_to_string parent="Meta.DebugTopic" name="to_string" cheader_filename="meta/util.h"
 
 CURRENT_TIME cheader_filename="meta/common.h"
 ICON_WIDTH cheader_filename="meta/common.h"
@@ -144,12 +153,16 @@ PRIORITY_PREFS_NOTIFY cheader_filename="meta/common.h"
 VIRTUAL_CORE_POINTER_ID cheader_filename="meta/common.h"
 VIRTUAL_CORE_KEYBOARD_ID cheader_filename="meta/common.h"
 
+Display.window_visibility_updated
+	.object name="unplaced" type="GLib.List<unowned Meta.Window>"
+	.p0 name="should_show" type="GLib.List<unowned Meta.Window>"
+	.p1 name="should_hide" type="GLib.List<unowned Meta.Window>"
+
 add_verbose_topic parent="Meta.Util" cheader_filename="meta/util.h"
 bug parent="Meta.Util" cheader_filename="meta/util.h"
 external_binding_name_for_action parent="Meta.Util" cheader_filename="meta/util.h"
 fatal parent="Meta.Util" cheader_filename="meta/util.h"
 get_locale_direction parent="Meta.Util" cheader_filename="meta/util.h"
-is_syncing parent="Meta.Util" cheader_filename="meta/util.h"
 is_verbose parent="Meta.Util" cheader_filename="meta/util.h"
 is_wayland_compositor parent="Meta.Util" cheader_filename="meta/util.h"
 later_add parent="Meta.Util" cheader_filename="meta/util.h"
@@ -157,22 +170,11 @@ later_remove parent="Meta.Util" cheader_filename="meta/util.h"
 pop_no_msg_prefix parent="Meta.Util" cheader_filename="meta/util.h"
 push_no_msg_prefix parent="Meta.Util" cheader_filename="meta/util.h"
 remove_verbose_topic parent="Meta.Util" cheader_filename="meta/util.h"
-show_dialog parent="Meta.Util" cheader_filename="meta/util.h"
-show_dialog.columns type_arguments="string" nullable default=null
-show_dialog.entries type_arguments="string" nullable default=null
-show_dialog.transient_for default=0
-show_dialog.icon_name nullable default=null
-show_dialog.cancel_text nullable default=null
-show_dialog.ok_text nullable default=null
-show_dialog.display nullable default=null
-show_dialog.timeout nullable default=null
-topic_real parent="Meta.Util" cheader_filename="meta/util.h"
 unsigned_long_equal parent="Meta.Util" name="ulong_equal" cheader_filename="meta/util.h"
 unsigned_long_equal.v1 type="ulong?"
 unsigned_long_equal.v2 type="ulong?"
 unsigned_long_hash parent="Meta.Util" name="ulong_hash" cheader_filename="meta/util.h"
 unsigned_long_hash.v type="ulong?"
-verbose_real parent="Meta.Util" cheader_filename="meta/util.h"
 warning parent="Meta.Util" cheader_filename="meta/util.h"
 create_context parent="Meta.Context" name="new" symbol_type="constructor" cheader_filename="meta/meta-context.h"
 
@@ -180,3 +182,24 @@ x11_error_trap_pop parent="Meta.X11Display" symbol_type="method" name="error_tra
 x11_error_trap_pop_with_return parent="Meta.X11Display" symbol_type="method" name="error_trap_pop_with_return" instance_idx=0 cheader_filename="meta/meta-x11-errors.h"
 x11_error_trap_push parent="Meta.X11Display" symbol_type="method" name="error_trap_push" instance_idx=0 cheader_filename="meta/meta-x11-errors.h"
 x11_init_gdk_display parent="Meta.X11Display" cheader_filename="meta/meta-x11-display.h"
+
+BackgroundActor sealed
+BackgroundContent sealed
+BackgroundImage sealed
+BackgroundImageCache sealed
+Background sealed
+Dnd sealed
+IdleMonitor sealed
+LaunchContext sealed
+RemoteAccessController sealed
+SelectionSourceMemory sealed
+Selection sealed
+ShadowFactory sealed
+ShapedTexture sealed
+SoundPlayer sealed
+Stage sealed
+StartupNotification sealed
+WaylandClient sealed
+WindowGroup sealed
+WorkspaceManager sealed
+X11Display sealed

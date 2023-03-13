@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 04:12+0000\n"
+"POT-Creation-Date: 2023-03-04 11:42+0000\n"
 "PO-Revision-Date: 2020-03-24 22:09+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -20,17 +20,24 @@ msgstr ""
 "X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:427
-msgid "Does the display look OK?"
-msgstr "¿Se ve bien la pantalla?"
+#: compositor/WindowManager.vala:321
+#, c-format
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] ""
+msgstr[1] ""
 
-#: compositor/WindowManager.vala:430
-msgid "Keep This Configuration"
-msgstr "Mantener esta configuración"
+#: compositor/WindowManager.vala:328
+msgid "Keep new display settings?"
+msgstr ""
 
-#: compositor/WindowManager.vala:431
-msgid "Restore Previous Configuration"
-msgstr "Restablecer configuración anterior"
+#: compositor/WindowManager.vala:332
+msgid "Keep Settings"
+msgstr ""
+
+#: compositor/WindowManager.vala:333
+msgid "Use Previous Settings"
+msgstr ""
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
@@ -48,11 +55,11 @@ msgstr "No se pudo acceder"
 msgid "Starting the session has failed."
 msgstr "El inicio de la sesión ha fallado."
 
-#: src/MainWindow.vala:482
+#: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
 msgstr "No se puede iniciar Configuración inicial"
 
-#: src/MainWindow.vala:487
+#: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -99,6 +106,15 @@ msgstr "Bloq Núm activada"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Contraseña"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "¿Se ve bien la pantalla?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Mantener esta configuración"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Restablecer configuración anterior"
 
 #~ msgid "Set properties of own user"
 #~ msgstr "Establecer propiedades de la propia cuenta"
