@@ -89,7 +89,7 @@ public class Greeter.SystemBackground : Clutter.Canvas {
         Gdk.Pixbuf scaled_pixbuf;
         double full_ratio = (double)background.height / (double)background.width;
         if ((width * full_ratio) < height) {
-            scaled_pixbuf = background.scale_simple ((int)(height * full_ratio), height, Gdk.InterpType.BILINEAR);
+            scaled_pixbuf = background.scale_simple ((int)(height * (1 / full_ratio)), height, Gdk.InterpType.BILINEAR);
         } else {
             scaled_pixbuf = background.scale_simple (width, (int)(width * full_ratio), Gdk.InterpType.BILINEAR);
         }
