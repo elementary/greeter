@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-04 11:42+0000\n"
-"PO-Revision-Date: 2023-04-14 00:10+0000\n"
+"PO-Revision-Date: 2023-04-14 09:13+0000\n"
 "Last-Translator: NorwayFun <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/ka/>\n"
@@ -30,7 +30,7 @@ msgstr ""
 #: data/greeter.appdata.xml.in:23 data/greeter.appdata.xml.in:39
 #: data/greeter.appdata.xml.in:51 data/greeter.appdata.xml.in:64
 msgid "Minor updates:"
-msgstr ""
+msgstr "უმნიშვნელო განახლებები:"
 
 #: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:41
 #: data/greeter.appdata.xml.in:53 data/greeter.appdata.xml.in:66
@@ -58,7 +58,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:61
 msgid "Hide clock during initial setup"
-msgstr ""
+msgstr "საათის დამალვა საწყისი მორგებისას"
 
 #: data/greeter.appdata.xml.in:62
 msgid "Use selected accent color for logged in checkmark"
@@ -70,11 +70,11 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:74
 msgid "Add keyboard layout support"
-msgstr ""
+msgstr "კლავიატურის განლაგების მხარდაჭერის დამატება"
 
 #: data/greeter.appdata.xml.in:75
 msgid "New colorful avatar fallbacks"
-msgstr ""
+msgstr "ახალი ფერადი ავატარები"
 
 #: data/greeter.appdata.xml.in:76
 msgid "Fix clock when resuming from sleep"
@@ -114,7 +114,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:113
 msgid "Code cleanup"
-msgstr ""
+msgstr "კოდის გაწმენდა"
 
 #: data/greeter.appdata.xml.in:120
 msgid "Extensive overhaul"
@@ -134,7 +134,7 @@ msgstr ""
 
 #: data/greeter.appdata.xml.in:125
 msgid "Various bug fixes"
-msgstr ""
+msgstr "გასწორდა სხვადასხვა შეცდომები"
 
 #: data/greeter.appdata.xml.in:161
 msgid "elementary, Inc."
