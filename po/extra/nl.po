@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-04 11:42+0000\n"
 "PO-Revision-Date: 2023-04-14 09:17+0000\n"
-"Last-Translator: DutchVipperloid <svenroelof@e.email>\n"
+"Last-Translator: Thierry Flament <thierry.flament@outlook.com>\n"
 "Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/nl/>\n"
 "Language: nl\n"
@@ -68,7 +68,7 @@ msgstr "Gebruik geselecteerde accentkleur voor ingelogd vinkje"
 
 #: data/greeter.appdata.xml.in:73
 msgid "Add multitouch finger tracking"
-msgstr ""
+msgstr "Multitouch vinger tracking toevoegen"
 
 #: data/greeter.appdata.xml.in:74
 msgid "Add keyboard layout support"
