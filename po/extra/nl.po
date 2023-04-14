@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-04 11:42+0000\n"
-"PO-Revision-Date: 2023-04-14 09:13+0000\n"
+"PO-Revision-Date: 2023-04-14 09:17+0000\n"
 "Last-Translator: Thierry Flament <thierry.flament@outlook.com>\n"
 "Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/nl/>\n"
@@ -42,7 +42,7 @@ msgstr "Bijgewerkte vertalingen"
 
 #: data/greeter.appdata.xml.in:35
 msgid "New Features:"
-msgstr ""
+msgstr "Nieuwe functies:"
 
 #: data/greeter.appdata.xml.in:37
 msgid "Provide panel background color interface"
@@ -55,14 +55,16 @@ msgstr "Verbeteringen:"
 #: data/greeter.appdata.xml.in:49
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr ""
+"Los een willekeurig probleem op waarbij Greeter niet correct laadt bij het "
+"opstarten"
 
 #: data/greeter.appdata.xml.in:61
 msgid "Hide clock during initial setup"
-msgstr ""
+msgstr "Verberg klok tijdens eerste installatie"
 
 #: data/greeter.appdata.xml.in:62
 msgid "Use selected accent color for logged in checkmark"
-msgstr ""
+msgstr "Gebruik geselecteerde accentkleur voor ingelogd vinkje"
 
 #: data/greeter.appdata.xml.in:73
 msgid "Add multitouch finger tracking"
