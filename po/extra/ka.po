@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-04 11:42+0000\n"
-"PO-Revision-Date: 2023-03-12 22:25+0000\n"
+"PO-Revision-Date: 2023-04-14 00:10+0000\n"
 "Last-Translator: NorwayFun <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/ka/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.2\n"
+"X-Generator: Weblate 4.16.4\n"
 
 #: data/greeter.appdata.xml.in:7
 msgid "Login &amp; Lock Screen"
@@ -42,7 +42,7 @@ msgstr "განახლებული თარგმანები"
 
 #: data/greeter.appdata.xml.in:35
 msgid "New Features:"
-msgstr ""
+msgstr "ახალი ფუნქციები:"
 
 #: data/greeter.appdata.xml.in:37
 msgid "Provide panel background color interface"
