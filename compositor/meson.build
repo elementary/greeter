@@ -50,7 +50,7 @@ if mutter_dep.length() == 0
 	error ('No supported mutter library found!')
 endif
 
-mutter_typelib_dir = libmutter_dep.get_pkgconfig_variable('typelibdir')
+mutter_typelib_dir = libmutter_dep.get_variable('typelibdir')
 
 # Here is the real Compositor work
 compositor_files = files(
