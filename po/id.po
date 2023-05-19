@@ -7,8 +7,9 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-04 11:42+0000\n"
-"PO-Revision-Date: 2023-05-19 17:09+0000\n"
-"Last-Translator: Muhammad Dholifun Nafsi <muhammad_dholifun@protonmail.com>\n"
+"PO-Revision-Date: 2023-05-20 18:06+0000\n"
+"Last-Translator: Faisal Rachmadin <frachmadin@users.noreply.l10n.elementary."
+"io>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/desktop/"
 "greeter/id/>\n"
 "Language: id\n"
@@ -43,37 +44,39 @@ msgstr "Masuk sebagai Tamu"
 
 #: src/MainWindow.vala:65
 msgid "Manual Login…"
-msgstr "Login Manual…"
+msgstr "Masuk Manual…"
 
 #: src/MainWindow.vala:409
 msgid "Unable to Log In"
-msgstr "Tidak bisa masuk"
+msgstr "Tidak bisa Masuk"
 
 #: src/MainWindow.vala:410
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Gagal memulai sesi."
 
 #: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Tidak Dapat Meluncurkan Penyiapan Awal"
 
 #: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Penyiapan Awal membuat pengguna pertama. Tanpanya, Anda tidak dapat masuk "
+"dan mungkin diharuskan memasang ulang OS."
 
 #: src/Cards/ManualCard.vala:35
 msgid "Manual Login"
-msgstr "Login Manual"
+msgstr "Masuk Secara Manual"
 
 #: src/Cards/ManualCard.vala:44
 msgid "Username"
-msgstr ""
+msgstr "Nama Pengguna"
 
 #: src/Cards/ManualCard.vala:47
 msgid "Try username"
-msgstr ""
+msgstr "Cek nama pengguna"
 
 #: src/Cards/UserCard.vala:112 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
@@ -85,19 +88,19 @@ msgstr ""
 
 #: src/Cards/UserCard.vala:229
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "Sesi tidak dapat diubah ketika pengguna sedang masuk"
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
-msgstr ""
+msgstr "Caps Lock & Num Lock menyala"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps Lock menyala"
 
 #: src/Widgets/CapsLockRevealer.vala:74
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Num Lock menyala"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
