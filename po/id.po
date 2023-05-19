@@ -8,8 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-04 11:42+0000\n"
 "PO-Revision-Date: 2023-05-19 17:09+0000\n"
-"Last-Translator: Faisal Rachmadin <frachmadin@users.noreply.l10n.elementary."
-"io>\n"
+"Last-Translator: Muhammad Dholifun Nafsi <muhammad_dholifun@protonmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/desktop/"
 "greeter/id/>\n"
 "Language: id\n"
@@ -40,7 +39,7 @@ msgstr "Gunakan Pengaturan Sebelumnya"
 
 #: src/MainWindow.vala:63
 msgid "Log in as Guest"
-msgstr ""
+msgstr "Masuk sebagai Tamu"
 
 #: src/MainWindow.vala:65
 msgid "Manual Login…"
@@ -48,7 +47,7 @@ msgstr "Login Manual…"
 
 #: src/MainWindow.vala:409
 msgid "Unable to Log In"
-msgstr ""
+msgstr "Tidak bisa masuk"
 
 #: src/MainWindow.vala:410
 msgid "Starting the session has failed."
