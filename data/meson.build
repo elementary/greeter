@@ -31,6 +31,11 @@ install_data(
     install_dir: join_paths(get_option('sysconfdir'), 'lightdm')
 )
 
+install_data(
+    '40-' + meson.project_name() + '.conf',
+    install_dir: join_paths(get_option('datadir'), 'lightdm', 'lightdm.conf.d')
+)
+
 test (
     'Validate desktop file',
     find_program('desktop-file-validate'),
