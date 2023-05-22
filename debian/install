@@ -1,4 +1,3 @@
-debian/40-io.elementary.greeter.conf /usr/share/lightdm/lightdm.conf.d/
 etc/lightdm
 usr/bin
 usr/sbin
