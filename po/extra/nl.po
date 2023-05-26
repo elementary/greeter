@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-04 11:42+0000\n"
-"PO-Revision-Date: 2023-04-15 09:59+0000\n"
-"Last-Translator: DutchVipperloid <svenroelof@e.email>\n"
+"PO-Revision-Date: 2023-05-27 12:06+0000\n"
+"Last-Translator: Thierry Flament <thierry.flament@outlook.com>\n"
 "Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/nl/>\n"
 "Language: nl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Weblate 4.17\n"
 
 #: data/greeter.appdata.xml.in:7
 msgid "Login &amp; Lock Screen"
@@ -46,7 +46,7 @@ msgstr "Nieuwe functies:"
 
 #: data/greeter.appdata.xml.in:37
 msgid "Provide panel background color interface"
-msgstr ""
+msgstr "Zorg voor een interface met de achtergrondkleur van het paneel"
 
 #: data/greeter.appdata.xml.in:47 data/greeter.appdata.xml.in:59
 msgid "Improvements:"
