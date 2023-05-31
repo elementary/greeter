@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-04 11:42+0000\n"
-"PO-Revision-Date: 2023-05-19 17:09+0000\n"
+"PO-Revision-Date: 2023-06-01 14:07+0000\n"
 "Last-Translator: Faisal Rachmadin <frachmadin@users.noreply.l10n.elementary."
 "io>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/desktop/"
@@ -43,7 +43,7 @@ msgstr "Terjemahan yang diperbarui"
 
 #: data/greeter.appdata.xml.in:35
 msgid "New Features:"
-msgstr ""
+msgstr "Fitur Baru:"
 
 #: data/greeter.appdata.xml.in:37
 msgid "Provide panel background color interface"
