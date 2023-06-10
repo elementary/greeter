@@ -47,7 +47,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private weak Gtk.StyleContext main_grid_style_context;
     private weak Gtk.StyleContext password_entry_context;
 
-    private bool needs_keyboard_layout_set = false;
+    private bool needs_settings_set = false;
 
     construct {
         need_password = true;
@@ -379,8 +379,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
             }
         }
 
-        if (needs_keyboard_layout_set) {
-            set_keyboard_layouts ();
+        if (needs_settings_set) {
+            set_settings ();
         }
 
         if (act_user.locked) {
@@ -415,12 +415,17 @@ public class Greeter.UserCard : Greeter.BaseCard {
         }
     }
 
-    public void set_keyboard_layouts () {
+    public void set_settings () {
         if (!act_user.is_loaded) {
-            needs_keyboard_layout_set = true;
+            needs_settings_set = true;
             return;
         }
 
+        set_keyboard_layouts ();
+        set_primary_mouse_button ();
+    }
+
+    private void set_keyboard_layouts () {
         var settings = new GLib.Settings ("org.gnome.desktop.input-sources");
 
         Variant[] elements = {};
@@ -436,6 +441,13 @@ public class Greeter.UserCard : Greeter.BaseCard {
         settings.set_value ("sources", list);
 
         settings.set_value ("current", settings_act.active_keyboard_layout);
+    }
+
+    private void set_primary_mouse_button () {
+        var settings = new GLib.Settings ("org.gnome.desktop.peripherals.mouse");
+        settings.set_value ("left-handed", settings_act.left_handed);
+
+        password_entry.text = settings_act.left_handed ? "right" : "left";
     }
 
     public UserCard (LightDM.User lightdm_user) {
