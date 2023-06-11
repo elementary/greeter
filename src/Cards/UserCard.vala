@@ -446,8 +446,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private void set_primary_mouse_button () {
         var settings = new GLib.Settings ("org.gnome.desktop.peripherals.mouse");
         settings.set_value ("left-handed", settings_act.left_handed);
-
-        password_entry.text = settings_act.left_handed ? "right" : "left";
     }
 
     public UserCard (LightDM.User lightdm_user) {
