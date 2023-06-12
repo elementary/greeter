@@ -41,7 +41,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
-    private Gtk.Label username_label;
 
     private SelectionCheck logged_in;
     private unowned Gtk.StyleContext logged_in_context;
@@ -53,7 +52,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     construct {
         need_password = true;
 
-        username_label = new Gtk.Label (lightdm_user.display_name) {
+        var username_label = new Gtk.Label (lightdm_user.display_name) {
             hexpand = true,
             margin = 24,
             margin_bottom = 12
