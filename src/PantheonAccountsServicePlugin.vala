@@ -22,4 +22,11 @@ interface Pantheon.SettingsDaemon.AccountsService : Object {
 
     public abstract KeyboardLayout[] keyboard_layouts { owned get; set; }
     public abstract uint active_keyboard_layout { get; set; }
+
+    public abstract bool left_handed { get; set; }
+    public abstract bool mouse_natural_scroll { get; set; }
+    public abstract bool touchpad_natural_scroll { get; set; }
+    public abstract double mouse_speed { get; set; }
+    public abstract double touchpad_speed { get; set; }
+    public abstract int accel_profile { owned get; set; }
 }

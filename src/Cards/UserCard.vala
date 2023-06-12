@@ -41,18 +41,19 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
+    private Gtk.Label username_label;
 
     private SelectionCheck logged_in;
     private unowned Gtk.StyleContext logged_in_context;
     private weak Gtk.StyleContext main_grid_style_context;
     private weak Gtk.StyleContext password_entry_context;
 
-    private bool needs_keyboard_layout_set = false;
+    private bool needs_settings_set = false;
 
     construct {
         need_password = true;
 
-        var username_label = new Gtk.Label (lightdm_user.display_name) {
+        username_label = new Gtk.Label (lightdm_user.display_name) {
             hexpand = true,
             margin = 24,
             margin_bottom = 12
@@ -379,8 +380,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
             }
         }
 
-        if (needs_keyboard_layout_set) {
-            set_keyboard_layouts ();
+        if (needs_settings_set) {
+            set_settings ();
         }
 
         if (act_user.locked) {
@@ -415,12 +416,17 @@ public class Greeter.UserCard : Greeter.BaseCard {
         }
     }
 
-    public void set_keyboard_layouts () {
+    public void set_settings () {
         if (!act_user.is_loaded) {
-            needs_keyboard_layout_set = true;
+            needs_settings_set = true;
             return;
         }
 
+        set_keyboard_layouts ();
+        set_mouse_touchpad_settings ();
+    }
+
+    private void set_keyboard_layouts () {
         var settings = new GLib.Settings ("org.gnome.desktop.input-sources");
 
         Variant[] elements = {};
@@ -436,6 +442,18 @@ public class Greeter.UserCard : Greeter.BaseCard {
         settings.set_value ("sources", list);
 
         settings.set_value ("current", settings_act.active_keyboard_layout);
+    }
+
+    private void set_mouse_touchpad_settings () {
+        var mouse_settings = new GLib.Settings ("org.gnome.desktop.peripherals.mouse");
+        mouse_settings.set_enum ("accel-profile", settings_act.accel_profile);
+        mouse_settings.set_boolean ("left-handed", settings_act.left_handed);
+        mouse_settings.set_boolean ("natural-scroll", settings_act.mouse_natural_scroll);
+        mouse_settings.set_double ("speed", settings_act.mouse_speed);
+
+        var touchpad_settings = new GLib.Settings ("org.gnome.desktop.peripherals.touchpad");
+        touchpad_settings.set_boolean ("natural-scroll", settings_act.touchpad_natural_scroll);
+        touchpad_settings.set_double ("speed", settings_act.touchpad_speed);
     }
 
     public UserCard (LightDM.User lightdm_user) {
