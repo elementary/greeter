@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-04 11:42+0000\n"
-"PO-Revision-Date: 2022-10-07 12:57+0000\n"
+"PO-Revision-Date: 2023-06-15 00:07+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/hu/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #: data/greeter.appdata.xml.in:7
 msgid "Login &amp; Lock Screen"
@@ -50,7 +50,7 @@ msgstr "Interfész a panel háttérszínéhez"
 
 #: data/greeter.appdata.xml.in:47 data/greeter.appdata.xml.in:59
 msgid "Improvements:"
-msgstr "Újdonságok:"
+msgstr "Fejlesztések:"
 
 #: data/greeter.appdata.xml.in:49
 msgid "Fix a random issue where Greeter does not load correctly on boot"
