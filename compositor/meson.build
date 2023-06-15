@@ -63,6 +63,7 @@ compositor_files = files(
   'KeyboardManager.vala',
   'main.vala',
   'MediaFeedback.vala',
+  'PointerLocator.vala',
   'SystemBackground.vala',
   'Utils.vala',
   'WindowManager.vala'
