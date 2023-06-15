@@ -5,8 +5,6 @@ gtk_dep = [dependency('gtk+-3.0'), dependency('gdk-x11-3.0')]
 gee_dep = dependency('gee-0.8')
 m_dep = meson.get_compiler('c').find_library('m', required: false)
 posix_dep = meson.get_compiler('vala').find_library('posix', required: false)
-gala_dep = dependency('gala')
-granite_dep = dependency('granite')
 
 # Mutter is a complicated library with many API changes, copied from Gala.
 mutter_dep = []
