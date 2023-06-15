@@ -5,6 +5,7 @@ compositor/MediaFeedback.vala
 compositor/main.vala
 compositor/DBusAccelerator.vala
 compositor/DBus.vala
+compositor/MaskCorners.vala
 src/Application.vala
 src/FPrintUtils.vala
 src/MainWindow.vala
