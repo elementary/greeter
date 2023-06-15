@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-04 11:42+0000\n"
-"PO-Revision-Date: 2022-05-18 11:16+0000\n"
+"PO-Revision-Date: 2023-06-13 10:07+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
-"Language-Team: French <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/fr/>\n"
+"Language-Team: French <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #: data/greeter.appdata.xml.in:7
 msgid "Login &amp; Lock Screen"
@@ -50,7 +50,7 @@ msgstr "Ajout d'une interface pour la couleur d'arrière-plan du panneau"
 
 #: data/greeter.appdata.xml.in:47 data/greeter.appdata.xml.in:59
 msgid "Improvements:"
-msgstr "Améliorations :"
+msgstr "Améliorations :"
 
 #: data/greeter.appdata.xml.in:49
 msgid "Fix a random issue where Greeter does not load correctly on boot"
