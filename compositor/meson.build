@@ -5,6 +5,8 @@ gtk_dep = [dependency('gtk+-3.0'), dependency('gdk-x11-3.0')]
 gee_dep = dependency('gee-0.8')
 m_dep = meson.get_compiler('c').find_library('m', required: false)
 posix_dep = meson.get_compiler('vala').find_library('posix', required: false)
+gala_dep = dependency('gala')
+granite_dep = dependency('granite')
 
 # Mutter is a complicated library with many API changes, copied from Gala.
 mutter_dep = []
@@ -62,6 +64,7 @@ compositor_files = files(
   'Dialogs.vala',
   'KeyboardManager.vala',
   'main.vala',
+  'MaskCorners.vala',
   'MediaFeedback.vala',
   'SystemBackground.vala',
   'Utils.vala',
@@ -73,7 +76,7 @@ executable(
   compositor_files,
   compositor_resources,
   config_header,
-  dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, posix_dep, mutter_dep],
+  dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, posix_dep, mutter_dep, gala_dep, granite_dep],
   vala_args: vala_flags,
   c_args: compositor_c_args,
   build_rpath: mutter_typelib_dir,
