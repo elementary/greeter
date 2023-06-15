@@ -447,7 +447,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var mouse_settings = new GLib.Settings ("org.gnome.desktop.peripherals.mouse");
         mouse_settings.set_boolean ("left-handed", settings_act.left_handed);
         mouse_settings.set_enum ("accel-profile", settings_act.accel_profile);
-        
+
         mouse_settings.set_boolean ("natural-scroll", settings_act.mouse_natural_scroll);
         mouse_settings.set_double ("speed", settings_act.mouse_speed);
 
