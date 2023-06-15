@@ -20,6 +20,11 @@ interface Pantheon.SettingsDaemon.AccountsService : Object {
         public string name;
     }
 
+    public struct XkbOption {
+        public string option;
+    }
+
     public abstract KeyboardLayout[] keyboard_layouts { owned get; set; }
     public abstract uint active_keyboard_layout { get; set; }
+    public abstract XkbOption[] xkb_options { owned get; set; }
 }

@@ -41,6 +41,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
+    private Gtk.Label username_label;
 
     private SelectionCheck logged_in;
     private unowned Gtk.StyleContext logged_in_context;
@@ -52,7 +53,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     construct {
         need_password = true;
 
-        var username_label = new Gtk.Label (lightdm_user.display_name) {
+        username_label = new Gtk.Label (lightdm_user.display_name) {
             hexpand = true,
             margin = 24,
             margin_bottom = 12
@@ -432,10 +433,16 @@ public class Greeter.UserCard : Greeter.BaseCard {
             elements += result;
         }
 
-        GLib.Variant list = new GLib.Variant.array (new VariantType ("(ss)"), elements);
-        settings.set_value ("sources", list);
+        GLib.Variant layouts_list = new GLib.Variant.array (new VariantType ("(ss)"), elements);
+        settings.set_value ("sources", layouts_list);
 
         settings.set_value ("current", settings_act.active_keyboard_layout);
+
+        string[] options = {};
+        foreach (var option in settings_act.xkb_options) {
+            options += option.option;
+        }
+        settings.set_value ("xkb-options", options);
     }
 
     public UserCard (LightDM.User lightdm_user) {
