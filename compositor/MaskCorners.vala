@@ -47,7 +47,7 @@ public class GreeterCompositor.MaskCorners : GLib.Object {
         cornermasks = new List<Clutter.Actor>[n_monitors];
 
         for (int m = 0; m < n_monitors; m++) {
-            corner_radii[m] = Gala.Utils.scale_to_int (DEFAULT_CORNER_RADIUS, display.get_monitor_scale (m));
+            corner_radii[m] = Utils.scale_to_int (DEFAULT_CORNER_RADIUS, display.get_monitor_scale (m));
         }
 
         for (int m = 0; m < n_monitors; m++) {
@@ -117,8 +117,8 @@ public class GreeterCompositor.MaskCorners : GLib.Object {
     }
 
     private bool draw_cornermask (Cairo.Context context, int monitor_no) requires (corner_radii.length > monitor_no) {
-        var buffer = new Gala.Drawing.BufferSurface (corner_radii[monitor_no], corner_radii[monitor_no]);
-        var buffer_context = buffer.context;
+        var buffer_surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, corner_radii[monitor_no], corner_radii[monitor_no]);
+        var buffer_context = new Cairo.Context (buffer_surface);
 
         buffer_context.arc (corner_radii[monitor_no], corner_radii[monitor_no], corner_radii[monitor_no], Math.PI, 1.5 * Math.PI);
         buffer_context.line_to (0, 0);
@@ -129,7 +129,7 @@ public class GreeterCompositor.MaskCorners : GLib.Object {
         context.set_operator (Cairo.Operator.CLEAR);
         context.paint ();
         context.set_operator (Cairo.Operator.OVER);
-        context.set_source_surface (buffer.surface, 0, 0);
+        context.set_source_surface (buffer_surface, 0, 0);
         context.paint ();
 
         return true;
