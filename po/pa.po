@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-04 11:42+0000\n"
+"POT-Creation-Date: 2023-06-19 16:48+0000\n"
 "PO-Revision-Date: 2021-08-12 13:02+0000\n"
 "Last-Translator: elSolus <tumbleweed@tuta.io>\n"
 "Language-Team: Punjabi <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -13,22 +13,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: compositor/WindowManager.vala:321
+#: compositor/WindowManager.vala:324
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: compositor/WindowManager.vala:328
+#: compositor/WindowManager.vala:331
 msgid "Keep new display settings?"
 msgstr ""
 
-#: compositor/WindowManager.vala:332
+#: compositor/WindowManager.vala:335
 msgid "Keep Settings"
 msgstr ""
 
-#: compositor/WindowManager.vala:333
+#: compositor/WindowManager.vala:336
 msgid "Use Previous Settings"
 msgstr ""
 
