@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-04 11:42+0000\n"
+"POT-Creation-Date: 2023-06-19 16:48+0000\n"
 "PO-Revision-Date: 2023-05-27 12:06+0000\n"
 "Last-Translator: Thierry Flament <thierry.flament@outlook.com>\n"
-"Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/"
-"greeter-extra/nl/>\n"
+"Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/greeter-"
+"extra/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,133 +19,118 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.17\n"
 
-#: data/greeter.appdata.xml.in:7
+#: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
 msgstr "Inloggen en scherm vergrendelen"
 
-#: data/greeter.appdata.xml.in:8
+#: data/greeter.metainfo.xml.in:10
 msgid "Unlock or log in to your device"
 msgstr "Ontgrendel uw apparaat of log in"
 
-#: data/greeter.appdata.xml.in:23 data/greeter.appdata.xml.in:39
-#: data/greeter.appdata.xml.in:51 data/greeter.appdata.xml.in:64
+#: data/greeter.metainfo.xml.in:33
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
+#: data/greeter.metainfo.xml.in:40 data/greeter.metainfo.xml.in:56
+#: data/greeter.metainfo.xml.in:69 data/greeter.metainfo.xml.in:83
 msgid "Minor updates:"
 msgstr "Kleine updates:"
 
-#: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:41
-#: data/greeter.appdata.xml.in:53 data/greeter.appdata.xml.in:66
-#: data/greeter.appdata.xml.in:77 data/greeter.appdata.xml.in:84
-#: data/greeter.appdata.xml.in:92 data/greeter.appdata.xml.in:100
-#: data/greeter.appdata.xml.in:114
+#: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:58
+#: data/greeter.metainfo.xml.in:71 data/greeter.metainfo.xml.in:85
+#: data/greeter.metainfo.xml.in:97
 msgid "Updated translations"
 msgstr "Bijgewerkte vertalingen"
 
-#: data/greeter.appdata.xml.in:35
+#: data/greeter.metainfo.xml.in:52
 msgid "New Features:"
 msgstr "Nieuwe functies:"
 
-#: data/greeter.appdata.xml.in:37
+#: data/greeter.metainfo.xml.in:54
 msgid "Provide panel background color interface"
 msgstr "Zorg voor een interface met de achtergrondkleur van het paneel"
 
-#: data/greeter.appdata.xml.in:47 data/greeter.appdata.xml.in:59
+#: data/greeter.metainfo.xml.in:65 data/greeter.metainfo.xml.in:78
 msgid "Improvements:"
 msgstr "Verbeteringen:"
 
-#: data/greeter.appdata.xml.in:49
+#: data/greeter.metainfo.xml.in:67
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr ""
 "Los een willekeurig probleem op waarbij Greeter niet correct laadt bij het "
 "opstarten"
 
-#: data/greeter.appdata.xml.in:61
+#: data/greeter.metainfo.xml.in:80
 msgid "Hide clock during initial setup"
 msgstr "Verberg klok tijdens eerste installatie"
 
-#: data/greeter.appdata.xml.in:62
+#: data/greeter.metainfo.xml.in:81
 msgid "Use selected accent color for logged in checkmark"
 msgstr ""
 "Gebruik de geselecteerde accentkleur voor het vinkje dat aangeeft dat de "
 "gebruiker is ingelogd"
 
-#: data/greeter.appdata.xml.in:73
+#: data/greeter.metainfo.xml.in:93
 msgid "Add multitouch finger tracking"
 msgstr "Voeg multitouch vinger tracking toe"
 
-#: data/greeter.appdata.xml.in:74
+#: data/greeter.metainfo.xml.in:94
 msgid "Add keyboard layout support"
 msgstr "Ondersteuning voor toetsenbordindeling toevoegen"
 
-#: data/greeter.appdata.xml.in:75
+#: data/greeter.metainfo.xml.in:95
 msgid "New colorful avatar fallbacks"
 msgstr "Nieuwe kleurrijke avatar fallbacks"
 
-#: data/greeter.appdata.xml.in:76
+#: data/greeter.metainfo.xml.in:96
 msgid "Fix clock when resuming from sleep"
 msgstr "Repareer klok bij hervatten vanuit slaapstand"
 
-#: data/greeter.appdata.xml.in:91
-msgid "Fix an issue with media keys"
-msgstr "Een probleem met media toetsen opgelost"
+#~ msgid "Fix an issue with media keys"
+#~ msgstr "Een probleem met media toetsen opgelost"
 
-#: data/greeter.appdata.xml.in:99
-msgid "Ensure that manual login is available when users are hidden"
-msgstr ""
-"Zorg ervoor dat handmatige login beschikbaar is als gebruikers verborgen zijn"
+#~ msgid "Ensure that manual login is available when users are hidden"
+#~ msgstr ""
+#~ "Zorg ervoor dat handmatige login beschikbaar is als gebruikers verborgen "
+#~ "zijn"
 
-#: data/greeter.appdata.xml.in:107
-msgid "Save last user on attempted login"
-msgstr "Bewaar de laatste gebruiker bij een inlogpoging"
+#~ msgid "Save last user on attempted login"
+#~ msgstr "Bewaar de laatste gebruiker bij een inlogpoging"
 
-#: data/greeter.appdata.xml.in:108
-msgid "Handle all background aspect ratios"
-msgstr "Regel alle achtergrond beeldverhoudingen"
+#~ msgid "Handle all background aspect ratios"
+#~ msgstr "Regel alle achtergrond beeldverhoudingen"
 
-#: data/greeter.appdata.xml.in:109
-msgid "Give non-focused user cards smaller usernames"
-msgstr "Geef niet geselecteerde gebruikers minder zichtbare gebruikersnamen"
+#~ msgid "Give non-focused user cards smaller usernames"
+#~ msgstr "Geef niet geselecteerde gebruikers minder zichtbare gebruikersnamen"
 
-#: data/greeter.appdata.xml.in:110
-msgid "Better respect NumLock settings"
-msgstr "Houd meer rekening met NumLock instellingen"
+#~ msgid "Better respect NumLock settings"
+#~ msgstr "Houd meer rekening met NumLock instellingen"
 
-#: data/greeter.appdata.xml.in:111
-msgid "Enable sounds in greeter"
-msgstr "Schakel geluid in voor Greeter"
+#~ msgid "Enable sounds in greeter"
+#~ msgstr "Schakel geluid in voor Greeter"
 
-#: data/greeter.appdata.xml.in:112
-msgid "Select password text on error instead of immediately clearing it"
-msgstr ""
-"Selecteer het ingevulde wachtwoord bij een fout, in plaats van het ingevulde "
-"wachtwoord direct te wissen"
+#~ msgid "Select password text on error instead of immediately clearing it"
+#~ msgstr ""
+#~ "Selecteer het ingevulde wachtwoord bij een fout, in plaats van het "
+#~ "ingevulde wachtwoord direct te wissen"
 
-#: data/greeter.appdata.xml.in:113
-msgid "Code cleanup"
-msgstr "Opgeruimde code"
+#~ msgid "Code cleanup"
+#~ msgstr "Opgeruimde code"
 
-#: data/greeter.appdata.xml.in:120
-msgid "Extensive overhaul"
-msgstr "Uitgebreide make-over"
+#~ msgid "Extensive overhaul"
+#~ msgstr "Uitgebreide make-over"
 
-#: data/greeter.appdata.xml.in:122
-msgid "New card-based appearance"
-msgstr "Nieuw, kaart-gebaseerd uiterlijk"
+#~ msgid "New card-based appearance"
+#~ msgstr "Nieuw, kaart-gebaseerd uiterlijk"
 
-#: data/greeter.appdata.xml.in:123
-msgid "Improved HiDPI support"
-msgstr "Verbeterde ondersteuning voor HiDPI"
+#~ msgid "Improved HiDPI support"
+#~ msgstr "Verbeterde ondersteuning voor HiDPI"
 
-#: data/greeter.appdata.xml.in:124
-msgid "AccountsService functionality"
-msgstr "AccountsService functionaliteit"
+#~ msgid "AccountsService functionality"
+#~ msgstr "AccountsService functionaliteit"
 
-#: data/greeter.appdata.xml.in:125
-msgid "Various bug fixes"
-msgstr "Diverse bug fixes"
-
-#: data/greeter.appdata.xml.in:161
-msgid "elementary, Inc."
-msgstr "elementary, Inc."
+#~ msgid "Various bug fixes"
+#~ msgstr "Diverse bug fixes"
 
 #~ msgid "Greeter"
 #~ msgstr "Greeter"

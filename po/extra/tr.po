@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-04 11:42+0000\n"
+"POT-Creation-Date: 2023-06-19 16:48+0000\n"
 "PO-Revision-Date: 2022-05-18 22:50+0000\n"
 "Last-Translator: Özgür Baskin <queeup@zoho.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/greeter-"
@@ -19,126 +19,111 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: data/greeter.appdata.xml.in:7
+#: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
 msgstr "Oturum Açma ve Kilit Ekranı"
 
-#: data/greeter.appdata.xml.in:8
+#: data/greeter.metainfo.xml.in:10
 msgid "Unlock or log in to your device"
 msgstr "Cihazınızın kilidini veya oturumunuzu açın"
 
-#: data/greeter.appdata.xml.in:23 data/greeter.appdata.xml.in:39
-#: data/greeter.appdata.xml.in:51 data/greeter.appdata.xml.in:64
+#: data/greeter.metainfo.xml.in:33
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
+#: data/greeter.metainfo.xml.in:40 data/greeter.metainfo.xml.in:56
+#: data/greeter.metainfo.xml.in:69 data/greeter.metainfo.xml.in:83
 msgid "Minor updates:"
 msgstr "Küçük güncellemeler:"
 
-#: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:41
-#: data/greeter.appdata.xml.in:53 data/greeter.appdata.xml.in:66
-#: data/greeter.appdata.xml.in:77 data/greeter.appdata.xml.in:84
-#: data/greeter.appdata.xml.in:92 data/greeter.appdata.xml.in:100
-#: data/greeter.appdata.xml.in:114
+#: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:58
+#: data/greeter.metainfo.xml.in:71 data/greeter.metainfo.xml.in:85
+#: data/greeter.metainfo.xml.in:97
 msgid "Updated translations"
 msgstr "Çeviriler güncellendi"
 
-#: data/greeter.appdata.xml.in:35
+#: data/greeter.metainfo.xml.in:52
 msgid "New Features:"
 msgstr "Yeni Özellikler:"
 
-#: data/greeter.appdata.xml.in:37
+#: data/greeter.metainfo.xml.in:54
 msgid "Provide panel background color interface"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:47 data/greeter.appdata.xml.in:59
+#: data/greeter.metainfo.xml.in:65 data/greeter.metainfo.xml.in:78
 msgid "Improvements:"
 msgstr "İyileştirmeler:"
 
-#: data/greeter.appdata.xml.in:49
+#: data/greeter.metainfo.xml.in:67
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:61
+#: data/greeter.metainfo.xml.in:80
 msgid "Hide clock during initial setup"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:62
+#: data/greeter.metainfo.xml.in:81
 msgid "Use selected accent color for logged in checkmark"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:73
+#: data/greeter.metainfo.xml.in:93
 msgid "Add multitouch finger tracking"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:74
+#: data/greeter.metainfo.xml.in:94
 msgid "Add keyboard layout support"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:75
+#: data/greeter.metainfo.xml.in:95
 msgid "New colorful avatar fallbacks"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:76
+#: data/greeter.metainfo.xml.in:96
 msgid "Fix clock when resuming from sleep"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:91
-msgid "Fix an issue with media keys"
-msgstr "Ortam anahtarlarıyla ilgili bir sorun giderildi"
+#~ msgid "Fix an issue with media keys"
+#~ msgstr "Ortam anahtarlarıyla ilgili bir sorun giderildi"
 
-#: data/greeter.appdata.xml.in:99
-msgid "Ensure that manual login is available when users are hidden"
-msgstr "Kullanıcılar gizliyken elle girişin kullanılabilir olduğundan emin ol"
+#~ msgid "Ensure that manual login is available when users are hidden"
+#~ msgstr ""
+#~ "Kullanıcılar gizliyken elle girişin kullanılabilir olduğundan emin ol"
 
-#: data/greeter.appdata.xml.in:107
-msgid "Save last user on attempted login"
-msgstr "Giriş yapma girişimi sırasında son kullanıcıyı kaydet"
+#~ msgid "Save last user on attempted login"
+#~ msgstr "Giriş yapma girişimi sırasında son kullanıcıyı kaydet"
 
-#: data/greeter.appdata.xml.in:108
-msgid "Handle all background aspect ratios"
-msgstr "Tüm arka plan en boy oranlarını işle"
+#~ msgid "Handle all background aspect ratios"
+#~ msgstr "Tüm arka plan en boy oranlarını işle"
 
-#: data/greeter.appdata.xml.in:109
-msgid "Give non-focused user cards smaller usernames"
-msgstr "Odaklanmamış kullanıcı kartlarına daha küçük kullanıcı adları verin"
+#~ msgid "Give non-focused user cards smaller usernames"
+#~ msgstr "Odaklanmamış kullanıcı kartlarına daha küçük kullanıcı adları verin"
 
-#: data/greeter.appdata.xml.in:110
-msgid "Better respect NumLock settings"
-msgstr "NumLock ayarlarına daha saygılı"
+#~ msgid "Better respect NumLock settings"
+#~ msgstr "NumLock ayarlarına daha saygılı"
 
-#: data/greeter.appdata.xml.in:111
-msgid "Enable sounds in greeter"
-msgstr "Karşılamada sesleri etkinleştir"
+#~ msgid "Enable sounds in greeter"
+#~ msgstr "Karşılamada sesleri etkinleştir"
 
-#: data/greeter.appdata.xml.in:112
-msgid "Select password text on error instead of immediately clearing it"
-msgstr "Hemen silmek yerine hatalı parola metnini seç"
+#~ msgid "Select password text on error instead of immediately clearing it"
+#~ msgstr "Hemen silmek yerine hatalı parola metnini seç"
 
-#: data/greeter.appdata.xml.in:113
-msgid "Code cleanup"
-msgstr "Kod temizlemesi"
+#~ msgid "Code cleanup"
+#~ msgstr "Kod temizlemesi"
 
-#: data/greeter.appdata.xml.in:120
-msgid "Extensive overhaul"
-msgstr "Kapsamlı bakım"
+#~ msgid "Extensive overhaul"
+#~ msgstr "Kapsamlı bakım"
 
-#: data/greeter.appdata.xml.in:122
-msgid "New card-based appearance"
-msgstr "Yeni kart tabanlı görünüm"
+#~ msgid "New card-based appearance"
+#~ msgstr "Yeni kart tabanlı görünüm"
 
-#: data/greeter.appdata.xml.in:123
-msgid "Improved HiDPI support"
-msgstr "HiDPI desteği iyileştirildi"
+#~ msgid "Improved HiDPI support"
+#~ msgstr "HiDPI desteği iyileştirildi"
 
-#: data/greeter.appdata.xml.in:124
-msgid "AccountsService functionality"
-msgstr "Hesap Hizmeti işlevselliği"
+#~ msgid "AccountsService functionality"
+#~ msgstr "Hesap Hizmeti işlevselliği"
 
-#: data/greeter.appdata.xml.in:125
-msgid "Various bug fixes"
-msgstr "Çeşitli hata düzeltmeleri"
-
-#: data/greeter.appdata.xml.in:161
-msgid "elementary, Inc."
-msgstr "elementary, Inc."
+#~ msgid "Various bug fixes"
+#~ msgstr "Çeşitli hata düzeltmeleri"
 
 #~ msgid "Greeter"
 #~ msgstr "Greeter"
