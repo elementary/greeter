@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2019-2023 elementary, Inc. <contact@elementary.io> -->
+<component>
+  <id>io.elementary.greeter</id>
+  <translation type="gettext">io.elementary.greeter</translation>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+
+  <name>Login &amp; Lock Screen</name>
+  <summary>Unlock or log in to your device</summary>
+  <description>
+    <p></p>
+  </description>
+
+  <content_rating type="oars-1.1" />
+
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/elementary/greeter/master/data/screenshot.png</image>
+    </screenshot>
+  </screenshots>
+
+  <provides>
+    <binary>io.elementary.greeter</binary>
+  </provides>
+
+  <url type="bugtracker">https://github.com/elementary/greeter/issues</url>
+  <url type="donation">https://elementary.io/get-involved#funding</url>
+  <url type="help">https://github.com/elementary/greeter/discussions</url>
+  <url type="homepage">https://elementary.io</url>
+  <url type="translate">https://l10n.elementary.io/projects/desktop</url>
+
+  <developer_name>elementary, Inc.</developer_name>
+  <project_group>elementary</project_group>
+  <update_contact>contact_at_elementary.io</update_contact>
+
+  <releases>
+    <release version="6.1.1" date="2022-11-15" urgency="medium">
+      <description>
+        <p>Minor updates:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/greeter/issues/551">Login input blocked after pressing enter</issue>
+      </issues>
+    </release>
+
+    <release version="6.1.0" date="2022-05-09" urgency="medium">
+      <description>
+        <p>New Features:</p>
+        <ul>
+          <li>Provide panel background color interface</li>
+        </ul>
+        <p>Minor updates:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="6.0.2" date="2022-02-28" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Fix a random issue where Greeter does not load correctly on boot</li>
+        </ul>
+        <p>Minor updates:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="6.0.1" date="2021-09-22" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Hide clock during initial setup</li>
+          <li>Use selected accent color for logged in checkmark</li>
+        </ul>
+        <p>Minor updates:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="6.0.0" date="2021-07-14" urgency="medium">
+      <description>
+        <ul>
+          <li>Add multitouch finger tracking</li>
+          <li>Add keyboard layout support</li>
+          <li>New colorful avatar fallbacks</li>
+          <li>Fix clock when resuming from sleep</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
+
+    <release version="5.0.4" date="2020-05-28" urgency="medium" />
+    <release version="5.0.3" date="2020-04-05" urgency="medium" />
+    <release version="5.0.2" date="2020-02-25" urgency="medium" />
+    <release version="5.0.1" date="2019-10-31" urgency="medium" />
+    <release version="5.0.0" date="2019-08-26" urgency="medium" />
+  </releases>
+</component>
