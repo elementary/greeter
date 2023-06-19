@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-04 11:42+0000\n"
+"POT-Creation-Date: 2023-06-19 16:48+0000\n"
 "PO-Revision-Date: 2021-10-08 09:16+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://l10n.elementary.io/projects/desktop/greeter-"
@@ -19,126 +19,68 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: data/greeter.appdata.xml.in:7
+#: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:8
+#: data/greeter.metainfo.xml.in:10
 msgid "Unlock or log in to your device"
 msgstr "Kirjaudu laitteelle tai avaa laitteen lukitus"
 
-#: data/greeter.appdata.xml.in:23 data/greeter.appdata.xml.in:39
-#: data/greeter.appdata.xml.in:51 data/greeter.appdata.xml.in:64
+#: data/greeter.metainfo.xml.in:33
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
+#: data/greeter.metainfo.xml.in:40 data/greeter.metainfo.xml.in:56
+#: data/greeter.metainfo.xml.in:69 data/greeter.metainfo.xml.in:83
 msgid "Minor updates:"
 msgstr "Pienet päivitykset:"
 
-#: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:41
-#: data/greeter.appdata.xml.in:53 data/greeter.appdata.xml.in:66
-#: data/greeter.appdata.xml.in:77 data/greeter.appdata.xml.in:84
-#: data/greeter.appdata.xml.in:92 data/greeter.appdata.xml.in:100
-#: data/greeter.appdata.xml.in:114
+#: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:58
+#: data/greeter.metainfo.xml.in:71 data/greeter.metainfo.xml.in:85
+#: data/greeter.metainfo.xml.in:97
 msgid "Updated translations"
 msgstr "Päivitetyt kielikäännökset"
 
-#: data/greeter.appdata.xml.in:35
+#: data/greeter.metainfo.xml.in:52
 msgid "New Features:"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:37
+#: data/greeter.metainfo.xml.in:54
 msgid "Provide panel background color interface"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:47 data/greeter.appdata.xml.in:59
+#: data/greeter.metainfo.xml.in:65 data/greeter.metainfo.xml.in:78
 msgid "Improvements:"
 msgstr "Parannukset:"
 
-#: data/greeter.appdata.xml.in:49
+#: data/greeter.metainfo.xml.in:67
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:61
+#: data/greeter.metainfo.xml.in:80
 msgid "Hide clock during initial setup"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:62
+#: data/greeter.metainfo.xml.in:81
 msgid "Use selected accent color for logged in checkmark"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:73
+#: data/greeter.metainfo.xml.in:93
 msgid "Add multitouch finger tracking"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:74
+#: data/greeter.metainfo.xml.in:94
 msgid "Add keyboard layout support"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:75
+#: data/greeter.metainfo.xml.in:95
 msgid "New colorful avatar fallbacks"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:76
+#: data/greeter.metainfo.xml.in:96
 msgid "Fix clock when resuming from sleep"
 msgstr ""
-
-#: data/greeter.appdata.xml.in:91
-msgid "Fix an issue with media keys"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:99
-msgid "Ensure that manual login is available when users are hidden"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:107
-msgid "Save last user on attempted login"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:108
-msgid "Handle all background aspect ratios"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:109
-msgid "Give non-focused user cards smaller usernames"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:110
-msgid "Better respect NumLock settings"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:111
-msgid "Enable sounds in greeter"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:112
-msgid "Select password text on error instead of immediately clearing it"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:113
-msgid "Code cleanup"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:120
-msgid "Extensive overhaul"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:122
-msgid "New card-based appearance"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:123
-msgid "Improved HiDPI support"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:124
-msgid "AccountsService functionality"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:125
-msgid "Various bug fixes"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:161
-msgid "elementary, Inc."
-msgstr "elementary, Inc."
 
 #~ msgid "Greeter"
 #~ msgstr "Kirjautumisnäkymä"
