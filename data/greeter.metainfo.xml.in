@@ -35,6 +35,20 @@
   <update_contact>contact_at_elementary.io</update_contact>
 
   <releases>
+    <release version="7.0.0" date="2023-06-19" urgency="medium">
+      <description>
+        <p>Minor updates:</p>
+        <ul>
+          <li>Prevent a potential issue with dialogs that use portals</li>
+          <li>Fix potential issues with incorrect keyboard layout being set</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/greeter/issues/25">Mask corners</issue>
+      </issues>
+    </release>
+
     <release version="6.1.1" date="2022-11-15" urgency="medium">
       <description>
         <p>Minor updates:</p>
@@ -87,18 +101,7 @@
       </description>
     </release>
 
-    <release version="6.0.0" date="2021-07-14" urgency="medium">
-      <description>
-        <ul>
-          <li>Add multitouch finger tracking</li>
-          <li>Add keyboard layout support</li>
-          <li>New colorful avatar fallbacks</li>
-          <li>Fix clock when resuming from sleep</li>
-          <li>Updated translations</li>
-        </ul>
-      </description>
-    </release>
-
+    <release version="6.0.0" date="2021-07-14" urgency="medium" />
     <release version="5.0.4" date="2020-05-28" urgency="medium" />
     <release version="5.0.3" date="2020-04-05" urgency="medium" />
     <release version="5.0.2" date="2020-02-25" urgency="medium" />
