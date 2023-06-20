@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-19 17:04+0000\n"
-"PO-Revision-Date: 2022-05-20 21:02+0000\n"
+"PO-Revision-Date: 2023-06-21 16:07+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
-"Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/ja/>\n"
+"Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
@@ -39,11 +39,11 @@ msgstr "そのほかのアップデート:"
 
 #: data/greeter.metainfo.xml.in:42
 msgid "Prevent a potential issue with dialogs that use portals"
-msgstr ""
+msgstr "ポータルを使用するダイアログに関連する潜在的なバグを修正"
 
 #: data/greeter.metainfo.xml.in:43
 msgid "Fix potential issues with incorrect keyboard layout being set"
-msgstr ""
+msgstr "不適切なキーボードレイアウトが設定されることがある不具合を修正"
 
 #: data/greeter.metainfo.xml.in:44 data/greeter.metainfo.xml.in:56
 #: data/greeter.metainfo.xml.in:72 data/greeter.metainfo.xml.in:85
