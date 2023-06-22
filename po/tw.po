@@ -1,26 +1,26 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-04 11:42+0000\n"
+"POT-Creation-Date: 2023-06-19 17:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 
-#: compositor/WindowManager.vala:321
+#: compositor/WindowManager.vala:324
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: compositor/WindowManager.vala:328
+#: compositor/WindowManager.vala:331
 msgid "Keep new display settings?"
 msgstr ""
 
-#: compositor/WindowManager.vala:332
+#: compositor/WindowManager.vala:335
 msgid "Keep Settings"
 msgstr ""
 
-#: compositor/WindowManager.vala:333
+#: compositor/WindowManager.vala:336
 msgid "Use Previous Settings"
 msgstr ""
 
