@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-04 11:42+0000\n"
+"POT-Creation-Date: 2023-06-19 17:04+0000\n"
 "PO-Revision-Date: 2021-11-01 07:03+0000\n"
 "Last-Translator: Yuchen Deng <loaden@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
@@ -19,126 +19,82 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: data/greeter.appdata.xml.in:7
+#: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:8
+#: data/greeter.metainfo.xml.in:10
 msgid "Unlock or log in to your device"
 msgstr "解锁或登录设备"
 
-#: data/greeter.appdata.xml.in:23 data/greeter.appdata.xml.in:39
-#: data/greeter.appdata.xml.in:51 data/greeter.appdata.xml.in:64
+#: data/greeter.metainfo.xml.in:33
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
+#: data/greeter.metainfo.xml.in:40 data/greeter.metainfo.xml.in:54
+#: data/greeter.metainfo.xml.in:70 data/greeter.metainfo.xml.in:83
+#: data/greeter.metainfo.xml.in:97
 msgid "Minor updates:"
 msgstr "次要更新："
 
-#: data/greeter.appdata.xml.in:25 data/greeter.appdata.xml.in:41
-#: data/greeter.appdata.xml.in:53 data/greeter.appdata.xml.in:66
-#: data/greeter.appdata.xml.in:77 data/greeter.appdata.xml.in:84
-#: data/greeter.appdata.xml.in:92 data/greeter.appdata.xml.in:100
-#: data/greeter.appdata.xml.in:114
+#: data/greeter.metainfo.xml.in:42
+msgid "Prevent a potential issue with dialogs that use portals"
+msgstr ""
+
+#: data/greeter.metainfo.xml.in:43
+msgid "Fix potential issues with incorrect keyboard layout being set"
+msgstr ""
+
+#: data/greeter.metainfo.xml.in:44 data/greeter.metainfo.xml.in:56
+#: data/greeter.metainfo.xml.in:72 data/greeter.metainfo.xml.in:85
+#: data/greeter.metainfo.xml.in:99
 msgid "Updated translations"
 msgstr "翻译更新"
 
-#: data/greeter.appdata.xml.in:35
+#: data/greeter.metainfo.xml.in:66
 msgid "New Features:"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:37
+#: data/greeter.metainfo.xml.in:68
 msgid "Provide panel background color interface"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:47 data/greeter.appdata.xml.in:59
+#: data/greeter.metainfo.xml.in:79 data/greeter.metainfo.xml.in:92
 msgid "Improvements:"
 msgstr "改进："
 
-#: data/greeter.appdata.xml.in:49
+#: data/greeter.metainfo.xml.in:81
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:61
+#: data/greeter.metainfo.xml.in:94
 msgid "Hide clock during initial setup"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:62
+#: data/greeter.metainfo.xml.in:95
 msgid "Use selected accent color for logged in checkmark"
 msgstr ""
 
-#: data/greeter.appdata.xml.in:73
-msgid "Add multitouch finger tracking"
-msgstr ""
+#~ msgid "Ensure that manual login is available when users are hidden"
+#~ msgstr "当有用户被隐藏时，将可以使用手动登录"
 
-#: data/greeter.appdata.xml.in:74
-msgid "Add keyboard layout support"
-msgstr ""
+#~ msgid "Enable sounds in greeter"
+#~ msgstr "在登录界面里启用音效"
 
-#: data/greeter.appdata.xml.in:75
-msgid "New colorful avatar fallbacks"
-msgstr ""
+#~ msgid "Select password text on error instead of immediately clearing it"
+#~ msgstr "密码出错时选中输入框，而不是立刻清空"
 
-#: data/greeter.appdata.xml.in:76
-msgid "Fix clock when resuming from sleep"
-msgstr ""
+#~ msgid "Code cleanup"
+#~ msgstr "代码整理"
 
-#: data/greeter.appdata.xml.in:91
-msgid "Fix an issue with media keys"
-msgstr ""
+#~ msgid "New card-based appearance"
+#~ msgstr "基于卡片的新外观"
 
-#: data/greeter.appdata.xml.in:99
-msgid "Ensure that manual login is available when users are hidden"
-msgstr "当有用户被隐藏时，将可以使用手动登录"
+#~ msgid "Improved HiDPI support"
+#~ msgstr "HiDPI 支持改进"
 
-#: data/greeter.appdata.xml.in:107
-msgid "Save last user on attempted login"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:108
-msgid "Handle all background aspect ratios"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:109
-msgid "Give non-focused user cards smaller usernames"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:110
-msgid "Better respect NumLock settings"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:111
-msgid "Enable sounds in greeter"
-msgstr "在登录界面里启用音效"
-
-#: data/greeter.appdata.xml.in:112
-msgid "Select password text on error instead of immediately clearing it"
-msgstr "密码出错时选中输入框，而不是立刻清空"
-
-#: data/greeter.appdata.xml.in:113
-msgid "Code cleanup"
-msgstr "代码整理"
-
-#: data/greeter.appdata.xml.in:120
-msgid "Extensive overhaul"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:122
-msgid "New card-based appearance"
-msgstr "基于卡片的新外观"
-
-#: data/greeter.appdata.xml.in:123
-msgid "Improved HiDPI support"
-msgstr "HiDPI 支持改进"
-
-#: data/greeter.appdata.xml.in:124
-msgid "AccountsService functionality"
-msgstr ""
-
-#: data/greeter.appdata.xml.in:125
-msgid "Various bug fixes"
-msgstr "一些 bug 修复"
-
-#: data/greeter.appdata.xml.in:161
-msgid "elementary, Inc."
-msgstr "elementary, Inc."
+#~ msgid "Various bug fixes"
+#~ msgstr "一些 bug 修复"
 
 #~ msgid "Greeter"
 #~ msgstr "登录界面"

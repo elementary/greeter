@@ -115,6 +115,8 @@ namespace GreeterCompositor {
             stage.remove_child (top_window_group);
             ui_group.add_child (top_window_group);
 
+            MaskCorners.init (this);
+
             /*keybindings*/
 
             KeyBinding.set_custom_handler ("switch-to-workspace-first", () => {});
