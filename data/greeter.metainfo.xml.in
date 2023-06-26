@@ -46,6 +46,7 @@
       </description>
       <issues>
         <issue url="https://github.com/elementary/greeter/issues/25">Mask corners</issue>
+        <issue url="https://github.com/elementary/greeter/issues/541">Some shortcuts to switch keyboard layout does not work on lockscreen</issue>
       </issues>
     </release>
 
