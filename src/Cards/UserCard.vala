@@ -290,7 +290,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             }
         });
 
-        update_style ();
+        // initially update_style is called inside `set_settings`
         notify["prefers-accent-color"].connect (() => {
             update_style ();
         });
@@ -301,12 +301,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private void update_style () {
-        var gtksettings = Gtk.Settings.get_default ();
-        gtksettings.gtk_theme_name = "io.elementary.stylesheet." + accent_to_string (prefers_accent_color);
-
-        var style_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, null);
-        logged_in_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        password_entry_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
+        interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (prefers_accent_color));
     }
 
     private string accent_to_string (int i) {
@@ -423,6 +419,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         set_keyboard_layouts ();
         set_mouse_touchpad_settings ();
+        update_style ();
     }
 
     private void set_keyboard_layouts () {
