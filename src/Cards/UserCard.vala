@@ -47,7 +47,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private weak Gtk.StyleContext main_grid_style_context;
     private weak Gtk.StyleContext password_entry_context;
 
-    private bool needs_keyboard_layout_set = false;
+    private bool needs_settings_set = false;
 
     construct {
         need_password = true;
@@ -379,8 +379,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
             }
         }
 
-        if (needs_keyboard_layout_set) {
-            set_keyboard_layouts ();
+        if (needs_settings_set) {
+            set_settings ();
         }
 
         if (act_user.locked) {
@@ -415,12 +415,17 @@ public class Greeter.UserCard : Greeter.BaseCard {
         }
     }
 
-    public void set_keyboard_layouts () {
+    public void set_settings () {
         if (!act_user.is_loaded) {
-            needs_keyboard_layout_set = true;
+            needs_settings_set = true;
             return;
         }
 
+        set_keyboard_layouts ();
+        set_mouse_touchpad_settings ();
+    }
+
+    private void set_keyboard_layouts () {
         var settings = new GLib.Settings ("org.gnome.desktop.input-sources");
 
         Variant[] elements = {};
@@ -436,6 +441,28 @@ public class Greeter.UserCard : Greeter.BaseCard {
         settings.set_value ("sources", list);
 
         settings.set_value ("current", settings_act.active_keyboard_layout);
+    }
+
+    private void set_mouse_touchpad_settings () {
+        var mouse_settings = new GLib.Settings ("org.gnome.desktop.peripherals.mouse");
+        mouse_settings.set_boolean ("left-handed", settings_act.left_handed);
+        mouse_settings.set_enum ("accel-profile", settings_act.accel_profile);
+
+        mouse_settings.set_boolean ("natural-scroll", settings_act.mouse_natural_scroll);
+        mouse_settings.set_double ("speed", settings_act.mouse_speed);
+
+        var touchpad_settings = new GLib.Settings ("org.gnome.desktop.peripherals.touchpad");
+        touchpad_settings.set_enum ("click-method", settings_act.touchpad_click_method);
+        touchpad_settings.set_boolean ("disable-while-typing", settings_act.touchpad_disable_while_typing);
+        touchpad_settings.set_boolean ("edge-scrolling-enabled", settings_act.touchpad_edge_scrolling);
+        touchpad_settings.set_boolean ("natural-scroll", settings_act.touchpad_natural_scroll);
+        touchpad_settings.set_enum ("send-events", settings_act.touchpad_send_events);
+        touchpad_settings.set_double ("speed", settings_act.touchpad_speed);
+        touchpad_settings.set_boolean ("tap-to-click", settings_act.touchpad_tap_to_click);
+        touchpad_settings.set_boolean ("two-finger-scrolling-enabled", settings_act.touchpad_two_finger_scrolling);
+
+        var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
+        interface_settings.set_int ("cursor-size", settings_act.cursor_size);
     }
 
     public UserCard (LightDM.User lightdm_user) {
