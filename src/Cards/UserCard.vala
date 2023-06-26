@@ -305,6 +305,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
         interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (prefers_accent_color));
     }
 
+    private void set_check_style () {
+        // Override check's accent_color so that it *always* uses user's preferred color
+        var style_provider = Gtk.CssProvider.get_named ("io.elementary.stylesheet." + accent_to_string (prefers_accent_color), null);
+        logged_in_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+    }
+
     private string accent_to_string (int i) {
         switch (i) {
             case 1:
@@ -374,6 +380,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
                 critical (e.message);
             }
         }
+
+        set_check_style ();
 
         if (needs_settings_set) {
             set_settings ();
