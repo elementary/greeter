@@ -144,6 +144,31 @@ namespace GreeterCompositor {
 
             KeyBinding.set_custom_handler ("show-desktop", () => {});
 
+            /* gsd seems to block its 'screenreader' shortcut, so we handle it ourselves */
+            var gsd_schema = GLib.SettingsSchemaSource.get_default ().lookup ("org.gnome.settings-daemon.plugins.media-keys", true);
+            if (gsd_schema != null && gsd_schema.has_key ("screenreader")) {
+                var gsd_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.media-keys");
+                var applications_settings = new GLib.Settings ("org.gnome.desktop.a11y.applications");
+                display.add_keybinding (
+                    "screenreader",
+                    gsd_settings,
+                    Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
+                    () => {
+                        Gdk.beep ();
+                        applications_settings.set_value (
+                            "screen-reader-enabled",
+                            !applications_settings.get_boolean ("screen-reader-enabled")
+                        );
+                    }
+                );
+            }
+
+            var applications_settings = new GLib.Settings ("org.gnome.desktop.a11y.applications");
+            applications_settings.set_boolean (
+                "screen-reader-enabled",
+                true
+            );
+
             stage.show ();
 
             Idle.add (() => {
