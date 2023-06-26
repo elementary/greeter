@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-19 17:04+0000\n"
-"PO-Revision-Date: 2023-06-13 10:07+0000\n"
-"Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
-"Language-Team: French <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/fr/>\n"
+"PO-Revision-Date: 2023-06-25 07:07+0000\n"
+"Last-Translator: Corentin Noël <tintou@noel.tf>\n"
+"Language-Team: French <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,10 +40,12 @@ msgstr "Mises à jour mineures :"
 #: data/greeter.metainfo.xml.in:42
 msgid "Prevent a potential issue with dialogs that use portals"
 msgstr ""
+"Empêche un problème potentiel avec les boîtes de dialogue qui utilisent des "
+"portails"
 
 #: data/greeter.metainfo.xml.in:43
 msgid "Fix potential issues with incorrect keyboard layout being set"
-msgstr ""
+msgstr "Correction du mauvais agencement de clavier activé par défaut"
 
 #: data/greeter.metainfo.xml.in:44 data/greeter.metainfo.xml.in:56
 #: data/greeter.metainfo.xml.in:72 data/greeter.metainfo.xml.in:85

@@ -438,10 +438,38 @@ public class Greeter.UserCard : Greeter.BaseCard {
             elements += result;
         }
 
-        GLib.Variant list = new GLib.Variant.array (new VariantType ("(ss)"), elements);
-        settings.set_value ("sources", list);
+        GLib.Variant layouts_list = new GLib.Variant.array (new VariantType ("(ss)"), elements);
+        settings.set_value ("sources", layouts_list);
 
         settings.set_value ("current", settings_act.active_keyboard_layout);
+
+        string[] options = {};
+        foreach (var option in settings_act.xkb_options) {
+            options += option.option;
+        }
+        settings.set_value ("xkb-options", options);
+    }
+
+    private void set_mouse_touchpad_settings () {
+        var mouse_settings = new GLib.Settings ("org.gnome.desktop.peripherals.mouse");
+        mouse_settings.set_boolean ("left-handed", settings_act.left_handed);
+        mouse_settings.set_enum ("accel-profile", settings_act.accel_profile);
+
+        mouse_settings.set_boolean ("natural-scroll", settings_act.mouse_natural_scroll);
+        mouse_settings.set_double ("speed", settings_act.mouse_speed);
+
+        var touchpad_settings = new GLib.Settings ("org.gnome.desktop.peripherals.touchpad");
+        touchpad_settings.set_enum ("click-method", settings_act.touchpad_click_method);
+        touchpad_settings.set_boolean ("disable-while-typing", settings_act.touchpad_disable_while_typing);
+        touchpad_settings.set_boolean ("edge-scrolling-enabled", settings_act.touchpad_edge_scrolling);
+        touchpad_settings.set_boolean ("natural-scroll", settings_act.touchpad_natural_scroll);
+        touchpad_settings.set_enum ("send-events", settings_act.touchpad_send_events);
+        touchpad_settings.set_double ("speed", settings_act.touchpad_speed);
+        touchpad_settings.set_boolean ("tap-to-click", settings_act.touchpad_tap_to_click);
+        touchpad_settings.set_boolean ("two-finger-scrolling-enabled", settings_act.touchpad_two_finger_scrolling);
+
+        var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
+        interface_settings.set_int ("cursor-size", settings_act.cursor_size);
     }
 
     private void set_mouse_touchpad_settings () {
