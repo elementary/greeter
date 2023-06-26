@@ -290,11 +290,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
             }
         });
 
-        // initially update_style is called inside `set_settings`
-        notify["prefers-accent-color"].connect (() => {
-            update_style ();
-        });
-
         grab_focus.connect (() => {
             password_entry.grab_focus_without_selecting ();
         });
