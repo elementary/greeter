@@ -437,10 +437,16 @@ public class Greeter.UserCard : Greeter.BaseCard {
             elements += result;
         }
 
-        GLib.Variant list = new GLib.Variant.array (new VariantType ("(ss)"), elements);
-        settings.set_value ("sources", list);
+        GLib.Variant layouts_list = new GLib.Variant.array (new VariantType ("(ss)"), elements);
+        settings.set_value ("sources", layouts_list);
 
         settings.set_value ("current", settings_act.active_keyboard_layout);
+
+        string[] options = {};
+        foreach (var option in settings_act.xkb_options) {
+            options += option.option;
+        }
+        settings.set_value ("xkb-options", options);
     }
 
     private void set_mouse_touchpad_settings () {
