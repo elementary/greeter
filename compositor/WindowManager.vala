@@ -46,6 +46,10 @@ namespace GreeterCompositor {
 
         Meta.PluginInfo info;
 
+        // Used to toggle screenreader
+        private GLib.Settings application_settings;
+        private int reader_pid = 0;
+
         //WindowSwitcher? winswitcher = null;
         //ActivatableComponent? workspace_view = null;
         //ActivatableComponent? window_overview = null;
@@ -149,6 +153,9 @@ namespace GreeterCompositor {
                so we handle it ourselves
                (the same thing is done in a11y indicator as well)
              */
+            application_settings = new GLib.Settings ("org.gnome.desktop.a11y.applications");
+            application_settings.changed["screen-reader-enabled"].connect (toggle_screen_reader);
+
             var gsd_schema = GLib.SettingsSchemaSource.get_default ().lookup ("org.gnome.settings-daemon.plugins.media-keys", true);
             if (gsd_schema != null && gsd_schema.has_key ("screenreader")) {
                 var gsd_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.media-keys");
@@ -158,15 +165,14 @@ namespace GreeterCompositor {
                     "screenreader",
                     gsd_settings,
                     Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
-                    toggle_screen_reader
+                    () => {
+                        application_settings.set_boolean (
+                            "screen-reader-enabled",
+                            !application_settings.get_boolean ("screen-reader-enabled")
+                        );
+                    }
                 );
             }
-
-            var applications_settings = new GLib.Settings ("org.gnome.desktop.a11y.applications");
-            applications_settings.set_boolean (
-                "screen-reader-enabled",
-                true
-            );
 
             stage.show ();
 
@@ -191,9 +197,8 @@ namespace GreeterCompositor {
             return list.to_array ();
         }
 
-        private int reader_pid = 0;
         private void toggle_screen_reader () {
-            if (reader_pid == 0) {
+            if (reader_pid == 0 && application_settings.get_boolean ("screen-reader-enabled")) {
                 try {
                     string[] argv;
                     Shell.parse_argv ("orca --replace", out argv);
@@ -201,7 +206,7 @@ namespace GreeterCompositor {
                 } catch (Error e) {
                     warning (e.message);
                 }
-            } else {
+            } else if (reader_pid != 0 && !application_settings.get_boolean ("screen-reader-enabled")) {
                 Posix.kill (reader_pid, Posix.Signal.QUIT);
                 Posix.waitpid (reader_pid, null, 0);
                 reader_pid = 0;
