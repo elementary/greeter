@@ -144,22 +144,21 @@ namespace GreeterCompositor {
 
             KeyBinding.set_custom_handler ("show-desktop", () => {});
 
-            /* gsd seems to block its 'screenreader' shortcut, so we handle it ourselves */
+            /* orca (screenreader) doesn't listen to it's
+               org.gnome.desktop.a11y.applications screen-reader-enabled key
+               so we handle it ourselves
+               (the same thing is done in a11y indicator as well)
+             */
             var gsd_schema = GLib.SettingsSchemaSource.get_default ().lookup ("org.gnome.settings-daemon.plugins.media-keys", true);
             if (gsd_schema != null && gsd_schema.has_key ("screenreader")) {
                 var gsd_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.media-keys");
-                var applications_settings = new GLib.Settings ("org.gnome.desktop.a11y.applications");
+                display.remove_keybinding ("screenreader"); // remove gsd's shortcut
+
                 display.add_keybinding (
                     "screenreader",
                     gsd_settings,
                     Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
-                    () => {
-                        Gdk.beep ();
-                        applications_settings.set_value (
-                            "screen-reader-enabled",
-                            !applications_settings.get_boolean ("screen-reader-enabled")
-                        );
-                    }
+                    toggle_screen_reader
                 );
             }
 
@@ -190,6 +189,23 @@ namespace GreeterCompositor {
             }
 
             return list.to_array ();
+        }
+
+        private int reader_pid = 0;
+        private void toggle_screen_reader () {
+            if (reader_pid == 0) {
+                try {
+                    string[] argv;
+                    Shell.parse_argv ("orca --replace", out argv);
+                    Process.spawn_async (null, argv, null, SpawnFlags.SEARCH_PATH, null, out reader_pid);
+                } catch (Error e) {
+                    warning (e.message);
+                }
+            } else {
+                Posix.kill (reader_pid, Posix.Signal.KILL);
+                Posix.waitpid (reader_pid, null, 0);
+                reader_pid = 0;
+            }
         }
 
         public override void show_window_menu_for_rect (Meta.Window window, Meta.WindowMenuType menu, Meta.Rectangle rect) {
