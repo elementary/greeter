@@ -156,24 +156,6 @@ namespace GreeterCompositor {
             application_settings = new GLib.Settings ("org.gnome.desktop.a11y.applications");
             application_settings.changed["screen-reader-enabled"].connect (toggle_screen_reader);
 
-            var gsd_schema = GLib.SettingsSchemaSource.get_default ().lookup ("org.gnome.settings-daemon.plugins.media-keys", true);
-            if (gsd_schema != null && gsd_schema.has_key ("screenreader")) {
-                var gsd_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.media-keys");
-                display.remove_keybinding ("screenreader"); // remove gsd's shortcut
-
-                display.add_keybinding (
-                    "screenreader",
-                    gsd_settings,
-                    Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
-                    () => {
-                        application_settings.set_boolean (
-                            "screen-reader-enabled",
-                            !application_settings.get_boolean ("screen-reader-enabled")
-                        );
-                    }
-                );
-            }
-
             stage.show ();
 
             Idle.add (() => {
