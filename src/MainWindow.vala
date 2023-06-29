@@ -28,6 +28,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private Hdy.Carousel carousel;
     private LightDM.Greeter lightdm_greeter;
     private Greeter.Settings settings;
+    private Gtk.Button guest_login_button;
     private Gtk.ToggleButton manual_login_button;
     private Greeter.DateTimeWidget datetime_widget;
     private unowned Greeter.BaseCard current_card;
@@ -60,7 +61,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         set_visual (get_screen ().get_rgba_visual ());
 
-        var guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
+        guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
 
         manual_login_button = new Gtk.ToggleButton.with_label (_("Manual Login…"));
 
@@ -70,15 +71,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         extra_login_grid.column_spacing = 12;
         extra_login_grid.column_homogeneous = true;
 
-        try {
-            var gtksettings = Gtk.Settings.get_default ();
-            gtksettings.gtk_icon_theme_name = "elementary";
-            gtksettings.gtk_theme_name = "io.elementary.stylesheet.blueberry";
-
-            var css_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, "dark");
-            guest_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-            manual_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        } catch (Error e) {}
+        update_style ();
+        unowned var gtk_settings = Gtk.Settings.get_default ();
+        gtk_settings.notify["gtk-theme-name"].connect (update_style);
 
         datetime_widget = new Greeter.DateTimeWidget ();
         datetime_widget.halign = Gtk.Align.CENTER;
@@ -277,6 +272,13 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 warning ("Unable to spawn numlockx to set numlock state");
             }
         }
+    }
+
+    private void update_style () {
+        unowned var gtksettings = Gtk.Settings.get_default ();
+        unowned var css_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, "dark");
+        guest_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        manual_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     private void maximize_and_focus () {

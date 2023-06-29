@@ -290,23 +290,20 @@ public class Greeter.UserCard : Greeter.BaseCard {
             }
         });
 
-        update_style ();
-        notify["prefers-accent-color"].connect (() => {
-            update_style ();
-        });
-
         grab_focus.connect (() => {
             password_entry.grab_focus_without_selecting ();
         });
     }
 
     private void update_style () {
-        var gtksettings = Gtk.Settings.get_default ();
-        gtksettings.gtk_theme_name = "io.elementary.stylesheet." + accent_to_string (prefers_accent_color);
+        var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
+        interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (prefers_accent_color));
+    }
 
-        var style_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, null);
+    private void set_check_style () {
+        // Override check's accent_color so that it *always* uses user's preferred color
+        var style_provider = Gtk.CssProvider.get_named ("io.elementary.stylesheet." + accent_to_string (prefers_accent_color), null);
         logged_in_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        password_entry_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     private string accent_to_string (int i) {
@@ -379,6 +376,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
             }
         }
 
+        set_check_style ();
+
         if (needs_settings_set) {
             set_settings ();
         }
@@ -424,6 +423,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         set_keyboard_layouts ();
         set_mouse_touchpad_settings ();
         set_night_light_settings ();
+        update_style ();
     }
 
     private void set_keyboard_layouts () {
