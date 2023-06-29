@@ -202,7 +202,7 @@ namespace GreeterCompositor {
                     warning (e.message);
                 }
             } else {
-                Posix.kill (reader_pid, Posix.Signal.KILL);
+                Posix.kill (reader_pid, Posix.Signal.QUIT);
                 Posix.waitpid (reader_pid, null, 0);
                 reader_pid = 0;
             }
