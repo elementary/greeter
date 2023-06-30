@@ -161,28 +161,25 @@ public class Greeter.UserCard : Greeter.BaseCard {
             GLib.BindingFlags.SYNC_CREATE
         );
 
-        var background_path = lightdm_user.background;
+        var background_path = "";
+        var path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
+        if (FileUtils.test (path, FileTest.EXISTS)) {
+            var background_directory = File.new_for_path (path);
+            try {
+                var enumerator = background_directory.enumerate_children (
+                    FileAttribute.STANDARD_NAME,
+                    FileQueryInfoFlags.NONE
+                );
 
-        if (background_path == null) {
-            string path = GLib.Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
-            if (GLib.FileUtils.test (path, FileTest.EXISTS)) {
-                var background_directory = GLib.File.new_for_path (path);
-                try {
-                    var enumerator = background_directory.enumerate_children (
-                        GLib.FileAttribute.STANDARD_NAME,
-                        GLib.FileQueryInfoFlags.NONE
-                    );
-
-                    GLib.FileInfo file_info;
-                    while ((file_info = enumerator.next_file ()) != null) {
-                        if (file_info.get_file_type () == GLib.FileType.REGULAR) {
-                            background_path = Path.build_filename (path, file_info.get_name ());
-                            break;
-                        }
+                FileInfo file_info;
+                while ((file_info = enumerator.next_file ()) != null) {
+                    if (file_info.get_file_type () == FileType.REGULAR) {
+                        background_path = Path.build_filename (path, file_info.get_name ());
+                        break;
                     }
-                } catch (Error e) {
-                    critical (e.message);
                 }
+            } catch (Error e) {
+                critical (e.message);
             }
         }
 
