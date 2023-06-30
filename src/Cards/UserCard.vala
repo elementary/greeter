@@ -49,12 +49,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private bool needs_settings_set = false;
 
-    public Gtk.Label username_label;
-
     construct {
         need_password = true;
 
-        username_label = new Gtk.Label (lightdm_user.display_name) {
+        var username_label = new Gtk.Label (lightdm_user.display_name) {
             hexpand = true,
             margin = 24,
             margin_bottom = 12
@@ -479,8 +477,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         interface_settings.set_value ("cursor-size", settings_act.cursor_size);
         interface_settings.set_value ("locate-pointer", settings_act.locate_pointer);
         interface_settings.set_value ("text-scaling-factor", settings_act.text_scaling_factor);
-
-        username_label.label = "%f".printf (settings_act.text_scaling_factor);
     }
 
     public UserCard (LightDM.User lightdm_user) {
