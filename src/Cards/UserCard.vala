@@ -49,6 +49,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private weak Gtk.StyleContext main_grid_style_context;
     private weak Gtk.StyleContext password_entry_context;
 
+    private string wallpaper_path;
     private bool needs_settings_set = false;
 
     construct {
@@ -163,6 +164,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
             GLib.BindingFlags.SYNC_CREATE
         );
 
+        wallpaper_path = get_wallpaper_path ();
+
         placeholder_background_image = new Greeter.BackgroundImage.from_color ("#000000");
 
         main_grid = new Gtk.Grid () {
@@ -272,11 +275,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         });
     }
 
-    private void update_style () {
-        var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
-        interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (prefers_accent_color));
-    }
-
     private void set_check_style () {
         // Override check's accent_color so that it *always* uses user's preferred color
         var style_provider = Gtk.CssProvider.get_named ("io.elementary.stylesheet." + accent_to_string (prefers_accent_color), null);
@@ -292,33 +290,37 @@ public class Greeter.UserCard : Greeter.BaseCard {
         if (settings_act.picture_options == 0) {
             background_image = new Greeter.BackgroundImage.from_color (settings_act.primary_color);
         } else {
-            var background_path = "";
-            var path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
-            if (FileUtils.test (path, FileTest.EXISTS)) {
-                var background_directory = File.new_for_path (path);
-                try {
-                    var enumerator = background_directory.enumerate_children (
-                        FileAttribute.STANDARD_NAME,
-                        FileQueryInfoFlags.NONE
-                    );
-    
-                    FileInfo file_info;
-                    while ((file_info = enumerator.next_file ()) != null) {
-                        if (file_info.get_file_type () == FileType.REGULAR) {
-                            background_path = Path.build_filename (path, file_info.get_name ());
-                            break;
-                        }
-                    }
-                } catch (Error e) {
-                    critical (e.message);
-                }
-            }
-
-            background_image = new Greeter.BackgroundImage.from_path (background_path);
+            background_image = new Greeter.BackgroundImage.from_path (wallpaper_path);
         }
 
         main_grid.attach (background_image, 0, 0);
         main_grid.show_all ();
+    }
+
+    private string get_wallpaper_path () {
+        var background_path = "";
+        var path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
+        if (FileUtils.test (path, FileTest.EXISTS)) {
+            var background_directory = File.new_for_path (path);
+            try {
+                var enumerator = background_directory.enumerate_children (
+                    FileAttribute.STANDARD_NAME,
+                    FileQueryInfoFlags.NONE
+                );
+
+                FileInfo file_info;
+                while ((file_info = enumerator.next_file ()) != null) {
+                    if (file_info.get_file_type () == FileType.REGULAR) {
+                        background_path = Path.build_filename (path, file_info.get_name ());
+                        break;
+                    }
+                }
+            } catch (Error e) {
+                critical (e.message);
+            }
+        }
+        
+        return background_path;
     }
 
     private string accent_to_string (int i) {
@@ -485,6 +487,21 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
         interface_settings.set_int ("cursor-size", settings_act.cursor_size);
+    }
+
+    private void update_style () {
+        var background_settings = new GLib.Settings ("org.gnome.desktop.background");
+        background_settings.set_enum ("picture-options", settings_act.picture_options);
+        background_settings.set_value ("picture-uri", File.new_for_path (wallpaper_path).get_uri ());
+        background_settings.set_value ("primary-color", settings_act.primary_color);
+
+        if (prefers_accent_color == 0) {
+            AccentColorManager.update_accent_color ();
+            return;
+        }
+
+        var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
+        interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (prefers_accent_color));
     }
 
     public UserCard (LightDM.User lightdm_user) {
