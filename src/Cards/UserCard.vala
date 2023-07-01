@@ -41,6 +41,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
+    private Greeter.BackgroundImage placeholder_background_image;
+    private Gtk.Grid main_grid;
 
     private SelectionCheck logged_in;
     private unowned Gtk.StyleContext logged_in_context;
@@ -161,37 +163,15 @@ public class Greeter.UserCard : Greeter.BaseCard {
             GLib.BindingFlags.SYNC_CREATE
         );
 
-        var background_path = "";
-        var path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
-        if (FileUtils.test (path, FileTest.EXISTS)) {
-            var background_directory = File.new_for_path (path);
-            try {
-                var enumerator = background_directory.enumerate_children (
-                    FileAttribute.STANDARD_NAME,
-                    FileQueryInfoFlags.NONE
-                );
+        placeholder_background_image = new Greeter.BackgroundImage.from_color ("#000000");
 
-                FileInfo file_info;
-                while ((file_info = enumerator.next_file ()) != null) {
-                    if (file_info.get_file_type () == FileType.REGULAR) {
-                        background_path = Path.build_filename (path, file_info.get_name ());
-                        break;
-                    }
-                }
-            } catch (Error e) {
-                critical (e.message);
-            }
-        }
-
-        var background_image = new Greeter.BackgroundImage (background_path);
-
-        var main_grid = new Gtk.Grid () {
+        main_grid = new Gtk.Grid () {
             margin_bottom = 48,
             orientation = Gtk.Orientation.VERTICAL
         };
-        main_grid.add (background_image);
-        main_grid.add (username_label);
-        main_grid.add (form_revealer);
+        main_grid.attach (placeholder_background_image, 0, 0);
+        main_grid.attach (username_label, 0, 1);
+        main_grid.attach (form_revealer, 0, 2);
 
         main_grid_style_context = main_grid.get_style_context ();
         main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
@@ -303,6 +283,44 @@ public class Greeter.UserCard : Greeter.BaseCard {
         logged_in_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
+    private void set_background_image () {
+        main_grid.remove (placeholder_background_image);
+        placeholder_background_image.destroy ();
+        placeholder_background_image = null;
+
+        Greeter.BackgroundImage background_image;
+        if (settings_act.picture_options == 0) {
+            background_image = new Greeter.BackgroundImage.from_color (settings_act.primary_color);
+        } else {
+            var background_path = "";
+            var path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
+            if (FileUtils.test (path, FileTest.EXISTS)) {
+                var background_directory = File.new_for_path (path);
+                try {
+                    var enumerator = background_directory.enumerate_children (
+                        FileAttribute.STANDARD_NAME,
+                        FileQueryInfoFlags.NONE
+                    );
+    
+                    FileInfo file_info;
+                    while ((file_info = enumerator.next_file ()) != null) {
+                        if (file_info.get_file_type () == FileType.REGULAR) {
+                            background_path = Path.build_filename (path, file_info.get_name ());
+                            break;
+                        }
+                    }
+                } catch (Error e) {
+                    critical (e.message);
+                }
+            }
+
+            background_image = new Greeter.BackgroundImage.from_path (background_path);
+        }
+
+        main_grid.attach (background_image, 0, 0);
+        main_grid.show_all ();
+    }
+
     private string accent_to_string (int i) {
         switch (i) {
             case 1:
@@ -373,6 +391,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             }
         }
 
+        set_background_image ();
         set_check_style ();
 
         if (needs_settings_set) {
