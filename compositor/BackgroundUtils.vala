@@ -22,7 +22,7 @@
  *   related to it are copied from Gala.DBus.
  */
 
- namespace BackgroundUtils {
+namespace BackgroundUtils {
     private const double SATURATION_WEIGHT = 1.5;
     private const double WEIGHT_THRESHOLD = 1.0;
 

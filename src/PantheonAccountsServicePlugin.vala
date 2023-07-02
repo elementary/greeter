@@ -20,6 +20,28 @@ interface Pantheon.SettingsDaemon.AccountsService : Object {
         public string name;
     }
 
+    public struct XkbOption {
+        public string option;
+    }
+
     public abstract KeyboardLayout[] keyboard_layouts { owned get; set; }
     public abstract uint active_keyboard_layout { get; set; }
+    public abstract XkbOption[] xkb_options { owned get; set; }
+
+    public abstract bool left_handed { get; set; }
+    public abstract int accel_profile { get; set; }
+
+    public abstract bool mouse_natural_scroll { get; set; }
+    public abstract double mouse_speed { get; set; }
+
+    public abstract int touchpad_click_method { get; set; }
+    public abstract bool touchpad_disable_while_typing { get; set; }
+    public abstract bool touchpad_edge_scrolling { get; set; }
+    public abstract bool touchpad_natural_scroll { get; set; }
+    public abstract int touchpad_send_events { get; set; }
+    public abstract double touchpad_speed { get; set; }
+    public abstract bool touchpad_tap_to_click { get; set; }
+    public abstract bool touchpad_two_finger_scrolling { get; set; }
+
+    public abstract int cursor_size { get; set; }
 }
