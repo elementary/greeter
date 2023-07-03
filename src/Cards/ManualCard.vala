@@ -26,7 +26,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
 
         username_entry = new Gtk.Entry () {
             hexpand = true,
-            input_purpose = Gtk.InputPurpose.FREE_FORM,
+            input_purpose = FREE_FORM,
             placeholder_text = _("Username"),
             primary_icon_name = "avatar-default-symbolic",
             secondary_icon_name = "go-jump-symbolic",
@@ -136,7 +136,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
 
             connecting = false;
             focus_username_entry ();
-            return GLib.Source.REMOVE;
+            return Source.REMOVE;
         });
     }
 
@@ -159,7 +159,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             grid_style_context.remove_class ("shake");
             entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
 
-            return GLib.Source.REMOVE;
+            return Source.REMOVE;
         });
     }
 }
