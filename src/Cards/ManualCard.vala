@@ -60,7 +60,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         form_grid.attach (password_box, 0, 3);
         form_grid.attach (session_button, 1, 2, 1, 2);
 
-        main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
+        main_box = new Gtk.Box (VERTICAL, 0) {
             margin_top = 12,
             margin_bottom = 12,
             margin_start = 12,
