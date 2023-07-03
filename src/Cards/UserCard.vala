@@ -422,6 +422,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         set_keyboard_layouts ();
         set_mouse_touchpad_settings ();
+        set_interface_settings ();
         set_night_light_settings ();
         update_style ();
     }
@@ -467,9 +468,16 @@ public class Greeter.UserCard : Greeter.BaseCard {
         touchpad_settings.set_double ("speed", settings_act.touchpad_speed);
         touchpad_settings.set_boolean ("tap-to-click", settings_act.touchpad_tap_to_click);
         touchpad_settings.set_boolean ("two-finger-scrolling-enabled", settings_act.touchpad_two_finger_scrolling);
+    }
 
+    private void set_interface_settings () {
         var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
-        interface_settings.set_int ("cursor-size", settings_act.cursor_size);
+        interface_settings.set_value ("cursor-blink", settings_act.cursor_blink);
+        interface_settings.set_value ("cursor-blink-time", settings_act.cursor_blink_time);
+        interface_settings.set_value ("cursor-blink-timeout", settings_act.cursor_blink_timeout);
+        interface_settings.set_value ("cursor-size", settings_act.cursor_size);
+        interface_settings.set_value ("locate-pointer", settings_act.locate_pointer);
+        interface_settings.set_value ("text-scaling-factor", settings_act.text_scaling_factor);
     }
 
     private void set_night_light_settings () {
