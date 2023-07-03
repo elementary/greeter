@@ -31,7 +31,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private SelectionCheck logged_in;
 
     private unowned Gtk.StyleContext logged_in_context;
-    private unowned Gtk.StyleContext main_grid_style_context;
+    private unowned Gtk.StyleContext main_box_style_context;
     private unowned Gtk.StyleContext password_entry_context;
 
     private bool needs_settings_set = false;
@@ -176,17 +176,17 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         var background_image = new Greeter.BackgroundImage (background_path);
 
-        var main_grid = new Gtk.Grid () {
+        var main_box = new Gtk.Box (VERTICAL, 0) {
             margin_bottom = 48
         };
-        main_grid.attach (background_image, 0, 0);
-        main_grid.attach (username_label, 0, 1);
-        main_grid.attach (form_revealer, 0, 2);
+        main_box.add (background_image);
+        main_box.add (username_label);
+        main_box.add (form_revealer);
 
-        main_grid_style_context = main_grid.get_style_context ();
-        main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
-        main_grid_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
-        main_grid_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        main_box_style_context = main_box.get_style_context ();
+        main_box_style_context.add_class (Granite.STYLE_CLASS_CARD);
+        main_box_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
+        main_box_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         update_collapsed_class ();
 
@@ -224,7 +224,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             margin_bottom = 12,
             margin_start = 12,
             margin_end = 12,
-            child = main_grid
+            child = main_box
         };
         card_overlay.add_overlay (avatar_overlay);
 
@@ -401,9 +401,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void update_collapsed_class () {
         if (show_input) {
-            main_grid_style_context.remove_class ("collapsed");
+            main_box_style_context.remove_class ("collapsed");
         } else {
-            main_grid_style_context.add_class ("collapsed");
+            main_box_style_context.add_class ("collapsed");
         }
     }
 
@@ -492,10 +492,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
         unowned var entry_style_context = password_entry.get_style_context ();
         entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
 
-        main_grid_style_context.add_class ("shake");
+        main_box_style_context.add_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
-            main_grid_style_context.remove_class ("shake");
+            main_box_style_context.remove_class ("shake");
             entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
 
             connecting = false;
