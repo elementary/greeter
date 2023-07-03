@@ -160,27 +160,11 @@ public class Greeter.UserCard : Greeter.BaseCard {
             "reveal-child",
             GLib.BindingFlags.SYNC_CREATE
         );
+        var background_path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper", "wallpaper");
+        var background_exists = FileUtils.test (background_path, FileTest.EXISTS) && FileUtils.test (background_path, FileTest.IS_REGULAR);
 
-        var background_path = "";
-        var path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
-        if (FileUtils.test (path, FileTest.EXISTS)) {
-            var background_directory = File.new_for_path (path);
-            try {
-                var enumerator = background_directory.enumerate_children (
-                    FileAttribute.STANDARD_NAME,
-                    FileQueryInfoFlags.NONE
-                );
-
-                FileInfo file_info;
-                while ((file_info = enumerator.next_file ()) != null) {
-                    if (file_info.get_file_type () == FileType.REGULAR) {
-                        background_path = Path.build_filename (path, file_info.get_name ());
-                        break;
-                    }
-                }
-            } catch (Error e) {
-                critical (e.message);
-            }
+        if (!background_exists) {
+            critical ("Background file does not exist");
         }
 
         var background_image = new Greeter.BackgroundImage (background_path);
