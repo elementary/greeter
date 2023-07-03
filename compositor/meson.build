@@ -64,6 +64,7 @@ compositor_files = files(
   'main.vala',
   'MaskCorners.vala',
   'MediaFeedback.vala',
+  'PointerLocator.vala',
   'SystemBackground.vala',
   'Utils.vala',
   'WindowManager.vala'

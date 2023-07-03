@@ -42,6 +42,8 @@ namespace GreeterCompositor {
          */
         public Clutter.Actor top_window_group { get; protected set; }
 
+        public PointerLocator pointer_locator { get; private set; }
+
         public Greeter.SystemBackground system_background { get; private set; }
 
         Meta.PluginInfo info;
@@ -119,6 +121,9 @@ namespace GreeterCompositor {
             stage.remove_child (top_window_group);
             ui_group.add_child (top_window_group);
 
+            pointer_locator = new PointerLocator (this);
+            ui_group.add_child (pointer_locator);
+
             MaskCorners.init (this);
 
             /*keybindings*/
@@ -154,6 +159,7 @@ namespace GreeterCompositor {
                (the same thing is done in a11y indicator as well)
              */
             application_settings = new GLib.Settings ("org.gnome.desktop.a11y.applications");
+            toggle_screen_reader (); // sync screen reader with gsettings key
             application_settings.changed["screen-reader-enabled"].connect (toggle_screen_reader);
 
             stage.show ();
@@ -340,6 +346,9 @@ namespace GreeterCompositor {
             return;
         }
 
+        public override void locate_pointer () {
+            pointer_locator.show_ripple ();
+        }
 
         public override void confirm_display_change () {
 #if HAS_MUTTER44
