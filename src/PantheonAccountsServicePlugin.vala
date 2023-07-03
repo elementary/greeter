@@ -15,6 +15,7 @@ interface Pantheon.AccountsService : Object {
 
 [DBus (name = "io.elementary.SettingsDaemon.AccountsService")]
 interface Pantheon.SettingsDaemon.AccountsService : Object {
+    /* Keyboard */
     public struct KeyboardLayout {
         public string backend;
         public string name;
@@ -28,6 +29,7 @@ interface Pantheon.SettingsDaemon.AccountsService : Object {
     public abstract uint active_keyboard_layout { get; set; }
     public abstract XkbOption[] xkb_options { owned get; set; }
 
+    /* Mouse and Touchpad */
     public abstract bool left_handed { get; set; }
     public abstract int accel_profile { get; set; }
 
@@ -43,6 +45,7 @@ interface Pantheon.SettingsDaemon.AccountsService : Object {
     public abstract bool touchpad_tap_to_click { get; set; }
     public abstract bool touchpad_two_finger_scrolling { get; set; }
 
+    /* Interface */
     public abstract bool cursor_blink { get; set; }
     public abstract int cursor_blink_time { get; set; }
     public abstract int cursor_blink_timeout { get; set; }
@@ -51,4 +54,17 @@ interface Pantheon.SettingsDaemon.AccountsService : Object {
     public abstract double text_scaling_factor { get; set; }
     public abstract int picture_options { get; set; }
     public abstract string primary_color { owned get; set; }
+
+    /* Night Light */
+    public struct Coordinates {
+        public double latitude;
+        public double longitude;
+    }
+
+    public abstract bool night_light_enabled { get; set; }
+    public abstract Coordinates night_light_last_coordinates { get; set; }
+    public abstract bool night_light_schedule_automatic { get; set; }
+    public abstract double night_light_schedule_from { get; set; }
+    public abstract double night_light_schedule_to { get; set; }
+    public abstract uint night_light_temperature { get; set; }
 }
