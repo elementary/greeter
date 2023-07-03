@@ -154,6 +154,7 @@ namespace GreeterCompositor {
                (the same thing is done in a11y indicator as well)
              */
             application_settings = new GLib.Settings ("org.gnome.desktop.a11y.applications");
+            toggle_screen_reader (); // sync screen reader with gsettings key
             application_settings.changed["screen-reader-enabled"].connect (toggle_screen_reader);
 
             stage.show ();
