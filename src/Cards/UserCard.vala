@@ -423,6 +423,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         set_keyboard_layouts ();
         set_mouse_touchpad_settings ();
         set_interface_settings ();
+        set_night_light_settings ();
         update_style ();
     }
 
@@ -477,6 +478,21 @@ public class Greeter.UserCard : Greeter.BaseCard {
         interface_settings.set_value ("cursor-size", settings_act.cursor_size);
         interface_settings.set_value ("locate-pointer", settings_act.locate_pointer);
         interface_settings.set_value ("text-scaling-factor", settings_act.text_scaling_factor);
+    }
+
+    private void set_night_light_settings () {
+        var night_light_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.color");
+        night_light_settings.set_value ("night-light-enabled", settings_act.night_light_enabled);
+
+        var latitude = new GLib.Variant.double (settings_act.night_light_last_coordinates.latitude);
+        var longitude = new GLib.Variant.double (settings_act.night_light_last_coordinates.longitude);
+        var coordinates = new GLib.Variant.tuple ({latitude, longitude});
+        night_light_settings.set_value ("night-light-last-coordinates", coordinates);
+
+        night_light_settings.set_value ("night-light-schedule-automatic", settings_act.night_light_schedule_automatic);
+        night_light_settings.set_value ("night-light-schedule-from", settings_act.night_light_schedule_from);
+        night_light_settings.set_value ("night-light-schedule-to", settings_act.night_light_schedule_to);
+        night_light_settings.set_value ("night-light-temperature", settings_act.night_light_temperature);
     }
 
     public UserCard (LightDM.User lightdm_user) {
