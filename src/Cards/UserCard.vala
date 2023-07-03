@@ -1,20 +1,6 @@
-/*
- * Copyright 2018–2021 elementary, Inc. (https://elementary.io)
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public
- * License along with this program; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1301 USA.
+ /*
+ * Copyright 2018-2023 elementary, Inc. (https://elementary.io)
+ * SPDX-License-Identifier: GPL-3.0-or-later
  *
  * Authors: Corentin Noël <corentin@elementary.io>
  */
@@ -38,24 +24,31 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Act.User act_user;
     private Pantheon.AccountsService greeter_act;
     private Pantheon.SettingsDaemon.AccountsService settings_act;
+
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
-
     private SelectionCheck logged_in;
+
     private unowned Gtk.StyleContext logged_in_context;
-    private weak Gtk.StyleContext main_grid_style_context;
-    private weak Gtk.StyleContext password_entry_context;
+    private unowned Gtk.StyleContext main_grid_style_context;
+    private unowned Gtk.StyleContext password_entry_context;
 
     private bool needs_settings_set = false;
+
+    public UserCard (LightDM.User lightdm_user) {
+        Object (lightdm_user: lightdm_user);
+    }
 
     construct {
         need_password = true;
 
         var username_label = new Gtk.Label (lightdm_user.display_name) {
             hexpand = true,
-            margin = 24,
-            margin_bottom = 12
+            margin_top = 24,
+            margin_bottom = 12,
+            margin_start = 24,
+            margin_end = 24,
         };
 
         unowned var username_label_context = username_label.get_style_context ();
@@ -123,36 +116,34 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         var disabled_message = new Gtk.Label (_("Account disabled"));
 
-        var disabled_grid = new Gtk.Grid () {
-            column_spacing = 6,
+        var disabled_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
             halign = Gtk.Align.CENTER,
             margin_top = 3
         };
-        disabled_grid.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-        disabled_grid.add (disabled_icon);
-        disabled_grid.add (disabled_message);
+        disabled_box.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        disabled_box.add (disabled_icon);
+        disabled_box.add (disabled_message);
 
         login_stack = new Gtk.Stack ();
         login_stack.add_named (password_grid, "password");
         login_stack.add_named (login_button, "button");
-        login_stack.add_named (disabled_grid, "disabled");
+        login_stack.add_named (disabled_box, "disabled");
 
-        var form_grid = new Gtk.Grid () {
-            column_spacing = 6,
-            margin = 24,
-            margin_bottom = 12,
+        var form_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
             margin_top = 12,
-            row_spacing = 12
+            margin_bottom = 12,
+            margin_start = 24,
+            margin_end = 24
         };
-        form_grid.add (login_stack);
-        form_grid.add (session_button);
+        form_box.add (login_stack);
+        form_box.add (session_button);
 
         form_revealer = new Gtk.Revealer () {
             margin_bottom = 12,
             reveal_child = true,
-            transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN
+            transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN,
+            child = form_box
         };
-        form_revealer.add (form_grid);
 
         bind_property (
             "show-input",
@@ -189,12 +180,11 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var background_image = new Greeter.BackgroundImage (background_path);
 
         var main_grid = new Gtk.Grid () {
-            margin_bottom = 48,
-            orientation = Gtk.Orientation.VERTICAL
+            margin_bottom = 48
         };
-        main_grid.add (background_image);
-        main_grid.add (username_label);
-        main_grid.add (form_revealer);
+        main_grid.attach (background_image, 0, 0);
+        main_grid.attach (username_label, 0, 1);
+        main_grid.attach (form_revealer, 0, 2);
 
         main_grid_style_context = main_grid.get_style_context ();
         main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
@@ -204,16 +194,19 @@ public class Greeter.UserCard : Greeter.BaseCard {
         update_collapsed_class ();
 
         var avatar = new Hdy.Avatar (64, lightdm_user.display_name, true) {
-            margin = 6
+            margin_top = 6,
+            margin_bottom = 6,
+            margin_start = 6,
+            margin_end = 6,
+            loadable_icon = new FileIcon (File.new_for_path (lightdm_user.image))
         };
-        avatar.loadable_icon = new FileIcon (File.new_for_path (lightdm_user.image));
 
         var avatar_overlay = new Gtk.Overlay () {
             halign = Gtk.Align.CENTER,
+            valign = Gtk.Align.START,
             margin_top = 100,
-            valign = Gtk.Align.START
+            child = avatar
         };
-        avatar_overlay.add (avatar);
 
         logged_in = new SelectionCheck () {
             halign = Gtk.Align.END,
@@ -230,9 +223,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
         }
 
         var card_overlay = new Gtk.Overlay () {
-            margin = 12
+            margin_top = 12,
+            margin_bottom = 12,
+            margin_start = 12,
+            margin_end = 12,
+            child = main_grid
         };
-        card_overlay.add (main_grid);
         card_overlay.add_overlay (avatar_overlay);
 
         add (card_overlay);
@@ -267,7 +263,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         // This makes all the animations synchonous
         form_revealer.size_allocate.connect ((alloc) => {
-            var total_height = form_grid.get_allocated_height () + form_grid.margin_top + form_grid.margin_bottom;
+            var total_height = form_box.get_allocated_height () + form_box.margin_top + form_box.margin_bottom;
             reveal_ratio = (double)alloc.height / (double)total_height;
         });
 
@@ -495,18 +491,13 @@ public class Greeter.UserCard : Greeter.BaseCard {
         night_light_settings.set_value ("night-light-temperature", settings_act.night_light_temperature);
     }
 
-    public UserCard (LightDM.User lightdm_user) {
-        Object (lightdm_user: lightdm_user);
-    }
-
     public override void wrong_credentials () {
-
-        weak Gtk.StyleContext entry_style_context = password_entry.get_style_context ();
+        unowned var entry_style_context = password_entry.get_style_context ();
         entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
 
         main_grid_style_context.add_class ("shake");
 
-        GLib.Timeout.add (ERROR_SHAKE_DURATION, () => {
+        Timeout.add (ERROR_SHAKE_DURATION, () => {
             main_grid_style_context.remove_class ("shake");
             entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
 
