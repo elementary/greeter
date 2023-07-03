@@ -484,10 +484,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var night_light_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.color");
         night_light_settings.set_value ("night-light-enabled", settings_act.night_light_enabled);
 
-        var first = new GLib.Variant.double (settings_act.night_light_last_coordinates.first);
-        var second = new GLib.Variant.double (settings_act.night_light_last_coordinates.second);
-        var result = new GLib.Variant.tuple ({first, second});
-        night_light_settings.set_value ("night-light-last-coordinates", result);
+        var latitude = new GLib.Variant.double (settings_act.night_light_last_coordinates.latitude);
+        var longitude = new GLib.Variant.double (settings_act.night_light_last_coordinates.longitude);
+        var coordinates = new GLib.Variant.tuple ({latitude, longitude});
+        night_light_settings.set_value ("night-light-last-coordinates", coordinates);
 
         night_light_settings.set_value ("night-light-schedule-automatic", settings_act.night_light_schedule_automatic);
         night_light_settings.set_value ("night-light-schedule-from", settings_act.night_light_schedule_from);
