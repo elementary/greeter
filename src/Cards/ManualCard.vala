@@ -75,8 +75,8 @@ public class Greeter.ManualCard : Greeter.BaseCard {
 
         child = main_box;
 
-        bind_property ("connecting", username_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
-        bind_property ("connecting", password_entry, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
+        bind_property ("connecting", username_entry, "sensitive", INVERT_BOOLEAN);
+        bind_property ("connecting", password_entry, "sensitive", INVERT_BOOLEAN);
 
         username_entry.activate.connect (() => do_connect_username (username_entry.text));
         password_entry.activate.connect (on_login);
