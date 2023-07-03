@@ -41,6 +41,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
+    private Greeter.BackgroundImage placeholder;
     private Gtk.Grid main_grid;
 
     private SelectionCheck logged_in;
@@ -162,11 +163,14 @@ public class Greeter.UserCard : Greeter.BaseCard {
             GLib.BindingFlags.SYNC_CREATE
         );
 
+        placeholder = new BackgroundImage.from_color ("ffffff");
+
         main_grid = new Gtk.Grid () {
             margin_bottom = 48,
             orientation = Gtk.Orientation.VERTICAL
         };
         // intentionally skipping 0,0 for user background;
+        main_grid.attach (placeholder, 0, 0);
         main_grid.attach (username_label, 0, 1);
         main_grid.attach (form_revealer, 0, 2);
 
@@ -276,32 +280,19 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private void set_background_image () {
+        main_grid.remove (placeholder);
+        placeholder.destroy ();
+        placeholder = null;
+
         Greeter.BackgroundImage background_image;
-        if (settings_act.picture_options == 0) {
+
+        var background_path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper", "wallpaper");
+        var background_image_exists = FileUtils.test (background_path, FileTest.EXISTS) && FileUtils.test (background_path, FileTest.IS_REGULAR);
+
+        if (settings_act.picture_options == 0 || !background_image_exists) {
+            warning ("PRIMARY COLOR %s", settings_act.primary_color);
             background_image = new Greeter.BackgroundImage.from_color (settings_act.primary_color);
         } else {
-            var background_path = "";
-            var path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
-            if (FileUtils.test (path, FileTest.EXISTS)) {
-                var background_directory = File.new_for_path (path);
-                try {
-                    var enumerator = background_directory.enumerate_children (
-                        FileAttribute.STANDARD_NAME,
-                        FileQueryInfoFlags.NONE
-                    );
-
-                    FileInfo file_info;
-                    while ((file_info = enumerator.next_file ()) != null) {
-                        if (file_info.get_file_type () == FileType.REGULAR) {
-                            background_path = Path.build_filename (path, file_info.get_name ());
-                            break;
-                        }
-                    }
-                } catch (Error e) {
-                    critical (e.message);
-                }
-            }
-
             background_image = new Greeter.BackgroundImage.from_path (background_path);
         }
 
