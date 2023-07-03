@@ -62,30 +62,30 @@ public class Greeter.UserCard : Greeter.BaseCard {
             "connecting",
             password_entry,
             "sensitive",
-            GLib.BindingFlags.INVERT_BOOLEAN
+            INVERT_BOOLEAN
         );
 
         var fingerprint_image = new Gtk.Image.from_icon_name (
             "fingerprint-symbolic",
-            Gtk.IconSize.BUTTON
+            BUTTON
         );
 
         bind_property (
             "use-fingerprint",
             fingerprint_image,
             "no-show-all",
-            GLib.BindingFlags.INVERT_BOOLEAN | GLib.BindingFlags.SYNC_CREATE
+            INVERT_BOOLEAN | SYNC_CREATE
         );
 
         bind_property (
             "use-fingerprint",
             fingerprint_image,
             "visible",
-            GLib.BindingFlags.SYNC_CREATE
+            SYNC_CREATE
         );
 
         var session_button = new Greeter.SessionButton () {
-            valign = Gtk.Align.START
+            valign = START
         };
 
         var caps_lock_revealer = new Greeter.CapsLockRevealer ();
@@ -98,7 +98,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         password_grid.attach (fingerprint_image, 1, 0);
         password_grid.attach (caps_lock_revealer, 0, 1, 2);
 
-        var size_group = new Gtk.SizeGroup (Gtk.SizeGroupMode.VERTICAL);
+        var size_group = new Gtk.SizeGroup (VERTICAL);
         size_group.add_widget (password_entry);
         size_group.add_widget (session_button);
 
@@ -109,14 +109,14 @@ public class Greeter.UserCard : Greeter.BaseCard {
             "connecting",
             login_button,
             "sensitive",
-            GLib.BindingFlags.INVERT_BOOLEAN
+            INVERT_BOOLEAN
         );
 
-        var disabled_icon = new Gtk.Image.from_icon_name ("changes-prevent-symbolic", Gtk.IconSize.MENU);
+        var disabled_icon = new Gtk.Image.from_icon_name ("changes-prevent-symbolic", MENU);
 
         var disabled_message = new Gtk.Label (_("Account disabled"));
 
-        var disabled_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
+        var disabled_box = new Gtk.Box (HORIZONTAL, 6) {
             halign = Gtk.Align.CENTER,
             margin_top = 3
         };
@@ -129,7 +129,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         login_stack.add_named (login_button, "button");
         login_stack.add_named (disabled_box, "disabled");
 
-        var form_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
+        var form_box = new Gtk.Box (HORIZONTAL, 6) {
             margin_top = 12,
             margin_bottom = 12,
             margin_start = 24,
@@ -141,7 +141,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         form_revealer = new Gtk.Revealer () {
             margin_bottom = 12,
             reveal_child = true,
-            transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN,
+            transition_type = SLIDE_DOWN,
             child = form_box
         };
 
@@ -149,24 +149,21 @@ public class Greeter.UserCard : Greeter.BaseCard {
             "show-input",
             form_revealer,
             "reveal-child",
-            GLib.BindingFlags.SYNC_CREATE
+            SYNC_CREATE
         );
 
         var background_path = lightdm_user.background;
 
         if (background_path == null) {
-            string path = GLib.Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
-            if (GLib.FileUtils.test (path, FileTest.EXISTS)) {
-                var background_directory = GLib.File.new_for_path (path);
+            string path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
+            if (FileUtils.test (path, EXISTS)) {
+                var background_directory = File.new_for_path (path);
                 try {
-                    var enumerator = background_directory.enumerate_children (
-                        GLib.FileAttribute.STANDARD_NAME,
-                        GLib.FileQueryInfoFlags.NONE
-                    );
+                    var enumerator = background_directory.enumerate_children (FileAttribute.STANDARD_NAME, NONE);
 
-                    GLib.FileInfo file_info;
+                    FileInfo file_info;
                     while ((file_info = enumerator.next_file ()) != null) {
-                        if (file_info.get_file_type () == GLib.FileType.REGULAR) {
+                        if (file_info.get_file_type () == REGULAR) {
                             background_path = Path.build_filename (path, file_info.get_name ());
                             break;
                         }
@@ -202,15 +199,15 @@ public class Greeter.UserCard : Greeter.BaseCard {
         };
 
         var avatar_overlay = new Gtk.Overlay () {
-            halign = Gtk.Align.CENTER,
-            valign = Gtk.Align.START,
+            halign = CENTER,
+            valign = START,
             margin_top = 100,
             child = avatar
         };
 
         logged_in = new SelectionCheck () {
-            halign = Gtk.Align.END,
-            valign = Gtk.Align.END
+            halign = END,
+            valign = END
         };
 
         logged_in_context = logged_in.get_style_context ();
@@ -234,17 +231,17 @@ public class Greeter.UserCard : Greeter.BaseCard {
         child = card_overlay;
 
         act_user = Act.UserManager.get_default ().get_user (lightdm_user.name);
-        act_user.bind_property ("locked", username_label, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
-        act_user.bind_property ("locked", session_button, "visible", GLib.BindingFlags.INVERT_BOOLEAN);
+        act_user.bind_property ("locked", username_label, "sensitive", INVERT_BOOLEAN);
+        act_user.bind_property ("locked", session_button, "visible", INVERT_BOOLEAN);
         act_user.notify["is-loaded"].connect (on_act_user_loaded);
 
         on_act_user_loaded ();
 
         card_overlay.focus.connect ((direction) => {
-            if (direction == Gtk.DirectionType.LEFT) {
+            if (direction == LEFT) {
                 go_left ();
                 return true;
-            } else if (direction == Gtk.DirectionType.RIGHT) {
+            } else if (direction == RIGHT) {
                 go_right ();
                 return true;
             }
@@ -335,18 +332,18 @@ public class Greeter.UserCard : Greeter.BaseCard {
         unowned string? act_path = act_user.get_object_path ();
         if (act_path != null) {
             try {
-                greeter_act = GLib.Bus.get_proxy_sync (
-                    GLib.BusType.SYSTEM,
+                greeter_act = Bus.get_proxy_sync (
+                    SYSTEM,
                     "org.freedesktop.Accounts",
                     act_path,
-                    GLib.DBusProxyFlags.GET_INVALIDATED_PROPERTIES
+                    GET_INVALIDATED_PROPERTIES
                 );
 
-                settings_act = GLib.Bus.get_proxy_sync (
-                    GLib.BusType.SYSTEM,
+                settings_act = Bus.get_proxy_sync (
+                    SYSTEM,
                     "org.freedesktop.Accounts",
                     act_path,
-                    GLib.DBusProxyFlags.GET_INVALIDATED_PROPERTIES
+                    GET_INVALIDATED_PROPERTIES
                 );
 
                 is_24h = greeter_act.time_format != "12h";
@@ -356,7 +353,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
                 sleep_inactive_battery_timeout = greeter_act.sleep_inactive_battery_timeout;
                 sleep_inactive_battery_type = greeter_act.sleep_inactive_battery_type;
 
-                ((GLib.DBusProxy) greeter_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
+                ((DBusProxy) greeter_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
                     string time_format;
                     changed_properties.lookup ("TimeFormat", "s", out time_format);
                     is_24h = time_format != "12h";
@@ -428,14 +425,14 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         Variant[] elements = {};
         foreach (var layout in settings_act.keyboard_layouts) {
-            GLib.Variant first = new GLib.Variant.string (layout.backend);
-            GLib.Variant second = new GLib.Variant.string (layout.name);
-            GLib.Variant result = new GLib.Variant.tuple ({first, second});
+            Variant first = new Variant.string (layout.backend);
+            Variant second = new Variant.string (layout.name);
+            Variant result = new Variant.tuple ({first, second});
 
             elements += result;
         }
 
-        GLib.Variant layouts_list = new GLib.Variant.array (new VariantType ("(ss)"), elements);
+        Variant layouts_list = new Variant.array (new VariantType ("(ss)"), elements);
         settings.set_value ("sources", layouts_list);
 
         settings.set_value ("current", settings_act.active_keyboard_layout);
@@ -480,9 +477,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var night_light_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.color");
         night_light_settings.set_value ("night-light-enabled", settings_act.night_light_enabled);
 
-        var latitude = new GLib.Variant.double (settings_act.night_light_last_coordinates.latitude);
-        var longitude = new GLib.Variant.double (settings_act.night_light_last_coordinates.longitude);
-        var coordinates = new GLib.Variant.tuple ({latitude, longitude});
+        var latitude = new Variant.double (settings_act.night_light_last_coordinates.latitude);
+        var longitude = new Variant.double (settings_act.night_light_last_coordinates.longitude);
+        var coordinates = new Variant.tuple ({latitude, longitude});
         night_light_settings.set_value ("night-light-last-coordinates", coordinates);
 
         night_light_settings.set_value ("night-light-schedule-automatic", settings_act.night_light_schedule_automatic);
@@ -503,7 +500,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
             connecting = false;
             password_entry.grab_focus ();
-            return GLib.Source.REMOVE;
+            return Source.REMOVE;
         });
     }
 
