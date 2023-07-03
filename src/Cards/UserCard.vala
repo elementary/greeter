@@ -289,7 +289,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
                         FileAttribute.STANDARD_NAME,
                         FileQueryInfoFlags.NONE
                     );
-    
+
                     FileInfo file_info;
                     while ((file_info = enumerator.next_file ()) != null) {
                         if (file_info.get_file_type () == FileType.REGULAR) {
