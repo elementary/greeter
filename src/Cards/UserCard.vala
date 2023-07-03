@@ -231,7 +231,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         };
         card_overlay.add_overlay (avatar_overlay);
 
-        add (card_overlay);
+        child = card_overlay;
 
         act_user = Act.UserManager.get_default ().get_user (lightdm_user.name);
         act_user.bind_property ("locked", username_label, "sensitive", GLib.BindingFlags.INVERT_BOOLEAN);
