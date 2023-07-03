@@ -41,8 +41,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
-    private Greeter.BackgroundImage placeholder;
-    private Gtk.Grid main_grid;
+    private Gtk.Box main_box;
 
     private SelectionCheck logged_in;
     private unowned Gtk.StyleContext logged_in_context;
@@ -163,18 +162,14 @@ public class Greeter.UserCard : Greeter.BaseCard {
             GLib.BindingFlags.SYNC_CREATE
         );
 
-        placeholder = new BackgroundImage.from_color ("ffffff");
-
-        main_grid = new Gtk.Grid () {
-            margin_bottom = 48,
-            orientation = Gtk.Orientation.VERTICAL
+        main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
+            margin_bottom = 48
         };
-        // intentionally skipping 0,0 for user background;
-        main_grid.attach (placeholder, 0, 0);
-        main_grid.attach (username_label, 0, 1);
-        main_grid.attach (form_revealer, 0, 2);
+        // in reverse order because pack_end is used
+        main_box.pack_end (form_revealer);
+        main_box.pack_end (username_label);
 
-        main_grid_style_context = main_grid.get_style_context ();
+        main_grid_style_context = main_box.get_style_context ();
         main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
         main_grid_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
         main_grid_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -210,7 +205,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var card_overlay = new Gtk.Overlay () {
             margin = 12
         };
-        card_overlay.add (main_grid);
+        card_overlay.add (main_box);
         card_overlay.add_overlay (avatar_overlay);
 
         add (card_overlay);
@@ -280,24 +275,43 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private void set_background_image () {
-        main_grid.remove (placeholder);
-        placeholder.destroy ();
-        placeholder = null;
-
         Greeter.BackgroundImage background_image;
 
-        var background_path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper", "wallpaper");
-        var background_image_exists = FileUtils.test (background_path, FileTest.EXISTS) && FileUtils.test (background_path, FileTest.IS_REGULAR);
+        var background_path = lightdm_user.background;
+        var background_exists = FileUtils.test (background_path, FileTest.EXISTS) && FileUtils.test (background_path, FileTest.IS_REGULAR);
 
-        if (settings_act.picture_options == 0 || !background_image_exists) {
-            warning ("PRIMARY COLOR %s", settings_act.primary_color);
+        if (!background_exists) {
+            var path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
+            if (FileUtils.test (path, FileTest.EXISTS)) {
+                var background_directory = File.new_for_path (path);
+                try {
+                    var enumerator = background_directory.enumerate_children (
+                        FileAttribute.STANDARD_NAME,
+                        FileQueryInfoFlags.NONE
+                    );
+    
+                    FileInfo file_info;
+                    while ((file_info = enumerator.next_file ()) != null) {
+                        if (file_info.get_file_type () == FileType.REGULAR) {
+                            background_path = Path.build_filename (path, file_info.get_name ());
+                            background_exists = true;
+                            break;
+                        }
+                    }
+                } catch (Error e) {
+                    critical (e.message);
+                }
+            }
+        }
+
+        if (settings_act.picture_options == 0 || !background_exists) {
             background_image = new Greeter.BackgroundImage.from_color (settings_act.primary_color);
         } else {
             background_image = new Greeter.BackgroundImage.from_path (background_path);
         }
 
-        main_grid.attach (background_image, 0, 0);
-        main_grid.show_all ();
+        main_box.pack_start (background_image);
+        main_box.show_all ();
     }
 
     private string accent_to_string (int i) {
