@@ -41,7 +41,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
-    private Greeter.BackgroundImage placeholder_background_image;
     private Gtk.Grid main_grid;
 
     private SelectionCheck logged_in;
@@ -163,13 +162,11 @@ public class Greeter.UserCard : Greeter.BaseCard {
             GLib.BindingFlags.SYNC_CREATE
         );
 
-        placeholder_background_image = new Greeter.BackgroundImage.from_color ("#000000");
-
         main_grid = new Gtk.Grid () {
             margin_bottom = 48,
             orientation = Gtk.Orientation.VERTICAL
         };
-        main_grid.attach (placeholder_background_image, 0, 0);
+        // intentionally skipping 0,0 for user background;
         main_grid.attach (username_label, 0, 1);
         main_grid.attach (form_revealer, 0, 2);
 
@@ -272,11 +269,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         });
     }
 
-    private void update_style () {
-        var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
-        interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (prefers_accent_color));
-    }
-
     private void set_check_style () {
         // Override check's accent_color so that it *always* uses user's preferred color
         var style_provider = Gtk.CssProvider.get_named ("io.elementary.stylesheet." + accent_to_string (prefers_accent_color), null);
@@ -284,10 +276,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private void set_background_image () {
-        main_grid.remove (placeholder_background_image);
-        placeholder_background_image.destroy ();
-        placeholder_background_image = null;
-
         Greeter.BackgroundImage background_image;
         if (settings_act.picture_options == 0) {
             background_image = new Greeter.BackgroundImage.from_color (settings_act.primary_color);
@@ -301,7 +289,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
                         FileAttribute.STANDARD_NAME,
                         FileQueryInfoFlags.NONE
                     );
-    
+
                     FileInfo file_info;
                     while ((file_info = enumerator.next_file ()) != null) {
                         if (file_info.get_file_type () == FileType.REGULAR) {
@@ -509,6 +497,11 @@ public class Greeter.UserCard : Greeter.BaseCard {
         night_light_settings.set_value ("night-light-schedule-from", settings_act.night_light_schedule_from);
         night_light_settings.set_value ("night-light-schedule-to", settings_act.night_light_schedule_to);
         night_light_settings.set_value ("night-light-temperature", settings_act.night_light_temperature);
+    }
+
+    private void update_style () {
+        var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
+        interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (prefers_accent_color));
     }
 
     public UserCard (LightDM.User lightdm_user) {
