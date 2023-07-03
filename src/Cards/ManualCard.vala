@@ -40,7 +40,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
 
         var caps_lock_revealer = new Greeter.CapsLockRevealer ();
 
-        var password_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 6);
+        var password_box = new Gtk.Box (VERTICAL, 6);
         password_box.add (password_entry);
         password_box.add (caps_lock_revealer);
 
