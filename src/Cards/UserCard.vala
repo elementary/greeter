@@ -1,4 +1,4 @@
- /*
+/*
  * Copyright 2018-2023 elementary, Inc. (https://elementary.io)
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
