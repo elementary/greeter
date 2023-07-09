@@ -161,10 +161,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
         main_box.pack_end (form_revealer);
         main_box.pack_end (username_label);
 
-        main_grid_style_context = main_box.get_style_context ();
-        main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
-        main_grid_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
-        main_grid_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        main_box_style_context = main_box.get_style_context ();
+        main_box_style_context.add_class (Granite.STYLE_CLASS_CARD);
+        main_box_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
+        main_box_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         update_collapsed_class ();
 
