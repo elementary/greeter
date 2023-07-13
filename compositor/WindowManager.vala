@@ -42,9 +42,15 @@ namespace GreeterCompositor {
          */
         public Clutter.Actor top_window_group { get; protected set; }
 
+        public PointerLocator pointer_locator { get; private set; }
+
         public Greeter.SystemBackground system_background { get; private set; }
 
         Meta.PluginInfo info;
+
+        // Used to toggle screenreader
+        private GLib.Settings application_settings;
+        private int reader_pid = 0;
 
         //WindowSwitcher? winswitcher = null;
         //ActivatableComponent? workspace_view = null;
@@ -115,6 +121,9 @@ namespace GreeterCompositor {
             stage.remove_child (top_window_group);
             ui_group.add_child (top_window_group);
 
+            pointer_locator = new PointerLocator (this);
+            ui_group.add_child (pointer_locator);
+
             MaskCorners.init (this);
 
             /*keybindings*/
@@ -144,6 +153,15 @@ namespace GreeterCompositor {
 
             KeyBinding.set_custom_handler ("show-desktop", () => {});
 
+            /* orca (screenreader) doesn't listen to it's
+               org.gnome.desktop.a11y.applications screen-reader-enabled key
+               so we handle it ourselves
+               (the same thing is done in a11y indicator as well)
+             */
+            application_settings = new GLib.Settings ("org.gnome.desktop.a11y.applications");
+            toggle_screen_reader (); // sync screen reader with gsettings key
+            application_settings.changed["screen-reader-enabled"].connect (toggle_screen_reader);
+
             stage.show ();
 
             Idle.add (() => {
@@ -165,6 +183,22 @@ namespace GreeterCompositor {
             }
 
             return list.to_array ();
+        }
+
+        private void toggle_screen_reader () {
+            if (reader_pid == 0 && application_settings.get_boolean ("screen-reader-enabled")) {
+                try {
+                    string[] argv;
+                    Shell.parse_argv ("orca --replace", out argv);
+                    Process.spawn_async (null, argv, null, SpawnFlags.SEARCH_PATH, null, out reader_pid);
+                } catch (Error e) {
+                    warning (e.message);
+                }
+            } else if (reader_pid != 0 && !application_settings.get_boolean ("screen-reader-enabled")) {
+                Posix.kill (reader_pid, Posix.Signal.QUIT);
+                Posix.waitpid (reader_pid, null, 0);
+                reader_pid = 0;
+            }
         }
 
         public override void show_window_menu_for_rect (Meta.Window window, Meta.WindowMenuType menu, Meta.Rectangle rect) {
@@ -312,6 +346,9 @@ namespace GreeterCompositor {
             return;
         }
 
+        public override void locate_pointer () {
+            pointer_locator.show_ripple ();
+        }
 
         public override void confirm_display_change () {
 #if HAS_MUTTER44

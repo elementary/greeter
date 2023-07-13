@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 16:48+0000\n"
-"PO-Revision-Date: 2022-05-20 21:02+0000\n"
+"POT-Creation-Date: 2023-06-19 17:04+0000\n"
+"PO-Revision-Date: 2023-06-21 16:07+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
-"Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/ja/>\n"
+"Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
@@ -31,58 +31,63 @@ msgstr "お使いのデバイスのロックを解除したりログインした
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
-#: data/greeter.metainfo.xml.in:40 data/greeter.metainfo.xml.in:56
-#: data/greeter.metainfo.xml.in:69 data/greeter.metainfo.xml.in:83
+#: data/greeter.metainfo.xml.in:40 data/greeter.metainfo.xml.in:54
+#: data/greeter.metainfo.xml.in:70 data/greeter.metainfo.xml.in:83
+#: data/greeter.metainfo.xml.in:97
 msgid "Minor updates:"
 msgstr "そのほかのアップデート:"
 
-#: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:58
-#: data/greeter.metainfo.xml.in:71 data/greeter.metainfo.xml.in:85
-#: data/greeter.metainfo.xml.in:97
+#: data/greeter.metainfo.xml.in:42
+msgid "Prevent a potential issue with dialogs that use portals"
+msgstr "ポータルを使用するダイアログに関連する潜在的なバグを修正"
+
+#: data/greeter.metainfo.xml.in:43
+msgid "Fix potential issues with incorrect keyboard layout being set"
+msgstr "不適切なキーボードレイアウトが設定されることがある不具合を修正"
+
+#: data/greeter.metainfo.xml.in:44 data/greeter.metainfo.xml.in:56
+#: data/greeter.metainfo.xml.in:72 data/greeter.metainfo.xml.in:85
+#: data/greeter.metainfo.xml.in:99
 msgid "Updated translations"
 msgstr "翻訳の更新"
 
-#: data/greeter.metainfo.xml.in:52
+#: data/greeter.metainfo.xml.in:66
 msgid "New Features:"
 msgstr "新機能:"
 
-#: data/greeter.metainfo.xml.in:54
+#: data/greeter.metainfo.xml.in:68
 msgid "Provide panel background color interface"
 msgstr "パネルの背景色インターフェースを追加"
 
-#: data/greeter.metainfo.xml.in:65 data/greeter.metainfo.xml.in:78
+#: data/greeter.metainfo.xml.in:79 data/greeter.metainfo.xml.in:92
 msgid "Improvements:"
 msgstr "改善点:"
 
-#: data/greeter.metainfo.xml.in:67
+#: data/greeter.metainfo.xml.in:81
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr "起動時に Greeter が適切に読み込まれないことがある不具合を修正"
 
-#: data/greeter.metainfo.xml.in:80
+#: data/greeter.metainfo.xml.in:94
 msgid "Hide clock during initial setup"
 msgstr "初期設定の間は時計を表示しないように修正"
 
-#: data/greeter.metainfo.xml.in:81
+#: data/greeter.metainfo.xml.in:95
 msgid "Use selected accent color for logged in checkmark"
 msgstr ""
 "ログイン中かどうかを表示するチェックマークに、ユーザーが選択したアクセントカ"
 "ラーを使用するように修正"
 
-#: data/greeter.metainfo.xml.in:93
-msgid "Add multitouch finger tracking"
-msgstr "マルチタッチを検知する機能を追加"
+#~ msgid "Add multitouch finger tracking"
+#~ msgstr "マルチタッチを検知する機能を追加"
 
-#: data/greeter.metainfo.xml.in:94
-msgid "Add keyboard layout support"
-msgstr "キーボードレイアウトへの対応を追加"
+#~ msgid "Add keyboard layout support"
+#~ msgstr "キーボードレイアウトへの対応を追加"
 
-#: data/greeter.metainfo.xml.in:95
-msgid "New colorful avatar fallbacks"
-msgstr "アバター画像未設定時に背景を色付きで表示するように変更"
+#~ msgid "New colorful avatar fallbacks"
+#~ msgstr "アバター画像未設定時に背景を色付きで表示するように変更"
 
-#: data/greeter.metainfo.xml.in:96
-msgid "Fix clock when resuming from sleep"
-msgstr "スリープからの復帰時に時刻が間違っている不具合を修正"
+#~ msgid "Fix clock when resuming from sleep"
+#~ msgstr "スリープからの復帰時に時刻が間違っている不具合を修正"
 
 #~ msgid "Fix an issue with media keys"
 #~ msgstr "メディアキーに関する不具合を修正"

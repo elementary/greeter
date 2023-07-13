@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 16:48+0000\n"
-"PO-Revision-Date: 2023-04-09 19:59+0000\n"
-"Last-Translator: lenemter <lenemter@gmail.com>\n"
-"Language-Team: Russian <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/ru/>\n"
+"POT-Creation-Date: 2023-06-19 17:04+0000\n"
+"PO-Revision-Date: 2023-06-25 07:07+0000\n"
+"Last-Translator: кубик круглый <megarainbow29@gmail.com>\n"
+"Language-Team: Russian <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.16.4\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.17\n"
 
 #: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
@@ -32,58 +32,64 @@ msgstr "Разблокируйте устройство или авторизу�
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
-#: data/greeter.metainfo.xml.in:40 data/greeter.metainfo.xml.in:56
-#: data/greeter.metainfo.xml.in:69 data/greeter.metainfo.xml.in:83
+#: data/greeter.metainfo.xml.in:40 data/greeter.metainfo.xml.in:54
+#: data/greeter.metainfo.xml.in:70 data/greeter.metainfo.xml.in:83
+#: data/greeter.metainfo.xml.in:97
 msgid "Minor updates:"
 msgstr "Незначительные обновления:"
 
-#: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:58
-#: data/greeter.metainfo.xml.in:71 data/greeter.metainfo.xml.in:85
-#: data/greeter.metainfo.xml.in:97
+#: data/greeter.metainfo.xml.in:42
+msgid "Prevent a potential issue with dialogs that use portals"
+msgstr "Предотвращена потенциальная проблема с диалогами, использующими порталы"
+
+#: data/greeter.metainfo.xml.in:43
+msgid "Fix potential issues with incorrect keyboard layout being set"
+msgstr ""
+"Исправлены потенциальные проблемы установки неверной раскладки клавиатуры"
+
+#: data/greeter.metainfo.xml.in:44 data/greeter.metainfo.xml.in:56
+#: data/greeter.metainfo.xml.in:72 data/greeter.metainfo.xml.in:85
+#: data/greeter.metainfo.xml.in:99
 msgid "Updated translations"
 msgstr "Обновлены переводы"
 
-#: data/greeter.metainfo.xml.in:52
+#: data/greeter.metainfo.xml.in:66
 msgid "New Features:"
 msgstr "Новые возможности:"
 
-#: data/greeter.metainfo.xml.in:54
+#: data/greeter.metainfo.xml.in:68
 msgid "Provide panel background color interface"
 msgstr "Верхней панели теперь предоставляется информация о цвете заднего фона"
 
-#: data/greeter.metainfo.xml.in:65 data/greeter.metainfo.xml.in:78
+#: data/greeter.metainfo.xml.in:79 data/greeter.metainfo.xml.in:92
 msgid "Improvements:"
 msgstr "Улучшения:"
 
-#: data/greeter.metainfo.xml.in:67
+#: data/greeter.metainfo.xml.in:81
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr ""
 "Исправлена ошибка, при которой Greeter не загружался корректно при запуске "
 "системы"
 
-#: data/greeter.metainfo.xml.in:80
+#: data/greeter.metainfo.xml.in:94
 msgid "Hide clock during initial setup"
 msgstr "Скрытие часов во время установки"
 
-#: data/greeter.metainfo.xml.in:81
+#: data/greeter.metainfo.xml.in:95
 msgid "Use selected accent color for logged in checkmark"
 msgstr "Галочки окрашиваются в выбранный цветовой акцент"
 
-#: data/greeter.metainfo.xml.in:93
-msgid "Add multitouch finger tracking"
-msgstr "Реализована поддержка отслеживания одновременных касаний"
+#~ msgid "Add multitouch finger tracking"
+#~ msgstr "Реализована поддержка отслеживания одновременных касаний"
 
-#: data/greeter.metainfo.xml.in:94
-msgid "Add keyboard layout support"
-msgstr "Добавлена поддержка раскладки клавиатуры"
+#~ msgid "Add keyboard layout support"
+#~ msgstr "Добавлена поддержка раскладки клавиатуры"
 
-#: data/greeter.metainfo.xml.in:95
-msgid "New colorful avatar fallbacks"
-msgstr "Новые цветные значки пользователей"
+#~ msgid "New colorful avatar fallbacks"
+#~ msgstr "Новые цветные значки пользователей"
 
-#: data/greeter.metainfo.xml.in:96
-msgid "Fix clock when resuming from sleep"
-msgstr "Исправлена работа часов при пробуждении компьютера"
+#~ msgid "Fix clock when resuming from sleep"
+#~ msgstr "Исправлена работа часов при пробуждении компьютера"
 
 #~ msgid "Fix an issue with media keys"
 #~ msgstr "Исправлена проблема с мультимедийными клавишами"

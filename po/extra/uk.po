@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 16:48+0000\n"
-"PO-Revision-Date: 2022-10-27 18:57+0000\n"
+"POT-Creation-Date: 2023-06-19 17:04+0000\n"
+"PO-Revision-Date: 2023-06-21 16:07+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/uk/>\n"
@@ -16,9 +16,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.4.2\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.17\n"
 
 #: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
@@ -32,56 +32,65 @@ msgstr "Розблокуйте або увійдіть до свого прис�
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
-#: data/greeter.metainfo.xml.in:40 data/greeter.metainfo.xml.in:56
-#: data/greeter.metainfo.xml.in:69 data/greeter.metainfo.xml.in:83
+#: data/greeter.metainfo.xml.in:40 data/greeter.metainfo.xml.in:54
+#: data/greeter.metainfo.xml.in:70 data/greeter.metainfo.xml.in:83
+#: data/greeter.metainfo.xml.in:97
 msgid "Minor updates:"
 msgstr "Незначні оновлення:"
 
-#: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:58
-#: data/greeter.metainfo.xml.in:71 data/greeter.metainfo.xml.in:85
-#: data/greeter.metainfo.xml.in:97
+#: data/greeter.metainfo.xml.in:42
+msgid "Prevent a potential issue with dialogs that use portals"
+msgstr ""
+"Попередження про потенційні проблеми з діалоговими вікнами, які "
+"використовують портали"
+
+#: data/greeter.metainfo.xml.in:43
+msgid "Fix potential issues with incorrect keyboard layout being set"
+msgstr ""
+"Виправлено потенційні проблеми, пов'язані з неправильною розкладкою "
+"клавіатури"
+
+#: data/greeter.metainfo.xml.in:44 data/greeter.metainfo.xml.in:56
+#: data/greeter.metainfo.xml.in:72 data/greeter.metainfo.xml.in:85
+#: data/greeter.metainfo.xml.in:99
 msgid "Updated translations"
 msgstr "Оновлені переклади"
 
-#: data/greeter.metainfo.xml.in:52
+#: data/greeter.metainfo.xml.in:66
 msgid "New Features:"
 msgstr "Нові функції:"
 
-#: data/greeter.metainfo.xml.in:54
+#: data/greeter.metainfo.xml.in:68
 msgid "Provide panel background color interface"
 msgstr "Додано панель кольору тла інтерфейсу"
 
-#: data/greeter.metainfo.xml.in:65 data/greeter.metainfo.xml.in:78
+#: data/greeter.metainfo.xml.in:79 data/greeter.metainfo.xml.in:92
 msgid "Improvements:"
 msgstr "Удосконалення:"
 
-#: data/greeter.metainfo.xml.in:67
+#: data/greeter.metainfo.xml.in:81
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr "Виправлено проблему, коли екран привітання неправильно завантажується"
 
-#: data/greeter.metainfo.xml.in:80
+#: data/greeter.metainfo.xml.in:94
 msgid "Hide clock during initial setup"
 msgstr "Ховання годинника під час установлення"
 
-#: data/greeter.metainfo.xml.in:81
+#: data/greeter.metainfo.xml.in:95
 msgid "Use selected accent color for logged in checkmark"
 msgstr "Прапорці забарвлюються в обраний основний колір"
 
-#: data/greeter.metainfo.xml.in:93
-msgid "Add multitouch finger tracking"
-msgstr "Додано жести пальцями"
+#~ msgid "Add multitouch finger tracking"
+#~ msgstr "Додано жести пальцями"
 
-#: data/greeter.metainfo.xml.in:94
-msgid "Add keyboard layout support"
-msgstr "Додано підтримку розкладки клавіатури"
+#~ msgid "Add keyboard layout support"
+#~ msgstr "Додано підтримку розкладки клавіатури"
 
-#: data/greeter.metainfo.xml.in:95
-msgid "New colorful avatar fallbacks"
-msgstr "Нові барвисті аватари"
+#~ msgid "New colorful avatar fallbacks"
+#~ msgstr "Нові барвисті аватари"
 
-#: data/greeter.metainfo.xml.in:96
-msgid "Fix clock when resuming from sleep"
-msgstr "Виправлено роботу годинника після пробудження пристрою"
+#~ msgid "Fix clock when resuming from sleep"
+#~ msgstr "Виправлено роботу годинника після пробудження пристрою"
 
 #~ msgid "Fix an issue with media keys"
 #~ msgstr "Виправлено проблему з мультимедійними клавішами"
