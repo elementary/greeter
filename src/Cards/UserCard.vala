@@ -276,36 +276,23 @@ public class Greeter.UserCard : Greeter.BaseCard {
         Greeter.BackgroundImage background_image;
 
         var background_path = lightdm_user.background;
-        var background_exists = FileUtils.test (background_path, FileTest.EXISTS) && FileUtils.test (background_path, FileTest.IS_REGULAR);
+        var background_exists = (
+            background_path != null &&
+            FileUtils.test (background_path, EXISTS) &&
+            FileUtils.test (background_path, IS_REGULAR)
+        );
 
         if (!background_exists) {
-            var path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
-            if (FileUtils.test (path, FileTest.EXISTS)) {
-                var background_directory = File.new_for_path (path);
-                try {
-                    var enumerator = background_directory.enumerate_children (
-                        FileAttribute.STANDARD_NAME,
-                        FileQueryInfoFlags.NONE
-                    );
-
-                    FileInfo file_info;
-                    while ((file_info = enumerator.next_file ()) != null) {
-                        if (file_info.get_file_type () == FileType.REGULAR) {
-                            background_path = Path.build_filename (path, file_info.get_name ());
-                            background_exists = true;
-                            break;
-                        }
-                    }
-                } catch (Error e) {
-                    critical (e.message);
-                }
-            }
+            background_path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
+            background_exists = FileUtils.test (background_path, EXISTS) && FileUtils.test (background_path, IS_REGULAR);
         }
 
-        if (settings_act.picture_options == 0 || !background_exists) {
+        if (settings_act.picture_options != 0 && background_exists) {
+            background_image = new Greeter.BackgroundImage.from_path (background_path);
+        } else if (settings_act.picture_options == 0 && settings_act.primary_color != null) {
             background_image = new Greeter.BackgroundImage.from_color (settings_act.primary_color);
         } else {
-            background_image = new Greeter.BackgroundImage.from_path (background_path);
+            background_image = new Greeter.BackgroundImage.from_path (null);
         }
 
         main_box.pack_start (background_image);
