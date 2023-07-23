@@ -47,6 +47,7 @@
       <issues>
         <issue url="https://github.com/elementary/greeter/issues/25">Mask corners</issue>
         <issue url="https://github.com/elementary/greeter/issues/70">User mouse settings aren't applied</issue>
+        <issue url="https://github.com/elementary/greeter/issues/295">Clicking in the card but outside of the wallpaper window does not switch the card</issue>
         <issue url="https://github.com/elementary/greeter/issues/451">Reuse mouse settings if only one user exists</issue>
         <issue url="https://github.com/elementary/greeter/issues/541">Some shortcuts to switch keyboard layout does not work on lockscreen</issue>
         <issue url="https://github.com/elementary/greeter/issues/589">Keyboard layout gets changed when failing at entering password in login form</issue>
