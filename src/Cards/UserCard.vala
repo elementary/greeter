@@ -25,6 +25,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Pantheon.AccountsService greeter_act;
     private Pantheon.SettingsDaemon.AccountsService settings_act;
 
+    private Gtk.GestureMultiPress click_gesture;
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
@@ -227,13 +228,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
             return false;
         });
 
-        card_overlay.button_release_event.connect ((event) => {
+        click_gesture = new Gtk.GestureMultiPress (this);
+        click_gesture.pressed.connect ((n_press, x, y) => {
             if (!show_input) {
                 focus_requested ();
                 password_entry.grab_focus ();
             }
-
-            return false;
         });
 
         // This makes all the animations synchonous
