@@ -419,8 +419,12 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         }
 
-        if (current_card is Greeter.UserCard) {
-            switch_to_card ((Greeter.UserCard) current_card);
+        if (user_card != null) {
+            try {
+                lightdm_greeter.authenticate (user_card.lightdm_user.name);
+            } catch (Error e) {
+                critical (e.message);
+            }
         }
 
         current_card.wrong_credentials ();
