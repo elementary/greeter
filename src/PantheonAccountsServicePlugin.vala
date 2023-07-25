@@ -52,6 +52,8 @@ interface Pantheon.SettingsDaemon.AccountsService : Object {
     public abstract int cursor_size { get; set; }
     public abstract bool locate_pointer { get; set; }
     public abstract double text_scaling_factor { get; set; }
+    public abstract int picture_options { get; set; }
+    public abstract string primary_color { owned get; set; }
     public abstract string document_font_name { owned get; set; }
     public abstract string font_name { owned get; set; }
     public abstract string monospace_font_name { owned get; set; }

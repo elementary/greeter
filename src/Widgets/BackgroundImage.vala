@@ -7,7 +7,7 @@ public class Greeter.BackgroundImage : Gtk.EventBox {
         height_request = 150;
     }
 
-    public BackgroundImage (string? path) {
+    public BackgroundImage.from_path (string? path) {
         if (path == null) {
             path = "/usr/share/backgrounds/elementaryos-default";
         }
@@ -24,6 +24,24 @@ public class Greeter.BackgroundImage : Gtk.EventBox {
                 critical (e.message);
             }
         }
+    }
+
+    public BackgroundImage.from_color (string color) {
+        full_pixbuf = new Gdk.Pixbuf (Gdk.Colorspace.RGB, false, 8, 1, 1);
+
+        Gdk.RGBA rgba_color = {};
+        rgba_color.parse (color);
+
+        uint32 f = 0x0;
+        f += (uint) Math.round (rgba_color.red * 255);
+        f <<= 8;
+        f += (uint) Math.round (rgba_color.green * 255);
+        f <<= 8;
+        f += (uint) Math.round (rgba_color.blue * 255);
+        f <<= 8;
+        f += 255;
+
+        full_pixbuf.fill (f);
     }
 
     public override bool draw (Cairo.Context cr) {
