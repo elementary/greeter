@@ -45,6 +45,7 @@
         </ul>
       </description>
       <issues>
+        <issue url="https://github.com/elementary/greeter/issues/3">Login screen does not respect solid color background</issue>
         <issue url="https://github.com/elementary/greeter/issues/25">Mask corners</issue>
         <issue url="https://github.com/elementary/greeter/issues/70">User mouse settings aren't applied</issue>
         <issue url="https://github.com/elementary/greeter/issues/295">Clicking in the card but outside of the wallpaper window does not switch the card</issue>

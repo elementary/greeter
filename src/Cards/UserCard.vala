@@ -29,6 +29,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
+    private Gtk.Box main_box;
+
     private SelectionCheck logged_in;
 
     private unowned Gtk.StyleContext logged_in_context;
@@ -153,36 +155,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
             SYNC_CREATE
         );
 
-        var background_path = lightdm_user.background;
-
-        if (background_path == null) {
-            string path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
-            if (FileUtils.test (path, EXISTS)) {
-                var background_directory = File.new_for_path (path);
-                try {
-                    var enumerator = background_directory.enumerate_children (FileAttribute.STANDARD_NAME, NONE);
-
-                    FileInfo file_info;
-                    while ((file_info = enumerator.next_file ()) != null) {
-                        if (file_info.get_file_type () == REGULAR) {
-                            background_path = Path.build_filename (path, file_info.get_name ());
-                            break;
-                        }
-                    }
-                } catch (Error e) {
-                    critical (e.message);
-                }
-            }
-        }
-
-        var background_image = new Greeter.BackgroundImage (background_path);
-
-        var main_box = new Gtk.Box (VERTICAL, 0) {
+        main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_bottom = 48
         };
-        main_box.add (background_image);
-        main_box.add (username_label);
-        main_box.add (form_revealer);
+        // in reverse order because pack_end is used
+        main_box.pack_end (form_revealer);
+        main_box.pack_end (username_label);
 
         main_box_style_context = main_box.get_style_context ();
         main_box_style_context.add_class (Granite.STYLE_CLASS_CARD);
@@ -288,15 +266,37 @@ public class Greeter.UserCard : Greeter.BaseCard {
         });
     }
 
-    private void update_style () {
-        var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
-        interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (prefers_accent_color));
-    }
-
     private void set_check_style () {
         // Override check's accent_color so that it *always* uses user's preferred color
         var style_provider = Gtk.CssProvider.get_named ("io.elementary.stylesheet." + accent_to_string (prefers_accent_color), null);
         logged_in_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+    }
+
+    private void set_background_image () {
+        Greeter.BackgroundImage background_image;
+
+        var background_path = lightdm_user.background;
+        var background_exists = (
+            background_path != null &&
+            FileUtils.test (background_path, EXISTS) &&
+            FileUtils.test (background_path, IS_REGULAR)
+        );
+
+        if (!background_exists) {
+            background_path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
+            background_exists = FileUtils.test (background_path, EXISTS) && FileUtils.test (background_path, IS_REGULAR);
+        }
+
+        if (settings_act.picture_options != 0 && background_exists) {
+            background_image = new Greeter.BackgroundImage.from_path (background_path);
+        } else if (settings_act.picture_options == 0 && settings_act.primary_color != null) {
+            background_image = new Greeter.BackgroundImage.from_color (settings_act.primary_color);
+        } else {
+            background_image = new Greeter.BackgroundImage.from_path (null);
+        }
+
+        main_box.pack_start (background_image);
+        main_box.show_all ();
     }
 
     private string accent_to_string (int i) {
@@ -369,6 +369,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             }
         }
 
+        set_background_image ();
         set_check_style ();
 
         if (needs_settings_set) {
@@ -489,6 +490,11 @@ public class Greeter.UserCard : Greeter.BaseCard {
         night_light_settings.set_value ("night-light-schedule-from", settings_act.night_light_schedule_from);
         night_light_settings.set_value ("night-light-schedule-to", settings_act.night_light_schedule_to);
         night_light_settings.set_value ("night-light-temperature", settings_act.night_light_temperature);
+    }
+
+    private void update_style () {
+        var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
+        interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (prefers_accent_color));
     }
 
     public override void wrong_credentials () {
