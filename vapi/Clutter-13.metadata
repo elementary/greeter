@@ -144,9 +144,7 @@ TouchpadSwipeEvent struct=false base_type="Clutter.Event"
 
 // Keysyms used to be CLUTTER_X instead of CLUTTER_KEY_X
 *#constant skip
-COGL skip=false
 CURRENT_TIME skip=false
-FLAVOUR skip=false
 PATH_RELATIVE skip=false
 PRIORITY_REDRAW skip=false
 
@@ -162,6 +160,8 @@ threads_add_timeout_full name="add_full" parent="Clutter.Threads.Timeout"
 ColorState sealed
 FrameClock sealed
 TextureContent sealed
+
+TextureContent.new_from_texture symbol_type="constructor"
 
 // Backwards compatibility
 Color.alloc symbol_type="function"
