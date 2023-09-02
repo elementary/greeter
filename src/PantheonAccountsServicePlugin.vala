@@ -2,6 +2,7 @@
 interface Pantheon.AccountsService : Object {
     public abstract string time_format { owned get; set; }
 
+    public abstract int prefers_color_scheme { get; set; }
     public abstract int prefers_accent_color { get; set; }
 
     [DBus (name = "SleepInactiveACTimeout")]
@@ -15,6 +16,11 @@ interface Pantheon.AccountsService : Object {
 
 [DBus (name = "io.elementary.SettingsDaemon.AccountsService")]
 interface Pantheon.SettingsDaemon.AccountsService : Object {
+    public struct Coordinates {
+        public double latitude;
+        public double longitude;
+    }
+
     /* Keyboard */
     public struct KeyboardLayout {
         public string backend;
@@ -58,11 +64,13 @@ interface Pantheon.SettingsDaemon.AccountsService : Object {
     public abstract string font_name { owned get; set; }
     public abstract string monospace_font_name { owned get; set; }
 
+    /* Prefer Dark Schedule (part of interface settings)*/
+    public abstract Coordinates prefer_dark_last_coordinates { get; set; }
+    public abstract int prefer_dark_schedule { get; set; }
+    public abstract double prefer_dark_schedule_from { get; set; }
+    public abstract double prefer_dark_schedule_to { get; set; }
+
     /* Night Light */
-    public struct Coordinates {
-        public double latitude;
-        public double longitude;
-    }
 
     public abstract bool night_light_enabled { get; set; }
     public abstract Coordinates night_light_last_coordinates { get; set; }

@@ -21,9 +21,13 @@ public class Greeter.UserCard : Greeter.BaseCard {
     public int sleep_inactive_battery_timeout { get; set; default = 1200; }
     public int sleep_inactive_battery_type { get; set; default = 1; }
 
+    private Act.User lightdm_user_act;
     private Act.User act_user;
+    private Pantheon.AccountsService lightdm_act;
     private Pantheon.AccountsService greeter_act;
     private Pantheon.SettingsDaemon.AccountsService settings_act;
+
+    private ulong dark_mode_sync_id = 0;
 
     private Gtk.GestureMultiPress click_gesture;
     private Gtk.Revealer form_revealer;
@@ -209,12 +213,16 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         child = card_overlay;
 
+        lightdm_user_act = Act.UserManager.get_default ().get_user (Environment.get_user_name ());
+
         act_user = Act.UserManager.get_default ().get_user (lightdm_user.name);
         act_user.bind_property ("locked", username_label, "sensitive", INVERT_BOOLEAN);
         act_user.bind_property ("locked", session_button, "visible", INVERT_BOOLEAN);
         act_user.notify["is-loaded"].connect (on_act_user_loaded);
 
-        on_act_user_loaded ();
+        if (act_user.is_loaded) {
+            on_act_user_loaded ();
+        }
 
         card_overlay.focus.connect ((direction) => {
             if (direction == LEFT) {
@@ -244,6 +252,11 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         notify["show-input"].connect (() => {
             update_collapsed_class ();
+
+            // Stop settings sync, that starts in `set_settings ()`
+            if (!show_input) {
+                stop_settings_sync ();
+            }
         });
 
         notify["child-revealed"].connect (() => {
@@ -352,18 +365,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
                 sleep_inactive_ac_type = greeter_act.sleep_inactive_ac_type;
                 sleep_inactive_battery_timeout = greeter_act.sleep_inactive_battery_timeout;
                 sleep_inactive_battery_type = greeter_act.sleep_inactive_battery_type;
-
-                ((DBusProxy) greeter_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
-                    string time_format;
-                    changed_properties.lookup ("TimeFormat", "s", out time_format);
-                    is_24h = time_format != "12h";
-
-                    changed_properties.lookup ("PrefersAccentColor", "i", out _prefers_accent_color);
-                    changed_properties.lookup ("SleepInactiveACTimeout", "i", out _sleep_inactive_ac_timeout);
-                    changed_properties.lookup ("SleepInactiveACType", "i", out _sleep_inactive_ac_type);
-                    changed_properties.lookup ("SleepInactiveBatteryTimeout", "i", out _sleep_inactive_battery_timeout);
-                    changed_properties.lookup ("SleepInactiveBatteryType", "i", out _sleep_inactive_battery_type);
-                });
             } catch (Error e) {
                 critical (e.message);
             }
@@ -414,11 +415,13 @@ public class Greeter.UserCard : Greeter.BaseCard {
             return;
         }
 
+        update_style ();
         set_keyboard_layouts ();
         set_mouse_touchpad_settings ();
         set_interface_settings ();
         set_night_light_settings ();
-        update_style ();
+
+        start_settings_sync ();
     }
 
     private void set_keyboard_layouts () {
@@ -475,6 +478,17 @@ public class Greeter.UserCard : Greeter.BaseCard {
         interface_settings.set_value ("document-font-name", settings_act.document_font_name);
         interface_settings.set_value ("font-name", settings_act.font_name);
         interface_settings.set_value ("monospace-font-name", settings_act.monospace_font_name);
+
+        var settings_daemon_settings = new GLib.Settings ("io.elementary.settings-daemon.prefers-color-scheme");
+
+        var latitude = new Variant.double (settings_act.prefer_dark_last_coordinates.latitude);
+        var longitude = new Variant.double (settings_act.prefer_dark_last_coordinates.longitude);
+        var coordinates = new Variant.tuple ({latitude, longitude});
+        settings_daemon_settings.set_value ("last-coordinates", coordinates);
+
+        settings_daemon_settings.set_enum ("prefer-dark-schedule", settings_act.prefer_dark_schedule);
+        settings_daemon_settings.set_value ("prefer-dark-schedule-from", settings_act.prefer_dark_schedule_from);
+        settings_daemon_settings.set_value ("prefer-dark-schedule-to", settings_act.prefer_dark_schedule_to);
     }
 
     private void set_night_light_settings () {
@@ -495,6 +509,40 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private void update_style () {
         var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
         interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (prefers_accent_color));
+
+        unowned string? lightdm_act_path = lightdm_user_act.get_object_path ();
+        if (lightdm_act_path != null) {
+            try {
+                lightdm_act = Bus.get_proxy_sync (
+                    SYSTEM,
+                    "org.freedesktop.Accounts",
+                    lightdm_act_path,
+                    GET_INVALIDATED_PROPERTIES
+                );
+
+                warning ("Set color_scheme %d for user %s", greeter_act.prefers_color_scheme, lightdm_user.name);
+                lightdm_act.prefers_color_scheme = greeter_act.prefers_color_scheme;
+            } catch (Error e) {
+                critical (e.message);
+            }
+        }
+    }
+
+    private void start_settings_sync () {
+        debug ("Started settings sync for user %s", lightdm_user.name);
+
+        dark_mode_sync_id = ((DBusProxy) lightdm_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
+            warning ("OwO");
+            int prefers_color_scheme;
+            changed_properties.lookup ("PrefersColorScheme", "i", out prefers_color_scheme);
+            greeter_act.prefers_color_scheme = prefers_color_scheme;
+        });
+    }
+
+    private void stop_settings_sync () {
+        debug ("Stopped settings sync for user %s", lightdm_user.name);
+
+        lightdm_act.disconnect (dark_mode_sync_id);
     }
 
     public override void wrong_credentials () {

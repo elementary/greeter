@@ -29,13 +29,15 @@ public int main (string[] args) {
     // overrides
     GLib.Environment.set_variable ("XDG_CURRENT_DESKTOP", "Pantheon", true);
 
-    var settings_daemon = new Greeter.SettingsDaemon ();
-    settings_daemon.start ();
+    var gnome_settings_daemon = new Greeter.SettingsDaemon ();
+    gnome_settings_daemon.start ();
 
     Gtk.init (ref args);
 
     Greeter.SubprocessSupervisor compositor;
+    Greeter.SubprocessSupervisor portals;
     Greeter.SubprocessSupervisor wingpanel;
+    Greeter.SubprocessSupervisor settings_daemon;
 
     try {
         compositor = new Greeter.SubprocessSupervisor ({"io.elementary.greeter-compositor"});
@@ -47,7 +49,28 @@ public int main (string[] args) {
     window.show_all ();
 
     try {
+        portals = new Greeter.SubprocessSupervisor ({"/usr/libexec/xdg-desktop-portal"});
+    } catch (Error e) {
+        critical (e.message);
+    }
+
+    unowned var gtk_settings = Gtk.Settings.get_default ();
+    unowned var granite_settings = Granite.Settings.get_default ();
+
+    gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == DARK;
+
+    granite_settings.notify["prefers-color-scheme"].connect (() => {
+        gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == DARK;
+    });
+
+    try {
         wingpanel = new Greeter.SubprocessSupervisor ({"io.elementary.wingpanel", "-g"});
+    } catch (Error e) {
+        critical (e.message);
+    }
+
+    try {
+        settings_daemon = new Greeter.SubprocessSupervisor ({"io.elementary.settings-daemon"});
     } catch (Error e) {
         critical (e.message);
     }
