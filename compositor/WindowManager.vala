@@ -201,7 +201,11 @@ namespace GreeterCompositor {
             }
         }
 
+#if HAS_MUTTER45
+        public override void show_window_menu_for_rect (Meta.Window window, Meta.WindowMenuType menu, Mtk.Rectangle rect) {
+#else
         public override void show_window_menu_for_rect (Meta.Window window, Meta.WindowMenuType menu, Meta.Rectangle rect) {
+#endif
             show_window_menu (window, menu, rect.x, rect.y);
         }
 
@@ -253,7 +257,11 @@ namespace GreeterCompositor {
             }
         }
 
+#if HAS_MUTTER45
+        public override void size_change (Meta.WindowActor actor, Meta.SizeChange which_change, Mtk.Rectangle old_frame_rect, Mtk.Rectangle old_buffer_rect) {
+#else
         public override void size_change (Meta.WindowActor actor, Meta.SizeChange which_change, Meta.Rectangle old_frame_rect, Meta.Rectangle old_buffer_rect) {
+#endif
             unowned Meta.Window window = actor.get_meta_window ();
             if (window.get_tile_match () != null) {
                 size_change_completed (actor);
@@ -397,7 +405,4 @@ namespace GreeterCompositor {
             return info;
         }
     }
-
-    [CCode (cname="clutter_x11_get_stage_window")]
-    public extern X.Window x_get_stage_window (Clutter.Actor stage);
 }
