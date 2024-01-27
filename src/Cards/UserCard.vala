@@ -385,7 +385,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
                 critical ("Couldn't load lighdm act");
                 return;
             }
-    
+
             try {
                 lightdm_act = Bus.get_proxy_sync (
                     SYSTEM,
