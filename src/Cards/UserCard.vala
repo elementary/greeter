@@ -6,6 +6,9 @@
  */
 
 public class Greeter.UserCard : Greeter.BaseCard {
+    private static Act.User lightdm_user_act;
+    private static Pantheon.AccountsService lightdm_act;
+
     public signal void go_left ();
     public signal void go_right ();
     public signal void focus_requested ();
@@ -21,9 +24,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     public int sleep_inactive_battery_timeout { get; set; default = 1200; }
     public int sleep_inactive_battery_type { get; set; default = 1; }
 
-    private Act.User lightdm_user_act;
     private Act.User act_user;
-    private Pantheon.AccountsService lightdm_act;
     private Pantheon.AccountsService greeter_act;
     private Pantheon.SettingsDaemon.AccountsService settings_act;
 
@@ -213,15 +214,19 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         child = card_overlay;
 
-        lightdm_user_act = Act.UserManager.get_default ().get_user (Environment.get_user_name ());
-
         act_user = Act.UserManager.get_default ().get_user (lightdm_user.name);
         act_user.bind_property ("locked", username_label, "sensitive", INVERT_BOOLEAN);
         act_user.bind_property ("locked", session_button, "visible", INVERT_BOOLEAN);
-        act_user.notify["is-loaded"].connect (on_act_user_loaded);
 
-        if (act_user.is_loaded) {
+        if (lightdm_user_act == null) {
+            lightdm_user_act = Act.UserManager.get_default ().get_user (Environment.get_user_name ());
+        }
+
+        if (act_user.is_loaded && lightdm_user_act.is_loaded) {
             on_act_user_loaded ();
+        } else {
+            act_user.notify["is-loaded"].connect (on_act_user_loaded);
+            lightdm_user_act.notify["is-loaded"].connect (on_act_user_loaded);
         }
 
         card_overlay.focus.connect ((direction) => {
@@ -338,35 +343,59 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private void on_act_user_loaded () {
-        if (!act_user.is_loaded) {
+        if (!act_user.is_loaded || !lightdm_user_act.is_loaded) {
             return;
         }
 
         unowned string? act_path = act_user.get_object_path ();
-        if (act_path != null) {
+        if (act_path == null) {
+            critical ("Couldn't load user act");
+            return;
+        }
+
+        try {
+            greeter_act = Bus.get_proxy_sync (
+                SYSTEM,
+                "org.freedesktop.Accounts",
+                act_path,
+                GET_INVALIDATED_PROPERTIES
+            );
+
+            settings_act = Bus.get_proxy_sync (
+                SYSTEM,
+                "org.freedesktop.Accounts",
+                act_path,
+                GET_INVALIDATED_PROPERTIES
+            );
+
+            is_24h = greeter_act.time_format != "12h";
+            prefers_accent_color = greeter_act.prefers_accent_color;
+            sleep_inactive_ac_timeout = greeter_act.sleep_inactive_ac_timeout;
+            sleep_inactive_ac_type = greeter_act.sleep_inactive_ac_type;
+            sleep_inactive_battery_timeout = greeter_act.sleep_inactive_battery_timeout;
+            sleep_inactive_battery_type = greeter_act.sleep_inactive_battery_type;
+        } catch (Error e) {
+            critical (e.message);
+            return;
+        }
+
+        if (lightdm_act == null) {
+            unowned string? lightdm_act_path = lightdm_user_act.get_object_path ();
+            if (lightdm_act_path == null) {
+                critical ("Couldn't load lighdm act");
+                return;
+            }
+    
             try {
-                greeter_act = Bus.get_proxy_sync (
+                lightdm_act = Bus.get_proxy_sync (
                     SYSTEM,
                     "org.freedesktop.Accounts",
-                    act_path,
+                    lightdm_act_path,
                     GET_INVALIDATED_PROPERTIES
                 );
-
-                settings_act = Bus.get_proxy_sync (
-                    SYSTEM,
-                    "org.freedesktop.Accounts",
-                    act_path,
-                    GET_INVALIDATED_PROPERTIES
-                );
-
-                is_24h = greeter_act.time_format != "12h";
-                prefers_accent_color = greeter_act.prefers_accent_color;
-                sleep_inactive_ac_timeout = greeter_act.sleep_inactive_ac_timeout;
-                sleep_inactive_ac_type = greeter_act.sleep_inactive_ac_type;
-                sleep_inactive_battery_timeout = greeter_act.sleep_inactive_battery_timeout;
-                sleep_inactive_battery_type = greeter_act.sleep_inactive_battery_type;
             } catch (Error e) {
                 critical (e.message);
+                return;
             }
         }
 
@@ -410,7 +439,11 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     public void set_settings () {
-        if (!act_user.is_loaded) {
+        if (!show_input) {
+            return;
+        }
+
+        if (!act_user.is_loaded || !lightdm_user_act.is_loaded) {
             needs_settings_set = true;
             return;
         }
@@ -509,30 +542,13 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private void update_style () {
         var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
         interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (prefers_accent_color));
-
-        unowned string? lightdm_act_path = lightdm_user_act.get_object_path ();
-        if (lightdm_act_path != null) {
-            try {
-                lightdm_act = Bus.get_proxy_sync (
-                    SYSTEM,
-                    "org.freedesktop.Accounts",
-                    lightdm_act_path,
-                    GET_INVALIDATED_PROPERTIES
-                );
-
-                warning ("Set color_scheme %d for user %s", greeter_act.prefers_color_scheme, lightdm_user.name);
-                lightdm_act.prefers_color_scheme = greeter_act.prefers_color_scheme;
-            } catch (Error e) {
-                critical (e.message);
-            }
-        }
+        lightdm_act.prefers_color_scheme = greeter_act.prefers_color_scheme;
     }
 
     private void start_settings_sync () {
         debug ("Started settings sync for user %s", lightdm_user.name);
 
         dark_mode_sync_id = ((DBusProxy) lightdm_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
-            warning ("OwO");
             int prefers_color_scheme;
             changed_properties.lookup ("PrefersColorScheme", "i", out prefers_color_scheme);
             greeter_act.prefers_color_scheme = prefers_color_scheme;
