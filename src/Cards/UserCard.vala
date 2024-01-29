@@ -522,6 +522,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
         settings_daemon_settings.set_enum ("prefer-dark-schedule", settings_act.prefer_dark_schedule);
         settings_daemon_settings.set_value ("prefer-dark-schedule-from", settings_act.prefer_dark_schedule_from);
         settings_daemon_settings.set_value ("prefer-dark-schedule-to", settings_act.prefer_dark_schedule_to);
+
+        var touchscreen_settings = new GLib.Settings ("org.gnome.settings-daemon.peripherals.touchscreen");
+        touchscreen_settings.set_boolean ("orientation-lock", settings_act.orientation_lock);
     }
 
     private void set_night_light_settings () {

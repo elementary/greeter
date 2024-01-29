@@ -63,6 +63,7 @@ interface Pantheon.SettingsDaemon.AccountsService : Object {
     public abstract string document_font_name { owned get; set; }
     public abstract string font_name { owned get; set; }
     public abstract string monospace_font_name { owned get; set; }
+    public abstract bool orientation_lock { get; set; }
 
     /* Prefer Dark Schedule (part of interface settings)*/
     public abstract Coordinates prefer_dark_last_coordinates { get; set; }
