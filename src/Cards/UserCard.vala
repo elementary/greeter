@@ -475,6 +475,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
         interface_settings.set_value ("document-font-name", settings_act.document_font_name);
         interface_settings.set_value ("font-name", settings_act.font_name);
         interface_settings.set_value ("monospace-font-name", settings_act.monospace_font_name);
+
+        var touchscreen_settings = new GLib.Settings ("org.gnome.settings-daemon.peripherals.touchscreen");
+        touchscreen_settings.set_boolean ("orientation-lock", settings_act.orientation_lock);
     }
 
     private void set_night_light_settings () {
