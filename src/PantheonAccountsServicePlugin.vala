@@ -66,15 +66,14 @@ interface Pantheon.SettingsDaemon.AccountsService : Object {
     public abstract bool orientation_lock { get; set; }
 
     /* Prefer Dark Schedule (part of interface settings)*/
-    public abstract Coordinates prefer_dark_last_coordinates { get; set; }
+    /* Last coordinates are reused for Night Light settings */
+    public abstract Coordinates last_coordinates { get; set; }
     public abstract int prefer_dark_schedule { get; set; }
     public abstract double prefer_dark_schedule_from { get; set; }
     public abstract double prefer_dark_schedule_to { get; set; }
 
     /* Night Light */
-
     public abstract bool night_light_enabled { get; set; }
-    public abstract Coordinates night_light_last_coordinates { get; set; }
     public abstract bool night_light_schedule_automatic { get; set; }
     public abstract double night_light_schedule_from { get; set; }
     public abstract double night_light_schedule_to { get; set; }

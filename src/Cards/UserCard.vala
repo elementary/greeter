@@ -514,8 +514,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         var settings_daemon_settings = new GLib.Settings ("io.elementary.settings-daemon.prefers-color-scheme");
 
-        var latitude = new Variant.double (settings_act.prefer_dark_last_coordinates.latitude);
-        var longitude = new Variant.double (settings_act.prefer_dark_last_coordinates.longitude);
+        var latitude = new Variant.double (settings_act.last_coordinates.latitude);
+        var longitude = new Variant.double (settings_act.last_coordinates.longitude);
         var coordinates = new Variant.tuple ({latitude, longitude});
         settings_daemon_settings.set_value ("last-coordinates", coordinates);
 
@@ -531,8 +531,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var night_light_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.color");
         night_light_settings.set_value ("night-light-enabled", settings_act.night_light_enabled);
 
-        var latitude = new Variant.double (settings_act.night_light_last_coordinates.latitude);
-        var longitude = new Variant.double (settings_act.night_light_last_coordinates.longitude);
+        var latitude = new Variant.double (settings_act.last_coordinates.latitude);
+        var longitude = new Variant.double (settings_act.last_coordinates.longitude);
         var coordinates = new Variant.tuple ({latitude, longitude});
         night_light_settings.set_value ("night-light-last-coordinates", coordinates);
 
