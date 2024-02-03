@@ -556,8 +556,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             binding.unbind ();
         }
 
-        user_card.set_settings ();
-
         binding = user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE);
         next_delta = user_cards.index (user_card);
 
@@ -566,6 +564,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         user_card.notify["reveal-ratio"].connect (notify_cb);
         user_card.show_input = true;
         user_card.grab_focus ();
+
+        user_card.set_settings ();
 
         if (index_delta != next_delta) {
             ((Greeter.UserCard) user_cards.peek_nth (index_delta)).show_input = false;
