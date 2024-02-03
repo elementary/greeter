@@ -119,7 +119,7 @@ public class GreeterCompositor.BackgroundManager : Meta.BackgroundGroup {
         content.background = background.background;
 
         insert_child_below (background_actor, null);
-        
+
         var monitor = display.get_monitor_geometry (monitor_index);
         background_actor.set_size (monitor.width, monitor.height);
 
