@@ -25,7 +25,7 @@ public enum BackgroundState {
     TRANSLUCENT_LIGHT
 }
 
-public class GreeterCompositor.BackgroundManager : Object {
+public class GreeterCompositor.WingpanelManager : Object {
     private const int MINIMIZE_DURATION = 200;
     private const int SNAP_DURATION = 250;
     private const int WALLPAPER_TRANSITION_DURATION = 150;
@@ -45,7 +45,7 @@ public class GreeterCompositor.BackgroundManager : Object {
 
     private BackgroundUtils.ColorInformation? bk_color_info = null;
 
-    public BackgroundManager (WindowManager _wm, int panel_height) {
+    public WingpanelManager (WindowManager _wm, int panel_height) {
         wm = _wm;
 
         Object (panel_height: panel_height);

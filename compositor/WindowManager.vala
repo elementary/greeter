@@ -42,9 +42,14 @@ namespace GreeterCompositor {
          */
         public Clutter.Actor top_window_group { get; protected set; }
 
+        /**
+         * The background group is a container for the background actors forming the wallpaper
+         */
+        public Meta.BackgroundGroup background_group { get; protected set; }
+
         public PointerLocator pointer_locator { get; private set; }
 
-        public Greeter.SystemBackground system_background { get; private set; }
+        public GreeterCompositor.SystemBackground system_background { get; private set; }
 
         Meta.PluginInfo info;
 
@@ -101,12 +106,12 @@ namespace GreeterCompositor {
             unowned Meta.Display display = get_display ();
 
             stage.remove_child (system_background.background_actor);
-            system_background = new Greeter.SystemBackground (display);
+            system_background = new SystemBackground (display);
             system_background.background_actor.add_constraint (new Clutter.BindConstraint (stage,
                 Clutter.BindCoordinate.ALL, 0));
             stage.insert_child_below (system_background.background_actor, null);
 
-            system_background.refresh ();
+            SystemBackground.refresh ();
         }
 
         void show_stage () {
@@ -114,12 +119,12 @@ namespace GreeterCompositor {
             MediaFeedback.init ();
             DBus.init (this);
             DBusAccelerator.init (this);
-            DBusBackgroundManager.init (this);
+            DBusWingpanelManager.init (this);
             KeyboardManager.init (display);
 
             stage = display.get_stage () as Clutter.Stage;
 
-            system_background = new Greeter.SystemBackground (display);
+            system_background = new SystemBackground (display);
             system_background.background_actor.add_constraint (new Clutter.BindConstraint (stage,
                 Clutter.BindCoordinate.ALL, 0));
             stage.insert_child_below (system_background.background_actor, null);
@@ -135,6 +140,10 @@ namespace GreeterCompositor {
             top_window_group = display.get_top_window_group ();
             stage.remove_child (top_window_group);
             ui_group.add_child (top_window_group);
+
+            background_group = new BackgroundContainer (this);
+            window_group.add_child (background_group);
+            window_group.set_child_below_sibling (background_group, null);
 
             pointer_locator = new PointerLocator (this);
             ui_group.add_child (pointer_locator);

@@ -236,7 +236,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             }
         });
 
-        // This makes all the animations synchonous
+        // This makes all the animations synchronous
         form_revealer.size_allocate.connect ((alloc) => {
             var total_height = form_box.get_allocated_height () + form_box.margin_top + form_box.margin_bottom;
             reveal_ratio = (double)alloc.height / (double)total_height;
@@ -478,6 +478,16 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         var touchscreen_settings = new GLib.Settings ("org.gnome.settings-daemon.peripherals.touchscreen");
         touchscreen_settings.set_boolean ("orientation-lock", settings_act.orientation_lock);
+
+        var background_settings = new GLib.Settings ("org.gnome.desktop.background");
+        if (lightdm_user.background != null) {
+            background_settings.set_value ("picture-uri", lightdm_user.background);
+        } else {
+            background_settings.reset ("picture-uri");
+        }
+
+        background_settings.set_value ("picture-options", settings_act.picture_options);
+        background_settings.set_value ("primary-color", settings_act.primary_color);
     }
 
     private void set_night_light_settings () {

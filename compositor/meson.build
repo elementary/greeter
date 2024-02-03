@@ -65,18 +65,25 @@ mutter_typelib_dir = libmutter_dep.get_variable('typelibdir')
 
 # Here is the real Compositor work
 compositor_files = files(
-  'BackgroundManager.vala',
-  'BackgroundUtils.vala',
+	'Background/Animation.vala',
+	'Background/Background.vala',
+	'Background/BackgroundCache.vala',
+	'Background/BackgroundContainer.vala',
+	'Background/BackgroundManager.vala',
+	'Background/BackgroundSource.vala',
+	'Background/BlurEffect.vala',
+	'Background/SystemBackground.vala',
+  'WingpanelManager/WingpanelManager.vala',
+  'WingpanelManager/DBusWingpanelManager.vala',
+  'WingpanelManager/BackgroundUtils.vala',
   'DBus.vala',
   'DBusAccelerator.vala',
-  'DBusBackgroundManager.vala',
   'Dialogs.vala',
   'KeyboardManager.vala',
   'main.vala',
   'MaskCorners.vala',
   'MediaFeedback.vala',
   'PointerLocator.vala',
-  'SystemBackground.vala',
   'Utils.vala',
   'WindowManager.vala'
 )
@@ -86,7 +93,7 @@ executable(
   compositor_files,
   compositor_resources,
   config_header,
-  dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, posix_dep, mutter_dep],
+  dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, posix_dep, mutter_dep, gnome_desktop_dep],
   vala_args: vala_flags,
   c_args: compositor_c_args,
   build_rpath: mutter_typelib_dir,

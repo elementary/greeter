@@ -18,9 +18,9 @@
  */
 
  [DBus (name = "org.pantheon.gala.WingpanelInterface")]
- public class GreeterCompositor.DBusBackgroundManager : Object {
-     private BackgroundManager background_manager;
-     private static DBusBackgroundManager? instance;
+ public class GreeterCompositor.DBusWingpanelManager : Object {
+     private WingpanelManager background_manager;
+     private static DBusWingpanelManager? instance;
      static WindowManager wm;
 
     [DBus (visible = false)]
@@ -30,7 +30,7 @@
         Bus.own_name (BusType.SESSION, "org.pantheon.gala.WingpanelInterface", BusNameOwnerFlags.NONE,
             (connection) => {
                 if (instance == null)
-                    instance = new DBusBackgroundManager ();
+                    instance = new DBusWingpanelManager ();
 
                 try {
                     connection.register_object ("/org/pantheon/gala/WingpanelInterface", instance);
@@ -46,7 +46,7 @@
      public signal void state_changed (BackgroundState state, uint animation_duration);
 
      public void initialize (int monitor, int panel_height) throws GLib.Error {
-         background_manager = new BackgroundManager (wm, panel_height);
+         background_manager = new WingpanelManager (wm, panel_height);
          background_manager.state_changed.connect ((state, animation_duration) => {
              state_changed (state, animation_duration);
          });
