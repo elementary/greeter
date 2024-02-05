@@ -418,6 +418,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
 
         current_card.wrong_credentials ();
+
+        carousel.interactive = true;
     }
 
     private async void load_users () {
@@ -530,6 +532,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private unowned GLib.Binding? time_format_binding = null;
     private void switch_to_card (Greeter.UserCard user_card) {
+        if (!carousel.interactive) {
+            return;
+        }
+
         if (current_card != null && current_card is UserCard) {
             ((UserCard) current_card).show_input = false;
         }
@@ -590,9 +596,16 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 critical (e.message);
             }
         }
+
+        carousel.interactive = false;
+        carousel.scroll_to (current_card);
     }
 
     private void go_previous () {
+        if (!carousel.interactive) {
+            return;
+        }
+
         unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index - 1);
         if (next_card != null) {
             carousel.scroll_to (next_card);
@@ -600,6 +613,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void go_next () {
+        if (!carousel.interactive) {
+            return;
+        }
+
         unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index + 1);
         if (next_card != null) {
             carousel.scroll_to (next_card);
