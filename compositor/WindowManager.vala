@@ -76,21 +76,6 @@ namespace GreeterCompositor {
         public override void start () {
             show_stage ();
 
-            unowned var background_actor = system_background.background_actor;
-            background_actor.opacity = 0;
-            background_actor.save_easing_state ();
-            background_actor.set_easing_duration (1000);
-            background_actor.set_easing_mode (Clutter.AnimationMode.EASE);
-            background_actor.opacity = 255;
-            background_actor.restore_easing_state ();
-
-            ui_group.opacity = 0;
-            ui_group.save_easing_state ();
-            ui_group.set_easing_duration (1000);
-            ui_group.set_easing_mode (Clutter.AnimationMode.EASE);
-            ui_group.opacity = 255;
-            ui_group.restore_easing_state ();
-
             unowned Meta.Display display = get_display ();
             display.gl_video_memory_purged.connect (() => {
                 refresh_background ();
