@@ -32,6 +32,8 @@ public int main (string[] args) {
     var gnome_settings_daemon = new Greeter.SettingsDaemon ();
     gnome_settings_daemon.start ();
 
+    Gtk.init (ref args);
+
     Greeter.SubprocessSupervisor compositor;
     Greeter.SubprocessSupervisor portals;
     Greeter.SubprocessSupervisor wingpanel;
@@ -42,8 +44,6 @@ public int main (string[] args) {
     } catch (Error e) {
         critical (e.message);
     }
-
-    Gtk.init (ref args);
 
     var window = new Greeter.MainWindow ();
     window.show_all ();
