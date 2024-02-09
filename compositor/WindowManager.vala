@@ -46,7 +46,7 @@ namespace GreeterCompositor {
 
         public Greeter.SystemBackground system_background { get; private set; }
 
-        private Clutter.Actor? fade_in_screen = null;
+        private Clutter.Actor fade_in_screen;
 
         private Meta.PluginInfo info;
 
