@@ -51,7 +51,9 @@ namespace GreeterCompositor {
 
         public GreeterCompositor.SystemBackground system_background { get; private set; }
 
-        Meta.PluginInfo info;
+        private Clutter.Actor fade_in_screen;
+
+        private Meta.PluginInfo info;
 
         // Used to toggle screenreader
         private GLib.Settings application_settings;
@@ -80,6 +82,12 @@ namespace GreeterCompositor {
 
         public override void start () {
             show_stage ();
+
+            fade_in_screen.save_easing_state ();
+            fade_in_screen.set_easing_duration (1000);
+            fade_in_screen.set_easing_mode (Clutter.AnimationMode.EASE);
+            fade_in_screen.opacity = 0;
+            fade_in_screen.restore_easing_state ();
 
             unowned Meta.Display display = get_display ();
             display.gl_video_memory_purged.connect (() => {
@@ -132,6 +140,15 @@ namespace GreeterCompositor {
 
             pointer_locator = new PointerLocator (this);
             ui_group.add_child (pointer_locator);
+
+            int width, height;
+            display.get_size (out width, out height);
+            fade_in_screen = new Clutter.Actor () {
+                width = width,
+                height = height,
+                background_color = Clutter.Color.from_rgba (0, 0, 0, 255),
+            };
+            stage.add_child (fade_in_screen);
 
             MaskCorners.init (this);
 
