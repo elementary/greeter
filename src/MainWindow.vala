@@ -545,7 +545,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
         time_format_binding = user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE);
 
-        binding = user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE);
         current_card = user_card;
 
         carousel.scroll_to (user_card);
