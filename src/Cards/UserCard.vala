@@ -445,7 +445,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         settings.set_value ("xkb-options", options);
     }
 
-    private void set_or_reset_settings (GLib.Settings settings, string key, GLib.Variant? value) {
+    private void set_or_reset_settings_key (GLib.Settings settings, string key, GLib.Variant? value) {
         if (value != null) {
             settings.set_value (key, value);
         } else {
@@ -480,9 +480,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
         interface_settings.set_value ("cursor-size", settings_act.cursor_size);
         interface_settings.set_value ("locate-pointer", settings_act.locate_pointer);
         interface_settings.set_value ("text-scaling-factor", settings_act.text_scaling_factor);
-        set_or_reset_settings (interface_settings, "document-font-name", settings_act.document_font_name);
-        set_or_reset_settings (interface_settings, "font-name", settings_act.font_name);
-        set_or_reset_settings (interface_settings, "monospace-font-name", settings_act.monospace_font_name);
+        set_or_reset_settings_key (interface_settings, "document-font-name", settings_act.document_font_name);
+        set_or_reset_settings_key (interface_settings, "font-name", settings_act.font_name);
+        set_or_reset_settings_key (interface_settings, "monospace-font-name", settings_act.monospace_font_name);
 
         var touchscreen_settings = new GLib.Settings ("org.gnome.settings-daemon.peripherals.touchscreen");
         touchscreen_settings.set_boolean ("orientation-lock", settings_act.orientation_lock);
