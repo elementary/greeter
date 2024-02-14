@@ -17,11 +17,11 @@
  * Boston, MA 02110-1301 USA.
  */
 
- [DBus (name = "org.pantheon.gala.WingpanelInterface")]
- public class GreeterCompositor.DBusWingpanelManager : Object {
-     private WingpanelManager background_manager;
-     private static DBusWingpanelManager? instance;
-     static WindowManager wm;
+[DBus (name = "org.pantheon.gala.WingpanelInterface")]
+public class GreeterCompositor.DBusWingpanelManager : Object {
+    private WingpanelManager background_manager;
+    private static DBusWingpanelManager? instance;
+    static WindowManager wm;
 
     [DBus (visible = false)]
     public static void init (WindowManager _wm) {
@@ -43,19 +43,19 @@
         );
     }
 
-     public signal void state_changed (BackgroundState state, uint animation_duration);
+    public signal void state_changed (BackgroundState state, uint animation_duration);
 
-     public void initialize (int monitor, int panel_height) throws GLib.Error {
-         background_manager = new WingpanelManager (wm, panel_height);
-         background_manager.state_changed.connect ((state, animation_duration) => {
-             state_changed (state, animation_duration);
-         });
+    public void initialize (int monitor, int panel_height) throws GLib.Error {
+        background_manager = new WingpanelManager (wm, panel_height);
+        background_manager.state_changed.connect ((state, animation_duration) => {
+            state_changed (state, animation_duration);
+        });
      }
 
-     public bool begin_grab_focused_window (int x, int y, int button, uint time, uint state) throws GLib.Error {
-         return false;
-     }
+    public bool begin_grab_focused_window (int x, int y, int button, uint time, uint state) throws GLib.Error {
+        return false;
+    }
 
-     public void remember_focused_window () throws GLib.Error {}
-     public void restore_focused_window () throws GLib.Error {}
+    public void remember_focused_window () throws GLib.Error {}
+    public void restore_focused_window () throws GLib.Error {}
  }

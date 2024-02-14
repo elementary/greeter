@@ -48,7 +48,11 @@ namespace BackgroundUtils {
 
     public async ColorInformation get_background_color_information (GreeterCompositor.WindowManager wm,
                                                                     int reference_x, int reference_y, int reference_width, int reference_height) throws DBusError {
-        var background = wm.system_background.background_actor;
+        var background = wm.background_group.get_child_at_index (wm.get_display ().get_primary_monitor ());
+
+        if (background == null) {
+            throw new DBusError.INVALID_ARGS ("Invalid monitor requested: %i".printf (wm.get_display ().get_primary_monitor ()));
+        }
 
         var effect = new DummyOffscreenEffect ();
         background.add_effect (effect);

@@ -63,11 +63,14 @@ public class GreeterCompositor.WingpanelManager : Object {
             update_current_workspace ();
         });
 
-        wm.notify["system-background"].connect (() => {
+        var signal_id = GLib.Signal.lookup ("changed", wm.background_group.get_type ());
+        GLib.Signal.add_emission_hook (signal_id, 0, (ihint, param_values) => {
             update_bk_color_info.begin ((obj, res) => {
                 update_bk_color_info.end (res);
                 check_for_state_change (WALLPAPER_TRANSITION_DURATION);
             });
+
+            return true;
         });
     }
 
