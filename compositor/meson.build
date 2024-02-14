@@ -75,6 +75,7 @@ compositor_files = files(
   'Background/SystemBackground.vala',
   'WingpanelManager/WingpanelManager.vala',
   'WingpanelManager/DBusWingpanelManager.vala',
+  'WingpanelManager/FocusManager.vala',
   'WingpanelManager/BackgroundUtils.vala',
   'DBus.vala',
   'DBusAccelerator.vala',

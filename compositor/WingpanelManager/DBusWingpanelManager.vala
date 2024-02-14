@@ -9,6 +9,7 @@ public class GreeterCompositor.DBusWingpanelManager : GLib.Object {
     private static WindowManager wm;
 
     private WingpanelManager background_manager;
+    private FocusManager focus_manager;
 
     [DBus (visible = false)]
     public static void init (WindowManager _wm) {
@@ -37,12 +38,19 @@ public class GreeterCompositor.DBusWingpanelManager : GLib.Object {
         background_manager.state_changed.connect ((state, animation_duration) => {
             state_changed (state, animation_duration);
         });
+
+        focus_manager = new FocusManager (wm.get_display ());
      }
 
     public bool begin_grab_focused_window (int x, int y, int button, uint time, uint state) throws GLib.Error {
-        return false;
+        return focus_manager.begin_grab_focused_window (x, y, button, time, state);
     }
 
-    public void remember_focused_window () throws GLib.Error {}
-    public void restore_focused_window () throws GLib.Error {}
+    public void remember_focused_window () throws GLib.Error {
+        focus_manager.remember_focused_window ();
+    }
+
+    public void restore_focused_window () throws GLib.Error {
+        focus_manager.restore_focused_window ();
+    }
 }
