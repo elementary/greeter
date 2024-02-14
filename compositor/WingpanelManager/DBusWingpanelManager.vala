@@ -18,10 +18,11 @@
  */
 
 [DBus (name = "org.pantheon.gala.WingpanelInterface")]
-public class GreeterCompositor.DBusWingpanelManager : Object {
-    private WingpanelManager background_manager;
+public class GreeterCompositor.DBusWingpanelManager : GLib.Object {
     private static DBusWingpanelManager? instance;
-    static WindowManager wm;
+    private static WindowManager wm;
+
+    private WingpanelManager background_manager;
 
     [DBus (visible = false)]
     public static void init (WindowManager _wm) {
@@ -58,4 +59,4 @@ public class GreeterCompositor.DBusWingpanelManager : Object {
 
     public void remember_focused_window () throws GLib.Error {}
     public void restore_focused_window () throws GLib.Error {}
- }
+}

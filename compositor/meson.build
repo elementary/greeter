@@ -65,14 +65,14 @@ mutter_typelib_dir = libmutter_dep.get_variable('typelibdir')
 
 # Here is the real Compositor work
 compositor_files = files(
-	'Background/Animation.vala',
-	'Background/Background.vala',
-	'Background/BackgroundCache.vala',
-	'Background/BackgroundContainer.vala',
-	'Background/BackgroundManager.vala',
-	'Background/BackgroundSource.vala',
-	'Background/BlurEffect.vala',
-	'Background/SystemBackground.vala',
+  'Background/Animation.vala',
+  'Background/Background.vala',
+  'Background/BackgroundCache.vala',
+  'Background/BackgroundContainer.vala',
+  'Background/BackgroundManager.vala',
+  'Background/BackgroundSource.vala',
+  'Background/BlurEffect.vala',
+  'Background/SystemBackground.vala',
   'WingpanelManager/WingpanelManager.vala',
   'WingpanelManager/DBusWingpanelManager.vala',
   'WingpanelManager/BackgroundUtils.vala',
