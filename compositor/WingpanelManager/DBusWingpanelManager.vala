@@ -18,7 +18,7 @@
  */
 
 [DBus (name = "org.pantheon.gala.WingpanelInterface")]
-public class GreeterCompositor.DBusWingpanelManager : Object {
+public class GreeterCompositor.DBusWingpanelManager : GLib.Object {
     private static DBusWingpanelManager? instance;
     private static WindowManager wm;
 
