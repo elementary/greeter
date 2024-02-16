@@ -37,12 +37,9 @@ public class GreeterCompositor.WingpanelManager : Object {
     public signal void state_changed (BackgroundState state, uint animation_duration);
 
     public int panel_height { private get; construct; }
+
     private static WindowManager wm;
-
-    private Meta.Workspace? current_workspace = null;
-
     private BackgroundState current_state = BackgroundState.LIGHT;
-
     private BackgroundUtils.ColorInformation? bk_color_info = null;
 
     public WingpanelManager (WindowManager _wm, int panel_height) {
@@ -75,32 +72,21 @@ public class GreeterCompositor.WingpanelManager : Object {
     }
 
     private void update_current_workspace () {
-        unowned Meta.WorkspaceManager manager = wm.get_display ().get_workspace_manager ();
-        var workspace = manager.get_active_workspace ();
+        unowned var display = wm.get_display ();
 
-        if (workspace == null) {
-            warning ("Cannot get active workspace");
-
-            return;
-        }
-
-        if (current_workspace != null) {
-            current_workspace.window_added.disconnect (on_window_added);
-            current_workspace.window_removed.disconnect (on_window_removed);
-        }
-
-        current_workspace = workspace;
-
-        foreach (Meta.Window window in current_workspace.list_windows ()) {
+        foreach (unowned var window in display.list_all_windows ()) {
             if (window.is_on_primary_monitor ()) {
                 register_window (window);
             }
         }
 
-        current_workspace.window_added.connect (on_window_added);
-        current_workspace.window_removed.connect (on_window_removed);
+        display.window_created.connect ((window) => {
+            on_window_added (window);
 
-        check_for_state_change (WORKSPACE_SWITCH_DURATION);
+            window.unmanaged.connect (on_window_removed);
+        });
+
+        check_for_state_change (0);
     }
 
     private void register_window (Meta.Window window) {
@@ -159,7 +145,7 @@ public class GreeterCompositor.WingpanelManager : Object {
     private void check_for_state_change (uint animation_duration) {
         bool has_maximized_window = false;
 
-        foreach (Meta.Window window in current_workspace.list_windows ()) {
+        foreach (Meta.Window window in wm.get_display ().list_all_windows ()) {
             if (window.is_on_primary_monitor ()) {
                 if (!window.minimized && window.maximized_vertically) {
                     has_maximized_window = true;
