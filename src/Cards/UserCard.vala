@@ -407,6 +407,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         set_mouse_touchpad_settings ();
         set_interface_settings ();
         set_night_light_settings ();
+        set_wingpanel_settings ();
         update_style ();
     }
 
@@ -482,6 +483,16 @@ public class Greeter.UserCard : Greeter.BaseCard {
         night_light_settings.set_value ("night-light-schedule-from", settings_act.night_light_schedule_from);
         night_light_settings.set_value ("night-light-schedule-to", settings_act.night_light_schedule_to);
         night_light_settings.set_value ("night-light-temperature", settings_act.night_light_temperature);
+    }
+
+    private void set_wingpanel_settings () {
+        var wingpanel_schema = SettingsSchemaSource.get_default ().lookup ("io.elementary.desktop.wingpanel", true);
+        if (wingpanel_schema == null || !wingpanel_schema.has_key ("use-transparency")) {
+            return;
+        }
+
+        var wingpanel_settings = new GLib.Settings ("io.elementary.desktop.wingpanel");
+        wingpanel_settings.set_value ("use-transparency", settings_act.wingpanel_use_transparency);
     }
 
     private void update_style () {
