@@ -41,7 +41,7 @@ namespace GreeterCompositor.BackgroundUtils {
         }
 
         var effect = new DummyOffscreenEffect ();
-        var newest_background_actor = (bg_manager.new_background_actor != null) ? bg_manager.new_background_actor : bg_manager.background_actor;
+        unowned var newest_background_actor = bg_manager.newest_background_actor;
         newest_background_actor.add_effect (effect);
 
         var bg_actor_width = (int) newest_background_actor.width;

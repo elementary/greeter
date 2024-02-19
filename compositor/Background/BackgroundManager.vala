@@ -13,10 +13,15 @@ public class GreeterCompositor.BackgroundManager : Meta.BackgroundGroup {
     public WindowManager wm { get; construct; }
     public int monitor_index { get; construct; }
     public bool control_position { get; construct; }
-    public Meta.BackgroundActor background_actor { get; private set; }
-    public Meta.BackgroundActor? new_background_actor { get; private set; default = null; }
+    public Meta.BackgroundActor newest_background_actor {
+        get {
+            return (new_background_actor != null) ? new_background_actor : background_actor;
+        }
+    }
 
     private BackgroundSource background_source;
+    private Meta.BackgroundActor background_actor;
+    private Meta.BackgroundActor? new_background_actor = null;
 
     public BackgroundManager (WindowManager wm, int monitor_index, bool control_position = true) {
         Object (wm: wm, monitor_index: monitor_index, control_position: control_position);
