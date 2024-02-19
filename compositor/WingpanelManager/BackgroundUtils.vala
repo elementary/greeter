@@ -8,7 +8,7 @@
  *   related to it are copied from Gala.DBus.
  */
 
-namespace BackgroundUtils {
+namespace GreeterCompositor.BackgroundUtils {
     private const double SATURATION_WEIGHT = 1.5;
     private const double WEIGHT_THRESHOLD = 1.0;
 
@@ -34,17 +34,18 @@ namespace BackgroundUtils {
 
     public async ColorInformation get_background_color_information (GreeterCompositor.WindowManager wm,
                                                                     int reference_x, int reference_y, int reference_width, int reference_height) throws DBusError {
-        var background = wm.background_group.get_child_at_index (wm.get_display ().get_primary_monitor ());
+        var bg_manager = (BackgroundManager) wm.background_group.get_child_at_index (wm.get_display ().get_primary_monitor ());
 
-        if (background == null) {
+        if (bg_manager == null) {
             throw new DBusError.INVALID_ARGS ("Invalid monitor requested: %i".printf (wm.get_display ().get_primary_monitor ()));
         }
 
         var effect = new DummyOffscreenEffect ();
-        background.add_effect (effect);
+        unowned var newest_background_actor = bg_manager.newest_background_actor;
+        newest_background_actor.add_effect (effect);
 
-        var bg_actor_width = (int)background.width;
-        var bg_actor_height = (int)background.height;
+        var bg_actor_width = (int) newest_background_actor.width;
+        var bg_actor_height = (int) newest_background_actor.height;
 
         // A commit in mutter added some padding to offscreen textures, so we
         // need to avoid looking at the edges of the texture as it often has a
@@ -77,7 +78,7 @@ namespace BackgroundUtils {
 
         paint_signal_handler = effect.done_painting.connect (() => {
             SignalHandler.disconnect (effect, paint_signal_handler);
-            background.remove_effect (effect);
+            newest_background_actor.remove_effect (effect);
 
             var texture = (Cogl.Texture)effect.get_texture ();
             var texture_width = texture.get_width ();
@@ -197,7 +198,7 @@ namespace BackgroundUtils {
             get_background_color_information.callback ();
         });
 
-        background.queue_redraw ();
+        newest_background_actor.queue_redraw ();
 
         yield;
 
