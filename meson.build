@@ -31,7 +31,11 @@ config_header = configure_file (
 
 add_project_arguments(['--vapidir', join_paths(meson.current_source_dir(), 'vapi')], language: 'vala')
 
-add_global_arguments('-DGETTEXT_PACKAGE="@0@"'.format(meson.project_name()), language:'c')
+add_global_arguments(
+    '-DGETTEXT_PACKAGE="@0@"'.format(meson.project_name()),
+    '-DGNOME_DESKTOP_USE_UNSTABLE_API',
+    language:'c'
+)
 
 greeter_resources = gnome.compile_resources(
     'greeter-resources', 'data/greeter.gresource.xml',
