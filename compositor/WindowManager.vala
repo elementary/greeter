@@ -97,9 +97,6 @@ namespace GreeterCompositor {
             });
         }
 
-        /*
-         * Disables tiling shortcuts
-         */
         private void disable_tiling_shortcuts () {
             var mutter_settings = new GLib.Settings ("org.gnome.mutter.keybindings");
             mutter_settings.set_strv ("toggle-tiled-left", {});
