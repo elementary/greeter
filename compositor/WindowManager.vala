@@ -83,6 +83,8 @@ namespace GreeterCompositor {
         public override void start () {
             show_stage ();
 
+            disable_tiling_shortcuts ();
+
             fade_in_screen.save_easing_state ();
             fade_in_screen.set_easing_duration (1000);
             fade_in_screen.set_easing_mode (Clutter.AnimationMode.EASE);
@@ -93,6 +95,19 @@ namespace GreeterCompositor {
             display.gl_video_memory_purged.connect (() => {
                 refresh_background ();
             });
+        }
+
+        /*
+         * Disables tiling shortcuts
+         */
+        private void disable_tiling_shortcuts () {
+            var mutter_settings = new GLib.Settings ("org.gnome.mutter.keybindings");
+            mutter_settings.set_strv ("toggle-tiled-left", {});
+            mutter_settings.set_strv ("toggle-tiled-right", {});
+
+            var wm_settings = new GLib.Settings ("org.gnome.desktop.wm.keybindings");
+            wm_settings.set_strv ("minimize", {});
+            wm_settings.set_strv ("toggle-maximized", {});
         }
 
         void refresh_background () {
