@@ -24,7 +24,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
-    private Hdy.Carousel carousel;
+    private Adw.Carousel carousel;
     private LightDM.Greeter lightdm_greeter;
     private Greeter.Settings settings;
     private Gtk.Button guest_login_button;
