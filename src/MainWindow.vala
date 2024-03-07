@@ -94,15 +94,15 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         manual_login_stack.add (carousel);
         manual_login_stack.add (manual_card);
 
-        var main_grid = new Gtk.Grid ();
-        main_grid.margin_top = main_grid.margin_bottom = 24;
-        main_grid.row_spacing = 24;
-        main_grid.orientation = Gtk.Orientation.VERTICAL;
-        main_grid.add (datetime_widget);
-        main_grid.add (manual_login_stack);
-        main_grid.add (extra_login_grid);
+        var main_box = new Gtk.Box (VERTICAL, 24) {
+            margin_top = 24,
+            margin_bottom = 24
+        };
+        main_box.add (datetime_widget);
+        main_box.add (manual_login_stack);
+        main_box.add (extra_login_grid);
 
-        add (main_grid);
+        child = main_box;
 
         manual_login_button.toggled.connect (() => {
             if (manual_login_button.active) {
