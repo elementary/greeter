@@ -29,6 +29,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private Greeter.Settings settings;
     private Gtk.Button guest_login_button;
     private Gtk.ToggleButton manual_login_button;
+    private Gtk.Revealer datetime_revealer;
     private Greeter.DateTimeWidget datetime_widget;
     private unowned LightDM.UserList lightdm_user_list;
 
@@ -77,7 +78,12 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         gtk_settings.notify["gtk-theme-name"].connect (update_style);
 
         datetime_widget = new Greeter.DateTimeWidget ();
-        datetime_widget.halign = Gtk.Align.CENTER;
+
+        datetime_revealer = new Gtk.Revealer () {
+            halign = CENTER,
+            child = datetime_widget,
+            transition_type = CROSSFADE
+        };
 
         user_cards = new GLib.Queue<unowned Greeter.UserCard> ();
 
@@ -98,7 +104,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         main_grid.margin_top = main_grid.margin_bottom = 24;
         main_grid.row_spacing = 24;
         main_grid.orientation = Gtk.Orientation.VERTICAL;
-        main_grid.add (datetime_widget);
+        main_grid.add (datetime_revealer);
         main_grid.add (manual_login_stack);
         main_grid.add (extra_login_grid);
 
@@ -443,7 +449,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
 
         if (lightdm_user_list.length > 0) {
-            datetime_widget.reveal_child = true;
+            datetime_revealer.reveal_child = true;
 
             lightdm_user_list.users.foreach ((user) => {
                 add_card (user);
@@ -468,7 +474,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 switch_to_card (user_card);
             }
         } else {
-            datetime_widget.reveal_child = false;
+            datetime_revealer.reveal_child = false;
 
             /* We're not certain that scaling factor will change, but try to wait for GSD in case it does */
             Timeout.add (500, () => {
