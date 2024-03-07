@@ -42,6 +42,10 @@ public class Greeter.SessionButton : Gtk.MenuButton {
                 while (iter.next ("{sv}", out key, out val)) {
                     menu.append (key, Action.print_detailed_name ("session.select", val));
                 }
+
+                if (menu.get_n_items () = 0) {
+                    destroy ();
+                }
             }
         });
     }
