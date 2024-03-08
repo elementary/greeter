@@ -206,14 +206,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 if (focused_entry != null && focused_entry.is_ancestor (current_card)) {
                     if (focused_entry.text == "") {
                         if (keyval == Gdk.Key.Left) {
-                            if (get_style_context ().direction == LTR) {
+                            if (Gtk.StateFlags.DIR_LTR in get_state_flags ()) {
                                 go_previous ();
                             } else {
                                 go_next ();
                             }
                             return Gdk.EVENT_STOP;
                         } else if (keyval == Gdk.Key.Right) {
-                            if (get_style_context ().direction == LTR) {
+                            if (Gtk.StateFlags.DIR_LTR in get_state_flags ()) {
                                 go_next ();
                             } else {
                                 go_previous ();
