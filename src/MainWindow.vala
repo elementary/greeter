@@ -404,8 +404,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     Gtk.ButtonsType.CLOSE
                 );
                 error_dialog.show_error_details (e.message);
-                error_dialog.run ();
-                error_dialog.destroy ();
+                error_dialog.present ();
+                error_dialog.response.connect (error_dialog.destroy);
             }
         }
 
