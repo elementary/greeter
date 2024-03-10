@@ -1,20 +1,6 @@
 /*
- * Copyright (c) 2011-2015 Wingpanel Developers (http://launchpad.net/wingpanel)
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public
- * License along with this program; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1301 USA.
+ * Copyright 2024 elementary, Inc. (https://elementary.io)
+ * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
 /*
@@ -22,7 +8,7 @@
  *   related to it are copied from Gala.DBus.
  */
 
-namespace BackgroundUtils {
+namespace GreeterCompositor.BackgroundUtils {
     private const double SATURATION_WEIGHT = 1.5;
     private const double WEIGHT_THRESHOLD = 1.0;
 
@@ -48,13 +34,18 @@ namespace BackgroundUtils {
 
     public async ColorInformation get_background_color_information (GreeterCompositor.WindowManager wm,
                                                                     int reference_x, int reference_y, int reference_width, int reference_height) throws DBusError {
-        var background = wm.system_background.background_actor;
+        var bg_manager = (BackgroundManager) wm.background_group.get_child_at_index (wm.get_display ().get_primary_monitor ());
+
+        if (bg_manager == null) {
+            throw new DBusError.INVALID_ARGS ("Invalid monitor requested: %i".printf (wm.get_display ().get_primary_monitor ()));
+        }
 
         var effect = new DummyOffscreenEffect ();
-        background.add_effect (effect);
+        unowned var newest_background_actor = bg_manager.newest_background_actor;
+        newest_background_actor.add_effect (effect);
 
-        var bg_actor_width = (int)background.width;
-        var bg_actor_height = (int)background.height;
+        var bg_actor_width = (int) newest_background_actor.width;
+        var bg_actor_height = (int) newest_background_actor.height;
 
         // A commit in mutter added some padding to offscreen textures, so we
         // need to avoid looking at the edges of the texture as it often has a
@@ -87,7 +78,7 @@ namespace BackgroundUtils {
 
         paint_signal_handler = effect.done_painting.connect (() => {
             SignalHandler.disconnect (effect, paint_signal_handler);
-            background.remove_effect (effect);
+            newest_background_actor.remove_effect (effect);
 
             var texture = (Cogl.Texture)effect.get_texture ();
             var texture_width = texture.get_width ();
@@ -207,7 +198,7 @@ namespace BackgroundUtils {
             get_background_color_information.callback ();
         });
 
-        background.queue_redraw ();
+        newest_background_actor.queue_redraw ();
 
         yield;
 
