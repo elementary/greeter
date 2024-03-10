@@ -262,7 +262,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private void set_background_image () {
-        Greeter.BackgroundImage background_image;
+        var background_picture = new Gtk.Picture () {
+            content_fit = COVER
+        };
 
         var background_path = lightdm_user.background;
         var background_exists = (
@@ -277,11 +279,26 @@ public class Greeter.UserCard : Greeter.BaseCard {
         }
 
         if (settings_act.picture_options != 0 && background_exists) {
-            background_image = new Greeter.BackgroundImage.from_path (background_path);
+            background_picture.set_filename (background_path);
         } else if (settings_act.picture_options == 0 && settings_act.primary_color != null) {
-            background_image = new Greeter.BackgroundImage.from_color (settings_act.primary_color);
+            Gdk.RGBA rgba_color = {};
+            rgba_color.parse (settings_act.primary_color);
+
+            uint32 f = 0x0;
+            f += (uint) Math.round (rgba_color.red * 255);
+            f <<= 8;
+            f += (uint) Math.round (rgba_color.green * 255);
+            f <<= 8;
+            f += (uint) Math.round (rgba_color.blue * 255);
+            f <<= 8;
+            f += 255;
+
+            pixbuf = new Gdk.Pixbuf (Gdk.Colorspace.RGB, false, 8, 1, 1);
+            pixbuf.fill (f);
+
+            background_picture.paintable = (Gdk.Texture.for_pixbuf (pixbuf));
         } else {
-            background_image = new Greeter.BackgroundImage.from_path (null);
+            background_picture.set_filename ("/usr/share/backgrounds/elementaryos-default");
         }
 
         main_box.pack_start (background_image);
