@@ -445,6 +445,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
         settings.set_value ("xkb-options", options);
     }
 
+    /* 
+     * When we get string typed settings from our settings daemon account service we might get a null value.
+     * In this case we reset the value to avoid criticals and unwanted behaviour.
+     */
     private void set_or_reset_settings_key (GLib.Settings settings, string key, GLib.Variant? value) {
         if (value != null) {
             settings.set_value (key, value);
