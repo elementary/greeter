@@ -263,7 +263,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void set_background_image () {
         var background_picture = new Gtk.Picture () {
-            content_fit = COVER
+            content_fit = COVER,
+            height_request = 150
         };
 
         var background_path = lightdm_user.background;
