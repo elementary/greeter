@@ -21,26 +21,12 @@
 
 public class Greeter.SessionButton : Gtk.MenuButton {
     construct {
-        var settings_list = new Gtk.ListBox () {
-            margin_bottom = 3,
-            margin_top = 3
-        };
-        settings_list.set_sort_func ((row1, row2) => {
-            var child1 = (Gtk.ModelButton) row1.get_child ();
-            var child2 = (Gtk.ModelButton) row2.get_child ();
-
-            return child1.text.collate (child2.text);
-        });
-
-        var settings_popover = new Gtk.Popover (this) {
-            position = Gtk.PositionType.BOTTOM
-        };
-        settings_popover.add (settings_list);
+        var menu = new GLib.Menu ();
 
         var cog_image = new Gtk.Image.from_icon_name ("open-menu-symbolic", Gtk.IconSize.BUTTON);
 
-        direction = Gtk.ArrowType.DOWN;
-        popover = settings_popover;
+        direction = DOWN;
+        menu_model = menu;
         get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
         add (cog_image);
 
@@ -54,19 +40,11 @@ public class Greeter.SessionButton : Gtk.MenuButton {
                 GLib.Variant? val = null;
                 string? key = null;
                 while (iter.next ("{sv}", out key, out val)) {
-                    var radio = new Gtk.ModelButton () {
-                        text = key
-                    };
-                    radio.set_detailed_action_name (Action.print_detailed_name ("session.select", val));
-
-                    settings_list.add (radio);
+                    menu.append (key, Action.print_detailed_name ("session.select", val));
                 }
 
-                if (settings_list.get_row_at_index (1) == null) {
+                if (menu.get_n_items () == 0) {
                     destroy ();
-                } else {
-                    settings_list.show_all ();
-                    settings_list.invalidate_sort ();
                 }
             }
         });
