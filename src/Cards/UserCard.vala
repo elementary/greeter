@@ -285,7 +285,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         }
 
         main_box.pack_start (background_image);
-        main_box.show_all ();
     }
 
     private string accent_to_string (int i) {
