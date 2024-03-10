@@ -1,9 +1,27 @@
-[DBus (name = "org.freedesktop.login1.Manager")]
-interface LoginManager : GLib.Object {
-    public signal void prepare_for_sleep (bool start);
-}
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: 2024 elementary, Inc. (https://elementary.io)
+ */
 
 public class Greeter.DateTimeWidget : Gtk.Revealer {
+    [DBus (name = "org.freedesktop.login1.Manager")]
+    private interface LoginManager : GLib.Object {
+        public signal void prepare_for_sleep (bool start);
+    }
+
+    [DBus (name = "org.pantheon.gala.WingpanelInterface")]
+    private interface WingpanelInterface : GLib.Object {
+        public signal void state_changed (BackgroundState state, uint animation_duration);
+    }
+
+    private enum BackgroundState {
+        LIGHT,
+        DARK,
+        MAXIMIZED,
+        TRANSLUCENT_DARK,
+        TRANSLUCENT_LIGHT
+    }
+
     public bool is_24h { get; set; default=true; }
 
     private Gtk.Label time_label;
@@ -11,6 +29,7 @@ public class Greeter.DateTimeWidget : Gtk.Revealer {
     private uint timeout_id = 0U;
 
     private LoginManager login_manager;
+    private WingpanelInterface wingpanel_interface;
 
     construct {
         var css_provider = new Gtk.CssProvider ();
@@ -58,6 +77,25 @@ public class Greeter.DateTimeWidget : Gtk.Revealer {
             );
 
             login_manager.prepare_for_sleep.connect ((start) => {
+                if (!start) {
+                    GLib.Source.remove (timeout_id);
+                    update_labels ();
+                }
+            });
+        } catch (IOError e) {
+            warning (e.message);
+        }
+    }
+
+    private async void setup_wingpanel_interface () {
+        try {
+            wingpanel_interface = yield Bus.get_proxy (
+                BusType.SESSION,
+                "org.pantheon.gala.WingpanelInterface",
+                "/org/pantheon/gala/WingpanelInterface"
+            );
+
+            wingpanel_interface.state_changed.connect ((state, duration) => {
                 if (!start) {
                     GLib.Source.remove (timeout_id);
                     update_labels ();
