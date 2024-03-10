@@ -44,7 +44,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         Gdk.Key.Down,
         Gdk.Key.Left,
         Gdk.Key.Right,
-        Gdk.Key.Return,
         Gdk.Key.Tab
     };
 
@@ -513,7 +512,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         });
 
         user_card.go_left.connect (() => {
-            if (get_style_context ().direction == LTR) {
+            if (Gtk.StateFlags.DIR_LTR in get_state_flags ()) {
                 go_previous ();
             } else {
                 go_next ();
@@ -521,7 +520,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         });
 
         user_card.go_right.connect (() => {
-            if (get_style_context ().direction == LTR) {
+            if (Gtk.StateFlags.DIR_LTR in get_state_flags ()) {
                 go_next ();
             } else {
                 go_previous ();
