@@ -3,7 +3,7 @@ interface LoginManager : GLib.Object {
     public signal void prepare_for_sleep (bool start);
 }
 
-public class Greeter.DateTimeWidget : Gtk.Revealer {
+public class Greeter.DateTimeWidget : Gtk.Box {
     public bool is_24h { get; set; default=true; }
 
     private Gtk.Label time_label;
@@ -16,28 +16,20 @@ public class Greeter.DateTimeWidget : Gtk.Revealer {
         var css_provider = new Gtk.CssProvider ();
         css_provider.load_from_resource ("/io/elementary/greeter/DateTime.css");
 
-        time_label = new Gtk.Label (null);
+        Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        unowned var time_label_style_context = time_label.get_style_context ();
-        time_label_style_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
-        time_label_style_context.add_class ("time");
-        time_label_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        time_label = new Gtk.Label (null);
+        time_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+        time_label.get_style_context ().add_class ("time");
+
 
         date_label = new Gtk.Label (null);
+        date_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+        date_label.get_style_context ().add_class ("date");
 
-        unowned var date_label_style_context = date_label.get_style_context ();
-        date_label_style_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
-        date_label_style_context.add_class ("date");
-        date_label_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-        var grid = new Gtk.Grid () {
-            orientation = Gtk.Orientation.VERTICAL
-        };
-        grid.add (time_label);
-        grid.add (date_label);
-
-        transition_type = Gtk.RevealerTransitionType.CROSSFADE;
-        add (grid);
+        orientation = VERTICAL;
+        add (time_label);
+        add (date_label);
 
         update_labels ();
 
