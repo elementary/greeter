@@ -44,7 +44,6 @@ public int main (string[] args) {
     Gtk.init (ref args);
 
     var window = new Greeter.MainWindow ();
-    window.show_all ();
 
     try {
         wingpanel = new Greeter.SubprocessSupervisor ({"io.elementary.wingpanel", "-g"});

@@ -18,7 +18,7 @@
  */
 
 public class Greeter.CapsLockRevealer : Gtk.Revealer {
-    private weak Gdk.Keymap keymap;
+    private unowned Gdk.Device device;
 
     private Gtk.Image caps_lock_image;
     private Gtk.Image num_lock_image;
@@ -48,16 +48,16 @@ public class Greeter.CapsLockRevealer : Gtk.Revealer {
 
         add (caps_lock_grid);
 
-        keymap = Gdk.Keymap.get_for_display (Gdk.Display.get_default ());
-        keymap.state_changed.connect (update_visibility);
+        device = Gdk.Display.get_default ().get_default_seat ().get_devices (KEYBOARD)[0];
+        device.changed.connect (update_visibility);
 
         update_visibility ();
     }
 
     private void update_visibility () {
         unowned string? label = null;
-        var caps_lock = keymap.get_caps_lock_state ();
-        var num_lock = keymap.get_num_lock_state ();
+        var caps_lock = device.caps_lock_state;
+        var num_lock = device.num_lock_state;
 
         reveal_child = caps_lock || num_lock;
 

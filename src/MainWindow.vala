@@ -24,7 +24,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
-    private Hdy.Carousel carousel;
+    private Adw.Carousel carousel;
     private LightDM.Greeter lightdm_greeter;
     private Greeter.Settings settings;
     private Gtk.Button guest_login_button;
@@ -54,7 +54,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     construct {
         app_paintable = true;
         decorated = false;
-        type_hint = Gdk.WindowTypeHint.DESKTOP;
         get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         settings = new Greeter.Settings ();
@@ -94,9 +93,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             margin_top = 24,
             margin_bottom = 24
         };
-        main_box.add (datetime_widget);
-        main_box.add (manual_login_stack);
-        main_box.add (extra_login_grid);
+        main_box.append (datetime_widget);
+        main_box.append (manual_login_stack);
+        main_box.append (extra_login_grid);
 
         child = main_box;
 
@@ -488,7 +487,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private void add_card (LightDM.User lightdm_user) {
         var user_card = new Greeter.UserCard (lightdm_user);
-        user_card.show_all ();
 
         carousel.add (user_card);
 
