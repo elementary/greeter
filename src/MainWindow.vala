@@ -72,10 +72,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         extra_login_grid.column_spacing = 12;
         extra_login_grid.column_homogeneous = true;
 
-        update_style ();
-        unowned var gtk_settings = Gtk.Settings.get_default ();
-        gtk_settings.notify["gtk-theme-name"].connect (update_style);
-
         datetime_widget = new Greeter.DateTimeWidget ();
         datetime_widget.halign = Gtk.Align.CENTER;
 
@@ -262,13 +258,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 warning ("Unable to spawn numlockx to set numlock state");
             }
         }
-    }
-
-    private void update_style () {
-        unowned var gtksettings = Gtk.Settings.get_default ();
-        unowned var css_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, "dark");
-        guest_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        manual_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     private void maximize_and_focus () {
