@@ -42,11 +42,18 @@ namespace GreeterCompositor {
          */
         public Clutter.Actor top_window_group { get; protected set; }
 
+        /**
+         * The background group is a container for the background actors forming the wallpaper
+         */
+        public Meta.BackgroundGroup background_group { get; protected set; }
+
         public PointerLocator pointer_locator { get; private set; }
 
-        public Greeter.SystemBackground system_background { get; private set; }
+        public GreeterCompositor.SystemBackground system_background { get; private set; }
 
-        Meta.PluginInfo info;
+        private Clutter.Actor fade_in_screen;
+
+        private Meta.PluginInfo info;
 
         // Used to toggle screenreader
         private GLib.Settings application_settings;
@@ -76,22 +83,40 @@ namespace GreeterCompositor {
         public override void start () {
             show_stage ();
 
+            disable_tiling_shortcuts ();
+
+            fade_in_screen.save_easing_state ();
+            fade_in_screen.set_easing_duration (1000);
+            fade_in_screen.set_easing_mode (Clutter.AnimationMode.EASE);
+            fade_in_screen.opacity = 0;
+            fade_in_screen.restore_easing_state ();
+
             unowned Meta.Display display = get_display ();
             display.gl_video_memory_purged.connect (() => {
                 refresh_background ();
             });
         }
 
+        private void disable_tiling_shortcuts () {
+            var mutter_settings = new GLib.Settings ("org.gnome.mutter.keybindings");
+            mutter_settings.set_strv ("toggle-tiled-left", {});
+            mutter_settings.set_strv ("toggle-tiled-right", {});
+
+            var wm_settings = new GLib.Settings ("org.gnome.desktop.wm.keybindings");
+            wm_settings.set_strv ("minimize", {});
+            wm_settings.set_strv ("toggle-maximized", {});
+        }
+
         void refresh_background () {
             unowned Meta.Display display = get_display ();
 
             stage.remove_child (system_background.background_actor);
-            system_background = new Greeter.SystemBackground (display);
+            system_background = new SystemBackground (display);
             system_background.background_actor.add_constraint (new Clutter.BindConstraint (stage,
                 Clutter.BindCoordinate.ALL, 0));
             stage.insert_child_below (system_background.background_actor, null);
 
-            system_background.refresh ();
+            SystemBackground.refresh ();
         }
 
         void show_stage () {
@@ -99,12 +124,12 @@ namespace GreeterCompositor {
             MediaFeedback.init ();
             DBus.init (this);
             DBusAccelerator.init (this);
-            DBusBackgroundManager.init (this);
+            DBusWingpanelManager.init (this);
             KeyboardManager.init (display);
 
             stage = display.get_stage () as Clutter.Stage;
 
-            system_background = new Greeter.SystemBackground (display);
+            system_background = new SystemBackground (display);
             system_background.background_actor.add_constraint (new Clutter.BindConstraint (stage,
                 Clutter.BindCoordinate.ALL, 0));
             stage.insert_child_below (system_background.background_actor, null);
@@ -121,8 +146,21 @@ namespace GreeterCompositor {
             stage.remove_child (top_window_group);
             ui_group.add_child (top_window_group);
 
+            background_group = new BackgroundContainer (this);
+            window_group.add_child (background_group);
+            window_group.set_child_below_sibling (background_group, null);
+
             pointer_locator = new PointerLocator (this);
             ui_group.add_child (pointer_locator);
+
+            int width, height;
+            display.get_size (out width, out height);
+            fade_in_screen = new Clutter.Actor () {
+                width = width,
+                height = height,
+                background_color = Clutter.Color.from_rgba (0, 0, 0, 255),
+            };
+            stage.add_child (fade_in_screen);
 
             MaskCorners.init (this);
 

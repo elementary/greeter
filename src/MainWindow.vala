@@ -24,15 +24,16 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
-    private int index_delta = 0;
     private Hdy.Carousel carousel;
     private LightDM.Greeter lightdm_greeter;
     private Greeter.Settings settings;
     private Gtk.Button guest_login_button;
     private Gtk.ToggleButton manual_login_button;
     private Greeter.DateTimeWidget datetime_widget;
-    private unowned Greeter.BaseCard current_card;
     private unowned LightDM.UserList lightdm_user_list;
+
+    private int current_user_card_index = 0;
+    private unowned Greeter.BaseCard? current_card = null;
 
     private bool installer_mode = false;
 
@@ -71,10 +72,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         extra_login_grid.column_spacing = 12;
         extra_login_grid.column_homogeneous = true;
 
-        update_style ();
-        unowned var gtk_settings = Gtk.Settings.get_default ();
-        gtk_settings.notify["gtk-theme-name"].connect (update_style);
-
         datetime_widget = new Greeter.DateTimeWidget ();
         datetime_widget.halign = Gtk.Align.CENTER;
 
@@ -93,15 +90,15 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         manual_login_stack.add (carousel);
         manual_login_stack.add (manual_card);
 
-        var main_grid = new Gtk.Grid ();
-        main_grid.margin_top = main_grid.margin_bottom = 24;
-        main_grid.row_spacing = 24;
-        main_grid.orientation = Gtk.Orientation.VERTICAL;
-        main_grid.add (datetime_widget);
-        main_grid.add (manual_login_stack);
-        main_grid.add (extra_login_grid);
+        var main_box = new Gtk.Box (VERTICAL, 24) {
+            margin_top = 24,
+            margin_bottom = 24
+        };
+        main_box.add (datetime_widget);
+        main_box.add (manual_login_stack);
+        main_box.add (extra_login_grid);
 
-        add (main_grid);
+        child = main_box;
 
         manual_login_button.toggled.connect (() => {
             if (manual_login_button.active) {
@@ -125,7 +122,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 }
 
                 manual_login_stack.visible_child = carousel;
-                current_card = user_cards.peek_nth (index_delta);
+                current_card = user_cards.peek_nth (current_user_card_index);
+
                 try {
                     lightdm_greeter.authenticate (((UserCard) current_card).lightdm_user.name);
                 } catch (Error e) {
@@ -142,22 +140,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         });
 
-        GLib.ActionEntry entries[] = {
-            GLib.ActionEntry () {
-                name = "previous",
-                activate = go_previous
-            },
-            GLib.ActionEntry () {
-                name = "next",
-                activate = go_next
-            }
-        };
-
         card_size_group = new Gtk.SizeGroup (Gtk.SizeGroupMode.HORIZONTAL);
         card_size_group.add_widget (extra_login_grid);
         card_size_group.add_widget (manual_card);
-
-        add_action_entries (entries, this);
 
         lightdm_greeter = new LightDM.Greeter ();
         lightdm_greeter.show_message.connect (show_message);
@@ -194,47 +179,48 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         manual_card.do_connect.connect (do_connect);
 
         key_press_event.connect ((event) => {
+            if (!(event.keyval in NAVIGATION_KEYS)) {
+                // Don't focus if it is a modifier or if search_box is already focused
+                unowned var current_focus = get_focus ();
+                if ((event.is_modifier == 0) && (current_focus == null || !current_focus.is_ancestor (current_card))) {
+                    current_card.grab_focus ();
+                }
+
+                return Gdk.EVENT_PROPAGATE;
+            }
+
             // arrow key is being used to navigate
-            if (event.keyval in NAVIGATION_KEYS) {
-                if (current_card is UserCard) {
-                    weak Gtk.Widget? current_focus = get_focus ();
-                    if (current_focus is Gtk.Entry && current_focus.is_ancestor (current_card)) {
-                        if (((Gtk.Entry) current_focus).text == "") {
-                            if (event.keyval == Gdk.Key.Left) {
-                                if (get_style_context ().direction == Gtk.TextDirection.RTL) {
-                                    activate_action ("next", null);
-                                } else {
-                                    activate_action ("previous", null);
-                                }
-                                return true;
-                            } else if (event.keyval == Gdk.Key.Right) {
-                                if (get_style_context ().direction == Gtk.TextDirection.RTL) {
-                                    activate_action ("previous", null);
-                                } else {
-                                    activate_action ("next", null);
-                                }
-                                return true;
+            if (current_card is UserCard) {
+                unowned var focused_entry = (Gtk.Entry) get_focus ();
+                if (focused_entry != null && focused_entry.is_ancestor (current_card)) {
+                    if (focused_entry.text == "") {
+                        if (event.keyval == Gdk.Key.Left) {
+                            if (get_style_context ().direction == LTR) {
+                                go_previous ();
+                            } else {
+                                go_next ();
                             }
+                            return Gdk.EVENT_STOP;
+                        } else if (event.keyval == Gdk.Key.Right) {
+                            if (get_style_context ().direction == LTR) {
+                                go_next ();
+                            } else {
+                                go_previous ();
+                            }
+                            return Gdk.EVENT_STOP;
                         }
                     }
                 }
-
-                return false;
             }
 
-            // Don't focus if it is a modifier or if search_box is already focused
-            weak Gtk.Widget? current_focus = get_focus ();
-            if ((event.is_modifier == 0) && (current_focus == null || !current_focus.is_ancestor (current_card))) {
-                current_card.grab_focus ();
-            }
-
-            return false;
+            return Gdk.EVENT_PROPAGATE;
         });
 
         carousel.page_changed.connect ((index) => {
             var children = carousel.get_children ();
 
             if (children.nth_data (index) is Greeter.UserCard) {
+                current_user_card_index = (int) index;
                 switch_to_card ((Greeter.UserCard) children.nth_data (index));
             }
         });
@@ -272,13 +258,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 warning ("Unable to spawn numlockx to set numlock state");
             }
         }
-    }
-
-    private void update_style () {
-        unowned var gtksettings = Gtk.Settings.get_default ();
-        unowned var css_provider = Gtk.CssProvider.get_named (gtksettings.gtk_theme_name, "dark");
-        guest_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        manual_login_button.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     private void maximize_and_focus () {
@@ -414,8 +393,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     Gtk.ButtonsType.CLOSE
                 );
                 error_dialog.show_error_details (e.message);
-                error_dialog.run ();
-                error_dialog.destroy ();
+                error_dialog.present ();
+                error_dialog.response.connect (error_dialog.destroy);
             }
         }
 
@@ -428,6 +407,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
 
         current_card.wrong_credentials ();
+
+        carousel.interactive = true;
     }
 
     private async void load_users () {
@@ -471,7 +452,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
 
             if (!user_selected) {
-                unowned Greeter.UserCard user_card = (Greeter.UserCard) user_cards.peek_head ();
+                unowned var user_card = user_cards.peek_head ();
                 user_card.show_input = true;
                 switch_to_card (user_card);
             }
@@ -493,10 +474,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                         "dialog-error",
                         Gtk.ButtonsType.CLOSE
                     );
-
                     error_dialog.show_error_details (e.message);
-                    error_dialog.run ();
-                    error_dialog.destroy ();
+                    error_dialog.present ();
+                    error_dialog.response.connect (error_dialog.destroy);
                 }
 
                 return Source.REMOVE;
@@ -517,18 +497,18 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         });
 
         user_card.go_left.connect (() => {
-            if (get_style_context ().direction == Gtk.TextDirection.RTL) {
-                activate_action ("next", null);
+            if (get_style_context ().direction == LTR) {
+                go_previous ();
             } else {
-                activate_action ("previous", null);
+                go_next ();
             }
         });
 
         user_card.go_right.connect (() => {
-            if (get_style_context ().direction == Gtk.TextDirection.RTL) {
-                activate_action ("previous", null);
+            if (get_style_context ().direction == LTR) {
+                go_next ();
             } else {
-                activate_action ("next", null);
+                go_previous ();
             }
         });
 
@@ -538,32 +518,28 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         user_cards.push_tail (user_card);
     }
 
-    int next_delta = 0;
-    weak GLib.Binding? binding = null;
+    private unowned GLib.Binding? time_format_binding = null;
     private void switch_to_card (Greeter.UserCard user_card) {
-        if (next_delta != index_delta) {
+        if (!carousel.interactive) {
             return;
         }
 
-        current_card = user_card;
-        if (binding != null) {
-            binding.unbind ();
+        if (current_card != null && current_card is UserCard) {
+            ((UserCard) current_card).show_input = false;
         }
 
-        user_card.set_settings ();
+        if (time_format_binding != null) {
+            time_format_binding.unbind ();
+        }
+        time_format_binding = user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE);
 
-        binding = user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE);
-        next_delta = user_cards.index (user_card);
+        current_card = user_card;
 
         carousel.scroll_to (user_card);
 
-        user_card.notify["reveal-ratio"].connect (notify_cb);
+        user_card.set_settings ();
         user_card.show_input = true;
         user_card.grab_focus ();
-
-        if (index_delta != next_delta) {
-            ((Greeter.UserCard) user_cards.peek_nth (index_delta)).show_input = false;
-        }
 
         if (user_card.lightdm_user.session != null) {
             get_action_group ("session").activate_action ("select", new GLib.Variant.string (user_card.lightdm_user.session));
@@ -581,15 +557,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             lightdm_greeter.authenticate (user_card.lightdm_user.name);
         } catch (Error e) {
             critical (e.message);
-        }
-    }
-
-    private void notify_cb (GLib.Object obj, GLib.ParamSpec spec) {
-        unowned var user_card = (Greeter.UserCard) obj;
-        if (user_card.reveal_ratio == 1.0) {
-            index_delta = next_delta;
-            user_card.notify["reveal-ratio"].disconnect (notify_cb);
-            return;
         }
     }
 
@@ -617,17 +584,28 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 critical (e.message);
             }
         }
+
+        carousel.interactive = false;
+        carousel.scroll_to (current_card);
     }
 
-    private void go_previous (GLib.SimpleAction action, GLib.Variant? parameter) {
-        unowned Greeter.UserCard? next_card = (Greeter.UserCard) user_cards.peek_nth (index_delta - 1);
+    private void go_previous () {
+        if (!carousel.interactive) {
+            return;
+        }
+
+        unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index - 1);
         if (next_card != null) {
             carousel.scroll_to (next_card);
         }
     }
 
-    private void go_next (GLib.SimpleAction action, GLib.Variant? parameter) {
-        unowned Greeter.UserCard? next_card = (Greeter.UserCard) user_cards.peek_nth (index_delta + 1);
+    private void go_next () {
+        if (!carousel.interactive) {
+            return;
+        }
+
+        unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index + 1);
         if (next_card != null) {
             carousel.scroll_to (next_card);
         }

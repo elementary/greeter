@@ -15,7 +15,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     public LightDM.User lightdm_user { get; construct; }
     public bool show_input { get; set; default = false; }
-    public double reveal_ratio { get; private set; default = 0.0; }
     public bool is_24h { get; set; default = true; }
 
     public int prefers_accent_color { get; set; default = 6; }
@@ -239,18 +238,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
             }
         });
 
-        // This makes all the animations synchonous
-        form_revealer.size_allocate.connect ((alloc) => {
-            var total_height = form_box.get_allocated_height () + form_box.margin_top + form_box.margin_bottom;
-            reveal_ratio = (double)alloc.height / (double)total_height;
-        });
-
         notify["show-input"].connect (() => {
             update_collapsed_class ();
-        });
-
-        notify["child-revealed"].connect (() => {
-            reveal_ratio = child_revealed ? 1.0 : 0.0;
         });
 
         password_entry.activate.connect (on_login);
@@ -475,6 +464,18 @@ public class Greeter.UserCard : Greeter.BaseCard {
         settings.set_value ("xkb-options", options);
     }
 
+    /* 
+     * When we get string typed settings from our settings daemon account service we might get a null value.
+     * In this case we reset the value to avoid criticals and unwanted behaviour.
+     */
+    private void set_or_reset_settings_key (GLib.Settings settings, string key, GLib.Variant? value) {
+        if (value != null) {
+            settings.set_value (key, value);
+        } else {
+            settings.reset (key);
+        }
+    }
+
     private void set_mouse_touchpad_settings () {
         var mouse_settings = new GLib.Settings ("org.gnome.desktop.peripherals.mouse");
         mouse_settings.set_boolean ("left-handed", settings_act.left_handed);
@@ -502,9 +503,22 @@ public class Greeter.UserCard : Greeter.BaseCard {
         interface_settings.set_value ("cursor-size", settings_act.cursor_size);
         interface_settings.set_value ("locate-pointer", settings_act.locate_pointer);
         interface_settings.set_value ("text-scaling-factor", settings_act.text_scaling_factor);
-        interface_settings.set_value ("document-font-name", settings_act.document_font_name);
-        interface_settings.set_value ("font-name", settings_act.font_name);
-        interface_settings.set_value ("monospace-font-name", settings_act.monospace_font_name);
+        set_or_reset_settings_key (interface_settings, "document-font-name", settings_act.document_font_name);
+        set_or_reset_settings_key (interface_settings, "font-name", settings_act.font_name);
+        set_or_reset_settings_key (interface_settings, "monospace-font-name", settings_act.monospace_font_name);
+
+        var touchscreen_settings = new GLib.Settings ("org.gnome.settings-daemon.peripherals.touchscreen");
+        touchscreen_settings.set_boolean ("orientation-lock", settings_act.orientation_lock);
+
+        var background_settings = new GLib.Settings ("org.gnome.desktop.background");
+        if (lightdm_user.background != null) {
+            background_settings.set_value ("picture-uri", lightdm_user.background);
+        } else {
+            background_settings.reset ("picture-uri");
+        }
+
+        background_settings.set_value ("picture-options", settings_act.picture_options);
+        background_settings.set_value ("primary-color", settings_act.primary_color);
     }
 
     private void set_night_light_settings () {
