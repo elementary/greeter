@@ -162,8 +162,6 @@ namespace GreeterCompositor {
             };
             stage.add_child (fade_in_screen);
 
-            MaskCorners.init (this);
-
             /*keybindings*/
 
             KeyBinding.set_custom_handler ("switch-to-workspace-first", () => {});
