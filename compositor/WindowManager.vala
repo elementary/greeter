@@ -115,8 +115,6 @@ namespace GreeterCompositor {
             system_background.background_actor.add_constraint (new Clutter.BindConstraint (stage,
                 Clutter.BindCoordinate.ALL, 0));
             stage.insert_child_below (system_background.background_actor, null);
-
-            SystemBackground.refresh ();
         }
 
         void show_stage () {
