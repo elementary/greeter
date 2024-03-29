@@ -206,13 +206,20 @@ namespace GreeterCompositor {
         }
 
         public uint32[] get_all_xids () {
-            var list = new Gee.ArrayList<uint32> ();
-
             unowned Meta.Display display = get_display ();
+
+            var list = new Gee.ArrayList<uint32> ();
+#if HAS_MUTTER46
+            unowned Meta.X11Display x11display = display.get_x11_display ();
+#endif
             unowned Meta.WorkspaceManager manager = display.get_workspace_manager ();
             for (int i = 0; i < manager.get_n_workspaces (); i++) {
                 foreach (var window in manager.get_workspace_by_index (i).list_windows ()) {
+#if HAS_MUTTER46
+                    list.add ((uint32)x11display.lookup_xwindow (window));
+#else
                     list.add ((uint32)window.get_xwindow ());
+#endif
                 }
             }
 
