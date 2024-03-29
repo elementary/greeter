@@ -74,7 +74,12 @@
             if (parent != null) {
                 if (parent.get_client_type () == Meta.WindowClientType.X11) {
                     //TODO: wayland support
+#if HAS_MUTTER46
+                    unowned Meta.X11Display x11display = parent.display.get_x11_display ();
+                    parent_handler = "x11:%x".printf ((uint) x11display.lookup_xwindow (parent));
+#else
                     parent_handler = "x11:%x".printf ((uint) parent.get_xwindow ());
+#endif
                 }
 
                 app_id = parent.get_sandboxed_app_id () ?? "";
