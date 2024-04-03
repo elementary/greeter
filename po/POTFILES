@@ -15,7 +15,6 @@ compositor/DBusAccelerator.vala
 compositor/Dialogs.vala
 compositor/KeyboardManager.vala
 compositor/main.vala
-compositor/MaskCorners.vala
 compositor/MediaFeedback.vala
 compositor/PointerLocator.vala
 compositor/Utils.vala
