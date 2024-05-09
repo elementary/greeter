@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 17:04+0000\n"
+"POT-Creation-Date: 2024-05-04 04:04+0000\n"
 "PO-Revision-Date: 2019-06-24 15:03-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -26,50 +26,46 @@ msgstr ""
 msgid "Unlock or log in to your device"
 msgstr ""
 
-#: data/greeter.metainfo.xml.in:33
-msgid "elementary, Inc."
-msgstr ""
-
-#: data/greeter.metainfo.xml.in:40 data/greeter.metainfo.xml.in:54
-#: data/greeter.metainfo.xml.in:70 data/greeter.metainfo.xml.in:83
-#: data/greeter.metainfo.xml.in:97
+#: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:63
+#: data/greeter.metainfo.xml.in:79 data/greeter.metainfo.xml.in:92
+#: data/greeter.metainfo.xml.in:106
 msgid "Minor updates:"
 msgstr ""
 
-#: data/greeter.metainfo.xml.in:42
+#: data/greeter.metainfo.xml.in:44
 msgid "Prevent a potential issue with dialogs that use portals"
 msgstr ""
 
-#: data/greeter.metainfo.xml.in:43
+#: data/greeter.metainfo.xml.in:45
 msgid "Fix potential issues with incorrect keyboard layout being set"
 msgstr ""
 
-#: data/greeter.metainfo.xml.in:44 data/greeter.metainfo.xml.in:56
-#: data/greeter.metainfo.xml.in:72 data/greeter.metainfo.xml.in:85
-#: data/greeter.metainfo.xml.in:99
+#: data/greeter.metainfo.xml.in:46 data/greeter.metainfo.xml.in:65
+#: data/greeter.metainfo.xml.in:81 data/greeter.metainfo.xml.in:94
+#: data/greeter.metainfo.xml.in:108
 msgid "Updated translations"
 msgstr ""
 
-#: data/greeter.metainfo.xml.in:66
+#: data/greeter.metainfo.xml.in:75
 msgid "New Features:"
 msgstr ""
 
-#: data/greeter.metainfo.xml.in:68
+#: data/greeter.metainfo.xml.in:77
 msgid "Provide panel background color interface"
 msgstr ""
 
-#: data/greeter.metainfo.xml.in:79 data/greeter.metainfo.xml.in:92
+#: data/greeter.metainfo.xml.in:88 data/greeter.metainfo.xml.in:101
 msgid "Improvements:"
 msgstr ""
 
-#: data/greeter.metainfo.xml.in:81
+#: data/greeter.metainfo.xml.in:90
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr ""
 
-#: data/greeter.metainfo.xml.in:94
+#: data/greeter.metainfo.xml.in:103
 msgid "Hide clock during initial setup"
 msgstr ""
 
-#: data/greeter.metainfo.xml.in:95
+#: data/greeter.metainfo.xml.in:104
 msgid "Use selected accent color for logged in checkmark"
 msgstr ""
