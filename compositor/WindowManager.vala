@@ -115,8 +115,6 @@ namespace GreeterCompositor {
             system_background.background_actor.add_constraint (new Clutter.BindConstraint (stage,
                 Clutter.BindCoordinate.ALL, 0));
             stage.insert_child_below (system_background.background_actor, null);
-
-            SystemBackground.refresh ();
         }
 
         void show_stage () {
@@ -161,8 +159,6 @@ namespace GreeterCompositor {
                 background_color = Clutter.Color.from_rgba (0, 0, 0, 255),
             };
             stage.add_child (fade_in_screen);
-
-            MaskCorners.init (this);
 
             /*keybindings*/
 
@@ -210,13 +206,20 @@ namespace GreeterCompositor {
         }
 
         public uint32[] get_all_xids () {
-            var list = new Gee.ArrayList<uint32> ();
-
             unowned Meta.Display display = get_display ();
+
+            var list = new Gee.ArrayList<uint32> ();
+#if HAS_MUTTER46
+            unowned Meta.X11Display x11display = display.get_x11_display ();
+#endif
             unowned Meta.WorkspaceManager manager = display.get_workspace_manager ();
             for (int i = 0; i < manager.get_n_workspaces (); i++) {
                 foreach (var window in manager.get_workspace_by_index (i).list_windows ()) {
+#if HAS_MUTTER46
+                    list.add ((uint32)x11display.lookup_xwindow (window));
+#else
                     list.add ((uint32)window.get_xwindow ());
+#endif
                 }
             }
 
