@@ -33,7 +33,6 @@ public int main (string[] args) {
     settings_daemon.start ();
 
     Greeter.SubprocessSupervisor compositor;
-    Greeter.SubprocessSupervisor wingpanel;
 
     try {
         compositor = new Greeter.SubprocessSupervisor ({"io.elementary.greeter-compositor"});
@@ -45,12 +44,6 @@ public int main (string[] args) {
 
     var window = new Greeter.MainWindow ();
     window.show_all ();
-
-    try {
-        wingpanel = new Greeter.SubprocessSupervisor ({"io.elementary.wingpanel", "-g"});
-    } catch (Error e) {
-        critical (e.message);
-    }
 
     Gtk.main ();
 
