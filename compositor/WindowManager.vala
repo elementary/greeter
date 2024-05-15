@@ -206,53 +206,53 @@ namespace GreeterCompositor {
             });
         }
 
-    private async void start_command (string[] command) {
-        if (Meta.Util.is_wayland_compositor ()) {
-            yield start_wayland (command);
-        } else {
-            yield start_x (command);
+        private async void start_command (string[] command) {
+            if (Meta.Util.is_wayland_compositor ()) {
+                yield start_wayland (command);
+            } else {
+                yield start_x (command);
+            }
         }
-    }
 
-    private async void start_wayland (string[] command) {
-        unowned Meta.Display display = get_display ();
-        var subprocess_launcher = new GLib.SubprocessLauncher (GLib.SubprocessFlags.INHERIT_FDS);
-        try {
-            Meta.WaylandClient daemon_client;
+        private async void start_wayland (string[] command) {
+            unowned Meta.Display display = get_display ();
+            var subprocess_launcher = new GLib.SubprocessLauncher (GLib.SubprocessFlags.INHERIT_FDS);
+            try {
+                Meta.WaylandClient daemon_client;
 #if HAS_MUTTER44
-            daemon_client = new Meta.WaylandClient (display.get_context (), subprocess_launcher);
+                daemon_client = new Meta.WaylandClient (display.get_context (), subprocess_launcher);
 #else
-            daemon_client = new Meta.WaylandClient (subprocess_launcher);
+                daemon_client = new Meta.WaylandClient (subprocess_launcher);
 #endif
-            var subprocess = daemon_client.spawnv (display, command);
+                var subprocess = daemon_client.spawnv (display, command);
 
-            yield subprocess.wait_async ();
+                yield subprocess.wait_async ();
 
-            //Restart the daemon if it crashes
-            Timeout.add_seconds (1, () => {
-                start_wayland.begin (command);
-                return Source.REMOVE;
-            });
-        } catch (Error e) {
-            warning ("Failed to create greeter client: %s", e.message);
-            return;
+                //Restart the daemon if it crashes
+                Timeout.add_seconds (1, () => {
+                    start_wayland.begin (command);
+                    return Source.REMOVE;
+                });
+            } catch (Error e) {
+                warning ("Failed to create greeter client: %s", e.message);
+                return;
+            }
         }
-    }
 
-    private async void start_x (string[] command) {
-        try {
-            var subprocess = new Subprocess.newv (command, GLib.SubprocessFlags.INHERIT_FDS);
-            yield subprocess.wait_async ();
+        private async void start_x (string[] command) {
+            try {
+                var subprocess = new Subprocess.newv (command, GLib.SubprocessFlags.INHERIT_FDS);
+                yield subprocess.wait_async ();
 
-            //Restart the daemon if it crashes
-            Timeout.add_seconds (1, () => {
-                start_x.begin (command);
-                return Source.REMOVE;
-            });
-        } catch (Error e) {
-            warning ("Failed to create greeter subprocess with x: %s", e.message);
+                //Restart the daemon if it crashes
+                Timeout.add_seconds (1, () => {
+                    start_x.begin (command);
+                    return Source.REMOVE;
+                });
+            } catch (Error e) {
+                warning ("Failed to create greeter subprocess with x: %s", e.message);
+            }
         }
-    }
 
         public uint32[] get_all_xids () {
             unowned Meta.Display display = get_display ();
