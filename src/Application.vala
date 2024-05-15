@@ -20,6 +20,13 @@
  */
 
 public class Greeter.Application : Gtk.Application {
+    public Application () {
+        Object (
+            application_id: "io.elementary.greeter",
+            flags: ApplicationFlags.FLAGS_NONE
+        );
+    }
+
     construct {
         Intl.setlocale (LocaleCategory.ALL, "");
         Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
