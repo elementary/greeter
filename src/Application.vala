@@ -19,40 +19,42 @@
  * Authors: Corentin Noël <corentin@elementary.io>
  */
 
-public int main (string[] args) {
-    Intl.setlocale (LocaleCategory.ALL, "");
-    Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
-    Intl.textdomain (Constants.GETTEXT_PACKAGE);
-    Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALE_DIR);
+public class Greeter.Application : Gtk.Application {
+    public static int main (string[] args) {
+        Intl.setlocale (LocaleCategory.ALL, "");
+        Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
+        Intl.textdomain (Constants.GETTEXT_PACKAGE);
+        Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALE_DIR);
 
-    // Ensure we present ourselves as Pantheon so we pick up the right GSettings
-    // overrides
-    GLib.Environment.set_variable ("XDG_CURRENT_DESKTOP", "Pantheon", true);
+        // Ensure we present ourselves as Pantheon so we pick up the right GSettings
+        // overrides
+        GLib.Environment.set_variable ("XDG_CURRENT_DESKTOP", "Pantheon", true);
 
-    var settings_daemon = new Greeter.SettingsDaemon ();
-    settings_daemon.start ();
+        var settings_daemon = new Greeter.SettingsDaemon ();
+        settings_daemon.start ();
 
-    Greeter.SubprocessSupervisor compositor;
-    Greeter.SubprocessSupervisor wingpanel;
+        Greeter.SubprocessSupervisor compositor;
+        Greeter.SubprocessSupervisor wingpanel;
 
-    try {
-        compositor = new Greeter.SubprocessSupervisor ({"io.elementary.greeter-compositor"});
-    } catch (Error e) {
-        critical (e.message);
+        try {
+            compositor = new Greeter.SubprocessSupervisor ({"io.elementary.greeter-compositor"});
+        } catch (Error e) {
+            critical (e.message);
+        }
+
+        Gtk.init (ref args);
+
+        var window = new Greeter.MainWindow ();
+        window.show_all ();
+
+        try {
+            wingpanel = new Greeter.SubprocessSupervisor ({"io.elementary.wingpanel", "-g"});
+        } catch (Error e) {
+            critical (e.message);
+        }
+
+        Gtk.main ();
+
+        return 0;
     }
-
-    Gtk.init (ref args);
-
-    var window = new Greeter.MainWindow ();
-    window.show_all ();
-
-    try {
-        wingpanel = new Greeter.SubprocessSupervisor ({"io.elementary.wingpanel", "-g"});
-    } catch (Error e) {
-        critical (e.message);
-    }
-
-    Gtk.main ();
-
-    return 0;
 }
