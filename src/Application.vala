@@ -20,12 +20,14 @@
  */
 
 public class Greeter.Application : Gtk.Application {
-    public static int main (string[] args) {
+    construct {
         Intl.setlocale (LocaleCategory.ALL, "");
         Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
         Intl.textdomain (Constants.GETTEXT_PACKAGE);
         Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALE_DIR);
+    }
 
+    public static int main (string[] args) {
         // Ensure we present ourselves as Pantheon so we pick up the right GSettings
         // overrides
         GLib.Environment.set_variable ("XDG_CURRENT_DESKTOP", "Pantheon", true);
@@ -55,6 +57,6 @@ public class Greeter.Application : Gtk.Application {
 
         Gtk.main ();
 
-        return 0;
+        return new Greeter.Application ().run (args);
     }
 }
