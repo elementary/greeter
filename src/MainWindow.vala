@@ -81,6 +81,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         datetime_revealer = new Gtk.Revealer () {
             child = datetime_widget,
             transition_type = CROSSFADE,
+            valign = CENTER,
             vexpand = true
         };
 
