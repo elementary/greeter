@@ -19,12 +19,9 @@ public class Greeter.DateTimeWidget : Gtk.Box {
         Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         time_label = new Gtk.Label (null);
-        time_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
         time_label.get_style_context ().add_class ("time");
 
-
         date_label = new Gtk.Label (null);
-        date_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
         date_label.get_style_context ().add_class ("date");
 
         orientation = VERTICAL;
