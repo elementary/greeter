@@ -68,18 +68,21 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         manual_login_button = new Gtk.ToggleButton.with_label (_("Manual Login…"));
 
-        var extra_login_grid = new Gtk.Grid ();
-        extra_login_grid.halign = Gtk.Align.CENTER;
-        extra_login_grid.valign = Gtk.Align.END;
-        extra_login_grid.column_spacing = 12;
-        extra_login_grid.column_homogeneous = true;
+        var extra_login_grid = new Gtk.Grid () {
+            column_homogeneous = true,
+            column_spacing = 12,
+            halign = CENTER,
+            valign = END,
+            vexpand = true
+        };
 
         datetime_widget = new Greeter.DateTimeWidget ();
 
         datetime_revealer = new Gtk.Revealer () {
-            halign = CENTER,
             child = datetime_widget,
-            transition_type = CROSSFADE
+            transition_type = CROSSFADE,
+            valign = CENTER,
+            vexpand = true
         };
 
         user_cards = new GLib.Queue<unowned Greeter.UserCard> ();
