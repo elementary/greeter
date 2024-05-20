@@ -35,20 +35,8 @@ public class Greeter.Application : Gtk.Application {
     }
 
     public static int main (string[] args) {
-        // Ensure we present ourselves as Pantheon so we pick up the right GSettings
-        // overrides
-        GLib.Environment.set_variable ("XDG_CURRENT_DESKTOP", "Pantheon", true);
-
         var settings_daemon = new Greeter.SettingsDaemon ();
         settings_daemon.start ();
-
-        Greeter.SubprocessSupervisor compositor;
-
-        try {
-            compositor = new Greeter.SubprocessSupervisor ({"io.elementary.greeter-compositor"});
-        } catch (Error e) {
-            critical (e.message);
-        }
 
         Gtk.init (ref args);
 

@@ -126,6 +126,7 @@ namespace GreeterCompositor {
             KeyboardManager.init (display);
 
             stage = display.get_stage () as Clutter.Stage;
+            stage.background_color = Clutter.Color.from_rgba (0, 0, 0, 255);
 
             system_background = new SystemBackground (display);
             system_background.background_actor.add_constraint (new Clutter.BindConstraint (stage,
@@ -135,6 +136,15 @@ namespace GreeterCompositor {
             ui_group = new Clutter.Actor ();
             ui_group.reactive = true;
             stage.add_child (ui_group);
+
+            int width, height;
+            display.get_size (out width, out height);
+            fade_in_screen = new Clutter.Actor () {
+                width = width,
+                height = height,
+                background_color = Clutter.Color.from_rgba (0, 0, 0, 255),
+            };
+            stage.add_child (fade_in_screen);
 
             window_group = display.get_window_group ();
             stage.remove_child (window_group);
@@ -150,15 +160,6 @@ namespace GreeterCompositor {
 
             pointer_locator = new PointerLocator (this);
             ui_group.add_child (pointer_locator);
-
-            int width, height;
-            display.get_size (out width, out height);
-            fade_in_screen = new Clutter.Actor () {
-                width = width,
-                height = height,
-                background_color = Clutter.Color.from_rgba (0, 0, 0, 255),
-            };
-            stage.add_child (fade_in_screen);
 
             /*keybindings*/
 
@@ -201,6 +202,7 @@ namespace GreeterCompositor {
             Idle.add (() => {
                 // let the session manager move to the next phase
                 display.get_context ().notify_ready ();
+                start_command.begin ({ "io.elementary.greeter" });
                 start_command.begin ({ "io.elementary.wingpanel", "-g" });
                 return GLib.Source.REMOVE;
             });
