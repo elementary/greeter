@@ -37,6 +37,29 @@
   <update_contact>contact_at_elementary.io</update_contact>
 
   <releases>
+    <release version="8.0.0" date="2024-05-21" urgency="medium">
+      <description>
+        <p>New Features:</p>
+        <ul>
+          <li>Add blurred wallpaper as background</li>
+          <li>Make Date and Time larger and bolder with softer shadows</li>
+        </ul>
+        <p>Minor updates:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/greeter/issues/130">Add orientation lock to greeter</issue>
+        <issue url="https://github.com/elementary/greeter/issues/216">Greeter does not respect screen rotation settings on login screen</issue>
+        <issue url="https://github.com/elementary/greeter/issues/264">Wingpanel resize jump</issue>
+        <issue url="https://github.com/elementary/greeter/issues/333">Password entry becomes insensitive</issue>
+        <issue url="https://github.com/elementary/greeter/issues/342">New greeter animation of background is weird</issue>
+        <issue url="https://github.com/elementary/greeter/issues/485">More elegant fade-in from boot screen</issue>
+        <issue url="https://github.com/elementary/greeter/issues/634">Password field becomes inaccessible when switching to another user card while login attempt is in progress</issue>
+      </issues>
+    </release>
+
     <release version="7.0.0" date="2023-07-25" urgency="medium">
       <description>
         <p>Minor updates:</p>
@@ -96,20 +119,7 @@
       </description>
     </release>
 
-    <release version="6.0.1" date="2021-09-22" urgency="medium">
-      <description>
-        <p>Improvements:</p>
-        <ul>
-          <li>Hide clock during initial setup</li>
-          <li>Use selected accent color for logged in checkmark</li>
-        </ul>
-        <p>Minor updates:</p>
-        <ul>
-          <li>Updated translations</li>
-        </ul>
-      </description>
-    </release>
-
+    <release version="6.0.1" date="2021-09-22" urgency="medium" />
     <release version="6.0.0" date="2021-07-14" urgency="medium" />
     <release version="5.0.4" date="2020-05-28" urgency="medium" />
     <release version="5.0.3" date="2020-04-05" urgency="medium" />
