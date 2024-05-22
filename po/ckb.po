@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-04 04:04+0000\n"
+"POT-Creation-Date: 2024-05-22 16:41+0000\n"
 "PO-Revision-Date: 2022-04-15 20:31+0000\n"
 "Last-Translator: Aga Ismael <agaesmaeel@gmail.com>\n"
 "Language-Team: Kurdish (Central) <https://l10n.elementary.io/projects/"
@@ -15,46 +15,46 @@ msgstr ""
 "X-Generator: Weblate 4.4.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:410
+#: compositor/WindowManager.vala:461
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: compositor/WindowManager.vala:417
+#: compositor/WindowManager.vala:468
 msgid "Keep new display settings?"
 msgstr ""
 
-#: compositor/WindowManager.vala:421
+#: compositor/WindowManager.vala:472
 msgid "Keep Settings"
 msgstr ""
 
-#: compositor/WindowManager.vala:422
+#: compositor/WindowManager.vala:473
 msgid "Use Previous Settings"
 msgstr ""
 
-#: src/MainWindow.vala:65
+#: src/MainWindow.vala:67
 msgid "Log in as Guest"
 msgstr "چوونە ژور وەکو میوان"
 
-#: src/MainWindow.vala:67
+#: src/MainWindow.vala:69
 msgid "Manual Login…"
 msgstr "چوونە ژوری ناخۆکار…"
 
-#: src/MainWindow.vala:390
+#: src/MainWindow.vala:403
 msgid "Unable to Log In"
 msgstr "چوونە ژورەوە سەرکەوتوو نەبوو"
 
-#: src/MainWindow.vala:391
+#: src/MainWindow.vala:404
 msgid "Starting the session has failed."
 msgstr "دەستپێکردنی سێشن شکستی هێنا."
 
-#: src/MainWindow.vala:468
+#: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
 msgstr "نەتوانرا دامەزراندنی سەرەتایی بخرێتە کار"
 
-#: src/MainWindow.vala:473
+#: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
