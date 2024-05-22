@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-04 04:04+0000\n"
+"POT-Creation-Date: 2024-05-22 16:41+0000\n"
 "PO-Revision-Date: 2023-06-21 16:07+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/desktop/greeter-"
@@ -27,49 +27,55 @@ msgstr "כניסה ומסך נעילה"
 msgid "Unlock or log in to your device"
 msgstr "שחרור נעילה או כניסה למכשיר שלך"
 
-#: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:63
-#: data/greeter.metainfo.xml.in:79 data/greeter.metainfo.xml.in:92
-#: data/greeter.metainfo.xml.in:106
-msgid "Minor updates:"
-msgstr "עדכונים משניים:"
-
-#: data/greeter.metainfo.xml.in:44
-msgid "Prevent a potential issue with dialogs that use portals"
-msgstr "נמנעה תקלה אפשרית עם חלוניות שמשתמשות בשערים"
-
-#: data/greeter.metainfo.xml.in:45
-msgid "Fix potential issues with incorrect keyboard layout being set"
-msgstr "תוקנה בעיה אפשרית עם הגדרת פריסת מקלדת שגויה"
-
-#: data/greeter.metainfo.xml.in:46 data/greeter.metainfo.xml.in:65
-#: data/greeter.metainfo.xml.in:81 data/greeter.metainfo.xml.in:94
-#: data/greeter.metainfo.xml.in:108
-msgid "Updated translations"
-msgstr "התרגומים עודכנו"
-
-#: data/greeter.metainfo.xml.in:75
+#: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:98
 msgid "New Features:"
 msgstr "יכולות חדשות:"
 
-#: data/greeter.metainfo.xml.in:77
+#: data/greeter.metainfo.xml.in:44
+msgid "Add blurred wallpaper as background"
+msgstr ""
+
+#: data/greeter.metainfo.xml.in:45
+msgid "Make Date and Time larger and bolder with softer shadows"
+msgstr ""
+
+#: data/greeter.metainfo.xml.in:47 data/greeter.metainfo.xml.in:65
+#: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:102
+#: data/greeter.metainfo.xml.in:115
+msgid "Minor updates:"
+msgstr "עדכונים משניים:"
+
+#: data/greeter.metainfo.xml.in:49 data/greeter.metainfo.xml.in:69
+#: data/greeter.metainfo.xml.in:88 data/greeter.metainfo.xml.in:104
+#: data/greeter.metainfo.xml.in:117
+msgid "Updated translations"
+msgstr "התרגומים עודכנו"
+
+#: data/greeter.metainfo.xml.in:67
+msgid "Prevent a potential issue with dialogs that use portals"
+msgstr "נמנעה תקלה אפשרית עם חלוניות שמשתמשות בשערים"
+
+#: data/greeter.metainfo.xml.in:68
+msgid "Fix potential issues with incorrect keyboard layout being set"
+msgstr "תוקנה בעיה אפשרית עם הגדרת פריסת מקלדת שגויה"
+
+#: data/greeter.metainfo.xml.in:100
 msgid "Provide panel background color interface"
 msgstr "אספקת מנשק צבע רקע לסרגל"
 
-#: data/greeter.metainfo.xml.in:88 data/greeter.metainfo.xml.in:101
+#: data/greeter.metainfo.xml.in:111
 msgid "Improvements:"
 msgstr "שיפורים:"
 
-#: data/greeter.metainfo.xml.in:90
+#: data/greeter.metainfo.xml.in:113
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr "תוקנה בעיה אקראית שמקבל הפנים לא נטען כראוי עם ההפעלה הראשונית"
 
-#: data/greeter.metainfo.xml.in:103
-msgid "Hide clock during initial setup"
-msgstr "השעון מוסתר במהלך ההתקנה הראשונית"
+#~ msgid "Hide clock during initial setup"
+#~ msgstr "השעון מוסתר במהלך ההתקנה הראשונית"
 
-#: data/greeter.metainfo.xml.in:104
-msgid "Use selected accent color for logged in checkmark"
-msgstr "ייעשה שימוש בצבע המוביל הנבחר לסימון כניסה למערכת"
+#~ msgid "Use selected accent color for logged in checkmark"
+#~ msgstr "ייעשה שימוש בצבע המוביל הנבחר לסימון כניסה למערכת"
 
 #~ msgid "elementary, Inc."
 #~ msgstr "elementary בע״מ."
