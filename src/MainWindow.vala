@@ -43,18 +43,20 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 return _is_live_session;
             }
 
+            _is_live_session = false;
+
             var proc_cmdline = File.new_for_path ("/proc/cmdline");
             try {
                 var dis = new DataInputStream (proc_cmdline.read ());
                 var line = dis.read_line ();
                 if ("boot=casper" in line || "boot=live" in line || "rd.live.image" in line) {
-                    return true;
+                    _is_live_session = true;
                 }
             } catch (Error e) {
                 critical ("Couldn't detect if running in Live Session: %s", e.message);
             }
 
-            return false;
+            return _is_live_session;
         }
     }
 
