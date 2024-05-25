@@ -36,7 +36,27 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private int current_user_card_index = 0;
     private unowned Greeter.BaseCard? current_card = null;
 
-    private bool installer_mode = false;
+    private bool _is_live_session? = null;
+    private bool is_live_session {
+        get {
+            if (_is_live_session != null) {
+                return _is_live_session;
+            }
+
+            var proc_cmdline = File.new_for_path ("/proc/cmdline");
+            try {
+                var dis = new DataInputStream (proc_cmdline.read ());
+                var line = dis.read_line ();
+                if ("boot=casper" in line || "boot=live" in line || "rd.live.image" in line) {
+                    return true;
+                }
+            } catch (Error e) {
+                critical ("Couldn't detect if running in Live Session: %s", e.message);
+            }
+
+            return false;
+        }
+    }
 
     private Gtk.EventControllerKey key_controller;
 
@@ -386,7 +406,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
                 // If the greeter is running on the install medium, check if the Installer has signalled
                 // that it wants the greeter to launch the live (demo) session by means of touching a file
-                if (installer_mode) {
+                if (is_live_session) {
                     var demo_mode_file = File.new_for_path ("/var/lib/lightdm/demo-mode");
                     if (demo_mode_file.query_exists ()) {
                         demo_mode_file.@delete ();
@@ -431,17 +451,15 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             critical (e.message);
         }
 
-        lightdm_greeter.notify_property ("show-manual-login-hint");
-        lightdm_greeter.notify_property ("has-guest-account-hint");
-
-        if (lightdm_greeter.default_session_hint != null) {
-            get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
-        }
-
         // Check if the installer is installed
         var installer_desktop = new DesktopAppInfo ("io.elementary.installer.desktop");
         if (installer_desktop != null) {
-            installer_mode = true;
+            is_live_session = true;
+            return;
+        }
+
+        if (lightdm_greeter.default_session_hint != null) {
+            get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
         }
 
         if (lightdm_user_list.length > 0) {
@@ -497,6 +515,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
 
         lightdm_greeter.notify_property ("hide-users-hint");
+        lightdm_greeter.notify_property ("show-manual-login-hint");
+        lightdm_greeter.notify_property ("has-guest-account-hint");
     }
 
     private void add_card (LightDM.User lightdm_user) {
