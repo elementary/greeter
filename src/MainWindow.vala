@@ -451,10 +451,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             critical (e.message);
         }
 
-        // Check if the installer is installed
-        var installer_desktop = new DesktopAppInfo ("io.elementary.installer.desktop");
-        if (installer_desktop != null) {
-            is_live_session = true;
+        // Don't need to build user cards etc in live media
+        if (is_live_session) {
             return;
         }
 
