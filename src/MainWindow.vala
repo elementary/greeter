@@ -36,7 +36,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private int current_user_card_index = 0;
     private unowned Greeter.BaseCard? current_card = null;
 
-    private bool _is_live_session? = null;
+    private bool? _is_live_session = null;
     private bool is_live_session {
         get {
             if (_is_live_session != null) {
