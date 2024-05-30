@@ -53,7 +53,13 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     _is_live_session = true;
                 }
             } catch (Error e) {
-                critical ("Couldn't detect if running in Live Session: %s", e.message);
+                critical ("Couldn't read proc/cmdline: %s", e.message);
+
+                // Check if the installer is installed
+                var installer_desktop = new DesktopAppInfo ("io.elementary.installer.desktop");
+                if (installer_desktop != null) {
+                    _is_live_session = true;
+                }
             }
 
             return _is_live_session;
@@ -453,13 +459,13 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             critical (e.message);
         }
 
+        if (lightdm_greeter.default_session_hint != null) {
+            get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
+        }
+
         // Don't need to build user cards etc in live media
         if (is_live_session) {
             return;
-        }
-
-        if (lightdm_greeter.default_session_hint != null) {
-            get_action_group ("session").activate_action ("select", new GLib.Variant.string (lightdm_greeter.default_session_hint));
         }
 
         if (lightdm_user_list.length > 0) {
