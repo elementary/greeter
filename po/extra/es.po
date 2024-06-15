@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-22 16:41+0000\n"
-"PO-Revision-Date: 2024-06-05 03:13+0000\n"
+"PO-Revision-Date: 2024-06-15 15:44+0000\n"
 "Last-Translator: Italo Felipe Capasso Ballesteros <edwood.grant@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/es/>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5\n"
+"X-Generator: Weblate 5.5.5\n"
 
 #: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
-msgstr ""
+msgstr "Inicio de sesión y pantalla de bloqueo"
 
 #: data/greeter.metainfo.xml.in:10
 msgid "Unlock or log in to your device"
-msgstr "Desbloquee o acceda a su dispositivo"
+msgstr "Desbloquee o inicie sesión en su equipo"
 
 #: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:98
 msgid "New Features:"
@@ -33,17 +33,19 @@ msgstr "Nuevas características:"
 
 #: data/greeter.metainfo.xml.in:44
 msgid "Add blurred wallpaper as background"
-msgstr ""
+msgstr "Se agregó un fondo de escritorio desenfocado"
 
 #: data/greeter.metainfo.xml.in:45
 msgid "Make Date and Time larger and bolder with softer shadows"
 msgstr ""
+"El texto de la fecha y hora es ahora más grande, más gruesa y con sombras "
+"más suaves"
 
 #: data/greeter.metainfo.xml.in:47 data/greeter.metainfo.xml.in:65
 #: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:102
 #: data/greeter.metainfo.xml.in:115
 msgid "Minor updates:"
-msgstr ""
+msgstr "Actualizaciones menores:"
 
 #: data/greeter.metainfo.xml.in:49 data/greeter.metainfo.xml.in:69
 #: data/greeter.metainfo.xml.in:88 data/greeter.metainfo.xml.in:104
@@ -53,15 +55,17 @@ msgstr "Traducciones actualizadas"
 
 #: data/greeter.metainfo.xml.in:67
 msgid "Prevent a potential issue with dialogs that use portals"
-msgstr ""
+msgstr "Se corrigió un posible problema con cuadro de diálogo que usen portales"
 
 #: data/greeter.metainfo.xml.in:68
 msgid "Fix potential issues with incorrect keyboard layout being set"
 msgstr ""
+"Se corrigieron posibles problemas al establecer distribuciones de teclado "
+"incorrectas"
 
 #: data/greeter.metainfo.xml.in:100
 msgid "Provide panel background color interface"
-msgstr ""
+msgstr "Se provee una interface de color de fondo para el panel"
 
 #: data/greeter.metainfo.xml.in:111
 msgid "Improvements:"
@@ -70,6 +74,8 @@ msgstr "Mejoras:"
 #: data/greeter.metainfo.xml.in:113
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr ""
+"Se corrigió un problema aleatorio donde la aplicación no cargar "
+"correctamente al iniciar"
 
 #~ msgid "Hide clock during initial setup"
 #~ msgstr "Ocultar el reloj durante la configuración inicial"
