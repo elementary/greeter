@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-22 16:41+0000\n"
 "PO-Revision-Date: 2024-06-15 15:44+0000\n"
-"Last-Translator: Italo Felipe Capasso Ballesteros <edwood.grant@gmail.com>\n"
+"Last-Translator: Andrés Felipe Esguerra Restrepo <afesguerra@outlook.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/desktop/greeter/"
 "es/>\n"
 "Language: es\n"
@@ -33,11 +33,11 @@ msgstr "¿Desea conservar la nueva configuración de pantalla?"
 
 #: compositor/WindowManager.vala:472
 msgid "Keep Settings"
-msgstr ""
+msgstr "Conservar configuración"
 
 #: compositor/WindowManager.vala:473
 msgid "Use Previous Settings"
-msgstr ""
+msgstr "Usar configuración previa"
 
 #: src/MainWindow.vala:67
 msgid "Log in as Guest"
