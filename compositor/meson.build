@@ -96,7 +96,8 @@ compositor_files = files(
   'MediaFeedback.vala',
   'PointerLocator.vala',
   'Utils.vala',
-  'WindowManager.vala'
+  'WindowManager.vala',
+  'Zoom.vala'
 )
 
 executable(
