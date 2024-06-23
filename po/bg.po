@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 17:04+0000\n"
+"POT-Creation-Date: 2024-05-22 16:41+0000\n"
 "PO-Revision-Date: 2019-12-15 23:07+0000\n"
 "Last-Translator: Daniel Foré <daniel@elementary.io>\n"
 "Language-Team: Bulgarian <https://l10n.elementary.io/projects/desktop/"
@@ -20,39 +20,39 @@ msgstr ""
 "X-Generator: Weblate 3.9.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:324
+#: compositor/WindowManager.vala:461
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: compositor/WindowManager.vala:331
+#: compositor/WindowManager.vala:468
 msgid "Keep new display settings?"
 msgstr ""
 
-#: compositor/WindowManager.vala:335
+#: compositor/WindowManager.vala:472
 msgid "Keep Settings"
 msgstr ""
 
-#: compositor/WindowManager.vala:336
+#: compositor/WindowManager.vala:473
 msgid "Use Previous Settings"
 msgstr ""
 
-#: src/MainWindow.vala:63
+#: src/MainWindow.vala:67
 msgid "Log in as Guest"
 msgstr ""
 
-#: src/MainWindow.vala:65
+#: src/MainWindow.vala:69
 #, fuzzy
 msgid "Manual Login…"
 msgstr "Ръчен вход"
 
-#: src/MainWindow.vala:409
+#: src/MainWindow.vala:403
 msgid "Unable to Log In"
 msgstr ""
 
-#: src/MainWindow.vala:410
+#: src/MainWindow.vala:404
 msgid "Starting the session has failed."
 msgstr ""
 
@@ -66,27 +66,27 @@ msgid ""
 "log in and may need to reinstall the OS."
 msgstr ""
 
-#: src/Cards/ManualCard.vala:35
+#: src/Cards/ManualCard.vala:21
 msgid "Manual Login"
 msgstr "Ръчен вход"
 
-#: src/Cards/ManualCard.vala:44
+#: src/Cards/ManualCard.vala:30
 msgid "Username"
 msgstr ""
 
-#: src/Cards/ManualCard.vala:47
+#: src/Cards/ManualCard.vala:33
 msgid "Try username"
 msgstr ""
 
-#: src/Cards/UserCard.vala:112 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:107 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Влизане"
 
-#: src/Cards/UserCard.vala:124
+#: src/Cards/UserCard.vala:119
 msgid "Account disabled"
 msgstr ""
 
-#: src/Cards/UserCard.vala:229
+#: src/Cards/UserCard.vala:197
 msgid "Session cannot be changed while user is logged in"
 msgstr ""
 

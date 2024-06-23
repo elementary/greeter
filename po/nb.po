@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 17:04+0000\n"
-"PO-Revision-Date: 2023-02-14 13:25+0000\n"
+"POT-Creation-Date: 2024-05-22 16:41+0000\n"
+"PO-Revision-Date: 2024-06-17 03:16+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/desktop/"
 "greeter/nb/>\n"
@@ -17,42 +17,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.2\n"
+"X-Generator: Weblate 5.5.5\n"
 "X-Launchpad-Export-Date: 2017-04-05 07:04+0000\n"
 
-#: compositor/WindowManager.vala:324
-#, fuzzy, c-format
-#| msgid "Changes will automatically revert after 30 seconds."
+#: compositor/WindowManager.vala:461
+#, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
-msgstr[0] "Endringer vil endres tilbake automatisk etter 30 sekunder."
-msgstr[1] "Endringer vil endres tilbake automatisk etter 30 sekunder."
+msgstr[0] "Endringer vil endres tilbake automatisk etter ett sekund."
+msgstr[1] "Endringer vil endres tilbake automatisk etter %i sekunder."
 
-#: compositor/WindowManager.vala:331
+#: compositor/WindowManager.vala:468
 msgid "Keep new display settings?"
 msgstr "Behold de nye skjerminnstillingene?"
 
-#: compositor/WindowManager.vala:335
+#: compositor/WindowManager.vala:472
 msgid "Keep Settings"
 msgstr "Behold innstillinger"
 
-#: compositor/WindowManager.vala:336
+#: compositor/WindowManager.vala:473
 msgid "Use Previous Settings"
 msgstr "Bruk tidligere oppsett"
 
-#: src/MainWindow.vala:63
+#: src/MainWindow.vala:67
 msgid "Log in as Guest"
 msgstr "Logg inn som gjest"
 
-#: src/MainWindow.vala:65
+#: src/MainWindow.vala:69
 msgid "Manual Login…"
 msgstr "Manuell innlogging…"
 
-#: src/MainWindow.vala:409
+#: src/MainWindow.vala:403
 msgid "Unable to Log In"
 msgstr "Kunne ikke logge inn"
 
-#: src/MainWindow.vala:410
+#: src/MainWindow.vala:404
 msgid "Starting the session has failed."
 msgstr "Kunne ikke starte økten."
 
@@ -68,27 +67,27 @@ msgstr ""
 "Førstegangsoppsett skaper din første bruker. Uten den, vil du ikke kunne "
 "logge inn, og vil kanskje måtte reinstallere OS-et."
 
-#: src/Cards/ManualCard.vala:35
+#: src/Cards/ManualCard.vala:21
 msgid "Manual Login"
 msgstr "Manuell innlogging"
 
-#: src/Cards/ManualCard.vala:44
+#: src/Cards/ManualCard.vala:30
 msgid "Username"
 msgstr "Brukernavn"
 
-#: src/Cards/ManualCard.vala:47
+#: src/Cards/ManualCard.vala:33
 msgid "Try username"
 msgstr "Prøv brukernavn"
 
-#: src/Cards/UserCard.vala:112 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:107 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Logg inn"
 
-#: src/Cards/UserCard.vala:124
+#: src/Cards/UserCard.vala:119
 msgid "Account disabled"
 msgstr "Konto avskrudd"
 
-#: src/Cards/UserCard.vala:229
+#: src/Cards/UserCard.vala:197
 msgid "Session cannot be changed while user is logged in"
 msgstr "Økten kan ikke endres mens en bruker er innlogget"
 

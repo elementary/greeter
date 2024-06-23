@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 17:04+0000\n"
-"PO-Revision-Date: 2023-04-07 17:59+0000\n"
-"Last-Translator: DutchVipperloid <svenroelof@e.email>\n"
+"POT-Creation-Date: 2024-05-22 16:41+0000\n"
+"PO-Revision-Date: 2024-05-31 09:13+0000\n"
+"Last-Translator: Thierry Flament <thierry.flament@outlook.com>\n"
 "Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/greeter/nl/"
 ">\n"
 "Language: nl\n"
@@ -17,41 +17,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Weblate 5.5\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:324
+#: compositor/WindowManager.vala:461
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
 msgstr[0] "Wijzigingen worden na %i seconde automatisch teruggedraaid."
 msgstr[1] "Wijzigingen worden na %i seconden automatisch teruggedraaid."
 
-#: compositor/WindowManager.vala:331
+#: compositor/WindowManager.vala:468
 msgid "Keep new display settings?"
-msgstr "Nieuwe scherminstellingen behouden?"
+msgstr "Nieuwe weergave-instellingen bewaren?"
 
-#: compositor/WindowManager.vala:335
+#: compositor/WindowManager.vala:472
 msgid "Keep Settings"
 msgstr "Instellingen behouden"
 
-#: compositor/WindowManager.vala:336
+#: compositor/WindowManager.vala:473
 msgid "Use Previous Settings"
 msgstr "Vorige instellingen gebruiken"
 
-#: src/MainWindow.vala:63
+#: src/MainWindow.vala:67
 msgid "Log in as Guest"
 msgstr "Aanmelden als gast"
 
-#: src/MainWindow.vala:65
+#: src/MainWindow.vala:69
 msgid "Manual Login…"
 msgstr "Handmatig inloggen…"
 
-#: src/MainWindow.vala:409
+#: src/MainWindow.vala:403
 msgid "Unable to Log In"
 msgstr "Het is niet mogelijk om in te loggen"
 
-#: src/MainWindow.vala:410
+#: src/MainWindow.vala:404
 msgid "Starting the session has failed."
 msgstr "Het starten van de sessie is mislukt."
 
@@ -68,27 +68,27 @@ msgstr ""
 "gebruiker kunt u niet inloggen en moet u waarschijnlijk het "
 "besturingssysteem opnieuw installeren."
 
-#: src/Cards/ManualCard.vala:35
+#: src/Cards/ManualCard.vala:21
 msgid "Manual Login"
 msgstr "Handmatig inloggen"
 
-#: src/Cards/ManualCard.vala:44
+#: src/Cards/ManualCard.vala:30
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: src/Cards/ManualCard.vala:47
+#: src/Cards/ManualCard.vala:33
 msgid "Try username"
 msgstr "Probeer gebruikersnaam"
 
-#: src/Cards/UserCard.vala:112 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:107 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Inloggen"
 
-#: src/Cards/UserCard.vala:124
+#: src/Cards/UserCard.vala:119
 msgid "Account disabled"
 msgstr "Account uitgeschakeld"
 
-#: src/Cards/UserCard.vala:229
+#: src/Cards/UserCard.vala:197
 msgid "Session cannot be changed while user is logged in"
 msgstr "De sessie kan niet worden gewijzigd terwijl de gebruiker is ingelogd"
 

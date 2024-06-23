@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 17:04+0000\n"
+"POT-Creation-Date: 2024-05-22 16:41+0000\n"
 "PO-Revision-Date: 2019-05-22 09:03+0000\n"
 "Last-Translator: P.-H. Lin <cypressyew@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://l10n.elementary.io/projects/"
@@ -20,38 +20,38 @@ msgstr ""
 "X-Generator: Weblate 3.6.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:324
+#: compositor/WindowManager.vala:461
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
 msgstr[0] ""
 
-#: compositor/WindowManager.vala:331
+#: compositor/WindowManager.vala:468
 msgid "Keep new display settings?"
 msgstr ""
 
-#: compositor/WindowManager.vala:335
+#: compositor/WindowManager.vala:472
 msgid "Keep Settings"
 msgstr ""
 
-#: compositor/WindowManager.vala:336
+#: compositor/WindowManager.vala:473
 msgid "Use Previous Settings"
 msgstr ""
 
-#: src/MainWindow.vala:63
+#: src/MainWindow.vala:67
 msgid "Log in as Guest"
 msgstr "以訪客身份登入"
 
-#: src/MainWindow.vala:65
+#: src/MainWindow.vala:69
 msgid "Manual Login…"
 msgstr "手動登入…"
 
-#: src/MainWindow.vala:409
+#: src/MainWindow.vala:403
 #, fuzzy
 msgid "Unable to Log In"
 msgstr "無法啟動初始設定程式"
 
-#: src/MainWindow.vala:410
+#: src/MainWindow.vala:404
 msgid "Starting the session has failed."
 msgstr ""
 
@@ -67,27 +67,27 @@ msgstr ""
 "初始設定程式建立您的第一個使用者。若無進行初始設定，您將會無法登入而且可能需"
 "要重新安裝作業系統。"
 
-#: src/Cards/ManualCard.vala:35
+#: src/Cards/ManualCard.vala:21
 msgid "Manual Login"
 msgstr "手動登入"
 
-#: src/Cards/ManualCard.vala:44
+#: src/Cards/ManualCard.vala:30
 msgid "Username"
 msgstr "使用者名稱"
 
-#: src/Cards/ManualCard.vala:47
+#: src/Cards/ManualCard.vala:33
 msgid "Try username"
 msgstr ""
 
-#: src/Cards/UserCard.vala:112 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:107 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "登入"
 
-#: src/Cards/UserCard.vala:124
+#: src/Cards/UserCard.vala:119
 msgid "Account disabled"
 msgstr "帳號已停用"
 
-#: src/Cards/UserCard.vala:229
+#: src/Cards/UserCard.vala:197
 msgid "Session cannot be changed while user is logged in"
 msgstr ""
 

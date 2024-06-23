@@ -126,6 +126,7 @@ namespace GreeterCompositor {
             KeyboardManager.init (display);
 
             stage = display.get_stage () as Clutter.Stage;
+            stage.background_color = Clutter.Color.from_rgba (0, 0, 0, 255);
 
             system_background = new SystemBackground (display);
             system_background.background_actor.add_constraint (new Clutter.BindConstraint (stage,
@@ -135,6 +136,15 @@ namespace GreeterCompositor {
             ui_group = new Clutter.Actor ();
             ui_group.reactive = true;
             stage.add_child (ui_group);
+
+            int width, height;
+            display.get_size (out width, out height);
+            fade_in_screen = new Clutter.Actor () {
+                width = width,
+                height = height,
+                background_color = Clutter.Color.from_rgba (0, 0, 0, 255),
+            };
+            stage.add_child (fade_in_screen);
 
             window_group = display.get_window_group ();
             stage.remove_child (window_group);
@@ -150,15 +160,6 @@ namespace GreeterCompositor {
 
             pointer_locator = new PointerLocator (this);
             ui_group.add_child (pointer_locator);
-
-            int width, height;
-            display.get_size (out width, out height);
-            fade_in_screen = new Clutter.Actor () {
-                width = width,
-                height = height,
-                background_color = Clutter.Color.from_rgba (0, 0, 0, 255),
-            };
-            stage.add_child (fade_in_screen);
 
             /*keybindings*/
 
@@ -201,8 +202,58 @@ namespace GreeterCompositor {
             Idle.add (() => {
                 // let the session manager move to the next phase
                 display.get_context ().notify_ready ();
+                start_command.begin ({ "io.elementary.greeter" });
+                start_command.begin ({ "io.elementary.wingpanel", "-g" });
                 return GLib.Source.REMOVE;
             });
+        }
+
+        private async void start_command (string[] command) {
+            if (Meta.Util.is_wayland_compositor ()) {
+                yield start_wayland (command);
+            } else {
+                yield start_x (command);
+            }
+        }
+
+        private async void start_wayland (string[] command) {
+            unowned Meta.Display display = get_display ();
+            var subprocess_launcher = new GLib.SubprocessLauncher (GLib.SubprocessFlags.INHERIT_FDS);
+            try {
+                Meta.WaylandClient daemon_client;
+#if HAS_MUTTER44
+                daemon_client = new Meta.WaylandClient (display.get_context (), subprocess_launcher);
+#else
+                daemon_client = new Meta.WaylandClient (subprocess_launcher);
+#endif
+                var subprocess = daemon_client.spawnv (display, command);
+
+                yield subprocess.wait_async ();
+
+                //Restart the daemon if it crashes
+                Timeout.add_seconds (1, () => {
+                    start_wayland.begin (command);
+                    return Source.REMOVE;
+                });
+            } catch (Error e) {
+                warning ("Failed to create greeter client: %s", e.message);
+                return;
+            }
+        }
+
+        private async void start_x (string[] command) {
+            try {
+                var subprocess = new Subprocess.newv (command, GLib.SubprocessFlags.INHERIT_FDS);
+                yield subprocess.wait_async ();
+
+                //Restart the daemon if it crashes
+                Timeout.add_seconds (1, () => {
+                    start_x.begin (command);
+                    return Source.REMOVE;
+                });
+            } catch (Error e) {
+                warning ("Failed to create greeter subprocess with x: %s", e.message);
+            }
         }
 
         public uint32[] get_all_xids () {

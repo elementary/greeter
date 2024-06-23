@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 17:04+0000\n"
-"PO-Revision-Date: 2023-06-21 16:07+0000\n"
+"POT-Creation-Date: 2024-05-22 16:41+0000\n"
+"PO-Revision-Date: 2024-05-25 08:13+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/ca/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.5\n"
 
 #: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
@@ -27,58 +27,64 @@ msgstr "Inici de sessió i pantalla de bloqueig"
 msgid "Unlock or log in to your device"
 msgstr "Desbloquegeu o entreu al dispositiu"
 
-#: data/greeter.metainfo.xml.in:33
-msgid "elementary, Inc."
-msgstr "elementary, Inc."
+#: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:98
+msgid "New Features:"
+msgstr "Característiques noves:"
 
-#: data/greeter.metainfo.xml.in:40 data/greeter.metainfo.xml.in:54
-#: data/greeter.metainfo.xml.in:70 data/greeter.metainfo.xml.in:83
-#: data/greeter.metainfo.xml.in:97
+#: data/greeter.metainfo.xml.in:44
+msgid "Add blurred wallpaper as background"
+msgstr "Afegiu un fons de pantalla borrós com a fons"
+
+#: data/greeter.metainfo.xml.in:45
+msgid "Make Date and Time larger and bolder with softer shadows"
+msgstr ""
+"Fes que la data i l'hora siguin més grosses i atrevides amb ombres més suaus."
+
+#: data/greeter.metainfo.xml.in:47 data/greeter.metainfo.xml.in:65
+#: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:102
+#: data/greeter.metainfo.xml.in:115
 msgid "Minor updates:"
 msgstr "Actualitzacions menors:"
 
-#: data/greeter.metainfo.xml.in:42
+#: data/greeter.metainfo.xml.in:49 data/greeter.metainfo.xml.in:69
+#: data/greeter.metainfo.xml.in:88 data/greeter.metainfo.xml.in:104
+#: data/greeter.metainfo.xml.in:117
+msgid "Updated translations"
+msgstr "Traduccions actualitzades"
+
+#: data/greeter.metainfo.xml.in:67
 msgid "Prevent a potential issue with dialogs that use portals"
 msgstr "Evita un possible problema amb els diàlegs que utilitzen portals"
 
-#: data/greeter.metainfo.xml.in:43
+#: data/greeter.metainfo.xml.in:68
 msgid "Fix potential issues with incorrect keyboard layout being set"
 msgstr ""
 "Solució de problemes potencials amb la configuració incorrecta del teclat"
 
-#: data/greeter.metainfo.xml.in:44 data/greeter.metainfo.xml.in:56
-#: data/greeter.metainfo.xml.in:72 data/greeter.metainfo.xml.in:85
-#: data/greeter.metainfo.xml.in:99
-msgid "Updated translations"
-msgstr "Traduccions actualitzades"
-
-#: data/greeter.metainfo.xml.in:66
-msgid "New Features:"
-msgstr "Característiques noves:"
-
-#: data/greeter.metainfo.xml.in:68
+#: data/greeter.metainfo.xml.in:100
 msgid "Provide panel background color interface"
 msgstr "Proporciona una interfície de color de fons"
 
-#: data/greeter.metainfo.xml.in:79 data/greeter.metainfo.xml.in:92
+#: data/greeter.metainfo.xml.in:111
 msgid "Improvements:"
 msgstr "Millores:"
 
-#: data/greeter.metainfo.xml.in:81
+#: data/greeter.metainfo.xml.in:113
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr ""
 "Solució d'un problema aleatori en què Greeter no es carrega correctament a "
 "l'arrencada"
 
-#: data/greeter.metainfo.xml.in:94
-msgid "Hide clock during initial setup"
-msgstr "S'amaga el rellotge durant la configuració inicial."
+#~ msgid "Hide clock during initial setup"
+#~ msgstr "S'amaga el rellotge durant la configuració inicial."
 
-#: data/greeter.metainfo.xml.in:95
-msgid "Use selected accent color for logged in checkmark"
-msgstr ""
-"S'usa el color d’accentuació seleccionat per a la marca de verificació de "
-"sessió iniciada."
+#~ msgid "Use selected accent color for logged in checkmark"
+#~ msgstr ""
+#~ "S'usa el color d’accentuació seleccionat per a la marca de verificació de "
+#~ "sessió iniciada."
+
+#~ msgid "elementary, Inc."
+#~ msgstr "elementary, Inc."
 
 #~ msgid "Add multitouch finger tracking"
 #~ msgstr "Addicció del desplaçament multitàctil"

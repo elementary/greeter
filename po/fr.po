@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 17:04+0000\n"
+"POT-Creation-Date: 2024-05-22 16:41+0000\n"
 "PO-Revision-Date: 2023-03-15 09:25+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 4.14.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:324
+#: compositor/WindowManager.vala:461
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
@@ -28,31 +28,31 @@ msgstr[0] "Les modifications seront automatiquement annulées après %i seconde.
 msgstr[1] ""
 "Les modifications seront automatiquement annulées après %i secondes."
 
-#: compositor/WindowManager.vala:331
+#: compositor/WindowManager.vala:468
 msgid "Keep new display settings?"
 msgstr "Conserver les nouveaux paramètres d'affichage ?"
 
-#: compositor/WindowManager.vala:335
+#: compositor/WindowManager.vala:472
 msgid "Keep Settings"
 msgstr "Conserver les paramètres"
 
-#: compositor/WindowManager.vala:336
+#: compositor/WindowManager.vala:473
 msgid "Use Previous Settings"
 msgstr "Utiliser les paramètres précédents"
 
-#: src/MainWindow.vala:63
+#: src/MainWindow.vala:67
 msgid "Log in as Guest"
 msgstr "Connexion en tant qu'invité"
 
-#: src/MainWindow.vala:65
+#: src/MainWindow.vala:69
 msgid "Manual Login…"
 msgstr "Connexion manuelle…"
 
-#: src/MainWindow.vala:409
+#: src/MainWindow.vala:403
 msgid "Unable to Log In"
 msgstr "Impossible de se connecter"
 
-#: src/MainWindow.vala:410
+#: src/MainWindow.vala:404
 msgid "Starting the session has failed."
 msgstr "Le lancement de la session a échoué."
 
@@ -68,27 +68,27 @@ msgstr ""
 "L'installation initiale créé votre premier utilisateur. Sans cela, vous ne "
 "pourriez pas vous connecter et devriez réinstaller le système d'exploitation."
 
-#: src/Cards/ManualCard.vala:35
+#: src/Cards/ManualCard.vala:21
 msgid "Manual Login"
 msgstr "Connexion manuelle"
 
-#: src/Cards/ManualCard.vala:44
+#: src/Cards/ManualCard.vala:30
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: src/Cards/ManualCard.vala:47
+#: src/Cards/ManualCard.vala:33
 msgid "Try username"
 msgstr "Essayer le nom d'utilisateur"
 
-#: src/Cards/UserCard.vala:112 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:107 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Connexion"
 
-#: src/Cards/UserCard.vala:124
+#: src/Cards/UserCard.vala:119
 msgid "Account disabled"
 msgstr "Compte désactivé"
 
-#: src/Cards/UserCard.vala:229
+#: src/Cards/UserCard.vala:197
 msgid "Session cannot be changed while user is logged in"
 msgstr ""
 "La session ne peut pas être modifiée tant que l'utilisateur est connecté"
