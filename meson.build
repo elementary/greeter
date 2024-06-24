@@ -55,5 +55,3 @@ vapigen = find_program('vapigen', required: false)
 if vapigen.found()
 	subdir('vapi')
 endif
-
-gnome.post_install(glib_compile_schemas: true)
