@@ -1,6 +1,7 @@
 etc/lightdm
 usr/bin
 usr/sbin
+usr/share/glib-2.0/schemas
 usr/share/lightdm/lightdm.conf.d
 usr/share/locale
 usr/share/metainfo
