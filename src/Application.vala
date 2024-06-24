@@ -19,21 +19,32 @@
  * Authors: Corentin Noël <corentin@elementary.io>
  */
 
-public int main (string[] args) {
-    Intl.setlocale (LocaleCategory.ALL, "");
-    Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
-    Intl.textdomain (Constants.GETTEXT_PACKAGE);
-    Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALE_DIR);
+public class Greeter.Application : Gtk.Application {
+    public Application () {
+        Object (
+            application_id: "io.elementary.greeter",
+            flags: ApplicationFlags.FLAGS_NONE
+        );
+    }
 
-    var settings_daemon = new Greeter.SettingsDaemon ();
-    settings_daemon.start ();
+    construct {
+        Intl.setlocale (LocaleCategory.ALL, "");
+        Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
+        Intl.textdomain (Constants.GETTEXT_PACKAGE);
+        Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALE_DIR);
+    }
 
-    Gtk.init (ref args);
+    public static int main (string[] args) {
+        var settings_daemon = new Greeter.SettingsDaemon ();
+        settings_daemon.start ();
 
-    var window = new Greeter.MainWindow ();
-    window.show_all ();
+        Gtk.init (ref args);
 
-    Gtk.main ();
+        var window = new Greeter.MainWindow ();
+        window.show_all ();
 
-    return 0;
+        Gtk.main ();
+
+        return new Greeter.Application ().run (args);
+    }
 }
