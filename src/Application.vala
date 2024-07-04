@@ -31,10 +31,6 @@ public int main (string[] args) {
     Greeter.SubprocessSupervisor portals;
     Greeter.SubprocessSupervisor settings_daemon;
 
-
-    var settings_daemon = new Greeter.SettingsDaemon ();
-    settings_daemon.start ();
-
     Gtk.init (ref args);
 
     var window = new Greeter.MainWindow ();
