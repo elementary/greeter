@@ -8,14 +8,16 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-22 16:41+0000\n"
-"PO-Revision-Date: 2019-06-24 15:03-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-08-07 17:16+0000\n"
+"Last-Translator: anonymous <noreply@weblate.org>\n"
+"Language-Team: English (Canada) <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/en_CA/>\n"
 "Language: en_CA\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
@@ -47,7 +49,7 @@ msgstr ""
 #: data/greeter.metainfo.xml.in:88 data/greeter.metainfo.xml.in:104
 #: data/greeter.metainfo.xml.in:117
 msgid "Updated translations"
-msgstr ""
+msgstr "Updated translations"
 
 #: data/greeter.metainfo.xml.in:67
 msgid "Prevent a potential issue with dialogs that use portals"
@@ -63,7 +65,7 @@ msgstr ""
 
 #: data/greeter.metainfo.xml.in:111
 msgid "Improvements:"
-msgstr ""
+msgstr "Improvements:"
 
 #: data/greeter.metainfo.xml.in:113
 msgid "Fix a random issue where Greeter does not load correctly on boot"
