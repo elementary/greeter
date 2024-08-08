@@ -93,7 +93,6 @@ public class GreeterCompositor.BackgroundManager : Meta.BackgroundGroup {
         var background = new_content.background.get_data<unowned Background> ("delegate");
 
         if (background.is_loaded) {
-            new_content.rounded_clip_radius = Utils.scale_to_int (6, wm.get_display ().get_monitor_scale (monitor_index));
             swap_background_actor (animate);
             return;
         }
@@ -104,7 +103,6 @@ public class GreeterCompositor.BackgroundManager : Meta.BackgroundGroup {
             background.set_data<ulong> ("background-loaded-handler", 0);
 
             swap_background_actor (animate);
-            new_content.rounded_clip_radius = Utils.scale_to_int (6, wm.get_display ().get_monitor_scale (monitor_index));
         });
         background.set_data<ulong> ("background-loaded-handler", handler);
     }
