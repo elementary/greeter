@@ -211,7 +211,7 @@ namespace GreeterCompositor {
                 // let the session manager move to the next phase
                 display.get_context ().notify_ready ();
                 start_command.begin ({ "io.elementary.greeter" });
-                start_command.begin ({ "io.elementary.wingpanel", "-g" });
+                ShellClientsManager.init (this);
                 return GLib.Source.REMOVE;
             });
         }
