@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-22 16:41+0000\n"
-"PO-Revision-Date: 2024-04-24 12:13+0000\n"
-"Last-Translator: Matheus Torres Carvalho <matheustcarvalho@hotmail.com>\n"
+"PO-Revision-Date: 2024-08-16 01:16+0000\n"
+"Last-Translator: José Rafael <jrafaeldesantana@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.elementary.io/projects/"
 "desktop/greeter-extra/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.0.2\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
@@ -29,15 +29,15 @@ msgstr "Desbloquear ou efetuar login em seu dispositivo"
 
 #: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:98
 msgid "New Features:"
-msgstr "Novas funcionalidades:"
+msgstr "Novos recursos:"
 
 #: data/greeter.metainfo.xml.in:44
 msgid "Add blurred wallpaper as background"
-msgstr ""
+msgstr "Adicionado papel de parede com o efeito blur como background"
 
 #: data/greeter.metainfo.xml.in:45
 msgid "Make Date and Time larger and bolder with softer shadows"
-msgstr ""
+msgstr "Define que a data e hora sejam um texto largo e com sombras mais suaves"
 
 #: data/greeter.metainfo.xml.in:47 data/greeter.metainfo.xml.in:65
 #: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:102
