@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-[DBus (name = "org.pantheon.gala.WingpanelInterface")]
+[DBus (name = "io.elementary.gala.WingpanelInterface")]
 public class GreeterCompositor.DBusWingpanelManager : GLib.Object {
     private static DBusWingpanelManager? instance;
     private static WindowManager wm;
@@ -15,19 +15,19 @@ public class GreeterCompositor.DBusWingpanelManager : GLib.Object {
     public static void init (WindowManager _wm) {
         wm = _wm;
 
-        Bus.own_name (BusType.SESSION, "org.pantheon.gala.WingpanelInterface", BusNameOwnerFlags.NONE,
+        Bus.own_name (BusType.SESSION, "io.elementary.gala.WingpanelInterface", BusNameOwnerFlags.NONE,
             (connection) => {
                 if (instance == null)
                     instance = new DBusWingpanelManager ();
 
                 try {
-                    connection.register_object ("/org/pantheon/gala/WingpanelInterface", instance);
+                    connection.register_object ("/io/elementary/gala/WingpanelInterface", instance);
                 } catch (Error e) {
                     warning (e.message);
                 }
             },
             () => {},
-            () => warning ("Could not acquire name\n")
+            () => warning ("Could not acquire name")
         );
     }
 
