@@ -89,27 +89,6 @@ public class GreeterCompositor.PanelClone : Object {
         return should_animate ? ANIMATION_DURATION : 0;
     }
 
-    private void hide () {
-        if (panel_hidden) {
-            return;
-        }
-
-        panel_hidden = true;
-
-        if (panel.anchor != TOP && panel.anchor != BOTTOM) {
-            warning ("Animated hide not supported for side yet.");
-            return;
-        }
-
-        clone.visible = true;
-
-        clone.save_easing_state ();
-        clone.set_easing_mode (Clutter.AnimationMode.EASE_OUT_QUAD);
-        clone.set_easing_duration (get_animation_duration ());
-        clone.y = calculate_clone_y (true);
-        clone.restore_easing_state ();
-    }
-
     public void show () {
         if (!panel_hidden) {
             return;
