@@ -9,18 +9,11 @@ install_data(
 )
 
 desktop_in = configure_file (
-    input: meson.project_name() + '.desktop.in.in',
-    output: meson.project_name() + '.desktop.in',
-    configuration: conf_data
-)
-
-i18n.merge_file (
-    input: desktop_in,
+    input: meson.project_name() + '.desktop.in',
     output: meson.project_name() + '.desktop',
     install: true,
     install_dir: join_paths(get_option('datadir'), 'xgreeters'),
-    po_dir: join_paths(meson.project_source_root (), 'po'),
-    type: 'desktop'
+    configuration: conf_data
 )
 
 i18n.merge_file(
