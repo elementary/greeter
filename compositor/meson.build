@@ -87,7 +87,6 @@ compositor_files = files(
   'HotCorners/Barrier.vala',
   'PantheonShell.vala',
   'ShellClients/CenteredWindow.vala',
-  'ShellClients/HideTracker.vala',
   'ShellClients/ManagedClient.vala',
   'ShellClients/NotificationsClient.vala',
   'ShellClients/PanelClone.vala',

@@ -13,20 +13,10 @@ public class GreeterCompositor.PanelClone : Object {
 
     public Pantheon.Desktop.HideMode hide_mode {
         get {
-            return hide_tracker == null ? Pantheon.Desktop.HideMode.NEVER : hide_tracker.hide_mode;
+            return NEVER;
         }
         set {
-            if (value == NEVER) {
-                hide_tracker = null;
-                show ();
-                return;
-            } else if (hide_tracker == null) {
-                hide_tracker = new HideTracker (wm.get_display (), panel);
-                hide_tracker.hide.connect (hide);
-                hide_tracker.show.connect (show);
-            }
-
-            hide_tracker.hide_mode = value;
+            show ();
         }
     }
 
@@ -34,8 +24,6 @@ public class GreeterCompositor.PanelClone : Object {
 
     private SafeWindowClone clone;
     private Meta.WindowActor actor;
-
-    private HideTracker? hide_tracker;
 
     public PanelClone (WindowManager wm, PanelWindow panel) {
         Object (wm: wm, panel: panel);
@@ -56,22 +44,13 @@ public class GreeterCompositor.PanelClone : Object {
 
         notify["panel-hidden"].connect (() => {
             update_visible ();
-            // When hidden changes schedule an update to make sure it's actually
-            // correct since things might have changed during the animation
-            if (hide_tracker != null) {
-                hide_tracker.schedule_update ();
-            }
         });
 
         update_visible ();
         update_clone_position ();
 
         Idle.add_once (() => {
-            if (hide_mode == NEVER) {
-                show ();
-            } else {
-                hide_tracker.schedule_update ();
-            }
+            show ();
         });
     }
 
