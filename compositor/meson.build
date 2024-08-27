@@ -84,7 +84,6 @@ compositor_files = files(
   'Background/BackgroundSource.vala',
   'Background/BlurEffect.vala',
   'Background/SystemBackground.vala',
-  'HotCorners/Barrier.vala',
   'PantheonShell.vala',
   'ShellClients/CenteredWindow.vala',
   'ShellClients/ManagedClient.vala',
