@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-22 16:41+0000\n"
-"PO-Revision-Date: 2024-05-23 23:13+0000\n"
+"PO-Revision-Date: 2024-09-01 08:16+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/ja/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
@@ -57,7 +57,7 @@ msgstr "ポータルを使用するダイアログに関連する潜在的なバ
 
 #: data/greeter.metainfo.xml.in:68
 msgid "Fix potential issues with incorrect keyboard layout being set"
-msgstr "不適切なキーボードレイアウトが設定されることがある不具合を修正"
+msgstr "間違ったキーボードレイアウトが設定されることがある不具合を修正"
 
 #: data/greeter.metainfo.xml.in:100
 msgid "Provide panel background color interface"
