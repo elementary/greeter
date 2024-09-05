@@ -57,7 +57,6 @@ namespace GreeterCompositor {
             set_anchor,
             focus_panel,
             set_size,
-            set_hide_mode,
         };
 
         wayland_pantheon_widget_interface = {
@@ -310,23 +309,6 @@ namespace GreeterCompositor {
         }
 
         ShellClientsManager.get_instance ().set_size (window, width, height);
-    }
-
-    internal static void set_hide_mode (Wl.Client client, Wl.Resource resource, [CCode (type = "uint32_t")] Pantheon.Desktop.HideMode hide_mode) {
-        unowned PanelSurface? panel_surface = resource.get_user_data<PanelSurface> ();
-        if (panel_surface.wayland_surface == null) {
-            warning ("Window tried to set hide mode but wayland surface is null.");
-            return;
-        }
-
-        Meta.Window? window;
-        panel_surface.wayland_surface.get ("window", out window, null);
-        if (window == null) {
-            warning ("Window tried to set hide mode but wayland surface had no associated window.");
-            return;
-        }
-
-        ShellClientsManager.get_instance ().set_hide_mode (window, hide_mode);
     }
 
     internal static void set_keep_above (Wl.Client client, Wl.Resource resource) {
