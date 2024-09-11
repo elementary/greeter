@@ -17,14 +17,14 @@
  * Authored by: Michael Terry <michael.terry@canonical.com>
  */
 
-public class Greeter.SettingsDaemon : Object {
-    private Greeter.GnomeSessionManager session_manager;
+public class GreeterCompositor.SettingsDaemon : Object {
+    private GreeterCompositor.GnomeSessionManager session_manager;
     private int n_names = 0;
     private SubprocessSupervisor[] supervisors = {};
 
     public void start () {
         /* Pretend to be GNOME session */
-        session_manager = new Greeter.GnomeSessionManager ();
+        session_manager = new GreeterCompositor.GnomeSessionManager ();
         n_names++;
         GLib.Bus.own_name (BusType.SESSION, "org.gnome.SessionManager", BusNameOwnerFlags.NONE,
                            (c) => {
@@ -60,7 +60,7 @@ public class Greeter.SettingsDaemon : Object {
 
         foreach (var daemon in daemons) {
             try {
-                supervisors += new Greeter.SubprocessSupervisor ({Constants.GSD_DIR + daemon});
+                supervisors += new GreeterCompositor.SubprocessSupervisor ({Constants.GSD_DIR + daemon});
             } catch (GLib.Error e) {
                 critical ("Could not start %s: %s", daemon, e.message);
             }
@@ -69,9 +69,9 @@ public class Greeter.SettingsDaemon : Object {
 }
 
 [DBus (name="org.gnome.SessionManager")]
-public class Greeter.GnomeSessionManager : GLib.Object {
-    private Gee.ArrayList<Greeter.GnomeSessionManagerClient> clients;
-    private Gee.ArrayList<unowned Greeter.GnomeSessionManagerClient> inhibitors;
+public class GreeterCompositor.GnomeSessionManager : GLib.Object {
+    private Gee.ArrayList<GreeterCompositor.GnomeSessionManagerClient> clients;
+    private Gee.ArrayList<unowned GreeterCompositor.GnomeSessionManagerClient> inhibitors;
 
     public string session_name { owned get; set; default = "pantheon"; }
     public string renderer { owned get; set; default = ""; }
@@ -86,8 +86,8 @@ public class Greeter.GnomeSessionManager : GLib.Object {
     public signal void session_over ();
 
     construct {
-        clients = new Gee.ArrayList<Greeter.GnomeSessionManagerClient> ();
-        inhibitors = new Gee.ArrayList<unowned Greeter.GnomeSessionManagerClient> ();
+        clients = new Gee.ArrayList<GreeterCompositor.GnomeSessionManagerClient> ();
+        inhibitors = new Gee.ArrayList<unowned GreeterCompositor.GnomeSessionManagerClient> ();
     }
 
     public void setenv (string variable, string value) throws GLib.Error {
@@ -188,7 +188,7 @@ public class Greeter.GnomeSessionManager : GLib.Object {
 }
 
 [DBus (name = "org.gnome.SessionManager.Client")]
-public class Greeter.GnomeSessionManagerClient : GLib.Object {
+public class GreeterCompositor.GnomeSessionManagerClient : GLib.Object {
     static uint32 serial_id = 0;
 
     private string app_id;
@@ -203,7 +203,7 @@ public class Greeter.GnomeSessionManagerClient : GLib.Object {
 
         try {
             var session_bus = GLib.Bus.get_sync (GLib.BusType.SESSION);
-            session_bus.register_object<Greeter.GnomeSessionManagerClient> (object_path, this);
+            session_bus.register_object<GreeterCompositor.GnomeSessionManagerClient> (object_path, this);
         } catch (Error e) {
             critical (e.message);
         }
