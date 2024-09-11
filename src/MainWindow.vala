@@ -497,9 +497,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.notify_property ("hide-users-hint");
     }
 
-    private const uint NOBODY_USER_UID = 65534;
-    private const uint RESERVED_UID_RANGE_END = 1000;
-
     private void add_card (LightDM.User lightdm_user) {
         // Don't add Live Session user
         if (lightdm_user.get_uid () == 1000) {
