@@ -444,12 +444,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             installer_mode = true;
         }
 
-        if (lightdm_user_list.length > 0) {
-            datetime_revealer.reveal_child = true;
+        lightdm_user_list.users.foreach (add_card);
 
-            lightdm_user_list.users.foreach ((user) => {
-                add_card (user);
-            });
+        if (carousel.n_pages > 0) {
+            datetime_revealer.reveal_child = true;
 
             unowned string? select_user = lightdm_greeter.select_user_hint;
             var user_to_select = (select_user != null) ? select_user : settings.last_user;
@@ -499,7 +497,15 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.notify_property ("hide-users-hint");
     }
 
+    private const uint NOBODY_USER_UID = 65534;
+    private const uint RESERVED_UID_RANGE_END = 1000;
+
     private void add_card (LightDM.User lightdm_user) {
+        // Don't add Live Session user
+        if (lightdm_user.get_uid () == 1000) {
+            return;
+        }
+
         var user_card = new Greeter.UserCard (lightdm_user);
         user_card.show_all ();
 
