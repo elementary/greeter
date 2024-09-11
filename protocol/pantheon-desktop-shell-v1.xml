@@ -90,6 +90,14 @@
       <arg name="width" type="int"/>
       <arg name="height" type="int"/>
     </request>
+
+    <request name="set_hide_mode">
+      <description summary="set panel hide mode">
+        Tell the shell when to hide the panel.
+      </description>
+
+      <arg name="hide_mode" type="uint" enum="hide_mode" summary="hide mode"/>
+    </request>
   </interface>
 
   <interface name="io_elementary_pantheon_widget_v1" version="1">
