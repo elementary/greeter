@@ -34,14 +34,12 @@ public class Greeter.Application : Gtk.Application {
         Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALE_DIR);
     }
 
+    public override void activate () {
+        add_window (new Greeter.MainWindow ());
+        active_window.show_all ();
+    }
+
     public static int main (string[] args) {
-        Gtk.init (ref args);
-
-        var window = new Greeter.MainWindow ();
-        window.show_all ();
-
-        Gtk.main ();
-
         return new Greeter.Application ().run (args);
     }
 }
