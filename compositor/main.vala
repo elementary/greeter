@@ -32,6 +32,9 @@ namespace GreeterCompositor {
         // overrides
         GLib.Environment.set_variable ("XDG_CURRENT_DESKTOP", "Pantheon", true);
 
+        var settings_daemon = new SettingsDaemon ();
+        settings_daemon.start ();
+
         var ctx = new Meta.Context ("Mutter(GreeterCompositor)");
         ctx.add_option_entries (GreeterCompositor.OPTIONS, Constants.GETTEXT_PACKAGE);
         try {

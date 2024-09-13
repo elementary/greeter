@@ -25,9 +25,6 @@ public int main (string[] args) {
     Intl.textdomain (Constants.GETTEXT_PACKAGE);
     Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALE_DIR);
 
-    var settings_daemon = new Greeter.SettingsDaemon ();
-    settings_daemon.start ();
-
     Gtk.init (ref args);
 
     var window = new Greeter.MainWindow ();

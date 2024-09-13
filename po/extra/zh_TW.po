@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-22 16:41+0000\n"
-"PO-Revision-Date: 2024-09-02 22:33+0000\n"
+"PO-Revision-Date: 2024-09-06 10:13+0000\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Chinese (Traditional) <https://l10n.elementary.io/projects/"
 "desktop/greeter-extra/zh_Hant/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
-msgstr ""
+msgstr "登入與鎖定畫面"
 
 #: data/greeter.metainfo.xml.in:10
 msgid "Unlock or log in to your device"
@@ -29,15 +29,15 @@ msgstr "解除鎖定或登入您的裝置"
 
 #: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:98
 msgid "New Features:"
-msgstr ""
+msgstr "新功能："
 
 #: data/greeter.metainfo.xml.in:44
 msgid "Add blurred wallpaper as background"
-msgstr ""
+msgstr "新增將模糊桌布設為背景的功能"
 
 #: data/greeter.metainfo.xml.in:45
 msgid "Make Date and Time larger and bolder with softer shadows"
-msgstr ""
+msgstr "讓日期與時間更大並使用較柔和的陰影"
 
 #: data/greeter.metainfo.xml.in:47 data/greeter.metainfo.xml.in:65
 #: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:102
@@ -53,15 +53,15 @@ msgstr "更新翻譯"
 
 #: data/greeter.metainfo.xml.in:67
 msgid "Prevent a potential issue with dialogs that use portals"
-msgstr ""
+msgstr "防止一個使用 portal 的對話框可能會遇到的問題"
 
 #: data/greeter.metainfo.xml.in:68
 msgid "Fix potential issues with incorrect keyboard layout being set"
-msgstr ""
+msgstr "修正可能設定錯誤的鍵盤配置的問題"
 
 #: data/greeter.metainfo.xml.in:100
 msgid "Provide panel background color interface"
-msgstr ""
+msgstr "提供面板背景色彩介面"
 
 #: data/greeter.metainfo.xml.in:111
 msgid "Improvements:"
@@ -69,7 +69,7 @@ msgstr "改善項目："
 
 #: data/greeter.metainfo.xml.in:113
 msgid "Fix a random issue where Greeter does not load correctly on boot"
-msgstr ""
+msgstr "修正一個 greeter 在開機時會隨機無法正確載入的問題"
 
 #~ msgid "elementary, Inc."
 #~ msgstr "elementary, Inc."
