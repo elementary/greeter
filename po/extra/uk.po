@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 16:41+0000\n"
+"POT-Creation-Date: 2024-09-13 20:19+0000\n"
 "PO-Revision-Date: 2024-05-27 15:13+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/desktop/"
@@ -27,6 +27,10 @@ msgstr "Вхід та екран блокування"
 #: data/greeter.metainfo.xml.in:10
 msgid "Unlock or log in to your device"
 msgstr "Розблокуйте або увійдіть до свого пристрою"
+
+#: data/greeter.metainfo.xml.in:34
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
 
 #: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:98
 msgid "New Features:"
@@ -82,9 +86,6 @@ msgstr "Виправлено проблему, коли екран привіт�
 
 #~ msgid "Use selected accent color for logged in checkmark"
 #~ msgstr "Прапорці забарвлюються в обраний основний колір"
-
-#~ msgid "elementary, Inc."
-#~ msgstr "elementary, Inc."
 
 #~ msgid "Add multitouch finger tracking"
 #~ msgstr "Додано жести пальцями"
