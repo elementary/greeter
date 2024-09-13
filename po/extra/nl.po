@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-22 16:41+0000\n"
-"PO-Revision-Date: 2023-08-02 17:08+0000\n"
+"PO-Revision-Date: 2024-08-17 17:19+0000\n"
 "Last-Translator: DutchVipperloid <svenroelof@e.email>\n"
-"Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/nl/>\n"
+"Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
@@ -49,7 +49,7 @@ msgstr "Kleine updates:"
 #: data/greeter.metainfo.xml.in:88 data/greeter.metainfo.xml.in:104
 #: data/greeter.metainfo.xml.in:117
 msgid "Updated translations"
-msgstr "Geüpdatete vertalingen"
+msgstr "Bijgewerkte vertalingen"
 
 #: data/greeter.metainfo.xml.in:67
 msgid "Prevent a potential issue with dialogs that use portals"

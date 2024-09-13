@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 elementary, Inc. (https://elementary.io)
+ * Copyright 2018-2024 elementary, Inc. (https://elementary.io)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -35,9 +35,6 @@ public class Greeter.Application : Gtk.Application {
     }
 
     public static int main (string[] args) {
-        var settings_daemon = new Greeter.SettingsDaemon ();
-        settings_daemon.start ();
-
         Gtk.init (ref args);
 
         var window = new Greeter.MainWindow ();
