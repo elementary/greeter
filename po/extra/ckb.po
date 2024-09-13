@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 16:41+0000\n"
+"POT-Creation-Date: 2024-09-13 20:19+0000\n"
 "PO-Revision-Date: 2022-04-15 22:18+0000\n"
 "Last-Translator: Aga Ismael <agaesmaeel@gmail.com>\n"
 "Language-Team: Kurdish (Central) <https://l10n.elementary.io/projects/"
@@ -26,6 +26,10 @@ msgstr ""
 #: data/greeter.metainfo.xml.in:10
 msgid "Unlock or log in to your device"
 msgstr "قوفڵ بکەوە یان بچۆرە ناو ئامێرەکەتەوە"
+
+#: data/greeter.metainfo.xml.in:34
+msgid "elementary, Inc."
+msgstr "کۆمپانیای ئێلەمێنتەری هاوپشک."
 
 #: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:98
 msgid "New Features:"
@@ -78,9 +82,6 @@ msgstr ""
 
 #~ msgid "Use selected accent color for logged in checkmark"
 #~ msgstr "بەکارهێنانی ڕەنگی ئەکسێنتی دیاریکراو بۆ چوونە ژور لە چێکمارکەکاندا"
-
-#~ msgid "elementary, Inc."
-#~ msgstr "کۆمپانیای ئێلەمێنتەری هاوپشک."
 
 #~ msgid "Greeter"
 #~ msgstr "گریتەر"
