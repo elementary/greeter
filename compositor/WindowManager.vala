@@ -210,7 +210,7 @@ namespace GreeterCompositor {
             Idle.add (() => {
                 // let the session manager move to the next phase
                 display.get_context ().notify_ready ();
-                start_command.begin ({ "io.elementary.wingpanel", "-g" });
+                ShellClientsManager.init (this);
 
                 if (GLib.Environment.get_variable ("DESKTOP_SESSION") != "installer") {
                     start_command.begin ({ "io.elementary.greeter" });
