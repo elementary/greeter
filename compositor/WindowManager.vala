@@ -63,6 +63,8 @@ namespace GreeterCompositor {
         //ActivatableComponent? workspace_view = null;
         //ActivatableComponent? window_overview = null;
 
+        private Zoom zoom;
+
         //ScreenSaver? screensaver;
 
         //Gee.LinkedList<ModalProxy> modal_stack = new Gee.LinkedList<ModalProxy> ();
@@ -135,6 +137,7 @@ namespace GreeterCompositor {
 
             ui_group = new Clutter.Actor ();
             ui_group.reactive = true;
+            update_ui_group_size ();
             stage.add_child (ui_group);
 
             int width, height;
@@ -160,6 +163,9 @@ namespace GreeterCompositor {
 
             pointer_locator = new PointerLocator (this);
             ui_group.add_child (pointer_locator);
+
+            unowned var monitor_manager = display.get_context ().get_backend ().get_monitor_manager ();
+            monitor_manager.monitors_changed.connect (update_ui_group_size);
 
             /*keybindings*/
 
@@ -188,6 +194,8 @@ namespace GreeterCompositor {
 
             KeyBinding.set_custom_handler ("show-desktop", () => {});
 
+            zoom = new Zoom (this);
+
             /* orca (screenreader) doesn't listen to it's
                org.gnome.desktop.a11y.applications screen-reader-enabled key
                so we handle it ourselves
@@ -202,10 +210,33 @@ namespace GreeterCompositor {
             Idle.add (() => {
                 // let the session manager move to the next phase
                 display.get_context ().notify_ready ();
-                start_command.begin ({ "io.elementary.greeter" });
-                start_command.begin ({ "io.elementary.wingpanel", "-g" });
+                ShellClientsManager.init (this);
+
+                if (GLib.Environment.get_variable ("DESKTOP_SESSION") != "installer") {
+                    start_command.begin ({ "io.elementary.greeter" });
+                }
+
                 return GLib.Source.REMOVE;
             });
+        }
+
+        private void update_ui_group_size () {
+            unowned var display = get_display ();
+
+            int max_width = 0;
+            int max_height = 0;
+
+            var num_monitors = display.get_n_monitors ();
+            for (int i = 0; i < num_monitors; i++) {
+                var geom = display.get_monitor_geometry (i);
+                var total_width = geom.x + geom.width;
+                var total_height = geom.y + geom.height;
+
+                max_width = (max_width > total_width) ? max_width : total_width;
+                max_height = (max_height > total_height) ? max_height : total_height;
+            }
+
+            ui_group.set_size (max_width, max_height);
         }
 
         private async void start_command (string[] command) {

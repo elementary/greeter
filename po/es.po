@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-04 04:04+0000\n"
-"PO-Revision-Date: 2020-03-24 22:09+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"POT-Creation-Date: 2024-05-22 16:41+0000\n"
+"PO-Revision-Date: 2024-06-15 15:44+0000\n"
+"Last-Translator: Andrés Felipe Esguerra Restrepo <afesguerra@outlook.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/desktop/greeter/"
 "es/>\n"
 "Language: es\n"
@@ -17,59 +17,59 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 5.5.5\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:410
+#: compositor/WindowManager.vala:461
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Los cambios se revertirán automáticamente después de %i segundo."
+msgstr[1] "Los cambios se revertirán automáticamente después de %i segundos."
 
-#: compositor/WindowManager.vala:417
+#: compositor/WindowManager.vala:468
 msgid "Keep new display settings?"
-msgstr ""
+msgstr "¿Desea conservar la nueva configuración de pantalla?"
 
-#: compositor/WindowManager.vala:421
+#: compositor/WindowManager.vala:472
 msgid "Keep Settings"
-msgstr ""
+msgstr "Conservar configuración"
 
-#: compositor/WindowManager.vala:422
+#: compositor/WindowManager.vala:473
 msgid "Use Previous Settings"
-msgstr ""
-
-#: src/MainWindow.vala:65
-msgid "Log in as Guest"
-msgstr "Acceder como invitado"
+msgstr "Usar configuración previa"
 
 #: src/MainWindow.vala:67
+msgid "Log in as Guest"
+msgstr "Iniciar sesión como invitado"
+
+#: src/MainWindow.vala:69
 msgid "Manual Login…"
-msgstr "Acceso manual…"
+msgstr "Inicio de sesión manual…"
 
-#: src/MainWindow.vala:390
+#: src/MainWindow.vala:403
 msgid "Unable to Log In"
-msgstr "No se pudo acceder"
+msgstr "No se pudo iniciar sesión"
 
-#: src/MainWindow.vala:391
+#: src/MainWindow.vala:404
 msgid "Starting the session has failed."
 msgstr "El inicio de la sesión ha fallado."
 
-#: src/MainWindow.vala:468
+#: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
 msgstr "No se puede iniciar Configuración inicial"
 
-#: src/MainWindow.vala:473
+#: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
 "Configuración inicial crea su primera cuenta de usuario. Sin ella, no podrá "
-"acceder al sistema y quizá tenga que reinstalarlo."
+"acceder al sistema y quizá tenga que reinstalar el sistema operativo."
 
 #: src/Cards/ManualCard.vala:21
 msgid "Manual Login"
-msgstr "Acceso manual"
+msgstr "Inicio de sesión manual"
 
 #: src/Cards/ManualCard.vala:30
 msgid "Username"
@@ -81,7 +81,7 @@ msgstr "Pruebe un nombre de usuario"
 
 #: src/Cards/UserCard.vala:107 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
-msgstr "Acceder"
+msgstr "Iniciar sesión"
 
 #: src/Cards/UserCard.vala:119
 msgid "Account disabled"
@@ -89,19 +89,21 @@ msgstr "Cuenta desactivada"
 
 #: src/Cards/UserCard.vala:197
 msgid "Session cannot be changed while user is logged in"
-msgstr "No se puede cambiar de sesión mientras haya accedido el usuario"
+msgstr ""
+"No se puede cambiar de sesión mientras exista un usuario con una sesión "
+"activa"
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
-msgstr "Bloq Mayús y Bloq Núm activadas"
+msgstr "Bloq Mayús y Bloq Num están activadas"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
-msgstr "Bloq Mayús activada"
+msgstr "Bloq Mayús está activada"
 
 #: src/Widgets/CapsLockRevealer.vala:74
 msgid "Num Lock is on"
-msgstr "Bloq Núm activada"
+msgstr "Bloq Num está activada"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"

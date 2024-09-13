@@ -7,6 +7,7 @@ project(
 
 gnome = import('gnome')
 i18n = import('i18n')
+vala = meson.get_compiler('vala')
 
 conf_data = configuration_data()
 conf_data.set('CONF_DIR', join_paths(get_option('sysconfdir'), 'lightdm'))
@@ -47,6 +48,7 @@ compositor_resources = gnome.compile_resources(
     source_dir: 'data'
 )
 
+subdir('protocol')
 subdir('src')
 subdir('compositor')
 subdir('data')
@@ -55,3 +57,5 @@ vapigen = find_program('vapigen', required: false)
 if vapigen.found()
 	subdir('vapi')
 endif
+
+gnome.post_install(glib_compile_schemas: true)

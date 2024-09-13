@@ -84,6 +84,14 @@ compositor_files = files(
   'Background/BackgroundSource.vala',
   'Background/BlurEffect.vala',
   'Background/SystemBackground.vala',
+  'PantheonShell.vala',
+  'ShellClients/CenteredWindow.vala',
+  'ShellClients/ManagedClient.vala',
+  'ShellClients/NotificationsClient.vala',
+  'ShellClients/PanelClone.vala',
+  'ShellClients/PanelWindow.vala',
+  'ShellClients/ShellClientsManager.vala',
+  'Widgets/SafeWindowClone.vala',
   'WingpanelManager/WingpanelManager.vala',
   'WingpanelManager/DBusWingpanelManager.vala',
   'WingpanelManager/FocusManager.vala',
@@ -95,8 +103,11 @@ compositor_files = files(
   'main.vala',
   'MediaFeedback.vala',
   'PointerLocator.vala',
+  'SettingsDaemon.vala',
+  'SubprocessSupervisor.vala',
   'Utils.vala',
-  'WindowManager.vala'
+  'WindowManager.vala',
+  'Zoom.vala'
 )
 
 executable(
@@ -104,7 +115,7 @@ executable(
   compositor_files,
   compositor_resources,
   config_header,
-  dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, posix_dep, mutter_dep, gnome_desktop_dep],
+  dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, posix_dep, mutter_dep, gnome_desktop_dep, pantheon_desktop_shell_dep],
   vala_args: vala_flags,
   c_args: compositor_c_args,
   build_rpath: mutter_typelib_dir,

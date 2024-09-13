@@ -3,60 +3,60 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Akan (Desktop)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-04 04:04+0000\n"
-"PO-Revision-Date: 2019-12-15 23:07+0000\n"
-"Last-Translator: Daniel Foré <daniel@elementary.io>\n"
-"Language-Team: Akan <https://l10n.elementary.io/projects/desktop/greeter/ak/"
-">\n"
+"POT-Creation-Date: 2024-05-22 16:41+0000\n"
+"PO-Revision-Date: 2024-08-07 17:16+0000\n"
+"Last-Translator: anonymous <noreply@weblate.org>\n"
+"Language-Team: Akan <https://l10n.elementary.io/projects/desktop/greeter/ak/>"
+"\n"
 "Language: ak\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 5.6.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:410
+#: compositor/WindowManager.vala:461
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: compositor/WindowManager.vala:417
+#: compositor/WindowManager.vala:468
 msgid "Keep new display settings?"
 msgstr ""
 
-#: compositor/WindowManager.vala:421
+#: compositor/WindowManager.vala:472
 msgid "Keep Settings"
 msgstr ""
 
-#: compositor/WindowManager.vala:422
+#: compositor/WindowManager.vala:473
 msgid "Use Previous Settings"
 msgstr ""
 
-#: src/MainWindow.vala:65
+#: src/MainWindow.vala:67
 msgid "Log in as Guest"
 msgstr ""
 
-#: src/MainWindow.vala:67
+#: src/MainWindow.vala:69
 #, fuzzy
 msgid "Manual Login…"
 msgstr "Wo Ara Kɔ Mu"
 
-#: src/MainWindow.vala:390
+#: src/MainWindow.vala:403
 msgid "Unable to Log In"
 msgstr ""
 
-#: src/MainWindow.vala:391
+#: src/MainWindow.vala:404
 msgid "Starting the session has failed."
 msgstr ""
 
-#: src/MainWindow.vala:468
+#: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
 msgstr ""
 
-#: src/MainWindow.vala:473
+#: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -100,7 +100,7 @@ msgstr ""
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #~ msgid "Does the display look OK?"
 #~ msgstr "Wo hu biribiara yie?"
