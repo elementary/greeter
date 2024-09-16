@@ -12,7 +12,7 @@ namespace GreeterCompositor {
         public Wl.Display wayland_display;
 
         [CCode (cname = "meta_context_get_wayland_compositor")]
-        public extern static unowned Gala.FakeMetaWaylandCompositor from_context (Meta.Context context);
+        public extern static unowned GreeterCompositor.FakeMetaWaylandCompositor from_context (Meta.Context context);
     }
 #endif
     public static inline unowned Wl.Display? get_display_from_context (Meta.Context context) {
@@ -24,7 +24,7 @@ namespace GreeterCompositor {
 
         return (Wl.Display) compositor.get_wayland_display ();
 #else
-        unowned FakeMetaWaylandCompositor compositor = Gala.FakeMetaWaylandCompositor.from_context (context);
+        unowned FakeMetaWaylandCompositor compositor = GreeterCompositor.FakeMetaWaylandCompositor.from_context (context);
         if (compositor == null) {
             return null;
         }
