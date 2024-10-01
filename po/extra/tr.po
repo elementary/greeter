@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-13 20:19+0000\n"
-"PO-Revision-Date: 2022-05-18 22:50+0000\n"
-"Last-Translator: Özgür Baskin <queeup@zoho.com>\n"
-"Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/greeter-"
-"extra/tr/>\n"
+"PO-Revision-Date: 2024-09-21 10:16+0000\n"
+"Last-Translator: Sinan Decron <sinanveyasinan@gmail.com>\n"
+"Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/"
+"greeter-extra/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
@@ -37,11 +37,11 @@ msgstr "Yeni Özellikler:"
 
 #: data/greeter.metainfo.xml.in:44
 msgid "Add blurred wallpaper as background"
-msgstr ""
+msgstr "Arkaplan olarak bulanık duvar kağıdı ekle"
 
 #: data/greeter.metainfo.xml.in:45
 msgid "Make Date and Time larger and bolder with softer shadows"
-msgstr ""
+msgstr "Tarih ve Saati daha yumuşak gölgelerle daha büyük ve daha kalın yap"
 
 #: data/greeter.metainfo.xml.in:47 data/greeter.metainfo.xml.in:65
 #: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:102
@@ -57,15 +57,15 @@ msgstr "Çeviriler güncellendi"
 
 #: data/greeter.metainfo.xml.in:67
 msgid "Prevent a potential issue with dialogs that use portals"
-msgstr ""
+msgstr "Portalları kullanan iletişim kutularında olası bir sorunu önle"
 
 #: data/greeter.metainfo.xml.in:68
 msgid "Fix potential issues with incorrect keyboard layout being set"
-msgstr ""
+msgstr "Yanlış klavye düzeninin ayarlanmasıyla ilgili olası sorunları düzelt"
 
 #: data/greeter.metainfo.xml.in:100
 msgid "Provide panel background color interface"
-msgstr ""
+msgstr "Panel arka plan rengi arayüzü sağla"
 
 #: data/greeter.metainfo.xml.in:111
 msgid "Improvements:"
@@ -74,6 +74,8 @@ msgstr "İyileştirmeler:"
 #: data/greeter.metainfo.xml.in:113
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr ""
+"Greeter'ın önyükleme sırasında düzgün yüklenmemesine neden olan rastgele bir "
+"sorunu düzelt"
 
 #~ msgid "Fix an issue with media keys"
 #~ msgstr "Ortam anahtarlarıyla ilgili bir sorun giderildi"
