@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-13 20:19+0000\n"
-"PO-Revision-Date: 2024-08-20 11:26+0000\n"
+"PO-Revision-Date: 2024-10-05 19:16+0000\n"
 "Last-Translator: JohnDumpling <john_dumpling@protonmail.com>\n"
 "Language-Team: Slovak <https://l10n.elementary.io/projects/desktop/greeter/"
 "sk/>\n"
@@ -43,42 +43,43 @@ msgstr "Použiť predchádzajúce nastavenia"
 
 #: src/MainWindow.vala:67
 msgid "Log in as Guest"
-msgstr ""
+msgstr "Prihlásiť sa ako hosť"
 
 #: src/MainWindow.vala:69
-#, fuzzy
 msgid "Manual Login…"
-msgstr "Manuálne prihlásenie"
+msgstr "Ručné prihlásenie…"
 
 #: src/MainWindow.vala:403
 msgid "Unable to Log In"
-msgstr ""
+msgstr "Nedarí sa prihlásiť"
 
 #: src/MainWindow.vala:404
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Spustenie relácie sa nepodarilo."
 
 #: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Nedarí sa spustiť Prvotné nastavenie"
 
 #: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Prvotné nastavenie vytvorí váš prvý používateľský účet. Bez neho sa nebudete "
+"môcť prihlásiť a možno bude nutné preinštalovať OS."
 
 #: src/Cards/ManualCard.vala:21
 msgid "Manual Login"
-msgstr "Manuálne prihlásenie"
+msgstr "Ručné prihlásenie"
 
 #: src/Cards/ManualCard.vala:30
 msgid "Username"
-msgstr ""
+msgstr "Používateľské meno"
 
 #: src/Cards/ManualCard.vala:33
 msgid "Try username"
-msgstr ""
+msgstr "Vyskúšať používateľské meno"
 
 #: src/Cards/UserCard.vala:107 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
@@ -90,7 +91,7 @@ msgstr ""
 
 #: src/Cards/UserCard.vala:197
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "Relácia nemôže byť zmenená, pokiaľ je používateľ prihlásený"
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
