@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 16:41+0000\n"
+"POT-Creation-Date: 2024-09-13 20:19+0000\n"
 "PO-Revision-Date: 2024-05-27 15:13+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/desktop/"
@@ -26,6 +26,10 @@ msgstr "Bejelentkezési és lezárási képernyő"
 #: data/greeter.metainfo.xml.in:10
 msgid "Unlock or log in to your device"
 msgstr "Feloldás vagy bejelentkezés az eszlözbe"
+
+#: data/greeter.metainfo.xml.in:34
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
 
 #: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:98
 msgid "New Features:"
@@ -80,9 +84,6 @@ msgstr ""
 
 #~ msgid "Use selected accent color for logged in checkmark"
 #~ msgstr "A kiválasztott témaszín használata a bejelentkezve pipához"
-
-#~ msgid "elementary, Inc."
-#~ msgstr "elementary, Inc."
 
 #~ msgid "Ensure that manual login is available when users are hidden"
 #~ msgstr ""

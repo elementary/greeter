@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 16:41+0000\n"
-"PO-Revision-Date: 2024-08-17 17:19+0000\n"
+"POT-Creation-Date: 2024-09-13 20:19+0000\n"
+"PO-Revision-Date: 2024-09-22 01:32+0000\n"
 "Last-Translator: DutchVipperloid <svenroelof@e.email>\n"
 "Language-Team: Dutch <https://l10n.elementary.io/projects/desktop/"
 "greeter-extra/nl/>\n"
@@ -27,17 +27,21 @@ msgstr "Inloggen en scherm vergrendelen"
 msgid "Unlock or log in to your device"
 msgstr "Ontgrendel uw apparaat of log in"
 
+#: data/greeter.metainfo.xml.in:34
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
 #: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:98
 msgid "New Features:"
 msgstr "Nieuwe functies:"
 
 #: data/greeter.metainfo.xml.in:44
 msgid "Add blurred wallpaper as background"
-msgstr ""
+msgstr "Voeg vervaagde afbeelding toe als achtergrond"
 
 #: data/greeter.metainfo.xml.in:45
 msgid "Make Date and Time larger and bolder with softer shadows"
-msgstr ""
+msgstr "Maak datum en tijd groter en meer uitgesproken met zachtere schaduwen"
 
 #: data/greeter.metainfo.xml.in:47 data/greeter.metainfo.xml.in:65
 #: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:102
@@ -53,11 +57,13 @@ msgstr "Bijgewerkte vertalingen"
 
 #: data/greeter.metainfo.xml.in:67
 msgid "Prevent a potential issue with dialogs that use portals"
-msgstr ""
+msgstr "Voorkom een potentieel probleem met dialogen die portalen gebruiken"
 
 #: data/greeter.metainfo.xml.in:68
 msgid "Fix potential issues with incorrect keyboard layout being set"
 msgstr ""
+"Voorkom potentiële problemen wanneer een incorrecte toetsenbordindeling "
+"wordt ingesteld"
 
 #: data/greeter.metainfo.xml.in:100
 msgid "Provide panel background color interface"
@@ -80,9 +86,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Gebruik de geselecteerde accentkleur voor het vinkje dat aangeeft dat de "
 #~ "gebruiker is ingelogd"
-
-#~ msgid "elementary, Inc."
-#~ msgstr "elementary, Inc."
 
 #~ msgid "Add multitouch finger tracking"
 #~ msgstr "Voeg multitouch vinger tracking toe"

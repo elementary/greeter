@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 16:41+0000\n"
+"POT-Creation-Date: 2024-09-13 20:19+0000\n"
 "PO-Revision-Date: 2023-02-17 21:25+0000\n"
 "Last-Translator: Mejans <farga@mejans.fr>\n"
 "Language-Team: Occitan <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 4.14.2\n"
 
-#: compositor/WindowManager.vala:461
+#: compositor/WindowManager.vala:492
 #, fuzzy, c-format
 #| msgid "Changes will automatically revert after 30 seconds."
 msgid "Changes will automatically revert after %i second."
@@ -21,15 +21,15 @@ msgid_plural "Changes will automatically revert after %i seconds."
 msgstr[0] "Las modificacions seràn automaticament anullada aprèp 30 segondas."
 msgstr[1] "Las modificacions seràn automaticament anullada aprèp 30 segondas."
 
-#: compositor/WindowManager.vala:468
+#: compositor/WindowManager.vala:499
 msgid "Keep new display settings?"
 msgstr "Servar los paramètres novèls d’afichatge ?"
 
-#: compositor/WindowManager.vala:472
+#: compositor/WindowManager.vala:503
 msgid "Keep Settings"
 msgstr "Servar los paramètres"
 
-#: compositor/WindowManager.vala:473
+#: compositor/WindowManager.vala:504
 msgid "Use Previous Settings"
 msgstr "Utilizar los paramètres precedents"
 

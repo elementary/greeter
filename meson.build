@@ -1,12 +1,13 @@
 project(
     'io.elementary.greeter',
     'vala', 'c',
-    version: '7.0.0',
+    version: '8.0.0',
     meson_version: '>= 0.58.0'
 )
 
 gnome = import('gnome')
 i18n = import('i18n')
+vala = meson.get_compiler('vala')
 
 conf_data = configuration_data()
 conf_data.set('CONF_DIR', join_paths(get_option('sysconfdir'), 'lightdm'))
@@ -47,6 +48,7 @@ compositor_resources = gnome.compile_resources(
     source_dir: 'data'
 )
 
+subdir('protocol')
 subdir('src')
 subdir('compositor')
 subdir('data')
