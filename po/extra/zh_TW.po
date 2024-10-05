@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 16:41+0000\n"
-"PO-Revision-Date: 2024-09-06 10:13+0000\n"
+"POT-Creation-Date: 2024-09-13 20:19+0000\n"
+"PO-Revision-Date: 2024-09-19 10:09+0000\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Chinese (Traditional) <https://l10n.elementary.io/projects/"
 "desktop/greeter-extra/zh_Hant/>\n"
@@ -26,6 +26,10 @@ msgstr "登入與鎖定畫面"
 #: data/greeter.metainfo.xml.in:10
 msgid "Unlock or log in to your device"
 msgstr "解除鎖定或登入您的裝置"
+
+#: data/greeter.metainfo.xml.in:34
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
 
 #: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:98
 msgid "New Features:"
@@ -53,7 +57,7 @@ msgstr "更新翻譯"
 
 #: data/greeter.metainfo.xml.in:67
 msgid "Prevent a potential issue with dialogs that use portals"
-msgstr "防止一個使用 portal 的對話框可能會遇到的問題"
+msgstr "防止使用桌面入口的對話框可能會遇到的某個問題"
 
 #: data/greeter.metainfo.xml.in:68
 msgid "Fix potential issues with incorrect keyboard layout being set"
@@ -69,10 +73,7 @@ msgstr "改善項目："
 
 #: data/greeter.metainfo.xml.in:113
 msgid "Fix a random issue where Greeter does not load correctly on boot"
-msgstr "修正一個 greeter 在開機時會隨機無法正確載入的問題"
-
-#~ msgid "elementary, Inc."
-#~ msgstr "elementary, Inc."
+msgstr "修正 greeter 在開機時會隨機無法正確載入的問題"
 
 #~ msgid "Greeter"
 #~ msgstr "歡迎程式"

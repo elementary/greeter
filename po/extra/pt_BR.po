@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 16:41+0000\n"
+"POT-Creation-Date: 2024-09-13 20:19+0000\n"
 "PO-Revision-Date: 2024-08-16 01:16+0000\n"
 "Last-Translator: José Rafael <jrafaeldesantana@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.elementary.io/projects/"
@@ -27,6 +27,10 @@ msgstr "Login e Tela de Bloqueio"
 msgid "Unlock or log in to your device"
 msgstr "Desbloquear ou efetuar login em seu dispositivo"
 
+#: data/greeter.metainfo.xml.in:34
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
 #: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:98
 msgid "New Features:"
 msgstr "Novos recursos:"
@@ -37,7 +41,8 @@ msgstr "Adicionado papel de parede com o efeito blur como background"
 
 #: data/greeter.metainfo.xml.in:45
 msgid "Make Date and Time larger and bolder with softer shadows"
-msgstr "Define que a data e hora sejam um texto largo e com sombras mais suaves"
+msgstr ""
+"Define que a data e hora sejam um texto largo e com sombras mais suaves"
 
 #: data/greeter.metainfo.xml.in:47 data/greeter.metainfo.xml.in:65
 #: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:102
@@ -79,9 +84,6 @@ msgstr ""
 
 #~ msgid "Use selected accent color for logged in checkmark"
 #~ msgstr "Usa a cor de destaque selecionada para a marca de seleção do login"
-
-#~ msgid "elementary, Inc."
-#~ msgstr "elementary, Inc."
 
 #~ msgid "Fix an issue with media keys"
 #~ msgstr "Corrige um problema com teclas de mídia"
