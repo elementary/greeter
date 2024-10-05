@@ -16,7 +16,7 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/elementary/greeter/7.0.0/data/screenshot.png</image>
+      <image>https://raw.githubusercontent.com/elementary/greeter/8.0.0/data/screenshot.png</image>
     </screenshot>
   </screenshots>
 
@@ -37,7 +37,7 @@
   <update_contact>contact_at_elementary.io</update_contact>
 
   <releases>
-    <release version="8.0.0" date="2024-05-21" urgency="medium">
+    <release version="8.0.0" date="2024-09-16" urgency="medium">
       <description>
         <p>New Features:</p>
         <ul>
