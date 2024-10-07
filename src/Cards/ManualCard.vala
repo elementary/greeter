@@ -71,7 +71,6 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         unowned var main_grid_style_context = main_box.get_style_context ();
         main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
         main_grid_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
-        main_grid_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         child = main_box;
 

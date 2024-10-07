@@ -1,9 +1,0 @@
-.background {
-    opacity: 0;
-    transition: opacity 1s ease;
-}
-
-.background.initialized {
-    opacity: 1;
-}
-
