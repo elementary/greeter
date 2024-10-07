@@ -16,17 +16,17 @@ public class Greeter.DateTimeWidget : Gtk.Box {
         var css_provider = new Gtk.CssProvider ();
         css_provider.load_from_resource ("/io/elementary/greeter/DateTime.css");
 
-        Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         time_label = new Gtk.Label (null);
-        time_label.get_style_context ().add_class ("time");
+        time_label.add_css_class ("time");
 
         date_label = new Gtk.Label (null);
-        date_label.get_style_context ().add_class ("date");
+        date_label.add_css_class ("date");
 
         orientation = VERTICAL;
-        add (time_label);
-        add (date_label);
+        append (time_label);
+        append (date_label);
 
         update_labels ();
 

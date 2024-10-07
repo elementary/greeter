@@ -12,7 +12,7 @@ public class Greeter.BackgroundImage : Gtk.Picture {
     }
 
     public BackgroundImage.from_color (string color) {
-        full_pixbuf = new Gdk.Pixbuf (Gdk.Colorspace.RGB, false, 8, 1, 1);
+        var pixbuf = new Gdk.Pixbuf (Gdk.Colorspace.RGB, false, 8, 1, 1);
 
         Gdk.RGBA rgba_color = {};
         rgba_color.parse (color);
@@ -26,7 +26,7 @@ public class Greeter.BackgroundImage : Gtk.Picture {
         f <<= 8;
         f += 255;
 
-        full_pixbuf.fill (f);
+        pixbuf.fill (f);
 
         paintable = Gdk.Texture.for_pixbuf (pixbuf);
     }

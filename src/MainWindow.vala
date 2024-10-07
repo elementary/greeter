@@ -54,7 +54,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     construct {
-        app_paintable = true;
         decorated = false;
         get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
@@ -88,7 +87,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         var manual_card = new Greeter.ManualCard ();
 
-        carousel = new Hdy.Carousel () {
+        carousel = new Adw.Carousel () {
             allow_long_swipes = true,
             vexpand = true
         };
@@ -96,8 +95,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         var manual_login_stack = new Gtk.Stack () {
             transition_type = Gtk.StackTransitionType.CROSSFADE
         };
-        manual_login_stack.add (carousel);
-        manual_login_stack.add (manual_card);
+        manual_login_stack.add_child (carousel);
+        manual_login_stack.add_child (manual_card);
 
         var main_box = new Gtk.Box (VERTICAL, 24) {
             margin_top = 24,
@@ -275,7 +274,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private void maximize_and_focus () {
         present ();
         maximize_window ();
-        get_style_context ().add_class ("initialized");
+        add_css_class ("initialized");
 
         if (current_card != null) {
             current_card.grab_focus ();
@@ -298,7 +297,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         var rect = monitor.get_geometry ();
         resize (rect.width, rect.height);
-        move (rect.x, rect.y);
     }
 
     private void create_session_selection_action () {

@@ -22,7 +22,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             hexpand = true,
             margin_bottom = 16
         };
-        label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+        label.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
 
         username_entry = new Gtk.Entry () {
             hexpand = true,
@@ -41,8 +41,8 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         var caps_lock_revealer = new Greeter.CapsLockRevealer ();
 
         var password_box = new Gtk.Box (VERTICAL, 6);
-        password_box.add (password_entry);
-        password_box.add (caps_lock_revealer);
+        password_box.append (password_entry);
+        password_box.append (caps_lock_revealer);
 
         var session_button = new Greeter.SessionButton ();
 
@@ -66,12 +66,11 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             margin_start = 12,
             margin_end = 12
         };
-        main_box.add (form_grid);
+        main_box.append (form_grid);
 
-        unowned var main_grid_style_context = main_box.get_style_context ();
-        main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
-        main_grid_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
-        main_grid_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        main_box.add_css_class (Granite.STYLE_CLASS_CARD);
+        main_box.add_css_class (Granite.STYLE_CLASS_ROUNDED);
+        main_box.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         child = main_box;
 
@@ -120,19 +119,14 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     public override void wrong_credentials () {
         password_entry.text = "";
 
-        unowned var username_entry_style_context = username_entry.get_style_context ();
-        username_entry_style_context.add_class (Granite.STYLE_CLASS_ERROR);
-
-        unowned var password_entry_style_context = password_entry.get_style_context ();
-        password_entry_style_context.add_class (Granite.STYLE_CLASS_ERROR);
-
-        unowned var grid_style_context = main_box.get_style_context ();
-        grid_style_context.add_class ("shake");
+        username_entry.add_css_class (Granite.STYLE_CLASS_ERROR);
+        password_entry.add_css_class (Granite.STYLE_CLASS_ERROR);
+        main_box.add_css_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
-            grid_style_context.remove_class ("shake");
-            username_entry_style_context.remove_class (Granite.STYLE_CLASS_ERROR);
-            password_entry_style_context.remove_class (Granite.STYLE_CLASS_ERROR);
+            main_box.remove_css_class ("shake");
+            username_entry.remove_css_class (Granite.STYLE_CLASS_ERROR);
+            password_entry.remove_css_class (Granite.STYLE_CLASS_ERROR);
 
             connecting = false;
             focus_username_entry ();
@@ -149,15 +143,12 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         username_entry.secondary_icon_name = "";
         username_entry.text = "";
 
-        unowned var entry_style_context = username_entry.get_style_context ();
-        entry_style_context.add_class (Granite.STYLE_CLASS_ERROR);
-
-        unowned var grid_style_context = main_box.get_style_context ();
-        grid_style_context.add_class ("shake");
+        username_entry.add_css_class (Granite.STYLE_CLASS_ERROR);
+        main_box.add_css_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
-            grid_style_context.remove_class ("shake");
-            entry_style_context.remove_class (Granite.STYLE_CLASS_ERROR);
+            main_box.remove_css_class ("shake");
+            username_entry.remove_css_class (Granite.STYLE_CLASS_ERROR);
 
             return Source.REMOVE;
         });

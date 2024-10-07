@@ -27,26 +27,26 @@ public class Greeter.CapsLockRevealer : Gtk.Revealer {
     construct {
         transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
 
-        caps_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-capslock-symbolic", Gtk.IconSize.MENU);
+        caps_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-capslock-symbolic");
         caps_lock_image.use_fallback = true;
         caps_lock_image.visible = false;
 
-        num_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-numlock-symbolic", Gtk.IconSize.MENU);
+        num_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-numlock-symbolic");
         num_lock_image.use_fallback = true;
         num_lock_image.visible = false;
 
         lock_label = new Gtk.Label (null);
         lock_label.use_markup = true;
 
-        var caps_lock_grid = new Gtk.Grid ();
-        caps_lock_grid.column_spacing = 3;
-        caps_lock_grid.halign = Gtk.Align.CENTER;
-        caps_lock_grid.get_style_context ().add_class (Granite.STYLE_CLASS_DIM_LABEL);
-        caps_lock_grid.add (caps_lock_image);
-        caps_lock_grid.add (num_lock_image);
-        caps_lock_grid.add (lock_label);
+        var caps_lock_box = new Gtk.Box (HORIZONTAL, 3) {
+            halign = CENTER
+        };
+        caps_lock_box.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
+        caps_lock_box.append (caps_lock_image);
+        caps_lock_box.append (num_lock_image);
+        caps_lock_box.append (lock_label);
 
-        add (caps_lock_grid);
+        child = caps_lock_box;
 
         device = Gdk.Display.get_default ().get_default_seat ().get_devices (KEYBOARD)[0];
         device.changed.connect (update_visibility);
@@ -61,8 +61,6 @@ public class Greeter.CapsLockRevealer : Gtk.Revealer {
 
         reveal_child = caps_lock || num_lock;
 
-        caps_lock_image.no_show_all = !caps_lock;
-        num_lock_image.no_show_all = !num_lock;
         caps_lock_image.visible = caps_lock;
         num_lock_image.visible = num_lock;
 

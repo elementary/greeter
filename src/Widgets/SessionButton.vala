@@ -23,12 +23,10 @@ public class Greeter.SessionButton : Gtk.MenuButton {
     construct {
         var menu = new GLib.Menu ();
 
-        var cog_image = new Gtk.Image.from_icon_name ("open-menu-symbolic", Gtk.IconSize.BUTTON);
-
         direction = DOWN;
+        icon_name = "open-menu-symbolic";
         menu_model = menu;
-        get_style_context ().add_class (Granite.STYLE_CLASS_FLAT);
-        add (cog_image);
+        add_css_class (Granite.STYLE_CLASS_FLAT);
 
         // The session action is on the MainWindow toplevel, wait until it is accessible.
         hierarchy_changed.connect ((previous_toplevel) => {
