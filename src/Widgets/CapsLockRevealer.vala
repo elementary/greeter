@@ -41,7 +41,7 @@ public class Greeter.CapsLockRevealer : Gtk.Revealer {
         var caps_lock_grid = new Gtk.Grid ();
         caps_lock_grid.column_spacing = 3;
         caps_lock_grid.halign = Gtk.Align.CENTER;
-        caps_lock_grid.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        caps_lock_grid.get_style_context ().add_class (Granite.STYLE_CLASS_DIM_LABEL);
         caps_lock_grid.add (caps_lock_image);
         caps_lock_grid.add (num_lock_image);
         caps_lock_grid.add (lock_label);

@@ -121,18 +121,18 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         password_entry.text = "";
 
         unowned var username_entry_style_context = username_entry.get_style_context ();
-        username_entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+        username_entry_style_context.add_class (Granite.STYLE_CLASS_ERROR);
 
         unowned var password_entry_style_context = password_entry.get_style_context ();
-        password_entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+        password_entry_style_context.add_class (Granite.STYLE_CLASS_ERROR);
 
         unowned var grid_style_context = main_box.get_style_context ();
         grid_style_context.add_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
             grid_style_context.remove_class ("shake");
-            username_entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
-            password_entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            username_entry_style_context.remove_class (Granite.STYLE_CLASS_ERROR);
+            password_entry_style_context.remove_class (Granite.STYLE_CLASS_ERROR);
 
             connecting = false;
             focus_username_entry ();
@@ -150,14 +150,14 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         username_entry.text = "";
 
         unowned var entry_style_context = username_entry.get_style_context ();
-        entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+        entry_style_context.add_class (Granite.STYLE_CLASS_ERROR);
 
         unowned var grid_style_context = main_box.get_style_context ();
         grid_style_context.add_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
             grid_style_context.remove_class ("shake");
-            entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            entry_style_context.remove_class (Granite.STYLE_CLASS_ERROR);
 
             return Source.REMOVE;
         });

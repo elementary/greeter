@@ -27,7 +27,7 @@ public class Greeter.SessionButton : Gtk.MenuButton {
 
         direction = DOWN;
         menu_model = menu;
-        get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+        get_style_context ().add_class (Granite.STYLE_CLASS_FLAT);
         add (cog_image);
 
         // The session action is on the MainWindow toplevel, wait until it is accessible.

@@ -105,7 +105,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         size_group.add_widget (session_button);
 
         var login_button = new Gtk.Button.with_label (_("Log In"));
-        login_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+        login_button.get_style_context ().add_class (Granite.STYLE_CLASS_SUGGESTED_ACTION);
 
         bind_property (
             "connecting",
@@ -122,7 +122,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             halign = Gtk.Align.CENTER,
             margin_top = 3
         };
-        disabled_box.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        disabled_box.get_style_context ().add_class (Granite.STYLE_CLASS_DIM_LABEL);
         disabled_box.add (disabled_icon);
         disabled_box.add (disabled_message);
 
@@ -512,13 +512,13 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     public override void wrong_credentials () {
         unowned var entry_style_context = password_entry.get_style_context ();
-        entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+        entry_style_context.add_class (Granite.STYLE_CLASS_ERROR);
 
         main_box_style_context.add_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
             main_box_style_context.remove_class ("shake");
-            entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            entry_style_context.remove_class (Granite.STYLE_CLASS_ERROR);
 
             connecting = false;
             password_entry.grab_focus ();
@@ -530,7 +530,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         private static Gtk.CssProvider check_provider;
 
         class construct {
-            set_css_name (Gtk.STYLE_CLASS_CHECK);
+            set_css_name (Granite.STYLE_CLASS_CHECK);
         }
 
         static construct {
