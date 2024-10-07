@@ -55,7 +55,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         unowned var username_label_context = username_label.get_style_context ();
         username_label_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
-        username_label_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         password_entry = new Greeter.PasswordEntry ();
         password_entry_context = password_entry.get_style_context ();
@@ -164,7 +163,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         main_box_style_context = main_box.get_style_context ();
         main_box_style_context.add_class (Granite.STYLE_CLASS_CARD);
         main_box_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
-        main_box_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         update_collapsed_class ();
 
@@ -528,19 +526,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private class SelectionCheck : Gtk.Spinner {
-        private static Gtk.CssProvider check_provider;
-
         class construct {
             set_css_name (Gtk.STYLE_CLASS_CHECK);
-        }
-
-        static construct {
-            check_provider = new Gtk.CssProvider ();
-            check_provider.load_from_resource ("/io/elementary/greeter/Check.css");
-        }
-
-        construct {
-            get_style_context ().add_provider (check_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
         }
     }
 }
