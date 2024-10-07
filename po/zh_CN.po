@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 17:04+0000\n"
-"PO-Revision-Date: 2022-10-27 18:57+0000\n"
-"Last-Translator: colindemian <colindemian@outlook.com>\n"
+"POT-Creation-Date: 2024-09-13 20:19+0000\n"
+"PO-Revision-Date: 2024-08-07 17:16+0000\n"
+"Last-Translator: anonymous <noreply@weblate.org>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "desktop/greeter/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -17,41 +17,40 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 5.6.2\n"
 "X-Launchpad-Export-Date: 2017-03-14 06:58+0000\n"
 
-#: compositor/WindowManager.vala:324
-#, fuzzy, c-format
-#| msgid "Changes will automatically revert after 30 seconds."
+#: compositor/WindowManager.vala:492
+#, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
-msgstr[0] "变更将在30秒后撤销。"
+msgstr[0] "变更将在 %i 秒后撤销。"
 
-#: compositor/WindowManager.vala:331
+#: compositor/WindowManager.vala:499
 msgid "Keep new display settings?"
 msgstr "要保留新的显示设置吗？"
 
-#: compositor/WindowManager.vala:335
+#: compositor/WindowManager.vala:503
 msgid "Keep Settings"
 msgstr "保留设置"
 
-#: compositor/WindowManager.vala:336
+#: compositor/WindowManager.vala:504
 msgid "Use Previous Settings"
 msgstr "恢复原有设置"
 
-#: src/MainWindow.vala:63
+#: src/MainWindow.vala:67
 msgid "Log in as Guest"
 msgstr "以访客身份登入"
 
-#: src/MainWindow.vala:65
+#: src/MainWindow.vala:69
 msgid "Manual Login…"
 msgstr "手动登录…"
 
-#: src/MainWindow.vala:409
+#: src/MainWindow.vala:403
 msgid "Unable to Log In"
 msgstr "无法登录"
 
-#: src/MainWindow.vala:410
+#: src/MainWindow.vala:404
 msgid "Starting the session has failed."
 msgstr "会话启动失败。"
 
@@ -67,27 +66,27 @@ msgstr ""
 "初始设置将会创建您的第一个账户，若缺少初始账户，您将无法登录并且可能需要重新"
 "安装操作系统。"
 
-#: src/Cards/ManualCard.vala:35
+#: src/Cards/ManualCard.vala:21
 msgid "Manual Login"
 msgstr "手动登录"
 
-#: src/Cards/ManualCard.vala:44
+#: src/Cards/ManualCard.vala:30
 msgid "Username"
 msgstr "用户名"
 
-#: src/Cards/ManualCard.vala:47
+#: src/Cards/ManualCard.vala:33
 msgid "Try username"
 msgstr "试试 username"
 
-#: src/Cards/UserCard.vala:112 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:107 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "登录"
 
-#: src/Cards/UserCard.vala:124
+#: src/Cards/UserCard.vala:119
 msgid "Account disabled"
 msgstr "账户已禁用"
 
-#: src/Cards/UserCard.vala:229
+#: src/Cards/UserCard.vala:197
 msgid "Session cannot be changed while user is logged in"
 msgstr "用户处于登入状态时无法更改会话"
 

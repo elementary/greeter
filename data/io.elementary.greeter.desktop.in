@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Pantheon Greeter
+Comment=Pantheon Greeter
+Exec=@PROJECT_NAME@-compositor
+Type=Application

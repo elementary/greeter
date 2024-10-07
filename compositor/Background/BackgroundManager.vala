@@ -29,7 +29,7 @@ public class GreeterCompositor.BackgroundManager : Meta.BackgroundGroup {
 
     construct {
         background_source = BackgroundCache.get_default ().get_background_source (wm.get_display ());
-        background_actor = create_background_actor ();
+        update_background_actor (false);
 
         destroy.connect (on_destroy);
     }

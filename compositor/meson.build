@@ -57,6 +57,17 @@ if mutter45_dep.found()
 	vala_flags = ['--define', 'HAS_MUTTER43', '--define', 'HAS_MUTTER44', '--define', 'HAS_MUTTER45']
 endif
 
+mutter46_dep = dependency('libmutter-14', version: ['>= 46', '< 47'], required: false)
+if mutter46_dep.found()
+	libmutter_dep = dependency('libmutter-14', version: '>= 46')
+	mutter_dep = [
+		libmutter_dep,
+		dependency('mutter-mtk-14'), dependency('mutter-cogl-14'),
+		dependency('mutter-cogl-pango-14'), dependency('mutter-clutter-14')
+	]
+	vala_flags = ['--define', 'HAS_MUTTER43', '--define', 'HAS_MUTTER44', '--define', 'HAS_MUTTER45', '--define', 'HAS_MUTTER46']
+endif
+
 if mutter_dep.length() == 0
 	error ('No supported mutter library found!')
 endif
@@ -73,6 +84,14 @@ compositor_files = files(
   'Background/BackgroundSource.vala',
   'Background/BlurEffect.vala',
   'Background/SystemBackground.vala',
+  'PantheonShell.vala',
+  'ShellClients/CenteredWindow.vala',
+  'ShellClients/ManagedClient.vala',
+  'ShellClients/NotificationsClient.vala',
+  'ShellClients/PanelClone.vala',
+  'ShellClients/PanelWindow.vala',
+  'ShellClients/ShellClientsManager.vala',
+  'Widgets/SafeWindowClone.vala',
   'WingpanelManager/WingpanelManager.vala',
   'WingpanelManager/DBusWingpanelManager.vala',
   'WingpanelManager/FocusManager.vala',
@@ -82,11 +101,13 @@ compositor_files = files(
   'Dialogs.vala',
   'KeyboardManager.vala',
   'main.vala',
-  'MaskCorners.vala',
   'MediaFeedback.vala',
   'PointerLocator.vala',
+  'SettingsDaemon.vala',
+  'SubprocessSupervisor.vala',
   'Utils.vala',
-  'WindowManager.vala'
+  'WindowManager.vala',
+  'Zoom.vala'
 )
 
 executable(
@@ -94,7 +115,7 @@ executable(
   compositor_files,
   compositor_resources,
   config_header,
-  dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, posix_dep, mutter_dep, gnome_desktop_dep],
+  dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, posix_dep, mutter_dep, gnome_desktop_dep, pantheon_desktop_shell_dep],
   vala_args: vala_flags,
   c_args: compositor_c_args,
   build_rpath: mutter_typelib_dir,

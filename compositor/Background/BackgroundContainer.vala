@@ -18,12 +18,17 @@ namespace GreeterCompositor {
             unowned var monitor_manager = wm.get_display ().get_context ().get_backend ().get_monitor_manager ();
             monitor_manager.monitors_changed.connect (update);
 
+            set_black_background (true);
             update ();
         }
 
         ~BackgroundContainer () {
             unowned var monitor_manager = wm.get_display ().get_context ().get_backend ().get_monitor_manager ();
             monitor_manager.monitors_changed.disconnect (update);
+        }
+
+        public void set_black_background (bool black) {
+            set_background_color (black ? Clutter.Color.from_string ("Black") : null);
         }
 
         private void update () {
