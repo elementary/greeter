@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 elementary, Inc. (https://elementary.io)
+ * Copyright 2018-2024 elementary, Inc. (https://elementary.io)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -19,18 +19,27 @@
  * Authors: Corentin Noël <corentin@elementary.io>
  */
 
-public int main (string[] args) {
-    Intl.setlocale (LocaleCategory.ALL, "");
-    Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
-    Intl.textdomain (Constants.GETTEXT_PACKAGE);
-    Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALE_DIR);
+public class Greeter.Application : Gtk.Application {
+    public Application () {
+        Object (
+            application_id: "io.elementary.greeter",
+            flags: ApplicationFlags.FLAGS_NONE
+        );
+    }
 
-    Gtk.init (ref args);
+    construct {
+        Intl.setlocale (LocaleCategory.ALL, "");
+        Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
+        Intl.textdomain (Constants.GETTEXT_PACKAGE);
+        Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALE_DIR);
+    }
 
-    var window = new Greeter.MainWindow ();
-    window.show_all ();
+    public override void activate () {
+        add_window (new Greeter.MainWindow ());
+        active_window.show_all ();
+    }
 
-    Gtk.main ();
-
-    return 0;
+    public static int main (string[] args) {
+        return new Greeter.Application ().run (args);
+    }
 }
