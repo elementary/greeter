@@ -32,7 +32,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private SelectionCheck logged_in;
 
-    private unowned Gtk.StyleContext logged_in_context;
     private unowned Gtk.StyleContext main_box_style_context;
     private unowned Gtk.StyleContext password_entry_context;
 
@@ -186,8 +185,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
             valign = END
         };
 
-        logged_in_context = logged_in.get_style_context ();
-
         if (lightdm_user.logged_in) {
             avatar_overlay.add_overlay (logged_in);
 
@@ -255,8 +252,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void set_check_style () {
         // Override check's accent_color so that it *always* uses user's preferred color
-        var style_provider = Gtk.CssProvider.get_named ("io.elementary.stylesheet." + accent_to_string (prefers_accent_color), null);
-        logged_in_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        logged_in.get_style_context ().add_class (accent_to_string (prefers_accent_color));
     }
 
     private void set_background_image () {

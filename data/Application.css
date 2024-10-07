@@ -58,13 +58,66 @@
 }
 
 check {
-    background-color: @accent_color;
     border-radius: 99px;
     color: white;
     margin: 2px;
     min-height: 20px;
     min-width: 20px;
-    -gtk-icon-shadow: 0 1px 1px shade(@accent_color, 0.7);
     -gtk-icon-source: -gtk-icontheme("check-active-symbolic");
     -gtk-icon-transform: scale(0.6);
+}
+
+check.banana {
+    background-color: mix(@BANANA_500, @BANANA_700, 0.3);
+    -gtk-icon-shadow: 0 1px 1px shade(mix(@BANANA_500, @BANANA_700, 0.3), 0.7);
+}
+
+check.blueberry {
+    background-color: mix(@BLUEBERRY_300, @BLUEBERRY_500, 0.25);
+    -gtk-icon-shadow: 0 1px 1px shade(mix(@BLUEBERRY_300, @BLUEBERRY_500, 0.25), 0.3), 0.7);
+}
+
+check.bubblegum {
+    background-color: mix(@BUBBLEGUM_300, @BUBBLEGUM_500, 0.25);
+    -gtk-icon-shadow: 0 1px 1px shade(mix(@BUBBLEGUM_300, @BUBBLEGUM_500, 0.25), 0.3), 0.7);
+}
+
+check.cocoa {
+    background-color: @COCOA_300;
+    -gtk-icon-shadow: 0 1px 1px shade(@COCOA_300, 0.3), 0.7);
+}
+
+check.grape {
+    background-color: mix(@GRAPE_300, @GRAPE_500, 0.5);
+    -gtk-icon-shadow: 0 1px 1px shade(mix(@GRAPE_300, @GRAPE_500, 0.5), 0.3), 0.7);
+}
+
+check.latte {
+    background-color: mix(@LATTE_300, @LATTE_500, 0.25);
+    -gtk-icon-shadow: 0 1px 1px shade(mix(@LATTE_300, @LATTE_500, 0.25), 0.3), 0.7);
+}
+
+check.lime {
+    background-color: mix(@LIME_300, @LIME_500, 0.25);
+    -gtk-icon-shadow: 0 1px 1px shade(mix(@LIME_300, @LIME_500, 0.25), 0.3), 0.7);
+}
+
+check.mint {
+    background-color: mix(@MINT_300, @MINT_500, 0.75);
+    -gtk-icon-shadow: 0 1px 1px shade(mix(@MINT_300, @MINT_500, 0.75), 0.3), 0.7);
+}
+
+check.orange {
+    background-color: mix(@ORANGE_300, @ORANGE_500, 0.5);
+    -gtk-icon-shadow: 0 1px 1px shade(mix(@ORANGE_300, @ORANGE_500, 0.5), 0.3), 0.7);
+}
+
+check.slate {
+    background-color: @SLATE_100;
+    -gtk-icon-shadow: 0 1px 1px shade(@SLATE_100, 0.3), 0.7);
+}
+
+check.strawberry {
+    background-color: mix(@STRAWBERRY_300, @STRAWBERRY_500, 0.25);
+    -gtk-icon-shadow: 0 1px 1px shade(mix(@STRAWBERRY_300, @STRAWBERRY_500, 0.25), 0.3), 0.7);
 }
