@@ -228,11 +228,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         });
 
         carousel.page_changed.connect ((index) => {
-            var children = carousel.get_children ();
-
-            if (children.nth_data (index) is Greeter.UserCard) {
+            if (carousel.get_nth_page (index) is Greeter.UserCard) {
                 current_user_card_index = (int) index;
-                switch_to_card ((Greeter.UserCard) children.nth_data (index));
+                switch_to_card ((Greeter.UserCard) carousel.get_nth_page (index));
             }
         });
 
@@ -499,7 +497,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private void add_card (LightDM.User lightdm_user) {
         var user_card = new Greeter.UserCard (lightdm_user);
 
-        carousel.add (user_card);
+        carousel.append (user_card);
 
         user_card.focus_requested.connect (() => {
             switch_to_card (user_card);
@@ -544,7 +542,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         current_card = user_card;
 
-        carousel.scroll_to (user_card);
+        carousel.scroll_to (user_card, true);
 
         user_card.set_settings ();
         user_card.show_input = true;
@@ -595,7 +593,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
 
         carousel.interactive = false;
-        carousel.scroll_to (current_card);
+        carousel.scroll_to (current_card, true);
     }
 
     private void go_previous () {
@@ -605,7 +603,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index - 1);
         if (next_card != null) {
-            carousel.scroll_to (next_card);
+            carousel.scroll_to (next_card, true);
         }
     }
 
@@ -616,7 +614,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index + 1);
         if (next_card != null) {
-            carousel.scroll_to (next_card);
+            carousel.scroll_to (next_card, true);
         }
     }
 }
