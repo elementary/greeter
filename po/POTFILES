@@ -30,7 +30,6 @@ src/Settings.vala
 src/Cards/BaseCard.vala
 src/Cards/ManualCard.vala
 src/Cards/UserCard.vala
-src/Widgets/BackgroundImage.vala
 src/Widgets/CapsLockRevealer.vala
 src/Widgets/DateTimeWidget.vala
 src/Widgets/PasswordEntry.vala
