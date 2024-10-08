@@ -36,7 +36,7 @@ public class Greeter.Application : Gtk.Application {
 
     public override void activate () {
         add_window (new Greeter.MainWindow ());
-        active_window.show_all ();
+        active_window.present ();
     }
 
     public static int main (string[] args) {

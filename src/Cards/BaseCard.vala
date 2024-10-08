@@ -52,8 +52,7 @@ public abstract class Greeter.BaseCard : Gtk.Box {
             width_request = 350
         };
 
-        add (revealer);
-        events |= Gdk.EventMask.BUTTON_RELEASE_MASK;
+        append (revealer);
 
         revealer.notify["child-revealed"].connect (() => {
             if (!revealer.child_revealed) {
