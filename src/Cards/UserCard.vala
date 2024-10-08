@@ -161,9 +161,15 @@ public class Greeter.UserCard : Greeter.BaseCard {
             margin_top = 6,
             margin_bottom = 6,
             margin_start = 6,
-            margin_end = 6,
-            loadable_icon = new FileIcon (File.new_for_path (lightdm_user.image))
+            margin_end = 6
         };
+
+        var user_icon_file = File.new_for_path (lightdm_user.image);
+        try {
+            avatar.custom_image = Gdk.Texture.from_file (user_icon_file );
+        } catch (Error e) {
+            avatar.custom_image = null;
+        }
 
         var avatar_overlay = new Gtk.Overlay () {
             halign = CENTER,
@@ -283,7 +289,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             f <<= 8;
             f += 255;
 
-            pixbuf = new Gdk.Pixbuf (Gdk.Colorspace.RGB, false, 8, 1, 1);
+            var pixbuf = new Gdk.Pixbuf (Gdk.Colorspace.RGB, false, 8, 1, 1);
             pixbuf.fill (f);
 
             background_picture.paintable = (Gdk.Texture.for_pixbuf (pixbuf));
@@ -291,7 +297,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             background_picture.set_filename ("/usr/share/backgrounds/elementaryos-default");
         }
 
-        main_box.prepend (background_image);
+        main_box.prepend (background_picture);
     }
 
     private string accent_to_string (int i) {
