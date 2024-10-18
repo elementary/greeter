@@ -236,10 +236,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             return false;
         });
 
-        destroy.connect (() => {
-            Gtk.main_quit ();
-        });
-
         load_users.begin (() => {
             /* A significant delay is required in order for the window and card to be focused at
              * at boot.  TODO: Find whether boot sequence can be tweaked to fix this.
