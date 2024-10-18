@@ -534,7 +534,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         });
     }
 
-    private class SelectionCheck : Gtk.Spinner {
+    private class SelectionCheck : Gtk.Widget {
         class construct {
             set_css_name ("check");
         }
