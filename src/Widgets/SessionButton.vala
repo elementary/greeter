@@ -19,14 +19,18 @@
  * Authors: Corentin Noël <corentin@elementary.io>
  */
 
-public class Greeter.SessionButton : Gtk.MenuButton {
+public class Greeter.SessionButton : Adw.Bin {
     construct {
         var menu = new GLib.Menu ();
 
-        direction = DOWN;
-        icon_name = "open-menu-symbolic";
-        menu_model = menu;
-        has_frame = false;
+        var menu_button = new Gtk.MenuButton () {
+            direction = DOWN,
+            has_frame = false,
+            icon_name = "open-menu-symbolic",
+            menu_model = menu
+        };
+
+        child = menu_button;
 
         var main_window = (Gtk.ApplicationWindow) get_ancestor (typeof (Gtk.ApplicationWindow));
         if (main_window != null) {
