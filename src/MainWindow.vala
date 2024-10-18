@@ -36,8 +36,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private bool installer_mode = false;
 
-    private Gtk.EventControllerKey key_controller;
-
     private const uint[] NAVIGATION_KEYS = {
         Gdk.Key.Up,
         Gdk.Key.Down,
@@ -178,9 +176,12 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         manual_card.do_connect_username.connect (do_connect_username);
         manual_card.do_connect.connect (do_connect);
 
-        key_controller = new Gtk.EventControllerKey (this) {
+        var key_controller = new Gtk.EventControllerKey () {
             propagation_phase = CAPTURE
         };
+
+        ((Gtk.Widget) this).add_controller (key_controller);
+
         key_controller.key_pressed.connect ((keyval, keycode, state) => {
             var mods = state & Gtk.accelerator_get_default_mod_mask ();
 
