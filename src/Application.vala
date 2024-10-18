@@ -34,6 +34,12 @@ public class Greeter.Application : Gtk.Application {
         Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALE_DIR);
     }
 
+    protected override void startup () {
+        base.startup ();
+
+        Granite.init ();
+    }
+
     public override void activate () {
         add_window (new Greeter.MainWindow ());
         active_window.present ();

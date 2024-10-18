@@ -67,10 +67,8 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             margin_end = 12
         };
         main_box.append (form_grid);
-
         main_box.add_css_class (Granite.STYLE_CLASS_CARD);
         main_box.add_css_class (Granite.STYLE_CLASS_ROUNDED);
-        main_box.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         child = main_box;
 

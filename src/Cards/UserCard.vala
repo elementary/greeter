@@ -50,7 +50,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         };
 
         username_label.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
-        username_label.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         password_entry = new Greeter.PasswordEntry ();
 
@@ -150,10 +149,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
         };
         main_box.append (username_label);
         main_box.append (form_revealer);
-
         main_box.add_css_class (Granite.STYLE_CLASS_CARD);
         main_box.add_css_class (Granite.STYLE_CLASS_ROUNDED);
-        main_box.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         update_collapsed_class ();
 
@@ -252,8 +249,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void set_check_style () {
         // Override check's accent_color so that it *always* uses user's preferred color
-        var style_provider = Gtk.CssProvider.get_named ("io.elementary.stylesheet." + accent_to_string (prefers_accent_color), null);
-        logged_in.get_style_context ().add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        logged_in.add_css_class (accent_to_string (prefers_accent_color));
     }
 
     private void set_background_image () {
@@ -538,19 +534,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private class SelectionCheck : Gtk.Spinner {
-        private static Gtk.CssProvider check_provider;
-
         class construct {
             set_css_name ("check");
-        }
-
-        static construct {
-            check_provider = new Gtk.CssProvider ();
-            check_provider.load_from_resource ("/io/elementary/greeter/Check.css");
-        }
-
-        construct {
-            get_style_context ().add_provider (check_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
         }
     }
 }
