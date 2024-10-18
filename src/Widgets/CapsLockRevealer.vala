@@ -40,7 +40,7 @@ public class Greeter.CapsLockRevealer : Adw.Bin {
 
         child = revealer;
 
-        device = Gdk.Display.get_default ().get_default_seat ().get_devices (KEYBOARD)[0];
+        device = Gdk.Display.get_default ().get_default_seat ().get_keyboard ();
         device.changed.connect (update_visibility);
 
         update_visibility ();

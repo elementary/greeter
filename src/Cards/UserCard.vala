@@ -205,16 +205,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         on_act_user_loaded ();
 
-        card_overlay.focus.connect ((direction) => {
+        card_overlay.move_focus.connect ((direction) => {
             if (direction == LEFT) {
                 go_left ();
-                return true;
             } else if (direction == RIGHT) {
                 go_right ();
-                return true;
             }
-
-            return false;
         });
 
         click_gesture = new Gtk.GestureClick ();
@@ -242,9 +238,14 @@ public class Greeter.UserCard : Greeter.BaseCard {
             }
         });
 
-        grab_focus.connect (() => {
-            password_entry.grab_focus_without_selecting ();
+        var focus_controller = new Gtk.EventControllerFocus ();
+        focus_controller.enter.connect (() => {
+            if (focus_controller.is_focus) {
+                password_entry.grab_focus_without_selecting ();
+            }
         });
+
+        add_controller (focus_controller);
     }
 
     private void set_check_style () {

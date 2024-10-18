@@ -50,8 +50,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         settings = new Greeter.Settings ();
         create_session_selection_action ();
 
-        set_visual (get_screen ().get_rgba_visual ());
-
         guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
 
         manual_login_button = new Gtk.ToggleButton.with_label (_("Manual Login…"));
@@ -227,16 +225,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         });
 
-        // regrab focus when dpi changed
-        get_screen ().monitors_changed.connect (() => {
-            maximize_and_focus ();
-        });
-
-        leave_notify_event.connect (() => {
-            maximize_and_focus ();
-            return false;
-        });
-
         load_users.begin (() => {
             /* A significant delay is required in order for the window and card to be focused at
              * at boot.  TODO: Find whether boot sequence can be tweaked to fix this.
@@ -269,21 +257,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void maximize_window () {
-        var display = Gdk.Display.get_default ();
-        unowned Gdk.Seat seat = display.get_default_seat ();
-        unowned Gdk.Device? pointer = seat.get_pointer ();
-
-        Gdk.Monitor? monitor;
-        if (pointer != null) {
-            int x, y;
-            pointer.get_position (null, out x, out y);
-            monitor = display.get_monitor_at_point (x, y);
-        } else {
-            monitor = display.get_primary_monitor ();
-        }
-
-        var rect = monitor.get_geometry ();
-        resize (rect.width, rect.height);
+        // We can't move the window so this probably needs to move to compositor?
     }
 
     private void create_session_selection_action () {

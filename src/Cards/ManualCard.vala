@@ -77,13 +77,19 @@ public class Greeter.ManualCard : Greeter.BaseCard {
 
         username_entry.activate.connect (() => do_connect_username (username_entry.text));
         password_entry.activate.connect (on_login);
-        grab_focus.connect (() => {
-            if (username_entry.sensitive) {
-                username_entry.grab_focus_without_selecting ();
-            } else {
-                password_entry.grab_focus_without_selecting ();
+
+        var focus_controller = new Gtk.EventControllerFocus ();
+        focus_controller.enter.connect (() => {
+            if (focus_controller.is_focus) {
+                if (username_entry.sensitive) {
+                    username_entry.grab_focus_without_selecting ();
+                } else {
+                    password_entry.grab_focus_without_selecting ();
+                }
             }
         });
+
+        add_controller (focus_controller);
     }
 
     private void on_login () {
