@@ -145,7 +145,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         );
 
         main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
-            margin_bottom = 48
+            overflow = HIDDEN
         };
         main_box.append (username_label);
         main_box.append (form_revealer);
@@ -154,12 +154,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         update_collapsed_class ();
 
-        var avatar = new Adw.Avatar (64, lightdm_user.display_name, true) {
-            margin_top = 6,
-            margin_bottom = 6,
-            margin_start = 6,
-            margin_end = 6
-        };
+        var avatar = new Adw.Avatar (64, lightdm_user.display_name, true);
 
         var user_icon_file = File.new_for_path (lightdm_user.image);
         try {
@@ -172,7 +167,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
             halign = CENTER,
             valign = START,
             margin_top = 100,
-            child = avatar
+            child = avatar,
+            overflow = VISIBLE
         };
 
         logged_in = new SelectionCheck () {
