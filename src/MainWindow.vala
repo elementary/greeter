@@ -163,7 +163,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.bind_property ("hide-users-hint", manual_login_button, "active", GLib.BindingFlags.SYNC_CREATE);
 
         notify["scale-factor"].connect (() => {
-            maximize_window ();
+            maximize ();
         });
 
         lightdm_user_list = LightDM.UserList.get_instance ();
@@ -235,7 +235,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             });
         });
 
-        maximize_window ();
+        maximize ();
 
         if (settings.activate_numlock) {
             try {
@@ -248,16 +248,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private void maximize_and_focus () {
         present ();
-        maximize_window ();
+        maximize ();
         add_css_class ("initialized");
+
+        // We can't move the window that probably need to go to compositor?
 
         if (current_card != null) {
             current_card.grab_focus ();
         }
-    }
-
-    private void maximize_window () {
-        // We can't move the window so this probably needs to move to compositor?
     }
 
     private void create_session_selection_action () {
