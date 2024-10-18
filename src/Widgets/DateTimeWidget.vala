@@ -13,11 +13,6 @@ public class Greeter.DateTimeWidget : Gtk.Box {
     private LoginManager login_manager;
 
     construct {
-        var css_provider = new Gtk.CssProvider ();
-        css_provider.load_from_resource ("/io/elementary/greeter/DateTime.css");
-
-        Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
         time_label = new Gtk.Label (null);
         time_label.get_style_context ().add_class ("time");
 
