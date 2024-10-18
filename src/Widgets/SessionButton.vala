@@ -28,22 +28,19 @@ public class Greeter.SessionButton : Gtk.MenuButton {
         menu_model = menu;
         has_frame = false;
 
-        // The session action is on the MainWindow toplevel, wait until it is accessible.
-        hierarchy_changed.connect ((previous_toplevel) => {
-            var main_window = (Gtk.ApplicationWindow) get_ancestor (typeof (Gtk.ApplicationWindow));
-            if (main_window != null) {
-                var hint = main_window.get_action_state_hint ("select-session");
-                var iter = hint.iterator ();
-                GLib.Variant? val = null;
-                string? key = null;
-                while (iter.next ("{sv}", out key, out val)) {
-                    menu.append (key, Action.print_detailed_name ("win.select-session", val));
-                }
-
-                if (menu.get_n_items () == 0) {
-                    destroy ();
-                }
+        var main_window = (Gtk.ApplicationWindow) get_ancestor (typeof (Gtk.ApplicationWindow));
+        if (main_window != null) {
+            var hint = main_window.get_action_state_hint ("select-session");
+            var iter = hint.iterator ();
+            GLib.Variant? val = null;
+            string? key = null;
+            while (iter.next ("{sv}", out key, out val)) {
+                menu.append (key, Action.print_detailed_name ("win.select-session", val));
             }
-        });
+
+            if (menu.get_n_items () == 0) {
+                destroy ();
+            }
+        }
     }
 }
