@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 17:04+0000\n"
-"PO-Revision-Date: 2023-06-21 16:07+0000\n"
+"POT-Creation-Date: 2024-09-13 20:19+0000\n"
+"PO-Revision-Date: 2024-05-28 23:13+0000\n"
 "Last-Translator: David Hewitt <davidmhewitt@gmail.com>\n"
 "Language-Team: English (United Kingdom) <https://l10n.elementary.io/projects/"
 "desktop/greeter-extra/en_GB/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.5\n"
 
 #: data/greeter.metainfo.xml.in:9
 msgid "Login &amp; Lock Screen"
@@ -27,53 +27,59 @@ msgstr "Login &amp; Lock Screen"
 msgid "Unlock or log in to your device"
 msgstr "Unlock or log in to your device"
 
-#: data/greeter.metainfo.xml.in:33
+#: data/greeter.metainfo.xml.in:34
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
-#: data/greeter.metainfo.xml.in:40 data/greeter.metainfo.xml.in:54
-#: data/greeter.metainfo.xml.in:70 data/greeter.metainfo.xml.in:83
-#: data/greeter.metainfo.xml.in:97
-msgid "Minor updates:"
-msgstr "Minor updates:"
-
-#: data/greeter.metainfo.xml.in:42
-msgid "Prevent a potential issue with dialogs that use portals"
-msgstr "Prevent a potential issue with dialogs that use portals"
-
-#: data/greeter.metainfo.xml.in:43
-msgid "Fix potential issues with incorrect keyboard layout being set"
-msgstr "Fix potential issues with incorrect keyboard layout being set"
-
-#: data/greeter.metainfo.xml.in:44 data/greeter.metainfo.xml.in:56
-#: data/greeter.metainfo.xml.in:72 data/greeter.metainfo.xml.in:85
-#: data/greeter.metainfo.xml.in:99
-msgid "Updated translations"
-msgstr "Updated translations"
-
-#: data/greeter.metainfo.xml.in:66
+#: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:98
 msgid "New Features:"
 msgstr "New Features:"
 
+#: data/greeter.metainfo.xml.in:44
+msgid "Add blurred wallpaper as background"
+msgstr "Add blurred wallpaper as background"
+
+#: data/greeter.metainfo.xml.in:45
+msgid "Make Date and Time larger and bolder with softer shadows"
+msgstr "Make Date and Time larger and bolder with softer shadows"
+
+#: data/greeter.metainfo.xml.in:47 data/greeter.metainfo.xml.in:65
+#: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:102
+#: data/greeter.metainfo.xml.in:115
+msgid "Minor updates:"
+msgstr "Minor updates:"
+
+#: data/greeter.metainfo.xml.in:49 data/greeter.metainfo.xml.in:69
+#: data/greeter.metainfo.xml.in:88 data/greeter.metainfo.xml.in:104
+#: data/greeter.metainfo.xml.in:117
+msgid "Updated translations"
+msgstr "Updated translations"
+
+#: data/greeter.metainfo.xml.in:67
+msgid "Prevent a potential issue with dialogs that use portals"
+msgstr "Prevent a potential issue with dialogs that use portals"
+
 #: data/greeter.metainfo.xml.in:68
+msgid "Fix potential issues with incorrect keyboard layout being set"
+msgstr "Fix potential issues with incorrect keyboard layout being set"
+
+#: data/greeter.metainfo.xml.in:100
 msgid "Provide panel background color interface"
 msgstr "Provide panel background color interface"
 
-#: data/greeter.metainfo.xml.in:79 data/greeter.metainfo.xml.in:92
+#: data/greeter.metainfo.xml.in:111
 msgid "Improvements:"
 msgstr "Improvements:"
 
-#: data/greeter.metainfo.xml.in:81
+#: data/greeter.metainfo.xml.in:113
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr "Fix a random issue where Greeter does not load correctly on boot"
 
-#: data/greeter.metainfo.xml.in:94
-msgid "Hide clock during initial setup"
-msgstr "Hide clock during initial setup"
+#~ msgid "Hide clock during initial setup"
+#~ msgstr "Hide clock during initial setup"
 
-#: data/greeter.metainfo.xml.in:95
-msgid "Use selected accent color for logged in checkmark"
-msgstr "Use selected accent colour for logged in checkmark"
+#~ msgid "Use selected accent color for logged in checkmark"
+#~ msgstr "Use selected accent colour for logged in checkmark"
 
 #~ msgid "Add multitouch finger tracking"
 #~ msgstr "Add multitouch finger tracking"

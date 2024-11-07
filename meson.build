@@ -1,12 +1,13 @@
 project(
     'io.elementary.greeter',
     'vala', 'c',
-    version: '7.0.0',
+    version: '8.0.0',
     meson_version: '>= 0.58.0'
 )
 
 gnome = import('gnome')
 i18n = import('i18n')
+vala = meson.get_compiler('vala')
 
 conf_data = configuration_data()
 conf_data.set('CONF_DIR', join_paths(get_option('sysconfdir'), 'lightdm'))
@@ -31,7 +32,11 @@ config_header = configure_file (
 
 add_project_arguments(['--vapidir', join_paths(meson.current_source_dir(), 'vapi')], language: 'vala')
 
-add_global_arguments('-DGETTEXT_PACKAGE="@0@"'.format(meson.project_name()), language:'c')
+add_global_arguments(
+    '-DGETTEXT_PACKAGE="@0@"'.format(meson.project_name()),
+    '-DGNOME_DESKTOP_USE_UNSTABLE_API',
+    language:'c'
+)
 
 greeter_resources = gnome.compile_resources(
     'greeter-resources', 'data/greeter.gresource.xml',
@@ -43,6 +48,7 @@ compositor_resources = gnome.compile_resources(
     source_dir: 'data'
 )
 
+subdir('protocol')
 subdir('src')
 subdir('compositor')
 subdir('data')
@@ -51,3 +57,5 @@ vapigen = find_program('vapigen', required: false)
 if vapigen.found()
 	subdir('vapi')
 endif
+
+gnome.post_install(glib_compile_schemas: true)

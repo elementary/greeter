@@ -32,7 +32,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private SelectionCheck logged_in;
 
-    private unowned Gtk.StyleContext logged_in_context;
     private unowned Gtk.StyleContext main_box_style_context;
     private unowned Gtk.StyleContext password_entry_context;
 
@@ -55,7 +54,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         unowned var username_label_context = username_label.get_style_context ();
         username_label_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
-        username_label_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         password_entry = new Greeter.PasswordEntry ();
         password_entry_context = password_entry.get_style_context ();
@@ -164,7 +162,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         main_box_style_context = main_box.get_style_context ();
         main_box_style_context.add_class (Granite.STYLE_CLASS_CARD);
         main_box_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
-        main_box_style_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         update_collapsed_class ();
 
@@ -187,8 +184,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
             halign = END,
             valign = END
         };
-
-        logged_in_context = logged_in.get_style_context ();
 
         if (lightdm_user.logged_in) {
             avatar_overlay.add_overlay (logged_in);
@@ -257,8 +252,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void set_check_style () {
         // Override check's accent_color so that it *always* uses user's preferred color
-        var style_provider = Gtk.CssProvider.get_named ("io.elementary.stylesheet." + accent_to_string (prefers_accent_color), null);
-        logged_in_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        logged_in.get_style_context ().add_class (accent_to_string (prefers_accent_color));
     }
 
     private void set_background_image () {
@@ -435,6 +429,18 @@ public class Greeter.UserCard : Greeter.BaseCard {
         settings.set_value ("xkb-options", options);
     }
 
+    /* 
+     * When we get string typed settings from our settings daemon account service we might get a null value.
+     * In this case we reset the value to avoid criticals and unwanted behaviour.
+     */
+    private void set_or_reset_settings_key (GLib.Settings settings, string key, GLib.Variant? value) {
+        if (value != null) {
+            settings.set_value (key, value);
+        } else {
+            settings.reset (key);
+        }
+    }
+
     private void set_mouse_touchpad_settings () {
         var mouse_settings = new GLib.Settings ("org.gnome.desktop.peripherals.mouse");
         mouse_settings.set_boolean ("left-handed", settings_act.left_handed);
@@ -462,12 +468,22 @@ public class Greeter.UserCard : Greeter.BaseCard {
         interface_settings.set_value ("cursor-size", settings_act.cursor_size);
         interface_settings.set_value ("locate-pointer", settings_act.locate_pointer);
         interface_settings.set_value ("text-scaling-factor", settings_act.text_scaling_factor);
-        interface_settings.set_value ("document-font-name", settings_act.document_font_name);
-        interface_settings.set_value ("font-name", settings_act.font_name);
-        interface_settings.set_value ("monospace-font-name", settings_act.monospace_font_name);
+        set_or_reset_settings_key (interface_settings, "document-font-name", settings_act.document_font_name);
+        set_or_reset_settings_key (interface_settings, "font-name", settings_act.font_name);
+        set_or_reset_settings_key (interface_settings, "monospace-font-name", settings_act.monospace_font_name);
 
         var touchscreen_settings = new GLib.Settings ("org.gnome.settings-daemon.peripherals.touchscreen");
         touchscreen_settings.set_boolean ("orientation-lock", settings_act.orientation_lock);
+
+        var background_settings = new GLib.Settings ("org.gnome.desktop.background");
+        if (lightdm_user.background != null) {
+            background_settings.set_value ("picture-uri", lightdm_user.background);
+        } else {
+            background_settings.reset ("picture-uri");
+        }
+
+        background_settings.set_value ("picture-options", settings_act.picture_options);
+        background_settings.set_value ("primary-color", settings_act.primary_color);
     }
 
     private void set_night_light_settings () {
@@ -517,19 +533,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private class SelectionCheck : Gtk.Spinner {
-        private static Gtk.CssProvider check_provider;
-
         class construct {
             set_css_name (Gtk.STYLE_CLASS_CHECK);
-        }
-
-        static construct {
-            check_provider = new Gtk.CssProvider ();
-            check_provider.load_from_resource ("/io/elementary/greeter/Check.css");
-        }
-
-        construct {
-            get_style_context ().add_provider (check_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
         }
     }
 }

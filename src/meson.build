@@ -5,6 +5,7 @@ gtk_dep = dependency('gtk+-3.0')
 granite_dep = dependency('granite', version: '>= 5.5.0')
 hdy_dep = dependency('libhandy-1', version: '>= 1.1.90')
 lightdm_dep = dependency('liblightdm-gobject-1')
+gnome_desktop_dep = dependency('gnome-desktop-3.0')
 m_dep = meson.get_compiler('c').find_library('m')
 
 install_path = join_paths(get_option('prefix'), get_option('sbindir'))
@@ -17,9 +18,7 @@ executable(
     'MainWindow.vala',
     'PantheonAccountsServicePlugin.vala',
     'PromptText.vala',
-    'SettingsDaemon.vala',
     'Settings.vala',
-    'SubprocessSupervisor.vala',
     'Cards/BaseCard.vala',
     'Cards/ManualCard.vala',
     'Cards/UserCard.vala',

@@ -57,6 +57,17 @@ if mutter45_dep.found()
 	vala_flags = ['--define', 'HAS_MUTTER43', '--define', 'HAS_MUTTER44', '--define', 'HAS_MUTTER45']
 endif
 
+mutter46_dep = dependency('libmutter-14', version: ['>= 46', '< 47'], required: false)
+if mutter46_dep.found()
+	libmutter_dep = dependency('libmutter-14', version: '>= 46')
+	mutter_dep = [
+		libmutter_dep,
+		dependency('mutter-mtk-14'), dependency('mutter-cogl-14'),
+		dependency('mutter-cogl-pango-14'), dependency('mutter-clutter-14')
+	]
+	vala_flags = ['--define', 'HAS_MUTTER43', '--define', 'HAS_MUTTER44', '--define', 'HAS_MUTTER45', '--define', 'HAS_MUTTER46']
+endif
+
 if mutter_dep.length() == 0
 	error ('No supported mutter library found!')
 endif
@@ -65,20 +76,38 @@ mutter_typelib_dir = libmutter_dep.get_variable('typelibdir')
 
 # Here is the real Compositor work
 compositor_files = files(
-  'BackgroundManager.vala',
-  'BackgroundUtils.vala',
+  'Background/Animation.vala',
+  'Background/Background.vala',
+  'Background/BackgroundCache.vala',
+  'Background/BackgroundContainer.vala',
+  'Background/BackgroundManager.vala',
+  'Background/BackgroundSource.vala',
+  'Background/BlurEffect.vala',
+  'Background/SystemBackground.vala',
+  'PantheonShell.vala',
+  'ShellClients/CenteredWindow.vala',
+  'ShellClients/ManagedClient.vala',
+  'ShellClients/NotificationsClient.vala',
+  'ShellClients/PanelClone.vala',
+  'ShellClients/PanelWindow.vala',
+  'ShellClients/ShellClientsManager.vala',
+  'Widgets/SafeWindowClone.vala',
+  'WingpanelManager/WingpanelManager.vala',
+  'WingpanelManager/DBusWingpanelManager.vala',
+  'WingpanelManager/FocusManager.vala',
+  'WingpanelManager/BackgroundUtils.vala',
   'DBus.vala',
   'DBusAccelerator.vala',
-  'DBusBackgroundManager.vala',
   'Dialogs.vala',
   'KeyboardManager.vala',
   'main.vala',
-  'MaskCorners.vala',
   'MediaFeedback.vala',
   'PointerLocator.vala',
-  'SystemBackground.vala',
+  'SettingsDaemon.vala',
+  'SubprocessSupervisor.vala',
   'Utils.vala',
-  'WindowManager.vala'
+  'WindowManager.vala',
+  'Zoom.vala'
 )
 
 executable(
@@ -86,7 +115,7 @@ executable(
   compositor_files,
   compositor_resources,
   config_header,
-  dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, posix_dep, mutter_dep],
+  dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, posix_dep, mutter_dep, gnome_desktop_dep, pantheon_desktop_shell_dep],
   vala_args: vala_flags,
   c_args: compositor_c_args,
   build_rpath: mutter_typelib_dir,

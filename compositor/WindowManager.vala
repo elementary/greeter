@@ -42,9 +42,14 @@ namespace GreeterCompositor {
          */
         public Clutter.Actor top_window_group { get; protected set; }
 
+        /**
+         * The background group is a container for the background actors forming the wallpaper
+         */
+        public Meta.BackgroundGroup background_group { get; protected set; }
+
         public PointerLocator pointer_locator { get; private set; }
 
-        public Greeter.SystemBackground system_background { get; private set; }
+        public GreeterCompositor.SystemBackground system_background { get; private set; }
 
         private Clutter.Actor fade_in_screen;
 
@@ -57,6 +62,8 @@ namespace GreeterCompositor {
         //WindowSwitcher? winswitcher = null;
         //ActivatableComponent? workspace_view = null;
         //ActivatableComponent? window_overview = null;
+
+        private Zoom zoom;
 
         //ScreenSaver? screensaver;
 
@@ -78,6 +85,8 @@ namespace GreeterCompositor {
         public override void start () {
             show_stage ();
 
+            disable_tiling_shortcuts ();
+
             fade_in_screen.save_easing_state ();
             fade_in_screen.set_easing_duration (1000);
             fade_in_screen.set_easing_mode (Clutter.AnimationMode.EASE);
@@ -90,16 +99,24 @@ namespace GreeterCompositor {
             });
         }
 
+        private void disable_tiling_shortcuts () {
+            var mutter_settings = new GLib.Settings ("org.gnome.mutter.keybindings");
+            mutter_settings.set_strv ("toggle-tiled-left", {});
+            mutter_settings.set_strv ("toggle-tiled-right", {});
+
+            var wm_settings = new GLib.Settings ("org.gnome.desktop.wm.keybindings");
+            wm_settings.set_strv ("minimize", {});
+            wm_settings.set_strv ("toggle-maximized", {});
+        }
+
         void refresh_background () {
             unowned Meta.Display display = get_display ();
 
             stage.remove_child (system_background.background_actor);
-            system_background = new Greeter.SystemBackground (display);
+            system_background = new SystemBackground (display);
             system_background.background_actor.add_constraint (new Clutter.BindConstraint (stage,
                 Clutter.BindCoordinate.ALL, 0));
             stage.insert_child_below (system_background.background_actor, null);
-
-            system_background.refresh ();
         }
 
         void show_stage () {
@@ -107,30 +124,21 @@ namespace GreeterCompositor {
             MediaFeedback.init ();
             DBus.init (this);
             DBusAccelerator.init (this);
-            DBusBackgroundManager.init (this);
+            DBusWingpanelManager.init (this);
             KeyboardManager.init (display);
 
             stage = display.get_stage () as Clutter.Stage;
+            stage.background_color = Clutter.Color.from_rgba (0, 0, 0, 255);
 
-            system_background = new Greeter.SystemBackground (display);
+            system_background = new SystemBackground (display);
             system_background.background_actor.add_constraint (new Clutter.BindConstraint (stage,
                 Clutter.BindCoordinate.ALL, 0));
             stage.insert_child_below (system_background.background_actor, null);
 
             ui_group = new Clutter.Actor ();
             ui_group.reactive = true;
+            update_ui_group_size ();
             stage.add_child (ui_group);
-
-            window_group = display.get_window_group ();
-            stage.remove_child (window_group);
-            ui_group.add_child (window_group);
-
-            top_window_group = display.get_top_window_group ();
-            stage.remove_child (top_window_group);
-            ui_group.add_child (top_window_group);
-
-            pointer_locator = new PointerLocator (this);
-            ui_group.add_child (pointer_locator);
 
             int width, height;
             display.get_size (out width, out height);
@@ -141,7 +149,23 @@ namespace GreeterCompositor {
             };
             stage.add_child (fade_in_screen);
 
-            MaskCorners.init (this);
+            window_group = display.get_window_group ();
+            stage.remove_child (window_group);
+            ui_group.add_child (window_group);
+
+            top_window_group = display.get_top_window_group ();
+            stage.remove_child (top_window_group);
+            ui_group.add_child (top_window_group);
+
+            background_group = new BackgroundContainer (this);
+            window_group.add_child (background_group);
+            window_group.set_child_below_sibling (background_group, null);
+
+            pointer_locator = new PointerLocator (this);
+            ui_group.add_child (pointer_locator);
+
+            unowned var monitor_manager = display.get_context ().get_backend ().get_monitor_manager ();
+            monitor_manager.monitors_changed.connect (update_ui_group_size);
 
             /*keybindings*/
 
@@ -170,6 +194,8 @@ namespace GreeterCompositor {
 
             KeyBinding.set_custom_handler ("show-desktop", () => {});
 
+            zoom = new Zoom (this);
+
             /* orca (screenreader) doesn't listen to it's
                org.gnome.desktop.a11y.applications screen-reader-enabled key
                so we handle it ourselves
@@ -184,18 +210,98 @@ namespace GreeterCompositor {
             Idle.add (() => {
                 // let the session manager move to the next phase
                 display.get_context ().notify_ready ();
+                ShellClientsManager.init (this);
+
+                if (GLib.Environment.get_variable ("DESKTOP_SESSION") != "installer") {
+                    start_command.begin ({ "io.elementary.greeter" });
+                }
+
                 return GLib.Source.REMOVE;
             });
         }
 
-        public uint32[] get_all_xids () {
-            var list = new Gee.ArrayList<uint32> ();
+        private void update_ui_group_size () {
+            unowned var display = get_display ();
 
+            int max_width = 0;
+            int max_height = 0;
+
+            var num_monitors = display.get_n_monitors ();
+            for (int i = 0; i < num_monitors; i++) {
+                var geom = display.get_monitor_geometry (i);
+                var total_width = geom.x + geom.width;
+                var total_height = geom.y + geom.height;
+
+                max_width = (max_width > total_width) ? max_width : total_width;
+                max_height = (max_height > total_height) ? max_height : total_height;
+            }
+
+            ui_group.set_size (max_width, max_height);
+        }
+
+        private async void start_command (string[] command) {
+            if (Meta.Util.is_wayland_compositor ()) {
+                yield start_wayland (command);
+            } else {
+                yield start_x (command);
+            }
+        }
+
+        private async void start_wayland (string[] command) {
             unowned Meta.Display display = get_display ();
+            var subprocess_launcher = new GLib.SubprocessLauncher (GLib.SubprocessFlags.INHERIT_FDS);
+            try {
+                Meta.WaylandClient daemon_client;
+#if HAS_MUTTER44
+                daemon_client = new Meta.WaylandClient (display.get_context (), subprocess_launcher);
+#else
+                daemon_client = new Meta.WaylandClient (subprocess_launcher);
+#endif
+                var subprocess = daemon_client.spawnv (display, command);
+
+                yield subprocess.wait_async ();
+
+                //Restart the daemon if it crashes
+                Timeout.add_seconds (1, () => {
+                    start_wayland.begin (command);
+                    return Source.REMOVE;
+                });
+            } catch (Error e) {
+                warning ("Failed to create greeter client: %s", e.message);
+                return;
+            }
+        }
+
+        private async void start_x (string[] command) {
+            try {
+                var subprocess = new Subprocess.newv (command, GLib.SubprocessFlags.INHERIT_FDS);
+                yield subprocess.wait_async ();
+
+                //Restart the daemon if it crashes
+                Timeout.add_seconds (1, () => {
+                    start_x.begin (command);
+                    return Source.REMOVE;
+                });
+            } catch (Error e) {
+                warning ("Failed to create greeter subprocess with x: %s", e.message);
+            }
+        }
+
+        public uint32[] get_all_xids () {
+            unowned Meta.Display display = get_display ();
+
+            var list = new Gee.ArrayList<uint32> ();
+#if HAS_MUTTER46
+            unowned Meta.X11Display x11display = display.get_x11_display ();
+#endif
             unowned Meta.WorkspaceManager manager = display.get_workspace_manager ();
             for (int i = 0; i < manager.get_n_workspaces (); i++) {
                 foreach (var window in manager.get_workspace_by_index (i).list_windows ()) {
+#if HAS_MUTTER46
+                    list.add ((uint32)x11display.lookup_xwindow (window));
+#else
                     list.add ((uint32)window.get_xwindow ());
+#endif
                 }
             }
 
