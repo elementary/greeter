@@ -39,6 +39,24 @@ jobs:
         meson build
         ninja -C build install
 
+  fedora:
+    runs-on: ubuntu-latest
+
+    container:
+      image: fedora:latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: |
+          dnf install -y desktop-file-utils accountsservice-devel gdk-pixbuf2-devel gnome-desktop3-devel granite-devel gtk3-devel libhandy-devel lightdm-gobject-devel mutter-devel libX11-devel meson valac
+      - name: Build
+        env:
+          DESTDIR: out
+        run: |
+          meson build
+          ninja -C build install
+
   lint:
 
     runs-on: ubuntu-latest
