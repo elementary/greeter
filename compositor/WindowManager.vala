@@ -260,11 +260,7 @@ namespace GreeterCompositor {
             var subprocess_launcher = new GLib.SubprocessLauncher (GLib.SubprocessFlags.INHERIT_FDS);
             try {
                 Meta.WaylandClient daemon_client;
-#if HAS_MUTTER44
                 daemon_client = new Meta.WaylandClient (display.get_context (), subprocess_launcher);
-#else
-                daemon_client = new Meta.WaylandClient (subprocess_launcher);
-#endif
                 var subprocess = daemon_client.spawnv (display, command);
 
                 yield subprocess.wait_async ();
@@ -332,11 +328,7 @@ namespace GreeterCompositor {
             }
         }
 
-#if HAS_MUTTER45
         public override void show_window_menu_for_rect (Meta.Window window, Meta.WindowMenuType menu, Mtk.Rectangle rect) {
-#else
-        public override void show_window_menu_for_rect (Meta.Window window, Meta.WindowMenuType menu, Meta.Rectangle rect) {
-#endif
             show_window_menu (window, menu, rect.x, rect.y);
         }
 
@@ -388,11 +380,7 @@ namespace GreeterCompositor {
             }
         }
 
-#if HAS_MUTTER45
         public override void size_change (Meta.WindowActor actor, Meta.SizeChange which_change, Mtk.Rectangle old_frame_rect, Mtk.Rectangle old_buffer_rect) {
-#else
-        public override void size_change (Meta.WindowActor actor, Meta.SizeChange which_change, Meta.Rectangle old_frame_rect, Meta.Rectangle old_buffer_rect) {
-#endif
             unowned Meta.Window window = actor.get_meta_window ();
             if (window.get_tile_match () != null) {
                 size_change_completed (actor);
@@ -490,12 +478,8 @@ namespace GreeterCompositor {
         }
 
         public override void confirm_display_change () {
-#if HAS_MUTTER44
             unowned var monitor_manager = get_display ().get_context ().get_backend ().get_monitor_manager ();
             var timeout = monitor_manager.get_display_configuration_timeout ();
-#else
-            var timeout = Meta.MonitorManager.get_display_configuration_timeout ();
-#endif
             var summary = ngettext (
                 "Changes will automatically revert after %i second.",
                 "Changes will automatically revert after %i seconds.",
