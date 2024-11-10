@@ -866,21 +866,13 @@ namespace Cogl {
 		RG_88,
 		RGB_888,
 		BGR_888,
-#if HAS_MUTTER45
 		RGBX_8888,
-#endif
 		RGBA_8888,
-#if HAS_MUTTER45
 		BGRX_8888,
-#endif
 		BGRA_8888,
-#if HAS_MUTTER45
 		XRGB_8888,
-#endif
 		ARGB_8888,
-#if HAS_MUTTER45
 		XBGR_8888,
-#endif
 		ABGR_8888,
 		RGBA_1010102,
 		BGRA_1010102,
@@ -888,13 +880,9 @@ namespace Cogl {
 		ARGB_2101010,
 		XBGR_2101010,
 		ABGR_2101010,
-#if HAS_MUTTER45
 		RGBX_FP_16161616,
-#endif
 		RGBA_FP_16161616,
-#if HAS_MUTTER45
 		BGRX_FP_16161616,
-#endif
 		BGRA_FP_16161616,
 		XRGB_FP_16161616,
 		ARGB_FP_16161616,
@@ -1092,13 +1080,10 @@ namespace Cogl {
 	[CCode (cheader_filename = "cogl/cogl.h")]
 	[Version (since = "1.0")]
 	public static void flush ();
-#if HAS_MUTTER45
 	[CCode (cheader_filename = "cogl/cogl.h")]
 	public static bool is_tracing ();
-#endif
 	[CCode (cheader_filename = "cogl/cogl.h")]
 	public static void set_tracing_disabled_on_thread (GLib.MainContext main_context);
-#if HAS_MUTTER45
 	[CCode (cheader_filename = "cogl/cogl.h")]
 	public static void set_tracing_enabled_on_thread (GLib.MainContext main_context, string group);
 	[CCode (cheader_filename = "cogl/cogl.h")]
@@ -1107,12 +1092,6 @@ namespace Cogl {
 	public static bool start_tracing_with_path (string filename) throws GLib.Error;
 	[CCode (cheader_filename = "cogl/cogl.h")]
 	public static void stop_tracing ();
-#else
-	[CCode (cheader_filename = "cogl/cogl.h")]
-	public static void set_tracing_enabled_on_thread (GLib.MainContext main_context, string group, string filename);
-	[CCode (cheader_filename = "cogl/cogl.h")]
-	public static void set_tracing_enabled_on_thread_with_fd (GLib.MainContext main_context, string group, int fd);
-#endif
 	[CCode (cheader_filename = "cogl/cogl.h")]
 	public static void trace_describe (Cogl.TraceHead head, string description);
 	[CCode (cheader_filename = "cogl/cogl.h")]
