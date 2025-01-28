@@ -19,7 +19,7 @@
  * Authors: Corentin Noël <corentin@elementary.io>
  */
 
-public class GreeterCompositor.SubprocessSupervisor : GLib.Object {
+public class GreeterSessionManager.SubprocessSupervisor : GLib.Object {
     public signal void spawned (GLib.Subprocess subprocess);
 
     private GLib.Subprocess subprocess;
