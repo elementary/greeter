@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 16:41+0000\n"
-"PO-Revision-Date: 2024-08-07 17:16+0000\n"
-"Last-Translator: anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2024-09-13 20:19+0000\n"
+"PO-Revision-Date: 2024-10-05 19:16+0000\n"
+"Last-Translator: janko mrkvicka <6aby74rto@relay.firefox.com>\n"
 "Language-Team: Slovak <https://l10n.elementary.io/projects/desktop/greeter/"
 "sk/>\n"
 "Language: sk\n"
@@ -21,64 +21,65 @@ msgstr ""
 "X-Generator: Weblate 5.6.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:461
+#: compositor/WindowManager.vala:492
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Za %i sekundu sa zmeny automaticky vrátia späť."
+msgstr[1] "Za %i sekundy sa zmeny automaticky vrátia späť."
+msgstr[2] "Za %i sekúnd sa zmeny automaticky vrátia späť."
 
-#: compositor/WindowManager.vala:468
+#: compositor/WindowManager.vala:499
 msgid "Keep new display settings?"
 msgstr "Ponechať nové nastavenia obrazovky?"
 
-#: compositor/WindowManager.vala:472
+#: compositor/WindowManager.vala:503
 msgid "Keep Settings"
 msgstr "Ponechať nastavenia"
 
-#: compositor/WindowManager.vala:473
+#: compositor/WindowManager.vala:504
 msgid "Use Previous Settings"
 msgstr "Použiť predchádzajúce nastavenia"
 
 #: src/MainWindow.vala:67
 msgid "Log in as Guest"
-msgstr ""
+msgstr "Prihlásiť sa ako hosť"
 
 #: src/MainWindow.vala:69
-#, fuzzy
 msgid "Manual Login…"
-msgstr "Manuálne prihlásenie"
+msgstr "Ručné prihlásenie…"
 
 #: src/MainWindow.vala:403
 msgid "Unable to Log In"
-msgstr ""
+msgstr "Nedarí sa prihlásiť"
 
 #: src/MainWindow.vala:404
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Spustenie relácie sa nepodarilo."
 
 #: src/MainWindow.vala:481
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Nedarí sa spustiť Prvotné nastavenie"
 
 #: src/MainWindow.vala:486
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Prvotné nastavenie vytvorí váš prvý používateľský účet. Bez neho sa nebudete "
+"môcť prihlásiť a možno bude nutné preinštalovať OS."
 
 #: src/Cards/ManualCard.vala:21
 msgid "Manual Login"
-msgstr "Manuálne prihlásenie"
+msgstr "Ručné prihlásenie"
 
 #: src/Cards/ManualCard.vala:30
 msgid "Username"
-msgstr ""
+msgstr "Používateľské meno"
 
 #: src/Cards/ManualCard.vala:33
 msgid "Try username"
-msgstr ""
+msgstr "Vyskúšať používateľské meno"
 
 #: src/Cards/UserCard.vala:107 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
@@ -86,23 +87,23 @@ msgstr "Prihlásiť sa"
 
 #: src/Cards/UserCard.vala:119
 msgid "Account disabled"
-msgstr ""
+msgstr "Účet zablokovaný"
 
 #: src/Cards/UserCard.vala:197
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "Relácia nemôže byť zmenená, pokiaľ je používateľ prihlásený"
 
 #: src/Widgets/CapsLockRevealer.vala:70
 msgid "Caps Lock & Num Lock are on"
-msgstr ""
+msgstr "Caps Lock a Num Lock sú zapnuté"
 
 #: src/Widgets/CapsLockRevealer.vala:72
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps Lock je zapnutý"
 
 #: src/Widgets/CapsLockRevealer.vala:74
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Num Lock je zapnutý"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"

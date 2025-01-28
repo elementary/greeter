@@ -128,7 +128,11 @@ namespace GreeterCompositor {
             KeyboardManager.init (display);
 
             stage = display.get_stage () as Clutter.Stage;
+#if HAS_MUTTER47
+            stage.background_color = Cogl.Color.from_string ("black");
+#else
             stage.background_color = Clutter.Color.from_rgba (0, 0, 0, 255);
+#endif
 
             system_background = new SystemBackground (display);
             system_background.background_actor.add_constraint (new Clutter.BindConstraint (stage,
@@ -145,7 +149,11 @@ namespace GreeterCompositor {
             fade_in_screen = new Clutter.Actor () {
                 width = width,
                 height = height,
+#if HAS_MUTTER47
+                background_color = Cogl.Color.from_string ("black")
+#else
                 background_color = Clutter.Color.from_rgba (0, 0, 0, 255),
+#endif
             };
             stage.add_child (fade_in_screen);
 
@@ -210,8 +218,12 @@ namespace GreeterCompositor {
             Idle.add (() => {
                 // let the session manager move to the next phase
                 display.get_context ().notify_ready ();
-                start_command.begin ({ "io.elementary.greeter" });
-                start_command.begin ({ "io.elementary.wingpanel", "-g" });
+                ShellClientsManager.init (this);
+
+                if (GLib.Environment.get_variable ("DESKTOP_SESSION") != "installer") {
+                    start_command.begin ({ "io.elementary.greeter" });
+                }
+
                 return GLib.Source.REMOVE;
             });
         }
