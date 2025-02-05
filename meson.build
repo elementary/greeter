@@ -51,6 +51,7 @@ compositor_resources = gnome.compile_resources(
 subdir('protocol')
 subdir('src')
 subdir('compositor')
+subdir('session-manager')
 subdir('data')
 subdir('po')
 vapigen = find_program('vapigen', required: false)
