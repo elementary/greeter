@@ -22,7 +22,7 @@
 public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
-    private Hdy.Carousel carousel;
+    private Adw.Carousel carousel;
     private LightDM.Greeter lightdm_greeter;
     private Greeter.Settings settings;
     private Gtk.Button guest_login_button;
@@ -36,8 +36,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private bool installer_mode = false;
 
-    private Gtk.EventControllerKey key_controller;
-
     private const uint[] NAVIGATION_KEYS = {
         Gdk.Key.Up,
         Gdk.Key.Down,
@@ -47,14 +45,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     };
 
     construct {
-        app_paintable = true;
         decorated = false;
-        type_hint = Gdk.WindowTypeHint.DESKTOP;
 
         settings = new Greeter.Settings ();
         create_session_selection_action ();
-
-        set_visual (get_screen ().get_rgba_visual ());
 
         guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
 
@@ -81,7 +75,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         var manual_card = new Greeter.ManualCard ();
 
-        carousel = new Hdy.Carousel () {
+        carousel = new Adw.Carousel () {
             allow_long_swipes = true,
             vexpand = true
         };
@@ -89,16 +83,16 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         var manual_login_stack = new Gtk.Stack () {
             transition_type = Gtk.StackTransitionType.CROSSFADE
         };
-        manual_login_stack.add (carousel);
-        manual_login_stack.add (manual_card);
+        manual_login_stack.add_child (carousel);
+        manual_login_stack.add_child (manual_card);
 
         var main_box = new Gtk.Box (VERTICAL, 24) {
             margin_top = 24,
             margin_bottom = 24
         };
-        main_box.add (datetime_revealer);
-        main_box.add (manual_login_stack);
-        main_box.add (extra_login_grid);
+        main_box.append (datetime_revealer);
+        main_box.append (manual_login_stack);
+        main_box.append (extra_login_grid);
 
         child = main_box;
 
@@ -169,7 +163,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.bind_property ("hide-users-hint", manual_login_button, "active", GLib.BindingFlags.SYNC_CREATE);
 
         notify["scale-factor"].connect (() => {
-            maximize_window ();
+            maximize ();
         });
 
         lightdm_user_list = LightDM.UserList.get_instance ();
@@ -180,9 +174,12 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         manual_card.do_connect_username.connect (do_connect_username);
         manual_card.do_connect.connect (do_connect);
 
-        key_controller = new Gtk.EventControllerKey (this) {
+        var key_controller = new Gtk.EventControllerKey () {
             propagation_phase = CAPTURE
         };
+
+        ((Gtk.Widget) this).add_controller (key_controller);
+
         key_controller.key_pressed.connect ((keyval, keycode, state) => {
             var mods = state & Gtk.accelerator_get_default_mod_mask ();
 
@@ -222,26 +219,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         });
 
         carousel.page_changed.connect ((index) => {
-            var children = carousel.get_children ();
-
-            if (children.nth_data (index) is Greeter.UserCard) {
+            if (carousel.get_nth_page (index) is Greeter.UserCard) {
                 current_user_card_index = (int) index;
-                switch_to_card ((Greeter.UserCard) children.nth_data (index));
+                switch_to_card ((Greeter.UserCard) carousel.get_nth_page (index));
             }
-        });
-
-        // regrab focus when dpi changed
-        get_screen ().monitors_changed.connect (() => {
-            maximize_and_focus ();
-        });
-
-        leave_notify_event.connect (() => {
-            maximize_and_focus ();
-            return false;
-        });
-
-        destroy.connect (() => {
-            Gtk.main_quit ();
         });
 
         load_users.begin (() => {
@@ -254,7 +235,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             });
         });
 
-        maximize_window ();
+        maximize ();
 
         if (settings.activate_numlock) {
             try {
@@ -267,31 +248,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private void maximize_and_focus () {
         present ();
-        maximize_window ();
-        get_style_context ().add_class ("initialized");
+        maximize ();
+        add_css_class ("initialized");
+
+        // We can't move the window that probably need to go to compositor?
 
         if (current_card != null) {
             current_card.grab_focus ();
         }
-    }
-
-    private void maximize_window () {
-        var display = Gdk.Display.get_default ();
-        unowned Gdk.Seat seat = display.get_default_seat ();
-        unowned Gdk.Device? pointer = seat.get_pointer ();
-
-        Gdk.Monitor? monitor;
-        if (pointer != null) {
-            int x, y;
-            pointer.get_position (null, out x, out y);
-            monitor = display.get_monitor_at_point (x, y);
-        } else {
-            monitor = display.get_primary_monitor ();
-        }
-
-        var rect = monitor.get_geometry ();
-        resize (rect.width, rect.height);
-        move (rect.x, rect.y);
     }
 
     private void create_session_selection_action () {
@@ -490,9 +454,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private void add_card (LightDM.User lightdm_user) {
         var user_card = new Greeter.UserCard (lightdm_user);
-        user_card.show_all ();
 
-        carousel.add (user_card);
+        carousel.append (user_card);
 
         user_card.focus_requested.connect (() => {
             switch_to_card (user_card);
@@ -537,7 +500,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         current_card = user_card;
 
-        carousel.scroll_to (user_card);
+        carousel.scroll_to (user_card, true);
 
         user_card.set_settings ();
         user_card.show_input = true;
@@ -588,7 +551,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
 
         carousel.interactive = false;
-        carousel.scroll_to (current_card);
+        carousel.scroll_to (current_card, true);
     }
 
     private void go_previous () {
@@ -598,7 +561,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index - 1);
         if (next_card != null) {
-            carousel.scroll_to (next_card);
+            carousel.scroll_to (next_card, true);
         }
     }
 
@@ -609,7 +572,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index + 1);
         if (next_card != null) {
-            carousel.scroll_to (next_card);
+            carousel.scroll_to (next_card, true);
         }
     }
 }

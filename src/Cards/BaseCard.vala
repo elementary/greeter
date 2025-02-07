@@ -22,8 +22,6 @@
 public abstract class Greeter.BaseCard : Gtk.Box {
     public signal void do_connect (string? credential = null);
 
-    protected static Gtk.CssProvider css_provider;
-
     public bool connecting { get; set; default = false; }
     public bool need_password { get; set; default = false; }
     public bool use_fingerprint { get; set; default = false; }
@@ -38,11 +36,6 @@ public abstract class Greeter.BaseCard : Gtk.Box {
 
     protected Gtk.Revealer revealer;
 
-    static construct {
-        css_provider = new Gtk.CssProvider ();
-        css_provider.load_from_resource ("/io/elementary/greeter/Card.css");
-    }
-
     construct {
         revealer = new Gtk.Revealer () {
             halign = CENTER,
@@ -52,8 +45,7 @@ public abstract class Greeter.BaseCard : Gtk.Box {
             width_request = 350
         };
 
-        add (revealer);
-        events |= Gdk.EventMask.BUTTON_RELEASE_MASK;
+        append (revealer);
 
         revealer.notify["child-revealed"].connect (() => {
             if (!revealer.child_revealed) {
