@@ -40,6 +40,15 @@ public class Greeter.Application : Gtk.Application {
         var css_provider = new Gtk.CssProvider ();
         css_provider.load_from_resource ("/io/elementary/greeter/Application.css");
 
+        unowned var gtk_settings = Gtk.Settings.get_default ();
+        unowned var granite_settings = Granite.Settings.get_default ();
+
+        gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == DARK;
+
+        granite_settings.notify["prefers-color-scheme"].connect (() => {
+            gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == DARK;
+        });
+
         Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
