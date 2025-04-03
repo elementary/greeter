@@ -2,24 +2,23 @@ msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-11 22:41+0000\n"
-"PO-Revision-Date: 2023-02-17 21:25+0000\n"
+"PO-Revision-Date: 2025-04-04 21:55+0000\n"
 "Last-Translator: Mejans <farga@mejans.fr>\n"
-"Language-Team: Occitan <https://l10n.elementary.io/projects/desktop/greeter/"
-"oc/>\n"
+"Language-Team: Occitan <https://l10n.elementaryos.org/projects/desktop/"
+"greeter/oc/>\n"
 "Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #: compositor/WindowManager.vala:501
-#, fuzzy, c-format
-#| msgid "Changes will automatically revert after 30 seconds."
+#, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
-msgstr[0] "Las modificacions seràn automaticament anullada aprèp 30 segondas."
-msgstr[1] "Las modificacions seràn automaticament anullada aprèp 30 segondas."
+msgstr[0] "Las modificacions seràn automaticament anullada aprèp %s segonda."
+msgstr[1] "Las modificacions seràn automaticament anullada aprèp %s segondas."
 
 #: compositor/WindowManager.vala:508
 msgid "Keep new display settings?"
