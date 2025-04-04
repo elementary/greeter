@@ -6,6 +6,9 @@
  */
 
 public class Greeter.UserCard : Greeter.BaseCard {
+    private static Act.User lightdm_user_act;
+    private static Pantheon.AccountsService lightdm_act;
+
     public signal void go_left ();
     public signal void go_right ();
     public signal void focus_requested ();
@@ -23,6 +26,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Act.User act_user;
     private Pantheon.AccountsService greeter_act;
     private Pantheon.SettingsDaemon.AccountsService settings_act;
+
+    private ulong dark_mode_sync_id = 0;
 
     private Gtk.GestureMultiPress click_gesture;
     private Gtk.Revealer form_revealer;
@@ -206,9 +211,17 @@ public class Greeter.UserCard : Greeter.BaseCard {
         act_user = Act.UserManager.get_default ().get_user (lightdm_user.name);
         act_user.bind_property ("locked", username_label, "sensitive", INVERT_BOOLEAN);
         act_user.bind_property ("locked", session_button, "visible", INVERT_BOOLEAN);
-        act_user.notify["is-loaded"].connect (on_act_user_loaded);
 
-        on_act_user_loaded ();
+        if (lightdm_user_act == null) {
+            lightdm_user_act = Act.UserManager.get_default ().get_user (Environment.get_user_name ());
+        }
+
+        if (act_user.is_loaded && lightdm_user_act.is_loaded) {
+            on_act_user_loaded ();
+        } else {
+            act_user.notify["is-loaded"].connect (on_act_user_loaded);
+            lightdm_user_act.notify["is-loaded"].connect (on_act_user_loaded);
+        }
 
         card_overlay.focus.connect ((direction) => {
             if (direction == LEFT) {
@@ -232,6 +245,11 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         notify["show-input"].connect (() => {
             update_collapsed_class ();
+
+            // Stop settings sync, that starts in `set_settings ()`
+            if (!show_input) {
+                stop_settings_sync ();
+            }
         });
 
         password_entry.activate.connect (on_login);
@@ -308,47 +326,59 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private void on_act_user_loaded () {
-        if (!act_user.is_loaded) {
+        if (!act_user.is_loaded || !lightdm_user_act.is_loaded) {
             return;
         }
 
         unowned string? act_path = act_user.get_object_path ();
-        if (act_path != null) {
+        if (act_path == null) {
+            critical ("Couldn't load user act");
+            return;
+        }
+
+        try {
+            greeter_act = Bus.get_proxy_sync (
+                SYSTEM,
+                "org.freedesktop.Accounts",
+                act_path,
+                GET_INVALIDATED_PROPERTIES
+            );
+
+            settings_act = Bus.get_proxy_sync (
+                SYSTEM,
+                "org.freedesktop.Accounts",
+                act_path,
+                GET_INVALIDATED_PROPERTIES
+            );
+
+            is_24h = greeter_act.time_format != "12h";
+            prefers_accent_color = greeter_act.prefers_accent_color;
+            sleep_inactive_ac_timeout = greeter_act.sleep_inactive_ac_timeout;
+            sleep_inactive_ac_type = greeter_act.sleep_inactive_ac_type;
+            sleep_inactive_battery_timeout = greeter_act.sleep_inactive_battery_timeout;
+            sleep_inactive_battery_type = greeter_act.sleep_inactive_battery_type;
+        } catch (Error e) {
+            critical (e.message);
+            return;
+        }
+
+        if (lightdm_act == null) {
+            unowned string? lightdm_act_path = lightdm_user_act.get_object_path ();
+            if (lightdm_act_path == null) {
+                critical ("Couldn't load lighdm act");
+                return;
+            }
+
             try {
-                greeter_act = Bus.get_proxy_sync (
+                lightdm_act = Bus.get_proxy_sync (
                     SYSTEM,
                     "org.freedesktop.Accounts",
-                    act_path,
+                    lightdm_act_path,
                     GET_INVALIDATED_PROPERTIES
                 );
-
-                settings_act = Bus.get_proxy_sync (
-                    SYSTEM,
-                    "org.freedesktop.Accounts",
-                    act_path,
-                    GET_INVALIDATED_PROPERTIES
-                );
-
-                is_24h = greeter_act.time_format != "12h";
-                prefers_accent_color = greeter_act.prefers_accent_color;
-                sleep_inactive_ac_timeout = greeter_act.sleep_inactive_ac_timeout;
-                sleep_inactive_ac_type = greeter_act.sleep_inactive_ac_type;
-                sleep_inactive_battery_timeout = greeter_act.sleep_inactive_battery_timeout;
-                sleep_inactive_battery_type = greeter_act.sleep_inactive_battery_type;
-
-                ((DBusProxy) greeter_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
-                    string time_format;
-                    changed_properties.lookup ("TimeFormat", "s", out time_format);
-                    is_24h = time_format != "12h";
-
-                    changed_properties.lookup ("PrefersAccentColor", "i", out _prefers_accent_color);
-                    changed_properties.lookup ("SleepInactiveACTimeout", "i", out _sleep_inactive_ac_timeout);
-                    changed_properties.lookup ("SleepInactiveACType", "i", out _sleep_inactive_ac_type);
-                    changed_properties.lookup ("SleepInactiveBatteryTimeout", "i", out _sleep_inactive_battery_timeout);
-                    changed_properties.lookup ("SleepInactiveBatteryType", "i", out _sleep_inactive_battery_type);
-                });
             } catch (Error e) {
                 critical (e.message);
+                return;
             }
         }
 
@@ -392,16 +422,22 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     public void set_settings () {
-        if (!act_user.is_loaded) {
+        if (!show_input) {
+            return;
+        }
+
+        if (!act_user.is_loaded || !lightdm_user_act.is_loaded) {
             needs_settings_set = true;
             return;
         }
 
+        update_style ();
         set_keyboard_layouts ();
         set_mouse_touchpad_settings ();
         set_interface_settings ();
         set_night_light_settings ();
-        update_style ();
+
+        start_settings_sync ();
     }
 
     private void set_keyboard_layouts () {
@@ -471,6 +507,17 @@ public class Greeter.UserCard : Greeter.BaseCard {
         set_or_reset_settings_key (interface_settings, "font-name", settings_act.font_name);
         set_or_reset_settings_key (interface_settings, "monospace-font-name", settings_act.monospace_font_name);
 
+        var settings_daemon_settings = new GLib.Settings ("io.elementary.settings-daemon.prefers-color-scheme");
+
+        var latitude = new Variant.double (settings_act.last_coordinates.latitude);
+        var longitude = new Variant.double (settings_act.last_coordinates.longitude);
+        var coordinates = new Variant.tuple ({latitude, longitude});
+        settings_daemon_settings.set_value ("last-coordinates", coordinates);
+
+        settings_daemon_settings.set_enum ("prefer-dark-schedule", settings_act.prefer_dark_schedule);
+        settings_daemon_settings.set_value ("prefer-dark-schedule-from", settings_act.prefer_dark_schedule_from);
+        settings_daemon_settings.set_value ("prefer-dark-schedule-to", settings_act.prefer_dark_schedule_to);
+
         var touchscreen_settings = new GLib.Settings ("org.gnome.settings-daemon.peripherals.touchscreen");
         touchscreen_settings.set_boolean ("orientation-lock", settings_act.orientation_lock);
 
@@ -489,8 +536,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var night_light_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.color");
         night_light_settings.set_value ("night-light-enabled", settings_act.night_light_enabled);
 
-        var latitude = new Variant.double (settings_act.night_light_last_coordinates.latitude);
-        var longitude = new Variant.double (settings_act.night_light_last_coordinates.longitude);
+        var latitude = new Variant.double (settings_act.last_coordinates.latitude);
+        var longitude = new Variant.double (settings_act.last_coordinates.longitude);
         var coordinates = new Variant.tuple ({latitude, longitude});
         night_light_settings.set_value ("night-light-last-coordinates", coordinates);
 
@@ -503,6 +550,23 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private void update_style () {
         var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
         interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (prefers_accent_color));
+        lightdm_act.prefers_color_scheme = greeter_act.prefers_color_scheme;
+    }
+
+    private void start_settings_sync () {
+        debug ("Started settings sync for user %s", lightdm_user.name);
+
+        dark_mode_sync_id = ((DBusProxy) lightdm_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
+            int prefers_color_scheme;
+            changed_properties.lookup ("PrefersColorScheme", "i", out prefers_color_scheme);
+            greeter_act.prefers_color_scheme = prefers_color_scheme;
+        });
+    }
+
+    private void stop_settings_sync () {
+        debug ("Stopped settings sync for user %s", lightdm_user.name);
+
+        lightdm_act.disconnect (dark_mode_sync_id);
     }
 
     public override void wrong_credentials () {
