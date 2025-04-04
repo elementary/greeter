@@ -3,7 +3,10 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+
 window.background {
+    background: transparent;
+    box-shadow: none;
     opacity: 0;
     transition: opacity 1s ease;
 }
@@ -11,6 +14,7 @@ window.background {
 window.background.initialized {
     opacity: 1;
 }
+
 
 .date,
 .time {
