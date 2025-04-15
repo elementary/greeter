@@ -8,33 +8,35 @@ msgstr ""
 "Project-Id-Version: io.elementary.greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-11 22:41+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-04-16 14:55+0000\n"
+"Last-Translator: Ben Gordon Agnew <ben.gordon@posteo.de>\n"
+"Language-Team: Scots <https://l10n.elementaryos.org/projects/desktop/greeter/"
+"sco/>\n"
 "Language: sco\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #: compositor/WindowManager.vala:501
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Changes sill automaticlie change back after %i second."
+msgstr[1] "Changes sill automaticlie change back after %i second."
 
 #: compositor/WindowManager.vala:508
 msgid "Keep new display settings?"
-msgstr ""
+msgstr "Keep the new display settins?"
 
 #: compositor/WindowManager.vala:512
 msgid "Keep Settings"
-msgstr ""
+msgstr "Keep Settins"
 
 #: compositor/WindowManager.vala:513
 msgid "Use Previous Settings"
-msgstr ""
+msgstr "Use Previous Settins"
 
 #: src/MainWindow.vala:59
 msgid "Log in as Guest"
