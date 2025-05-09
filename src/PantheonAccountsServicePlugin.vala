@@ -2,6 +2,7 @@
 interface Pantheon.AccountsService : Object {
     public abstract string time_format { owned get; set; }
 
+    public abstract int prefers_color_scheme { get; set; }
     public abstract int prefers_accent_color { get; set; }
 
     [DBus (name = "SleepInactiveACTimeout")]

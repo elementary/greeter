@@ -232,6 +232,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         notify["show-input"].connect (() => {
             update_collapsed_class ();
+
+            if (greeter_act != null) {
+                SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
+            }
         });
 
         password_entry.activate.connect (on_login);
@@ -336,6 +340,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
                 sleep_inactive_battery_timeout = greeter_act.sleep_inactive_battery_timeout;
                 sleep_inactive_battery_type = greeter_act.sleep_inactive_battery_type;
 
+                if (show_input) {
+                    SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
+                }
+
                 ((DBusProxy) greeter_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
                     string time_format;
                     changed_properties.lookup ("TimeFormat", "s", out time_format);
@@ -346,6 +354,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
                     changed_properties.lookup ("SleepInactiveACType", "i", out _sleep_inactive_ac_type);
                     changed_properties.lookup ("SleepInactiveBatteryTimeout", "i", out _sleep_inactive_battery_timeout);
                     changed_properties.lookup ("SleepInactiveBatteryType", "i", out _sleep_inactive_battery_type);
+
+                    if (show_input) {
+                        SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
+                    }
                 });
             } catch (Error e) {
                 critical (e.message);
