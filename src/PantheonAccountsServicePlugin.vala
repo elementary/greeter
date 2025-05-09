@@ -16,6 +16,11 @@ interface Pantheon.AccountsService : Object {
 
 [DBus (name = "io.elementary.SettingsDaemon.AccountsService")]
 interface Pantheon.SettingsDaemon.AccountsService : Object {
+    public struct Coordinates {
+        public double latitude;
+        public double longitude;
+    }
+
     /* Keyboard */
     public struct KeyboardLayout {
         public string backend;
@@ -60,14 +65,15 @@ interface Pantheon.SettingsDaemon.AccountsService : Object {
     public abstract string monospace_font_name { owned get; set; }
     public abstract bool orientation_lock { get; set; }
 
-    /* Night Light */
-    public struct Coordinates {
-        public double latitude;
-        public double longitude;
-    }
+    /* Prefer Dark Schedule (part of interface settings)*/
+    /* Last coordinates are reused for Night Light settings */
+    public abstract Coordinates last_coordinates { get; set; }
+    public abstract int prefer_dark_schedule { get; set; }
+    public abstract double prefer_dark_schedule_from { get; set; }
+    public abstract double prefer_dark_schedule_to { get; set; }
 
+    /* Night Light */
     public abstract bool night_light_enabled { get; set; }
-    public abstract Coordinates night_light_last_coordinates { get; set; }
     public abstract bool night_light_schedule_automatic { get; set; }
     public abstract double night_light_schedule_from { get; set; }
     public abstract double night_light_schedule_to { get; set; }

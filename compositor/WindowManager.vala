@@ -223,6 +223,7 @@ namespace GreeterCompositor {
                 if (GLib.Environment.get_variable ("DESKTOP_SESSION") != "installer") {
                     start_command.begin ({ "io.elementary.greeter-session-manager" });
                     start_command.begin ({ "io.elementary.greeter" });
+                    start_command.begin ({ "io.elementary.settings-daemon" });
                 }
 
                 return GLib.Source.REMOVE;

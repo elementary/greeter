@@ -483,6 +483,17 @@ public class Greeter.UserCard : Greeter.BaseCard {
         set_or_reset_settings_key (interface_settings, "font-name", settings_act.font_name);
         set_or_reset_settings_key (interface_settings, "monospace-font-name", settings_act.monospace_font_name);
 
+        var settings_daemon_settings = new GLib.Settings ("io.elementary.settings-daemon.prefers-color-scheme");
+
+        var latitude = new Variant.double (settings_act.last_coordinates.latitude);
+        var longitude = new Variant.double (settings_act.last_coordinates.longitude);
+        var coordinates = new Variant.tuple ({latitude, longitude});
+        settings_daemon_settings.set_value ("last-coordinates", coordinates);
+
+        settings_daemon_settings.set_enum ("prefer-dark-schedule", settings_act.prefer_dark_schedule);
+        settings_daemon_settings.set_value ("prefer-dark-schedule-from", settings_act.prefer_dark_schedule_from);
+        settings_daemon_settings.set_value ("prefer-dark-schedule-to", settings_act.prefer_dark_schedule_to);
+
         var touchscreen_settings = new GLib.Settings ("org.gnome.settings-daemon.peripherals.touchscreen");
         touchscreen_settings.set_boolean ("orientation-lock", settings_act.orientation_lock);
 
@@ -501,8 +512,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var night_light_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.color");
         night_light_settings.set_value ("night-light-enabled", settings_act.night_light_enabled);
 
-        var latitude = new Variant.double (settings_act.night_light_last_coordinates.latitude);
-        var longitude = new Variant.double (settings_act.night_light_last_coordinates.longitude);
+        var latitude = new Variant.double (settings_act.last_coordinates.latitude);
+        var longitude = new Variant.double (settings_act.last_coordinates.longitude);
         var coordinates = new Variant.tuple ({latitude, longitude});
         night_light_settings.set_value ("night-light-last-coordinates", coordinates);
 
