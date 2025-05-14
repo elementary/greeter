@@ -1,6 +1,6 @@
 /*
  * Copyright 2012-2014 Tom Beckmann, Rico Tzschichholz
- * Copyright 2018 elementary LLC. (https://elementary.io)
+ * Copyright 2018-2025 elementary, Inc. (https://elementary.io)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,25 +21,9 @@ using Meta;
 namespace GreeterCompositor {
 
     public class WindowManager : Meta.Plugin {
-
-        /**
-         * {@inheritDoc}
-         */
         public Clutter.Actor ui_group { get; protected set; }
-
-        /**
-         * {@inheritDoc}
-         */
         public Clutter.Stage stage { get; protected set; }
-
-        /**
-         * {@inheritDoc}
-         */
         public Clutter.Actor window_group { get; protected set; }
-
-        /**
-         * {@inheritDoc}
-         */
         public Clutter.Actor top_window_group { get; protected set; }
 
         /**
@@ -59,23 +43,7 @@ namespace GreeterCompositor {
         private GLib.Settings application_settings;
         private int reader_pid = 0;
 
-        //WindowSwitcher? winswitcher = null;
-        //ActivatableComponent? workspace_view = null;
-        //ActivatableComponent? window_overview = null;
-
         private Zoom zoom;
-
-        //ScreenSaver? screensaver;
-
-        //Gee.LinkedList<ModalProxy> modal_stack = new Gee.LinkedList<ModalProxy> ();
-
-        Gee.HashSet<Meta.WindowActor> minimizing = new Gee.HashSet<Meta.WindowActor> ();
-        Gee.HashSet<Meta.WindowActor> maximizing = new Gee.HashSet<Meta.WindowActor> ();
-        Gee.HashSet<Meta.WindowActor> unmaximizing = new Gee.HashSet<Meta.WindowActor> ();
-        Gee.HashSet<Meta.WindowActor> mapping = new Gee.HashSet<Meta.WindowActor> ();
-        Gee.HashSet<Meta.WindowActor> destroying = new Gee.HashSet<Meta.WindowActor> ();
-        Gee.HashSet<Meta.WindowActor> unminimizing = new Gee.HashSet<Meta.WindowActor> ();
-        GLib.HashTable<Meta.Window, int> ws_assoc = new GLib.HashTable<Meta.Window, int> (direct_hash, direct_equal);
 
         construct {
             info = Meta.PluginInfo () {name = "GreeterCompositor", version = Constants.VERSION, author = "elementary LLC.",
@@ -341,149 +309,38 @@ namespace GreeterCompositor {
             show_window_menu (window, menu, rect.x, rect.y);
         }
 
-        /*
-         * effects
-         */
-
-        void handle_fullscreen_window (Meta.Window window, Meta.SizeChange which_change) {
-            // Only handle windows which are located on the primary monitor
-            if (!window.is_on_primary_monitor ())
-                return;
-
-            // Due to how this is implemented, by relying on the functionality
-            // offered by the dynamic workspace handler, let's just bail out
-            // if that's not available.
-            if (!Prefs.get_dynamic_workspaces ())
-                return;
-
-            unowned Meta.Display display = get_display ();
-            var time = display.get_current_time ();
-            unowned Meta.Workspace win_ws = window.get_workspace ();
-            unowned Meta.WorkspaceManager manager = display.get_workspace_manager ();
-
-            if (which_change == Meta.SizeChange.FULLSCREEN) {
-                // Do nothing if the current workspace would be empty
-                if (Utils.get_n_windows (win_ws) <= 1)
-                    return;
-
-                var old_ws_index = win_ws.index ();
-                var new_ws_index = old_ws_index + 1;
-                //InternalUtils.insert_workspace_with_window (new_ws_index, window);
-
-                var new_ws_obj = manager.get_workspace_by_index (new_ws_index);
-                window.change_workspace (new_ws_obj);
-                new_ws_obj.activate_with_focus (window, time);
-
-                ws_assoc.insert (window, old_ws_index);
-            } else if (ws_assoc.contains (window)) {
-                var old_ws_index = ws_assoc.get (window);
-                var new_ws_index = win_ws.index ();
-
-                if (new_ws_index != old_ws_index && old_ws_index < manager.get_n_workspaces ()) {
-                    var old_ws_obj = manager.get_workspace_by_index (old_ws_index);
-                    window.change_workspace (old_ws_obj);
-                    old_ws_obj.activate_with_focus (window, time);
-                }
-
-                ws_assoc.remove (window);
-            }
-        }
-
 #if HAS_MUTTER45
         public override void size_change (Meta.WindowActor actor, Meta.SizeChange which_change, Mtk.Rectangle old_frame_rect, Mtk.Rectangle old_buffer_rect) {
 #else
         public override void size_change (Meta.WindowActor actor, Meta.SizeChange which_change, Meta.Rectangle old_frame_rect, Meta.Rectangle old_buffer_rect) {
 #endif
-            unowned Meta.Window window = actor.get_meta_window ();
-            if (window.get_tile_match () != null) {
-                size_change_completed (actor);
-                return;
-            }
-
-            ulong signal_id = 0U;
-            signal_id = window.size_changed.connect (() => {
-                window.disconnect (signal_id);
-
-                switch (which_change) {
-                    case Meta.SizeChange.MAXIMIZE:
-                    case Meta.SizeChange.UNMAXIMIZE:
-                        break;
-                    case Meta.SizeChange.FULLSCREEN:
-                    case Meta.SizeChange.UNFULLSCREEN:
-                        handle_fullscreen_window (actor.get_meta_window (), which_change);
-                        break;
-                }
-
-                size_change_completed (actor);
-            });
+            size_change_completed (actor);
         }
 
         public override void minimize (WindowActor actor) {
+            actor.hide ();
+            minimize_completed (actor);
         }
 
         public override void unminimize (WindowActor actor) {
             actor.show ();
             unminimize_completed (actor);
-            return;
         }
 
         public override void map (WindowActor actor) {
             actor.show ();
             map_completed (actor);
-            return;
         }
 
         public override void destroy (WindowActor actor) {
             destroy_completed (actor);
             Utils.request_clean_icon_cache (get_all_xids ());
-
-            return;
         }
 
-        // Cancel attached animation of an actor and reset it
-        bool end_animation (ref Gee.HashSet<Meta.WindowActor> list, WindowActor actor) {
-            if (!list.contains (actor))
-                return false;
-
-            if (actor.is_destroyed ()) {
-                list.remove (actor);
-                return false;
-            }
-
-            actor.remove_all_transitions ();
-            actor.opacity = 255U;
-            actor.set_scale (1.0f, 1.0f);
-            actor.rotation_angle_x = 0.0f;
-            actor.set_pivot_point (0.0f, 0.0f);
-
-            list.remove (actor);
-            return true;
-        }
-
-        public override void kill_window_effects (WindowActor actor) {
-            if (end_animation (ref mapping, actor)) {
-                map_completed (actor);
-            }
-
-            if (end_animation (ref unminimizing, actor)) {
-                unminimize_completed (actor);
-            }
-
-            if (end_animation (ref minimizing, actor)) {
-                minimize_completed (actor);
-            }
-
-            if (end_animation (ref destroying, actor)) {
-                destroy_completed (actor);
-            }
-
-            end_animation (ref unmaximizing, actor);
-            end_animation (ref maximizing, actor);
-        }
+        public override void kill_window_effects (WindowActor actor) {}
 
         public override void switch_workspace (int from, int to, MotionDirection direction) {
             switch_workspace_completed ();
-            return;
         }
 
         public override void locate_pointer () {
