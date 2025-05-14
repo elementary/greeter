@@ -232,6 +232,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         notify["show-input"].connect (() => {
             update_collapsed_class ();
+
+            if (greeter_act != null) {
+                SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
+            }
         });
 
         password_entry.activate.connect (on_login);
@@ -336,6 +340,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
                 sleep_inactive_battery_timeout = greeter_act.sleep_inactive_battery_timeout;
                 sleep_inactive_battery_type = greeter_act.sleep_inactive_battery_type;
 
+                if (show_input) {
+                    SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
+                }
+
                 ((DBusProxy) greeter_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
                     string time_format;
                     changed_properties.lookup ("TimeFormat", "s", out time_format);
@@ -346,6 +354,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
                     changed_properties.lookup ("SleepInactiveACType", "i", out _sleep_inactive_ac_type);
                     changed_properties.lookup ("SleepInactiveBatteryTimeout", "i", out _sleep_inactive_battery_timeout);
                     changed_properties.lookup ("SleepInactiveBatteryType", "i", out _sleep_inactive_battery_type);
+
+                    if (show_input) {
+                        SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
+                    }
                 });
             } catch (Error e) {
                 critical (e.message);
@@ -471,6 +483,17 @@ public class Greeter.UserCard : Greeter.BaseCard {
         set_or_reset_settings_key (interface_settings, "font-name", settings_act.font_name);
         set_or_reset_settings_key (interface_settings, "monospace-font-name", settings_act.monospace_font_name);
 
+        var settings_daemon_settings = new GLib.Settings ("io.elementary.settings-daemon.prefers-color-scheme");
+
+        var latitude = new Variant.double (settings_act.last_coordinates.latitude);
+        var longitude = new Variant.double (settings_act.last_coordinates.longitude);
+        var coordinates = new Variant.tuple ({latitude, longitude});
+        settings_daemon_settings.set_value ("last-coordinates", coordinates);
+
+        settings_daemon_settings.set_enum ("prefer-dark-schedule", settings_act.prefer_dark_schedule);
+        settings_daemon_settings.set_value ("prefer-dark-schedule-from", settings_act.prefer_dark_schedule_from);
+        settings_daemon_settings.set_value ("prefer-dark-schedule-to", settings_act.prefer_dark_schedule_to);
+
         var touchscreen_settings = new GLib.Settings ("org.gnome.settings-daemon.peripherals.touchscreen");
         touchscreen_settings.set_boolean ("orientation-lock", settings_act.orientation_lock);
 
@@ -489,8 +512,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var night_light_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.color");
         night_light_settings.set_value ("night-light-enabled", settings_act.night_light_enabled);
 
-        var latitude = new Variant.double (settings_act.night_light_last_coordinates.latitude);
-        var longitude = new Variant.double (settings_act.night_light_last_coordinates.longitude);
+        var latitude = new Variant.double (settings_act.last_coordinates.latitude);
+        var longitude = new Variant.double (settings_act.last_coordinates.longitude);
         var coordinates = new Variant.tuple ({latitude, longitude});
         night_light_settings.set_value ("night-light-last-coordinates", coordinates);
 
