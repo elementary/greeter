@@ -1,6 +1,6 @@
 /*
  * Copyright 2012-2014 Tom Beckmann, Rico Tzschichholz
- * Copyright 2018 elementary LLC. (https://elementary.io)
+ * Copyright 2018-2025 elementary, Inc. (https://elementary.io)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -314,13 +314,12 @@ namespace GreeterCompositor {
 #else
         public override void size_change (Meta.WindowActor actor, Meta.SizeChange which_change, Meta.Rectangle old_frame_rect, Meta.Rectangle old_buffer_rect) {
 #endif
-            unowned Meta.Window window = actor.get_meta_window ();
-            if (window.get_tile_match () != null) {
-                size_change_completed (actor);
-            }
+            size_change_completed (actor);
         }
 
         public override void minimize (WindowActor actor) {
+            actor.hide ();
+            minimize_completed (actor);
         }
 
         public override void unminimize (WindowActor actor) {
@@ -338,12 +337,10 @@ namespace GreeterCompositor {
             Utils.request_clean_icon_cache (get_all_xids ());
         }
 
-        public override void kill_window_effects (WindowActor actor) {
-        }
+        public override void kill_window_effects (WindowActor actor) {}
 
         public override void switch_workspace (int from, int to, MotionDirection direction) {
             switch_workspace_completed ();
-            return;
         }
 
         public override void locate_pointer () {
