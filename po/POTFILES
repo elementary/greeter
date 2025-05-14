@@ -17,8 +17,6 @@ compositor/KeyboardManager.vala
 compositor/main.vala
 compositor/MediaFeedback.vala
 compositor/PointerLocator.vala
-compositor/SettingsDaemon.vala
-compositor/SubprocessSupervisor.vala
 compositor/Utils.vala
 compositor/WindowManager.vala
 src/Application.vala

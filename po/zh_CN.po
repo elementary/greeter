@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-13 20:19+0000\n"
+"POT-Creation-Date: 2025-02-11 22:41+0000\n"
 "PO-Revision-Date: 2024-08-07 17:16+0000\n"
 "Last-Translator: anonymous <noreply@weblate.org>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
@@ -20,45 +20,45 @@ msgstr ""
 "X-Generator: Weblate 5.6.2\n"
 "X-Launchpad-Export-Date: 2017-03-14 06:58+0000\n"
 
-#: compositor/WindowManager.vala:492
+#: compositor/WindowManager.vala:501
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
 msgstr[0] "变更将在 %i 秒后撤销。"
 
-#: compositor/WindowManager.vala:499
+#: compositor/WindowManager.vala:508
 msgid "Keep new display settings?"
 msgstr "要保留新的显示设置吗？"
 
-#: compositor/WindowManager.vala:503
+#: compositor/WindowManager.vala:512
 msgid "Keep Settings"
 msgstr "保留设置"
 
-#: compositor/WindowManager.vala:504
+#: compositor/WindowManager.vala:513
 msgid "Use Previous Settings"
 msgstr "恢复原有设置"
 
-#: src/MainWindow.vala:67
+#: src/MainWindow.vala:59
 msgid "Log in as Guest"
 msgstr "以访客身份登入"
 
-#: src/MainWindow.vala:69
+#: src/MainWindow.vala:61
 msgid "Manual Login…"
 msgstr "手动登录…"
 
-#: src/MainWindow.vala:403
+#: src/MainWindow.vala:392
 msgid "Unable to Log In"
 msgstr "无法登录"
 
-#: src/MainWindow.vala:404
+#: src/MainWindow.vala:393
 msgid "Starting the session has failed."
 msgstr "会话启动失败。"
 
-#: src/MainWindow.vala:481
+#: src/MainWindow.vala:470
 msgid "Unable to Launch Initial Setup"
 msgstr "无法启动初始化设置"
 
-#: src/MainWindow.vala:486
+#: src/MainWindow.vala:475
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -78,27 +78,27 @@ msgstr "用户名"
 msgid "Try username"
 msgstr "试试 username"
 
-#: src/Cards/UserCard.vala:107 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:105 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "登录"
 
-#: src/Cards/UserCard.vala:119
+#: src/Cards/UserCard.vala:117
 msgid "Account disabled"
 msgstr "账户已禁用"
 
-#: src/Cards/UserCard.vala:197
+#: src/Cards/UserCard.vala:192
 msgid "Session cannot be changed while user is logged in"
 msgstr "用户处于登入状态时无法更改会话"
 
-#: src/Widgets/CapsLockRevealer.vala:70
+#: src/Widgets/CapsLockRevealer.vala:61
 msgid "Caps Lock & Num Lock are on"
 msgstr "大写锁定和数字锁定已打开"
 
-#: src/Widgets/CapsLockRevealer.vala:72
+#: src/Widgets/CapsLockRevealer.vala:63
 msgid "Caps Lock is on"
 msgstr "大写锁定已打开"
 
-#: src/Widgets/CapsLockRevealer.vala:74
+#: src/Widgets/CapsLockRevealer.vala:65
 msgid "Num Lock is on"
 msgstr "数字锁定已打开"
 
