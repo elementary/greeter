@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-13 20:19+0000\n"
+"POT-Creation-Date: 2025-02-11 22:41+0000\n"
 "PO-Revision-Date: 2019-11-07 10:24+0000\n"
 "Last-Translator: Shtonchjo <shtonchjo@gmail.com>\n"
 "Language-Team: Esperanto <https://l10n.elementary.io/projects/desktop/"
@@ -20,46 +20,46 @@ msgstr ""
 "X-Generator: Weblate 3.7.1\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:492
+#: compositor/WindowManager.vala:501
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: compositor/WindowManager.vala:499
+#: compositor/WindowManager.vala:508
 msgid "Keep new display settings?"
 msgstr ""
 
-#: compositor/WindowManager.vala:503
+#: compositor/WindowManager.vala:512
 msgid "Keep Settings"
 msgstr ""
 
-#: compositor/WindowManager.vala:504
+#: compositor/WindowManager.vala:513
 msgid "Use Previous Settings"
 msgstr ""
 
-#: src/MainWindow.vala:67
+#: src/MainWindow.vala:59
 msgid "Log in as Guest"
 msgstr "Ensaluti kiel Gasto"
 
-#: src/MainWindow.vala:69
+#: src/MainWindow.vala:61
 msgid "Manual Login…"
 msgstr "Mana ensaluto…"
 
-#: src/MainWindow.vala:403
+#: src/MainWindow.vala:392
 msgid "Unable to Log In"
 msgstr "Neeblis ensaluti"
 
-#: src/MainWindow.vala:404
+#: src/MainWindow.vala:393
 msgid "Starting the session has failed."
 msgstr "Startigo de la seanco fiaskis."
 
-#: src/MainWindow.vala:481
+#: src/MainWindow.vala:470
 msgid "Unable to Launch Initial Setup"
 msgstr "Neeblis lanĉi la komencan agordadon"
 
-#: src/MainWindow.vala:486
+#: src/MainWindow.vala:475
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -79,27 +79,27 @@ msgstr "Uzantonomo"
 msgid "Try username"
 msgstr "Provu uzantonomon"
 
-#: src/Cards/UserCard.vala:107 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:105 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Ensaluti"
 
-#: src/Cards/UserCard.vala:119
+#: src/Cards/UserCard.vala:117
 msgid "Account disabled"
 msgstr "Konto malaktivigita"
 
-#: src/Cards/UserCard.vala:197
+#: src/Cards/UserCard.vala:192
 msgid "Session cannot be changed while user is logged in"
 msgstr "Neeblas ŝanĝi la seancon dum estas ensalutinto"
 
-#: src/Widgets/CapsLockRevealer.vala:70
+#: src/Widgets/CapsLockRevealer.vala:61
 msgid "Caps Lock & Num Lock are on"
 msgstr "Maj. Bask. & Nom. Bask. ŝaltitaj"
 
-#: src/Widgets/CapsLockRevealer.vala:72
+#: src/Widgets/CapsLockRevealer.vala:63
 msgid "Caps Lock is on"
 msgstr "Maj. Bask. ŝaltita"
 
-#: src/Widgets/CapsLockRevealer.vala:74
+#: src/Widgets/CapsLockRevealer.vala:65
 msgid "Num Lock is on"
 msgstr "Nom. Bask. ŝaltita"
 

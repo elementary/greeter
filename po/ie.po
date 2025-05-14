@@ -1,59 +1,58 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-13 20:19+0000\n"
-"PO-Revision-Date: 2018-09-15 00:10+0000\n"
+"POT-Creation-Date: 2025-02-11 22:41+0000\n"
+"PO-Revision-Date: 2025-03-20 07:55+0000\n"
 "Last-Translator: Carmina16 <mistresssilvara@hotmail.com>\n"
-"Language-Team: Occidental <https://weblate.elementary.io/projects/desktop/"
+"Language-Team: Occidental <https://l10n.elementaryos.org/projects/desktop/"
 "greeter/ie/>\n"
 "Language: ie\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.0.1\n"
+"X-Generator: Weblate 5.10.4\n"
 
-#: compositor/WindowManager.vala:492
+#: compositor/WindowManager.vala:501
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Li modificationes va esser revertet pos %i seconde."
+msgstr[1] "Li modificationes va esser revertet pos %i secondes."
 
-#: compositor/WindowManager.vala:499
+#: compositor/WindowManager.vala:508
 msgid "Keep new display settings?"
-msgstr ""
+msgstr "Reterner li nov parametres del ecran?"
 
-#: compositor/WindowManager.vala:503
+#: compositor/WindowManager.vala:512
 msgid "Keep Settings"
-msgstr ""
+msgstr "Retener"
 
-#: compositor/WindowManager.vala:504
+#: compositor/WindowManager.vala:513
 msgid "Use Previous Settings"
-msgstr ""
+msgstr "Usar li precedent"
 
-#: src/MainWindow.vala:67
+#: src/MainWindow.vala:59
 msgid "Log in as Guest"
-msgstr ""
+msgstr "Session de gast"
 
-#: src/MainWindow.vala:69
-#, fuzzy
+#: src/MainWindow.vala:61
 msgid "Manual Login…"
-msgstr "Aperter manualmen"
+msgstr "Aperter manualmen…"
 
-#: src/MainWindow.vala:403
+#: src/MainWindow.vala:392
 msgid "Unable to Log In"
-msgstr ""
+msgstr "Ne successat aperter li session"
 
-#: src/MainWindow.vala:404
+#: src/MainWindow.vala:393
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Ne successat iniciar li session."
 
-#: src/MainWindow.vala:481
+#: src/MainWindow.vala:470
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Ne successat lansar li configuration inicial"
 
-#: src/MainWindow.vala:486
+#: src/MainWindow.vala:475
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -65,39 +64,39 @@ msgstr "Aperter manualmen"
 
 #: src/Cards/ManualCard.vala:30
 msgid "Username"
-msgstr ""
+msgstr "Nómine"
 
 #: src/Cards/ManualCard.vala:33
 msgid "Try username"
-msgstr ""
+msgstr "Provar li nómine"
 
-#: src/Cards/UserCard.vala:107 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:105 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Aperter"
 
-#: src/Cards/UserCard.vala:119
+#: src/Cards/UserCard.vala:117
 msgid "Account disabled"
-msgstr ""
+msgstr "Li conto es deactivat"
 
-#: src/Cards/UserCard.vala:197
+#: src/Cards/UserCard.vala:192
 msgid "Session cannot be changed while user is logged in"
 msgstr ""
 
-#: src/Widgets/CapsLockRevealer.vala:70
+#: src/Widgets/CapsLockRevealer.vala:61
 msgid "Caps Lock & Num Lock are on"
-msgstr ""
+msgstr "Caps Lock e Num Lock es activ"
 
-#: src/Widgets/CapsLockRevealer.vala:72
+#: src/Widgets/CapsLockRevealer.vala:63
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps Lock es activ"
 
-#: src/Widgets/CapsLockRevealer.vala:74
+#: src/Widgets/CapsLockRevealer.vala:65
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Num Lock es activ"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
-msgstr ""
+msgstr "Contrasigne"
 
 #~ msgid "Place your finger"
 #~ msgstr "Mette vor fingre"
