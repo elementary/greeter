@@ -59,6 +59,9 @@ interface Pantheon.SettingsDaemon.AccountsService : Object {
     public abstract string monospace_font_name { owned get; set; }
     public abstract bool orientation_lock { get; set; }
 
+    /* Wingpanel */
+    public abstract bool wingpanel_use_transparency { get; set; }
+
     /* Night Light */
     public struct Coordinates {
         public double latitude;
