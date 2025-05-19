@@ -19,6 +19,7 @@ executable(
     'PantheonAccountsServicePlugin.vala',
     'PromptText.vala',
     'Settings.vala',
+    'SettingsPortal.vala',
     'Cards/BaseCard.vala',
     'Cards/ManualCard.vala',
     'Cards/UserCard.vala',
