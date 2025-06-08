@@ -20,6 +20,7 @@
  */
 
 public class Greeter.MainWindow : Gtk.ApplicationWindow {
+    private Pantheon.Desktop.Greeter? desktop_greeter;
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
     private Hdy.Carousel carousel;
@@ -50,7 +51,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     construct {
         app_paintable = true;
         decorated = false;
-        type_hint = Gdk.WindowTypeHint.DESKTOP;
 
         gsettings = new GLib.Settings ("io.elementary.greeter");
 
@@ -264,6 +264,62 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             } catch (Error e) {
                 warning ("Unable to spawn numlockx to set numlock state");
             }
+        }
+
+        main_box.realize.connect (init_panel);
+    }
+
+    private void init_panel () {
+        if (Gdk.Display.get_default () is Gdk.Wayland.Display) {
+            // We have to wrap in Idle otherwise the Meta.Window of the WaylandSurface in Gala is still null
+            Idle.add_once (init_wl);
+        } else {
+            init_x ();
+        }
+    }
+
+    private static Wl.RegistryListener registry_listener;
+    private void init_wl () {
+        registry_listener.global = registry_handle_global;
+        unowned var display = Gdk.Display.get_default ();
+        if (display is Gdk.Wayland.Display) {
+            unowned var wl_display = ((Gdk.Wayland.Display) display).get_wl_display ();
+            var wl_registry = wl_display.get_registry ();
+            wl_registry.add_listener (
+                registry_listener,
+                this
+            );
+
+            if (wl_display.roundtrip () < 0) {
+                return;
+            }
+        }
+    }
+
+    public void registry_handle_global (Wl.Registry wl_registry, uint32 name, string @interface, uint32 version) {
+        if (@interface == "io_elementary_pantheon_shell_v1") {
+            var desktop_shell = wl_registry.bind<Pantheon.Desktop.Shell> (name, ref Pantheon.Desktop.Shell.iface, uint32.min (version, 1));
+            unowned var window = get_window ();
+            if (window is Gdk.Wayland.Window) {
+                unowned var wl_surface = ((Gdk.Wayland.Window) window).get_wl_surface ();
+                desktop_greeter = desktop_shell.get_greeter (wl_surface);
+                desktop_greeter.init ();
+            }
+        }
+    }
+
+    private void init_x () {
+        var display = Gdk.Display.get_default ();
+        if (display is Gdk.X11.Display) {
+            unowned var xdisplay = ((Gdk.X11.Display) display).get_xdisplay ();
+
+            var window = ((Gdk.X11.Window) get_window ()).get_xid ();
+
+            var prop = xdisplay.intern_atom ("_MUTTER_HINTS", false);
+
+            var value = "greeter=1";
+
+            xdisplay.change_property (window, prop, X.XA_STRING, 8, 0, (uchar[]) value, value.length);
         }
     }
 

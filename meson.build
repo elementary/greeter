@@ -48,6 +48,7 @@ compositor_resources = gnome.compile_resources(
     source_dir: 'data'
 )
 
+subdir('protocol')
 subdir('src')
 subdir('compositor')
 subdir('session-manager')
