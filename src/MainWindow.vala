@@ -38,14 +38,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private Gtk.EventControllerKey key_controller;
 
-    private const uint[] NAVIGATION_KEYS = {
-        Gdk.Key.Up,
-        Gdk.Key.Down,
-        Gdk.Key.Left,
-        Gdk.Key.Right,
-        Gdk.Key.Tab
-    };
-
     construct {
         app_paintable = true;
         decorated = false;
@@ -184,41 +176,34 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             propagation_phase = CAPTURE
         };
         key_controller.key_pressed.connect ((keyval, keycode, state) => {
-            var mods = state & Gtk.accelerator_get_default_mod_mask ();
-
-            if (!(keyval in NAVIGATION_KEYS)) {
-                // Don't focus if it is a modifier or if search_box is already focused
-                unowned var current_focus = get_focus ();
-                if ((mods == 0) && (current_focus == null || !current_focus.is_ancestor (current_card))) {
-                    current_card.grab_focus ();
-                }
-
+            if (!(current_card is UserCard)) {
                 return Gdk.EVENT_PROPAGATE;
             }
 
-            // arrow key is being used to navigate
-            if (current_card is UserCard) {
-                unowned var focused_entry = (Gtk.Entry) get_focus ();
-                if (focused_entry != null && focused_entry.is_ancestor (current_card)) {
-                    if (focused_entry.text == "") {
-                        if (keyval == Gdk.Key.Left) {
-                            if (Gtk.StateFlags.DIR_LTR in get_state_flags ()) {
-                                go_previous ();
-                            } else {
-                                go_next ();
-                            }
-                            return Gdk.EVENT_STOP;
-                        } else if (keyval == Gdk.Key.Right) {
-                            if (Gtk.StateFlags.DIR_LTR in get_state_flags ()) {
-                                go_next ();
-                            } else {
-                                go_previous ();
-                            }
-                            return Gdk.EVENT_STOP;
-                        }
-                    }
-                }
+            unowned var focused_entry = (Gtk.Entry) get_focus ();
+            if (focused_entry == null || !focused_entry.is_ancestor (current_card) || focused_entry.text != "") {
+                return Gdk.EVENT_PROPAGATE;
             }
+
+            var ltr = Gtk.StateFlags.DIR_LTR in get_state_flags ();
+
+            if (keyval == Gdk.Key.Left) {
+                if (ltr) {
+                    go_previous ();
+                } else {
+                    go_next ();
+                }
+                return Gdk.EVENT_STOP;
+            } else if (keyval == Gdk.Key.Right) {
+                if (ltr) {
+                    go_next ();
+                } else {
+                    go_previous ();
+                }
+                return Gdk.EVENT_STOP;
+            }
+
+            return Gdk.EVENT_PROPAGATE;
         });
 
         carousel.page_changed.connect ((index) => {
