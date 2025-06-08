@@ -119,6 +119,8 @@ compositor_files = files(
   'Zoom.vala'
 )
 
+subdir('protocol')
+
 executable(
   meson.project_name()+'-compositor',
   compositor_files,
