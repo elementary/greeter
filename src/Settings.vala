@@ -20,30 +20,8 @@
  */
 
 public class Greeter.Settings : GLib.Object {
-    private GLib.KeyFile state;
     private GLib.KeyFile settings;
     private GLib.Settings power_settings;
-    private string state_file;
-
-    public string? last_user {
-        owned get {
-            try {
-                return state.get_value ("greeter", "last-user");
-            } catch (Error e) {
-                debug (e.message);
-                return null;
-            }
-        }
-
-        set {
-            state.set_value ("greeter", "last-user", value);
-            try {
-                state.save_to_file (state_file);
-            } catch (Error e) {
-                critical ("Failed to write state: %s", e.message);
-            }
-        }
-    }
 
     public int sleep_inactive_ac_timeout {
         set {
@@ -89,21 +67,6 @@ public class Greeter.Settings : GLib.Object {
     }
 
     construct {
-        var state_dir = GLib.Path.build_filename (GLib.Environment.get_user_cache_dir (), "io.elementary.greeter");
-        GLib.DirUtils.create_with_parents (state_dir, 0775);
-
-        unowned string? xdg_seat = GLib.Environment.get_variable ("XDG_SEAT");
-        var state_file_name = xdg_seat != null && xdg_seat != "seat0" ? xdg_seat + "-state" : "state";
-
-        state_file = GLib.Path.build_filename (state_dir, state_file_name);
-        state = new GLib.KeyFile ();
-        try {
-            state.load_from_file (state_file, GLib.KeyFileFlags.NONE);
-        } catch (GLib.FileError.NOENT e) {
-        } catch (Error e) {
-            critical ("Failed to load state from %s: %s", state_file, e.message);
-        }
-
         settings = new GLib.KeyFile ();
         try {
             var greeter_conf_file = GLib.Path.build_filename (Constants.CONF_DIR, "io.elementary.greeter.conf");
