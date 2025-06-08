@@ -25,6 +25,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private Hdy.Carousel carousel;
     private LightDM.Greeter lightdm_greeter;
     private Greeter.Settings settings;
+    private GLib.Settings gsettings;
     private Gtk.Button guest_login_button;
     private Gtk.ToggleButton manual_login_button;
     private Gtk.Revealer datetime_revealer;
@@ -50,6 +51,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         app_paintable = true;
         decorated = false;
         type_hint = Gdk.WindowTypeHint.DESKTOP;
+
+        gsettings = new GLib.Settings ("io.elementary.greeter");
 
         settings = new Greeter.Settings ();
         create_session_selection_action ();
@@ -358,7 +361,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private void authentication_complete () {
         var user_card = current_card as Greeter.UserCard;
         if (user_card != null) {
-             settings.last_user = user_card.lightdm_user.name;
+            gsettings.set_string ("last-user", user_card.lightdm_user.name);
         }
 
         if (lightdm_greeter.is_authenticated) {
@@ -441,17 +444,15 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             });
 
             unowned string? select_user = lightdm_greeter.select_user_hint;
-            var user_to_select = (select_user != null) ? select_user : settings.last_user;
+            var user_to_select = select_user != null ? select_user : gsettings.get_string ("last-user");
 
             bool user_selected = false;
-            if (user_to_select != null) {
-                user_cards.head.foreach ((card) => {
-                    if (card.lightdm_user.name == user_to_select) {
-                        switch_to_card (card);
-                        user_selected = true;
-                    }
-                });
-            }
+            user_cards.head.foreach ((card) => {
+                if (card.lightdm_user.name == user_to_select) {
+                    switch_to_card (card);
+                    user_selected = true;
+                }
+            });
 
             if (!user_selected) {
                 unowned var user_card = user_cards.peek_head ();
