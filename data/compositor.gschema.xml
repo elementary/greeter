@@ -3,7 +3,7 @@
   <schema path="/io/elementary/greeter/" id="io.elementary.greeter">
     <key type="s" name="last-user">
       <default>''</default>
-      <summary></summary>
+      <summary>Last selected user</summary>
       <description></description>
     </key>
   </schema>
