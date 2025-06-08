@@ -114,8 +114,6 @@ compositor_files = files(
   'main.vala',
   'MediaFeedback.vala',
   'PointerLocator.vala',
-  'SettingsDaemon.vala',
-  'SubprocessSupervisor.vala',
   'Utils.vala',
   'WindowManager.vala',
   'Zoom.vala'

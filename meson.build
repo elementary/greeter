@@ -1,7 +1,7 @@
 project(
     'io.elementary.greeter',
     'vala', 'c',
-    version: '8.0.0',
+    version: '8.0.1',
     meson_version: '>= 0.58.0'
 )
 
@@ -51,6 +51,7 @@ compositor_resources = gnome.compile_resources(
 subdir('protocol')
 subdir('src')
 subdir('compositor')
+subdir('session-manager')
 subdir('data')
 subdir('po')
 vapigen = find_program('vapigen', required: false)
