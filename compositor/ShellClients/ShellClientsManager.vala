@@ -47,6 +47,7 @@ public class GreeterCompositor.ShellClientsManager : Object {
 
     private async void start_clients () {
         protocol_clients += new ManagedClient (wm.get_display (), { "io.elementary.wingpanel", "-g" });
+        protocol_clients += new ManagedClient (wm.get_display (), { "io.elementary.greeter" });
     }
 
     public void make_dock (Meta.Window window) {
