@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2023 elementary, Inc. (https://elementary.io)
+ * Copyright 2018-2025 elementary, Inc. (https://elementary.io)
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
  * Authors: Corentin Noël <corentin@elementary.io>
@@ -15,10 +15,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     public bool is_24h { get; set; default = true; }
 
     public int prefers_accent_color { get; set; default = 6; }
-    public int sleep_inactive_ac_timeout { get; set; default = 1200; }
-    public int sleep_inactive_ac_type { get; set; default = 1; }
-    public int sleep_inactive_battery_timeout { get; set; default = 1200; }
-    public int sleep_inactive_battery_type { get; set; default = 1; }
 
     private Act.User act_user;
     private Pantheon.AccountsService greeter_act;
@@ -31,9 +27,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Gtk.Box main_box;
 
     private SelectionCheck logged_in;
-
-    private unowned Gtk.StyleContext main_box_style_context;
-    private unowned Gtk.StyleContext password_entry_context;
 
     private bool needs_settings_set = false;
 
@@ -51,12 +44,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
             margin_start = 24,
             margin_end = 24,
         };
-
-        unowned var username_label_context = username_label.get_style_context ();
-        username_label_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
+        username_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
         password_entry = new Greeter.PasswordEntry ();
-        password_entry_context = password_entry.get_style_context ();
 
         bind_property (
             "connecting",
@@ -147,10 +137,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
         // in reverse order because pack_end is used
         main_box.pack_end (form_revealer);
         main_box.pack_end (username_label);
-
-        main_box_style_context = main_box.get_style_context ();
-        main_box_style_context.add_class (Granite.STYLE_CLASS_CARD);
-        main_box_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
+        main_box.get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
+        main_box.get_style_context ().add_class (Granite.STYLE_CLASS_ROUNDED);
 
         update_collapsed_class ();
 
@@ -328,10 +316,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
                 is_24h = greeter_act.time_format != "12h";
                 prefers_accent_color = greeter_act.prefers_accent_color;
-                sleep_inactive_ac_timeout = greeter_act.sleep_inactive_ac_timeout;
-                sleep_inactive_ac_type = greeter_act.sleep_inactive_ac_type;
-                sleep_inactive_battery_timeout = greeter_act.sleep_inactive_battery_timeout;
-                sleep_inactive_battery_type = greeter_act.sleep_inactive_battery_type;
 
                 if (show_input) {
                     SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
@@ -343,10 +327,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
                     is_24h = time_format != "12h";
 
                     changed_properties.lookup ("PrefersAccentColor", "i", out _prefers_accent_color);
-                    changed_properties.lookup ("SleepInactiveACTimeout", "i", out _sleep_inactive_ac_timeout);
-                    changed_properties.lookup ("SleepInactiveACType", "i", out _sleep_inactive_ac_type);
-                    changed_properties.lookup ("SleepInactiveBatteryTimeout", "i", out _sleep_inactive_battery_timeout);
-                    changed_properties.lookup ("SleepInactiveBatteryType", "i", out _sleep_inactive_battery_type);
 
                     if (show_input) {
                         SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
@@ -390,9 +370,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void update_collapsed_class () {
         if (show_input) {
-            main_box_style_context.remove_class ("collapsed");
+            main_box.get_style_context ().remove_class ("collapsed");
         } else {
-            main_box_style_context.add_class ("collapsed");
+            main_box.get_style_context ().add_class ("collapsed");
         }
     }
 
@@ -406,6 +386,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         set_mouse_touchpad_settings ();
         set_interface_settings ();
         set_night_light_settings ();
+        set_power_settings ();
         update_style ();
     }
 
@@ -516,20 +497,26 @@ public class Greeter.UserCard : Greeter.BaseCard {
         night_light_settings.set_value ("night-light-temperature", settings_act.night_light_temperature);
     }
 
+    private void set_power_settings () {
+        var power_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.power");
+        power_settings.set_int ("sleep-inactive-ac-timeout", greeter_act.sleep_inactive_ac_timeout);
+        power_settings.set_enum ("sleep-inactive-ac-type", greeter_act.sleep_inactive_ac_type);
+        power_settings.set_int ("sleep-inactive-battery-timeout", greeter_act.sleep_inactive_battery_timeout);
+        power_settings.set_enum ("sleep-inactive-battery-type", greeter_act.sleep_inactive_battery_type);
+    }
+
     private void update_style () {
         var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
         interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (prefers_accent_color));
     }
 
     public override void wrong_credentials () {
-        unowned var entry_style_context = password_entry.get_style_context ();
-        entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
-
-        main_box_style_context.add_class ("shake");
+        password_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_ERROR);
+        main_box.get_style_context ().add_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
-            main_box_style_context.remove_class ("shake");
-            entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            password_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_ERROR);
+            main_box.get_style_context ().remove_class ("shake");
 
             connecting = false;
             password_entry.grab_focus ();

@@ -1,20 +1,6 @@
 /*
- * Copyright 2018-2021 elementary, Inc. (https://elementary.io)
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public
- * License along with this program; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1301 USA.
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-FileCopyrightText: 2018-2025 elementary, Inc. (https://elementary.io)
  *
  * Authors: Corentin Noël <corentin@elementary.io>
  */
@@ -39,14 +25,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private bool installer_mode = false;
 
     private Gtk.EventControllerKey key_controller;
-
-    private const uint[] NAVIGATION_KEYS = {
-        Gdk.Key.Up,
-        Gdk.Key.Down,
-        Gdk.Key.Left,
-        Gdk.Key.Right,
-        Gdk.Key.Tab
-    };
 
     construct {
         app_paintable = true;
@@ -186,41 +164,34 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             propagation_phase = CAPTURE
         };
         key_controller.key_pressed.connect ((keyval, keycode, state) => {
-            var mods = state & Gtk.accelerator_get_default_mod_mask ();
-
-            if (!(keyval in NAVIGATION_KEYS)) {
-                // Don't focus if it is a modifier or if search_box is already focused
-                unowned var current_focus = get_focus ();
-                if ((mods == 0) && (current_focus == null || !current_focus.is_ancestor (current_card))) {
-                    current_card.grab_focus ();
-                }
-
+            if (!(current_card is UserCard)) {
                 return Gdk.EVENT_PROPAGATE;
             }
 
-            // arrow key is being used to navigate
-            if (current_card is UserCard) {
-                unowned var focused_entry = (Gtk.Entry) get_focus ();
-                if (focused_entry != null && focused_entry.is_ancestor (current_card)) {
-                    if (focused_entry.text == "") {
-                        if (keyval == Gdk.Key.Left) {
-                            if (Gtk.StateFlags.DIR_LTR in get_state_flags ()) {
-                                go_previous ();
-                            } else {
-                                go_next ();
-                            }
-                            return Gdk.EVENT_STOP;
-                        } else if (keyval == Gdk.Key.Right) {
-                            if (Gtk.StateFlags.DIR_LTR in get_state_flags ()) {
-                                go_next ();
-                            } else {
-                                go_previous ();
-                            }
-                            return Gdk.EVENT_STOP;
-                        }
-                    }
-                }
+            unowned var focused_entry = (Gtk.Entry) get_focus ();
+            if (focused_entry == null || !focused_entry.is_ancestor (current_card) || focused_entry.text != "") {
+                return Gdk.EVENT_PROPAGATE;
             }
+
+            var ltr = Gtk.StateFlags.DIR_LTR in get_state_flags ();
+
+            if (keyval == Gdk.Key.Left) {
+                if (ltr) {
+                    go_previous ();
+                } else {
+                    go_next ();
+                }
+                return Gdk.EVENT_STOP;
+            } else if (keyval == Gdk.Key.Right) {
+                if (ltr) {
+                    go_next ();
+                } else {
+                    go_previous ();
+                }
+                return Gdk.EVENT_STOP;
+            }
+
+            return Gdk.EVENT_PROPAGATE;
         });
 
         carousel.page_changed.connect ((index) => {
@@ -364,25 +335,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 current_card.use_fingerprint = true;
                 break;
         }
-
-        critical ("message: `%s' (%d): %s", text, type, messagetext.to_string ());
-        /*var messagetext = string_to_messagetext(text);
-
-        if (messagetext == MessageText.FPRINT_SWIPE || messagetext == MessageText.FPRINT_PLACE) {
-            // For the fprint module, there is no prompt message from PAM.
-            send_prompt (PromptType.FPRINT);
-        }
-
-        current_login.show_message (type, messagetext, text);*/
     }
 
     private void show_prompt (string text, LightDM.PromptType type = LightDM.PromptType.QUESTION) {
-        critical ("prompt: `%s' (%d)", text, type);
-        /*send_prompt (lightdm_prompttype_to_prompttype(type), string_to_prompttext(text), text);
-
-        had_prompt = true;
-
-        current_login.show_prompt (type, prompttext, text);*/
         if (current_card is ManualCard) {
             if (type == LightDM.PromptType.SECRET) {
                 ((ManualCard) current_card).ask_password ();
@@ -400,14 +355,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
 
         if (lightdm_greeter.is_authenticated) {
-            // Copy user's power settings to lightdm user
-            if (user_card != null) {
-                settings.sleep_inactive_ac_timeout = user_card.sleep_inactive_ac_timeout;
-                settings.sleep_inactive_ac_type = user_card.sleep_inactive_ac_type;
-                settings.sleep_inactive_battery_timeout = user_card.sleep_inactive_battery_timeout;
-                settings.sleep_inactive_battery_type = user_card.sleep_inactive_battery_type;
-            }
-
             try {
                 unowned var session = application.get_action_state ("select-session").get_string ();
 
