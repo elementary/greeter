@@ -190,7 +190,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
             if (children.nth_data (index) is Greeter.UserCard) {
                 current_user_card_index = (int) index;
-                //  switch_to_card ((Greeter.UserCard) children.nth_data (index));
             }
         });
 
