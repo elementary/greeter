@@ -20,6 +20,7 @@
  */
 
 public class Greeter.MainWindow : Gtk.ApplicationWindow {
+    private Pantheon.Desktop.Greeter? desktop_greeter;
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
     private Hdy.Carousel carousel;
@@ -42,12 +43,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     construct {
         app_paintable = true;
         decorated = false;
-        type_hint = Gdk.WindowTypeHint.DESKTOP;
 
         gsettings = new GLib.Settings ("io.elementary.greeter");
 
         settings = new Greeter.Settings ();
-        create_session_selection_action ();
 
         set_visual (get_screen ().get_rgba_visual ());
 
@@ -251,6 +250,62 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 warning ("Unable to spawn numlockx to set numlock state");
             }
         }
+
+        main_box.realize.connect (init_panel);
+    }
+
+    private void init_panel () {
+        if (Gdk.Display.get_default () is Gdk.Wayland.Display) {
+            // We have to wrap in Idle otherwise the Meta.Window of the WaylandSurface in Gala is still null
+            Idle.add_once (init_wl);
+        } else {
+            init_x ();
+        }
+    }
+
+    private static Wl.RegistryListener registry_listener;
+    private void init_wl () {
+        registry_listener.global = registry_handle_global;
+        unowned var display = Gdk.Display.get_default ();
+        if (display is Gdk.Wayland.Display) {
+            unowned var wl_display = ((Gdk.Wayland.Display) display).get_wl_display ();
+            var wl_registry = wl_display.get_registry ();
+            wl_registry.add_listener (
+                registry_listener,
+                this
+            );
+
+            if (wl_display.roundtrip () < 0) {
+                return;
+            }
+        }
+    }
+
+    public void registry_handle_global (Wl.Registry wl_registry, uint32 name, string @interface, uint32 version) {
+        if (@interface == "io_elementary_pantheon_shell_v1") {
+            var desktop_shell = wl_registry.bind<Pantheon.Desktop.Shell> (name, ref Pantheon.Desktop.Shell.iface, uint32.min (version, 1));
+            unowned var window = get_window ();
+            if (window is Gdk.Wayland.Window) {
+                unowned var wl_surface = ((Gdk.Wayland.Window) window).get_wl_surface ();
+                desktop_greeter = desktop_shell.get_greeter (wl_surface);
+                desktop_greeter.init ();
+            }
+        }
+    }
+
+    private void init_x () {
+        var display = Gdk.Display.get_default ();
+        if (display is Gdk.X11.Display) {
+            unowned var xdisplay = ((Gdk.X11.Display) display).get_xdisplay ();
+
+            var window = ((Gdk.X11.Window) get_window ()).get_xid ();
+
+            var prop = xdisplay.intern_atom ("_MUTTER_HINTS", false);
+
+            var value = "greeter=1";
+
+            xdisplay.change_property (window, prop, X.XA_STRING, 8, 0, (uchar[]) value, value.length);
+        }
     }
 
     private void maximize_and_focus () {
@@ -280,26 +335,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         var rect = monitor.get_geometry ();
         resize (rect.width, rect.height);
         move (rect.x, rect.y);
-    }
-
-    private void create_session_selection_action () {
-        unowned GLib.List<LightDM.Session> sessions = LightDM.get_sessions ();
-        weak LightDM.Session? first_session = sessions.nth_data (0);
-        var selected_session = new GLib.Variant.string (first_session != null ? first_session.key : "");
-        var select_session_action = new GLib.SimpleAction.stateful ("select-session", GLib.VariantType.STRING, selected_session);
-        var vardict = new GLib.VariantDict ();
-        sessions.foreach ((session) => {
-            vardict.insert_value (session.name, new GLib.Variant.string (session.key));
-        });
-        select_session_action.set_state_hint (vardict.end ());
-
-        select_session_action.activate.connect ((param) => {
-            if (!select_session_action.get_state ().equal (param)) {
-                select_session_action.set_state (param);
-            }
-        });
-
-        add_action (select_session_action);
     }
 
     private void show_message (string text, LightDM.MessageType type) {
@@ -359,7 +394,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
 
             try {
-                unowned var session = get_action_state ("select-session").get_string ();
+                unowned var session = application.get_action_state ("select-session").get_string ();
 
                 // If the greeter is running on the install medium, check if the Installer has signalled
                 // that it wants the greeter to launch the live (demo) session by means of touching a file
@@ -412,7 +447,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.notify_property ("has-guest-account-hint");
 
         if (lightdm_greeter.default_session_hint != null) {
-            activate_action ("select-session", new GLib.Variant.string (lightdm_greeter.default_session_hint));
+            application.activate_action ("select-session", new GLib.Variant.string (lightdm_greeter.default_session_hint));
         }
 
         // Check if the installer is installed
@@ -530,7 +565,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         user_card.grab_focus ();
 
         if (user_card.lightdm_user.session != null) {
-            activate_action ("select-session", new GLib.Variant.string (user_card.lightdm_user.session));
+            application.activate_action ("select-session", new GLib.Variant.string (user_card.lightdm_user.session));
         }
 
         if (lightdm_greeter.in_authentication) {
