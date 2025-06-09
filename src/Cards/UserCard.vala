@@ -84,11 +84,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
             SYNC_CREATE
         );
 
-        var session_button = new Greeter.SessionButton () {
-            valign = START
+        var password_session_button = new Greeter.SessionButton () {
+            vexpand = true
         };
-
-        var caps_lock_revealer = new Greeter.CapsLockRevealer ();
 
         var password_grid = new Gtk.Grid () {
             column_spacing = 6,
@@ -96,53 +94,44 @@ public class Greeter.UserCard : Greeter.BaseCard {
         };
         password_grid.attach (password_entry, 0, 0);
         password_grid.attach (fingerprint_image, 1, 0);
-        password_grid.attach (caps_lock_revealer, 0, 1, 2);
-
-        var size_group = new Gtk.SizeGroup (VERTICAL);
-        size_group.add_widget (password_entry);
-        size_group.add_widget (session_button);
+        password_grid.attach (password_session_button, 2, 0);
+        password_grid.attach (new Greeter.CapsLockRevealer (), 0, 1, 3);
 
         var login_button = new Gtk.Button.with_label (_("Log In"));
         login_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+        bind_property ("connecting", login_button, "sensitive", INVERT_BOOLEAN);
 
-        bind_property (
-            "connecting",
-            login_button,
-            "sensitive",
-            INVERT_BOOLEAN
-        );
+        var login_button_session_button = new Greeter.SessionButton () {
+            vexpand = true
+        };
 
-        var disabled_icon = new Gtk.Image.from_icon_name ("changes-prevent-symbolic", MENU);
-
-        var disabled_message = new Gtk.Label (_("Account disabled"));
+        var login_box = new Gtk.Box (HORIZONTAL, 6);
+        login_box.add (login_button);
+        login_box.add (login_button_session_button);
 
         var disabled_box = new Gtk.Box (HORIZONTAL, 6) {
             halign = Gtk.Align.CENTER,
             margin_top = 3
         };
+        disabled_box.add (new Gtk.Image.from_icon_name ("changes-prevent-symbolic", MENU));
+        disabled_box.add (new Gtk.Label (_("Account disabled")));
         disabled_box.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-        disabled_box.add (disabled_icon);
-        disabled_box.add (disabled_message);
 
-        login_stack = new Gtk.Stack ();
-        login_stack.add_named (password_grid, "password");
-        login_stack.add_named (login_button, "button");
-        login_stack.add_named (disabled_box, "disabled");
-
-        var form_box = new Gtk.Box (HORIZONTAL, 6) {
+        login_stack = new Gtk.Stack () {
             margin_top = 12,
             margin_bottom = 12,
             margin_start = 24,
             margin_end = 24
         };
-        form_box.add (login_stack);
-        form_box.add (session_button);
+        login_stack.add_named (password_grid, "password");
+        login_stack.add_named (login_button, "button");
+        login_stack.add_named (disabled_box, "disabled");
 
         form_revealer = new Gtk.Revealer () {
             margin_bottom = 12,
             reveal_child = true,
             transition_type = SLIDE_DOWN,
-            child = form_box
+            child = login_stack
         };
 
         bind_property (
@@ -188,8 +177,11 @@ public class Greeter.UserCard : Greeter.BaseCard {
         if (lightdm_user.logged_in) {
             avatar_overlay.add_overlay (logged_in);
 
-            session_button.sensitive = false;
-            session_button.tooltip_text = (_("Session cannot be changed while user is logged in"));
+            password_session_button.sensitive = false;
+            password_session_button.tooltip_text = (_("Session cannot be changed while user is logged in"));
+
+            login_button_session_button.sensitive = false;
+            login_button_session_button.tooltip_text = (_("Session cannot be changed while user is logged in"));
         }
 
         var card_overlay = new Gtk.Overlay () {
@@ -205,7 +197,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         act_user = Act.UserManager.get_default ().get_user (lightdm_user.name);
         act_user.bind_property ("locked", username_label, "sensitive", INVERT_BOOLEAN);
-        act_user.bind_property ("locked", session_button, "visible", INVERT_BOOLEAN);
+        act_user.bind_property ("locked", password_session_button, "visible", INVERT_BOOLEAN);
+        act_user.bind_property ("locked", login_button_session_button, "visible", INVERT_BOOLEAN);
         act_user.notify["is-loaded"].connect (on_act_user_loaded);
 
         on_act_user_loaded ();
