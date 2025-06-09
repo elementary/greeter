@@ -1,20 +1,6 @@
 /*
- * Copyright 2018-2021 elementary, Inc. (https://elementary.io)
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public
- * License along with this program; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1301 USA.
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-FileCopyrightText: 2018-2025 elementary, Inc. (https://elementary.io)
  *
  * Authors: Corentin Noël <corentin@elementary.io>
  */
@@ -349,25 +335,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 current_card.use_fingerprint = true;
                 break;
         }
-
-        critical ("message: `%s' (%d): %s", text, type, messagetext.to_string ());
-        /*var messagetext = string_to_messagetext(text);
-
-        if (messagetext == MessageText.FPRINT_SWIPE || messagetext == MessageText.FPRINT_PLACE) {
-            // For the fprint module, there is no prompt message from PAM.
-            send_prompt (PromptType.FPRINT);
-        }
-
-        current_login.show_message (type, messagetext, text);*/
     }
 
     private void show_prompt (string text, LightDM.PromptType type = LightDM.PromptType.QUESTION) {
-        critical ("prompt: `%s' (%d)", text, type);
-        /*send_prompt (lightdm_prompttype_to_prompttype(type), string_to_prompttext(text), text);
-
-        had_prompt = true;
-
-        current_login.show_prompt (type, prompttext, text);*/
         if (current_card is ManualCard) {
             if (type == LightDM.PromptType.SECRET) {
                 ((ManualCard) current_card).ask_password ();
@@ -385,14 +355,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
 
         if (lightdm_greeter.is_authenticated) {
-            // Copy user's power settings to lightdm user
-            if (user_card != null) {
-                settings.sleep_inactive_ac_timeout = user_card.sleep_inactive_ac_timeout;
-                settings.sleep_inactive_ac_type = user_card.sleep_inactive_ac_type;
-                settings.sleep_inactive_battery_timeout = user_card.sleep_inactive_battery_timeout;
-                settings.sleep_inactive_battery_type = user_card.sleep_inactive_battery_type;
-            }
-
             try {
                 unowned var session = application.get_action_state ("select-session").get_string ();
 

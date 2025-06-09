@@ -63,9 +63,8 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         };
         main_box.add (form_grid);
 
-        unowned var main_grid_style_context = main_box.get_style_context ();
-        main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
-        main_grid_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
+        main_box.get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
+        main_box.get_style_context ().add_class (Granite.STYLE_CLASS_ROUNDED);
 
         child = main_box;
 
@@ -93,19 +92,14 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     public override void wrong_credentials () {
         password_entry.text = "";
 
-        unowned var username_entry_style_context = username_entry.get_style_context ();
-        username_entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
-
-        unowned var password_entry_style_context = password_entry.get_style_context ();
-        password_entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
-
-        unowned var grid_style_context = main_box.get_style_context ();
-        grid_style_context.add_class ("shake");
+        username_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_ERROR);
+        password_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_ERROR);
+        main_box.get_style_context ().add_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
-            grid_style_context.remove_class ("shake");
-            username_entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
-            password_entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            username_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_ERROR);
+            password_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_ERROR);
+            main_box.get_style_context ().remove_class ("shake");
 
             connecting = false;
             username_entry.grab_focus_without_selecting ();
@@ -121,15 +115,12 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         username_entry.grab_focus_without_selecting ();
         username_entry.text = "";
 
-        unowned var entry_style_context = username_entry.get_style_context ();
-        entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
-
-        unowned var grid_style_context = main_box.get_style_context ();
-        grid_style_context.add_class ("shake");
+        username_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_ERROR);
+        main_box.get_style_context ().add_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
-            grid_style_context.remove_class ("shake");
-            entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            username_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_ERROR);
+            main_box.get_style_context ().remove_class ("shake");
 
             return Source.REMOVE;
         });

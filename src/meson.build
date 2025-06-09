@@ -21,7 +21,6 @@ executable(
     'FPrintUtils.vala',
     'MainWindow.vala',
     'PantheonAccountsServicePlugin.vala',
-    'PromptText.vala',
     'Settings.vala',
     'SettingsPortal.vala',
     'Cards/BaseCard.vala',
