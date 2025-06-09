@@ -216,13 +216,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             }
         });
 
-        notify["show-input"].connect (() => {
-            update_collapsed_class ();
-
-            if (greeter_act != null) {
-                SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
-            }
-        });
+        notify["show-input"].connect (update_collapsed_class);
 
         password_entry.activate.connect (on_login);
         login_button.clicked.connect (on_login);
@@ -320,16 +314,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
                 );
 
                 is_24h = greeter_act.time_format != "12h";
-
-                if (show_input) {
-                    SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
-                }
-
-                ((DBusProxy) greeter_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
-                    if (show_input) {
-                        SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
-                    }
-                });
             } catch (Error e) {
                 critical (e.message);
             }
@@ -506,6 +490,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private void update_style () {
         var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
         interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (greeter_act.prefers_accent_color));
+
+        SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
     }
 
     public override void wrong_credentials () {
