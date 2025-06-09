@@ -349,25 +349,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 current_card.use_fingerprint = true;
                 break;
         }
-
-        critical ("message: `%s' (%d): %s", text, type, messagetext.to_string ());
-        /*var messagetext = string_to_messagetext(text);
-
-        if (messagetext == MessageText.FPRINT_SWIPE || messagetext == MessageText.FPRINT_PLACE) {
-            // For the fprint module, there is no prompt message from PAM.
-            send_prompt (PromptType.FPRINT);
-        }
-
-        current_login.show_message (type, messagetext, text);*/
     }
 
     private void show_prompt (string text, LightDM.PromptType type = LightDM.PromptType.QUESTION) {
-        critical ("prompt: `%s' (%d)", text, type);
-        /*send_prompt (lightdm_prompttype_to_prompttype(type), string_to_prompttext(text), text);
-
-        had_prompt = true;
-
-        current_login.show_prompt (type, prompttext, text);*/
         if (current_card is ManualCard) {
             if (type == LightDM.PromptType.SECRET) {
                 ((ManualCard) current_card).ask_password ();
