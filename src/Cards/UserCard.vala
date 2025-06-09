@@ -32,9 +32,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private SelectionCheck logged_in;
 
-    private unowned Gtk.StyleContext main_box_style_context;
-    private unowned Gtk.StyleContext password_entry_context;
-
     private bool needs_settings_set = false;
 
     public UserCard (LightDM.User lightdm_user) {
@@ -51,12 +48,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
             margin_start = 24,
             margin_end = 24,
         };
-
-        unowned var username_label_context = username_label.get_style_context ();
-        username_label_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
+        username_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
         password_entry = new Greeter.PasswordEntry ();
-        password_entry_context = password_entry.get_style_context ();
 
         bind_property (
             "connecting",
@@ -158,10 +152,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
         // in reverse order because pack_end is used
         main_box.pack_end (form_revealer);
         main_box.pack_end (username_label);
-
-        main_box_style_context = main_box.get_style_context ();
-        main_box_style_context.add_class (Granite.STYLE_CLASS_CARD);
-        main_box_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
+        main_box.get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
+        main_box.get_style_context ().add_class (Granite.STYLE_CLASS_ROUNDED);
 
         update_collapsed_class ();
 
@@ -397,9 +389,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void update_collapsed_class () {
         if (show_input) {
-            main_box_style_context.remove_class ("collapsed");
+            main_box.get_style_context ().remove_class ("collapsed");
         } else {
-            main_box_style_context.add_class ("collapsed");
+            main_box.get_style_context ().add_class ("collapsed");
         }
     }
 
@@ -529,14 +521,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     public override void wrong_credentials () {
-        unowned var entry_style_context = password_entry.get_style_context ();
-        entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
-
-        main_box_style_context.add_class ("shake");
+        password_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_ERROR);
+        main_box.get_style_context ().add_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
-            main_box_style_context.remove_class ("shake");
-            entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            password_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_ERROR);
+            main_box.get_style_context ().remove_class ("shake");
 
             connecting = false;
             password_entry.grab_focus ();
