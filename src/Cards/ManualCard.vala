@@ -73,11 +73,12 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         bind_property ("connecting", password_entry, "sensitive", INVERT_BOOLEAN);
 
         username_entry.focus_out_event.connect (() => {
-            do_connect_username (username_entry.text);
+            if (username_entry.text != "") {
+                do_connect_username (username_entry.text);
+            }
         });
 
         password_entry.activate.connect (on_login);
-        grab_focus.connect (username_entry.grab_focus_without_selecting);
     }
 
     private void on_login () {
@@ -87,14 +88,6 @@ public class Greeter.ManualCard : Greeter.BaseCard {
 
         connecting = true;
         do_connect (password_entry.text);
-    }
-
-    private void focus_username_entry () {
-        username_entry.grab_focus_without_selecting ();
-    }
-
-    private void focus_password_entry () {
-        password_entry.grab_focus_without_selecting ();
     }
 
     public override void wrong_credentials () {
@@ -115,13 +108,13 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             password_entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
 
             connecting = false;
-            focus_username_entry ();
+            username_entry.grab_focus_without_selecting ();
             return Source.REMOVE;
         });
     }
 
     public void ask_password () {
-        focus_password_entry ();
+        password_entry.grab_focus_without_selecting ();
     }
 
     public void wrong_username () {
