@@ -55,7 +55,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         gsettings = new GLib.Settings ("io.elementary.greeter");
 
         settings = new Greeter.Settings ();
-        create_session_selection_action ();
 
         set_visual (get_screen ().get_rgba_visual ());
 
@@ -297,26 +296,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         move (rect.x, rect.y);
     }
 
-    private void create_session_selection_action () {
-        unowned GLib.List<LightDM.Session> sessions = LightDM.get_sessions ();
-        weak LightDM.Session? first_session = sessions.nth_data (0);
-        var selected_session = new GLib.Variant.string (first_session != null ? first_session.key : "");
-        var select_session_action = new GLib.SimpleAction.stateful ("select-session", GLib.VariantType.STRING, selected_session);
-        var vardict = new GLib.VariantDict ();
-        sessions.foreach ((session) => {
-            vardict.insert_value (session.name, new GLib.Variant.string (session.key));
-        });
-        select_session_action.set_state_hint (vardict.end ());
-
-        select_session_action.activate.connect ((param) => {
-            if (!select_session_action.get_state ().equal (param)) {
-                select_session_action.set_state (param);
-            }
-        });
-
-        add_action (select_session_action);
-    }
-
     private void show_message (string text, LightDM.MessageType type) {
         var messagetext = Greeter.FPrintUtils.string_to_messagetext (text);
         switch (messagetext) {
@@ -374,7 +353,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
 
             try {
-                unowned var session = get_action_state ("select-session").get_string ();
+                unowned var session = application.get_action_state ("select-session").get_string ();
 
                 // If the greeter is running on the install medium, check if the Installer has signalled
                 // that it wants the greeter to launch the live (demo) session by means of touching a file
@@ -427,7 +406,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.notify_property ("has-guest-account-hint");
 
         if (lightdm_greeter.default_session_hint != null) {
-            activate_action ("select-session", new GLib.Variant.string (lightdm_greeter.default_session_hint));
+            application.activate_action ("select-session", new GLib.Variant.string (lightdm_greeter.default_session_hint));
         }
 
         // Check if the installer is installed
@@ -545,7 +524,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         user_card.grab_focus ();
 
         if (user_card.lightdm_user.session != null) {
-            activate_action ("select-session", new GLib.Variant.string (user_card.lightdm_user.session));
+            application.activate_action ("select-session", new GLib.Variant.string (user_card.lightdm_user.session));
         }
 
         if (lightdm_greeter.in_authentication) {

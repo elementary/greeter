@@ -65,6 +65,24 @@ public class Greeter.Application : Gtk.Application {
         settings_portal.notify["prefers-color-scheme"].connect (() => {
             gtk_settings.gtk_application_prefer_dark_theme = settings_portal.prefers_color_scheme == 1;
         });
+
+        unowned var sessions = LightDM.get_sessions ();
+        unowned var first_session = sessions.nth_data (0);
+        var selected_session = new GLib.Variant.string (first_session != null ? first_session.key : "");
+        var select_session_action = new GLib.SimpleAction.stateful ("select-session", GLib.VariantType.STRING, selected_session);
+        var vardict = new GLib.VariantDict ();
+        sessions.foreach ((session) => {
+            vardict.insert_value (session.name, new GLib.Variant.string (session.key));
+        });
+        select_session_action.set_state_hint (vardict.end ());
+
+        select_session_action.activate.connect ((param) => {
+            if (!select_session_action.get_state ().equal (param)) {
+                select_session_action.set_state (param);
+            }
+        });
+
+        add_action (select_session_action);
     }
 
     public override void activate () {
