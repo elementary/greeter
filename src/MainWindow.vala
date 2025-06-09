@@ -482,7 +482,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         user_cards.push_tail (user_card);
     }
 
-    private unowned GLib.Binding? time_format_binding = null;
     private void switch_to_card (Greeter.UserCard user_card) {
         if (!carousel.interactive) {
             return;
@@ -492,10 +491,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             ((UserCard) current_card).show_input = false;
         }
 
-        if (time_format_binding != null) {
-            time_format_binding.unbind ();
-        }
-        time_format_binding = user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE);
+        datetime_widget.is_24h = user_card.is_24h;
 
         current_card = user_card;
 
