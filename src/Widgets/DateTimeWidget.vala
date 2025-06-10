@@ -27,14 +27,14 @@ public class Greeter.DateTimeWidget : Gtk.Box {
 
     construct {
         time_label = new Gtk.Label (null);
-        time_label.get_style_context ().add_class ("time");
+        time_label.add_css_class ("time");
 
         date_label = new Gtk.Label (null);
-        date_label.get_style_context ().add_class ("date");
+        date_label.add_css_class ("date");
 
         orientation = VERTICAL;
-        add (time_label);
-        add (date_label);
+        append (time_label);
+        append (date_label);
 
         update_labels ();
 
