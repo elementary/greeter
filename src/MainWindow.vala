@@ -138,10 +138,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.bind_property ("hide-users-hint", manual_login_button, "sensitive", GLib.BindingFlags.SYNC_CREATE | GLib.BindingFlags.INVERT_BOOLEAN);
         lightdm_greeter.bind_property ("hide-users-hint", manual_login_button, "active", GLib.BindingFlags.SYNC_CREATE);
 
-        notify["scale-factor"].connect (() => {
-            maximize_window ();
-        });
-
         lightdm_user_list = LightDM.UserList.get_instance ();
         lightdm_user_list.user_added.connect (() => {
             load_users.begin ();
@@ -192,31 +188,22 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         });
 
-        // regrab focus when dpi changed
-        get_screen ().monitors_changed.connect (() => {
-            maximize_and_focus ();
-        });
-
-        leave_notify_event.connect (() => {
-            maximize_and_focus ();
-            return false;
-        });
-
-        destroy.connect (() => {
-            Gtk.main_quit ();
-        });
-
         load_users.begin (() => {
             /* A significant delay is required in order for the window and card to be focused at
              * at boot.  TODO: Find whether boot sequence can be tweaked to fix this.
              */
             Timeout.add (500, () => {
-                maximize_and_focus ();
+                get_style_context ().add_class ("initialized");
+
+                if (current_card != null) {
+                    current_card.grab_focus ();
+                }
+
                 return Source.REMOVE;
             });
         });
 
-        maximize_window ();
+        maximize ();
 
         if (settings.activate_numlock) {
             try {
@@ -281,35 +268,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
             xdisplay.change_property (window, prop, X.XA_STRING, 8, 0, (uchar[]) value, value.length);
         }
-    }
-
-    private void maximize_and_focus () {
-        present ();
-        maximize_window ();
-        get_style_context ().add_class ("initialized");
-
-        if (current_card != null) {
-            current_card.grab_focus ();
-        }
-    }
-
-    private void maximize_window () {
-        var display = Gdk.Display.get_default ();
-        unowned Gdk.Seat seat = display.get_default_seat ();
-        unowned Gdk.Device? pointer = seat.get_pointer ();
-
-        Gdk.Monitor? monitor;
-        if (pointer != null) {
-            int x, y;
-            pointer.get_position (null, out x, out y);
-            monitor = display.get_monitor_at_point (x, y);
-        } else {
-            monitor = display.get_primary_monitor ();
-        }
-
-        var rect = monitor.get_geometry ();
-        resize (rect.width, rect.height);
-        move (rect.x, rect.y);
     }
 
     private void show_message (string text, LightDM.MessageType type) {
