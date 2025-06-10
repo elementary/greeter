@@ -6,8 +6,6 @@
  */
 
 public class GreeterCompositor.PanelWindow : ShellWindow {
-    private const int ANIMATION_DURATION = 250;
-
     private static HashTable<Meta.Window, Meta.Strut?> window_struts = new HashTable<Meta.Window, Meta.Strut?> (null, null);
 
     public WindowManager wm { get; construct; }
