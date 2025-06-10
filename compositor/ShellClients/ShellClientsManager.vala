@@ -163,6 +163,11 @@ public class GreeterCompositor.ShellClientsManager : Object {
 
     public void init_greeter (Meta.Window window) {
         make_desktop (window);
+
+        positioned_windows[window] = new ShellWindow (window, FULLSCREEN);
+
+        // connect_after so we make sure that any queued move is unqueued
+        window.unmanaging.connect_after ((_window) => positioned_windows.remove (_window));
     }
 
     public void make_centered (Meta.Window window) requires (!is_itself_positioned (window)) {
