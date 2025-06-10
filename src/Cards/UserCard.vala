@@ -367,6 +367,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         set_keyboard_layouts ();
         set_mouse_touchpad_settings ();
         set_interface_settings ();
+        set_wingpanel_settings ();
         set_night_light_settings ();
         set_power_settings ();
         update_style ();
@@ -462,6 +463,16 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         background_settings.set_value ("picture-options", settings_act.picture_options);
         background_settings.set_value ("primary-color", settings_act.primary_color);
+    }
+
+    private void set_wingpanel_settings () {
+        var wingpanel_power_schema = SettingsSchemaSource.get_default ().lookup ("io.elementary.desktop.wingpanel.power", true);
+        if (wingpanel_power_schema == null || !wingpanel_power_schema.has_key ("show-percentage")) {
+            return;
+        }
+
+        var wingpanel_power_settings = new GLib.Settings ("io.elementary.desktop.wingpanel.power");
+        wingpanel_power_settings.set_value ("show-percentage", settings_act.wingpanel_show_percentage);
     }
 
     private void set_night_light_settings () {
