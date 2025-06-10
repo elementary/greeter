@@ -9,7 +9,8 @@ public class GreeterCompositor.PositionedWindow : Object {
     public enum Position {
         TOP,
         BOTTOM,
-        CENTER;
+        CENTER,
+        FULLSCREEN;
 
         public static Position from_anchor (Pantheon.Desktop.Anchor anchor) {
             if (anchor > 1) {
@@ -53,6 +54,7 @@ public class GreeterCompositor.PositionedWindow : Object {
     private void position_window () {
         int x = 0, y = 0;
         var window_rect = window.get_frame_rect ();
+        int width = window_rect.width, height = window_rect.height;
         unowned var display = window.display;
 
         switch (position) {
@@ -73,10 +75,18 @@ public class GreeterCompositor.PositionedWindow : Object {
                 x = monitor_geom.x + (monitor_geom.width - window_rect.width) / 2;
                 y = monitor_geom.y + monitor_geom.height - window_rect.height;
                 break;
+
+            case FULLSCREEN:
+                var monitor_geom = display.get_monitor_geometry (display.get_primary_monitor ());
+                x = monitor_geom.x;
+                y = monitor_geom.y;
+                width = monitor_geom.width;
+                height = monitor_geom.height;
+                break;
         }
 
         SignalHandler.block (window, position_changed_id);
-        window.move_frame (false, x, y);
+        window.move_resize_frame (false, x, y, width, height);
         SignalHandler.unblock (window, position_changed_id);
     }
 }
