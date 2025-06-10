@@ -236,7 +236,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void set_check_style () {
         // Override check's accent_color so that it *always* uses user's preferred color
-        logged_in.get_style_context ().add_class (accent_to_string (greeter_act.prefers_accent_color));
+        logged_in.get_style_context ().add_class (accent_to_string (settings_act.accent_color));
     }
 
     private void set_background_image () {
@@ -489,7 +489,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void update_style () {
         var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
-        interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (greeter_act.prefers_accent_color));
+        interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (settings_act.accent_color));
 
         SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
     }
