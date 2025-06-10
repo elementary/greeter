@@ -247,6 +247,10 @@ public class GreeterCompositor.ShellClientsManager : Object {
                     }
                     break;
 
+                case "greeter":
+                    init_greeter (window);
+                    break;
+
                 case "centered":
                     make_centered (window);
                     break;
