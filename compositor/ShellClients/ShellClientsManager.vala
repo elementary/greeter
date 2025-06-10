@@ -85,6 +85,43 @@ public class GreeterCompositor.ShellClientsManager : Object {
         xdisplay.change_property (x_window, atom, (X.Atom) 4, 32, 0, (uchar[]) dock_atom, 1);
     }
 
+
+    public void make_desktop (Meta.Window window) {
+        if (Meta.Util.is_wayland_compositor ()) {
+            make_desktop_wayland (window);
+        } else {
+            make_desktop_x11 (window);
+        }
+    }
+
+    private void make_desktop_wayland (Meta.Window window) requires (Meta.Util.is_wayland_compositor ()) {
+        foreach (var client in protocol_clients) {
+            if (client.wayland_client.owns_window (window)) {
+                client.wayland_client.make_desktop (window);
+                break;
+            }
+        }
+    }
+
+    private void make_desktop_x11 (Meta.Window window) requires (!Meta.Util.is_wayland_compositor ()) {
+        unowned var x11_display = wm.get_display ().get_x11_display ();
+
+#if HAS_MUTTER46
+        var x_window = x11_display.lookup_xwindow (window);
+#else
+        var x_window = window.get_xwindow ();
+#endif
+        // gtk3's gdk_x11_window_set_type_hint() is used as a reference
+        unowned var xdisplay = x11_display.get_xdisplay ();
+        var atom = xdisplay.intern_atom ("_NET_WM_WINDOW_TYPE", false);
+        var dock_atom = xdisplay.intern_atom ("_NET_WM_WINDOW_TYPE_DESKTOP", false);
+
+        // (X.Atom) 4 is XA_ATOM
+        // 32 is format
+        // 0 means replace
+        xdisplay.change_property (x_window, atom, (X.Atom) 4, 32, 0, (uchar[]) dock_atom, 1);
+    }
+
     public void set_anchor (Meta.Window window, Meta.Side side) {
         if (window in windows) {
             windows[window].update_anchor (side);
@@ -123,6 +160,10 @@ public class GreeterCompositor.ShellClientsManager : Object {
         }
 
         windows[window].set_hide_mode (hide_mode);
+    }
+
+    public void init_greeter (Meta.Window window) {
+        make_desktop (window);
     }
 
     public void make_centered (Meta.Window window) {
@@ -195,6 +236,10 @@ public class GreeterCompositor.ShellClientsManager : Object {
                     } else {
                         warning ("Failed to parse %s as width and height", val);
                     }
+                    break;
+
+                case "greeter":
+                    init_greeter (window);
                     break;
 
                 case "centered":

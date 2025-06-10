@@ -41,6 +41,48 @@ public class Greeter.Application : Gtk.Application {
         css_provider.load_from_resource ("/io/elementary/greeter/Application.css");
 
         Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        GLib.Bus.own_name (
+            SESSION,
+            "org.freedesktop.portal.Desktop",
+            NONE,
+            (connection, name) => {
+                try {
+                    connection.register_object ("/org/freedesktop/portal/desktop", SettingsPortal.get_default ());
+                } catch (Error e) {
+                    critical ("Unable to register the object: %s", e.message);
+                }
+            },
+            () => debug ("org.freedesktop.portal.Desktop acquired"),
+            () => debug ("org.freedesktop.portal.Desktop lost")
+        );
+
+        unowned var gtk_settings = Gtk.Settings.get_default ();
+        unowned var settings_portal = SettingsPortal.get_default ();
+
+        gtk_settings.gtk_application_prefer_dark_theme = settings_portal.prefers_color_scheme == 1;
+
+        settings_portal.notify["prefers-color-scheme"].connect (() => {
+            gtk_settings.gtk_application_prefer_dark_theme = settings_portal.prefers_color_scheme == 1;
+        });
+
+        unowned var sessions = LightDM.get_sessions ();
+        unowned var first_session = sessions.nth_data (0);
+        var selected_session = new GLib.Variant.string (first_session != null ? first_session.key : "");
+        var select_session_action = new GLib.SimpleAction.stateful ("select-session", GLib.VariantType.STRING, selected_session);
+        var vardict = new GLib.VariantDict ();
+        sessions.foreach ((session) => {
+            vardict.insert_value (session.name, new GLib.Variant.string (session.key));
+        });
+        select_session_action.set_state_hint (vardict.end ());
+
+        select_session_action.activate.connect ((param) => {
+            if (!select_session_action.get_state ().equal (param)) {
+                select_session_action.set_state (param);
+            }
+        });
+
+        add_action (select_session_action);
     }
 
     public override void activate () {

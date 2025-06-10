@@ -81,17 +81,16 @@ compositor_files = files(
   'main.vala',
   'MediaFeedback.vala',
   'PointerLocator.vala',
-  'SettingsDaemon.vala',
-  'SubprocessSupervisor.vala',
   'Utils.vala',
   'WindowManager.vala',
   'Zoom.vala'
 )
 
+subdir('protocol')
+
 executable(
   meson.project_name()+'-compositor',
   compositor_files,
-  compositor_resources,
   config_header,
   dependencies: [glib_dep, gtk_dep, gee_dep, m_dep, posix_dep, mutter_dep, gnome_desktop_dep, pantheon_desktop_shell_dep],
   vala_args: vala_flags,
