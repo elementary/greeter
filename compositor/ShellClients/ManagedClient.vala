@@ -48,7 +48,7 @@ public class GreeterCompositor.ManagedClient : Object {
     }
 
     private async void start_wayland () {
-        var subprocess_launcher = new GLib.SubprocessLauncher (STDERR_PIPE | STDOUT_PIPE);
+        var subprocess_launcher = new GLib.SubprocessLauncher (INHERIT_FDS);
         try {
             wayland_client = new Meta.WaylandClient (display.get_context (), subprocess_launcher);
             subprocess = wayland_client.spawnv (display, args);
