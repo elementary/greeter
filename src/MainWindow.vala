@@ -6,11 +6,12 @@
  */
 
 public class Greeter.MainWindow : Gtk.ApplicationWindow {
+    public LightDM.Greeter lightdm_greeter { private get; construct; }
+
     private Pantheon.Desktop.Greeter? desktop_greeter;
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
     private Hdy.Carousel carousel;
-    private LightDM.Greeter lightdm_greeter;
     private Greeter.Settings settings;
     private GLib.Settings gsettings;
     private Gtk.Revealer datetime_revealer;
@@ -24,6 +25,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private Gtk.EventControllerKey key_controller;
 
+    public MainWindow (LightDM.Greeter lightdm_greeter) {
+        Object (lightdm_greeter: lightdm_greeter);
+    }
+
     construct {
         app_paintable = true;
         decorated = false;
@@ -32,12 +37,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         gsettings = new GLib.Settings ("io.elementary.greeter");
         settings = new Greeter.Settings ();
 
-        lightdm_greeter = new LightDM.Greeter ();
-        try {
-            lightdm_greeter.connect_to_daemon_sync ();
-        } catch (Error e) {
-            critical ("LightDM couldn't connect to daemon: %s", e.message);
-        }
         lightdm_greeter.show_message.connect (show_message);
         lightdm_greeter.show_prompt.connect (show_prompt);
         lightdm_greeter.authentication_complete.connect (authentication_complete);
@@ -318,7 +317,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     }
                 }
 
+                gsettings.set_string ("last-session-type", session);
                 lightdm_greeter.start_session_sync (session);
+
                 return;
             } catch (Error e) {
                 var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
@@ -347,10 +348,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private async void load_users () {
-        if (lightdm_greeter.default_session_hint != null) {
-            application.activate_action ("select-session", new GLib.Variant.string (lightdm_greeter.default_session_hint));
-        }
-
         // Check if the installer is installed
         var installer_desktop = new DesktopAppInfo ("io.elementary.installer.desktop");
         if (installer_desktop != null) {
