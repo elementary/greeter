@@ -15,7 +15,7 @@ You'll need the following dependencies:
 * libgtk-3-dev
 * libhandy-1-dev >= 0.90.0
 * liblightdm-gobject-1-dev
-* libmutter-6-dev
+* libmutter-13-dev
 * libx11-dev
 * meson
 * valac

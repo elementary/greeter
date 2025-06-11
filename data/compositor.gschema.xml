@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
+  <schema path="/io/elementary/greeter/" id="io.elementary.greeter">
+    <key type="s" name="last-user">
+      <default>''</default>
+      <summary>Last selected user</summary>
+      <description></description>
+    </key>
+    <key type="s" name="last-session-type">
+      <default>''</default>
+      <summary>Last selected session type</summary>
+      <description></description>
+    </key>
+  </schema>
+
   <schema path="/io/elementary/greeter-compositor/keybindings/" id="io.elementary.greeter-compositor.keybindings">
     <key type="as" name="zoom-in">
       <default><![CDATA[['<Super>plus', '<Super>KP_Add']]]></default>

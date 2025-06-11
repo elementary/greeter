@@ -37,7 +37,9 @@ namespace GreeterCompositor {
 
         private Clutter.Actor fade_in_screen;
 
+#if !HAS_MUTTER48
         private Meta.PluginInfo info;
+#endif
 
         // Used to toggle screenreader
         private GLib.Settings application_settings;
@@ -46,8 +48,10 @@ namespace GreeterCompositor {
         private Zoom zoom;
 
         construct {
+#if !HAS_MUTTER48
             info = Meta.PluginInfo () {name = "GreeterCompositor", version = Constants.VERSION, author = "elementary LLC.",
                 license = "GPLv3", description = "The greeter compositor"};
+#endif
         }
 
         public override void start () {
@@ -95,7 +99,11 @@ namespace GreeterCompositor {
             DBusWingpanelManager.init (this);
             KeyboardManager.init (display);
 
+#if HAS_MUTTER48
+            stage = display.get_compositor ().get_stage () as Clutter.Stage;
+#else
             stage = display.get_stage () as Clutter.Stage;
+#endif
 #if HAS_MUTTER47
             stage.background_color = Cogl.Color.from_string ("black");
 #else
@@ -125,11 +133,19 @@ namespace GreeterCompositor {
             };
             stage.add_child (fade_in_screen);
 
+#if HAS_MUTTER48
+            window_group = display.get_compositor ().get_window_group ();
+#else
             window_group = display.get_window_group ();
+#endif
             stage.remove_child (window_group);
             ui_group.add_child (window_group);
 
+#if HAS_MUTTER48
+            top_window_group = display.get_compositor ().get_top_window_group ();
+#else
             top_window_group = display.get_top_window_group ();
+#endif
             stage.remove_child (top_window_group);
             ui_group.add_child (top_window_group);
 
@@ -191,6 +207,7 @@ namespace GreeterCompositor {
                 if (GLib.Environment.get_variable ("DESKTOP_SESSION") != "installer") {
                     start_command.begin ({ "io.elementary.greeter-session-manager" });
                     start_command.begin ({ "io.elementary.greeter" });
+                    start_command.begin ({ "io.elementary.settings-daemon" });
                 }
 
                 return GLib.Source.REMOVE;
@@ -229,11 +246,7 @@ namespace GreeterCompositor {
             var subprocess_launcher = new GLib.SubprocessLauncher (GLib.SubprocessFlags.INHERIT_FDS);
             try {
                 Meta.WaylandClient daemon_client;
-#if HAS_MUTTER44
                 daemon_client = new Meta.WaylandClient (display.get_context (), subprocess_launcher);
-#else
-                daemon_client = new Meta.WaylandClient (subprocess_launcher);
-#endif
                 var subprocess = daemon_client.spawnv (display, command);
 
                 yield subprocess.wait_async ();
@@ -264,27 +277,6 @@ namespace GreeterCompositor {
             }
         }
 
-        public uint32[] get_all_xids () {
-            unowned Meta.Display display = get_display ();
-
-            var list = new Gee.ArrayList<uint32> ();
-#if HAS_MUTTER46
-            unowned Meta.X11Display x11display = display.get_x11_display ();
-#endif
-            unowned Meta.WorkspaceManager manager = display.get_workspace_manager ();
-            for (int i = 0; i < manager.get_n_workspaces (); i++) {
-                foreach (var window in manager.get_workspace_by_index (i).list_windows ()) {
-#if HAS_MUTTER46
-                    list.add ((uint32)x11display.lookup_xwindow (window));
-#else
-                    list.add ((uint32)window.get_xwindow ());
-#endif
-                }
-            }
-
-            return list.to_array ();
-        }
-
         private void toggle_screen_reader () {
             if (reader_pid == 0 && application_settings.get_boolean ("screen-reader-enabled")) {
                 try {
@@ -301,19 +293,11 @@ namespace GreeterCompositor {
             }
         }
 
-#if HAS_MUTTER45
         public override void show_window_menu_for_rect (Meta.Window window, Meta.WindowMenuType menu, Mtk.Rectangle rect) {
-#else
-        public override void show_window_menu_for_rect (Meta.Window window, Meta.WindowMenuType menu, Meta.Rectangle rect) {
-#endif
             show_window_menu (window, menu, rect.x, rect.y);
         }
 
-#if HAS_MUTTER45
         public override void size_change (Meta.WindowActor actor, Meta.SizeChange which_change, Mtk.Rectangle old_frame_rect, Mtk.Rectangle old_buffer_rect) {
-#else
-        public override void size_change (Meta.WindowActor actor, Meta.SizeChange which_change, Meta.Rectangle old_frame_rect, Meta.Rectangle old_buffer_rect) {
-#endif
             size_change_completed (actor);
         }
 
@@ -334,7 +318,6 @@ namespace GreeterCompositor {
 
         public override void destroy (WindowActor actor) {
             destroy_completed (actor);
-            Utils.request_clean_icon_cache (get_all_xids ());
         }
 
         public override void kill_window_effects (WindowActor actor) {}
@@ -348,12 +331,8 @@ namespace GreeterCompositor {
         }
 
         public override void confirm_display_change () {
-#if HAS_MUTTER44
             unowned var monitor_manager = get_display ().get_context ().get_backend ().get_monitor_manager ();
             var timeout = monitor_manager.get_display_configuration_timeout ();
-#else
-            var timeout = Meta.MonitorManager.get_display_configuration_timeout ();
-#endif
             var summary = ngettext (
                 "Changes will automatically revert after %i second.",
                 "Changes will automatically revert after %i seconds.",
@@ -390,8 +369,10 @@ namespace GreeterCompositor {
             dialog.show ();
         }
 
+#if !HAS_MUTTER48
         public override unowned Meta.PluginInfo? plugin_info () {
             return info;
         }
+#endif
     }
 }

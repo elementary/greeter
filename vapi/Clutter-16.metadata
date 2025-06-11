@@ -1,27 +1,29 @@
 // Non mini-object
 ActorBox struct
-Color struct
-Knot struct
 Margin struct
 PaintVolume struct
-PathNode struct
 Perspective struct
-Units struct
 
 *.ref unowned
+* cheader_filename="clutter/clutter.h"
+
+// Fix the few clutter-pango headers
+Text cheader_filename="clutter/clutter-pango.h"
+TextBuffer cheader_filename="clutter/clutter-pango.h"
+TextNode cheader_filename="clutter/clutter-pango.h"
+Actor
+	.get_pango_context cheader_filename="clutter/clutter-pango.h"
+	.create_pango_context cheader_filename="clutter/clutter-pango.h"
+	.create_pango_layout cheader_filename="clutter/clutter-pango.h"
+
 
 Actor
 	.apply_transform.matrix ref
 	.get_abs_allocation_vertices.verts out=false
-Canvas
-	.new symbol_type="constructor"
 Event.type#method name="get_type"
-Image
-	.new symbol_type="constructor"
 
 // ???
 Actor.has_pointer#method name="get_has_pointer"
-ScriptError errordomain
 
 // Not all backing symbols are deprecated
 Actor.pick deprecated=false
@@ -29,24 +31,22 @@ Actor.pick deprecated=false
 // Nullable return values
 Actor
 	.get_parent nullable
-value_get_color nullable
+
+// The original CType has been overridden by the annotations
+Actor
+	.allocate.box ctype="const ClutterActorBox *"
+	.get_stage ctype="ClutterActor *"
+Action.handle_event.event ctype="const ClutterEvent *"
 
 // method/virtual-method/signal don't match
 Actor
 	.event#method name="emit_event"
 	.get_paint_volume#virtual_method name="get_paint_volume_vfunc"
 	.get_paint_volume#virtual_method.volume out
-Container
-	.add_actor skip=false
-	.class_* skip
 Text
 	.activate#method name="try_activate"
 	.insert_text#signal skip
 TextBuffer.get_text#virtual_method name="get_text_with_length"
-
-// virtual/abstract distinction
-Container
-	.*_child_meta#virtual_method virtual
 
 // Default values
 Stage.read_pixels
@@ -61,13 +61,13 @@ Text
 LayoutManager
 	.create_child_meta skip=false
 
+// We can use static strings
+PaintNode
+	.set_static_name skip=false
+
 // Variadic arguments
 Backend
 	.get_cogl_context skip=false
-Container
-	.child_get skip=false
-	.child_set skip=false
-	.remove skip=false
 Interval
 	.new skip=false
 	.get_interval skip=false
@@ -77,33 +77,16 @@ Interval
 LayoutManager
 	.child_get skip=false
 	.child_set skip=false
-Script
-	.get_objects skip=false
 
 // Skipped upstream for unknown reasons
 Interval.register_progress_func skip=false
-threads_add_idle skip=false
-threads_add_idle_full skip=false
-threads_add_timeout skip=false
-threads_add_timeout_full skip=false
 
 // struct/class confusion
 ActorBox
 	.new skip
 	.from_vertices skip
-Units.from_* skip
 Margin
 	.new skip
-
-// Class methods
-container_class_find_child_property skip
-container_class_list_child_properties skip
-
-// Move symbols
-units_from_* skip
-
-// Struct return values
-color_get_static nullable
 
 // Upstream
 Event
@@ -119,9 +102,6 @@ StageView.layout skip
 
 Stage
 	.paint_view.redraw_clip type="Cairo.Region"
-
-Capture
-  .image type="Cairo.ImageSurface"
 
 // *Event should be compact classes derived from Clutter.Event
 Event.type skip=false
@@ -144,48 +124,19 @@ TouchpadSwipeEvent struct=false base_type="Clutter.Event"
 
 // Keysyms used to be CLUTTER_X instead of CLUTTER_KEY_X
 *#constant skip
-COGL skip=false
 CURRENT_TIME skip=false
-FLAVOUR skip=false
-PATH_RELATIVE skip=false
 PRIORITY_REDRAW skip=false
 
 // Clutter devs don't like us creating nested namespaces
 value_* name="value_(.+)" parent="Clutter.Value"
 threads_* name="threads_(.+)" parent="Clutter.Threads"
-threads_add_idle name="add" parent="Clutter.Threads.Idle"
-threads_add_idle_full name="add_full" parent="Clutter.Threads.Idle"
-threads_add_timeout name="add" parent="Clutter.Threads.Timeout"
-threads_add_timeout_full name="add_full" parent="Clutter.Threads.Timeout"
 
 // There is no way to know sealed classes before GLib 2.70
 ColorState sealed
 FrameClock sealed
 TextureContent sealed
 
-// Backwards compatibility
-Color.alloc symbol_type="function"
-
-Color.from_hls name="init_from_hls"
-Color.from_pixel name="init_from_pixel"
-Color.from_string name="init_from_string"
-
-Color.new name="from_rgba" symbol_type="function"
-	.alpha default=0
-	.blue default=0
-	.green default=0
-	.red default=0
-
-Color.init
-	.alpha default=0
-	.blue default=0
-	.green default=0
-	.red default=0
-
-BinAlignment deprecated=false deprecated_since=null
-BinAlignment.* deprecated
-BinAlignment.start deprecated=false
-BinLayout.new.*_align default=Clutter.BinAlignment.START
+TextureContent.new_from_texture symbol_type="constructor"
 
 // Possibly keep
 KEY_* skip=false name="KEY_(.+)" type="uint" parent="Clutter.Key"

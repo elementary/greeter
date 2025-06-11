@@ -20,6 +20,8 @@
  */
 
 public class Greeter.Application : Gtk.Application {
+    private LightDM.Greeter lightdm_greeter;
+
     public Application () {
         Object (
             application_id: "io.elementary.greeter",
@@ -41,11 +43,71 @@ public class Greeter.Application : Gtk.Application {
         css_provider.load_from_resource ("/io/elementary/greeter/Application.css");
 
         Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        GLib.Bus.own_name (
+            SESSION,
+            "org.freedesktop.portal.Desktop",
+            NONE,
+            (connection, name) => {
+                try {
+                    connection.register_object ("/org/freedesktop/portal/desktop", SettingsPortal.get_default ());
+                } catch (Error e) {
+                    critical ("Unable to register the object: %s", e.message);
+                }
+            },
+            () => debug ("org.freedesktop.portal.Desktop acquired"),
+            () => debug ("org.freedesktop.portal.Desktop lost")
+        );
+
+        unowned var gtk_settings = Gtk.Settings.get_default ();
+        unowned var settings_portal = SettingsPortal.get_default ();
+
+        gtk_settings.gtk_application_prefer_dark_theme = settings_portal.prefers_color_scheme == 1;
+
+        settings_portal.notify["prefers-color-scheme"].connect (() => {
+            gtk_settings.gtk_application_prefer_dark_theme = settings_portal.prefers_color_scheme == 1;
+        });
+
+        var settings = new GLib.Settings ("io.elementary.greeter");
+
+        lightdm_greeter = new LightDM.Greeter ();
+        try {
+            lightdm_greeter.connect_to_daemon_sync ();
+        } catch (Error e) {
+            critical ("LightDM couldn't connect to daemon: %s", e.message);
+        }
+
+        unowned var sessions = LightDM.get_sessions ();
+
+        var selected_session = "";
+        if (settings.get_string ("last-session-type") != "") {
+            selected_session = settings.get_string ("last-session-type");
+        } else if (lightdm_greeter.default_session_hint != null) {
+            selected_session = lightdm_greeter.default_session_hint;
+        } else if (sessions.length () > 0) {
+            selected_session = sessions.first ().data.key;
+        }
+
+        var select_session_action = new GLib.SimpleAction.stateful ("select-session", GLib.VariantType.STRING, selected_session);
+        var vardict = new GLib.VariantDict ();
+        sessions.foreach ((session) => {
+            vardict.insert_value (session.name, new GLib.Variant.string (session.key));
+        });
+        select_session_action.set_state_hint (vardict.end ());
+
+        select_session_action.activate.connect ((param) => {
+            if (!select_session_action.get_state ().equal (param)) {
+                select_session_action.set_state (param);
+            }
+        });
+
+        add_action (select_session_action);
     }
 
     public override void activate () {
-        add_window (new Greeter.MainWindow ());
+        add_window (new Greeter.MainWindow (lightdm_greeter));
         active_window.show_all ();
+        active_window.present ();
     }
 
     public static int main (string[] args) {
