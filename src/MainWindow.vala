@@ -6,15 +6,14 @@
  */
 
 public class Greeter.MainWindow : Gtk.ApplicationWindow {
+    public LightDM.Greeter lightdm_greeter { private get; construct; }
+
     private Pantheon.Desktop.Greeter? desktop_greeter;
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
     private Hdy.Carousel carousel;
-    private LightDM.Greeter lightdm_greeter;
     private Greeter.Settings settings;
     private GLib.Settings gsettings;
-    private Gtk.Button guest_login_button;
-    private Gtk.ToggleButton manual_login_button;
     private Gtk.Revealer datetime_revealer;
     private Greeter.DateTimeWidget datetime_widget;
     private unowned LightDM.UserList lightdm_user_list;
@@ -26,27 +25,37 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private Gtk.EventControllerKey key_controller;
 
+    public MainWindow (LightDM.Greeter lightdm_greeter) {
+        Object (lightdm_greeter: lightdm_greeter);
+    }
+
     construct {
         app_paintable = true;
         decorated = false;
-
-        gsettings = new GLib.Settings ("io.elementary.greeter");
-
-        settings = new Greeter.Settings ();
-
         set_visual (get_screen ().get_rgba_visual ());
 
-        guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
+        gsettings = new GLib.Settings ("io.elementary.greeter");
+        settings = new Greeter.Settings ();
 
-        manual_login_button = new Gtk.ToggleButton.with_label (_("Manual Login…"));
+        lightdm_greeter.show_message.connect (show_message);
+        lightdm_greeter.show_prompt.connect (show_prompt);
+        lightdm_greeter.authentication_complete.connect (authentication_complete);
 
-        var extra_login_grid = new Gtk.Grid () {
-            column_homogeneous = true,
-            column_spacing = 12,
+        var guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
+        var manual_login_button = new Gtk.ToggleButton.with_label (_("Manual Login…"));
+
+        var extra_login_box = new Gtk.Box (HORIZONTAL, 12) {
+            homogeneous = true,
             halign = CENTER,
             valign = END,
             vexpand = true
         };
+        if (lightdm_greeter.has_guest_account_hint) {
+            extra_login_box.add (guest_login_button);
+        }
+        if (lightdm_greeter.show_manual_login_hint) {
+            extra_login_box.add (manual_login_button);
+        }
 
         datetime_widget = new Greeter.DateTimeWidget ();
 
@@ -78,7 +87,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         };
         main_box.add (datetime_revealer);
         main_box.add (manual_login_stack);
-        main_box.add (extra_login_grid);
+        main_box.add (extra_login_box);
 
         child = main_box;
 
@@ -123,34 +132,11 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         });
 
         card_size_group = new Gtk.SizeGroup (Gtk.SizeGroupMode.HORIZONTAL);
-        card_size_group.add_widget (extra_login_grid);
+        card_size_group.add_widget (extra_login_box);
         card_size_group.add_widget (manual_card);
-
-        lightdm_greeter = new LightDM.Greeter ();
-        lightdm_greeter.show_message.connect (show_message);
-        lightdm_greeter.show_prompt.connect (show_prompt);
-        lightdm_greeter.authentication_complete.connect (authentication_complete);
-
-        lightdm_greeter.notify["has-guest-account-hint"].connect (() => {
-            if (lightdm_greeter.has_guest_account_hint && guest_login_button.parent == null) {
-                extra_login_grid.attach (guest_login_button, 0, 0);
-                guest_login_button.show ();
-            }
-        });
-
-        lightdm_greeter.notify["show-manual-login-hint"].connect (() => {
-            if (lightdm_greeter.show_manual_login_hint && manual_login_button.parent == null) {
-                extra_login_grid.attach (manual_login_button, 1, 0);
-                manual_login_button.show ();
-            }
-        });
 
         lightdm_greeter.bind_property ("hide-users-hint", manual_login_button, "sensitive", GLib.BindingFlags.SYNC_CREATE | GLib.BindingFlags.INVERT_BOOLEAN);
         lightdm_greeter.bind_property ("hide-users-hint", manual_login_button, "active", GLib.BindingFlags.SYNC_CREATE);
-
-        notify["scale-factor"].connect (() => {
-            maximize_window ();
-        });
 
         lightdm_user_list = LightDM.UserList.get_instance ();
         lightdm_user_list.user_added.connect (() => {
@@ -199,22 +185,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
             if (children.nth_data (index) is Greeter.UserCard) {
                 current_user_card_index = (int) index;
-                switch_to_card ((Greeter.UserCard) children.nth_data (index));
             }
-        });
-
-        // regrab focus when dpi changed
-        get_screen ().monitors_changed.connect (() => {
-            maximize_and_focus ();
-        });
-
-        leave_notify_event.connect (() => {
-            maximize_and_focus ();
-            return false;
-        });
-
-        destroy.connect (() => {
-            Gtk.main_quit ();
         });
 
         load_users.begin (() => {
@@ -222,12 +193,17 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
              * at boot.  TODO: Find whether boot sequence can be tweaked to fix this.
              */
             Timeout.add (500, () => {
-                maximize_and_focus ();
+                get_style_context ().add_class ("initialized");
+
+                if (current_card != null) {
+                    current_card.grab_focus ();
+                }
+
                 return Source.REMOVE;
             });
         });
 
-        maximize_window ();
+        maximize ();
 
         if (settings.activate_numlock) {
             try {
@@ -294,35 +270,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
     }
 
-    private void maximize_and_focus () {
-        present ();
-        maximize_window ();
-        get_style_context ().add_class ("initialized");
-
-        if (current_card != null) {
-            current_card.grab_focus ();
-        }
-    }
-
-    private void maximize_window () {
-        var display = Gdk.Display.get_default ();
-        unowned Gdk.Seat seat = display.get_default_seat ();
-        unowned Gdk.Device? pointer = seat.get_pointer ();
-
-        Gdk.Monitor? monitor;
-        if (pointer != null) {
-            int x, y;
-            pointer.get_position (null, out x, out y);
-            monitor = display.get_monitor_at_point (x, y);
-        } else {
-            monitor = display.get_primary_monitor ();
-        }
-
-        var rect = monitor.get_geometry ();
-        resize (rect.width, rect.height);
-        move (rect.x, rect.y);
-    }
-
     private void show_message (string text, LightDM.MessageType type) {
         var messagetext = Greeter.FPrintUtils.string_to_messagetext (text);
         switch (messagetext) {
@@ -370,7 +317,9 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     }
                 }
 
+                gsettings.set_string ("last-session-type", session);
                 lightdm_greeter.start_session_sync (session);
+
                 return;
             } catch (Error e) {
                 var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
@@ -399,19 +348,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private async void load_users () {
-        try {
-            yield lightdm_greeter.connect_to_daemon (null);
-        } catch (Error e) {
-            critical (e.message);
-        }
-
-        lightdm_greeter.notify_property ("show-manual-login-hint");
-        lightdm_greeter.notify_property ("has-guest-account-hint");
-
-        if (lightdm_greeter.default_session_hint != null) {
-            application.activate_action ("select-session", new GLib.Variant.string (lightdm_greeter.default_session_hint));
-        }
-
         // Check if the installer is installed
         var installer_desktop = new DesktopAppInfo ("io.elementary.installer.desktop");
         if (installer_desktop != null) {
@@ -467,8 +403,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 return Source.REMOVE;
             });
         }
-
-        lightdm_greeter.notify_property ("hide-users-hint");
     }
 
     private void add_card (LightDM.User lightdm_user) {
@@ -503,7 +437,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         user_cards.push_tail (user_card);
     }
 
-    private unowned GLib.Binding? time_format_binding = null;
     private void switch_to_card (Greeter.UserCard user_card) {
         if (!carousel.interactive) {
             return;
@@ -513,10 +446,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             ((UserCard) current_card).show_input = false;
         }
 
-        if (time_format_binding != null) {
-            time_format_binding.unbind ();
-        }
-        time_format_binding = user_card.bind_property ("is-24h", datetime_widget, "is-24h", GLib.BindingFlags.SYNC_CREATE);
+        datetime_widget.is_24h = user_card.is_24h;
 
         current_card = user_card;
 

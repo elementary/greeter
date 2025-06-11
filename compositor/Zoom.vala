@@ -58,7 +58,12 @@ public class GreeterCompositor.Zoom : Object {
     private inline Graphene.Point compute_new_pivot_point () {
         unowned var wins = wm.ui_group;
         Graphene.Point coords;
-        wm.get_display ().get_cursor_tracker ().get_pointer (out coords, null);
+#if HAS_MUTTER48
+        unowned var tracker = wm.get_display ().get_compositor ().get_backend ().get_cursor_tracker ();
+#else
+        unowned var tracker = wm.get_display ().get_cursor_tracker ();
+#endif
+        tracker.get_pointer (out coords, null);
         var new_pivot = Graphene.Point () {
             x = coords.x / wins.width,
             y = coords.y / wins.height
