@@ -14,8 +14,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     public bool show_input { get; set; default = false; }
     public bool is_24h { get; set; default = true; }
 
-    public int prefers_accent_color { get; set; default = 6; }
-
     private Act.User act_user;
     private Pantheon.AccountsService greeter_act;
     private Pantheon.SettingsDaemon.AccountsService settings_act;
@@ -211,13 +209,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             }
         });
 
-        notify["show-input"].connect (() => {
-            update_collapsed_class ();
-
-            if (greeter_act != null) {
-                SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
-            }
-        });
+        notify["show-input"].connect (update_collapsed_class);
 
         password_entry.activate.connect (on_login);
         login_button.clicked.connect (on_login);
@@ -237,7 +229,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void set_check_style () {
         // Override check's accent_color so that it *always* uses user's preferred color
-        logged_in.get_style_context ().add_class (accent_to_string (prefers_accent_color));
+        logged_in.get_style_context ().add_class (accent_to_string (settings_act.accent_color));
     }
 
     private void set_background_image () {
@@ -315,23 +307,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
                 );
 
                 is_24h = greeter_act.time_format != "12h";
-                prefers_accent_color = greeter_act.prefers_accent_color;
-
-                if (show_input) {
-                    SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
-                }
-
-                ((DBusProxy) greeter_act).g_properties_changed.connect ((changed_properties, invalidated_properties) => {
-                    string time_format;
-                    changed_properties.lookup ("TimeFormat", "s", out time_format);
-                    is_24h = time_format != "12h";
-
-                    changed_properties.lookup ("PrefersAccentColor", "i", out _prefers_accent_color);
-
-                    if (show_input) {
-                        SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
-                    }
-                });
             } catch (Error e) {
                 critical (e.message);
             }
@@ -507,7 +482,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void update_style () {
         var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
-        interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (prefers_accent_color));
+        interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (settings_act.accent_color));
+
+        SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
     }
 
     public override void wrong_credentials () {

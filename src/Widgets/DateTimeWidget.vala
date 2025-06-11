@@ -1,15 +1,28 @@
-[DBus (name = "org.freedesktop.login1.Manager")]
-interface LoginManager : GLib.Object {
-    public signal void prepare_for_sleep (bool start);
-}
+/*
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-FileCopyrightText: 2025 elementary, Inc. (https://elementary.io)
+ */
 
 public class Greeter.DateTimeWidget : Gtk.Box {
-    public bool is_24h { get; set; default=true; }
+    [DBus (name = "org.freedesktop.login1.Manager")]
+    private interface LoginManager : GLib.Object {
+        public signal void prepare_for_sleep (bool about_to_suspend);
+    }
+
+    private bool _is_24h = true;
+    public bool is_24h {
+        private get {
+            return _is_24h;
+        }
+        set {
+            _is_24h = value;
+            update_labels ();
+        }
+    }
 
     private Gtk.Label time_label;
     private Gtk.Label date_label;
-    private uint timeout_id = 0U;
-
+    private uint timeout_id = 0;
     private LoginManager login_manager;
 
     construct {
@@ -25,25 +38,19 @@ public class Greeter.DateTimeWidget : Gtk.Box {
 
         update_labels ();
 
-        notify["is-24h"].connect (() => {
-            GLib.Source.remove (timeout_id);
-            update_labels ();
-        });
-
         setup_for_sleep.begin ();
     }
 
     private async void setup_for_sleep () {
         try {
             login_manager = yield Bus.get_proxy (
-                BusType.SYSTEM,
+                SYSTEM,
                 "org.freedesktop.login1",
                 "/org/freedesktop/login1"
             );
 
-            login_manager.prepare_for_sleep.connect ((start) => {
-                if (!start) {
-                    GLib.Source.remove (timeout_id);
+            login_manager.prepare_for_sleep.connect ((about_to_suspend) => {
+                if (!about_to_suspend) {
                     update_labels ();
                 }
             });
@@ -53,11 +60,17 @@ public class Greeter.DateTimeWidget : Gtk.Box {
     }
 
     private bool update_labels () {
+        if (timeout_id != 0) {
+            GLib.Source.remove (timeout_id);
+        }
+
         var now = new GLib.DateTime.now_local ();
+
         time_label.label = now.format (Granite.DateTime.get_default_time_format (!is_24h, false));
         date_label.label = now.format (Granite.DateTime.get_default_date_format (true, true, false));
-        var delta = 60 - now.get_second ();
-        timeout_id = GLib.Timeout.add_seconds (delta, update_labels);
+
+        timeout_id = GLib.Timeout.add_seconds (60 - now.get_second (), update_labels);
+
         return GLib.Source.REMOVE;
     }
 }

@@ -20,6 +20,8 @@
  */
 
 public class Greeter.Application : Gtk.Application {
+    private LightDM.Greeter lightdm_greeter;
+
     public Application () {
         Object (
             application_id: "io.elementary.greeter",
@@ -66,9 +68,26 @@ public class Greeter.Application : Gtk.Application {
             gtk_settings.gtk_application_prefer_dark_theme = settings_portal.prefers_color_scheme == 1;
         });
 
+        var settings = new GLib.Settings ("io.elementary.greeter");
+
+        lightdm_greeter = new LightDM.Greeter ();
+        try {
+            lightdm_greeter.connect_to_daemon_sync ();
+        } catch (Error e) {
+            critical ("LightDM couldn't connect to daemon: %s", e.message);
+        }
+
         unowned var sessions = LightDM.get_sessions ();
-        unowned var first_session = sessions.nth_data (0);
-        var selected_session = new GLib.Variant.string (first_session != null ? first_session.key : "");
+
+        var selected_session = "";
+        if (settings.get_string ("last-session-type") != "") {
+            selected_session = settings.get_string ("last-session-type");
+        } else if (lightdm_greeter.default_session_hint != null) {
+            selected_session = lightdm_greeter.default_session_hint;
+        } else if (sessions.length () > 0) {
+            selected_session = sessions.first ().data.key;
+        }
+
         var select_session_action = new GLib.SimpleAction.stateful ("select-session", GLib.VariantType.STRING, selected_session);
         var vardict = new GLib.VariantDict ();
         sessions.foreach ((session) => {
@@ -86,8 +105,9 @@ public class Greeter.Application : Gtk.Application {
     }
 
     public override void activate () {
-        add_window (new Greeter.MainWindow ());
+        add_window (new Greeter.MainWindow (lightdm_greeter));
         active_window.show_all ();
+        active_window.present ();
     }
 
     public static int main (string[] args) {
