@@ -16,17 +16,19 @@ public class GreeterCompositor.ShellClientsManager : Object {
         instance = new ShellClientsManager (wm);
     }
 
-    public static ShellClientsManager? get_instance () {
+    public static unowned ShellClientsManager? get_instance () {
         return instance;
     }
+
+    public Clutter.Actor? actor { get { return wm.stage; } }
 
     public WindowManager wm { get; construct; }
 
     private NotificationsClient notifications_client;
     private ManagedClient[] protocol_clients = {};
 
-    private GLib.HashTable<Meta.Window, PanelWindow> windows = new GLib.HashTable<Meta.Window, PanelWindow> (null, null);
-    private GLib.HashTable<Meta.Window, CenteredWindow> centered_windows = new GLib.HashTable<Meta.Window, CenteredWindow> (null, null);
+    private GLib.HashTable<Meta.Window, PanelWindow> panel_windows = new GLib.HashTable<Meta.Window, PanelWindow> (null, null);
+    private GLib.HashTable<Meta.Window, ShellWindow> positioned_windows = new GLib.HashTable<Meta.Window, ShellWindow> (null, null);
 
     private ShellClientsManager (WindowManager wm) {
         Object (wm: wm);
@@ -60,7 +62,9 @@ public class GreeterCompositor.ShellClientsManager : Object {
     private void make_dock_wayland (Meta.Window window) requires (Meta.Util.is_wayland_compositor ()) {
         foreach (var client in protocol_clients) {
             if (client.wayland_client.owns_window (window)) {
+#if HAS_MUTTER46
                 client.wayland_client.make_dock (window);
+#endif
                 break;
             }
         }
@@ -85,19 +89,56 @@ public class GreeterCompositor.ShellClientsManager : Object {
         xdisplay.change_property (x_window, atom, (X.Atom) 4, 32, 0, (uchar[]) dock_atom, 1);
     }
 
-    public void set_anchor (Meta.Window window, Meta.Side side) {
-        if (window in windows) {
-            windows[window].update_anchor (side);
+
+    public void make_desktop (Meta.Window window) {
+        if (Meta.Util.is_wayland_compositor ()) {
+            make_desktop_wayland (window);
+        } else {
+            make_desktop_x11 (window);
+        }
+    }
+
+    private void make_desktop_wayland (Meta.Window window) requires (Meta.Util.is_wayland_compositor ()) {
+        foreach (var client in protocol_clients) {
+            if (client.wayland_client.owns_window (window)) {
+                client.wayland_client.make_desktop (window);
+                break;
+            }
+        }
+    }
+
+    private void make_desktop_x11 (Meta.Window window) requires (!Meta.Util.is_wayland_compositor ()) {
+        unowned var x11_display = wm.get_display ().get_x11_display ();
+
+#if HAS_MUTTER46
+        var x_window = x11_display.lookup_xwindow (window);
+#else
+        var x_window = window.get_xwindow ();
+#endif
+        // gtk3's gdk_x11_window_set_type_hint() is used as a reference
+        unowned var xdisplay = x11_display.get_xdisplay ();
+        var atom = xdisplay.intern_atom ("_NET_WM_WINDOW_TYPE", false);
+        var dock_atom = xdisplay.intern_atom ("_NET_WM_WINDOW_TYPE_DESKTOP", false);
+
+        // (X.Atom) 4 is XA_ATOM
+        // 32 is format
+        // 0 means replace
+        xdisplay.change_property (x_window, atom, (X.Atom) 4, 32, 0, (uchar[]) dock_atom, 1);
+    }
+
+    public void set_anchor (Meta.Window window, Pantheon.Desktop.Anchor anchor) {
+        if (window in panel_windows) {
+            panel_windows[window].anchor = anchor;
             return;
         }
 
         make_dock (window);
         // TODO: Return if requested by window that's not a trusted client?
 
-        windows[window] = new PanelWindow (wm, window, side);
+        panel_windows[window] = new PanelWindow (wm, window, anchor);
 
         // connect_after so we make sure the PanelWindow can destroy its barriers and struts
-        window.unmanaging.connect_after (() => windows.remove (window));
+        window.unmanaging.connect_after ((_window) => panel_windows.remove (_window));
     }
 
     /**
@@ -108,44 +149,36 @@ public class GreeterCompositor.ShellClientsManager : Object {
      * TODO: Maybe use for strut only?
      */
     public void set_size (Meta.Window window, int width, int height) {
-        if (!(window in windows)) {
+        if (!(window in panel_windows)) {
             warning ("Set anchor for window before size.");
             return;
         }
 
-        windows[window].set_size (width, height);
+        panel_windows[window].set_size (width, height);
     }
 
     public void set_hide_mode (Meta.Window window, Pantheon.Desktop.HideMode hide_mode) {
-        if (!(window in windows)) {
-            warning ("Set anchor for window before hide mode.");
-            return;
-        }
-
-        windows[window].set_hide_mode (hide_mode);
+        debug ("Hide mode is unsupported in greeter-compositor");
     }
 
-    public void make_centered (Meta.Window window) {
-        if (window in centered_windows) {
-            return;
-        }
+    public void init_greeter (Meta.Window window) {
+        make_desktop (window);
 
-        centered_windows[window] = new CenteredWindow (wm, window);
+        positioned_windows[window] = new ShellWindow (window, FULLSCREEN);
 
-        window.unmanaging.connect_after (() => centered_windows.remove (window));
+        // connect_after so we make sure that any queued move is unqueued
+        window.unmanaging.connect_after ((_window) => positioned_windows.remove (_window));
     }
 
-    public bool is_positioned_window (Meta.Window window) {
-        bool positioned = (window in centered_windows) || (window in windows);
-        window.foreach_ancestor ((ancestor) => {
-            if (ancestor in centered_windows || ancestor in windows) {
-                positioned = true;
-            }
+    public void make_centered (Meta.Window window) requires (!is_itself_positioned (window)) {
+        positioned_windows[window] = new ShellWindow (window, CENTER);
 
-            return !positioned;
-        });
+        // connect_after so we make sure that any queued move is unqueued
+        window.unmanaging.connect_after ((_window) => positioned_windows.remove (_window));
+    }
 
-        return positioned;
+    public bool is_itself_positioned (Meta.Window window) {
+        return (window in positioned_windows) || (window in panel_windows) || window.get_data (NOTIFICATION_DATA_KEY);
     }
 
     //X11 only
@@ -167,8 +200,30 @@ public class GreeterCompositor.ShellClientsManager : Object {
 
             switch (key) {
                 case "anchor":
-                    int parsed; // Will be used as Meta.Side which is a 4 value bitfield so check bounds for that
-                    if (int.try_parse (val, out parsed) && 0 <= parsed && parsed <= 15) {
+                    int meta_side_parsed; // Will be used as Meta.Side which is a 4 value bitfield so check bounds for that
+                    if (int.try_parse (val, out meta_side_parsed) && 0 <= meta_side_parsed && meta_side_parsed <= 15) {
+                        //FIXME: Next major release change dock and wingpanel calls to get rid of this
+                        Pantheon.Desktop.Anchor parsed = TOP;
+                        switch ((Meta.Side) meta_side_parsed) {
+                            case BOTTOM:
+                                parsed = BOTTOM;
+                                break;
+
+                            case LEFT:
+                                parsed = LEFT;
+                                break;
+
+                            case RIGHT:
+                                parsed = RIGHT;
+                                break;
+
+                            default:
+                                break;
+                        }
+
+                        set_anchor (window, parsed);
+                        // We need to set a second time because the intention is to call this before the window is shown which it is on wayland
+                        // but on X the window was already shown when we get here so we have to call again to instantly apply it.
                         set_anchor (window, parsed);
                     } else {
                         warning ("Failed to parse %s as anchor", val);
@@ -197,13 +252,27 @@ public class GreeterCompositor.ShellClientsManager : Object {
                     }
                     break;
 
+                case "greeter":
+                    init_greeter (window);
+                    break;
+
                 case "centered":
                     make_centered (window);
+                    break;
+
+                case "restore-previous-region":
+                    set_restore_previous_x11_region (window);
                     break;
 
                 default:
                     break;
             }
         }
+    }
+
+    private void set_restore_previous_x11_region (Meta.Window window)
+    requires (!Meta.Util.is_wayland_compositor ())
+    requires (window in panel_windows) {
+        debug ("restore-previous-region is unsupported in greeter-compositor");
     }
 }

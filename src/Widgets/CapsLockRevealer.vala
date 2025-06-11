@@ -1,26 +1,18 @@
 /*
- * Copyright 2018-2024 elementary, Inc. (https://elementary.io)
  * SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-FileCopyrightText: 2018-2025 elementary, Inc. (https://elementary.io)
  */
 
-public class Greeter.CapsLockRevealer : Adw.Bin {
-    private unowned Gdk.Device device;
-
+public class Greeter.CapsLockRevealer : Granite.Bin {
     private Gtk.Image caps_lock_image;
     private Gtk.Image num_lock_image;
     private Gtk.Label lock_label;
     private Gtk.Revealer revealer;
 
     construct {
-        caps_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-capslock-symbolic") {
-            use_fallback = true,
-            visible = false
-        };
+        caps_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-capslock-symbolic", MENU);
+        num_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-numlock-symbolic", MENU);
 
-        num_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-numlock-symbolic") {
-            use_fallback = true,
-            visible = false
-        };
 
         lock_label = new Gtk.Label (null);
         lock_label.add_css_class (Granite.STYLE_CLASS_SMALL_LABEL);
@@ -40,15 +32,15 @@ public class Greeter.CapsLockRevealer : Adw.Bin {
 
         child = revealer;
 
-        device = Gdk.Display.get_default ().get_default_seat ().get_keyboard ();
-        device.changed.connect (update_visibility);
+        var keymap = Gdk.Keymap.get_for_display (Gdk.Display.get_default ());
+        keymap.state_changed.connect (update_visibility);
 
-        update_visibility ();
+        update_visibility (keymap);
     }
 
-    private void update_visibility () {
-        var caps_lock = device.caps_lock_state;
-        var num_lock = device.num_lock_state;
+    private void update_visibility (Gdk.Keymap keymap) {
+        var caps_lock = keymap.get_caps_lock_state ();
+        var num_lock = keymap.get_num_lock_state ();
 
         revealer.reveal_child = caps_lock || num_lock;
 

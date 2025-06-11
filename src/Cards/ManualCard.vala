@@ -67,6 +67,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             margin_end = 12
         };
         main_box.append (form_grid);
+
         main_box.add_css_class (Granite.STYLE_CLASS_CARD);
         main_box.add_css_class (Granite.STYLE_CLASS_ROUNDED);
 
@@ -128,9 +129,9 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         main_box.add_css_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
-            main_box.remove_css_class ("shake");
             username_entry.remove_css_class (Granite.STYLE_CLASS_ERROR);
             password_entry.remove_css_class (Granite.STYLE_CLASS_ERROR);
+            main_box.remove_css_class ("shake");
 
             connecting = false;
             focus_username_entry ();
@@ -151,8 +152,8 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         main_box.add_css_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
-            main_box.remove_css_class ("shake");
             username_entry.remove_css_class (Granite.STYLE_CLASS_ERROR);
+            main_box.remove_css_class ("shake");
 
             return Source.REMOVE;
         });
