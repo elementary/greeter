@@ -37,7 +37,9 @@ namespace GreeterCompositor {
 
         private Clutter.Actor fade_in_screen;
 
+#if !HAS_MUTTER48
         private Meta.PluginInfo info;
+#endif
 
         // Used to toggle screenreader
         private GLib.Settings application_settings;
@@ -46,8 +48,10 @@ namespace GreeterCompositor {
         private Zoom zoom;
 
         construct {
+#if !HAS_MUTTER48
             info = Meta.PluginInfo () {name = "GreeterCompositor", version = Constants.VERSION, author = "elementary LLC.",
                 license = "GPLv3", description = "The greeter compositor"};
+#endif
         }
 
         public override void start () {
@@ -95,7 +99,11 @@ namespace GreeterCompositor {
             DBusWingpanelManager.init (this);
             KeyboardManager.init (display);
 
+#if HAS_MUTTER48
+            stage = display.get_compositor ().get_stage () as Clutter.Stage;
+#else
             stage = display.get_stage () as Clutter.Stage;
+#endif
 #if HAS_MUTTER47
             stage.background_color = Cogl.Color.from_string ("black");
 #else
@@ -125,11 +133,19 @@ namespace GreeterCompositor {
             };
             stage.add_child (fade_in_screen);
 
+#if HAS_MUTTER48
+            window_group = display.get_compositor ().get_window_group ();
+#else
             window_group = display.get_window_group ();
+#endif
             stage.remove_child (window_group);
             ui_group.add_child (window_group);
 
+#if HAS_MUTTER48
+            top_window_group = display.get_compositor ().get_top_window_group ();
+#else
             top_window_group = display.get_top_window_group ();
+#endif
             stage.remove_child (top_window_group);
             ui_group.add_child (top_window_group);
 
@@ -353,8 +369,10 @@ namespace GreeterCompositor {
             dialog.show ();
         }
 
+#if !HAS_MUTTER48
         public override unowned Meta.PluginInfo? plugin_info () {
             return info;
         }
+#endif
     }
 }
