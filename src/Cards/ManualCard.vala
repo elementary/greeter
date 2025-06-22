@@ -28,15 +28,10 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             hexpand = true,
             input_purpose = FREE_FORM,
             placeholder_text = _("Username"),
-            primary_icon_name = "avatar-default-symbolic",
-            secondary_icon_name = "go-jump-symbolic",
-            secondary_icon_tooltip_text = _("Try username")
+            primary_icon_name = "avatar-default-symbolic"
         };
 
-        password_entry = new Greeter.PasswordEntry () {
-            secondary_icon_name = "",
-            sensitive = false
-        };
+        password_entry = new Greeter.PasswordEntry ();
 
         var caps_lock_revealer = new Greeter.CapsLockRevealer ();
 
@@ -73,15 +68,13 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         bind_property ("connecting", username_entry, "sensitive", INVERT_BOOLEAN);
         bind_property ("connecting", password_entry, "sensitive", INVERT_BOOLEAN);
 
-        username_entry.activate.connect (() => do_connect_username (username_entry.text));
-        password_entry.activate.connect (on_login);
-        grab_focus.connect (() => {
-            if (username_entry.sensitive) {
-                username_entry.grab_focus_without_selecting ();
-            } else {
-                password_entry.grab_focus_without_selecting ();
+        username_entry.focus_out_event.connect (() => {
+            if (username_entry.text != "") {
+                do_connect_username (username_entry.text);
             }
         });
+
+        password_entry.activate.connect (on_login);
     }
 
     private void on_login () {
@@ -91,25 +84,6 @@ public class Greeter.ManualCard : Greeter.BaseCard {
 
         connecting = true;
         do_connect (password_entry.text);
-        password_entry.sensitive = false;
-    }
-
-    private void focus_username_entry () {
-        password_entry.secondary_icon_name = "";
-        password_entry.sensitive = false;
-
-        username_entry.secondary_icon_name = "go-jump-symbolic";
-        username_entry.sensitive = true;
-        username_entry.grab_focus_without_selecting ();
-    }
-
-    private void focus_password_entry () {
-        username_entry.secondary_icon_name = "";
-        username_entry.sensitive = false;
-
-        password_entry.secondary_icon_name = "go-jump-symbolic";
-        password_entry.sensitive = true;
-        password_entry.grab_focus_without_selecting ();
     }
 
     public override void wrong_credentials () {
@@ -125,18 +99,17 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             main_box.get_style_context ().remove_class ("shake");
 
             connecting = false;
-            focus_username_entry ();
+            username_entry.grab_focus_without_selecting ();
             return Source.REMOVE;
         });
     }
 
     public void ask_password () {
-        focus_password_entry ();
+        password_entry.grab_focus_without_selecting ();
     }
 
     public void wrong_username () {
         username_entry.grab_focus_without_selecting ();
-        username_entry.secondary_icon_name = "";
         username_entry.text = "";
 
         username_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_ERROR);
