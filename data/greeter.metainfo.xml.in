@@ -52,6 +52,7 @@
         <issue url="https://github.com/elementary/greeter/issues/619">Cannot type Username in Manual Login when users are hidden</issue>
         <issue url="https://github.com/elementary/greeter/issues/688">Pantheon greeter (login screen and lock screen) does not follow the dark visual style</issue>
         <issue url="https://github.com/elementary/greeter/issues/689">Does not follow the "automatic" accent color (based on wallpaper)</issue>
+        <issue url="https://github.com/elementary/greeter/issues/699">Num lock/Caps lock labels are not centered</issue>
         <issue url="https://github.com/elementary/greeter/issues/790">add support for mutter 48 / libmutter-16</issue>
       </issues>
     </release>
