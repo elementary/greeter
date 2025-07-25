@@ -61,6 +61,10 @@ if mutter_dep.length() == 0
 	error ('No supported mutter library found!')
 endif
 
+if vala.version().version_compare('>= 0.56.17')
+    vala_flags += ['--define', 'VALA_0_56_17']
+endif
+
 mutter_typelib_dir = libmutter_dep.get_variable('typelibdir')
 
 # Here is the real Compositor work
