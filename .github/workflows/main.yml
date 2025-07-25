@@ -68,7 +68,7 @@ jobs:
         run: |
           zypper addrepo https://download.opensuse.org/repositories/X11:Pantheon/15.6/X11:Pantheon.repo
           zypper --gpg-auto-import-keys refresh
-          zypper --non-interactive install tar git desktop-file-utils accountsservice-devel gdk-pixbuf2-devel gnome-desktop3-devel granite6-devel gtk3-devel libhandy-devel lightdm-gobject-devel mutter-devel meson vala gcc
+          zypper --non-interactive install tar git desktop-file-utils accountsservice-devel gdk-pixbuf-devel libgnome-desktop-3-devel granite6-devel gtk3-devel libhandy-devel lightdm-gobject-devel mutter-devel meson vala gcc
       - uses: actions/checkout@v4
       - name: Build
         env:
