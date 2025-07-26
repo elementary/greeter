@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-11 22:41+0000\n"
-"PO-Revision-Date: 2025-07-19 10:55+0000\n"
+"PO-Revision-Date: 2025-07-27 10:55+0000\n"
 "Last-Translator: lenify <lenify@tutanota.com>\n"
 "Language-Team: Belarusian <https://l10n.elementaryos.org/projects/desktop/"
 "greeter-extra/be/>\n"
@@ -70,7 +70,7 @@ msgstr ""
 
 #: data/greeter.metainfo.xml.in:128
 msgid "Improvements:"
-msgstr ""
+msgstr "Паляпшэнні:"
 
 #: data/greeter.metainfo.xml.in:130
 msgid "Fix a random issue where Greeter does not load correctly on boot"
