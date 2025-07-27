@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-11 22:41+0000\n"
-"PO-Revision-Date: 2025-07-27 10:55+0000\n"
+"PO-Revision-Date: 2025-07-28 13:55+0000\n"
 "Last-Translator: lenify <lenify@tutanota.com>\n"
 "Language-Team: Belarusian <https://l10n.elementaryos.org/projects/desktop/"
 "greeter-extra/be/>\n"
@@ -36,7 +36,7 @@ msgstr "elementary, Inc."
 #: data/greeter.metainfo.xml.in:82 data/greeter.metainfo.xml.in:103
 #: data/greeter.metainfo.xml.in:119 data/greeter.metainfo.xml.in:132
 msgid "Minor updates:"
-msgstr ""
+msgstr "Нязначныя абнаўленні:"
 
 #: data/greeter.metainfo.xml.in:44 data/greeter.metainfo.xml.in:66
 #: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:105
