@@ -57,8 +57,27 @@ jobs:
           meson build
           ninja -C build install
 
-  lint:
+  open-suse-leap:
+    runs-on: ubuntu-latest
 
+    container:
+      image: opensuse/leap:latest
+
+    steps:
+      - name: Install dependencies
+        run: |
+          zypper addrepo https://download.opensuse.org/repositories/X11:Pantheon/15.6/X11:Pantheon.repo
+          zypper --gpg-auto-import-keys refresh
+          zypper --non-interactive install tar git desktop-file-utils accountsservice-devel gdk-pixbuf-devel libgnome-desktop-3-devel granite6-devel gtk3-devel libhandy-devel lightdm-gobject-devel mutter-devel meson vala gcc
+      - uses: actions/checkout@v4
+      - name: Build
+        env:
+          DESTDIR: out
+        run: |
+          meson build
+          ninja -C build install  
+     
+  lint:
     runs-on: ubuntu-latest
 
     container:

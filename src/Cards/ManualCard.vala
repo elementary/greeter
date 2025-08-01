@@ -40,10 +40,6 @@ public class Greeter.ManualCard : Greeter.BaseCard {
 
         var caps_lock_revealer = new Greeter.CapsLockRevealer ();
 
-        var password_box = new Gtk.Box (VERTICAL, 6);
-        password_box.add (password_entry);
-        password_box.add (caps_lock_revealer);
-
         var session_button = new Greeter.SessionButton ();
 
         var form_grid = new Gtk.Grid () {
@@ -57,8 +53,9 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         form_grid.attach (icon, 0, 0, 2);
         form_grid.attach (label, 0, 1, 2);
         form_grid.attach (username_entry, 0, 2);
-        form_grid.attach (password_box, 0, 3);
+        form_grid.attach (password_entry, 0, 3);
         form_grid.attach (session_button, 1, 2, 1, 2);
+        form_grid.attach (caps_lock_revealer, 0, 4, 2);
 
         main_box = new Gtk.Box (VERTICAL, 0) {
             margin_top = 12,
@@ -68,9 +65,8 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         };
         main_box.add (form_grid);
 
-        unowned var main_grid_style_context = main_box.get_style_context ();
-        main_grid_style_context.add_class (Granite.STYLE_CLASS_CARD);
-        main_grid_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
+        main_box.get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
+        main_box.get_style_context ().add_class (Granite.STYLE_CLASS_ROUNDED);
 
         child = main_box;
 
@@ -119,19 +115,14 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     public override void wrong_credentials () {
         password_entry.text = "";
 
-        unowned var username_entry_style_context = username_entry.get_style_context ();
-        username_entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
-
-        unowned var password_entry_style_context = password_entry.get_style_context ();
-        password_entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
-
-        unowned var grid_style_context = main_box.get_style_context ();
-        grid_style_context.add_class ("shake");
+        username_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_ERROR);
+        password_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_ERROR);
+        main_box.get_style_context ().add_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
-            grid_style_context.remove_class ("shake");
-            username_entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
-            password_entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            username_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_ERROR);
+            password_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_ERROR);
+            main_box.get_style_context ().remove_class ("shake");
 
             connecting = false;
             focus_username_entry ();
@@ -148,15 +139,12 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         username_entry.secondary_icon_name = "";
         username_entry.text = "";
 
-        unowned var entry_style_context = username_entry.get_style_context ();
-        entry_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
-
-        unowned var grid_style_context = main_box.get_style_context ();
-        grid_style_context.add_class ("shake");
+        username_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_ERROR);
+        main_box.get_style_context ().add_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
-            grid_style_context.remove_class ("shake");
-            entry_style_context.remove_class (Gtk.STYLE_CLASS_ERROR);
+            username_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_ERROR);
+            main_box.get_style_context ().remove_class ("shake");
 
             return Source.REMOVE;
         });

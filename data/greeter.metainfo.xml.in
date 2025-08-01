@@ -37,6 +37,24 @@
   <update_contact>contact_at_elementary.io</update_contact>
 
   <releases>
+    <release version="8.1.0" date="2025-06-11" urgency="medium">
+      <description>
+        <p>Minor updates:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/greeter/issues/349">Can not select a different session only with keyboard</issue>
+        <issue url="https://github.com/elementary/greeter/issues/356">Background setting in io.elementary.greeter.conf not being honored</issue>
+        <issue url="https://github.com/elementary/greeter/issues/360">default-wallpaper in io.elementary.greeter.conf is not used as fallback background</issue>
+        <issue url="https://github.com/elementary/greeter/issues/688">Pantheon greeter (login screen and lock screen) does not follow the dark visual style</issue>
+        <issue url="https://github.com/elementary/greeter/issues/689">Does not follow the "automatic" accent color (based on wallpaper)</issue>
+        <issue url="https://github.com/elementary/greeter/issues/699">Num lock/Caps lock labels are not centered</issue>
+        <issue url="https://github.com/elementary/greeter/issues/790">add support for mutter 48 / libmutter-16</issue>
+      </issues>
+    </release>
+
     <release version="8.0.1" date="2025-02-12" urgency="medium">
       <description>
         <p>Minor updates:</p>
