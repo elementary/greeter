@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-11 22:41+0000\n"
-"PO-Revision-Date: 2019-12-15 23:07+0000\n"
-"Last-Translator: Daniel Foré <daniel@elementary.io>\n"
-"Language-Team: Belarusian <https://l10n.elementary.io/projects/desktop/"
+"PO-Revision-Date: 2025-08-02 20:55+0000\n"
+"Last-Translator: lenify <lenify@tutanota.com>\n"
+"Language-Team: Belarusian <https://l10n.elementaryos.org/projects/desktop/"
 "greeter/be/>\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
@@ -18,28 +18,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:501
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Змены будуць скасаваныя праз %i секунду."
+msgstr[1] "Змены будуць скасаваныя праз %i секунды."
+msgstr[2] "Змены будуць скасаваныя праз %i секунд."
 
 #: compositor/WindowManager.vala:508
 msgid "Keep new display settings?"
-msgstr ""
+msgstr "Захаваць новыя налады дысплэя?"
 
 #: compositor/WindowManager.vala:512
 msgid "Keep Settings"
-msgstr ""
+msgstr "Захаваць налады"
 
 #: compositor/WindowManager.vala:513
 msgid "Use Previous Settings"
-msgstr ""
+msgstr "Выкарыстаць папярэднія налады"
 
 #: src/MainWindow.vala:59
 msgid "Log in as Guest"
