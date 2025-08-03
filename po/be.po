@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-11 22:41+0000\n"
-"PO-Revision-Date: 2025-08-02 20:55+0000\n"
+"PO-Revision-Date: 2025-08-04 10:55+0000\n"
 "Last-Translator: lenify <lenify@tutanota.com>\n"
 "Language-Team: Belarusian <https://l10n.elementaryos.org/projects/desktop/"
 "greeter/be/>\n"
@@ -43,30 +43,31 @@ msgstr "Выкарыстаць папярэднія налады"
 
 #: src/MainWindow.vala:59
 msgid "Log in as Guest"
-msgstr ""
+msgstr "Увайсці як госць"
 
 #: src/MainWindow.vala:61
-#, fuzzy
 msgid "Manual Login…"
-msgstr "Ручны уваход"
+msgstr "Ручны ўваход…"
 
 #: src/MainWindow.vala:392
 msgid "Unable to Log In"
-msgstr ""
+msgstr "Не ўдалося ўвайсці"
 
 #: src/MainWindow.vala:393
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Не ўдалося запусціць сеанс."
 
 #: src/MainWindow.vala:470
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Не ўдалося запусціць пачатковае наладжванне"
 
 #: src/MainWindow.vala:475
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Пачатковае наладжванне стварае ваш першы ўліковы запіс. Без яго, вы не "
+"зможаце ўвайсці і, магчыма, вам спатрэбіцца пераўсталяваць АС."
 
 #: src/Cards/ManualCard.vala:21
 msgid "Manual Login"
@@ -74,11 +75,11 @@ msgstr "Ручны уваход"
 
 #: src/Cards/ManualCard.vala:30
 msgid "Username"
-msgstr ""
+msgstr "Імя карыстальніка"
 
 #: src/Cards/ManualCard.vala:33
 msgid "Try username"
-msgstr ""
+msgstr "Паспрабуйце імя карыстальніка"
 
 #: src/Cards/UserCard.vala:105 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
@@ -86,27 +87,27 @@ msgstr "Увайсці"
 
 #: src/Cards/UserCard.vala:117
 msgid "Account disabled"
-msgstr ""
+msgstr "Уліковы запіс адключаны"
 
 #: src/Cards/UserCard.vala:192
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "Немагчыма змяніць сеанс, пакуль карыстальнік у сістэме"
 
 #: src/Widgets/CapsLockRevealer.vala:61
 msgid "Caps Lock & Num Lock are on"
-msgstr ""
+msgstr "Caps Lock і Num Lock уключаныя"
 
 #: src/Widgets/CapsLockRevealer.vala:63
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps Lock уключаны"
 
 #: src/Widgets/CapsLockRevealer.vala:65
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Num Lock уключаны"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #~ msgid "Does the display look OK?"
 #~ msgstr "Ці выглядае выява на дысплеі як мае быць?"
