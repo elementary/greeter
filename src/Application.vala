@@ -102,6 +102,29 @@ public class Greeter.Application : Gtk.Application {
         });
 
         add_action (select_session_action);
+
+        var a11y_settings = new GLib.Settings ("org.gnome.desktop.a11y.applications");
+        a11y_settings.changed.connect ((key) => {
+            if (key != "screen-keyboard-enabled" && key != "screen-reader-enabled") {
+                return;
+            }
+
+            if (!a11y_settings.get_boolean (key)) {
+                return;
+            }
+
+            if (select_session_action.get_state ().get_string () != "pantheon-wayland") {
+                return;
+            }
+
+            select_session_action.set_state (new Variant.string ("pantheon"));
+
+            var notification = new Notification (_("Classic session automatically selected"));
+            notification.set_body (_("Accessibility features may be unavailable in the Secure session"));
+            notification.set_icon (new ThemedIcon ("preferences-desktop-accessibility"));
+
+            send_notification ("session-type", notification);
+        });
     }
 
     public override void activate () {
