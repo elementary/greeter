@@ -25,6 +25,12 @@ i18n.merge_file(
     install_dir: get_option('datadir') / 'metainfo',
 )
 
+# For notifications
+install_data(
+    desktop_in,
+    install_dir: get_option('datadir') / 'applications',
+)
+
 install_data(
     meson.project_name() + '.conf',
     install_dir: join_paths(get_option('sysconfdir'), 'lightdm')

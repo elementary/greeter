@@ -1,5 +1,7 @@
 [Desktop Entry]
 Name=Pantheon Greeter
 Comment=Pantheon Greeter
+Icon=io.elementary.settings
 Exec=@PROJECT_NAME@-compositor
 Type=Application
+NoDisplay=true
