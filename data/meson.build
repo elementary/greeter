@@ -40,3 +40,20 @@ test (
     find_program('desktop-file-validate'),
     args: join_paths(meson.current_build_dir (), meson.project_name() + '.desktop')
 )
+
+# For notifications
+install_data(
+    desktop_in,
+    install_dir: get_option('datadir') / 'applications',
+)
+
+install_data(
+    'icons' / '48.svg',
+    install_dir: get_option('datadir') / 'icons' / 'hicolor' / '48x48' / 'apps',
+    rename: meson.project_name() + '.settings.svg'
+)
+install_data(
+    'icons' / '48.svg',
+    install_dir: get_option('datadir') / 'icons' / 'hicolor' / '48x48@2' / 'apps',
+    rename: meson.project_name() + '.settings.svg'
+)
