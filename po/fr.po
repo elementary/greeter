@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-18 15:09+0000\n"
-"PO-Revision-Date: 2023-03-15 09:25+0000\n"
+"PO-Revision-Date: 2025-08-21 13:55+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
-"Language-Team: French <https://l10n.elementary.io/projects/desktop/greeter/"
-"fr/>\n"
+"Language-Team: French <https://l10n.elementaryos.org/projects/desktop/"
+"greeter/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
 #: compositor/WindowManager.vala:337
@@ -42,11 +42,13 @@ msgstr "Utiliser les paramètres précédents"
 
 #: src/Application.vala:122
 msgid "Classic session automatically selected"
-msgstr ""
+msgstr "Session classique sélectionnée automatiquement"
 
 #: src/Application.vala:123
 msgid "Accessibility features may be unavailable in the Secure session"
 msgstr ""
+"Les fonctionnalités d'accessibilité pourraient être indisponibles dans la "
+"session sécurisée"
 
 #: src/MainWindow.vala:44
 msgid "Log in as Guest"
