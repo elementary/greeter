@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 22:41+0000\n"
+"POT-Creation-Date: 2025-08-18 15:09+0000\n"
 "PO-Revision-Date: 2023-03-12 22:25+0000\n"
 "Last-Translator: NorwayFun <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -20,46 +20,54 @@ msgstr ""
 "X-Generator: Weblate 4.14.2\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:501
+#: compositor/WindowManager.vala:337
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
 msgstr[0] "ცვლილებები ავტომატურად დაბრუნება %i წამის შემდეგ."
 msgstr[1] "ცვლილებები ავტომატურად დაბრუნება %i წამის შემდეგ."
 
-#: compositor/WindowManager.vala:508
+#: compositor/WindowManager.vala:344
 msgid "Keep new display settings?"
 msgstr "დავიტოვო ეკრანის ახალი პარამეტრები?"
 
-#: compositor/WindowManager.vala:512
+#: compositor/WindowManager.vala:348
 msgid "Keep Settings"
 msgstr "პარამეტრების შენარჩუნება"
 
-#: compositor/WindowManager.vala:513
+#: compositor/WindowManager.vala:349
 msgid "Use Previous Settings"
 msgstr "წინა პარამეტრების გამოყენება"
 
-#: src/MainWindow.vala:59
+#: src/Application.vala:122
+msgid "Classic session automatically selected"
+msgstr ""
+
+#: src/Application.vala:123
+msgid "Accessibility features may be unavailable in the Secure session"
+msgstr ""
+
+#: src/MainWindow.vala:44
 msgid "Log in as Guest"
 msgstr "სტუმრად შესვლა"
 
-#: src/MainWindow.vala:61
+#: src/MainWindow.vala:45
 msgid "Manual Login…"
 msgstr "ხელით შესვლა…"
 
-#: src/MainWindow.vala:392
+#: src/MainWindow.vala:326
 msgid "Unable to Log In"
 msgstr "შესვლა შეუძლებელია"
 
-#: src/MainWindow.vala:393
+#: src/MainWindow.vala:327
 msgid "Starting the session has failed."
 msgstr "სესიის დაწყების შეცდომა."
 
-#: src/MainWindow.vala:470
+#: src/MainWindow.vala:389
 msgid "Unable to Launch Initial Setup"
 msgstr "პირველადი მორგების გაშვების შეცდომა"
 
-#: src/MainWindow.vala:475
+#: src/MainWindow.vala:394
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -79,27 +87,27 @@ msgstr "მომხმარებლის სახელი"
 msgid "Try username"
 msgstr "სცადეთ მომხმარებლის სახელი"
 
-#: src/Cards/UserCard.vala:105 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:88 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "შესვლა"
 
-#: src/Cards/UserCard.vala:117
+#: src/Cards/UserCard.vala:105
 msgid "Account disabled"
 msgstr "ანგარიში გათიშულია"
 
-#: src/Cards/UserCard.vala:192
+#: src/Cards/UserCard.vala:167 src/Cards/UserCard.vala:170
 msgid "Session cannot be changed while user is logged in"
 msgstr "სესიის შეცვლა მაშინ, როცა მომხმარებელი შესულია, შეუძლებელია"
 
-#: src/Widgets/CapsLockRevealer.vala:61
+#: src/Widgets/CapsLockRevealer.vala:52
 msgid "Caps Lock & Num Lock are on"
 msgstr "Caps Lock & Num Lock ჩართულებია"
 
-#: src/Widgets/CapsLockRevealer.vala:63
+#: src/Widgets/CapsLockRevealer.vala:54
 msgid "Caps Lock is on"
 msgstr "Caps Lock ჩართულია"
 
-#: src/Widgets/CapsLockRevealer.vala:65
+#: src/Widgets/CapsLockRevealer.vala:56
 msgid "Num Lock is on"
 msgstr "Num Lock ჩართულია"
 
