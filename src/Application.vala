@@ -90,8 +90,12 @@ public class Greeter.Application : Gtk.Application {
 
         var select_session_action = new GLib.SimpleAction.stateful ("select-session", GLib.VariantType.STRING, selected_session);
         var vardict = new GLib.VariantDict ();
+        var has_pantheon_x11_session = false;
         sessions.foreach ((session) => {
             vardict.insert_value (session.name, new GLib.Variant.string (session.key));
+            if (session.key == "pantheon") {
+                has_pantheon_x11_session = true;
+            }
         });
         select_session_action.set_state_hint (vardict.end ());
 
@@ -114,6 +118,10 @@ public class Greeter.Application : Gtk.Application {
             }
 
             if (select_session_action.get_state ().get_string () != "pantheon-wayland") {
+                return;
+            }
+
+            if (!has_pantheon_x11_session) {
                 return;
             }
 
