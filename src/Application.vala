@@ -90,8 +90,12 @@ public class Greeter.Application : Gtk.Application {
 
         var select_session_action = new GLib.SimpleAction.stateful ("select-session", GLib.VariantType.STRING, selected_session);
         var vardict = new GLib.VariantDict ();
+        var has_pantheon_x11_session = false;
         sessions.foreach ((session) => {
             vardict.insert_value (session.name, new GLib.Variant.string (session.key));
+            if (session.key == "pantheon") {
+                has_pantheon_x11_session = true;
+            }
         });
         select_session_action.set_state_hint (vardict.end ());
 
@@ -102,6 +106,31 @@ public class Greeter.Application : Gtk.Application {
         });
 
         add_action (select_session_action);
+
+        if (has_pantheon_x11_session) {
+            var a11y_settings = new GLib.Settings ("org.gnome.desktop.a11y.applications");
+            a11y_settings.changed.connect ((key) => {
+                if (key != "screen-keyboard-enabled" && key != "screen-reader-enabled") {
+                    return;
+                }
+
+                if (!a11y_settings.get_boolean (key)) {
+                    return;
+                }
+
+                if (select_session_action.get_state ().get_string () != "pantheon-wayland") {
+                    return;
+                }
+
+                select_session_action.set_state (new Variant.string ("pantheon"));
+
+                var notification = new Notification (_("Classic session automatically selected"));
+                notification.set_body (_("Accessibility features may be unavailable in the Secure session"));
+                notification.set_icon (new ThemedIcon ("preferences-desktop-accessibility"));
+
+                send_notification ("session-type", notification);
+            });
+        }
     }
 
     public override void activate () {
