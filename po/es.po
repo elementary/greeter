@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-18 15:09+0000\n"
+"POT-Creation-Date: 2025-10-02 15:56+0000\n"
 "PO-Revision-Date: 2025-09-14 18:55+0000\n"
 "Last-Translator: Italo Felipe Capasso Ballesteros <italo@gp-mail.com>\n"
 "Language-Team: Spanish <https://l10n.elementaryos.org/projects/desktop/"
@@ -39,11 +39,11 @@ msgstr "Conservar configuración"
 msgid "Use Previous Settings"
 msgstr "Usar configuración previa"
 
-#: src/Application.vala:122
+#: src/Application.vala:127
 msgid "Classic session automatically selected"
 msgstr "Sesión clásica seleccionada automáticamente"
 
-#: src/Application.vala:123
+#: src/Application.vala:128
 msgid "Accessibility features may be unavailable in the Secure session"
 msgstr ""
 "Algunas características de accesibilidad pueden no estar disponibles en una "
@@ -85,10 +85,6 @@ msgstr "Inicio de sesión manual"
 msgid "Username"
 msgstr "Nombre de usuario"
 
-#: src/Cards/ManualCard.vala:33
-msgid "Try username"
-msgstr "Pruebe un nombre de usuario"
-
 #: src/Cards/UserCard.vala:88 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Iniciar sesión"
@@ -118,6 +114,9 @@ msgstr "Bloq Num está activada"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Contraseña"
+
+#~ msgid "Try username"
+#~ msgstr "Pruebe un nombre de usuario"
 
 #~ msgid "Does the display look OK?"
 #~ msgstr "¿Se ve bien la pantalla?"

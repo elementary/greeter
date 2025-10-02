@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-18 15:09+0000\n"
+"POT-Creation-Date: 2025-10-02 15:56+0000\n"
 "PO-Revision-Date: 2019-12-29 05:21+0000\n"
 "Last-Translator: Marko <marko.dolar@gmail.com>\n"
 "Language-Team: Slovenian <https://l10n.elementary.io/projects/desktop/"
@@ -42,11 +42,11 @@ msgstr ""
 msgid "Use Previous Settings"
 msgstr ""
 
-#: src/Application.vala:122
+#: src/Application.vala:127
 msgid "Classic session automatically selected"
 msgstr ""
 
-#: src/Application.vala:123
+#: src/Application.vala:128
 msgid "Accessibility features may be unavailable in the Secure session"
 msgstr ""
 
@@ -86,10 +86,6 @@ msgstr "Ročna prijava"
 msgid "Username"
 msgstr "Uporabniško ime"
 
-#: src/Cards/ManualCard.vala:33
-msgid "Try username"
-msgstr "Poskusite uporabniško ime"
-
 #: src/Cards/UserCard.vala:88 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Prijava"
@@ -117,6 +113,9 @@ msgstr "Num Lock je vklopljen"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Geslo"
+
+#~ msgid "Try username"
+#~ msgstr "Poskusite uporabniško ime"
 
 #~ msgid "Does the display look OK?"
 #~ msgstr "Ali je slika na zaslonu videti v redu?"

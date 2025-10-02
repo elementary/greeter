@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-18 15:09+0000\n"
+"POT-Creation-Date: 2025-10-02 15:56+0000\n"
 "PO-Revision-Date: 2024-10-05 19:16+0000\n"
 "Last-Translator: janko mrkvicka <6aby74rto@relay.firefox.com>\n"
 "Language-Team: Slovak <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -41,11 +41,11 @@ msgstr "Ponechať nastavenia"
 msgid "Use Previous Settings"
 msgstr "Použiť predchádzajúce nastavenia"
 
-#: src/Application.vala:122
+#: src/Application.vala:127
 msgid "Classic session automatically selected"
 msgstr ""
 
-#: src/Application.vala:123
+#: src/Application.vala:128
 msgid "Accessibility features may be unavailable in the Secure session"
 msgstr ""
 
@@ -85,10 +85,6 @@ msgstr "Ručné prihlásenie"
 msgid "Username"
 msgstr "Používateľské meno"
 
-#: src/Cards/ManualCard.vala:33
-msgid "Try username"
-msgstr "Vyskúšať používateľské meno"
-
 #: src/Cards/UserCard.vala:88 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Prihlásiť sa"
@@ -116,6 +112,9 @@ msgstr "Num Lock je zapnutý"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Heslo"
+
+#~ msgid "Try username"
+#~ msgstr "Vyskúšať používateľské meno"
 
 #~ msgid "Does the display look OK?"
 #~ msgstr "Je zobrazenie na displeji v poriadku?"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-18 15:09+0000\n"
+"POT-Creation-Date: 2025-10-02 15:56+0000\n"
 "PO-Revision-Date: 2025-08-04 10:55+0000\n"
 "Last-Translator: lenify <lenify@tutanota.com>\n"
 "Language-Team: Belarusian <https://l10n.elementaryos.org/projects/desktop/"
@@ -41,11 +41,11 @@ msgstr "Захаваць налады"
 msgid "Use Previous Settings"
 msgstr "Выкарыстаць папярэднія налады"
 
-#: src/Application.vala:122
+#: src/Application.vala:127
 msgid "Classic session automatically selected"
 msgstr ""
 
-#: src/Application.vala:123
+#: src/Application.vala:128
 msgid "Accessibility features may be unavailable in the Secure session"
 msgstr ""
 
@@ -85,10 +85,6 @@ msgstr "Ручны уваход"
 msgid "Username"
 msgstr "Імя карыстальніка"
 
-#: src/Cards/ManualCard.vala:33
-msgid "Try username"
-msgstr "Паспрабуйце імя карыстальніка"
-
 #: src/Cards/UserCard.vala:88 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Увайсці"
@@ -116,6 +112,9 @@ msgstr "Num Lock уключаны"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Пароль"
+
+#~ msgid "Try username"
+#~ msgstr "Паспрабуйце імя карыстальніка"
 
 #~ msgid "Does the display look OK?"
 #~ msgstr "Ці выглядае выява на дысплеі як мае быць?"

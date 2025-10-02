@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-18 15:09+0000\n"
+"POT-Creation-Date: 2025-10-02 15:56+0000\n"
 "PO-Revision-Date: 2023-11-09 13:10+0000\n"
 "Last-Translator: aalhaif <aalhaif@hotmail.com>\n"
 "Language-Team: Arabic <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -44,11 +44,11 @@ msgstr ""
 msgid "Use Previous Settings"
 msgstr ""
 
-#: src/Application.vala:122
+#: src/Application.vala:127
 msgid "Classic session automatically selected"
 msgstr ""
 
-#: src/Application.vala:123
+#: src/Application.vala:128
 msgid "Accessibility features may be unavailable in the Secure session"
 msgstr ""
 
@@ -88,10 +88,6 @@ msgstr "تسجيل دخول يدوي"
 msgid "Username"
 msgstr "اسم المستخدم"
 
-#: src/Cards/ManualCard.vala:33
-msgid "Try username"
-msgstr "جرب اسم المستخدم"
-
 #: src/Cards/UserCard.vala:88 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "سجل الدخول"
@@ -119,6 +115,9 @@ msgstr "مفتاح الأرقام مفعل"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "كلمة المرور"
+
+#~ msgid "Try username"
+#~ msgstr "جرب اسم المستخدم"
 
 #~ msgid "Does the display look OK?"
 #~ msgstr "هل تبدو شاشة العرض جيدة؟"

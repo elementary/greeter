@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-18 15:09+0000\n"
+"POT-Creation-Date: 2025-10-02 15:56+0000\n"
 "PO-Revision-Date: 2025-09-12 11:55+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementaryos.org/projects/desktop/"
@@ -39,11 +39,11 @@ msgstr "Beállítások megtartása"
 msgid "Use Previous Settings"
 msgstr "Előző beállítások visszaállítása"
 
-#: src/Application.vala:122
+#: src/Application.vala:127
 msgid "Classic session automatically selected"
 msgstr "A klasszikus munkamenet automatikusan ki lett választva"
 
-#: src/Application.vala:123
+#: src/Application.vala:128
 msgid "Accessibility features may be unavailable in the Secure session"
 msgstr ""
 "A kisegítő lehetőségek nem feltétlen elérhetők a biztonságos munkamenetben"
@@ -84,10 +84,6 @@ msgstr "Kézi bejelentkezés"
 msgid "Username"
 msgstr "Felhasználónév"
 
-#: src/Cards/ManualCard.vala:33
-msgid "Try username"
-msgstr "Próbálja a felhasználónevet"
-
 #: src/Cards/UserCard.vala:88 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Bejelentkezés"
@@ -115,6 +111,9 @@ msgstr "Num Lock bekapcsolva"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Jelszó"
+
+#~ msgid "Try username"
+#~ msgstr "Próbálja a felhasználónevet"
 
 #~ msgid "Does the display look OK?"
 #~ msgstr "Megfelelően jelenik meg a kép?"

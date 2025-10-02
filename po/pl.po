@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-18 15:09+0000\n"
+"POT-Creation-Date: 2025-10-02 15:56+0000\n"
 "PO-Revision-Date: 2023-03-07 13:25+0000\n"
 "Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -41,11 +41,11 @@ msgstr "Zachowaj ustawienia"
 msgid "Use Previous Settings"
 msgstr "Użyj poprzednich ustawień"
 
-#: src/Application.vala:122
+#: src/Application.vala:127
 msgid "Classic session automatically selected"
 msgstr ""
 
-#: src/Application.vala:123
+#: src/Application.vala:128
 msgid "Accessibility features may be unavailable in the Secure session"
 msgstr ""
 
@@ -86,10 +86,6 @@ msgstr "Ręczne logowanie"
 msgid "Username"
 msgstr "Nazwa użytkownika"
 
-#: src/Cards/ManualCard.vala:33
-msgid "Try username"
-msgstr "Wypróbuj nazwę użytkownika"
-
 #: src/Cards/UserCard.vala:88 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Zaloguj się"
@@ -117,6 +113,9 @@ msgstr "Num Lock jest włączony"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Hasło"
+
+#~ msgid "Try username"
+#~ msgstr "Wypróbuj nazwę użytkownika"
 
 #~ msgid "Does the display look OK?"
 #~ msgstr "Czy wyświetlany obraz wygląda poprawnie?"

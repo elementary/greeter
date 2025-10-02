@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-18 15:09+0000\n"
+"POT-Creation-Date: 2025-10-02 15:56+0000\n"
 "PO-Revision-Date: 2024-12-12 05:36+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/desktop/greeter-"
@@ -31,49 +31,49 @@ msgstr "お使いのデバイスのロックを解除したりログインした
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
-#: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:61
-#: data/greeter.metainfo.xml.in:83 data/greeter.metainfo.xml.in:101
-#: data/greeter.metainfo.xml.in:122 data/greeter.metainfo.xml.in:138
-#: data/greeter.metainfo.xml.in:151
+#: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:64
+#: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:104
+#: data/greeter.metainfo.xml.in:125 data/greeter.metainfo.xml.in:141
+#: data/greeter.metainfo.xml.in:154
 msgid "Minor updates:"
 msgstr "マイナーアップデート:"
 
-#: data/greeter.metainfo.xml.in:44 data/greeter.metainfo.xml.in:63
-#: data/greeter.metainfo.xml.in:85 data/greeter.metainfo.xml.in:105
-#: data/greeter.metainfo.xml.in:124 data/greeter.metainfo.xml.in:140
-#: data/greeter.metainfo.xml.in:153
+#: data/greeter.metainfo.xml.in:44 data/greeter.metainfo.xml.in:66
+#: data/greeter.metainfo.xml.in:88 data/greeter.metainfo.xml.in:108
+#: data/greeter.metainfo.xml.in:127 data/greeter.metainfo.xml.in:143
+#: data/greeter.metainfo.xml.in:156
 msgid "Updated translations"
 msgstr "翻訳の更新"
 
-#: data/greeter.metainfo.xml.in:78 data/greeter.metainfo.xml.in:134
+#: data/greeter.metainfo.xml.in:81 data/greeter.metainfo.xml.in:137
 msgid "New Features:"
 msgstr "新機能:"
 
-#: data/greeter.metainfo.xml.in:80
+#: data/greeter.metainfo.xml.in:83
 msgid "Add blurred wallpaper as background"
 msgstr "ぼかしをかけた壁紙を背景として追加"
 
-#: data/greeter.metainfo.xml.in:81
+#: data/greeter.metainfo.xml.in:84
 msgid "Make Date and Time larger and bolder with softer shadows"
 msgstr "日付と時刻を、より大きく、太く、影が柔らかくなるように修正"
 
-#: data/greeter.metainfo.xml.in:103
+#: data/greeter.metainfo.xml.in:106
 msgid "Prevent a potential issue with dialogs that use portals"
 msgstr "ポータルを使用するダイアログに関連する潜在的なバグを修正"
 
-#: data/greeter.metainfo.xml.in:104
+#: data/greeter.metainfo.xml.in:107
 msgid "Fix potential issues with incorrect keyboard layout being set"
 msgstr "間違ったキーボードレイアウトが設定されることがある不具合を修正"
 
-#: data/greeter.metainfo.xml.in:136
+#: data/greeter.metainfo.xml.in:139
 msgid "Provide panel background color interface"
 msgstr "パネルの背景色インターフェースを追加"
 
-#: data/greeter.metainfo.xml.in:147
+#: data/greeter.metainfo.xml.in:150
 msgid "Improvements:"
 msgstr "改善点:"
 
-#: data/greeter.metainfo.xml.in:149
+#: data/greeter.metainfo.xml.in:152
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr "起動時に Greeter が適切に読み込まれないことがある不具合を修正"
 
