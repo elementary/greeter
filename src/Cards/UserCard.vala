@@ -68,11 +68,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
             SYNC_CREATE
         );
 
-        var session_button = new Greeter.SessionButton () {
-            valign = START
+        var password_session_button = new Greeter.SessionButton () {
+            vexpand = true
         };
-
-        var caps_lock_revealer = new Greeter.CapsLockRevealer ();
 
         var password_grid = new Gtk.Grid () {
             column_spacing = 6,
@@ -80,53 +78,44 @@ public class Greeter.UserCard : Greeter.BaseCard {
         };
         password_grid.attach (password_entry, 0, 0);
         password_grid.attach (fingerprint_image, 1, 0);
-        password_grid.attach (caps_lock_revealer, 0, 1, 2);
-
-        var size_group = new Gtk.SizeGroup (VERTICAL);
-        size_group.add_widget (password_entry);
-        size_group.add_widget (session_button);
+        password_grid.attach (password_session_button, 2, 0);
+        password_grid.attach (new Greeter.CapsLockRevealer (), 0, 1, 3);
 
         var login_button = new Gtk.Button.with_label (_("Log In"));
-        login_button.add_css_class (Granite.STYLE_CLASS_SUGGESTED_ACTION);
+        login_button.add_css_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+        bind_property ("connecting", login_button, "sensitive", INVERT_BOOLEAN);
 
-        bind_property (
-            "connecting",
-            login_button,
-            "sensitive",
-            INVERT_BOOLEAN
-        );
+        var login_button_session_button = new Greeter.SessionButton () {
+            vexpand = true
+        };
 
-        var disabled_icon = new Gtk.Image.from_icon_name ("changes-prevent-symbolic");
-
-        var disabled_message = new Gtk.Label (_("Account disabled"));
+        var login_box = new Gtk.Box (HORIZONTAL, 6);
+        login_box.append (login_button);
+        login_box.append (login_button_session_button);
 
         var disabled_box = new Gtk.Box (HORIZONTAL, 6) {
             halign = Gtk.Align.CENTER,
             margin_top = 3
         };
-        disabled_box.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
-        disabled_box.append (disabled_icon);
-        disabled_box.append (disabled_message);
+        disabled_box.append (new Gtk.Image.from_icon_name ("changes-prevent-symbolic"));
+        disabled_box.append (new Gtk.Label (_("Account disabled")));
+        disabled_box.add_css_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
-        login_stack = new Gtk.Stack ();
-        login_stack.add_named (password_grid, "password");
-        login_stack.add_named (login_button, "button");
-        login_stack.add_named (disabled_box, "disabled");
-
-        var form_box = new Gtk.Box (HORIZONTAL, 6) {
+        login_stack = new Gtk.Stack () {
             margin_top = 12,
             margin_bottom = 12,
             margin_start = 24,
             margin_end = 24
         };
-        form_box.append (login_stack);
-        form_box.append (session_button);
+        login_stack.add_named (password_grid, "password");
+        login_stack.add_named (login_button, "button");
+        login_stack.add_named (disabled_box, "disabled");
 
         form_revealer = new Gtk.Revealer () {
             margin_bottom = 12,
             reveal_child = true,
             transition_type = SLIDE_DOWN,
-            child = form_box
+            child = login_stack
         };
 
         bind_property (
@@ -171,8 +160,11 @@ public class Greeter.UserCard : Greeter.BaseCard {
         if (lightdm_user.logged_in) {
             avatar_overlay.add_overlay (logged_in);
 
-            session_button.sensitive = false;
-            session_button.tooltip_text = (_("Session cannot be changed while user is logged in"));
+            password_session_button.sensitive = false;
+            password_session_button.tooltip_text = (_("Session cannot be changed while user is logged in"));
+
+            login_button_session_button.sensitive = false;
+            login_button_session_button.tooltip_text = (_("Session cannot be changed while user is logged in"));
         }
 
         var card_overlay = new Gtk.Overlay () {
@@ -188,7 +180,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         act_user = Act.UserManager.get_default ().get_user (lightdm_user.name);
         act_user.bind_property ("locked", username_label, "sensitive", INVERT_BOOLEAN);
-        act_user.bind_property ("locked", session_button, "visible", INVERT_BOOLEAN);
+        act_user.bind_property ("locked", password_session_button, "visible", INVERT_BOOLEAN);
+        act_user.bind_property ("locked", login_button_session_button, "visible", INVERT_BOOLEAN);
         act_user.notify["is-loaded"].connect (on_act_user_loaded);
 
         on_act_user_loaded ();
@@ -384,6 +377,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         set_keyboard_layouts ();
         set_mouse_touchpad_settings ();
         set_interface_settings ();
+        set_wingpanel_settings ();
         set_night_light_settings ();
         set_power_settings ();
         update_style ();
@@ -479,6 +473,16 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         background_settings.set_value ("picture-options", settings_act.picture_options);
         background_settings.set_value ("primary-color", settings_act.primary_color);
+    }
+
+    private void set_wingpanel_settings () {
+        var wingpanel_schema = SettingsSchemaSource.get_default ().lookup ("io.elementary.desktop.wingpanel", true);
+        if (wingpanel_schema == null || !wingpanel_schema.has_key ("use-transparency")) {
+            return;
+        }
+
+        var wingpanel_settings = new GLib.Settings ("io.elementary.desktop.wingpanel");
+        wingpanel_settings.set_value ("use-transparency", settings_act.wingpanel_use_transparency);
     }
 
     private void set_night_light_settings () {
