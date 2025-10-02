@@ -82,7 +82,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         password_grid.attach (new Greeter.CapsLockRevealer (), 0, 1, 3);
 
         var login_button = new Gtk.Button.with_label (_("Log In"));
-        login_button.add_css_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+        login_button.add_css_class (Granite.STYLE_CLASS_SUGGESTED_ACTION);
         bind_property ("connecting", login_button, "sensitive", INVERT_BOOLEAN);
 
         var login_button_session_button = new Greeter.SessionButton () {
@@ -99,7 +99,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         };
         disabled_box.append (new Gtk.Image.from_icon_name ("changes-prevent-symbolic"));
         disabled_box.append (new Gtk.Label (_("Account disabled")));
-        disabled_box.add_css_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        disabled_box.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
         login_stack = new Gtk.Stack () {
             margin_top = 12,
@@ -516,11 +516,11 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     public override void wrong_credentials () {
-        password_entry.add_css_class (Gtk.STYLE_CLASS_ERROR);
+        password_entry.add_css_class (Granite.STYLE_CLASS_ERROR);
         main_box.add_css_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
-            password_entry.remove_css_class (Gtk.STYLE_CLASS_ERROR);
+            password_entry.remove_css_class (Granite.STYLE_CLASS_ERROR);
             main_box.remove_css_class ("shake");
 
             connecting = false;

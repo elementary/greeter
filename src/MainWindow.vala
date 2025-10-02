@@ -29,7 +29,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     construct {
         decorated = false;
-        set_visual (get_screen ().get_rgba_visual ());
 
         gsettings = new GLib.Settings ("io.elementary.greeter");
         settings = new Greeter.Settings ();
@@ -48,10 +47,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             vexpand = true
         };
         if (lightdm_greeter.has_guest_account_hint) {
-            extra_login_box.add (guest_login_button);
+            extra_login_box.append (guest_login_button);
         }
         if (lightdm_greeter.show_manual_login_hint) {
-            extra_login_box.add (manual_login_button);
+            extra_login_box.append (manual_login_button);
         }
 
         datetime_widget = new Greeter.DateTimeWidget ();
@@ -84,7 +83,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         };
         main_box.append (datetime_revealer);
         main_box.append (manual_login_stack);
-        main_box.append (extra_login_grid);
+        main_box.append (extra_login_box);
 
         child = main_box;
 

@@ -4,14 +4,15 @@
  */
 
 public class Greeter.CapsLockRevealer : Granite.Bin {
+    private Gdk.Device device;
     private Gtk.Image caps_lock_image;
     private Gtk.Image num_lock_image;
     private Gtk.Label lock_label;
     private Gtk.Revealer revealer;
 
     construct {
-        caps_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-capslock-symbolic", MENU);
-        num_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-numlock-symbolic", MENU);
+        caps_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-capslock-symbolic");
+        num_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-numlock-symbolic");
 
 
         lock_label = new Gtk.Label (null);
@@ -32,15 +33,15 @@ public class Greeter.CapsLockRevealer : Granite.Bin {
 
         child = revealer;
 
-        var keymap = Gdk.Keymap.get_for_display (Gdk.Display.get_default ());
-        keymap.state_changed.connect (update_visibility);
+        device = Gdk.Display.get_default ().get_default_seat ().get_keyboard ();
+        device.changed.connect (update_visibility);
 
-        update_visibility (keymap);
+        update_visibility ();
     }
 
-    private void update_visibility (Gdk.Keymap keymap) {
-        var caps_lock = keymap.get_caps_lock_state ();
-        var num_lock = keymap.get_num_lock_state ();
+    private void update_visibility () {
+        var caps_lock = device.get_caps_lock_state ();
+        var num_lock = device.get_num_lock_state ();
 
         revealer.reveal_child = caps_lock || num_lock;
 
