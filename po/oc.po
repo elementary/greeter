@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-18 15:09+0000\n"
+"POT-Creation-Date: 2025-10-02 15:56+0000\n"
 "PO-Revision-Date: 2025-04-04 21:55+0000\n"
 "Last-Translator: Mejans <farga@mejans.fr>\n"
 "Language-Team: Occitan <https://l10n.elementaryos.org/projects/desktop/"
@@ -32,11 +32,11 @@ msgstr "Servar los paramètres"
 msgid "Use Previous Settings"
 msgstr "Utilizar los paramètres precedents"
 
-#: src/Application.vala:122
+#: src/Application.vala:127
 msgid "Classic session automatically selected"
 msgstr ""
 
-#: src/Application.vala:123
+#: src/Application.vala:128
 msgid "Accessibility features may be unavailable in the Secure session"
 msgstr ""
 
@@ -76,10 +76,6 @@ msgstr "Connexion manuala"
 msgid "Username"
 msgstr "Nom d’utilizaire"
 
-#: src/Cards/ManualCard.vala:33
-msgid "Try username"
-msgstr "Ensajar lo nom d’utilizaire"
-
 #: src/Cards/UserCard.vala:88 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Connexion"
@@ -107,6 +103,9 @@ msgstr "Chifras activadas"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Senhal"
+
+#~ msgid "Try username"
+#~ msgstr "Ensajar lo nom d’utilizaire"
 
 #~ msgid "Does the display look OK?"
 #~ msgstr "L’afichatge sembla bon ?"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-18 15:09+0000\n"
+"POT-Creation-Date: 2025-10-02 15:56+0000\n"
 "PO-Revision-Date: 2025-04-16 14:55+0000\n"
 "Last-Translator: Ben Gordon Agnew <ben.gordon@posteo.de>\n"
 "Language-Team: Scots <https://l10n.elementaryos.org/projects/desktop/greeter/"
@@ -38,11 +38,11 @@ msgstr "Keep Settins"
 msgid "Use Previous Settings"
 msgstr "Use Previous Settins"
 
-#: src/Application.vala:122
+#: src/Application.vala:127
 msgid "Classic session automatically selected"
 msgstr ""
 
-#: src/Application.vala:123
+#: src/Application.vala:128
 msgid "Accessibility features may be unavailable in the Secure session"
 msgstr ""
 
@@ -78,10 +78,6 @@ msgstr ""
 
 #: src/Cards/ManualCard.vala:30
 msgid "Username"
-msgstr ""
-
-#: src/Cards/ManualCard.vala:33
-msgid "Try username"
 msgstr ""
 
 #: src/Cards/UserCard.vala:88 src/Widgets/PasswordEntry.vala:27

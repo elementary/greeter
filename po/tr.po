@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-18 15:09+0000\n"
+"POT-Creation-Date: 2025-10-02 15:56+0000\n"
 "PO-Revision-Date: 2023-05-18 21:06+0000\n"
 "Last-Translator: Ahmet Eren Tomurcuk <eren_tomurcuk@hotmail.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/greeter/"
@@ -39,11 +39,11 @@ msgstr "Ayarları Koru"
 msgid "Use Previous Settings"
 msgstr "Önceki Ayarları Kullan"
 
-#: src/Application.vala:122
+#: src/Application.vala:127
 msgid "Classic session automatically selected"
 msgstr ""
 
-#: src/Application.vala:123
+#: src/Application.vala:128
 msgid "Accessibility features may be unavailable in the Secure session"
 msgstr ""
 
@@ -83,10 +83,6 @@ msgstr "El İle Oturum Aç"
 msgid "Username"
 msgstr "Kullanıcı adı"
 
-#: src/Cards/ManualCard.vala:33
-msgid "Try username"
-msgstr "Kullanıcı adı dene"
-
 #: src/Cards/UserCard.vala:88 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Oturum Aç"
@@ -114,6 +110,9 @@ msgstr "Num Lock açık"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Parola"
+
+#~ msgid "Try username"
+#~ msgstr "Kullanıcı adı dene"
 
 #~ msgid "Does the display look OK?"
 #~ msgstr "Ekran iyi görünüyor mu?"

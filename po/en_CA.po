@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-18 15:09+0000\n"
+"POT-Creation-Date: 2025-10-02 15:56+0000\n"
 "PO-Revision-Date: 2024-08-07 17:16+0000\n"
 "Last-Translator: anonymous <noreply@weblate.org>\n"
 "Language-Team: English (Canada) <https://l10n.elementary.io/projects/desktop/"
@@ -39,11 +39,11 @@ msgstr ""
 msgid "Use Previous Settings"
 msgstr ""
 
-#: src/Application.vala:122
+#: src/Application.vala:127
 msgid "Classic session automatically selected"
 msgstr ""
 
-#: src/Application.vala:123
+#: src/Application.vala:128
 msgid "Accessibility features may be unavailable in the Secure session"
 msgstr ""
 
@@ -80,10 +80,6 @@ msgstr "Manual Login"
 
 #: src/Cards/ManualCard.vala:30
 msgid "Username"
-msgstr ""
-
-#: src/Cards/ManualCard.vala:33
-msgid "Try username"
 msgstr ""
 
 #: src/Cards/UserCard.vala:88 src/Widgets/PasswordEntry.vala:27
