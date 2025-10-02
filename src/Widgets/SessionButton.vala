@@ -5,7 +5,7 @@
  * Authors: Corentin Noël <corentin@elementary.io>
  */
 
-public class Greeter.SessionButton : Gtk.Bin {
+public class Greeter.SessionButton : Granite.Bin {
     construct {
         var menu = new GLib.Menu ();
         unowned var application = (Gtk.Application) GLib.Application.get_default ();
@@ -18,11 +18,11 @@ public class Greeter.SessionButton : Gtk.Bin {
         }
 
         var menu_button = new Gtk.MenuButton () {
-            child = new Gtk.Image.from_icon_name ("open-menu-symbolic", Gtk.IconSize.BUTTON),
             direction = DOWN,
+            has_frame = false,
+            icon_name = "open-menu-symbolic",
             menu_model = menu
         };
-        menu_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
 
         child = menu_button;
     }

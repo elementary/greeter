@@ -22,7 +22,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             hexpand = true,
             margin_bottom = 16
         };
-        label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+        label.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
 
         username_entry = new Gtk.Entry () {
             hexpand = true,
@@ -58,23 +58,28 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             margin_start = 12,
             margin_end = 12
         };
-        main_box.add (form_grid);
+        main_box.append (form_grid);
 
-        main_box.get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
-        main_box.get_style_context ().add_class (Granite.STYLE_CLASS_ROUNDED);
+        main_box.add_css_class (Granite.STYLE_CLASS_CARD);
+        main_box.add_css_class (Granite.STYLE_CLASS_ROUNDED);
 
         child = main_box;
 
         bind_property ("connecting", username_entry, "sensitive", INVERT_BOOLEAN);
         bind_property ("connecting", password_entry, "sensitive", INVERT_BOOLEAN);
 
-        username_entry.focus_out_event.connect (() => {
+
+        var focus_controller = new Gtk.EventControllerFocus ();
+        focus_controller.leave.connect (() => {
             if (username_entry.text != "") {
                 do_connect_username (username_entry.text);
             }
         });
 
+        username_entry.add_controller (focus_controller);
+
         password_entry.activate.connect (on_login);
+
     }
 
     private void on_login () {
@@ -89,14 +94,14 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     public override void wrong_credentials () {
         password_entry.text = "";
 
-        username_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_ERROR);
-        password_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_ERROR);
-        main_box.get_style_context ().add_class ("shake");
+        username_entry.add_css_class (Granite.STYLE_CLASS_ERROR);
+        password_entry.add_css_class (Granite.STYLE_CLASS_ERROR);
+        main_box.add_css_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
-            username_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_ERROR);
-            password_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_ERROR);
-            main_box.get_style_context ().remove_class ("shake");
+            username_entry.remove_css_class (Granite.STYLE_CLASS_ERROR);
+            password_entry.remove_css_class (Granite.STYLE_CLASS_ERROR);
+            main_box.remove_css_class ("shake");
 
             connecting = false;
             username_entry.grab_focus_without_selecting ();
@@ -112,12 +117,12 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         username_entry.grab_focus_without_selecting ();
         username_entry.text = "";
 
-        username_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_ERROR);
-        main_box.get_style_context ().add_class ("shake");
+        username_entry.add_css_class (Granite.STYLE_CLASS_ERROR);
+        main_box.add_css_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
-            username_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_ERROR);
-            main_box.get_style_context ().remove_class ("shake");
+            username_entry.remove_css_class (Granite.STYLE_CLASS_ERROR);
+            main_box.remove_css_class ("shake");
 
             return Source.REMOVE;
         });
