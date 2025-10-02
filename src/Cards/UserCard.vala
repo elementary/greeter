@@ -57,13 +57,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         bind_property (
             "use-fingerprint",
             fingerprint_image,
-            "no-show-all",
-            INVERT_BOOLEAN | SYNC_CREATE
-        );
-
-        bind_property (
-            "use-fingerprint",
-            fingerprint_image,
             "visible",
             SYNC_CREATE
         );
