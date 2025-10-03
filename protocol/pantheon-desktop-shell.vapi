@@ -48,6 +48,9 @@ namespace Pantheon.Desktop {
         public void focus ();
         public void set_size (int width, int height);
         public void set_hide_mode (Pantheon.Desktop.HideMode hide_mode);
+        public void request_visible_in_multitasking_view ();
+        public void add_blur (uint left, uint right, uint top, uint bottom, uint clip_radius);
+        public void remove_blur ();
     }
 
     [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "struct io_elementary_pantheon_widget_v1", cprefix = "io_elementary_pantheon_widget_v1_")]

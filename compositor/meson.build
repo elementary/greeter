@@ -90,6 +90,8 @@ compositor_files = files(
   'WingpanelManager/DBusWingpanelManager.vala',
   'WingpanelManager/FocusManager.vala',
   'WingpanelManager/BackgroundUtils.vala',
+  'BackgroundBlurEffect.vala',
+  'BlurManager.vala',
   'DBus.vala',
   'DBusAccelerator.vala',
   'Dialogs.vala',

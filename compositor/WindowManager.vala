@@ -55,6 +55,8 @@ namespace GreeterCompositor {
         }
 
         public override void start () {
+            BlurManager.init (this);
+
             show_stage ();
 
             disable_tiling_shortcuts ();
