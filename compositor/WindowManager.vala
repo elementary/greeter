@@ -55,6 +55,8 @@ namespace GreeterCompositor {
         }
 
         public override void start () {
+            BlurManager.init (this);
+
             show_stage ();
 
             fade_in_screen.save_easing_state ();
