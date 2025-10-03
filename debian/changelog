@@ -1,3 +1,9 @@
+io.elementary.greeter (8.1.0) jammy; urgency=medium
+
+  * Release 8.1.0 (#817)
+
+ -- elementary, Inc. <builds@elementary.io>  Fri, 03 Oct 2025 20:15:08 +0000
+
 io.elementary.greeter (8.0.1) jammy; urgency=medium
 
   * Release 8.0.1 (#783)
