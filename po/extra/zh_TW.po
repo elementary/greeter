@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 22:41+0000\n"
+"POT-Creation-Date: 2025-10-02 15:56+0000\n"
 "PO-Revision-Date: 2024-09-19 10:09+0000\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Chinese (Traditional) <https://l10n.elementary.io/projects/"
@@ -32,46 +32,48 @@ msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
 #: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:64
-#: data/greeter.metainfo.xml.in:82 data/greeter.metainfo.xml.in:103
-#: data/greeter.metainfo.xml.in:119 data/greeter.metainfo.xml.in:132
+#: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:104
+#: data/greeter.metainfo.xml.in:125 data/greeter.metainfo.xml.in:141
+#: data/greeter.metainfo.xml.in:154
 msgid "Minor updates:"
 msgstr "小型更新："
 
 #: data/greeter.metainfo.xml.in:44 data/greeter.metainfo.xml.in:66
-#: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:105
-#: data/greeter.metainfo.xml.in:121 data/greeter.metainfo.xml.in:134
+#: data/greeter.metainfo.xml.in:88 data/greeter.metainfo.xml.in:108
+#: data/greeter.metainfo.xml.in:127 data/greeter.metainfo.xml.in:143
+#: data/greeter.metainfo.xml.in:156
 msgid "Updated translations"
 msgstr "更新翻譯"
 
-#: data/greeter.metainfo.xml.in:59 data/greeter.metainfo.xml.in:115
+#: data/greeter.metainfo.xml.in:81 data/greeter.metainfo.xml.in:137
 msgid "New Features:"
 msgstr "新功能："
 
-#: data/greeter.metainfo.xml.in:61
+#: data/greeter.metainfo.xml.in:83
 msgid "Add blurred wallpaper as background"
 msgstr "新增將模糊桌布設為背景的功能"
 
-#: data/greeter.metainfo.xml.in:62
+#: data/greeter.metainfo.xml.in:84
 msgid "Make Date and Time larger and bolder with softer shadows"
 msgstr "讓日期與時間更大並使用較柔和的陰影"
 
-#: data/greeter.metainfo.xml.in:84
+#: data/greeter.metainfo.xml.in:106
 msgid "Prevent a potential issue with dialogs that use portals"
 msgstr "防止使用桌面入口的對話框可能會遇到的某個問題"
 
-#: data/greeter.metainfo.xml.in:85
+#: data/greeter.metainfo.xml.in:107
 msgid "Fix potential issues with incorrect keyboard layout being set"
 msgstr "修正可能設定錯誤的鍵盤配置的問題"
 
-#: data/greeter.metainfo.xml.in:117
+#: data/greeter.metainfo.xml.in:139
 msgid "Provide panel background color interface"
 msgstr "提供面板背景色彩介面"
 
-#: data/greeter.metainfo.xml.in:128
+#: data/greeter.metainfo.xml.in:150
 msgid "Improvements:"
 msgstr "改善項目："
 
-#: data/greeter.metainfo.xml.in:130
+#: data/greeter.metainfo.xml.in:152
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr "修正 greeter 在開機時會隨機無法正確載入的問題"
 

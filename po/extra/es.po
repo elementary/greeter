@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 22:41+0000\n"
+"POT-Creation-Date: 2025-10-02 15:56+0000\n"
 "PO-Revision-Date: 2024-06-24 06:42+0000\n"
 "Last-Translator: Italo Felipe Capasso Ballesteros <edwood.grant@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/desktop/greeter-"
@@ -32,51 +32,53 @@ msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
 #: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:64
-#: data/greeter.metainfo.xml.in:82 data/greeter.metainfo.xml.in:103
-#: data/greeter.metainfo.xml.in:119 data/greeter.metainfo.xml.in:132
+#: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:104
+#: data/greeter.metainfo.xml.in:125 data/greeter.metainfo.xml.in:141
+#: data/greeter.metainfo.xml.in:154
 msgid "Minor updates:"
 msgstr "Actualizaciones menores:"
 
 #: data/greeter.metainfo.xml.in:44 data/greeter.metainfo.xml.in:66
-#: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:105
-#: data/greeter.metainfo.xml.in:121 data/greeter.metainfo.xml.in:134
+#: data/greeter.metainfo.xml.in:88 data/greeter.metainfo.xml.in:108
+#: data/greeter.metainfo.xml.in:127 data/greeter.metainfo.xml.in:143
+#: data/greeter.metainfo.xml.in:156
 msgid "Updated translations"
 msgstr "Traducciones actualizadas"
 
-#: data/greeter.metainfo.xml.in:59 data/greeter.metainfo.xml.in:115
+#: data/greeter.metainfo.xml.in:81 data/greeter.metainfo.xml.in:137
 msgid "New Features:"
 msgstr "Nuevas características:"
 
-#: data/greeter.metainfo.xml.in:61
+#: data/greeter.metainfo.xml.in:83
 msgid "Add blurred wallpaper as background"
 msgstr "Se agregó un fondo de escritorio desenfocado"
 
-#: data/greeter.metainfo.xml.in:62
+#: data/greeter.metainfo.xml.in:84
 msgid "Make Date and Time larger and bolder with softer shadows"
 msgstr ""
 "El texto de la fecha y hora es ahora más grande, más gruesa y con sombras "
 "más suaves"
 
-#: data/greeter.metainfo.xml.in:84
+#: data/greeter.metainfo.xml.in:106
 msgid "Prevent a potential issue with dialogs that use portals"
 msgstr ""
 "Se corrigió un posible problema con cuadro de diálogo que usen portales"
 
-#: data/greeter.metainfo.xml.in:85
+#: data/greeter.metainfo.xml.in:107
 msgid "Fix potential issues with incorrect keyboard layout being set"
 msgstr ""
 "Se corrigieron posibles problemas al establecer distribuciones de teclado "
 "incorrectas"
 
-#: data/greeter.metainfo.xml.in:117
+#: data/greeter.metainfo.xml.in:139
 msgid "Provide panel background color interface"
 msgstr "Se provee una interface de color de fondo para el panel"
 
-#: data/greeter.metainfo.xml.in:128
+#: data/greeter.metainfo.xml.in:150
 msgid "Improvements:"
 msgstr "Mejoras:"
 
-#: data/greeter.metainfo.xml.in:130
+#: data/greeter.metainfo.xml.in:152
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr ""
 "Se corrigió un problema aleatorio donde el inicio de sesión no funciona "
