@@ -26,9 +26,14 @@ public class GreeterCompositor.NotificationsClient : Object {
         client.window_created.connect ((window) => {
             window.set_data (NOTIFICATION_DATA_KEY, true);
             window.make_above ();
+
+            if (Meta.Util.is_wayland_compositor ()) {
 #if HAS_MUTTER46
             client.wayland_client.make_dock (window);
 #endif
+            } else {
+                ShellClientsManager.get_instance ().make_dock (window);
+            }
         });
     }
 }
