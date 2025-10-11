@@ -6,6 +6,9 @@
  */
 
 public class Greeter.UserCard : Greeter.BaseCard {
+    /* We sync display settings once */
+    private static bool synced_display_settings = false;
+
     public signal void go_left ();
     public signal void go_right ();
     public signal void focus_requested ();
@@ -259,6 +262,32 @@ public class Greeter.UserCard : Greeter.BaseCard {
         main_box.show_all ();
     }
 
+    private void set_display_settings () {
+        if (synced_display_settings) {
+            return;
+        }
+
+        var source_path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "monitors.xml");
+        var source = File.new_for_path (source_path);
+
+        if (!source.query_exists ()) {
+            warning ("%s doesn't exist", source_path);
+            return;
+        }
+
+        var dest_path = Path.build_filename (GLib.Environment.get_user_config_dir (), "monitors.xml");
+        var dest = File.new_for_path (dest_path);
+
+        try {
+            source.copy (dest, OVERWRITE | ALL_METADATA);
+        } catch (Error e) {
+            warning (e.message);
+            return;
+        }
+
+        synced_display_settings = true;
+    }
+
     private string accent_to_string (int i) {
         switch (i) {
             case 1:
@@ -314,6 +343,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         set_background_image ();
         set_check_style ();
+        set_display_settings ();
 
         if (needs_settings_set) {
             set_settings ();
