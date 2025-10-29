@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-02 15:56+0000\n"
-"PO-Revision-Date: 2025-10-22 05:26+0000\n"
+"PO-Revision-Date: 2025-10-30 13:55+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <https://l10n.elementaryos.org/projects/desktop/"
 "greeter-extra/sv/>\n"
@@ -51,7 +51,7 @@ msgstr "Nya funktioner:"
 
 #: data/greeter.metainfo.xml.in:83
 msgid "Add blurred wallpaper as background"
-msgstr "Lägg till suddig bakgrundsbild som bakgrund"
+msgstr "Lägg till oskarp bakgrundsbild som bakgrund"
 
 #: data/greeter.metainfo.xml.in:84
 msgid "Make Date and Time larger and bolder with softer shadows"
@@ -64,7 +64,7 @@ msgstr "Förhindra ett potentiellt problem med dialogrutor som använder portale
 #: data/greeter.metainfo.xml.in:107
 msgid "Fix potential issues with incorrect keyboard layout being set"
 msgstr ""
-"Åtgärdar potentiella problem med felaktig tangentbordslayout som ställs in"
+"Åtgärdar potentiella problem med felaktig tangentbordslayout som ställts in"
 
 #: data/greeter.metainfo.xml.in:139
 msgid "Provide panel background color interface"
@@ -77,5 +77,5 @@ msgstr "Förbättringar:"
 #: data/greeter.metainfo.xml.in:152
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr ""
-"Åtgärda ett slumpmässigt problem där Greeter inte läses in korrekt vid "
+"Åtgärda ett slumpmässigt problem där Hälsaren inte läses in korrekt vid "
 "uppstart"
