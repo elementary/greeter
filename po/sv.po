@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-02 15:56+0000\n"
-"PO-Revision-Date: 2025-10-22 05:26+0000\n"
+"PO-Revision-Date: 2025-10-30 13:55+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <https://l10n.elementaryos.org/projects/desktop/"
 "greeter/sv/>\n"
@@ -29,7 +29,7 @@ msgstr[1] "Ändringar återställs automatiskt efter %i sekunder."
 
 #: compositor/WindowManager.vala:344
 msgid "Keep new display settings?"
-msgstr "Behålla nya skärminställningar?"
+msgstr "Behåll nya skärminställningar?"
 
 #: compositor/WindowManager.vala:348
 msgid "Keep Settings"
