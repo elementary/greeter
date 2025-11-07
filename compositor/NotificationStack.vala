@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 elementary, Inc (https://elementary.io)
+ * Copyright 2020-2025 elementary, Inc (https://elementary.io)
  *           2014 Tom Beckmann
  *
  * This program is free software: you can redistribute it and/or modify
