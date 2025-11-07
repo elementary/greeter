@@ -18,7 +18,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private Greeter.DateTimeWidget datetime_widget;
     private unowned LightDM.UserList lightdm_user_list;
 
-    private int current_user_card_index = 0;
+    private int current_user_card_index = -1;
     private unowned Greeter.BaseCard? current_card = null;
 
     private bool installer_mode = false;
@@ -180,13 +180,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             return Gdk.EVENT_PROPAGATE;
         });
 
-        carousel.page_changed.connect ((index) => {
-            var children = carousel.get_children ();
-
-            if (children.nth_data (index) is Greeter.UserCard) {
-                current_user_card_index = (int) index;
-            }
-        });
+        carousel.page_changed.connect (handle_page_changed);
 
         load_users.begin (() => {
             /* A significant delay is required in order for the window and card to be focused at
@@ -367,7 +361,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             bool user_selected = false;
             user_cards.head.foreach ((card) => {
                 if (card.lightdm_user.name == user_to_select) {
-                    switch_to_card (card);
+                    carousel.scroll_to (card);
                     user_selected = true;
                 }
             });
@@ -375,7 +369,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             if (!user_selected) {
                 unowned var user_card = user_cards.peek_head ();
                 user_card.show_input = true;
-                switch_to_card (user_card);
+                carousel.scroll_to (user_card);
             }
         } else {
             datetime_revealer.reveal_child = false;
@@ -408,13 +402,16 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private void add_card (LightDM.User lightdm_user) {
         var user_card = new Greeter.UserCard (lightdm_user);
         user_card.show_all ();
+        user_card.do_connect.connect (do_connect);
+        user_card.click_gesture.pressed.connect ((gesture, n_press, x, y) => {
+            assert (gesture.widget is UserCard);
 
-        carousel.add (user_card);
-
-        user_card.focus_requested.connect (() => {
-            switch_to_card (user_card);
+            var _user_card = (UserCard) gesture.widget;
+            if (!_user_card.show_input) {
+                carousel.scroll_to (_user_card);
+                _user_card.grab_focus ();
+            }
         });
-
         user_card.go_left.connect (() => {
             if (Gtk.StateFlags.DIR_LTR in get_state_flags ()) {
                 go_previous ();
@@ -422,7 +419,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 go_next ();
             }
         });
-
         user_card.go_right.connect (() => {
             if (Gtk.StateFlags.DIR_LTR in get_state_flags ()) {
                 go_next ();
@@ -431,14 +427,19 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         });
 
-        user_card.do_connect.connect (do_connect);
+        carousel.add (user_card);
 
         card_size_group.add_widget (user_card);
         user_cards.push_tail (user_card);
     }
 
-    private void switch_to_card (Greeter.UserCard user_card) {
-        if (!carousel.interactive) {
+    private void handle_page_changed (uint index) {
+        if (index == current_user_card_index) {
+            return;
+        }
+
+        unowned var user_card = user_cards.peek_nth (index);
+        if (user_card == null) {
             return;
         }
 
@@ -446,11 +447,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             ((UserCard) current_card).show_input = false;
         }
 
-        datetime_widget.is_24h = user_card.is_24h;
-
+        current_user_card_index = (int) index;
         current_card = user_card;
 
-        carousel.scroll_to (user_card);
+        datetime_widget.is_24h = user_card.is_24h;
 
         user_card.set_settings ();
         user_card.show_input = true;
