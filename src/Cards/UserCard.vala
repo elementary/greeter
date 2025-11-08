@@ -33,7 +33,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         need_password = true;
 
         var username_label = new Gtk.Label (lightdm_user.display_name) {
-            sensitive = !lightdm_user.is_locked,
             hexpand = true,
             margin_top = 24,
             margin_bottom = 12,
@@ -41,6 +40,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             margin_end = 24,
         };
         username_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+        lightdm_user.bind_property ("is-locked", username_label, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
 
         password_entry = new Greeter.PasswordEntry ();
         bind_property ("connecting", password_entry, "sensitive", INVERT_BOOLEAN);
@@ -50,9 +50,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
         bind_property ("use-fingerprint", fingerprint_image, "visible", SYNC_CREATE);
 
         var password_session_button = new Greeter.SessionButton () {
-            sensitive = !lightdm_user.is_locked,
             vexpand = true
         };
+        lightdm_user.bind_property ("is-locked", password_session_button, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
 
         var password_grid = new Gtk.Grid () {
             column_spacing = 6,
@@ -68,9 +68,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
         bind_property ("connecting", login_button, "sensitive", INVERT_BOOLEAN);
 
         var login_button_session_button = new Greeter.SessionButton () {
-            sensitive = !lightdm_user.is_locked,
             vexpand = true
         };
+        lightdm_user.bind_property ("is-locked", login_button_session_button, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
 
         var login_box = new Gtk.Box (HORIZONTAL, 6);
         login_box.add (login_button);
