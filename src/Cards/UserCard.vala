@@ -6,8 +6,6 @@
  */
 
 public class Greeter.UserCard : Greeter.BaseCard {
-    public signal void go_left ();
-    public signal void go_right ();
     public signal void focus_requested ();
 
     public LightDM.User lightdm_user { get; construct; }
@@ -188,18 +186,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         act_user.notify["is-loaded"].connect (on_act_user_loaded);
 
         on_act_user_loaded ();
-
-        card_overlay.focus.connect ((direction) => {
-            if (direction == LEFT) {
-                go_left ();
-                return true;
-            } else if (direction == RIGHT) {
-                go_right ();
-                return true;
-            }
-
-            return false;
-        });
 
         click_gesture = new Gtk.GestureMultiPress (this);
         click_gesture.pressed.connect ((n_press, x, y) => {
