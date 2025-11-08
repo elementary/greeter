@@ -9,17 +9,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     public LightDM.Greeter lightdm_greeter { private get; construct; }
 
     private Pantheon.Desktop.Greeter? desktop_greeter;
-    private GLib.Queue<unowned Greeter.UserCard> user_cards;
-    private Gtk.SizeGroup card_size_group;
     private Hdy.Carousel carousel;
     private Greeter.Settings settings;
     private GLib.Settings gsettings;
     private Gtk.Revealer datetime_revealer;
-    private Greeter.DateTimeWidget datetime_widget;
-    private unowned LightDM.UserList lightdm_user_list;
+    private DateTimeWidget datetime_widget;
 
     private int current_user_card_index = 0;
-    private unowned Greeter.BaseCard? current_card = null;
+    private unowned BaseCard? current_card;
 
     private bool installer_mode = false;
 
@@ -41,23 +38,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         lightdm_greeter.show_prompt.connect (show_prompt);
         lightdm_greeter.authentication_complete.connect (authentication_complete);
 
-        var guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
-        var manual_login_button = new Gtk.ToggleButton.with_label (_("Manual Login…"));
-
-        var extra_login_box = new Gtk.Box (HORIZONTAL, 12) {
-            homogeneous = true,
-            halign = CENTER,
-            valign = END,
-            vexpand = true
-        };
-        if (lightdm_greeter.has_guest_account_hint) {
-            extra_login_box.add (guest_login_button);
-        }
-        if (lightdm_greeter.show_manual_login_hint) {
-            extra_login_box.add (manual_login_button);
-        }
-
-        datetime_widget = new Greeter.DateTimeWidget ();
+        datetime_widget = new DateTimeWidget ();
 
         datetime_revealer = new Gtk.Revealer () {
             child = datetime_widget,
@@ -66,114 +47,62 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             vexpand = true
         };
 
-        user_cards = new GLib.Queue<unowned Greeter.UserCard> ();
-
-        var manual_card = new Greeter.ManualCard ();
-
         carousel = new Hdy.Carousel () {
             allow_long_swipes = true,
             vexpand = true
         };
 
-        var manual_login_stack = new Gtk.Stack () {
-            transition_type = Gtk.StackTransitionType.CROSSFADE
-        };
-        manual_login_stack.add (carousel);
-        manual_login_stack.add (manual_card);
+        // We need to load users here because guest and manual cards are supposed to be at the end
+        load_users ();
+
+        if (lightdm_greeter.has_guest_account_hint) {
+            var guest_card = new GuestCard ();
+            guest_card.show_all ();
+            guest_card.do_connect.connect (() => {
+                try {
+                    lightdm_greeter.authenticate_as_guest ();
+                } catch (Error e) {
+                    critical (e.message);
+                }
+            });
+
+            carousel.add (guest_card);
+        }
+
+        if (lightdm_greeter.show_manual_login_hint) {
+            var manual_card = new ManualCard ();
+            manual_card.show_all ();
+            manual_card.do_connect_username.connect (do_connect_username);
+            manual_card.do_connect.connect (do_connect);
+
+            carousel.add (manual_card);
+        }
 
         var main_box = new Gtk.Box (VERTICAL, 24) {
             margin_top = 24,
             margin_bottom = 24
         };
         main_box.add (datetime_revealer);
-        main_box.add (manual_login_stack);
-        main_box.add (extra_login_box);
+        main_box.add (carousel);
 
         child = main_box;
-
-        manual_login_button.toggled.connect (() => {
-            if (manual_login_button.active) {
-                if (lightdm_greeter.in_authentication) {
-                    try {
-                        lightdm_greeter.cancel_authentication ();
-                    } catch (Error e) {
-                        critical (e.message);
-                    }
-                }
-
-                manual_login_stack.visible_child = manual_card;
-                current_card = manual_card;
-            } else {
-                if (lightdm_greeter.in_authentication) {
-                    try {
-                        lightdm_greeter.cancel_authentication ();
-                    } catch (Error e) {
-                        critical (e.message);
-                    }
-                }
-
-                manual_login_stack.visible_child = carousel;
-                current_card = user_cards.peek_nth (current_user_card_index);
-
-                try {
-                    lightdm_greeter.authenticate (((UserCard) current_card).lightdm_user.name);
-                } catch (Error e) {
-                    critical (e.message);
-                }
-            }
-        });
-
-        guest_login_button.clicked.connect (() => {
-            try {
-                lightdm_greeter.authenticate_as_guest ();
-            } catch (Error e) {
-                critical (e.message);
-            }
-        });
-
-        card_size_group = new Gtk.SizeGroup (Gtk.SizeGroupMode.HORIZONTAL);
-        card_size_group.add_widget (extra_login_box);
-        card_size_group.add_widget (manual_card);
-
-        lightdm_greeter.bind_property ("hide-users-hint", manual_login_button, "sensitive", GLib.BindingFlags.SYNC_CREATE | GLib.BindingFlags.INVERT_BOOLEAN);
-        lightdm_greeter.bind_property ("hide-users-hint", manual_login_button, "active", GLib.BindingFlags.SYNC_CREATE);
-
-        lightdm_user_list = LightDM.UserList.get_instance ();
-        lightdm_user_list.user_added.connect (() => {
-            load_users.begin ();
-        });
-
-        manual_card.do_connect_username.connect (do_connect_username);
-        manual_card.do_connect.connect (do_connect);
 
         key_controller = new Gtk.EventControllerKey (this) {
             propagation_phase = CAPTURE
         };
         key_controller.key_pressed.connect ((keyval, keycode, state) => {
-            if (!(current_card is UserCard)) {
-                return Gdk.EVENT_PROPAGATE;
-            }
-
-            unowned var focused_entry = (Gtk.Entry) get_focus ();
+            unowned var focused_entry = get_focus () as Gtk.Entry;
             if (focused_entry == null || !focused_entry.is_ancestor (current_card) || focused_entry.text != "") {
                 return Gdk.EVENT_PROPAGATE;
             }
 
             var ltr = Gtk.StateFlags.DIR_LTR in get_state_flags ();
 
-            if (keyval == Gdk.Key.Left) {
-                if (ltr) {
-                    go_previous ();
-                } else {
-                    go_next ();
-                }
+            if (keyval == Gdk.Key.Left && ltr || keyval == Gdk.Key.Right && !ltr) {
+                go_previous ();
                 return Gdk.EVENT_STOP;
-            } else if (keyval == Gdk.Key.Right) {
-                if (ltr) {
-                    go_next ();
-                } else {
-                    go_previous ();
-                }
+            } else if (keyval == Gdk.Key.Right && ltr || keyval == Gdk.Key.Left && !ltr) {
+                go_next ();
                 return Gdk.EVENT_STOP;
             }
 
@@ -188,19 +117,17 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         });
 
-        load_users.begin (() => {
-            /* A significant delay is required in order for the window and card to be focused at
-             * at boot.  TODO: Find whether boot sequence can be tweaked to fix this.
-             */
-            Timeout.add (500, () => {
-                get_style_context ().add_class ("initialized");
+        /* A significant delay is required in order for the window and card to be focused at
+            * at boot.  TODO: Find whether boot sequence can be tweaked to fix this.
+            */
+        Timeout.add (500, () => {
+            get_style_context ().add_class ("initialized");
 
-                if (current_card != null) {
-                    current_card.grab_focus ();
-                }
+            if (current_card != null) {
+                current_card.grab_focus ();
+            }
 
-                return Source.REMOVE;
-            });
+            return Source.REMOVE;
         });
 
         maximize ();
@@ -284,12 +211,17 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
     }
 
-    private void show_prompt (string text, LightDM.PromptType type = LightDM.PromptType.QUESTION) {
+    private void show_prompt (string text, LightDM.PromptType type) {
         if (current_card is ManualCard) {
-            if (type == LightDM.PromptType.SECRET) {
-                ((ManualCard) current_card).ask_password ();
-            } else {
-                ((ManualCard) current_card).wrong_username ();
+            var manual_card = (ManualCard) current_card;
+
+            switch (type) {
+                case QUESTION:
+                    manual_card.wrong_username ();
+                    break;
+                case SECRET:
+                    manual_card.ask_password ();
+                    break;
             }
         }
     }
@@ -347,35 +279,37 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         carousel.interactive = true;
     }
 
-    private async void load_users () {
+    private void load_users () {
         // Check if the installer is installed
         var installer_desktop = new DesktopAppInfo ("io.elementary.installer.desktop");
         if (installer_desktop != null) {
             installer_mode = true;
         }
 
+        unowned var lightdm_user_list = LightDM.UserList.get_instance ();
         if (lightdm_user_list.length > 0) {
             datetime_revealer.reveal_child = true;
 
-            lightdm_user_list.users.foreach ((user) => {
-                add_card (user);
-            });
+            lightdm_user_list.users.foreach (add_card);
 
-            unowned string? select_user = lightdm_greeter.select_user_hint;
-            var user_to_select = select_user != null ? select_user : gsettings.get_string ("last-user");
+            unowned var user_to_select = lightdm_greeter.select_user_hint ?? gsettings.get_string ("last-user");
 
             bool user_selected = false;
-            user_cards.head.foreach ((card) => {
-                if (card.lightdm_user.name == user_to_select) {
+            foreach (unowned var carousel_child in carousel.get_children ()) {
+                assert (carousel_child is BaseCard);
+                unowned var card = (BaseCard) carousel_child;
+
+                if (card is UserCard && ((UserCard) card).lightdm_user.name == user_to_select) {
                     switch_to_card (card);
                     user_selected = true;
                 }
-            });
+            }
 
             if (!user_selected) {
-                unowned var user_card = user_cards.peek_head ();
-                user_card.show_input = true;
-                switch_to_card (user_card);
+                unowned var first_carousel_child = carousel.get_children ().first ().data;
+                assert (first_carousel_child is BaseCard);
+
+                switch_to_card ((BaseCard) first_carousel_child);
             }
         } else {
             datetime_revealer.reveal_child = false;
@@ -432,33 +366,19 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         });
 
         user_card.do_connect.connect (do_connect);
-
-        card_size_group.add_widget (user_card);
-        user_cards.push_tail (user_card);
     }
 
-    private void switch_to_card (Greeter.UserCard user_card) {
+    private void switch_to_card (Greeter.BaseCard card) {
         if (!carousel.interactive) {
             return;
         }
 
-        if (current_card != null && current_card is UserCard) {
-            ((UserCard) current_card).show_input = false;
-        }
+        current_card?.hide_card_content ();
 
-        datetime_widget.is_24h = user_card.is_24h;
-
-        current_card = user_card;
-
-        carousel.scroll_to (user_card);
-
-        user_card.set_settings ();
-        user_card.show_input = true;
-        user_card.grab_focus ();
-
-        if (user_card.lightdm_user.session != null) {
-            application.activate_action ("select-session", new GLib.Variant.string (user_card.lightdm_user.session));
-        }
+        card.reveal_card_content ();
+        card.grab_focus ();
+        carousel.scroll_to (card);
+        current_card = card;
 
         if (lightdm_greeter.in_authentication) {
             try {
@@ -468,10 +388,20 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         }
 
-        try {
-            lightdm_greeter.authenticate (user_card.lightdm_user.name);
-        } catch (Error e) {
-            critical (e.message);
+        if (card is UserCard) {
+            var user_card = (UserCard) card;
+            datetime_widget.is_24h = user_card.is_24h;
+            user_card.set_settings ();
+
+            if (user_card.lightdm_user.session != null) {
+                application.activate_action ("select-session", new GLib.Variant.string (user_card.lightdm_user.session));
+            }
+
+            try {
+                lightdm_greeter.authenticate (user_card.lightdm_user.name);
+            } catch (Error e) {
+                critical (e.message);
+            }
         }
     }
 
@@ -505,24 +435,24 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void go_previous () {
-        if (!carousel.interactive) {
+        if (!carousel.interactive || current_user_card_index - 1 < 0) {
             return;
         }
 
-        unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index - 1);
-        if (next_card != null) {
-            carousel.scroll_to (next_card);
+        unowned var carousel_child = carousel.get_children ().nth_data (current_user_card_index - 1);
+        if (carousel_child != null) {
+            carousel.scroll_to (carousel_child);
         }
     }
 
     private void go_next () {
-        if (!carousel.interactive) {
+        if (!carousel.interactive || current_user_card_index + 1 >= carousel.n_pages) {
             return;
         }
 
-        unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index + 1);
-        if (next_card != null) {
-            carousel.scroll_to (next_card);
+        unowned var carousel_child = carousel.get_children ().nth_data (current_user_card_index + 1);
+        if (carousel_child != null) {
+            carousel.scroll_to (carousel_child);
         }
     }
 }

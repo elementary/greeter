@@ -8,16 +8,8 @@ public class Greeter.ManualCard : Greeter.BaseCard {
 
     private Greeter.PasswordEntry password_entry;
     private Gtk.Entry username_entry;
-    private Gtk.Box main_box;
 
     construct {
-        width_request = 350;
-
-        var icon = new Gtk.Image () {
-            icon_name = "avatar-default",
-            pixel_size = 64
-        };
-
         var label = new Gtk.Label (_("Manual Login")) {
             hexpand = true,
             margin_bottom = 16
@@ -45,25 +37,13 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             margin_start = 24,
             margin_end = 24
         };
-        form_grid.attach (icon, 0, 0, 2);
-        form_grid.attach (label, 0, 1, 2);
-        form_grid.attach (username_entry, 0, 2);
-        form_grid.attach (password_entry, 0, 3);
-        form_grid.attach (session_button, 1, 2, 1, 2);
-        form_grid.attach (caps_lock_revealer, 0, 4, 2);
+        form_grid.attach (label, 0, 0, 2);
+        form_grid.attach (username_entry, 0, 1);
+        form_grid.attach (password_entry, 0, 2);
+        form_grid.attach (session_button, 1, 1, 1, 2);
+        form_grid.attach (caps_lock_revealer, 0, 3, 2);
 
-        main_box = new Gtk.Box (VERTICAL, 0) {
-            margin_top = 12,
-            margin_bottom = 12,
-            margin_start = 12,
-            margin_end = 12
-        };
         main_box.add (form_grid);
-
-        main_box.get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
-        main_box.get_style_context ().add_class (Granite.STYLE_CLASS_ROUNDED);
-
-        child = main_box;
 
         bind_property ("connecting", username_entry, "sensitive", INVERT_BOOLEAN);
         bind_property ("connecting", password_entry, "sensitive", INVERT_BOOLEAN);
@@ -122,4 +102,19 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             return Source.REMOVE;
         });
     }
+
+    public override BackgroundImage load_background_image () {
+        return new BackgroundImage.from_path (null);
+    }
+
+    public override Gtk.Widget get_avatar_widget () {
+        return new Gtk.Image () {
+            icon_name = "avatar-default",
+            pixel_size = 64
+        };
+    }
+
+    public override void reveal_card_content () {}
+
+    public override void hide_card_content () {}
 }
