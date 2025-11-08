@@ -1,4 +1,3 @@
-actservice_dep = dependency('accountsservice')
 gobject_dep = dependency('gobject-2.0')
 glib_dep = dependency('glib-2.0')
 gdk_wl_dep = dependency('gdk-wayland-3.0')
@@ -32,7 +31,7 @@ executable(
     'Widgets/PasswordEntry.vala',
     'Widgets/SessionButton.vala',
     config_header,
-    dependencies: [ actservice_dep, gobject_dep, glib_dep, gdk_wl_dep, gdk_x11_dep, gtk_dep, granite_dep, hdy_dep, lightdm_dep, m_dep, pantheon_desktop_shell_dep, wl_client_dep, x11_dep ],
+    dependencies: [ gobject_dep, glib_dep, gdk_wl_dep, gdk_x11_dep, gtk_dep, granite_dep, hdy_dep, lightdm_dep, m_dep, pantheon_desktop_shell_dep, wl_client_dep, x11_dep ],
     install : true,
     install_dir: install_path
 )
