@@ -1,6 +1,6 @@
 /*
  * Copyright 2012 Tom Beckmann, Rico Tzschichholz
- * Copyright 2018 elementary LLC. (https://elementary.io)
+ * Copyright 2018-2025 elementary, Inc. (https://elementary.io)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -51,6 +51,58 @@ namespace GreeterCompositor {
          */
         public static int scale_to_int (int value, float scale_factor) {
             return (int) (Math.round ((float)value * scale_factor));
+        }
+
+        /**
+         * Utility that returns the given duration or 0 if animations are disabled.
+         */
+        public static uint get_animation_duration (uint duration) {
+            return Meta.Prefs.get_gnome_animations () ? duration : 0;
+        }
+
+        public static void clutter_actor_reparent (Clutter.Actor actor, Clutter.Actor new_parent) {
+            if (actor == new_parent) {
+                return;
+            }
+
+            actor.ref ();
+            actor.get_parent ().remove_child (actor);
+            new_parent.add_child (actor);
+            actor.unref ();
+        }
+
+        public delegate void WindowActorReadyCallback (Meta.WindowActor window_actor);
+
+        public static void wait_for_window_actor (Meta.Window window, owned WindowActorReadyCallback callback) {
+            unowned var window_actor = (Meta.WindowActor) window.get_compositor_private ();
+            if (window_actor != null) {
+                callback (window_actor);
+                return;
+            }
+
+            Idle.add (() => {
+                window_actor = (Meta.WindowActor) window.get_compositor_private ();
+
+                if (window_actor != null) {
+                    callback (window_actor);
+                }
+
+                return Source.REMOVE;
+            });
+        }
+
+        public static void wait_for_window_actor_visible (Meta.Window window, owned WindowActorReadyCallback callback) {
+            wait_for_window_actor (window, (window_actor) => {
+                if (window_actor.visible) {
+                    callback (window_actor);
+                } else {
+                    ulong show_handler = 0;
+                    show_handler = window_actor.show.connect (() => {
+                        window_actor.disconnect (show_handler);
+                        callback (window_actor);
+                    });
+                }
+            });
         }
 
         private static Gtk.StyleContext selection_style_context = null;
