@@ -15,7 +15,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     // TODO: In Gtk4 remove this gesture and move it to MainWindow 
     public Gtk.GestureMultiPress click_gesture { get; private set; }
 
-    private Act.User act_user;
     private Pantheon.AccountsService greeter_act;
     private Pantheon.SettingsDaemon.AccountsService settings_act;
 
@@ -25,8 +24,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Gtk.Box main_box;
 
     private SelectionCheck logged_in;
-
-    private bool needs_settings_set = false;
 
     public UserCard (LightDM.User lightdm_user) {
         Object (lightdm_user: lightdm_user);
@@ -43,38 +40,19 @@ public class Greeter.UserCard : Greeter.BaseCard {
             margin_end = 24,
         };
         username_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+        lightdm_user.bind_property ("is-locked", username_label, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
 
         password_entry = new Greeter.PasswordEntry ();
+        bind_property ("connecting", password_entry, "sensitive", INVERT_BOOLEAN);
 
-        bind_property (
-            "connecting",
-            password_entry,
-            "sensitive",
-            INVERT_BOOLEAN
-        );
-
-        var fingerprint_image = new Gtk.Image.from_icon_name (
-            "fingerprint-symbolic",
-            BUTTON
-        );
-
-        bind_property (
-            "use-fingerprint",
-            fingerprint_image,
-            "no-show-all",
-            INVERT_BOOLEAN | SYNC_CREATE
-        );
-
-        bind_property (
-            "use-fingerprint",
-            fingerprint_image,
-            "visible",
-            SYNC_CREATE
-        );
+        var fingerprint_image = new Gtk.Image.from_icon_name ("fingerprint-symbolic", BUTTON);
+        bind_property ("use-fingerprint", fingerprint_image, "no-show-all", SYNC_CREATE | INVERT_BOOLEAN);
+        bind_property ("use-fingerprint", fingerprint_image, "visible", SYNC_CREATE);
 
         var password_session_button = new Greeter.SessionButton () {
             vexpand = true
         };
+        lightdm_user.bind_property ("is-locked", password_session_button, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
 
         var password_grid = new Gtk.Grid () {
             column_spacing = 6,
@@ -92,6 +70,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var login_button_session_button = new Greeter.SessionButton () {
             vexpand = true
         };
+        lightdm_user.bind_property ("is-locked", login_button_session_button, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
 
         var login_box = new Gtk.Box (HORIZONTAL, 6);
         login_box.add (login_button);
@@ -121,13 +100,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             transition_type = SLIDE_DOWN,
             child = login_stack
         };
-
-        bind_property (
-            "show-input",
-            form_revealer,
-            "reveal-child",
-            SYNC_CREATE
-        );
+        bind_property ("show-input", form_revealer, "reveal-child", SYNC_CREATE);
 
         main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_bottom = 48
@@ -181,13 +154,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         child = card_overlay;
 
-        act_user = Act.UserManager.get_default ().get_user (lightdm_user.name);
-        act_user.bind_property ("locked", username_label, "sensitive", INVERT_BOOLEAN);
-        act_user.bind_property ("locked", password_session_button, "visible", INVERT_BOOLEAN);
-        act_user.bind_property ("locked", login_button_session_button, "visible", INVERT_BOOLEAN);
-        act_user.notify["is-loaded"].connect (on_act_user_loaded);
-
-        on_act_user_loaded ();
+        connect_to_dbus_interfaces ();
 
         card_overlay.focus.connect ((direction) => {
             if (direction == LEFT) {
@@ -278,42 +245,32 @@ public class Greeter.UserCard : Greeter.BaseCard {
         }
     }
 
-    private void on_act_user_loaded () {
-        if (!act_user.is_loaded) {
-            return;
-        }
+    private void connect_to_dbus_interfaces () {
+        var account_path = "/org/freedesktop/Accounts/User%d".printf ((int )lightdm_user.uid);
+        try {
+            greeter_act = Bus.get_proxy_sync (
+                SYSTEM,
+                "org.freedesktop.Accounts",
+                account_path,
+                GET_INVALIDATED_PROPERTIES
+            );
 
-        unowned string? act_path = act_user.get_object_path ();
-        if (act_path != null) {
-            try {
-                greeter_act = Bus.get_proxy_sync (
-                    SYSTEM,
-                    "org.freedesktop.Accounts",
-                    act_path,
-                    GET_INVALIDATED_PROPERTIES
-                );
+            settings_act = Bus.get_proxy_sync (
+                SYSTEM,
+                "org.freedesktop.Accounts",
+                account_path,
+                GET_INVALIDATED_PROPERTIES
+            );
 
-                settings_act = Bus.get_proxy_sync (
-                    SYSTEM,
-                    "org.freedesktop.Accounts",
-                    act_path,
-                    GET_INVALIDATED_PROPERTIES
-                );
-
-                is_24h = greeter_act.time_format != "12h";
-            } catch (Error e) {
-                critical (e.message);
-            }
+            is_24h = greeter_act.time_format != "12h";
+        } catch (Error e) {
+            critical (e.message);
         }
 
         set_background_image ();
         set_check_style ();
 
-        if (needs_settings_set) {
-            set_settings ();
-        }
-
-        if (act_user.locked) {
+        if (lightdm_user.is_locked) {
             login_stack.visible_child_name = "disabled";
         } else {
             if (need_password) {
@@ -346,11 +303,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     public void set_settings () {
-        if (!act_user.is_loaded) {
-            needs_settings_set = true;
-            return;
-        }
-
         set_keyboard_layouts ();
         set_mouse_touchpad_settings ();
         set_interface_settings ();
