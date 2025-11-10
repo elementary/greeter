@@ -6,11 +6,6 @@
       <summary>Last selected user</summary>
       <description></description>
     </key>
-    <key type="s" name="last-session-type">
-      <default>''</default>
-      <summary>Last selected session type</summary>
-      <description></description>
-    </key>
   </schema>
 
   <schema path="/io/elementary/greeter-compositor/keybindings/" id="io.elementary.greeter-compositor.keybindings">

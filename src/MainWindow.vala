@@ -297,7 +297,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         if (lightdm_greeter.is_authenticated) {
             try {
-                unowned var session = application.get_action_state ("select-session").get_string ();
+                unowned var session = current_card.selected_session_type;
 
                 // If the greeter is running on the install medium, check if the Installer has signalled
                 // that it wants the greeter to launch the live (demo) session by means of touching a file
@@ -311,7 +311,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     }
                 }
 
-                gsettings.set_string ("last-session-type", session);
                 lightdm_greeter.start_session_sync (session);
 
                 return;
