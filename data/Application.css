@@ -104,7 +104,7 @@ check.lime {
 
 check.mint {
     background-color: mix(@MINT_300, @MINT_500, 0.75);
-    -gtk-icon-shadow: 0 1px 1px shade(mix(@MINT_300, @MINT_500, 0.75);, 0.7);
+    -gtk-icon-shadow: 0 1px 1px shade(mix(@MINT_300, @MINT_500, 0.75), 0.7);
 }
 
 check.orange {
