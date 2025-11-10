@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 elementary, Inc. (https://elementary.io)
+ * Copyright 2024-2025 elementary, Inc. (https://elementary.io)
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
  * Authored by: Leonhard Kargl <leo.kargl@proton.me>
@@ -178,7 +178,20 @@ public class GreeterCompositor.ShellClientsManager : Object {
     }
 
     public bool is_itself_positioned (Meta.Window window) {
-        return (window in positioned_windows) || (window in panel_windows) || window.get_data (NOTIFICATION_DATA_KEY);
+        return (window in positioned_windows) || (window in panel_windows) || NotificationStack.is_notification (window);
+    }
+
+    public bool is_positioned_window (Meta.Window window) {
+        bool positioned = is_itself_positioned (window);
+        window.foreach_ancestor ((ancestor) => {
+            if (is_itself_positioned (ancestor)) {
+                positioned = true;
+            }
+
+            return !positioned;
+        });
+
+        return positioned;
     }
 
     //X11 only

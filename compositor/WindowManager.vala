@@ -25,16 +25,18 @@ namespace GreeterCompositor {
         public Clutter.Stage stage { get; protected set; }
         public Clutter.Actor window_group { get; protected set; }
         public Clutter.Actor top_window_group { get; protected set; }
-
-        /**
-         * The background group is a container for the background actors forming the wallpaper
-         */
         public Meta.BackgroundGroup background_group { get; protected set; }
-
         public PointerLocator pointer_locator { get; private set; }
-
         public GreeterCompositor.SystemBackground system_background { get; private set; }
 
+        /**
+         * The group that contains all WindowActors that make shell elements, that is all windows reported as
+         * ShellClientsManager.is_positioned_window.
+         * It will (eventually) never be hidden by other components and is always on top of everything. Therefore elements are
+         * responsible themselves for hiding depending on the state we are currently in (e.g. normal desktop, open multitasking view, fullscreen, etc.).
+         */
+        private Clutter.Actor shell_group;
+        private NotificationStack notification_stack;
         private Clutter.Actor fade_in_screen;
 
 #if !HAS_MUTTER48
@@ -88,6 +90,8 @@ namespace GreeterCompositor {
             DBusAccelerator.init (this);
             DBusWingpanelManager.init (this);
             KeyboardManager.init (display);
+
+            notification_stack = new NotificationStack (display);
 
 #if HAS_MUTTER48
             stage = display.get_compositor ().get_stage () as Clutter.Stage;
@@ -143,6 +147,10 @@ namespace GreeterCompositor {
             window_group.add_child (background_group);
             window_group.set_child_below_sibling (background_group, null);
 
+            // Add the remaining components that should be on top
+            shell_group = new Clutter.Actor ();
+            ui_group.add_child (shell_group);
+
             pointer_locator = new PointerLocator (this);
             ui_group.add_child (pointer_locator);
 
@@ -191,6 +199,10 @@ namespace GreeterCompositor {
             application_settings = new GLib.Settings ("org.gnome.desktop.a11y.applications");
             toggle_screen_reader (); // sync screen reader with gsettings key
             application_settings.changed["screen-reader-enabled"].connect (toggle_screen_reader);
+
+            display.window_created.connect ((window) =>
+                Utils.wait_for_window_actor_visible (window, check_shell_window)
+            );
 
             stage.show ();
 
@@ -285,6 +297,17 @@ namespace GreeterCompositor {
                 Posix.kill (reader_pid, Posix.Signal.QUIT);
                 Posix.waitpid (reader_pid, null, 0);
                 reader_pid = 0;
+            }
+        }
+
+        private void check_shell_window (Meta.WindowActor actor) {
+            unowned var window = actor.get_meta_window ();
+            if (ShellClientsManager.get_instance ().is_positioned_window (window)) {
+                Utils.clutter_actor_reparent (actor, shell_group);
+            }
+
+            if (NotificationStack.is_notification (window)) {
+                notification_stack.show_notification (actor);
             }
         }
 

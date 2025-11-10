@@ -6,17 +6,16 @@
  */
 
 public class Greeter.UserCard : Greeter.BaseCard {
-    public signal void focus_requested ();
-
     public LightDM.User lightdm_user { get; construct; }
     public bool show_input { get; set; default = false; }
     public bool is_24h { get; set; default = true; }
+    // TODO: In Gtk4 remove this gesture and move it to MainWindow 
+    public Gtk.GestureMultiPress click_gesture { get; private set; }
 
     private Act.User act_user;
     private Pantheon.AccountsService greeter_act;
     private Pantheon.SettingsDaemon.AccountsService settings_act;
 
-    private Gtk.GestureMultiPress click_gesture;
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
@@ -188,12 +187,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         on_act_user_loaded ();
 
         click_gesture = new Gtk.GestureMultiPress (this);
-        click_gesture.pressed.connect ((n_press, x, y) => {
-            if (!show_input) {
-                focus_requested ();
-                password_entry.grab_focus ();
-            }
-        });
 
         notify["show-input"].connect (update_collapsed_class);
 

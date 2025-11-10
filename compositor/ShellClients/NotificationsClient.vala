@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 elementary, Inc. (https://elementary.io)
+ * Copyright 2024-2025 elementary, Inc. (https://elementary.io)
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
  * Authored by: Leonhard Kargl <leo.kargl@proton.me>
@@ -26,6 +26,7 @@ public class GreeterCompositor.NotificationsClient : Object {
         client.window_created.connect ((window) => {
             window.set_data (NOTIFICATION_DATA_KEY, true);
             window.make_above ();
+            window.stick ();
 #if HAS_MUTTER46
             client.wayland_client.make_dock (window);
 #endif
