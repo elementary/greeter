@@ -401,12 +401,16 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void set_wingpanel_settings () {
         var wingpanel_schema = SettingsSchemaSource.get_default ().lookup ("io.elementary.desktop.wingpanel", true);
-        if (wingpanel_schema == null || !wingpanel_schema.has_key ("use-transparency")) {
-            return;
+        if (wingpanel_schema != null && wingpanel_schema.has_key ("use-transparency")) {
+            var wingpanel_settings = new GLib.Settings ("io.elementary.desktop.wingpanel");
+            wingpanel_settings.set_boolean ("use-transparency", settings_act.wingpanel_use_transparency);
         }
 
-        var wingpanel_settings = new GLib.Settings ("io.elementary.desktop.wingpanel");
-        wingpanel_settings.set_boolean ("use-transparency", settings_act.wingpanel_use_transparency);
+        var wingpanel_power_schema = SettingsSchemaSource.get_default ().lookup ("io.elementary.desktop.wingpanel.power", true);
+        if (wingpanel_power_schema != null && wingpanel_power_schema.has_key ("show-percentage")) {
+            var wingpanel_power_settings = new GLib.Settings ("io.elementary.desktop.wingpanel.power");
+            wingpanel_power_settings.set_boolean ("show-percentage", settings_act.wingpanel_show_percentage);
+        }
     }
 
     private void set_night_light_settings () {
