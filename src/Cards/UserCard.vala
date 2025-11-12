@@ -12,7 +12,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     // TODO: In Gtk4 remove this gesture and move it to MainWindow 
     public Gtk.GestureMultiPress click_gesture { get; private set; }
 
-    private Act.User act_user;
     private Pantheon.AccountsService greeter_act;
     private Pantheon.SettingsDaemon.AccountsService settings_act;
 
@@ -22,8 +21,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Gtk.Box main_box;
 
     private SelectionCheck logged_in;
-
-    private bool needs_settings_set = false;
 
     public UserCard (LightDM.User lightdm_user) {
         Object (lightdm_user: lightdm_user);
@@ -40,38 +37,19 @@ public class Greeter.UserCard : Greeter.BaseCard {
             margin_end = 24,
         };
         username_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+        lightdm_user.bind_property ("is-locked", username_label, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
 
         password_entry = new Greeter.PasswordEntry ();
+        bind_property ("connecting", password_entry, "sensitive", INVERT_BOOLEAN);
 
-        bind_property (
-            "connecting",
-            password_entry,
-            "sensitive",
-            INVERT_BOOLEAN
-        );
-
-        var fingerprint_image = new Gtk.Image.from_icon_name (
-            "fingerprint-symbolic",
-            BUTTON
-        );
-
-        bind_property (
-            "use-fingerprint",
-            fingerprint_image,
-            "no-show-all",
-            INVERT_BOOLEAN | SYNC_CREATE
-        );
-
-        bind_property (
-            "use-fingerprint",
-            fingerprint_image,
-            "visible",
-            SYNC_CREATE
-        );
+        var fingerprint_image = new Gtk.Image.from_icon_name ("fingerprint-symbolic", BUTTON);
+        bind_property ("use-fingerprint", fingerprint_image, "no-show-all", SYNC_CREATE | INVERT_BOOLEAN);
+        bind_property ("use-fingerprint", fingerprint_image, "visible", SYNC_CREATE);
 
         var password_session_button = new Greeter.SessionButton () {
             vexpand = true
         };
+        lightdm_user.bind_property ("is-locked", password_session_button, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
 
         var password_grid = new Gtk.Grid () {
             column_spacing = 6,
@@ -89,6 +67,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var login_button_session_button = new Greeter.SessionButton () {
             vexpand = true
         };
+        lightdm_user.bind_property ("is-locked", login_button_session_button, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
 
         var login_box = new Gtk.Box (HORIZONTAL, 6);
         login_box.add (login_button);
@@ -118,13 +97,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             transition_type = SLIDE_DOWN,
             child = login_stack
         };
-
-        bind_property (
-            "show-input",
-            form_revealer,
-            "reveal-child",
-            SYNC_CREATE
-        );
+        bind_property ("show-input", form_revealer, "reveal-child", SYNC_CREATE);
 
         main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_bottom = 48
@@ -178,13 +151,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         child = card_overlay;
 
-        act_user = Act.UserManager.get_default ().get_user (lightdm_user.name);
-        act_user.bind_property ("locked", username_label, "sensitive", INVERT_BOOLEAN);
-        act_user.bind_property ("locked", password_session_button, "visible", INVERT_BOOLEAN);
-        act_user.bind_property ("locked", login_button_session_button, "visible", INVERT_BOOLEAN);
-        act_user.notify["is-loaded"].connect (on_act_user_loaded);
-
-        on_act_user_loaded ();
+        connect_to_dbus_interfaces ();
 
         click_gesture = new Gtk.GestureMultiPress (this);
 
@@ -263,42 +230,32 @@ public class Greeter.UserCard : Greeter.BaseCard {
         }
     }
 
-    private void on_act_user_loaded () {
-        if (!act_user.is_loaded) {
-            return;
-        }
+    private void connect_to_dbus_interfaces () {
+        var account_path = "/org/freedesktop/Accounts/User%d".printf ((int )lightdm_user.uid);
+        try {
+            greeter_act = Bus.get_proxy_sync (
+                SYSTEM,
+                "org.freedesktop.Accounts",
+                account_path,
+                GET_INVALIDATED_PROPERTIES
+            );
 
-        unowned string? act_path = act_user.get_object_path ();
-        if (act_path != null) {
-            try {
-                greeter_act = Bus.get_proxy_sync (
-                    SYSTEM,
-                    "org.freedesktop.Accounts",
-                    act_path,
-                    GET_INVALIDATED_PROPERTIES
-                );
+            settings_act = Bus.get_proxy_sync (
+                SYSTEM,
+                "org.freedesktop.Accounts",
+                account_path,
+                GET_INVALIDATED_PROPERTIES
+            );
 
-                settings_act = Bus.get_proxy_sync (
-                    SYSTEM,
-                    "org.freedesktop.Accounts",
-                    act_path,
-                    GET_INVALIDATED_PROPERTIES
-                );
-
-                is_24h = greeter_act.time_format != "12h";
-            } catch (Error e) {
-                critical (e.message);
-            }
+            is_24h = greeter_act.time_format != "12h";
+        } catch (Error e) {
+            critical (e.message);
         }
 
         set_background_image ();
         set_check_style ();
 
-        if (needs_settings_set) {
-            set_settings ();
-        }
-
-        if (act_user.locked) {
+        if (lightdm_user.is_locked) {
             login_stack.visible_child_name = "disabled";
         } else {
             if (need_password) {
@@ -331,11 +288,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     public void set_settings () {
-        if (!act_user.is_loaded) {
-            needs_settings_set = true;
-            return;
-        }
-
         set_keyboard_layouts ();
         set_mouse_touchpad_settings ();
         set_interface_settings ();
@@ -402,12 +354,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void set_interface_settings () {
         var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
-        interface_settings.set_value ("cursor-blink", settings_act.cursor_blink);
-        interface_settings.set_value ("cursor-blink-time", settings_act.cursor_blink_time);
-        interface_settings.set_value ("cursor-blink-timeout", settings_act.cursor_blink_timeout);
-        interface_settings.set_value ("cursor-size", settings_act.cursor_size);
-        interface_settings.set_value ("locate-pointer", settings_act.locate_pointer);
-        interface_settings.set_value ("text-scaling-factor", settings_act.text_scaling_factor);
+        interface_settings.set_boolean ("cursor-blink", settings_act.cursor_blink);
+        interface_settings.set_int ("cursor-blink-time", settings_act.cursor_blink_time);
+        interface_settings.set_int ("cursor-blink-timeout", settings_act.cursor_blink_timeout);
+        interface_settings.set_int ("cursor-size", settings_act.cursor_size);
+        interface_settings.set_boolean ("locate-pointer", settings_act.locate_pointer);
+        interface_settings.set_double ("text-scaling-factor", settings_act.text_scaling_factor);
         set_or_reset_settings_key (interface_settings, "document-font-name", settings_act.document_font_name);
         set_or_reset_settings_key (interface_settings, "font-name", settings_act.font_name);
         set_or_reset_settings_key (interface_settings, "monospace-font-name", settings_act.monospace_font_name);
@@ -420,46 +372,45 @@ public class Greeter.UserCard : Greeter.BaseCard {
         settings_daemon_settings.set_value ("last-coordinates", coordinates);
 
         settings_daemon_settings.set_enum ("prefer-dark-schedule", settings_act.prefer_dark_schedule);
-        settings_daemon_settings.set_value ("prefer-dark-schedule-from", settings_act.prefer_dark_schedule_from);
-        settings_daemon_settings.set_value ("prefer-dark-schedule-to", settings_act.prefer_dark_schedule_to);
+        settings_daemon_settings.set_double ("prefer-dark-schedule-from", settings_act.prefer_dark_schedule_from);
+        settings_daemon_settings.set_double ("prefer-dark-schedule-to", settings_act.prefer_dark_schedule_to);
 
         var touchscreen_settings = new GLib.Settings ("org.gnome.settings-daemon.peripherals.touchscreen");
         touchscreen_settings.set_boolean ("orientation-lock", settings_act.orientation_lock);
 
         var background_settings = new GLib.Settings ("org.gnome.desktop.background");
-        if (lightdm_user.background != null) {
-            background_settings.set_value ("picture-uri", lightdm_user.background);
-        } else {
-            background_settings.reset ("picture-uri");
-        }
-
-        background_settings.set_value ("picture-options", settings_act.picture_options);
-        background_settings.set_value ("primary-color", settings_act.primary_color);
+        background_settings.set_enum ("picture-options", settings_act.picture_options);
+        set_or_reset_settings_key (background_settings, "picture-uri", lightdm_user.background);
+        set_or_reset_settings_key (background_settings, "primary-color", settings_act.primary_color);
     }
 
     private void set_wingpanel_settings () {
         var wingpanel_schema = SettingsSchemaSource.get_default ().lookup ("io.elementary.desktop.wingpanel", true);
-        if (wingpanel_schema == null || !wingpanel_schema.has_key ("use-transparency")) {
-            return;
+        if (wingpanel_schema != null && wingpanel_schema.has_key ("use-transparency")) {
+            var wingpanel_settings = new GLib.Settings ("io.elementary.desktop.wingpanel");
+            wingpanel_settings.set_boolean ("use-transparency", settings_act.wingpanel_use_transparency);
         }
 
-        var wingpanel_settings = new GLib.Settings ("io.elementary.desktop.wingpanel");
-        wingpanel_settings.set_value ("use-transparency", settings_act.wingpanel_use_transparency);
+        var wingpanel_power_schema = SettingsSchemaSource.get_default ().lookup ("io.elementary.desktop.wingpanel.power", true);
+        if (wingpanel_power_schema != null && wingpanel_power_schema.has_key ("show-percentage")) {
+            var wingpanel_power_settings = new GLib.Settings ("io.elementary.desktop.wingpanel.power");
+            wingpanel_power_settings.set_boolean ("show-percentage", settings_act.wingpanel_show_percentage);
+        }
     }
 
     private void set_night_light_settings () {
         var night_light_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.color");
-        night_light_settings.set_value ("night-light-enabled", settings_act.night_light_enabled);
+        night_light_settings.set_boolean ("night-light-enabled", settings_act.night_light_enabled);
 
         var latitude = new Variant.double (settings_act.last_coordinates.latitude);
         var longitude = new Variant.double (settings_act.last_coordinates.longitude);
         var coordinates = new Variant.tuple ({latitude, longitude});
         night_light_settings.set_value ("night-light-last-coordinates", coordinates);
 
-        night_light_settings.set_value ("night-light-schedule-automatic", settings_act.night_light_schedule_automatic);
-        night_light_settings.set_value ("night-light-schedule-from", settings_act.night_light_schedule_from);
-        night_light_settings.set_value ("night-light-schedule-to", settings_act.night_light_schedule_to);
-        night_light_settings.set_value ("night-light-temperature", settings_act.night_light_temperature);
+        night_light_settings.set_boolean ("night-light-schedule-automatic", settings_act.night_light_schedule_automatic);
+        night_light_settings.set_double ("night-light-schedule-from", settings_act.night_light_schedule_from);
+        night_light_settings.set_double ("night-light-schedule-to", settings_act.night_light_schedule_to);
+        night_light_settings.set_uint ("night-light-temperature", settings_act.night_light_temperature);
     }
 
     private void set_power_settings () {
@@ -472,7 +423,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void update_style () {
         var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
-        interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (settings_act.accent_color));
+        interface_settings.set_string ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (settings_act.accent_color));
 
         SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
     }

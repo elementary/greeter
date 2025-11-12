@@ -67,6 +67,7 @@ interface Pantheon.SettingsDaemon.AccountsService : Object {
 
     /* Wingpanel */
     public abstract bool wingpanel_use_transparency { get; set; }
+    public abstract bool wingpanel_show_percentage { get; set; }
 
     /* Prefer Dark Schedule (part of interface settings)*/
     /* Last coordinates are reused for Night Light settings */
