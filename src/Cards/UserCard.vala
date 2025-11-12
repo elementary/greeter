@@ -6,9 +6,6 @@
  */
 
 public class Greeter.UserCard : Greeter.BaseCard {
-    public signal void go_left ();
-    public signal void go_right ();
-
     public LightDM.User lightdm_user { get; construct; }
     public bool show_input { get; set; default = false; }
     public bool is_24h { get; set; default = true; }
@@ -155,18 +152,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         child = card_overlay;
 
         connect_to_dbus_interfaces ();
-
-        card_overlay.focus.connect ((direction) => {
-            if (direction == LEFT) {
-                go_left ();
-                return true;
-            } else if (direction == RIGHT) {
-                go_right ();
-                return true;
-            }
-
-            return false;
-        });
 
         click_gesture = new Gtk.GestureMultiPress (this);
 
