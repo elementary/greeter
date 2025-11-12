@@ -18,6 +18,8 @@ You'll need the following dependencies:
 * libx11-dev
 * meson
 * valac
+* gettext (provides `msgfmt`)
+* libgnome-desktop-3-dev
 
 Run `meson` to configure the build environment and then `ninja` to build
 
