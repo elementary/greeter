@@ -6,7 +6,7 @@
  */
 
 public class Greeter.MainWindow : Gtk.ApplicationWindow {
-    public LightDM.Greeter lightdm_greeter { private get; construct; }
+    public Greetd.Greeter greetd_greeter { private get; construct; }
 
     private Pantheon.Desktop.Greeter? desktop_greeter;
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
@@ -15,8 +15,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private Greeter.Settings settings;
     private GLib.Settings gsettings;
     private Gtk.Revealer datetime_revealer;
-    private Greeter.DateTimeWidget datetime_widget;
-    private unowned LightDM.UserList lightdm_user_list;
+    private DateTimeWidget datetime_widget;
+    Gtk.Label manual_login_button_label;
 
     private int current_user_card_index = -1;
     private unowned Greeter.BaseCard? current_card = null;
@@ -25,8 +25,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
     private Gtk.EventControllerKey key_controller;
 
-    public MainWindow (LightDM.Greeter lightdm_greeter) {
-        Object (lightdm_greeter: lightdm_greeter);
+    public MainWindow (Greetd.Greeter greetd_greeter) {
+        Object (greetd_greeter: greetd_greeter);
     }
 
     construct {
@@ -37,12 +37,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         gsettings = new GLib.Settings ("io.elementary.greeter");
         settings = new Greeter.Settings ();
 
-        lightdm_greeter.show_message.connect (show_message);
-        lightdm_greeter.show_prompt.connect (show_prompt);
-        lightdm_greeter.authentication_complete.connect (authentication_complete);
+        //  lightdm_greeter.show_message.connect (show_message);
+        //  lightdm_greeter.show_prompt.connect (show_prompt);
+        //  lightdm_greeter.authentication_complete.connect (authentication_complete);
 
-        var guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
-        var manual_login_button = new Gtk.ToggleButton.with_label (_("Manual Login…"));
+        //  var guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
+        //  var manual_login_button = new Gtk.ToggleButton.with_label (_("Manual Login…"));
+        //  manual_login_button_label = (Gtk.Label) manual_login_button.get_child ();
+        var manual_login_button_label = new Gtk.Label (null);
 
         var extra_login_box = new Gtk.Box (HORIZONTAL, 12) {
             homogeneous = true,
@@ -50,12 +52,12 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             valign = END,
             vexpand = true
         };
-        if (lightdm_greeter.has_guest_account_hint) {
-            extra_login_box.add (guest_login_button);
-        }
-        if (lightdm_greeter.show_manual_login_hint) {
-            extra_login_box.add (manual_login_button);
-        }
+        //  if (lightdm_greeter.has_guest_account_hint) {
+        //      extra_login_box.add (guest_login_button);
+        //  }
+        //  if (lightdm_greeter.show_manual_login_hint) {
+            extra_login_box.add (manual_login_button_label);
+        //  }
 
         datetime_widget = new Greeter.DateTimeWidget ();
 
@@ -91,55 +93,62 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         child = main_box;
 
-        manual_login_button.toggled.connect (() => {
-            if (manual_login_button.active) {
-                if (lightdm_greeter.in_authentication) {
-                    try {
-                        lightdm_greeter.cancel_authentication ();
-                    } catch (Error e) {
-                        critical (e.message);
-                    }
-                }
+        //  manual_login_button.toggled.connect (() => {
+        //      if (manual_login_button.active) {
+        //          if (lightdm_greeter.in_authentication) {
+        //              try {
+        //                  lightdm_greeter.cancel_authentication ();
+        //              } catch (Error e) {
+        //                  critical (e.message);
+        //              }
+        //          }
 
-                manual_login_stack.visible_child = manual_card;
-                current_card = manual_card;
-            } else {
-                if (lightdm_greeter.in_authentication) {
-                    try {
-                        lightdm_greeter.cancel_authentication ();
-                    } catch (Error e) {
-                        critical (e.message);
-                    }
-                }
+        //          manual_login_stack.visible_child = manual_card;
+        //          current_card = manual_card;
+        //      } else {
+        //          if (lightdm_greeter.in_authentication) {
+        //              try {
+        //                  lightdm_greeter.cancel_authentication ();
+        //              } catch (Error e) {
+        //                  critical (e.message);
+        //              }
+        //          }
 
-                manual_login_stack.visible_child = carousel;
-                current_card = user_cards.peek_nth (current_user_card_index);
+        //          manual_login_stack.visible_child = carousel;
+        //          current_card = user_cards.peek_nth (current_user_card_index);
 
-                try {
-                    lightdm_greeter.authenticate (((UserCard) current_card).lightdm_user.name);
-                } catch (Error e) {
-                    critical (e.message);
-                }
-            }
-        });
+        //          try {
+        //              lightdm_greeter.authenticate (((UserCard) current_card).lightdm_user.name);
+        //          } catch (Error e) {
+        //              critical (e.message);
+        //          }
+        //      }
+        //  });
 
-        guest_login_button.clicked.connect (() => {
-            try {
-                lightdm_greeter.authenticate_as_guest ();
-            } catch (Error e) {
-                critical (e.message);
-            }
-        });
+        //  guest_login_button.clicked.connect (() => {
+        //      try {
+        //          lightdm_greeter.authenticate_as_guest ();
+        //      } catch (Error e) {
+        //          critical (e.message);
+        //      }
+        //  });
 
         card_size_group = new Gtk.SizeGroup (Gtk.SizeGroupMode.HORIZONTAL);
         card_size_group.add_widget (extra_login_box);
         card_size_group.add_widget (manual_card);
 
-        lightdm_greeter.bind_property ("hide-users-hint", manual_login_button, "sensitive", GLib.BindingFlags.SYNC_CREATE | GLib.BindingFlags.INVERT_BOOLEAN);
-        lightdm_greeter.bind_property ("hide-users-hint", manual_login_button, "active", GLib.BindingFlags.SYNC_CREATE);
+        //  lightdm_greeter.bind_property ("hide-users-hint", manual_login_button, "sensitive", GLib.BindingFlags.SYNC_CREATE | GLib.BindingFlags.INVERT_BOOLEAN);
+        //  lightdm_greeter.bind_property ("hide-users-hint", manual_login_button, "active", GLib.BindingFlags.SYNC_CREATE);
 
-        lightdm_user_list = LightDM.UserList.get_instance ();
-        lightdm_user_list.user_added.connect (() => {
+        var user_list = Act.UserManager.get_default ();
+        
+        if (user_list.is_loaded) {
+            load_users.begin ();
+        } else {
+            user_list.notify["is-loaded"].connect (load_users);
+        }
+
+        user_list.user_added.connect (() => {
             load_users.begin ();
         });
 
@@ -264,82 +273,82 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
     }
 
-    private void show_message (string text, LightDM.MessageType type) {
-        var messagetext = Greeter.FPrintUtils.string_to_messagetext (text);
-        switch (messagetext) {
-            case Greeter.FPrintUtils.MessageText.FPRINT_TIMEOUT:
-            case Greeter.FPrintUtils.MessageText.FPRINT_ERROR:
-            case Greeter.FPrintUtils.MessageText.OTHER:
-                current_card.use_fingerprint = false;
-                break;
-            default:
-                current_card.use_fingerprint = true;
-                break;
-        }
-    }
+    //  private void show_message (string text, LightDM.MessageType type) {
+    //      var messagetext = Greeter.FPrintUtils.string_to_messagetext (text);
+    //      switch (messagetext) {
+    //          case Greeter.FPrintUtils.MessageText.FPRINT_TIMEOUT:
+    //          case Greeter.FPrintUtils.MessageText.FPRINT_ERROR:
+    //          case Greeter.FPrintUtils.MessageText.OTHER:
+    //              current_card.use_fingerprint = false;
+    //              break;
+    //          default:
+    //              current_card.use_fingerprint = true;
+    //              break;
+    //      }
+    //  }
 
-    private void show_prompt (string text, LightDM.PromptType type = LightDM.PromptType.QUESTION) {
-        if (current_card is ManualCard) {
-            if (type == LightDM.PromptType.SECRET) {
-                ((ManualCard) current_card).ask_password ();
-            } else {
-                ((ManualCard) current_card).wrong_username ();
-            }
-        }
-    }
+    //  private void show_prompt (string text, LightDM.PromptType type = LightDM.PromptType.QUESTION) {
+    //      if (current_card is ManualCard) {
+    //          if (type == LightDM.PromptType.SECRET) {
+    //              ((ManualCard) current_card).ask_password ();
+    //          } else {
+    //              ((ManualCard) current_card).wrong_username ();
+    //          }
+    //      }
+    //  }
 
     // Called after the credentials are checked, might be authenticated or not.
-    private void authentication_complete () {
-        var user_card = current_card as Greeter.UserCard;
-        if (user_card != null) {
-            gsettings.set_string ("last-user", user_card.lightdm_user.name);
-        }
+    //  private void authentication_complete () {
+    //      var user_card = current_card as Greeter.UserCard;
+    //      if (user_card != null) {
+    //          gsettings.set_string ("last-user", user_card.lightdm_user.name);
+    //      }
 
-        if (lightdm_greeter.is_authenticated) {
-            try {
-                unowned var session = application.get_action_state ("select-session").get_string ();
+    //      if (lightdm_greeter.is_authenticated) {
+    //          try {
+    //              unowned var session = application.get_action_state ("select-session").get_string ();
 
-                // If the greeter is running on the install medium, check if the Installer has signalled
-                // that it wants the greeter to launch the live (demo) session by means of touching a file
-                if (installer_mode) {
-                    var demo_mode_file = File.new_for_path ("/var/lib/lightdm/demo-mode");
-                    if (demo_mode_file.query_exists ()) {
-                        demo_mode_file.@delete ();
-                        session = "pantheon";
-                    } else {
-                        session = "installer";
-                    }
-                }
+    //              // If the greeter is running on the install medium, check if the Installer has signalled
+    //              // that it wants the greeter to launch the live (demo) session by means of touching a file
+    //              if (installer_mode) {
+    //                  var demo_mode_file = File.new_for_path ("/var/lib/lightdm/demo-mode");
+    //                  if (demo_mode_file.query_exists ()) {
+    //                      demo_mode_file.@delete ();
+    //                      session = "pantheon";
+    //                  } else {
+    //                      session = "installer";
+    //                  }
+    //              }
 
-                gsettings.set_string ("last-session-type", session);
-                lightdm_greeter.start_session_sync (session);
+    //              gsettings.set_string ("last-session-type", session);
+    //              lightdm_greeter.start_session_sync (session);
 
-                return;
-            } catch (Error e) {
-                var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
-                    _("Unable to Log In"),
-                    _("Starting the session has failed."),
-                    "dialog-error",
-                    Gtk.ButtonsType.CLOSE
-                );
-                error_dialog.show_error_details (e.message);
-                error_dialog.present ();
-                error_dialog.response.connect (error_dialog.destroy);
-            }
-        }
+    //              return;
+    //          } catch (Error e) {
+    //              var error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
+    //                  _("Unable to Log In"),
+    //                  _("Starting the session has failed."),
+    //                  "dialog-error",
+    //                  Gtk.ButtonsType.CLOSE
+    //              );
+    //              error_dialog.show_error_details (e.message);
+    //              error_dialog.present ();
+    //              error_dialog.response.connect (error_dialog.destroy);
+    //          }
+    //      }
 
-        if (user_card != null) {
-            try {
-                lightdm_greeter.authenticate (user_card.lightdm_user.name);
-            } catch (Error e) {
-                critical (e.message);
-            }
-        }
+    //      if (user_card != null) {
+    //          try {
+    //              lightdm_greeter.authenticate (user_card.lightdm_user.name);
+    //          } catch (Error e) {
+    //              critical (e.message);
+    //          }
+    //      }
 
-        current_card.wrong_credentials ();
+    //      current_card.wrong_credentials ();
 
-        carousel.interactive = true;
-    }
+    //      carousel.interactive = true;
+    //  }
 
     private async void load_users () {
         // Check if the installer is installed
@@ -348,19 +357,19 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             installer_mode = true;
         }
 
-        if (lightdm_user_list.length > 0) {
+        unowned var user_manager = Act.UserManager.get_default ();
+        var act_users = user_manager.list_users ();
+
+        if (act_users.length () > 0) {
             datetime_revealer.reveal_child = true;
 
-            lightdm_user_list.users.foreach ((user) => {
-                add_card (user);
-            });
+            act_users.foreach (add_card);
 
-            unowned string? select_user = lightdm_greeter.select_user_hint;
-            var user_to_select = select_user != null ? select_user : gsettings.get_string ("last-user");
+            var last_user = gsettings.get_string ("last-user");
 
             bool user_selected = false;
             user_cards.head.foreach ((card) => {
-                if (card.lightdm_user.name == user_to_select) {
+                if (card.act_user.user_name == last_user) {
                     carousel.scroll_to (card);
                     user_selected = true;
                 }
@@ -399,8 +408,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
     }
 
-    private void add_card (LightDM.User lightdm_user) {
-        var user_card = new Greeter.UserCard (lightdm_user);
+    private void add_card (Act.User act_user) {
+        var user_card = new Greeter.UserCard (act_user);
         user_card.show_all ();
         user_card.do_connect.connect (do_connect);
         user_card.click_gesture.pressed.connect ((gesture, n_press, x, y) => {
@@ -456,52 +465,38 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         user_card.show_input = true;
         user_card.grab_focus ();
 
-        if (user_card.lightdm_user.session != null) {
-            application.activate_action ("select-session", new GLib.Variant.string (user_card.lightdm_user.session));
-        }
+        //  if (user_card.lightdm_user.session != null) {
+        //      application.activate_action ("select-session", new GLib.Variant.string (user_card.lightdm_user.session));
+        //  }
+        application.activate_action ("select-session", new GLib.Variant.string ("pantheon-wayland"));
 
-        if (lightdm_greeter.in_authentication) {
-            try {
-                lightdm_greeter.cancel_authentication ();
-            } catch (Error e) {
-                critical (e.message);
-            }
-        }
+        greetd_greeter.roundtrip ({ CANCEL_SESSION, "" });
+        greetd_greeter.roundtrip ({ CREATE_SESSION, user_card.act_user.user_name });
+        
 
-        try {
-            lightdm_greeter.authenticate (user_card.lightdm_user.name);
-        } catch (Error e) {
-            critical (e.message);
-        }
+        manual_login_button_label.set_text ("Created session ig?");
     }
 
     private void do_connect_username (string username) {
-        if (lightdm_greeter.in_authentication) {
-            try {
-                lightdm_greeter.cancel_authentication ();
-            } catch (Error e) {
-                critical (e.message);
-            }
+        var response = greetd_greeter.roundtrip ({ CANCEL_SESSION, "" });
+        if (!(response is Greetd.ResponseSuccess)) {
+            manual_login_button_label.set_text ("Couldn't cancel session");
+            warning ("Couldn't cancel session");
         }
 
-        try {
-            lightdm_greeter.authenticate (username);
-        } catch (Error e) {
-            critical (e.message);
+        greetd_greeter.roundtrip ({ CREATE_SESSION, username });
+        if (!(response is Greetd.ResponseSuccess)) {
+            manual_login_button_label.set_text ("Couldn't create session");
+            warning ("Couldn't create session");
         }
     }
 
     private void do_connect (string? credential) {
-        if (credential != null) {
-            try {
-                lightdm_greeter.respond (credential);
-            } catch (Error e) {
-                critical (e.message);
-            }
+        var response = greetd_greeter.roundtrip ({ POST_AUTH_MESSAGE_RESPONSE, credential });
+        if (response is Greetd.ResponseSuccess) {
+            manual_login_button_label.set_text ("Connected, starting session");
+            greetd_greeter.roundtrip ({ START_SESSION, "gnome-session --session=pantheon" });
         }
-
-        carousel.interactive = false;
-        carousel.scroll_to (current_card);
     }
 
     private void go_previous () {

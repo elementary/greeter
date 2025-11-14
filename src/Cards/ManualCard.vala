@@ -82,7 +82,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
             return;
         }
 
-        connecting = true;
+        //  connecting = true;
         do_connect (password_entry.text);
     }
 

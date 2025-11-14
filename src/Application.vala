@@ -20,7 +20,7 @@
  */
 
 public class Greeter.Application : Gtk.Application {
-    private LightDM.Greeter lightdm_greeter;
+    private Greetd.Greeter greetd_greeter;
 
     public Application () {
         Object (
@@ -68,35 +68,32 @@ public class Greeter.Application : Gtk.Application {
             gtk_settings.gtk_application_prefer_dark_theme = settings_portal.prefers_color_scheme == 1;
         });
 
-        var settings = new GLib.Settings ("io.elementary.greeter");
+        //  var settings = new GLib.Settings ("io.elementary.greeter");
 
-        lightdm_greeter = new LightDM.Greeter ();
-        try {
-            lightdm_greeter.connect_to_daemon_sync ();
-        } catch (Error e) {
-            critical ("LightDM couldn't connect to daemon: %s", e.message);
-        }
+        greetd_greeter = new Greetd.Greeter ();
 
-        unowned var sessions = LightDM.get_sessions ();
+        //  unowned var sessions = LightDM.get_sessions ();
 
-        var selected_session = "";
-        if (settings.get_string ("last-session-type") != "") {
-            selected_session = settings.get_string ("last-session-type");
-        } else if (lightdm_greeter.default_session_hint != null) {
-            selected_session = lightdm_greeter.default_session_hint;
-        } else if (sessions.length () > 0) {
-            selected_session = sessions.first ().data.key;
-        }
+        var selected_session = "pantheon-wayland";
+        //  if (settings.get_string ("last-session-type") != "") {
+        //      selected_session = settings.get_string ("last-session-type");
+        //  } else if (lightdm_greeter.default_session_hint != null) {
+        //      selected_session = lightdm_greeter.default_session_hint;
+        //  } else if (sessions.length () > 0) {
+        //      selected_session = sessions.first ().data.key;
+        //  }
 
         var select_session_action = new GLib.SimpleAction.stateful ("select-session", GLib.VariantType.STRING, selected_session);
         var vardict = new GLib.VariantDict ();
         var has_pantheon_x11_session = false;
-        sessions.foreach ((session) => {
-            vardict.insert_value (session.name, new GLib.Variant.string (session.key));
-            if (session.key == "pantheon") {
-                has_pantheon_x11_session = true;
-            }
-        });
+        vardict.insert_value ("pantheon-wayland", new GLib.Variant.string ("Secure Session"));
+        vardict.insert_value ("pantheon", new GLib.Variant.string ("Classic Session"));
+        //  sessions.foreach ((session) => {
+        //      vardict.insert_value (session.name, new GLib.Variant.string (session.key));
+        //      if (session.key == "pantheon") {
+        //          has_pantheon_x11_session = true;
+        //      }
+        //  });
         select_session_action.set_state_hint (vardict.end ());
 
         select_session_action.activate.connect ((param) => {
@@ -134,7 +131,7 @@ public class Greeter.Application : Gtk.Application {
     }
 
     public override void activate () {
-        add_window (new Greeter.MainWindow (lightdm_greeter));
+        add_window (new Greeter.MainWindow (greetd_greeter));
         active_window.show_all ();
         active_window.present ();
     }
