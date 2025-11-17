@@ -312,7 +312,17 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 }
 
                 gsettings.set_string ("last-session-type", session);
-                lightdm_greeter.start_session_sync (session);
+
+                try {
+                    warning ("LAUNCHING SESSION");
+                    SessionLauncher.launch_session (user_card.lightdm_user.name, session);
+                    warning ("LAUNCHED SESSION YAY");
+                }  catch (Error e) {
+                    warning (e.message);
+                    warning ("lightdm :(");
+                    lightdm_greeter.start_session_sync (session);
+                    warning ("lightdm :((((((((");
+                }
 
                 return;
             } catch (Error e) {
