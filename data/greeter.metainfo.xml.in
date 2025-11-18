@@ -37,6 +37,20 @@
   <update_contact>contact_at_elementary.io</update_contact>
 
   <releases>
+    <release version="8.1.1" date="2025-11-18" urgency="medium">
+      <description>
+        <p>Minor updates:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/greeter/issues/454">Sync wingpanel's "Show Percentage" option</issue>
+        <issue url="https://github.com/elementary/greeter/issues/760">Notifications appear on the wrong side</issue>
+        <issue url="https://github.com/elementary/greeter/issues/831">Switching cards with the keyboard never reveals the password field</issue>
+      </issues>
+    </release>
+
     <release version="8.1.0" date="2025-10-03" urgency="medium">
       <description>
         <p>Minor updates:</p>
