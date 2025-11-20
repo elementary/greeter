@@ -8,8 +8,10 @@
 
 You'll need the following dependencies:
 
+* gettext (provides `msgfmt`)
 * gnome-settings-daemon >= 3.27
 * libgdk-pixbuf2.0-dev
+* libgnome-desktop-3-dev
 * libgranite-dev >= 5.5.0
 * libgtk-3-dev
 * libhandy-1-dev >= 0.90.0
@@ -18,8 +20,7 @@ You'll need the following dependencies:
 * libx11-dev
 * meson
 * valac
-* gettext (provides `msgfmt`)
-* libgnome-desktop-3-dev
+
 
 Run `meson` to configure the build environment and then `ninja` to build
 
