@@ -6,9 +6,6 @@
  */
 
 public class Greeter.UserCard : Greeter.BaseCard {
-    public signal void go_left ();
-    public signal void go_right ();
-
     public LightDM.User lightdm_user { get; construct; }
     public bool show_input { get; set; default = false; }
     public bool is_24h { get; set; default = true; }
@@ -161,18 +158,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         child = card_overlay;
 
         connect_to_dbus_interfaces ();
-
-        card_overlay.focus.connect ((direction) => {
-            if (direction == LEFT) {
-                go_left ();
-                return true;
-            } else if (direction == RIGHT) {
-                go_right ();
-                return true;
-            }
-
-            return false;
-        });
 
         click_gesture = new Gtk.GestureMultiPress (this);
 
@@ -375,12 +360,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void set_interface_settings () {
         var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
-        interface_settings.set_value ("cursor-blink", settings_act.cursor_blink);
-        interface_settings.set_value ("cursor-blink-time", settings_act.cursor_blink_time);
-        interface_settings.set_value ("cursor-blink-timeout", settings_act.cursor_blink_timeout);
-        interface_settings.set_value ("cursor-size", settings_act.cursor_size);
-        interface_settings.set_value ("locate-pointer", settings_act.locate_pointer);
-        interface_settings.set_value ("text-scaling-factor", settings_act.text_scaling_factor);
+        interface_settings.set_boolean ("cursor-blink", settings_act.cursor_blink);
+        interface_settings.set_int ("cursor-blink-time", settings_act.cursor_blink_time);
+        interface_settings.set_int ("cursor-blink-timeout", settings_act.cursor_blink_timeout);
+        interface_settings.set_int ("cursor-size", settings_act.cursor_size);
+        interface_settings.set_boolean ("locate-pointer", settings_act.locate_pointer);
+        interface_settings.set_double ("text-scaling-factor", settings_act.text_scaling_factor);
         set_or_reset_settings_key (interface_settings, "document-font-name", settings_act.document_font_name);
         set_or_reset_settings_key (interface_settings, "font-name", settings_act.font_name);
         set_or_reset_settings_key (interface_settings, "monospace-font-name", settings_act.monospace_font_name);
@@ -393,46 +378,45 @@ public class Greeter.UserCard : Greeter.BaseCard {
         settings_daemon_settings.set_value ("last-coordinates", coordinates);
 
         settings_daemon_settings.set_enum ("prefer-dark-schedule", settings_act.prefer_dark_schedule);
-        settings_daemon_settings.set_value ("prefer-dark-schedule-from", settings_act.prefer_dark_schedule_from);
-        settings_daemon_settings.set_value ("prefer-dark-schedule-to", settings_act.prefer_dark_schedule_to);
+        settings_daemon_settings.set_double ("prefer-dark-schedule-from", settings_act.prefer_dark_schedule_from);
+        settings_daemon_settings.set_double ("prefer-dark-schedule-to", settings_act.prefer_dark_schedule_to);
 
         var touchscreen_settings = new GLib.Settings ("org.gnome.settings-daemon.peripherals.touchscreen");
         touchscreen_settings.set_boolean ("orientation-lock", settings_act.orientation_lock);
 
         var background_settings = new GLib.Settings ("org.gnome.desktop.background");
-        if (lightdm_user.background != null) {
-            background_settings.set_value ("picture-uri", lightdm_user.background);
-        } else {
-            background_settings.reset ("picture-uri");
-        }
-
-        background_settings.set_value ("picture-options", settings_act.picture_options);
-        background_settings.set_value ("primary-color", settings_act.primary_color);
+        background_settings.set_enum ("picture-options", settings_act.picture_options);
+        set_or_reset_settings_key (background_settings, "picture-uri", lightdm_user.background);
+        set_or_reset_settings_key (background_settings, "primary-color", settings_act.primary_color);
     }
 
     private void set_wingpanel_settings () {
         var wingpanel_schema = SettingsSchemaSource.get_default ().lookup ("io.elementary.desktop.wingpanel", true);
-        if (wingpanel_schema == null || !wingpanel_schema.has_key ("use-transparency")) {
-            return;
+        if (wingpanel_schema != null && wingpanel_schema.has_key ("use-transparency")) {
+            var wingpanel_settings = new GLib.Settings ("io.elementary.desktop.wingpanel");
+            wingpanel_settings.set_boolean ("use-transparency", settings_act.wingpanel_use_transparency);
         }
 
-        var wingpanel_settings = new GLib.Settings ("io.elementary.desktop.wingpanel");
-        wingpanel_settings.set_value ("use-transparency", settings_act.wingpanel_use_transparency);
+        var wingpanel_power_schema = SettingsSchemaSource.get_default ().lookup ("io.elementary.desktop.wingpanel.power", true);
+        if (wingpanel_power_schema != null && wingpanel_power_schema.has_key ("show-percentage")) {
+            var wingpanel_power_settings = new GLib.Settings ("io.elementary.desktop.wingpanel.power");
+            wingpanel_power_settings.set_boolean ("show-percentage", settings_act.wingpanel_show_percentage);
+        }
     }
 
     private void set_night_light_settings () {
         var night_light_settings = new GLib.Settings ("org.gnome.settings-daemon.plugins.color");
-        night_light_settings.set_value ("night-light-enabled", settings_act.night_light_enabled);
+        night_light_settings.set_boolean ("night-light-enabled", settings_act.night_light_enabled);
 
         var latitude = new Variant.double (settings_act.last_coordinates.latitude);
         var longitude = new Variant.double (settings_act.last_coordinates.longitude);
         var coordinates = new Variant.tuple ({latitude, longitude});
         night_light_settings.set_value ("night-light-last-coordinates", coordinates);
 
-        night_light_settings.set_value ("night-light-schedule-automatic", settings_act.night_light_schedule_automatic);
-        night_light_settings.set_value ("night-light-schedule-from", settings_act.night_light_schedule_from);
-        night_light_settings.set_value ("night-light-schedule-to", settings_act.night_light_schedule_to);
-        night_light_settings.set_value ("night-light-temperature", settings_act.night_light_temperature);
+        night_light_settings.set_boolean ("night-light-schedule-automatic", settings_act.night_light_schedule_automatic);
+        night_light_settings.set_double ("night-light-schedule-from", settings_act.night_light_schedule_from);
+        night_light_settings.set_double ("night-light-schedule-to", settings_act.night_light_schedule_to);
+        night_light_settings.set_uint ("night-light-temperature", settings_act.night_light_temperature);
     }
 
     private void set_power_settings () {
@@ -445,7 +429,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void update_style () {
         var interface_settings = new GLib.Settings ("org.gnome.desktop.interface");
-        interface_settings.set_value ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (settings_act.accent_color));
+        interface_settings.set_string ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (settings_act.accent_color));
 
         SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
     }
