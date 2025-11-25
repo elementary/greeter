@@ -7,6 +7,8 @@
 
 public abstract class Greeter.BaseCard : Gtk.Bin {
     public signal void do_connect (string? credential = null);
+    public signal void go_left ();
+    public signal void go_right ();
 
     protected const int ERROR_SHAKE_DURATION = 450;
 
@@ -18,6 +20,18 @@ public abstract class Greeter.BaseCard : Gtk.Bin {
         halign = CENTER;
         valign = CENTER;
         width_request = 350;
+    }
+
+    public override bool focus (Gtk.DirectionType direction) {
+        if (direction == LEFT) {
+            go_left ();
+            return Gdk.EVENT_STOP;
+        } else if (direction == RIGHT) {
+            go_right ();
+            return Gdk.EVENT_STOP;
+        }
+
+        return base.focus (direction);
     }
 
     public abstract void wrong_credentials ();
