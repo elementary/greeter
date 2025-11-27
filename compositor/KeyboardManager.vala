@@ -8,6 +8,9 @@ public class GreeterCompositor.KeyboardManager : Object {
     private static KeyboardManager? instance;
     private static VariantType sources_variant_type;
     private static GLib.Settings settings;
+#if HAS_MUTTER49
+    private GLib.Cancellable? cancellable = null;
+#endif
 
     public unowned Meta.Display display { construct; private get; }
 
@@ -74,6 +77,8 @@ public class GreeterCompositor.KeyboardManager : Object {
 
     [CCode (instance_pos = -1)]
     private void set_keyboard_layout (GLib.Settings settings, string key) {
+        unowned var backend = display.get_context ().get_backend ();
+
         if (key == "sources" || key == "xkb-options") {
             string[] layouts = {}, variants = {};
 
@@ -100,14 +105,50 @@ public class GreeterCompositor.KeyboardManager : Object {
             var variant = string.joinv (",", variants);
             var options = string.joinv (",", xkb_options);
 
-#if HAS_MUTTER46
+#if HAS_MUTTER49
+            if (cancellable != null) {
+                cancellable.cancel ();
+                cancellable = new GLib.Cancellable ();
+            }
+
+            backend.set_keymap_async.begin (layout, variant, options, settings.get_string ("xkb-model"), cancellable, (obj, res) => {
+                try {
+                    ((Meta.Backend) obj).set_keymap_async.end (res);
+                } catch (Error e) {
+                    if (e is GLib.IOError.CANCELLED) {
+                        // ignore
+                    } else {
+                        cancellable = null;
+                    }
+                }
+            });
+#elif HAS_MUTTER46
             //TODO: add model support
-            display.get_context ().get_backend ().set_keymap (layout, variant, options, "");
+            backend.set_keymap (layout, variant, options, "");
 #else
-            display.get_context ().get_backend ().set_keymap (layout, variant, options);
+            backend.set_keymap (layout, variant, options);
 #endif
         } else if (key == "current") {
-            display.get_context ().get_backend ().lock_layout_group (settings.get_uint ("current"));
+#if HAS_MUTTER49
+            if (cancellable != null) {
+                cancellable.cancel ();
+                cancellable = new GLib.Cancellable ();
+            }
+
+            backend.set_keymap_layout_group_async.begin (settings.get_uint ("current"), cancellable, (obj, res) => {
+                try {
+                    ((Meta.Backend) obj).set_keymap_layout_group_async.end (res);
+                } catch (Error e) {
+                    if (e is GLib.IOError.CANCELLED) {
+                        // ignore
+                    } else {
+                        cancellable = null;
+                    }
+                }
+            });
+#else
+            backend.lock_layout_group (settings.get_uint ("current"));
+#endif
         }
     }
 }

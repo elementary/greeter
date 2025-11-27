@@ -172,7 +172,11 @@ public class GreeterCompositor.BackgroundBlurEffect : Clutter.Effect {
             Mtk.Rectangle stage_view_layout = {};
 
             box_scale_factor = stage_view.get_scale ();
+#if HAS_MUTTER49
+            stage_view.get_layout (stage_view_layout);
+#else
             stage_view.get_layout (ref stage_view_layout);
+#endif
 
             origin_x -= stage_view_layout.x;
             origin_y -= stage_view_layout.y;
