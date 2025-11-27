@@ -253,8 +253,15 @@ namespace GreeterCompositor {
             var subprocess_launcher = new GLib.SubprocessLauncher (GLib.SubprocessFlags.INHERIT_FDS);
             try {
                 Meta.WaylandClient daemon_client;
+                Subprocess? subprocess;
+
+#if HAS_MUTTER49
+                daemon_client = new Meta.WaylandClient.subprocess (display.get_context (), subprocess_launcher, command);
+                subprocess = daemon_client.get_subprocess ();
+#else
                 daemon_client = new Meta.WaylandClient (display.get_context (), subprocess_launcher);
-                var subprocess = daemon_client.spawnv (display, command);
+                subprocess = daemon_client.spawnv (display, command);
+#endif
 
                 yield subprocess.wait_async ();
 
