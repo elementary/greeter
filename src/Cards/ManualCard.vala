@@ -10,6 +10,13 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     private Gtk.Entry username_entry;
     private Gtk.Box main_box;
 
+    public ManualCard () {
+        Object (
+            card_identifier: "manual",
+            selected_session: ((Greeter.Application) GLib.Application.get_default ()).default_session_type
+        );
+    }
+
     construct {
         width_request = 350;
 
@@ -35,7 +42,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
 
         var caps_lock_revealer = new Greeter.CapsLockRevealer ();
 
-        var session_button = new Greeter.SessionButton ();
+        var session_button = new Greeter.SessionButton (card_identifier, select_session_action);
 
         var form_grid = new Gtk.Grid () {
             column_spacing = 6,

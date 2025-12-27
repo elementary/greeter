@@ -23,7 +23,13 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private SelectionCheck logged_in;
 
     public UserCard (LightDM.User lightdm_user) {
-        Object (lightdm_user: lightdm_user);
+        unowned var default_session = ((Greeter.Application) GLib.Application.get_default ()).default_session_type;
+
+        Object (
+            lightdm_user: lightdm_user,
+            card_identifier: "User%u".printf ((uint) lightdm_user.uid),
+            selected_session: lightdm_user.session ?? default_session
+        );
     }
 
     construct {
@@ -46,7 +52,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         bind_property ("use-fingerprint", fingerprint_image, "no-show-all", SYNC_CREATE | INVERT_BOOLEAN);
         bind_property ("use-fingerprint", fingerprint_image, "visible", SYNC_CREATE);
 
-        var password_session_button = new Greeter.SessionButton () {
+        var password_session_button = new Greeter.SessionButton (card_identifier, select_session_action) {
             vexpand = true
         };
         lightdm_user.bind_property ("is-locked", password_session_button, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
@@ -64,7 +70,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         login_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
         bind_property ("connecting", login_button, "sensitive", INVERT_BOOLEAN);
 
-        var login_button_session_button = new Greeter.SessionButton () {
+        var login_button_session_button = new Greeter.SessionButton (card_identifier, select_session_action) {
             vexpand = true
         };
         lightdm_user.bind_property ("is-locked", login_button_session_button, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
