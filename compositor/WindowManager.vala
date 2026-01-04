@@ -99,7 +99,7 @@ namespace GreeterCompositor {
             stage = display.get_stage () as Clutter.Stage;
 #endif
 #if HAS_MUTTER47
-            stage.background_color = Cogl.Color.from_string ("black");
+            stage.background_color = Cogl.Color.from_string ("#000000");
 #else
             stage.background_color = Clutter.Color.from_rgba (0, 0, 0, 255);
 #endif
@@ -120,7 +120,7 @@ namespace GreeterCompositor {
                 width = width,
                 height = height,
 #if HAS_MUTTER47
-                background_color = Cogl.Color.from_string ("black")
+                background_color = Cogl.Color.from_string ("#000000")
 #else
                 background_color = Clutter.Color.from_rgba (0, 0, 0, 255),
 #endif

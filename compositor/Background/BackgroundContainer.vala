@@ -29,7 +29,7 @@ namespace GreeterCompositor {
 
         public void set_black_background (bool black) {
 #if HAS_MUTTER47
-            set_background_color (black ? Cogl.Color.from_string ("Black") : null);
+            set_background_color (black ? Cogl.Color.from_string ("#000000") : null);
 #else
             set_background_color (black ? Clutter.Color.from_string ("Black") : null);
 #endif
