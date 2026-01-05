@@ -160,6 +160,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
         password_entry.activate.connect (on_login);
         login_button.clicked.connect (on_login);
 
+        lightdm_user.bind_property ("is-locked", login_stack, "visible-child-name", SYNC_CREATE,
+            (BindingTransformFunc) is_locked_to_visible_child_name
+        );
+
         notify["need-password"].connect (() => {
             if (need_password) {
                 login_stack.visible_child = password_grid;
@@ -254,16 +258,20 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         set_background_image ();
         set_check_style ();
+    }
 
-        if (lightdm_user.is_locked) {
-            login_stack.visible_child_name = "disabled";
+    private bool is_locked_to_visible_child_name (Binding binding, Value _is_locked, ref Value _visible_child_name) {
+        if (_is_locked.get_boolean ()) {
+            _visible_child_name.set_string ("disabled");
         } else {
             if (need_password) {
-                login_stack.visible_child_name = "password";
+                _visible_child_name.set_string ("password");
             } else {
-                login_stack.visible_child_name = "button";
+                _visible_child_name.set_string ("button");
             }
         }
+
+        return true;
     }
 
     private void on_login () {
