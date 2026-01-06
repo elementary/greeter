@@ -6,9 +6,6 @@
  */
 
 public class GreeterCompositor.ShellWindow : PositionedWindow {
-    public bool modal { get; private set; default = false; }
-    public bool dim { get; private set; default = false; }
-
     public Clutter.Actor? actor { get { return window_actor; } }
 
     private Meta.WindowActor window_actor;
@@ -24,11 +21,6 @@ public class GreeterCompositor.ShellWindow : PositionedWindow {
         window_actor.notify["height"].connect (update_clip);
         window_actor.notify["translation-y"].connect (update_clip);
         notify["position"].connect (update_clip);
-    }
-
-    public void make_modal (bool dim) {
-        modal = true;
-        this.dim = dim;
     }
 
     private void update_clip () {

@@ -191,7 +191,6 @@ public class GreeterCompositor.ShellClientsManager : Object {
 
     public bool is_itself_shell_window (Meta.Window window) {
         return (
-            (window in positioned_windows && positioned_windows[window].modal) ||
             (window in panel_windows) ||
             NotificationStack.is_notification (window)
         );
