@@ -116,10 +116,7 @@ public class GreeterCompositor.WingpanelManager : Object {
     public async void update_bk_color_info () {
         SourceFunc callback = update_bk_color_info.callback;
 
-        var monitor = wm.get_display ().get_primary_monitor ();
-        var monitor_geometry = wm.get_display ().get_monitor_geometry (monitor);
-
-        BackgroundUtils.get_background_color_information.begin (wm, 0, 0, monitor_geometry.width, panel_height, (obj, res) => {
+        BackgroundUtils.get_background_color_information.begin (wm, panel_height, (obj, res) => {
             try {
                 bk_color_info = BackgroundUtils.get_background_color_information.end (res);
             } catch (Error e) {
