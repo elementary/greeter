@@ -16,30 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-[DBus (name="org.pantheon.greeter")]
 public class GreeterCompositor.DBus {
-    public static DBus? instance;
-    static WindowManager wm;
-
-    [DBus (visible = false)]
-    public static void init (WindowManager _wm) {
-        wm = _wm;
-
-        Bus.own_name (BusType.SESSION, "org.pantheon.greeter", BusNameOwnerFlags.NONE,
-            (connection) => {
-                if (instance == null)
-                    instance = new DBus ();
-
-                try {
-                    connection.register_object ("/org/pantheon/greeter", instance);
-                } catch (Error e) {
-                    warning (e.message);
-                }
-            },
-            () => {},
-            () => warning ("Could not acquire name\n")
-        );
-
+    public static void init (WindowManager wm) {
         Bus.own_name (BusType.SESSION, "org.gnome.Shell", BusNameOwnerFlags.NONE,
             (connection) => {
                 try {
@@ -51,16 +29,5 @@ public class GreeterCompositor.DBus {
             () => {},
             () => critical ("Could not acquire name")
         );
-    }
-
-    [DBus (visible = false)]
-    public signal void change_wallpaper (string path);
-
-    public void set_wallpaper (string path) throws GLib.Error {
-        change_wallpaper (path);
-    }
-
-    private DBus () {
-
     }
 }
