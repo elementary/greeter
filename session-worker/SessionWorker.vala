@@ -6,7 +6,7 @@
 [DBus (name = "io.elementary.GreeterSessionWorker")]
 public class SessionWorker.SessionWorker : Object {
     [DBus (visible = false)]
-    [CCode (cheader_filename = "grp.h>", cname = "initgroups")]
+    [CCode (cheader_filename = "grp.h", cname = "initgroups")]
     public static extern int initgroups (string user, uint gid);
 
     public void launch_session (string username, HashTable<string, Variant> env_variables, string[] argvp) throws Error {
