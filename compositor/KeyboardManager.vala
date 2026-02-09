@@ -48,10 +48,12 @@ public class GreeterCompositor.KeyboardManager : Object {
 
     [CCode (instance_pos = -1)]
     public static bool handle_modifiers_accelerator_activated (Meta.Display display, bool backward) {
+#if !HAS_MUTTER50
 #if HAS_MUTTER46
         display.get_compositor ().backend.ungrab_keyboard (display.get_current_time ());
 #else
         display.ungrab_keyboard (display.get_current_time ());
+#endif
 #endif
 
         var sources = settings.get_value ("sources");
@@ -79,7 +81,11 @@ public class GreeterCompositor.KeyboardManager : Object {
     private void set_keyboard_layout (GLib.Settings settings, string key) {
         unowned var backend = display.get_context ().get_backend ();
 
+#if HAS_MUTTER50
+        if (key == "sources" || key == "xkb-options" || key == "current") {
+#else
         if (key == "sources" || key == "xkb-options") {
+#endif
             string[] layouts = {}, variants = {};
 
             var sources = settings.get_value ("sources");
@@ -111,7 +117,12 @@ public class GreeterCompositor.KeyboardManager : Object {
                 cancellable = new GLib.Cancellable ();
             }
 
+#if HAS_MUTTER50
+            var description = new Meta.KeymapDescription.from_rules (settings.get_string ("xkb-model"), layout, variant, options, layouts, layouts);
+            backend.set_keymap_async.begin (description, settings.get_uint ("current"), cancellable, (obj, res) => {
+#else
             backend.set_keymap_async.begin (layout, variant, options, settings.get_string ("xkb-model"), cancellable, (obj, res) => {
+#endif
                 try {
                     ((Meta.Backend) obj).set_keymap_async.end (res);
                 } catch (Error e) {
@@ -128,6 +139,7 @@ public class GreeterCompositor.KeyboardManager : Object {
 #else
             backend.set_keymap (layout, variant, options);
 #endif
+#if !HAS_MUTTER50
         } else if (key == "current") {
 #if HAS_MUTTER49
             if (cancellable != null) {
@@ -148,6 +160,7 @@ public class GreeterCompositor.KeyboardManager : Object {
             });
 #else
             backend.lock_layout_group (settings.get_uint ("current"));
+#endif
 #endif
         }
     }
