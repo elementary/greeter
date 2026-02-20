@@ -52,13 +52,18 @@ public class GreeterCompositor.ShellClientsManager : Object {
     }
 
     public void make_dock (Meta.Window window) {
+#if HAS_MUTTER49
+        window.set_type (Meta.WindowType.DOCK);
+#else
         if (Meta.Util.is_wayland_compositor ()) {
             make_dock_wayland (window);
         } else {
             make_dock_x11 (window);
         }
+#endif
     }
 
+#if !HAS_MUTTER49
     private void make_dock_wayland (Meta.Window window) requires (Meta.Util.is_wayland_compositor ()) {
         foreach (var client in protocol_clients) {
             if (client.wayland_client.owns_window (window)) {
@@ -88,16 +93,22 @@ public class GreeterCompositor.ShellClientsManager : Object {
         // 0 means replace
         xdisplay.change_property (x_window, atom, (X.Atom) 4, 32, 0, (uchar[]) dock_atom, 1);
     }
+#endif
 
 
     public void make_desktop (Meta.Window window) {
+#if HAS_MUTTER49
+        window.set_type (Meta.WindowType.DESKTOP);
+#else
         if (Meta.Util.is_wayland_compositor ()) {
             make_desktop_wayland (window);
         } else {
             make_desktop_x11 (window);
         }
+#endif
     }
 
+#if !HAS_MUTTER49
     private void make_desktop_wayland (Meta.Window window) requires (Meta.Util.is_wayland_compositor ()) {
         foreach (var client in protocol_clients) {
             if (client.wayland_client.owns_window (window)) {
@@ -125,6 +136,7 @@ public class GreeterCompositor.ShellClientsManager : Object {
         // 0 means replace
         xdisplay.change_property (x_window, atom, (X.Atom) 4, 32, 0, (uchar[]) dock_atom, 1);
     }
+#endif
 
     public void set_anchor (Meta.Window window, Pantheon.Desktop.Anchor anchor) {
         if (window in panel_windows) {
@@ -170,21 +182,32 @@ public class GreeterCompositor.ShellClientsManager : Object {
         window.unmanaging.connect_after ((_window) => positioned_windows.remove (_window));
     }
 
-    public void make_centered (Meta.Window window) requires (!is_itself_positioned (window)) {
+    public void make_centered (Meta.Window window) requires (!is_itself_shell_window (window)) {
         positioned_windows[window] = new ShellWindow (window, CENTER);
 
         // connect_after so we make sure that any queued move is unqueued
         window.unmanaging.connect_after ((_window) => positioned_windows.remove (_window));
     }
 
-    public bool is_itself_positioned (Meta.Window window) {
-        return (window in positioned_windows) || (window in panel_windows) || NotificationStack.is_notification (window);
+    public bool is_itself_shell_window (Meta.Window window) {
+        return (
+            (window in panel_windows) ||
+            NotificationStack.is_notification (window)
+        );
     }
 
-    public bool is_positioned_window (Meta.Window window) {
-        bool positioned = is_itself_positioned (window);
+    /**
+     * Whether the given window is a shell window. A shell window is a window that's
+     * part of the desktop shell itself and should be completely ignored by other components.
+     * It is entirely managed by Gala, always above everything else, and manages hiding
+     * in e.g. multitasking view itself. This also applies to transient windows of shell windows.
+     * Note that even if `false` is returned the window might still be in part managed by gala
+     * e.g. for centered windows.
+     */
+    public bool is_shell_window (Meta.Window window) {
+        bool positioned = is_itself_shell_window (window);
         window.foreach_ancestor ((ancestor) => {
-            if (is_itself_positioned (ancestor)) {
+            if (is_itself_shell_window (ancestor)) {
                 positioned = true;
             }
 

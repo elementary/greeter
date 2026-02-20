@@ -8,6 +8,14 @@
     </key>
   </schema>
 
+  <schema path="/io/elementary/greeter-compositor/background/" id="io.elementary.greeter-compositor.background">
+    <key type="b" name="dim-wallpaper-in-dark-style">
+      <default>false</default>
+      <summary>Dim wallpapers when dark style is active</summary>
+      <description></description>
+    </key>
+  </schema>
+
   <schema path="/io/elementary/greeter-compositor/keybindings/" id="io.elementary.greeter-compositor.keybindings">
     <key type="as" name="zoom-in">
       <default><![CDATA[['<Super>plus', '<Super>KP_Add']]]></default>

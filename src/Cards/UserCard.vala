@@ -231,6 +231,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
                 return "cocoa";
             case 10:
                 return "slate";
+            case 11:
+                return "latte";
             default:
                 return "blueberry";
         }

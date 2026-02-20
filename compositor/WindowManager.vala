@@ -31,7 +31,7 @@ namespace GreeterCompositor {
 
         /**
          * The group that contains all WindowActors that make shell elements, that is all windows reported as
-         * ShellClientsManager.is_positioned_window.
+         * ShellClientsManager.is_shell_window.
          * It will (eventually) never be hidden by other components and is always on top of everything. Therefore elements are
          * responsible themselves for hiding depending on the state we are currently in (e.g. normal desktop, open multitasking view, fullscreen, etc.).
          */
@@ -99,7 +99,7 @@ namespace GreeterCompositor {
             stage = display.get_stage () as Clutter.Stage;
 #endif
 #if HAS_MUTTER47
-            stage.background_color = Cogl.Color.from_string ("black");
+            stage.background_color = Cogl.Color.from_string ("#000000");
 #else
             stage.background_color = Clutter.Color.from_rgba (0, 0, 0, 255);
 #endif
@@ -120,7 +120,7 @@ namespace GreeterCompositor {
                 width = width,
                 height = height,
 #if HAS_MUTTER47
-                background_color = Cogl.Color.from_string ("black")
+                background_color = Cogl.Color.from_string ("#000000")
 #else
                 background_color = Clutter.Color.from_rgba (0, 0, 0, 255),
 #endif
@@ -253,8 +253,15 @@ namespace GreeterCompositor {
             var subprocess_launcher = new GLib.SubprocessLauncher (GLib.SubprocessFlags.INHERIT_FDS);
             try {
                 Meta.WaylandClient daemon_client;
+                Subprocess? subprocess;
+
+#if HAS_MUTTER49
+                daemon_client = new Meta.WaylandClient.subprocess (display.get_context (), subprocess_launcher, command);
+                subprocess = daemon_client.get_subprocess ();
+#else
                 daemon_client = new Meta.WaylandClient (display.get_context (), subprocess_launcher);
-                var subprocess = daemon_client.spawnv (display, command);
+                subprocess = daemon_client.spawnv (display, command);
+#endif
 
                 yield subprocess.wait_async ();
 
@@ -302,7 +309,7 @@ namespace GreeterCompositor {
 
         private void check_shell_window (Meta.WindowActor actor) {
             unowned var window = actor.get_meta_window ();
-            if (ShellClientsManager.get_instance ().is_positioned_window (window)) {
+            if (ShellClientsManager.get_instance ().is_shell_window (window)) {
                 Utils.clutter_actor_reparent (actor, shell_group);
             }
 

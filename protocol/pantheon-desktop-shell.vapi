@@ -5,14 +5,13 @@
  */
 
 namespace Pantheon.Desktop {
-    [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "struct io_elementary_pantheon_shell_v1", cprefix = "io_elementary_pantheon_shell_v1_")]
+    [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "struct io_elementary_pantheon_shell_v1", cprefix = "io_elementary_pantheon_shell_v1_", free_function = "io_elementary_pantheon_shell_v1_destroy")]
     public class Shell : Wl.Proxy {
         [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "io_elementary_pantheon_shell_v1_interface")]
         public static Wl.Interface iface;
         public void set_user_data (void* user_data);
         public void* get_user_data ();
         public uint32 get_version ();
-        public void destroy ();
         public Pantheon.Desktop.Panel get_panel (Wl.Surface surface);
         public Pantheon.Desktop.Widget get_widget (Wl.Surface surface);
         public Pantheon.Desktop.Greeter get_greeter (Wl.Surface surface);
@@ -36,14 +35,13 @@ namespace Pantheon.Desktop {
         ALWAYS
     }
 
-    [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "struct io_elementary_pantheon_panel_v1", cprefix = "io_elementary_pantheon_panel_v1_")]
+    [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "struct io_elementary_pantheon_panel_v1", cprefix = "io_elementary_pantheon_panel_v1_", free_function = "io_elementary_pantheon_panel_v1_destroy")]
     public class Panel : Wl.Proxy {
         [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "io_elementary_pantheon_panel_v1_interface")]
         public static Wl.Interface iface;
         public void set_user_data (void* user_data);
         public void* get_user_data ();
         public uint32 get_version ();
-        public void destroy ();
         public void set_anchor (Pantheon.Desktop.Anchor anchor);
         public void focus ();
         public void set_size (int width, int height);
@@ -53,35 +51,32 @@ namespace Pantheon.Desktop {
         public void remove_blur ();
     }
 
-    [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "struct io_elementary_pantheon_widget_v1", cprefix = "io_elementary_pantheon_widget_v1_")]
+    [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "struct io_elementary_pantheon_widget_v1", cprefix = "io_elementary_pantheon_widget_v1_", free_function = "io_elementary_pantheon_widget_v1_destroy")]
     public class Widget : Wl.Proxy {
         [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "io_elementary_pantheon_widget_v1_interface")]
         public static Wl.Interface iface;
         public void set_user_data (void* user_data);
         public void* get_user_data ();
         public uint32 get_version ();
-        public void destroy ();
     }
 
-    [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "struct io_elementary_pantheon_greeter_v1", cprefix = "io_elementary_pantheon_greeter_v1_")]
+    [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "struct io_elementary_pantheon_greeter_v1", cprefix = "io_elementary_pantheon_greeter_v1_", free_function = "io_elementary_pantheon_greeter_v1_destroy")]
     public class Greeter : Wl.Proxy {
         [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "io_elementary_pantheon_greeter_v1_interface")]
         public static Wl.Interface iface;
         public void set_user_data (void* user_data);
         public void* get_user_data ();
         public uint32 get_version ();
-        public void destroy ();
         public void init ();
     }
 
-    [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "struct io_elementary_pantheon_extended_behavior_v1", cprefix = "io_elementary_pantheon_extended_behavior_v1_")]
+    [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "struct io_elementary_pantheon_extended_behavior_v1", cprefix = "io_elementary_pantheon_extended_behavior_v1_", free_function = "io_elementary_pantheon_extended_behavior_v1_destroy")]
     public class ExtendedBehavior : Wl.Proxy {
         [CCode (cheader_filename = "pantheon-desktop-shell-client-protocol.h", cname = "io_elementary_pantheon_extended_behavior_v1_interface")]
         public static Wl.Interface iface;
         public void set_user_data (void* user_data);
         public void* get_user_data ();
         public uint32 get_version ();
-        public void destroy ();
         public void set_keep_above ();
     }
 }

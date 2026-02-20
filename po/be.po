@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-02 15:56+0000\n"
-"PO-Revision-Date: 2025-08-04 10:55+0000\n"
+"PO-Revision-Date: 2025-12-04 11:55+0000\n"
 "Last-Translator: lenify <lenify@tutanota.com>\n"
 "Language-Team: Belarusian <https://l10n.elementaryos.org/projects/desktop/"
 "greeter/be/>\n"
@@ -43,11 +43,11 @@ msgstr "Выкарыстаць папярэднія налады"
 
 #: src/Application.vala:127
 msgid "Classic session automatically selected"
-msgstr ""
+msgstr "Класічны сеанс выбраны аўтаматычна"
 
 #: src/Application.vala:128
 msgid "Accessibility features may be unavailable in the Secure session"
-msgstr ""
+msgstr "Спецыяльныя магчымасці могуць быць недаступныя ў бяспечным сеансе"
 
 #: src/MainWindow.vala:44
 msgid "Log in as Guest"
