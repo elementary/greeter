@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-02 15:56+0000\n"
+"POT-Creation-Date: 2026-03-29 15:12+0000\n"
 "PO-Revision-Date: 2023-05-20 18:06+0000\n"
 "Last-Translator: Muktazam Hasbi Ashidiqi <hasbeeazam@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/desktop/"
@@ -19,21 +19,21 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:337
+#: compositor/WindowManager.vala:362
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
 msgstr[0] "Perubahan akan kembali secara otomatis setelah %i detik."
 
-#: compositor/WindowManager.vala:344
+#: compositor/WindowManager.vala:369
 msgid "Keep new display settings?"
 msgstr "Pertahankan pengaturan tampilan baru?"
 
-#: compositor/WindowManager.vala:348
+#: compositor/WindowManager.vala:373
 msgid "Keep Settings"
 msgstr "Pertahankan Pengaturan"
 
-#: compositor/WindowManager.vala:349
+#: compositor/WindowManager.vala:374
 msgid "Use Previous Settings"
 msgstr "Gunakan Pengaturan Sebelumnya"
 
@@ -53,19 +53,19 @@ msgstr "Masuk sebagai Tamu"
 msgid "Manual Login…"
 msgstr "Masuk Manual…"
 
-#: src/MainWindow.vala:326
+#: src/MainWindow.vala:320
 msgid "Unable to Log In"
 msgstr "Tidak bisa Masuk"
 
-#: src/MainWindow.vala:327
+#: src/MainWindow.vala:321
 msgid "Starting the session has failed."
 msgstr "Gagal memulai sesi."
 
-#: src/MainWindow.vala:389
+#: src/MainWindow.vala:383
 msgid "Unable to Launch Initial Setup"
 msgstr "Tidak Dapat Meluncurkan Penyiapan Awal"
 
-#: src/MainWindow.vala:394
+#: src/MainWindow.vala:388
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -81,15 +81,15 @@ msgstr "Masuk Secara Manual"
 msgid "Username"
 msgstr "Nama Pengguna"
 
-#: src/Cards/UserCard.vala:88 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:63 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Masuk"
 
-#: src/Cards/UserCard.vala:105
+#: src/Cards/UserCard.vala:81
 msgid "Account disabled"
 msgstr "Akun dinonaktifkan"
 
-#: src/Cards/UserCard.vala:167 src/Cards/UserCard.vala:170
+#: src/Cards/UserCard.vala:137 src/Cards/UserCard.vala:140
 msgid "Session cannot be changed while user is logged in"
 msgstr "Sesi tidak dapat diubah ketika pengguna sedang masuk"
 
