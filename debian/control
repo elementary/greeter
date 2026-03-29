@@ -15,6 +15,7 @@ Build-Depends: debhelper (>= 10.5.1),
                libmutter-18-dev | libmutter-17-dev | libmutter-16-dev | libmutter-15-dev | libmutter-14-dev | libmutter-13-dev,
                libsoup-3.0-dev,
                libx11-dev,
+               lightdm-vala,
                meson,
                valac (>= 0.26)
 Standards-Version: 4.1.1
