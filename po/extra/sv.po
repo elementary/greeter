@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-29 15:12+0000\n"
-"PO-Revision-Date: 2025-10-30 13:55+0000\n"
+"PO-Revision-Date: 2026-04-03 21:09+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <https://l10n.elementaryos.org/projects/desktop/"
 "greeter-extra/sv/>\n"
@@ -20,8 +20,6 @@ msgstr ""
 "X-Generator: Weblate 5.11.4\n"
 
 #: data/greeter.metainfo.xml.in:9
-#, fuzzy
-#| msgid "Login &amp; Lock Screen"
 msgid "Login & Lock Screen"
 msgstr "Inloggning och låsskärm"
 
