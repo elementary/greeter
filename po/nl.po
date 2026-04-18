@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-02 15:56+0000\n"
+"POT-Creation-Date: 2026-03-29 15:12+0000\n"
 "PO-Revision-Date: 2025-12-14 04:55+0000\n"
 "Last-Translator: Bas Ernst <bas@ernstgenova.it>\n"
 "Language-Team: Dutch <https://l10n.elementaryos.org/projects/desktop/greeter/"
@@ -20,22 +20,22 @@ msgstr ""
 "X-Generator: Weblate 5.11.4\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:337
+#: compositor/WindowManager.vala:362
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
 msgstr[0] "Wijzigingen worden na %i seconde automatisch teruggedraaid."
 msgstr[1] "Wijzigingen worden na %i seconden automatisch teruggedraaid."
 
-#: compositor/WindowManager.vala:344
+#: compositor/WindowManager.vala:369
 msgid "Keep new display settings?"
 msgstr "Nieuwe weergave-instellingen bewaren?"
 
-#: compositor/WindowManager.vala:348
+#: compositor/WindowManager.vala:373
 msgid "Keep Settings"
 msgstr "Instellingen behouden"
 
-#: compositor/WindowManager.vala:349
+#: compositor/WindowManager.vala:374
 msgid "Use Previous Settings"
 msgstr "Vorige instellingen gebruiken"
 
@@ -56,19 +56,19 @@ msgstr "Aanmelden als gast"
 msgid "Manual Login…"
 msgstr "Handmatig inloggen…"
 
-#: src/MainWindow.vala:326
+#: src/MainWindow.vala:320
 msgid "Unable to Log In"
 msgstr "Het is niet mogelijk om in te loggen"
 
-#: src/MainWindow.vala:327
+#: src/MainWindow.vala:321
 msgid "Starting the session has failed."
 msgstr "Het starten van de sessie is mislukt."
 
-#: src/MainWindow.vala:389
+#: src/MainWindow.vala:383
 msgid "Unable to Launch Initial Setup"
 msgstr "Het laden van de instellingen om te beginnen is mislukt"
 
-#: src/MainWindow.vala:394
+#: src/MainWindow.vala:388
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -85,15 +85,15 @@ msgstr "Handmatig inloggen"
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: src/Cards/UserCard.vala:88 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:63 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Inloggen"
 
-#: src/Cards/UserCard.vala:105
+#: src/Cards/UserCard.vala:81
 msgid "Account disabled"
 msgstr "Account uitgeschakeld"
 
-#: src/Cards/UserCard.vala:167 src/Cards/UserCard.vala:170
+#: src/Cards/UserCard.vala:137 src/Cards/UserCard.vala:140
 msgid "Session cannot be changed while user is logged in"
 msgstr "De sessie kan niet worden gewijzigd terwijl de gebruiker is ingelogd"
 
