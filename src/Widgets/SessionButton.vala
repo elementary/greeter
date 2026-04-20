@@ -6,15 +6,15 @@
  */
 
 public class Greeter.SessionButton : Gtk.Bin {
-    construct {
+    public SessionButton (string action_group_prefix, Action select_session_action) {
         var menu = new GLib.Menu ();
-        unowned var application = (Gtk.Application) GLib.Application.get_default ();
-        var hint = application.get_action_state_hint ("select-session");
-        var iter = hint.iterator ();
+
+        var iter = select_session_action.get_state_hint ().iterator ();
         GLib.Variant? val = null;
         string? key = null;
         while (iter.next ("{sv}", out key, out val)) {
-            menu.append (key, Action.print_detailed_name ("app.select-session", val));
+            var action_name = "%s.%s".printf (action_group_prefix, select_session_action.name);
+            menu.append (key, Action.print_detailed_name (action_name, val));
         }
 
         var menu_button = new Gtk.MenuButton () {
