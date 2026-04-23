@@ -1,20 +1,6 @@
 /*
- * Copyright 2018 elementary, Inc. (https://elementary.io)
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public
- * License along with this program; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1301 USA.
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-FileCopyrightText: 2018-2025 elementary, Inc. (https://elementary.io)
  *
  * Authors: Corentin Noël <corentin@elementary.io>
  */
@@ -36,7 +22,7 @@ namespace Greeter.FPrintUtils {
     }
 
     private inline string fprintd_message (string message) {
-        //return GLib.dgettext ("fprintd", message);
+        // TODO: Translate message using GLib.dgettext
         return message;
     }
 
@@ -44,10 +30,10 @@ namespace Greeter.FPrintUtils {
         // Ideally this would query PAM and ask which module is currently active,
         // but since we're running through LightDM we don't have that ability.
         // There should at be a state machine to transition to and from the 
-        // active module depending on the messages recieved. But, this is can go
+        // active module depending on the messages received. But, this is can go
         // wrong quickly. 
         // The reason why this is needed is, for example, we can get the "An
-        // unknown error occured" message from pam_fprintd, but we can get it 
+        // unknown error occurred" message from pam_fprintd, but we can get it 
         // from some other random module as well. You never know.
         // Maybe it's worth adding some LightDM/PAM functionality for this? 
         // The PAM "feature" which makes it all tricky is that modules can send 
@@ -62,7 +48,7 @@ namespace Greeter.FPrintUtils {
         //  - https://gitlab.freedesktop.org/libfprint/fprintd/blob/master/pam/fingerprint-strings.h
         //  - https://gitlab.freedesktop.org/libfprint/fprintd/blob/master/pam/pam_fprintd.c
 
-        if (text == fprintd_message ("An unknown error occured")) {
+        if (text == fprintd_message ("An unknown error occurred")) {
             return MessageText.FPRINT_ERROR;
         } else if (text == fprintd_message ("An unknown error occurred")) {
             return MessageText.FPRINT_ERROR;

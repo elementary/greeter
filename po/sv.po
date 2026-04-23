@@ -7,64 +7,74 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 16:41+0000\n"
-"PO-Revision-Date: 2024-08-07 17:16+0000\n"
-"Last-Translator: anonymous <noreply@weblate.org>\n"
-"Language-Team: Swedish <https://l10n.elementary.io/projects/desktop/greeter/"
-"sv/>\n"
+"POT-Creation-Date: 2026-03-29 15:12+0000\n"
+"PO-Revision-Date: 2025-10-30 13:55+0000\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"Language-Team: Swedish <https://l10n.elementaryos.org/projects/desktop/"
+"greeter/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:461
+#: compositor/WindowManager.vala:362
 #, c-format
 msgid "Changes will automatically revert after %i second."
 msgid_plural "Changes will automatically revert after %i seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ändringar återställs automatiskt efter %i sekund."
+msgstr[1] "Ändringar återställs automatiskt efter %i sekunder."
 
-#: compositor/WindowManager.vala:468
+#: compositor/WindowManager.vala:369
 msgid "Keep new display settings?"
-msgstr ""
+msgstr "Behåll nya skärminställningar?"
 
-#: compositor/WindowManager.vala:472
+#: compositor/WindowManager.vala:373
 msgid "Keep Settings"
-msgstr ""
+msgstr "Behåll inställningar"
 
-#: compositor/WindowManager.vala:473
+#: compositor/WindowManager.vala:374
 msgid "Use Previous Settings"
-msgstr ""
+msgstr "Använd tidigare inställningar"
 
-#: src/MainWindow.vala:67
+#: src/Application.vala:127
+msgid "Classic session automatically selected"
+msgstr "Klassisk session väljs automatiskt"
+
+#: src/Application.vala:128
+msgid "Accessibility features may be unavailable in the Secure session"
+msgstr ""
+"Hjälpmedelsfunktioner kanske inte är tillgängliga i den säkra sessionen"
+
+#: src/MainWindow.vala:44
 msgid "Log in as Guest"
-msgstr ""
+msgstr "Logga in som gäst"
 
-#: src/MainWindow.vala:69
-#, fuzzy
+#: src/MainWindow.vala:45
 msgid "Manual Login…"
-msgstr "Manuell inloggning"
+msgstr "Manuell inloggning…"
 
-#: src/MainWindow.vala:403
+#: src/MainWindow.vala:320
 msgid "Unable to Log In"
-msgstr ""
+msgstr "Kunde inte logga in"
 
-#: src/MainWindow.vala:404
+#: src/MainWindow.vala:321
 msgid "Starting the session has failed."
-msgstr ""
+msgstr "Start av sessionen har misslyckats."
 
-#: src/MainWindow.vala:481
+#: src/MainWindow.vala:383
 msgid "Unable to Launch Initial Setup"
-msgstr ""
+msgstr "Kunde inte starta initial konfiguration"
 
-#: src/MainWindow.vala:486
+#: src/MainWindow.vala:388
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
 msgstr ""
+"Initial konfiguration skapar din första användare. Utan den kommer du inte "
+"att kunna logga in och kan behöva installera om operativsystemet."
 
 #: src/Cards/ManualCard.vala:21
 msgid "Manual Login"
@@ -72,35 +82,31 @@ msgstr "Manuell inloggning"
 
 #: src/Cards/ManualCard.vala:30
 msgid "Username"
-msgstr ""
+msgstr "Användarnamn"
 
-#: src/Cards/ManualCard.vala:33
-msgid "Try username"
-msgstr ""
-
-#: src/Cards/UserCard.vala:107 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:63 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Logga in"
 
-#: src/Cards/UserCard.vala:119
+#: src/Cards/UserCard.vala:81
 msgid "Account disabled"
-msgstr ""
+msgstr "Kontot är inaktiverat"
 
-#: src/Cards/UserCard.vala:197
+#: src/Cards/UserCard.vala:137 src/Cards/UserCard.vala:140
 msgid "Session cannot be changed while user is logged in"
-msgstr ""
+msgstr "Sessionen kan inte ändras när användaren är inloggad"
 
-#: src/Widgets/CapsLockRevealer.vala:70
+#: src/Widgets/CapsLockRevealer.vala:52
 msgid "Caps Lock & Num Lock are on"
-msgstr ""
+msgstr "Caps Lock och Num Lock är på"
 
-#: src/Widgets/CapsLockRevealer.vala:72
+#: src/Widgets/CapsLockRevealer.vala:54
 msgid "Caps Lock is on"
-msgstr ""
+msgstr "Caps Lock är på"
 
-#: src/Widgets/CapsLockRevealer.vala:74
+#: src/Widgets/CapsLockRevealer.vala:56
 msgid "Num Lock is on"
-msgstr ""
+msgstr "Num Lock är på"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"

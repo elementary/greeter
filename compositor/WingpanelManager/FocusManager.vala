@@ -97,13 +97,14 @@ public class GreeterCompositor.FocusManager : GLib.Object {
         }
 
         if (window != null) {
-#if HAS_MUTTER46
+#if HAS_MUTTER49
+            Graphene.Point pos_hint = {x, y};
+            window.begin_grab_op (Meta.GrabOp.MOVING, null, time, pos_hint);
+#elif HAS_MUTTER46
             Graphene.Point pos_hint = {x, y};
             window.begin_grab_op (Meta.GrabOp.MOVING, null, null, time, pos_hint);
-#elif HAS_MUTTER44
-            window.begin_grab_op (Meta.GrabOp.MOVING, null, null, time);
 #else
-            window.begin_grab_op (Meta.GrabOp.MOVING, true, time);
+            window.begin_grab_op (Meta.GrabOp.MOVING, null, null, time);
 #endif
             return true;
         }

@@ -1,6 +1,6 @@
 /*
  * Copyright 2012 Tom Beckmann, Rico Tzschichholz
- * Copyright 2018 elementary LLC. (https://elementary.io)
+ * Copyright 2018-2025 elementary, Inc. (https://elementary.io)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,60 +18,10 @@
 
 namespace GreeterCompositor {
     public class Utils {
-        // Cache xid:pixbuf and icon:pixbuf pairs to provide a faster way aquiring icons
-        static HashTable<string, Gdk.Pixbuf> xid_pixbuf_cache;
         static HashTable<string, Gdk.Pixbuf> icon_pixbuf_cache;
-        static uint cache_clear_timeout = 0;
 
         class construct {
-            xid_pixbuf_cache = new HashTable<string, Gdk.Pixbuf> (str_hash, str_equal);
             icon_pixbuf_cache = new HashTable<string, Gdk.Pixbuf> (str_hash, str_equal);
-        }
-
-        Utils () {}
-
-        /**
-         * Clean icon caches
-         */
-        static void clean_icon_cache (uint32[] xids) {
-            var list = xid_pixbuf_cache.get_keys ();
-            var pixbuf_list = icon_pixbuf_cache.get_values ();
-            var icon_list = icon_pixbuf_cache.get_keys ();
-
-            foreach (var xid_key in list) {
-                var xid = (uint32)uint64.parse (xid_key.split ("::")[0]);
-                if (!(xid in xids)) {
-                    var pixbuf = xid_pixbuf_cache.get (xid_key);
-                    for (var j = 0; j < pixbuf_list.length (); j++) {
-                        if (pixbuf_list.nth_data (j) == pixbuf) {
-                            xid_pixbuf_cache.remove (icon_list.nth_data (j));
-                        }
-                    }
-
-                    xid_pixbuf_cache.remove (xid_key);
-                }
-            }
-        }
-
-        /**
-         * Marks the given xids as no longer needed, the corresponding icons
-         * may be freed now. Mainly for internal purposes.
-         *
-         * @param xids The xids of the window that no longer need icons
-         */
-        public static void request_clean_icon_cache (uint32[] xids) {
-            if (cache_clear_timeout > 0) {
-                GLib.Source.remove (cache_clear_timeout);
-            }
-
-            cache_clear_timeout = Timeout.add_seconds (30, () => {
-                cache_clear_timeout = 0;
-                Idle.add (() => {
-                    clean_icon_cache (xids);
-                    return false;
-                });
-                return false;
-            });
         }
 
         /**
@@ -101,6 +51,58 @@ namespace GreeterCompositor {
          */
         public static int scale_to_int (int value, float scale_factor) {
             return (int) (Math.round ((float)value * scale_factor));
+        }
+
+        /**
+         * Utility that returns the given duration or 0 if animations are disabled.
+         */
+        public static uint get_animation_duration (uint duration) {
+            return Meta.Prefs.get_gnome_animations () ? duration : 0;
+        }
+
+        public static void clutter_actor_reparent (Clutter.Actor actor, Clutter.Actor new_parent) {
+            if (actor == new_parent) {
+                return;
+            }
+
+            actor.ref ();
+            actor.get_parent ().remove_child (actor);
+            new_parent.add_child (actor);
+            actor.unref ();
+        }
+
+        public delegate void WindowActorReadyCallback (Meta.WindowActor window_actor);
+
+        public static void wait_for_window_actor (Meta.Window window, owned WindowActorReadyCallback callback) {
+            unowned var window_actor = (Meta.WindowActor) window.get_compositor_private ();
+            if (window_actor != null) {
+                callback (window_actor);
+                return;
+            }
+
+            Idle.add (() => {
+                window_actor = (Meta.WindowActor) window.get_compositor_private ();
+
+                if (window_actor != null) {
+                    callback (window_actor);
+                }
+
+                return Source.REMOVE;
+            });
+        }
+
+        public static void wait_for_window_actor_visible (Meta.Window window, owned WindowActorReadyCallback callback) {
+            wait_for_window_actor (window, (window_actor) => {
+                if (window_actor.visible) {
+                    callback (window_actor);
+                } else {
+                    ulong show_handler = 0;
+                    show_handler = window_actor.show.connect (() => {
+                        window_actor.disconnect (show_handler);
+                        callback (window_actor);
+                    });
+                }
+            });
         }
 
         private static Gtk.StyleContext selection_style_context = null;

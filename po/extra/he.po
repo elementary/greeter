@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 16:41+0000\n"
+"POT-Creation-Date: 2026-03-29 15:12+0000\n"
 "PO-Revision-Date: 2024-05-25 08:13+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: Hebrew <https://l10n.elementary.io/projects/desktop/"
-"greeter-extra/he/>\n"
+"Language-Team: Hebrew <https://l10n.elementary.io/projects/desktop/greeter-"
+"extra/he/>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,54 +20,64 @@ msgstr ""
 "X-Generator: Weblate 5.5\n"
 
 #: data/greeter.metainfo.xml.in:9
-msgid "Login &amp; Lock Screen"
+#, fuzzy
+#| msgid "Login &amp; Lock Screen"
+msgid "Login & Lock Screen"
 msgstr "כניסה ומסך נעילה"
 
 #: data/greeter.metainfo.xml.in:10
 msgid "Unlock or log in to your device"
 msgstr "שחרור נעילה או כניסה למכשיר שלך"
 
-#: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:98
-msgid "New Features:"
-msgstr "יכולות חדשות:"
+#: data/greeter.metainfo.xml.in:34
+msgid "elementary, Inc."
+msgstr "elementary בע״מ."
 
-#: data/greeter.metainfo.xml.in:44
-msgid "Add blurred wallpaper as background"
-msgstr "הוספת תמונת רקע מטושטשת כרקע"
-
-#: data/greeter.metainfo.xml.in:45
-msgid "Make Date and Time larger and bolder with softer shadows"
-msgstr "הגדלה והדגשה של התאריך והשעה באמצעות צללים רכים יותר"
-
-#: data/greeter.metainfo.xml.in:47 data/greeter.metainfo.xml.in:65
-#: data/greeter.metainfo.xml.in:86 data/greeter.metainfo.xml.in:102
-#: data/greeter.metainfo.xml.in:115
+#: data/greeter.metainfo.xml.in:42 data/greeter.metainfo.xml.in:54
+#: data/greeter.metainfo.xml.in:68 data/greeter.metainfo.xml.in:90
+#: data/greeter.metainfo.xml.in:112 data/greeter.metainfo.xml.in:130
+#: data/greeter.metainfo.xml.in:151 data/greeter.metainfo.xml.in:167
+#: data/greeter.metainfo.xml.in:180
 msgid "Minor updates:"
 msgstr "עדכונים משניים:"
 
-#: data/greeter.metainfo.xml.in:49 data/greeter.metainfo.xml.in:69
-#: data/greeter.metainfo.xml.in:88 data/greeter.metainfo.xml.in:104
-#: data/greeter.metainfo.xml.in:117
+#: data/greeter.metainfo.xml.in:44 data/greeter.metainfo.xml.in:56
+#: data/greeter.metainfo.xml.in:70 data/greeter.metainfo.xml.in:92
+#: data/greeter.metainfo.xml.in:114 data/greeter.metainfo.xml.in:134
+#: data/greeter.metainfo.xml.in:153 data/greeter.metainfo.xml.in:169
+#: data/greeter.metainfo.xml.in:182
 msgid "Updated translations"
 msgstr "התרגומים עודכנו"
 
-#: data/greeter.metainfo.xml.in:67
+#: data/greeter.metainfo.xml.in:107 data/greeter.metainfo.xml.in:163
+msgid "New Features:"
+msgstr "יכולות חדשות:"
+
+#: data/greeter.metainfo.xml.in:109
+msgid "Add blurred wallpaper as background"
+msgstr "הוספת תמונת רקע מטושטשת כרקע"
+
+#: data/greeter.metainfo.xml.in:110
+msgid "Make Date and Time larger and bolder with softer shadows"
+msgstr "הגדלה והדגשה של התאריך והשעה באמצעות צללים רכים יותר"
+
+#: data/greeter.metainfo.xml.in:132
 msgid "Prevent a potential issue with dialogs that use portals"
 msgstr "נמנעה תקלה אפשרית עם חלוניות שמשתמשות בשערים"
 
-#: data/greeter.metainfo.xml.in:68
+#: data/greeter.metainfo.xml.in:133
 msgid "Fix potential issues with incorrect keyboard layout being set"
 msgstr "תוקנה בעיה אפשרית עם הגדרת פריסת מקלדת שגויה"
 
-#: data/greeter.metainfo.xml.in:100
+#: data/greeter.metainfo.xml.in:165
 msgid "Provide panel background color interface"
 msgstr "אספקת מנשק צבע רקע לסרגל"
 
-#: data/greeter.metainfo.xml.in:111
+#: data/greeter.metainfo.xml.in:176
 msgid "Improvements:"
 msgstr "שיפורים:"
 
-#: data/greeter.metainfo.xml.in:113
+#: data/greeter.metainfo.xml.in:178
 msgid "Fix a random issue where Greeter does not load correctly on boot"
 msgstr "תוקנה בעיה אקראית שמקבל הפנים לא נטען כראוי עם ההפעלה הראשונית"
 
@@ -76,9 +86,6 @@ msgstr "תוקנה בעיה אקראית שמקבל הפנים לא נטען כ�
 
 #~ msgid "Use selected accent color for logged in checkmark"
 #~ msgstr "ייעשה שימוש בצבע המוביל הנבחר לסימון כניסה למערכת"
-
-#~ msgid "elementary, Inc."
-#~ msgstr "elementary בע״מ."
 
 #~ msgid "Add multitouch finger tracking"
 #~ msgstr "נוסף מעקב אחר מספר אצבעות במקביל"

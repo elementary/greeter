@@ -8,14 +8,15 @@
 
 You'll need the following dependencies:
 
+* gettext (provides `msgfmt`)
 * gnome-settings-daemon >= 3.27
-* libaccountsservice-dev
 * libgdk-pixbuf2.0-dev
+* libgnome-desktop-3-dev
 * libgranite-dev >= 5.5.0
 * libgtk-3-dev
 * libhandy-1-dev >= 0.90.0
-* liblightdm-gobject-1-dev
-* libmutter-6-dev
+* liblightdm-gobject-1-dev >= 1.30.0
+* libmutter-13-dev
 * libx11-dev
 * meson
 * valac

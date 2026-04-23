@@ -18,20 +18,21 @@ jobs:
         version: [stable, unstable, development-target]
         include:
           - version: stable
-            mutter_pkg: libmutter-10-dev
-          - version: unstable
-            mutter_pkg: libmutter-10-dev
-          - version: development-target
             mutter_pkg: libmutter-14-dev
+          - version: unstable
+            mutter_pkg: libmutter-14-dev
+          - version: development-target
+            mutter_pkg: libmutter-18-dev
+            lightdm_vala: lightdm-vala
     container:
       image: ghcr.io/elementary/docker:${{ matrix.version }}
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Install Dependencies
       run: |
         apt update
-        apt install -y desktop-file-utils libaccountsservice-dev libgdk-pixbuf2.0-dev libgnome-desktop-3-dev libgranite-dev libgtk-3-dev libhandy-1-dev liblightdm-gobject-1-dev ${{ matrix.mutter_pkg }} libx11-dev meson valac
+        apt install -y desktop-file-utils libgdk-pixbuf-2.0-dev libgnome-desktop-3-dev libgranite-dev libgtk-3-dev libhandy-1-dev libjson-glib-dev liblightdm-gobject-1-dev ${{ matrix.mutter_pkg }} libsoup-3.0-dev libx11-dev ${{ matrix.lightdm_vala }} meson valac
     - name: Build
       env:
         DESTDIR: out
@@ -39,17 +40,53 @@ jobs:
         meson build
         ninja -C build install
 
-  lint:
+  fedora:
+    runs-on: ubuntu-latest
 
+    container:
+      image: fedora:latest
+
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install Dependencies
+        run: |
+          dnf install -y desktop-file-utils gdk-pixbuf2-devel gnome-desktop3-devel granite-devel gtk3-devel libhandy-devel lightdm-gobject-devel mutter-devel libX11-devel meson valac
+      - name: Build
+        env:
+          DESTDIR: out
+        run: |
+          meson build
+          ninja -C build install
+
+  open-suse-leap:
+    runs-on: ubuntu-latest
+
+    container:
+      image: opensuse/leap:latest
+
+    steps:
+      - name: Install dependencies
+        run: |
+          zypper addrepo https://download.opensuse.org/repositories/X11:Pantheon/15.6/X11:Pantheon.repo
+          zypper --gpg-auto-import-keys refresh
+          zypper --non-interactive install tar git desktop-file-utils gdk-pixbuf-devel libgnome-desktop-3-devel granite6-devel gtk3-devel libhandy-devel lightdm-gobject-devel mutter-devel meson vala gcc
+      - uses: actions/checkout@v6
+      - name: Build
+        env:
+          DESTDIR: out
+        run: |
+          meson build
+          ninja -C build install
+
+  lint:
     runs-on: ubuntu-latest
 
     container:
       image: valalang/lint
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Lint
       run: |
         io.elementary.vala-lint -d compositor
         io.elementary.vala-lint -d src
-

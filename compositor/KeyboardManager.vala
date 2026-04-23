@@ -8,6 +8,9 @@ public class GreeterCompositor.KeyboardManager : Object {
     private static KeyboardManager? instance;
     private static VariantType sources_variant_type;
     private static GLib.Settings settings;
+#if HAS_MUTTER49
+    private GLib.Cancellable? cancellable = null;
+#endif
 
     public unowned Meta.Display display { construct; private get; }
 
@@ -45,10 +48,12 @@ public class GreeterCompositor.KeyboardManager : Object {
 
     [CCode (instance_pos = -1)]
     public static bool handle_modifiers_accelerator_activated (Meta.Display display, bool backward) {
+#if !HAS_MUTTER50
 #if HAS_MUTTER46
         display.get_compositor ().backend.ungrab_keyboard (display.get_current_time ());
 #else
         display.ungrab_keyboard (display.get_current_time ());
+#endif
 #endif
 
         var sources = settings.get_value ("sources");
@@ -74,7 +79,13 @@ public class GreeterCompositor.KeyboardManager : Object {
 
     [CCode (instance_pos = -1)]
     private void set_keyboard_layout (GLib.Settings settings, string key) {
+        unowned var backend = display.get_context ().get_backend ();
+
+#if HAS_MUTTER50
+        if (key == "sources" || key == "xkb-options" || key == "current") {
+#else
         if (key == "sources" || key == "xkb-options") {
+#endif
             string[] layouts = {}, variants = {};
 
             var sources = settings.get_value ("sources");
@@ -100,14 +111,57 @@ public class GreeterCompositor.KeyboardManager : Object {
             var variant = string.joinv (",", variants);
             var options = string.joinv (",", xkb_options);
 
-#if HAS_MUTTER46
-            //TODO: add model support
-            display.get_context ().get_backend ().set_keymap (layout, variant, options, "");
+#if HAS_MUTTER49
+            if (cancellable != null) {
+                cancellable.cancel ();
+                cancellable = new GLib.Cancellable ();
+            }
+
+#if HAS_MUTTER50
+            var description = new Meta.KeymapDescription.from_rules (settings.get_string ("xkb-model"), layout, variant, options, layouts, layouts);
+            backend.set_keymap_async.begin (description, settings.get_uint ("current"), cancellable, (obj, res) => {
 #else
-            display.get_context ().get_backend ().set_keymap (layout, variant, options);
+            backend.set_keymap_async.begin (layout, variant, options, settings.get_string ("xkb-model"), cancellable, (obj, res) => {
 #endif
+                try {
+                    ((Meta.Backend) obj).set_keymap_async.end (res);
+                } catch (Error e) {
+                    if (e is GLib.IOError.CANCELLED) {
+                        // ignore
+                    } else {
+                        cancellable = null;
+                    }
+                }
+            });
+#elif HAS_MUTTER46
+            //TODO: add model support
+            backend.set_keymap (layout, variant, options, "");
+#else
+            backend.set_keymap (layout, variant, options);
+#endif
+#if !HAS_MUTTER50
         } else if (key == "current") {
-            display.get_context ().get_backend ().lock_layout_group (settings.get_uint ("current"));
+#if HAS_MUTTER49
+            if (cancellable != null) {
+                cancellable.cancel ();
+                cancellable = new GLib.Cancellable ();
+            }
+
+            backend.set_keymap_layout_group_async.begin (settings.get_uint ("current"), cancellable, (obj, res) => {
+                try {
+                    ((Meta.Backend) obj).set_keymap_layout_group_async.end (res);
+                } catch (Error e) {
+                    if (e is GLib.IOError.CANCELLED) {
+                        // ignore
+                    } else {
+                        cancellable = null;
+                    }
+                }
+            });
+#else
+            backend.lock_layout_group (settings.get_uint ("current"));
+#endif
+#endif
         }
     }
 }

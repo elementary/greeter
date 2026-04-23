@@ -39,7 +39,7 @@ namespace GreeterCompositor {
             monitor_manager = display.get_context ().get_backend ().get_monitor_manager ();
             monitor_manager.monitors_changed.connect (monitors_changed);
 
-            gala_background_settings = new GLib.Settings ("io.elementary.desktop.background");
+            gala_background_settings = new GLib.Settings ("io.elementary.greeter-compositor.background");
             gala_background_settings.changed["dim-wallpaper-in-dark-style"].connect (() => changed ());
 
             gnome_background_settings = new GLib.Settings ("org.gnome.desktop.background");

@@ -23,10 +23,7 @@ src/Application.vala
 src/FPrintUtils.vala
 src/MainWindow.vala
 src/PantheonAccountsServicePlugin.vala
-src/PromptText.vala
-src/SettingsDaemon.vala
 src/Settings.vala
-src/SubprocessSupervisor.vala
 src/Cards/BaseCard.vala
 src/Cards/ManualCard.vala
 src/Cards/UserCard.vala

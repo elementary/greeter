@@ -2,6 +2,21 @@
 
 [CCode (cprefix = "Mtk", gir_namespace = "Mtk", gir_version = "13", lower_case_cprefix = "mtk_")]
 namespace Mtk {
+#if HAS_MUTTER49
+	[CCode (cheader_filename = "mtk/mtk.h", has_type_id = false)]
+	[Compact]
+	public class AnonymousFile {
+	}
+#endif
+#if HAS_MUTTER50
+	[CCode (cheader_filename = "mtk/mtk.h", has_type_id = false)]
+	[Compact]
+	public class DbusPidfd {
+		public void free ();
+		public pid_t get_pid ();
+		public int get_pidfd ();
+	}
+#endif
 #if HAS_MUTTER46
 	[CCode (cheader_filename = "mtk/mtk.h", ref_function = "mtk_region_ref", type_id = "mtk_region_get_type ()", unref_function = "mtk_region_unref")]
 	[Compact]
@@ -14,7 +29,13 @@ namespace Mtk {
 		public static Mtk.Region create_rectangle (Mtk.Rectangle rect);
 		public static Mtk.Region create_rectangles (Mtk.Rectangle rects, int n_rects);
 		public Mtk.Region crop_and_scale (Graphene.Rect src_rect, int dst_width, int dst_height);
+#if HAS_MUTTER50
+		public Mtk.Region downscale (int scale);
+#endif
 		public bool equal (Mtk.Region other);
+#if HAS_MUTTER48
+		public void get_box (int nth, int x1, int y1, int x2, int y2);
+#endif
 		public Mtk.Rectangle? get_extents ();
 		public Mtk.Rectangle? get_rectangle (int nth);
 		public void intersect (Mtk.Region other);
@@ -44,11 +65,19 @@ namespace Mtk {
 		[CCode (has_construct_function = false, type = "MtkRectangle*")]
 		public Rectangle (int x, int y, int width, int height);
 		public int area ();
+#if HAS_MUTTER48
+		public bool contains_point (int x, int y);
+		public bool contains_pointf (float x, float y);
+#endif
 		public bool contains_rect (Mtk.Rectangle inner_rect);
 		public Mtk.Rectangle? copy ();
 		public bool could_fit_rect (Mtk.Rectangle inner_rect);
 #if HAS_MUTTER46
 		public void crop_and_scale (Graphene.Rect src_rect, int dst_width, int dst_height, Mtk.Rectangle dest);
+#endif
+#if HAS_MUTTER47
+		[CCode (has_construct_function = false, type = "MtkRectangle*")]
+		public Rectangle.empty ();
 #endif
 		public bool equal (Mtk.Rectangle src2);
 		public void free ();
@@ -58,11 +87,17 @@ namespace Mtk {
 #if HAS_MUTTER46
 		public bool is_adjacent_to (Mtk.Rectangle other);
 #endif
+#if HAS_MUTTER49
+		public bool is_empty ();
+#endif
 		public bool overlap (Mtk.Rectangle rect2);
 #if HAS_MUTTER46
 		public void scale_double (double scale, Mtk.RoundingStrategy rounding_strategy, Mtk.Rectangle dest);
 #endif
 		public Graphene.Rect? to_graphene_rect ();
+#if HAS_MUTTER47
+		public void transform (Mtk.MonitorTransform transform, int width, int height, Mtk.Rectangle dest);
+#endif
 		public Mtk.Rectangle union (Mtk.Rectangle rect2);
 		public bool vert_overlap (Mtk.Rectangle rect2);
 	}
@@ -89,6 +124,38 @@ namespace Mtk {
 		public void init (Mtk.Region region);
 		public void next ();
 	}
+#if HAS_MUTTER49
+	[CCode (cheader_filename = "mtk/mtk.h", cprefix = "MTK_ANONYMOUS_FILE_MAPMODE_", has_type_id = false)]
+	public enum AnonymousFileMapmode {
+		PRIVATE,
+		SHARED
+	}
+#endif
+#if HAS_MUTTER47
+	[CCode (cheader_filename = "mtk/mtk.h", cprefix = "MTK_MONITOR_TRANSFORM_", has_type_id = false)]
+	public enum MonitorTransform {
+		NORMAL,
+		@90,
+		@180,
+		@270,
+		FLIPPED,
+		FLIPPED_90,
+		FLIPPED_180,
+		FLIPPED_270;
+#if HAS_MUTTER48
+		public static Mtk.MonitorTransform from_string (string name);
+#endif
+		public Mtk.MonitorTransform invert ();
+#if HAS_MUTTER48
+		public unowned string to_string ();
+#endif
+		public Mtk.MonitorTransform transform (Mtk.MonitorTransform other);
+		public void transform_matrix (Graphene.Matrix matrix);
+		public void transform_point (int area_width, int area_height, int point_x, int point_y);
+		[CCode (cname = "MTK_MONITOR_ALL_TRANSFORMS")]
+		public const int ALL;
+	}
+#endif
 	[CCode (cheader_filename = "mtk/mtk.h", cprefix = "MTK_REGION_OVERLAP_", has_type_id = false)]
 	public enum RegionOverlap {
 		OUT,
@@ -102,6 +169,22 @@ namespace Mtk {
 		GROW,
 		ROUND
 	}
+#if HAS_MUTTER48
+	[CCode (cheader_filename = "mtk/mtk.h")]
+	public static void compute_viewport_matrix (Graphene.Matrix matrix, int width, int height, float scale, Mtk.MonitorTransform transform, Graphene.Rect src_rect);
+#endif
+#if HAS_MUTTER49
+	[CCode (cheader_filename = "mtk/mtk.h")]
+#if HAS_MUTTER50
+	public static int64 extrapolate_next_interval_boundary (int64 boundary_us, int64 base_us, int64 interval_us);
+#else
+	public static int64 extrapolate_next_interval_boundary (int64 base_us, int64 interval_us);
+#endif
+#endif
+#if HAS_MUTTER50
+	[CCode (cheader_filename = "mtk/mtk.h")]
+	public static int64 find_nearest_interval_boundary (int64 boundary_us, int64 base_us, int64 interval_us);
+#endif
 	[CCode (cheader_filename = "mtk/mtk.h")]
 	[Version (replacement = "Rectangle.from_graphene_rect")]
 	public static Mtk.Rectangle rectangle_from_graphene_rect (Graphene.Rect rect, Mtk.RoundingStrategy rounding_strategy);
