@@ -305,7 +305,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                     var demo_mode_file = File.new_for_path ("/var/lib/lightdm/demo-mode");
                     if (demo_mode_file.query_exists ()) {
                         demo_mode_file.@delete ();
-                        session = "pantheon";
+                        session = "pantheon-wayland";
                     } else {
                         session = "installer";
                     }
