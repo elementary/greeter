@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-29 15:12+0000\n"
+"POT-Creation-Date: 2026-04-24 14:50+0000\n"
 "PO-Revision-Date: 2025-08-21 13:55+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementaryos.org/projects/desktop/"
@@ -39,16 +39,6 @@ msgstr "Conserver les paramètres"
 #: compositor/WindowManager.vala:374
 msgid "Use Previous Settings"
 msgstr "Utiliser les paramètres précédents"
-
-#: src/Application.vala:127
-msgid "Classic session automatically selected"
-msgstr "Session classique sélectionnée automatiquement"
-
-#: src/Application.vala:128
-msgid "Accessibility features may be unavailable in the Secure session"
-msgstr ""
-"Les fonctionnalités d'accessibilité pourraient être indisponibles dans la "
-"session sécurisée"
 
 #: src/MainWindow.vala:44
 msgid "Log in as Guest"
@@ -114,6 +104,14 @@ msgstr "Verr Num activé"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Mot de passe"
+
+#~ msgid "Classic session automatically selected"
+#~ msgstr "Session classique sélectionnée automatiquement"
+
+#~ msgid "Accessibility features may be unavailable in the Secure session"
+#~ msgstr ""
+#~ "Les fonctionnalités d'accessibilité pourraient être indisponibles dans la "
+#~ "session sécurisée"
 
 #~ msgid "Try username"
 #~ msgstr "Essayer le nom d'utilisateur"

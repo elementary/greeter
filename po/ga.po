@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-29 15:12+0000\n"
+"POT-Creation-Date: 2026-04-24 14:50+0000\n"
 "PO-Revision-Date: 2017-02-25 05:03+0000\n"
 "Last-Translator: Aoibhe Ní Ghnímh <Unknown>\n"
 "Language-Team: Irish <ga@li.org>\n"
@@ -35,14 +35,6 @@ msgstr ""
 
 #: compositor/WindowManager.vala:374
 msgid "Use Previous Settings"
-msgstr ""
-
-#: src/Application.vala:127
-msgid "Classic session automatically selected"
-msgstr ""
-
-#: src/Application.vala:128
-msgid "Accessibility features may be unavailable in the Secure session"
 msgstr ""
 
 #: src/MainWindow.vala:44

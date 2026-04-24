@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-29 15:12+0000\n"
+"POT-Creation-Date: 2026-04-24 14:50+0000\n"
 "PO-Revision-Date: 2023-05-20 18:06+0000\n"
 "Last-Translator: Muktazam Hasbi Ashidiqi <hasbeeazam@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/desktop/"
@@ -36,14 +36,6 @@ msgstr "Pertahankan Pengaturan"
 #: compositor/WindowManager.vala:374
 msgid "Use Previous Settings"
 msgstr "Gunakan Pengaturan Sebelumnya"
-
-#: src/Application.vala:127
-msgid "Classic session automatically selected"
-msgstr ""
-
-#: src/Application.vala:128
-msgid "Accessibility features may be unavailable in the Secure session"
-msgstr ""
 
 #: src/MainWindow.vala:44
 msgid "Log in as Guest"

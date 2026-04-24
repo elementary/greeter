@@ -4,4 +4,5 @@ Comment=Pantheon Greeter
 Icon=io.elementary.greeter.settings
 Exec=@PROJECT_NAME@-compositor
 Type=Application
+X-LightDM-Session-Type=wayland
 NoDisplay=true
