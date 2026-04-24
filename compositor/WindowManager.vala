@@ -71,6 +71,33 @@ namespace GreeterCompositor {
             display.gl_video_memory_purged.connect (() => {
                 refresh_background ();
             });
+
+            if (Meta.Util.is_wayland_compositor ()) {
+                display.init_xserver.connect ((task) => {
+                    start_x11_services.begin (task);
+                    return true;
+                });
+            }
+        }
+
+        private async void start_x11_services (GLib.Task task) {
+            try {
+                var session_bus = yield GLib.Bus.@get (GLib.BusType.SESSION);
+                yield session_bus.call (
+                    "org.freedesktop.systemd1",
+                    "/org/freedesktop/systemd1",
+                    "org.freedesktop.systemd1.Manager",
+                    "StartUnit",
+                    new GLib.Variant ("(ss)", "gnome-session-x11-services-ready.target", "fail"),
+                    new GLib.VariantType ("(o)"),
+                    GLib.DBusCallFlags.NONE,
+                    -1
+                );
+            } catch (Error e) {
+                critical (e.message);
+            } finally {
+                task.return_boolean (true);
+            }
         }
 
         void refresh_background () {
