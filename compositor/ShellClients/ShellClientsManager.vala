@@ -20,15 +20,13 @@ public class GreeterCompositor.ShellClientsManager : Object {
         return instance;
     }
 
-    public Clutter.Actor? actor { get { return wm.stage; } }
-
     public WindowManager wm { get; construct; }
 
     private NotificationsClient notifications_client;
     private ManagedClient[] protocol_clients = {};
 
     private GLib.HashTable<Meta.Window, PanelWindow> panel_windows = new GLib.HashTable<Meta.Window, PanelWindow> (null, null);
-    private GLib.HashTable<Meta.Window, ShellWindow> positioned_windows = new GLib.HashTable<Meta.Window, ShellWindow> (null, null);
+    private GLib.HashTable<Meta.Window, ExtendedBehaviorWindow> positioned_windows = new GLib.HashTable<Meta.Window, ExtendedBehaviorWindow> (null, null);
 
     private ShellClientsManager (WindowManager wm) {
         Object (wm: wm);
@@ -94,7 +92,6 @@ public class GreeterCompositor.ShellClientsManager : Object {
         xdisplay.change_property (x_window, atom, (X.Atom) 4, 32, 0, (uchar[]) dock_atom, 1);
     }
 #endif
-
 
     public void make_desktop (Meta.Window window) {
 #if HAS_MUTTER49
@@ -176,14 +173,14 @@ public class GreeterCompositor.ShellClientsManager : Object {
     public void init_greeter (Meta.Window window) {
         make_desktop (window);
 
-        positioned_windows[window] = new ShellWindow (window, FULLSCREEN);
+        positioned_windows[window] = new ExtendedBehaviorWindow (window);
 
         // connect_after so we make sure that any queued move is unqueued
         window.unmanaging.connect_after ((_window) => positioned_windows.remove (_window));
     }
 
     public void make_centered (Meta.Window window) requires (!is_itself_shell_window (window)) {
-        positioned_windows[window] = new ShellWindow (window, CENTER);
+        positioned_windows[window] = new ExtendedBehaviorWindow (window);
 
         // connect_after so we make sure that any queued move is unqueued
         window.unmanaging.connect_after ((_window) => positioned_windows.remove (_window));
