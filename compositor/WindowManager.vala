@@ -208,6 +208,7 @@ namespace GreeterCompositor {
 
             Idle.add (() => {
                 // let the session manager move to the next phase
+                Systemd.Daemon.notify (true, "READY=1");
                 display.get_context ().notify_ready ();
                 ShellClientsManager.init (this);
 
