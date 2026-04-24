@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-29 15:12+0000\n"
+"POT-Creation-Date: 2026-04-24 14:50+0000\n"
 "PO-Revision-Date: 2026-04-04 02:32+0000\n"
 "Last-Translator: Buni <ben.gordon@posteo.de>\n"
 "Language-Team: Scots <https://l10n.elementaryos.org/projects/desktop/greeter/"
@@ -37,14 +37,6 @@ msgstr "Haud Settins"
 #: compositor/WindowManager.vala:374
 msgid "Use Previous Settings"
 msgstr "Yuise Previous Settins"
-
-#: src/Application.vala:127
-msgid "Classic session automatically selected"
-msgstr "Classic session automatically wale't"
-
-#: src/Application.vala:128
-msgid "Accessibility features may be unavailable in the Secure session"
-msgstr "Accessibility feetures micht be unavailable in the Sicker session"
 
 #: src/MainWindow.vala:44
 msgid "Log in as Guest"
@@ -109,3 +101,9 @@ msgstr "Num Lock is on"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Passwird"
+
+#~ msgid "Classic session automatically selected"
+#~ msgstr "Classic session automatically wale't"
+
+#~ msgid "Accessibility features may be unavailable in the Secure session"
+#~ msgstr "Accessibility feetures micht be unavailable in the Sicker session"

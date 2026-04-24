@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-29 15:12+0000\n"
+"POT-Creation-Date: 2026-04-24 14:50+0000\n"
 "PO-Revision-Date: 2025-10-30 13:55+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <https://l10n.elementaryos.org/projects/desktop/"
@@ -38,15 +38,6 @@ msgstr "Behåll inställningar"
 #: compositor/WindowManager.vala:374
 msgid "Use Previous Settings"
 msgstr "Använd tidigare inställningar"
-
-#: src/Application.vala:127
-msgid "Classic session automatically selected"
-msgstr "Klassisk session väljs automatiskt"
-
-#: src/Application.vala:128
-msgid "Accessibility features may be unavailable in the Secure session"
-msgstr ""
-"Hjälpmedelsfunktioner kanske inte är tillgängliga i den säkra sessionen"
 
 #: src/MainWindow.vala:44
 msgid "Log in as Guest"
@@ -111,6 +102,13 @@ msgstr "Num Lock är på"
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Lösenord"
+
+#~ msgid "Classic session automatically selected"
+#~ msgstr "Klassisk session väljs automatiskt"
+
+#~ msgid "Accessibility features may be unavailable in the Secure session"
+#~ msgstr ""
+#~ "Hjälpmedelsfunktioner kanske inte är tillgängliga i den säkra sessionen"
 
 #~ msgid "Does the display look OK?"
 #~ msgstr "Ser bildskärmen bra ut?"
