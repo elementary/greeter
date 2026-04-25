@@ -2,7 +2,7 @@
 Name=Pantheon Greeter
 Comment=Pantheon Greeter
 Icon=io.elementary.greeter.settings
-Exec=@PROJECT_NAME@-compositor
+Exec=env GALA_SESSION_TYPE=greeter gala --wayland
 Type=Application
 X-LightDM-Session-Type=wayland
 NoDisplay=true
