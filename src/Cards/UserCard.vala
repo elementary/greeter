@@ -15,6 +15,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Pantheon.AccountsService greeter_act;
     private Pantheon.SettingsDaemon.AccountsService settings_act;
 
+    private Gtk.Label username_label;
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
@@ -29,7 +30,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     construct {
         need_password = true;
 
-        var username_label = new Gtk.Label (lightdm_user.display_name) {
+        username_label = new Gtk.Label (lightdm_user.display_name) {
             hexpand = true,
             margin_top = 24,
             margin_bottom = 12,
@@ -37,7 +38,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
             margin_end = 24,
         };
         username_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
-        lightdm_user.bind_property ("is-locked", username_label, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
 
         password_entry = new Greeter.PasswordEntry ();
         bind_property ("connecting", password_entry, "sensitive", INVERT_BOOLEAN);
@@ -49,7 +49,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var password_session_button = new Greeter.SessionButton () {
             vexpand = true
         };
-        lightdm_user.bind_property ("is-locked", password_session_button, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
 
         var password_grid = new Gtk.Grid () {
             column_spacing = 6,
@@ -67,7 +66,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         var login_button_session_button = new Greeter.SessionButton () {
             vexpand = true
         };
-        lightdm_user.bind_property ("is-locked", login_button_session_button, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
 
         var login_box = new Gtk.Box (HORIZONTAL, 6);
         login_box.add (login_button);
@@ -152,6 +150,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
         child = card_overlay;
 
         connect_to_dbus_interfaces ();
+        lightdm_user.changed.connect (update_is_locked_ui);
+        notify["need-password"].connect (update_is_locked_ui);
 
         click_gesture = new Gtk.GestureMultiPress (this);
 
@@ -160,17 +160,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         password_entry.activate.connect (on_login);
         login_button.clicked.connect (on_login);
 
-        notify["need-password"].connect (() => {
-            if (need_password) {
-                login_stack.visible_child = password_grid;
-            } else {
-                login_stack.visible_child = login_button;
-            }
-        });
-
-        grab_focus.connect (() => {
-            password_entry.grab_focus_without_selecting ();
-        });
+        grab_focus.connect (password_entry.grab_focus_without_selecting);
     }
 
     private void set_check_style () {
@@ -256,15 +246,21 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         set_background_image ();
         set_check_style ();
+        update_is_locked_ui ();
+    }
 
-        if (lightdm_user.is_locked) {
+    private void update_is_locked_ui () {
+        // lightdm_user.is_locked prints warnings so let's use a getter method here
+        var is_locked = lightdm_user.get_is_locked ();
+
+        username_label.sensitive = !is_locked;
+
+        if (is_locked) {
             login_stack.visible_child_name = "disabled";
+        } else if (need_password) {
+            login_stack.visible_child_name = "password";
         } else {
-            if (need_password) {
-                login_stack.visible_child_name = "password";
-            } else {
-                login_stack.visible_child_name = "button";
-            }
+            login_stack.visible_child_name = "button";
         }
     }
 
