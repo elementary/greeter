@@ -296,6 +296,27 @@ namespace GreeterCompositor {
         focus (panel_surface.wayland_surface);
     }
 
+    internal static void focus_extended_behavior (Wl.Client client, Wl.Resource resource) {
+        unowned ExtendedBehaviorSurface? extended_behavior_surface = resource.get_user_data<ExtendedBehaviorSurface> ();
+        if (extended_behavior_surface.wayland_surface == null) {
+            warning ("Window tried to focus but wayland surface is null.");
+            return;
+        }
+
+        focus (extended_behavior_surface.wayland_surface);
+    }
+
+    internal static void focus (Object wayland_surface) {
+        Meta.Window? window;
+        wayland_surface.get ("window", out window, null);
+        if (window == null) {
+            warning ("Window tried to focus but wayland surface had no associated window.");
+            return;
+        }
+
+        window.focus (window.get_display ().get_current_time ());
+    }
+
     internal static void set_size (Wl.Client client, Wl.Resource resource, int width, int height) {
         unowned PanelSurface? panel_surface = resource.get_user_data<PanelSurface> ();
         if (panel_surface.wayland_surface == null) {
@@ -368,27 +389,6 @@ namespace GreeterCompositor {
         }
 
         ShellClientsManager.get_instance ().init_greeter (window);
-    }
-
-    internal static void focus_extended_behavior (Wl.Client client, Wl.Resource resource) {
-        unowned ExtendedBehaviorSurface? extended_behavior_surface = resource.get_user_data<ExtendedBehaviorSurface> ();
-        if (extended_behavior_surface.wayland_surface == null) {
-            warning ("Window tried to focus but wayland surface is null.");
-            return;
-        }
-
-        focus (extended_behavior_surface.wayland_surface);
-    }
-
-    internal static void focus (Object wayland_surface) {
-        Meta.Window? window;
-        wayland_surface.get ("window", out window, null);
-        if (window == null) {
-            warning ("Window tried to focus but wayland surface had no associated window.");
-            return;
-        }
-
-        window.focus (window.get_display ().get_current_time ());
     }
 
     internal static void set_keep_above (Wl.Client client, Wl.Resource resource) {
