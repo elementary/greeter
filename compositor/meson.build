@@ -101,6 +101,7 @@ compositor_files = files(
   'Background/SystemBackground.vala',
   'PantheonShell.vala',
   'ShellClients/CenteredWindow.vala',
+  'ShellClients/ExtendedBehaviorWindow.vala',
   'ShellClients/ManagedClient.vala',
   'ShellClients/NotificationsClient.vala',
   'ShellClients/PanelWindow.vala',

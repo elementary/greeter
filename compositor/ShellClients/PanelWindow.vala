@@ -15,19 +15,17 @@ public class GreeterCompositor.PanelWindow : ShellWindow {
     private int height = -1;
 
     public PanelWindow (WindowManager wm, Meta.Window window, Pantheon.Desktop.Anchor anchor) {
-        Object (wm: wm, anchor: anchor, window: window, position: Position.from_anchor (anchor));
+        Object (wm: wm, window: window, anchor: anchor);
     }
 
     construct {
-        update_strut ();
-
         window.unmanaging.connect (() => {
             if (window_struts.remove (window)) {
                 update_struts ();
             }
         });
 
-        notify["anchor"].connect (() => position = Position.from_anchor (anchor));
+        notify["anchor"].connect (position_window);
 
         unowned var workspace_manager = window.display.get_workspace_manager ();
         workspace_manager.workspace_added.connect (update_strut);
@@ -35,6 +33,15 @@ public class GreeterCompositor.PanelWindow : ShellWindow {
 
         window.size_changed.connect (update_strut);
         window.position_changed.connect (update_strut);
+        notify["width"].connect (update_strut);
+        notify["height"].connect (update_strut);
+
+        var window_actor = (Meta.WindowActor) window.get_compositor_private ();
+
+        window_actor.notify["width"].connect (update_clip);
+        window_actor.notify["height"].connect (update_clip);
+        window_actor.notify["translation-y"].connect (update_clip);
+        notify["anchor"].connect (update_clip);
     }
 
     public Mtk.Rectangle get_custom_window_rect () {
@@ -101,6 +108,42 @@ public class GreeterCompositor.PanelWindow : ShellWindow {
 
             default:
                 return TOP;
+        }
+    }
+
+    protected override void get_window_position (Mtk.Rectangle window_rect, out int x, out int y) {
+        var monitor_rect = window.display.get_monitor_geometry (window.display.get_primary_monitor ());
+        switch (anchor) {
+            case TOP:
+                x = monitor_rect.x + (monitor_rect.width - window_rect.width) / 2;
+                y = monitor_rect.y;
+                break;
+
+            case BOTTOM:
+                x = monitor_rect.x + (monitor_rect.width - window_rect.width) / 2;
+                y = monitor_rect.y + monitor_rect.height - window_rect.height;
+                break;
+
+            default:
+                warning ("Unsupported anchor %s for PanelWindow", anchor.to_string ());
+                x = 0;
+                y = 0;
+                break;
+        }
+    }
+
+    private void update_clip () {
+        var monitor_geom = window.display.get_monitor_geometry (window.get_monitor ());
+        var window_actor = (Meta.WindowActor) window.get_compositor_private ();
+
+        var y = window_actor.y + window_actor.translation_y;
+
+        if (y + window_actor.height > monitor_geom.y + monitor_geom.height) {
+            window_actor.set_clip (0, 0, window_actor.width, monitor_geom.y + monitor_geom.height - y);
+        } else if (y < monitor_geom.y) {
+            window_actor.set_clip (0, monitor_geom.y - y, window_actor.width, window_actor.height);
+        } else {
+            window_actor.remove_clip ();
         }
     }
 }
