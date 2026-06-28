@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-24 14:50+0000\n"
 "PO-Revision-Date: 2026-06-29 13:56+0000\n"
-"Last-Translator: kalligator <kalligator+github@gmail.com>\n"
+"Last-Translator: Jim Spentzos <jimspentzos2000@gmail.com>\n"
 "Language-Team: Greek <https://l10n.elementaryos.org/projects/desktop/greeter-"
 "extra/el/>\n"
 "Language: el\n"
@@ -49,7 +49,7 @@ msgstr "Ενημερωμένες μεταφράσεις"
 
 #: data/greeter.metainfo.xml.in:107 data/greeter.metainfo.xml.in:163
 msgid "New Features:"
-msgstr ""
+msgstr "Νέες λειτουργίες:"
 
 #: data/greeter.metainfo.xml.in:109
 msgid "Add blurred wallpaper as background"
