@@ -21,6 +21,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private int current_user_card_index = -1;
     private unowned Greeter.BaseCard? current_card = null;
 
+    private FPrintUtil fprint_util;
+
     private bool installer_mode = false;
 
     private Gtk.EventControllerKey key_controller;
@@ -385,7 +387,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void add_card (LightDM.User lightdm_user) {
-        var user_card = new Greeter.UserCard (lightdm_user);
+        var user_card = new Greeter.UserCard (lightdm_user, fprint_util);
         user_card.show_all ();
         user_card.do_connect.connect (do_connect);
         user_card.click_gesture.pressed.connect ((gesture, n_press, x, y) => {
@@ -497,6 +499,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index - 1);
         if (next_card != null) {
             carousel.scroll_to (next_card);
+            fprint_util.start (next_card.lightdm_user.name);
         }
     }
 
@@ -508,6 +511,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index + 1);
         if (next_card != null) {
             carousel.scroll_to (next_card);
+            fprint_util.start (next_card.lightdm_user.name);
         }
     }
 }

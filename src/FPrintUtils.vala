@@ -21,7 +21,7 @@ public interface FPrintDevice : GLib.Object {
     public signal void verify_status (string result, bool done);
 }
 
-class FPrintUtil : GLib.Object {
+public class FPrintUtil : GLib.Object {
     private unowned FPrintManager manager;
     private FPrintDevice[] devices = {};
 
