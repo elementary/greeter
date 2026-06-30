@@ -37,7 +37,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         gsettings = new GLib.Settings ("io.elementary.greeter");
         settings = new Greeter.Settings ();
 
-        lightdm_greeter.show_message.connect (show_message);
         lightdm_greeter.show_prompt.connect (show_prompt);
         lightdm_greeter.authentication_complete.connect (authentication_complete);
 
@@ -261,20 +260,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             var value = "greeter=1";
 
             xdisplay.change_property (window, prop, X.XA_STRING, 8, 0, (uchar[]) value, value.length);
-        }
-    }
-
-    private void show_message (string text, LightDM.MessageType type) {
-        var messagetext = Greeter.FPrintUtils.string_to_messagetext (text);
-        switch (messagetext) {
-            case Greeter.FPrintUtils.MessageText.FPRINT_TIMEOUT:
-            case Greeter.FPrintUtils.MessageText.FPRINT_ERROR:
-            case Greeter.FPrintUtils.MessageText.OTHER:
-                current_card.use_fingerprint = false;
-                break;
-            default:
-                current_card.use_fingerprint = true;
-                break;
         }
     }
 
