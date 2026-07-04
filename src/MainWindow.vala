@@ -18,6 +18,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private Greeter.DateTimeWidget datetime_widget;
     private unowned LightDM.UserList lightdm_user_list;
 
+    private string? saved_credential = null;
+
     private int current_user_card_index = -1;
     private unowned Greeter.BaseCard? current_card = null;
 
@@ -270,15 +272,24 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             case Greeter.FPrintUtils.MessageText.FPRINT_TIMEOUT:
             case Greeter.FPrintUtils.MessageText.FPRINT_ERROR:
             case Greeter.FPrintUtils.MessageText.OTHER:
-                current_card.use_fingerprint = false;
                 break;
             default:
                 current_card.use_fingerprint = true;
+                saved_credential = null;
                 break;
         }
     }
 
     private void show_prompt (string text, LightDM.PromptType type = LightDM.PromptType.QUESTION) {
+        if (saved_credential != null) {
+            try {
+                lightdm_greeter.respond (saved_credential);
+            } catch (Error e) {
+                critical (e.message);
+            }
+        } else {
+            do_connect_username (((UserCard) current_card).lightdm_user.name);
+        }
         if (current_card is ManualCard) {
             if (type == LightDM.PromptType.SECRET) {
                 ((ManualCard) current_card).ask_password ();
@@ -492,14 +503,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void do_connect (string? credential) {
-        if (credential != null) {
-            try {
-                lightdm_greeter.respond (credential);
-            } catch (Error e) {
-                critical (e.message);
-            }
-        }
-
+        saved_credential = credential;
         carousel.interactive = false;
         carousel.scroll_to (current_card);
     }
