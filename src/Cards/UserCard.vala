@@ -23,7 +23,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private SelectionCheck logged_in;
 
-    public unowned FPrintUtil fprint_util { get; construct; }
+    public FPrintUtil fprint_util { get; construct; }
+    public signal void do_fprint_login (string username);
 
     public UserCard (LightDM.User lightdm_user, FPrintUtil fprint_util) {
         Object (
@@ -165,7 +166,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
         password_entry.activate.connect (on_login);
         login_button.clicked.connect (on_login);
 
-        fprint_util.verify_passed.connect (on_login);
+        fprint_util.verify_passed.connect (() => {
+            do_fprint_login (lightdm_user.name);
+        });
+
         fprint_util.verify_failed.connect (wrong_credentials);
 
         grab_focus.connect (password_entry.grab_focus_without_selecting);

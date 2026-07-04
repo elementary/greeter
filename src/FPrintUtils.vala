@@ -8,7 +8,7 @@
 [DBus (name = "net.reactivated.Fprint.Manager")]
 public interface FPrintManager : GLib.Object {
     public abstract ObjectPath get_default_device () throws GLib.Error;
-    public abstract ObjectPath[] get_devices ();
+    public abstract ObjectPath[] get_devices () throws GLib.Error;
 }
 
 [DBus (name = "net.reactivated.Fprint.Device")]
@@ -22,7 +22,7 @@ public interface FPrintDevice : GLib.Object {
 }
 
 public class FPrintUtil : GLib.Object {
-    private unowned FPrintManager manager;
+    private FPrintManager manager;
     private FPrintDevice[] devices = {};
 
     public signal void verify_passed ();
@@ -44,7 +44,14 @@ public class FPrintUtil : GLib.Object {
             return false;
         }
 
-        var device_paths = manager.get_devices ();
+        ObjectPath[]? device_paths = null;
+
+        try {
+            device_paths = manager.get_devices ();
+        } catch (Error e) {
+            debug (e.message);
+            return false;
+        }
 
         foreach (var device_path in device_paths) {
             FPrintDevice device;
@@ -91,7 +98,7 @@ public class FPrintUtil : GLib.Object {
                 try {
                     device.verify_stop ();
                 } catch (GLib.Error e) {
-                    debug ("Device stop error: %s\n%s", device.name, e.message);
+                    debug ("%s: %s", device.name, e.message);
                 }
             }
             stop ();
