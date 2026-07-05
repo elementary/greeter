@@ -340,6 +340,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         }
 
+        saved_credential = null;
+
         if (user_card != null) {
             try {
                 lightdm_greeter.authenticate (user_card.lightdm_user.name);
