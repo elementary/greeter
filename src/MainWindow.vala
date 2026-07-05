@@ -281,6 +281,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void show_prompt (string text, LightDM.PromptType type = LightDM.PromptType.QUESTION) {
+        if (current_card is ManualCard) {
+            if (type == LightDM.PromptType.SECRET) {
+                ((ManualCard) current_card).ask_password ();
+            } else {
+                ((ManualCard) current_card).wrong_username ();
+            }
+        }
+
         if (saved_credential != null) {
             try {
                 lightdm_greeter.respond (saved_credential);
@@ -289,13 +297,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         } else {
             do_connect_username (((UserCard) current_card).lightdm_user.name);
-        }
-        if (current_card is ManualCard) {
-            if (type == LightDM.PromptType.SECRET) {
-                ((ManualCard) current_card).ask_password ();
-            } else {
-                ((ManualCard) current_card).wrong_username ();
-            }
         }
     }
 
