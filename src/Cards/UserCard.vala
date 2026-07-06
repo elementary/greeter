@@ -1,6 +1,6 @@
 /*
- * Copyright 2018-2025 elementary, Inc. (https://elementary.io)
  * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: 2018-2026 elementary, Inc. (https://elementary.io)
  *
  * Authors: Corentin Noël <corentin@elementary.io>
  */
@@ -270,11 +270,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         }
 
         connecting = true;
-        if (need_password) {
-            do_connect (password_entry.text);
-        } else {
-            do_connect ();
-        }
+        authenticate (lightdm_user.name, need_password ? password_entry.text : "");
     }
 
     private void update_collapsed_class () {

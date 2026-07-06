@@ -1,11 +1,9 @@
 /*
- * Copyright 2018-2023 elementary, Inc. (https://elementary.io)
  * SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-FileCopyrightText: 2018-2026 elementary, Inc. (https://elementary.io)
  */
 
 public class Greeter.ManualCard : Greeter.BaseCard {
-    public signal void do_connect_username (string username);
-
     private Greeter.PasswordEntry password_entry;
     private Gtk.Entry username_entry;
     private Gtk.Box main_box;
@@ -68,12 +66,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         bind_property ("connecting", username_entry, "sensitive", INVERT_BOOLEAN);
         bind_property ("connecting", password_entry, "sensitive", INVERT_BOOLEAN);
 
-        username_entry.focus_out_event.connect (() => {
-            if (username_entry.text != "") {
-                do_connect_username (username_entry.text);
-            }
-        });
-
+        username_entry.activate.connect (on_login);
         password_entry.activate.connect (on_login);
     }
 
@@ -83,7 +76,7 @@ public class Greeter.ManualCard : Greeter.BaseCard {
         }
 
         connecting = true;
-        do_connect (password_entry.text);
+        authenticate (username_entry.text, password_entry.text);
     }
 
     public override void wrong_credentials () {

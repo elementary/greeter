@@ -17,6 +17,7 @@ executable(
     meson.project_name(),
     greeter_resources,
     'Application.vala',
+    'AuthenticationManager.vala',
     'FPrintUtils.vala',
     'MainWindow.vala',
     'PantheonAccountsServicePlugin.vala',
