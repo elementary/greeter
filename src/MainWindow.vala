@@ -187,11 +187,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
              * at boot.  TODO: Find whether boot sequence can be tweaked to fix this.
              */
             Timeout.add (500, () => {
-                get_style_context ().add_class ("initialized");
-
-                if (current_card != null) {
-                    current_card.grab_focus ();
-                }
+                current_card?.grab_focus ();
+                show_all ();
 
                 return Source.REMOVE;
             });
