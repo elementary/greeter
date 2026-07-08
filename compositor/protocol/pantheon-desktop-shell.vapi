@@ -11,9 +11,8 @@ namespace Pantheon.Desktop {
         public static Wl.Interface iface;
         public Pantheon.Desktop.GetPanel get_panel;
         public Pantheon.Desktop.GetWidget get_widget;
-        public Pantheon.Desktop.GetGreeter get_greeter;
         public Pantheon.Desktop.GetExtendedBehavior get_extended_behavior;
-
+        public Pantheon.Desktop.GetGreeter get_greeter;
     }
 
     [CCode (cheader_filename = "pantheon-desktop-shell-server-protocol.h", cname = "enum io_elementary_pantheon_panel_v1_anchor", cprefix="IO_ELEMENTARY_PANTHEON_PANEL_V1_ANCHOR_", has_type_id = false)]
