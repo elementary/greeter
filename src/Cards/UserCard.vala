@@ -6,6 +6,10 @@
  */
 
 public class Greeter.UserCard : Greeter.BaseCard {
+    private const int PASSWORD_MODE_REGULAR = 0;
+    private const int PASSWORD_MODE_SET_AT_NEXT_LOGIN = 1;
+    private const int PASSWORD_MODE_NO_PASSWORD = 2;
+
     /**
      * We use Act.User instead of LightDM.User because lightdm is unmaintained
      * and lacks some fields from Act.User such as `password_mode`.
@@ -30,8 +34,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     construct {
-        need_password = true;
-
         var username_label = new Gtk.Label (user.real_name) {
             hexpand = true,
             margin_top = 24,
@@ -62,7 +64,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
         password_grid.attach (password_session_button, 2, 0);
         password_grid.attach (new Greeter.CapsLockRevealer (), 0, 1, 3);
 
-        var login_button = new Gtk.Button.with_label (_("Log In"));
+        var login_button = new Gtk.Button.with_label (_("Log In")) {
+            hexpand = true
+        };
         login_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
         bind_property ("connecting", login_button, "sensitive", INVERT_BOOLEAN);
 
@@ -89,7 +93,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             margin_end = 24
         };
         login_stack.add_named (password_grid, "password");
-        login_stack.add_named (login_button, "button");
+        login_stack.add_named (login_box, "button");
         login_stack.add_named (disabled_box, "disabled");
 
         form_revealer = new Gtk.Revealer () {
@@ -150,9 +154,11 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         child = card_overlay;
 
-        connect_to_dbus_interfaces ();
-        user.changed.connect (update_is_locked_ui);
-        notify["need-password"].connect (update_is_locked_ui);
+        show_all ();
+
+        user.notify["locked"].connect (update_is_locked_ui);
+        user.notify["password-mode"].connect (update_is_locked_ui);
+        update_is_locked_ui ();
 
         click_gesture = new Gtk.GestureMultiPress (this);
 
@@ -160,6 +166,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
         login_button.clicked.connect (on_login);
 
         grab_focus.connect (password_entry.grab_focus_without_selecting);
+
+        connect_to_dbus_interfaces ();
     }
 
     private void set_check_style () {
@@ -248,13 +256,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         set_background_image ();
         set_check_style ();
-        update_is_locked_ui ();
     }
 
     private void update_is_locked_ui () {
         if (user.locked) {
             login_stack.visible_child_name = "disabled";
-        } else if (need_password) {
+        } else if (user.password_mode != PASSWORD_MODE_NO_PASSWORD) {
             login_stack.visible_child_name = "password";
         } else {
             login_stack.visible_child_name = "button";
@@ -267,7 +274,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
         }
 
         connecting = true;
-        provide_credential (need_password ? password_entry.text : "");
+
+        if (user.password_mode != PASSWORD_MODE_NO_PASSWORD) {
+            provide_credential (password_entry.text);
+        } else {
+            start_authentication (user.user_name);
+        }
     }
 
     private void set_settings () {
@@ -418,7 +430,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
         set_settings ();
         grab_focus ();
 
-        start_authentication (user.user_name);
+        if (user.password_mode != PASSWORD_MODE_NO_PASSWORD) {
+            start_authentication (user.user_name);
+        }
     }
 
     public override void on_deselected () {

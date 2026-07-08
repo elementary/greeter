@@ -14,7 +14,6 @@ public abstract class Greeter.BaseCard : Gtk.Bin {
     protected const int ERROR_SHAKE_DURATION = 450;
 
     public bool connecting { get; set; default = false; }
-    public bool need_password { get; set; default = false; }
     public bool use_fingerprint { get; set; default = false; }
 
     construct {
