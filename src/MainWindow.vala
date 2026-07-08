@@ -1,6 +1,6 @@
 /*
  * SPDX-License-Identifier: GPL-2.0-or-later
- * SPDX-FileCopyrightText: 2018-2025 elementary, Inc. (https://elementary.io)
+ * SPDX-FileCopyrightText: 2018-2026 elementary, Inc. (https://elementary.io)
  *
  * Authors: Corentin Noël <corentin@elementary.io>
  */
@@ -8,6 +8,7 @@
 public class Greeter.MainWindow : Gtk.ApplicationWindow {
     public LightDM.Greeter lightdm_greeter { private get; construct; }
 
+    private AuthenticationManager authentication_manager;
     private Pantheon.Desktop.Greeter? desktop_greeter;
     private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
@@ -33,6 +34,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         app_paintable = true;
         decorated = false;
         set_visual (get_screen ().get_rgba_visual ());
+
+        authentication_manager = new AuthenticationManager (lightdm_greeter);
 
         gsettings = new GLib.Settings ("io.elementary.greeter");
         settings = new Greeter.Settings ();
@@ -92,34 +95,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         child = main_box;
 
         manual_login_button.toggled.connect (() => {
-            if (manual_login_button.active) {
-                if (lightdm_greeter.in_authentication) {
-                    try {
-                        lightdm_greeter.cancel_authentication ();
-                    } catch (Error e) {
-                        critical (e.message);
-                    }
-                }
+            authentication_manager.cancel_authentication ();
 
+            if (manual_login_button.active) {
                 manual_login_stack.visible_child = manual_card;
                 current_card = manual_card;
             } else {
-                if (lightdm_greeter.in_authentication) {
-                    try {
-                        lightdm_greeter.cancel_authentication ();
-                    } catch (Error e) {
-                        critical (e.message);
-                    }
-                }
-
                 manual_login_stack.visible_child = carousel;
                 current_card = user_cards.peek_nth (current_user_card_index);
-
-                try {
-                    lightdm_greeter.authenticate (((UserCard) current_card).lightdm_user.name);
-                } catch (Error e) {
-                    critical (e.message);
-                }
             }
         });
 
@@ -143,8 +126,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             load_users.begin ();
         });
 
-        manual_card.do_connect_username.connect (do_connect_username);
-        manual_card.do_connect.connect (do_connect);
+        manual_card.authenticate.connect (authenticate);
 
         key_controller = new Gtk.EventControllerKey (this) {
             propagation_phase = CAPTURE
@@ -278,7 +260,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
     }
 
-    private void show_prompt (string text, LightDM.PromptType type = LightDM.PromptType.QUESTION) {
+    private void show_prompt (string text, LightDM.PromptType type) {
         if (current_card is ManualCard) {
             if (type == LightDM.PromptType.SECRET) {
                 ((ManualCard) current_card).ask_password ();
@@ -402,7 +384,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private void add_card (LightDM.User lightdm_user) {
         var user_card = new Greeter.UserCard (lightdm_user);
         user_card.show_all ();
-        user_card.do_connect.connect (do_connect);
+        user_card.authenticate.connect (authenticate);
         user_card.click_gesture.pressed.connect ((gesture, n_press, x, y) => {
             assert (gesture.widget is UserCard);
 
@@ -459,46 +441,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         if (user_card.lightdm_user.session != null) {
             application.activate_action ("select-session", new GLib.Variant.string (user_card.lightdm_user.session));
         }
-
-        if (lightdm_greeter.in_authentication) {
-            try {
-                lightdm_greeter.cancel_authentication ();
-            } catch (Error e) {
-                critical (e.message);
-            }
-        }
-
-        try {
-            lightdm_greeter.authenticate (user_card.lightdm_user.name);
-        } catch (Error e) {
-            critical (e.message);
-        }
     }
 
-    private void do_connect_username (string username) {
-        if (lightdm_greeter.in_authentication) {
-            try {
-                lightdm_greeter.cancel_authentication ();
-            } catch (Error e) {
-                critical (e.message);
-            }
-        }
-
-        try {
-            lightdm_greeter.authenticate (username);
-        } catch (Error e) {
-            critical (e.message);
-        }
-    }
-
-    private void do_connect (string? credential) {
-        if (credential != null) {
-            try {
-                lightdm_greeter.respond (credential);
-            } catch (Error e) {
-                critical (e.message);
-            }
-        }
+    private void authenticate (string username, string credential) {
+        authentication_manager.authenticate (username, credential);
 
         carousel.interactive = false;
         carousel.scroll_to (current_card);
