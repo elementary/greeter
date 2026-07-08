@@ -1,13 +1,20 @@
 /*
- * Copyright 2018-2025 elementary, Inc. (https://elementary.io)
+ * Copyright 2018-2026 elementary, Inc. (https://elementary.io)
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
  * Authors: Corentin Noël <corentin@elementary.io>
  */
 
 public class Greeter.UserCard : Greeter.BaseCard {
-    public LightDM.User lightdm_user { get; construct; }
-    public bool show_input { get; set; default = false; }
+    private const int PASSWORD_MODE_REGULAR = 0;
+    private const int PASSWORD_MODE_SET_AT_NEXT_LOGIN = 1;
+    private const int PASSWORD_MODE_NO_PASSWORD = 2;
+
+    /**
+     * We use Act.User instead of LightDM.User because lightdm is unmaintained
+     * and lacks some fields from Act.User such as `password_mode`.
+     */
+    public Act.User user { get; construct; }
     public bool is_24h { get; set; default = true; }
     // TODO: In Gtk4 remove this gesture and move it to MainWindow 
     public Gtk.GestureMultiPress click_gesture { get; private set; }
@@ -15,7 +22,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Pantheon.AccountsService greeter_act;
     private Pantheon.SettingsDaemon.AccountsService settings_act;
 
-    private Gtk.Label username_label;
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
@@ -23,14 +29,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private SelectionCheck logged_in;
 
-    public UserCard (LightDM.User lightdm_user) {
-        Object (lightdm_user: lightdm_user);
+    public UserCard (Act.User user) requires (user.is_loaded) {
+        Object (user: user);
     }
 
     construct {
-        need_password = true;
-
-        username_label = new Gtk.Label (lightdm_user.display_name) {
+        var username_label = new Gtk.Label (user.real_name) {
             hexpand = true,
             margin_top = 24,
             margin_bottom = 12,
@@ -38,6 +42,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             margin_end = 24,
         };
         username_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+        user.bind_property ("locked", username_label, "sensitive", SYNC_CREATE);
 
         password_entry = new Greeter.PasswordEntry ();
         bind_property ("connecting", password_entry, "sensitive", INVERT_BOOLEAN);
@@ -59,7 +64,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
         password_grid.attach (password_session_button, 2, 0);
         password_grid.attach (new Greeter.CapsLockRevealer (), 0, 1, 3);
 
-        var login_button = new Gtk.Button.with_label (_("Log In"));
+        var login_button = new Gtk.Button.with_label (_("Log In")) {
+            hexpand = true
+        };
         login_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
         bind_property ("connecting", login_button, "sensitive", INVERT_BOOLEAN);
 
@@ -86,16 +93,15 @@ public class Greeter.UserCard : Greeter.BaseCard {
             margin_end = 24
         };
         login_stack.add_named (password_grid, "password");
-        login_stack.add_named (login_button, "button");
+        login_stack.add_named (login_box, "button");
         login_stack.add_named (disabled_box, "disabled");
 
         form_revealer = new Gtk.Revealer () {
             margin_bottom = 12,
-            reveal_child = true,
+            reveal_child = false,
             transition_type = SLIDE_DOWN,
             child = login_stack
         };
-        bind_property ("show-input", form_revealer, "reveal-child", SYNC_CREATE);
 
         main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_bottom = 48
@@ -105,15 +111,14 @@ public class Greeter.UserCard : Greeter.BaseCard {
         main_box.pack_end (username_label);
         main_box.get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
         main_box.get_style_context ().add_class (Granite.STYLE_CLASS_ROUNDED);
+        main_box.get_style_context ().add_class ("collapsed");
 
-        update_collapsed_class ();
-
-        var avatar = new Hdy.Avatar (64, lightdm_user.display_name, true) {
+        var avatar = new Hdy.Avatar (64, user.real_name, true) {
             margin_top = 6,
             margin_bottom = 6,
             margin_start = 6,
             margin_end = 6,
-            loadable_icon = new FileIcon (File.new_for_path (lightdm_user.image))
+            loadable_icon = new FileIcon (File.new_for_path (user.icon_file))
         };
 
         var avatar_overlay = new Gtk.Overlay () {
@@ -128,7 +133,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             valign = END
         };
 
-        if (lightdm_user.logged_in) {
+        if (user.is_logged_in ()) {
             avatar_overlay.add_overlay (logged_in);
 
             password_session_button.sensitive = false;
@@ -149,18 +154,20 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         child = card_overlay;
 
-        connect_to_dbus_interfaces ();
-        lightdm_user.changed.connect (update_is_locked_ui);
-        notify["need-password"].connect (update_is_locked_ui);
+        show_all ();
+
+        user.notify["locked"].connect (update_is_locked_ui);
+        user.notify["password-mode"].connect (update_is_locked_ui);
+        update_is_locked_ui ();
 
         click_gesture = new Gtk.GestureMultiPress (this);
-
-        notify["show-input"].connect (update_collapsed_class);
 
         password_entry.activate.connect (on_login);
         login_button.clicked.connect (on_login);
 
         grab_focus.connect (password_entry.grab_focus_without_selecting);
+
+        connect_to_dbus_interfaces ();
     }
 
     private void set_check_style () {
@@ -168,24 +175,27 @@ public class Greeter.UserCard : Greeter.BaseCard {
         logged_in.get_style_context ().add_class (accent_to_string (settings_act.accent_color));
     }
 
+    private string generate_background_image_path () {
+        if (settings_act.picture_options == 0) {
+            return "";
+        }
+
+        var path = Path.build_filename ("/", "var", "lib", "lightdm-data", user.user_name, "wallpaper");
+        if (FileUtils.test (path, EXISTS) && FileUtils.test (path, IS_REGULAR)) {
+            return path;
+        }
+
+        return "/usr/share/backgrounds/elementaryos-default";
+    }
+
     private void set_background_image () {
         Greeter.BackgroundImage background_image;
 
-        var background_path = lightdm_user.background;
-        var background_exists = (
-            background_path != null &&
-            FileUtils.test (background_path, EXISTS) &&
-            FileUtils.test (background_path, IS_REGULAR)
-        );
+        var background_path = generate_background_image_path ();
 
-        if (!background_exists) {
-            background_path = Path.build_filename ("/", "var", "lib", "lightdm-data", lightdm_user.name, "wallpaper");
-            background_exists = FileUtils.test (background_path, EXISTS) && FileUtils.test (background_path, IS_REGULAR);
-        }
-
-        if (settings_act.picture_options != 0 && background_exists) {
+        if (settings_act.picture_options != 0) {
             background_image = new Greeter.BackgroundImage.from_path (background_path);
-        } else if (settings_act.picture_options == 0 && settings_act.primary_color != null) {
+        } else if (settings_act.primary_color != null) {
             background_image = new Greeter.BackgroundImage.from_color (settings_act.primary_color);
         } else {
             background_image = new Greeter.BackgroundImage.from_path (null);
@@ -223,7 +233,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private void connect_to_dbus_interfaces () {
-        var account_path = "/org/freedesktop/Accounts/User%d".printf ((int )lightdm_user.uid);
+        var account_path = "/org/freedesktop/Accounts/User%d".printf (user.uid);
         try {
             greeter_act = Bus.get_proxy_sync (
                 SYSTEM,
@@ -246,18 +256,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         set_background_image ();
         set_check_style ();
-        update_is_locked_ui ();
     }
 
     private void update_is_locked_ui () {
-        // lightdm_user.is_locked prints warnings so let's use a getter method here
-        var is_locked = lightdm_user.get_is_locked ();
-
-        username_label.sensitive = !is_locked;
-
-        if (is_locked) {
+        if (user.locked) {
             login_stack.visible_child_name = "disabled";
-        } else if (need_password) {
+        } else if (user.password_mode != PASSWORD_MODE_NO_PASSWORD) {
             login_stack.visible_child_name = "password";
         } else {
             login_stack.visible_child_name = "button";
@@ -270,22 +274,15 @@ public class Greeter.UserCard : Greeter.BaseCard {
         }
 
         connecting = true;
-        if (need_password) {
-            do_connect (password_entry.text);
+
+        if (user.password_mode != PASSWORD_MODE_NO_PASSWORD) {
+            provide_credential (password_entry.text);
         } else {
-            do_connect ();
+            start_authentication (user.user_name);
         }
     }
 
-    private void update_collapsed_class () {
-        if (show_input) {
-            main_box.get_style_context ().remove_class ("collapsed");
-        } else {
-            main_box.get_style_context ().add_class ("collapsed");
-        }
-    }
-
-    public void set_settings () {
+    private void set_settings () {
         set_keyboard_layouts ();
         set_mouse_touchpad_settings ();
         set_interface_settings ();
@@ -378,7 +375,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         var background_settings = new GLib.Settings ("org.gnome.desktop.background");
         background_settings.set_enum ("picture-options", settings_act.picture_options);
-        set_or_reset_settings_key (background_settings, "picture-uri", lightdm_user.background);
+        set_or_reset_settings_key (background_settings, "picture-uri", generate_background_image_path ());
         set_or_reset_settings_key (background_settings, "primary-color", settings_act.primary_color);
     }
 
@@ -424,6 +421,23 @@ public class Greeter.UserCard : Greeter.BaseCard {
         interface_settings.set_string ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (settings_act.accent_color));
 
         SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
+    }
+
+    public override void on_selected () {
+        form_revealer.reveal_child = true;
+        main_box.get_style_context ().remove_class ("collapsed");
+
+        set_settings ();
+        grab_focus ();
+
+        if (user.password_mode != PASSWORD_MODE_NO_PASSWORD) {
+            start_authentication (user.user_name);
+        }
+    }
+
+    public override void on_deselected () {
+        form_revealer.reveal_child = false;
+        main_box.get_style_context ().add_class ("collapsed");
     }
 
     public override void wrong_credentials () {
