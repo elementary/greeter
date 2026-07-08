@@ -24,6 +24,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Greeter.PasswordEntry password_entry;
     private Gtk.Box main_box;
 
+    private Greeter.SessionButton password_session_button;
+    private Greeter.SessionButton login_button_session_button;
+    private Gtk.Overlay avatar_overlay;
     private SelectionCheck logged_in;
 
     public UserCard (Act.User user) requires (user.is_loaded) {
@@ -50,7 +53,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         bind_property ("use-fingerprint", fingerprint_image, "no-show-all", SYNC_CREATE | INVERT_BOOLEAN);
         bind_property ("use-fingerprint", fingerprint_image, "visible", SYNC_CREATE);
 
-        var password_session_button = new Greeter.SessionButton () {
+        password_session_button = new Greeter.SessionButton () {
             vexpand = true
         };
 
@@ -67,7 +70,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         login_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
         bind_property ("connecting", login_button, "sensitive", INVERT_BOOLEAN);
 
-        var login_button_session_button = new Greeter.SessionButton () {
+        login_button_session_button = new Greeter.SessionButton () {
             vexpand = true
         };
 
@@ -120,7 +123,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             loadable_icon = new FileIcon (File.new_for_path (user.icon_file))
         };
 
-        var avatar_overlay = new Gtk.Overlay () {
+        avatar_overlay = new Gtk.Overlay () {
             halign = CENTER,
             valign = START,
             margin_top = 100,
@@ -131,16 +134,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
             halign = END,
             valign = END
         };
-
-        if (user.is_logged_in ()) {
-            avatar_overlay.add_overlay (logged_in);
-
-            password_session_button.sensitive = false;
-            password_session_button.tooltip_text = (_("Session cannot be changed while user is logged in"));
-
-            login_button_session_button.sensitive = false;
-            login_button_session_button.tooltip_text = (_("Session cannot be changed while user is logged in"));
-        }
 
         var card_overlay = new Gtk.Overlay () {
             margin_top = 12,
@@ -153,9 +146,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         child = card_overlay;
 
-        connect_to_dbus_interfaces ();
         user.changed.connect (update_is_locked_ui);
         notify["need-password"].connect (update_is_locked_ui);
+        update_is_locked_ui ();
+
+        user.sessions_changed.connect (on_sessions_changed);
+        on_sessions_changed ();
 
         click_gesture = new Gtk.GestureMultiPress (this);
 
@@ -165,6 +161,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
         login_button.clicked.connect (on_login);
 
         grab_focus.connect (password_entry.grab_focus_without_selecting);
+
+        connect_to_dbus_interfaces ();
     }
 
     private void set_check_style () {
@@ -253,7 +251,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         set_background_image ();
         set_check_style ();
-        update_is_locked_ui ();
     }
 
     private void update_is_locked_ui () {
@@ -263,6 +260,24 @@ public class Greeter.UserCard : Greeter.BaseCard {
             login_stack.visible_child_name = "password";
         } else {
             login_stack.visible_child_name = "button";
+        }
+    }
+
+    private void on_sessions_changed () {
+        var user_is_logged_in = user.is_logged_in ();
+
+        password_session_button.sensitive = !user_is_logged_in;
+        login_button_session_button.sensitive = user_is_logged_in;
+
+        var tooltip_text = user_is_logged_in ? (_("Session cannot be changed while user is logged in")) : "";
+        password_session_button.tooltip_text = tooltip_text;
+        login_button_session_button.tooltip_text = tooltip_text;
+
+        if (user_is_logged_in) {
+            avatar_overlay.add_overlay (logged_in);
+            logged_in.show_all ();
+        } else {
+            avatar_overlay.remove (logged_in);
         }
     }
 
