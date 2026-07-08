@@ -9,7 +9,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     public LightDM.User lightdm_user { get; construct; }
     public bool show_input { get; set; default = false; }
     public bool is_24h { get; set; default = true; }
-    // TODO: In Gtk4 remove this gesture and move it to MainWindow 
+    // TODO: In Gtk4 remove this gesture and move it to MainWindow
     public Gtk.GestureMultiPress click_gesture { get; private set; }
 
     private Pantheon.AccountsService greeter_act;
@@ -23,8 +23,14 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private SelectionCheck logged_in;
 
-    public UserCard (LightDM.User lightdm_user) {
-        Object (lightdm_user: lightdm_user);
+    public FPrintUtil fprint_util { get; construct; }
+    public signal void do_fprint_login (string username);
+
+    public UserCard (LightDM.User lightdm_user, FPrintUtil fprint_util) {
+        Object (
+            lightdm_user: lightdm_user,
+            fprint_util: fprint_util
+        );
     }
 
     construct {
@@ -159,6 +165,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         password_entry.activate.connect (on_login);
         login_button.clicked.connect (on_login);
+
+        fprint_util.verify_passed.connect (() => {
+            do_fprint_login (lightdm_user.name);
+        });
+
+        fprint_util.verify_failed.connect (wrong_credentials);
 
         grab_focus.connect (password_entry.grab_focus_without_selecting);
     }
@@ -319,7 +331,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         settings.set_value ("xkb-options", options);
     }
 
-    /* 
+    /*
      * When we get string typed settings from our settings daemon account service we might get a null value.
      * In this case we reset the value to avoid criticals and unwanted behaviour.
      */
@@ -424,6 +436,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
         interface_settings.set_string ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (settings_act.accent_color));
 
         SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
+    }
+
+    public override bool focus (Gtk.DirectionType direction) {
+        use_fingerprint = false;
+        fprint_util.stop ();
+        return base.focus (direction);
     }
 
     public override void wrong_credentials () {

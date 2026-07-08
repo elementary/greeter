@@ -21,6 +21,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private int current_user_card_index = -1;
     private unowned Greeter.BaseCard? current_card = null;
 
+    private FPrintUtil fprint_util;
+
     private bool installer_mode = false;
 
     private Gtk.EventControllerKey key_controller;
@@ -37,9 +39,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         gsettings = new GLib.Settings ("io.elementary.greeter");
         settings = new Greeter.Settings ();
 
-        lightdm_greeter.show_message.connect (show_message);
         lightdm_greeter.show_prompt.connect (show_prompt);
         lightdm_greeter.authentication_complete.connect (authentication_complete);
+
+        fprint_util = new FPrintUtil ();
 
         var guest_login_button = new Gtk.Button.with_label (_("Log in as Guest"));
         var manual_login_button = new Gtk.ToggleButton.with_label (_("Manual Login…"));
@@ -264,20 +267,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
     }
 
-    private void show_message (string text, LightDM.MessageType type) {
-        var messagetext = Greeter.FPrintUtils.string_to_messagetext (text);
-        switch (messagetext) {
-            case Greeter.FPrintUtils.MessageText.FPRINT_TIMEOUT:
-            case Greeter.FPrintUtils.MessageText.FPRINT_ERROR:
-            case Greeter.FPrintUtils.MessageText.OTHER:
-                current_card.use_fingerprint = false;
-                break;
-            default:
-                current_card.use_fingerprint = true;
-                break;
-        }
-    }
-
     private void show_prompt (string text, LightDM.PromptType type = LightDM.PromptType.QUESTION) {
         if (current_card is ManualCard) {
             if (type == LightDM.PromptType.SECRET) {
@@ -362,6 +351,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             user_cards.head.foreach ((card) => {
                 if (card.lightdm_user.name == user_to_select) {
                     carousel.scroll_to (card);
+                    card.use_fingerprint = fprint_util.start (card.lightdm_user.name);
                     user_selected = true;
                 }
             });
@@ -370,6 +360,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 unowned var user_card = user_cards.peek_head ();
                 user_card.show_input = true;
                 carousel.scroll_to (user_card);
+                user_card.use_fingerprint = fprint_util.start (user_card.lightdm_user.name);
             }
         } else {
             datetime_revealer.reveal_child = false;
@@ -400,9 +391,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void add_card (LightDM.User lightdm_user) {
-        var user_card = new Greeter.UserCard (lightdm_user);
+        var user_card = new Greeter.UserCard (lightdm_user, fprint_util);
         user_card.show_all ();
         user_card.do_connect.connect (do_connect);
+        user_card.do_fprint_login.connect (do_connect_username);
         user_card.click_gesture.pressed.connect ((gesture, n_press, x, y) => {
             assert (gesture.widget is UserCard);
 
@@ -512,6 +504,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index - 1);
         if (next_card != null) {
             carousel.scroll_to (next_card);
+            next_card.use_fingerprint = fprint_util.start (next_card.lightdm_user.name);
         }
     }
 
@@ -523,6 +516,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index + 1);
         if (next_card != null) {
             carousel.scroll_to (next_card);
+            next_card.use_fingerprint = fprint_util.start (next_card.lightdm_user.name);
         }
     }
 }
