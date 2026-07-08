@@ -11,7 +11,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
      * and lacks some fields from Act.User such as `password_mode`.
      */
     public Act.User user { get; construct; }
-    public bool show_input { get; set; default = false; }
     public bool is_24h { get; set; default = true; }
     // TODO: In Gtk4 remove this gesture and move it to MainWindow 
     public Gtk.GestureMultiPress click_gesture { get; private set; }
@@ -95,11 +94,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         form_revealer = new Gtk.Revealer () {
             margin_bottom = 12,
-            reveal_child = true,
+            reveal_child = false,
             transition_type = SLIDE_DOWN,
             child = login_stack
         };
-        bind_property ("show-input", form_revealer, "reveal-child", SYNC_CREATE);
 
         main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_bottom = 48
@@ -109,8 +107,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         main_box.pack_end (username_label);
         main_box.get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
         main_box.get_style_context ().add_class (Granite.STYLE_CLASS_ROUNDED);
-
-        update_collapsed_class ();
+        main_box.get_style_context ().add_class ("collapsed");
 
         var avatar = new Hdy.Avatar (64, user.real_name, true) {
             margin_top = 6,
@@ -158,8 +155,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
         notify["need-password"].connect (update_is_locked_ui);
 
         click_gesture = new Gtk.GestureMultiPress (this);
-
-        notify["show-input"].connect (update_collapsed_class);
 
         password_entry.activate.connect (on_login);
         login_button.clicked.connect (on_login);
@@ -272,22 +267,10 @@ public class Greeter.UserCard : Greeter.BaseCard {
         }
 
         connecting = true;
-        if (need_password) {
-            do_connect (password_entry.text);
-        } else {
-            do_connect ();
-        }
+        provide_credential (need_password ? password_entry.text : "");
     }
 
-    private void update_collapsed_class () {
-        if (show_input) {
-            main_box.get_style_context ().remove_class ("collapsed");
-        } else {
-            main_box.get_style_context ().add_class ("collapsed");
-        }
-    }
-
-    public void set_settings () {
+    private void set_settings () {
         set_keyboard_layouts ();
         set_mouse_touchpad_settings ();
         set_interface_settings ();
@@ -426,6 +409,21 @@ public class Greeter.UserCard : Greeter.BaseCard {
         interface_settings.set_string ("gtk-theme", "io.elementary.stylesheet." + accent_to_string (settings_act.accent_color));
 
         SettingsPortal.get_default ().prefers_color_scheme = greeter_act.prefers_color_scheme;
+    }
+
+    public override void on_selected () {
+        form_revealer.reveal_child = true;
+        main_box.get_style_context ().remove_class ("collapsed");
+
+        set_settings ();
+        grab_focus ();
+
+        start_authentication (user.user_name);
+    }
+
+    public override void on_deselected () {
+        form_revealer.reveal_child = false;
+        main_box.get_style_context ().add_class ("collapsed");
     }
 
     public override void wrong_credentials () {
