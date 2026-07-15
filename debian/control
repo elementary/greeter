@@ -5,6 +5,7 @@ Maintainer: elementary <builds@elementary.io>
 Build-Depends: debhelper (>= 10.5.1),
                desktop-file-utils,
                gettext,
+               libaccountsservice-dev,
                libgdk-pixbuf-2.0-dev | libgdk-pixbuf2.0-dev,
                libgnome-desktop-3-dev,
                libgranite-dev,
