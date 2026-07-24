@@ -173,17 +173,17 @@ public class GreeterCompositor.ShellClientsManager : Object {
         debug ("Hide mode is unsupported in greeter-compositor");
     }
 
-    public void init_greeter (Meta.Window window) {
-        make_desktop (window);
-
-        positioned_windows[window] = new ShellWindow (window, FULLSCREEN);
+    public void make_centered (Meta.Window window) requires (!is_itself_shell_window (window)) {
+        positioned_windows[window] = new ShellWindow (window, CENTER);
 
         // connect_after so we make sure that any queued move is unqueued
         window.unmanaging.connect_after ((_window) => positioned_windows.remove (_window));
     }
 
-    public void make_centered (Meta.Window window) requires (!is_itself_shell_window (window)) {
-        positioned_windows[window] = new ShellWindow (window, CENTER);
+    public void make_greeter (Meta.Window window) {
+        make_desktop (window);
+
+        positioned_windows[window] = new ShellWindow (window, FULLSCREEN);
 
         // connect_after so we make sure that any queued move is unqueued
         window.unmanaging.connect_after ((_window) => positioned_windows.remove (_window));
@@ -288,16 +288,16 @@ public class GreeterCompositor.ShellClientsManager : Object {
                     }
                     break;
 
-                case "greeter":
-                    init_greeter (window);
-                    break;
-
                 case "centered":
                     make_centered (window);
                     break;
 
                 case "restore-previous-region":
                     set_restore_previous_x11_region (window);
+                    break;
+
+                case "greeter":
+                    make_greeter (window);
                     break;
 
                 default:

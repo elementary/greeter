@@ -245,7 +245,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             if (window is Gdk.Wayland.Window) {
                 unowned var wl_surface = ((Gdk.Wayland.Window) window).get_wl_surface ();
                 desktop_greeter = desktop_shell.get_greeter (wl_surface);
-                desktop_greeter.init ();
+                desktop_greeter.make_greeter ();
             }
         }
     }
