@@ -13,8 +13,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
     public Act.User user { get; construct; }
     public bool show_input { get; set; default = false; }
     public bool is_24h { get; set; default = true; }
-    // TODO: In Gtk4 remove this gesture and move it to MainWindow 
-    public Gtk.GestureMultiPress click_gesture { get; private set; }
 
     private Pantheon.AccountsService greeter_act;
     private Pantheon.SettingsDaemon.AccountsService settings_act;
@@ -43,14 +41,13 @@ public class Greeter.UserCard : Greeter.BaseCard {
             margin_start = 24,
             margin_end = 24,
         };
-        username_label.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+        username_label.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
         user.bind_property ("locked", username_label, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
 
         password_entry = new Greeter.PasswordEntry ();
         bind_property ("connecting", password_entry, "sensitive", INVERT_BOOLEAN);
 
-        var fingerprint_image = new Gtk.Image.from_icon_name ("fingerprint-symbolic", BUTTON);
-        bind_property ("use-fingerprint", fingerprint_image, "no-show-all", SYNC_CREATE | INVERT_BOOLEAN);
+        var fingerprint_image = new Gtk.Image.from_icon_name ("fingerprint-symbolic");
         bind_property ("use-fingerprint", fingerprint_image, "visible", SYNC_CREATE);
 
         password_session_button = new Greeter.SessionButton () {
@@ -67,7 +64,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         password_grid.attach (new Greeter.CapsLockRevealer (), 0, 1, 3);
 
         var login_button = new Gtk.Button.with_label (_("Log In"));
-        login_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+        login_button.add_css_class (Granite.CssClass.SUGGESTED);
         bind_property ("connecting", login_button, "sensitive", INVERT_BOOLEAN);
 
         login_button_session_button = new Greeter.SessionButton () {
@@ -75,16 +72,16 @@ public class Greeter.UserCard : Greeter.BaseCard {
         };
 
         var login_box = new Gtk.Box (HORIZONTAL, 6);
-        login_box.add (login_button);
-        login_box.add (login_button_session_button);
+        login_box.append (login_button);
+        login_box.append (login_button_session_button);
 
         var disabled_box = new Gtk.Box (HORIZONTAL, 6) {
             halign = Gtk.Align.CENTER,
             margin_top = 3
         };
-        disabled_box.add (new Gtk.Image.from_icon_name ("changes-prevent-symbolic", MENU));
-        disabled_box.add (new Gtk.Label (_("Account disabled")));
-        disabled_box.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        disabled_box.append (new Gtk.Image.from_icon_name ("changes-prevent-symbolic"));
+        disabled_box.append (new Gtk.Label (_("Account disabled")));
+        disabled_box.add_css_class (Granite.CssClass.DIM);
 
         login_stack = new Gtk.Stack () {
             margin_top = 12,
@@ -105,23 +102,28 @@ public class Greeter.UserCard : Greeter.BaseCard {
         bind_property ("show-input", form_revealer, "reveal-child", SYNC_CREATE);
 
         main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
-            margin_bottom = 48
+            margin_bottom = 48,
+            overflow = HIDDEN // Without this, Gtk.Picture won't have rounded corners
         };
-        // in reverse order because pack_end is used
-        main_box.pack_end (form_revealer);
-        main_box.pack_end (username_label);
-        main_box.get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
-        main_box.get_style_context ().add_class (Granite.STYLE_CLASS_ROUNDED);
+        main_box.append (username_label);
+        main_box.append (form_revealer);
+        main_box.add_css_class (Granite.CssClass.CARD);
 
         update_collapsed_class ();
 
-        var avatar = new Hdy.Avatar (64, user.real_name, true) {
+        var avatar = new Adw.Avatar (64, user.real_name, true) {
             margin_top = 6,
             margin_bottom = 6,
             margin_start = 6,
             margin_end = 6,
-            loadable_icon = new FileIcon (File.new_for_path (user.icon_file))
         };
+
+        var user_icon_file = File.new_for_path (user.icon_file);
+        try {
+            avatar.custom_image = Gdk.Texture.from_file (user_icon_file );
+        } catch (Error e) {
+            avatar.custom_image = null;
+        }
 
         avatar_overlay = new Gtk.Overlay () {
             halign = CENTER,
@@ -153,21 +155,26 @@ public class Greeter.UserCard : Greeter.BaseCard {
         user.sessions_changed.connect (on_sessions_changed);
         on_sessions_changed ();
 
-        click_gesture = new Gtk.GestureMultiPress (this);
-
         notify["show-input"].connect (update_collapsed_class);
 
         password_entry.activate.connect (on_login);
         login_button.clicked.connect (on_login);
 
-        grab_focus.connect (password_entry.grab_focus_without_selecting);
+        var focus_controller = new Gtk.EventControllerFocus ();
+        focus_controller.enter.connect (() => {
+            if (focus_controller.is_focus) {
+                password_entry.grab_focus_without_selecting ();
+            }
+        });
+
+        add_controller (focus_controller);
 
         connect_to_dbus_interfaces ();
     }
 
     private void set_check_style () {
         // Override check's accent_color so that it *always* uses user's preferred color
-        logged_in.get_style_context ().add_class (accent_to_string (settings_act.accent_color));
+        logged_in.add_css_class (accent_to_string (settings_act.accent_color));
     }
 
     private string generate_background_image_path () {
@@ -184,20 +191,42 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private void set_background_image () {
-        Greeter.BackgroundImage background_image;
+        var background_picture = new Gtk.Picture () {
+            content_fit = COVER
+        };
 
         var background_path = generate_background_image_path ();
 
         if (settings_act.picture_options != 0) {
-            background_image = new Greeter.BackgroundImage.from_path (background_path);
+            background_picture.set_filename (background_path);
         } else if (settings_act.primary_color != null) {
-            background_image = new Greeter.BackgroundImage.from_color (settings_act.primary_color);
+            Gdk.RGBA rgba_color = {};
+            rgba_color.parse (settings_act.primary_color);
+
+            uint32 f = 0x0;
+            f += (uint) Math.round (rgba_color.red * 255);
+            f <<= 8;
+            f += (uint) Math.round (rgba_color.green * 255);
+            f <<= 8;
+            f += (uint) Math.round (rgba_color.blue * 255);
+            f <<= 8;
+            f += 255;
+
+            var pixbuf = new Gdk.Pixbuf (Gdk.Colorspace.RGB, false, 8, 1, 1);
+            pixbuf.fill (f);
+
+            background_picture.paintable = (Gdk.Texture.for_pixbuf (pixbuf));
         } else {
-            background_image = new Greeter.BackgroundImage.from_path (null);
+            background_picture.set_filename ("/usr/share/backgrounds/elementaryos-default");
         }
 
-        main_box.pack_start (background_image);
-        main_box.show_all ();
+        var clamp = new Adw.Clamp () {
+            child = background_picture,
+            orientation = VERTICAL,
+            maximum_size = 150
+        };
+
+        main_box.prepend (clamp);
     }
 
     private string accent_to_string (int i) {
@@ -275,9 +304,8 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         if (user_is_logged_in) {
             avatar_overlay.add_overlay (logged_in);
-            logged_in.show_all ();
         } else {
-            avatar_overlay.remove (logged_in);
+            avatar_overlay.remove_overlay (logged_in);
         }
     }
 
@@ -296,9 +324,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
     private void update_collapsed_class () {
         if (show_input) {
-            main_box.get_style_context ().remove_class ("collapsed");
+            main_box.remove_css_class ("collapsed");
         } else {
-            main_box.get_style_context ().add_class ("collapsed");
+            main_box.add_css_class ("collapsed");
         }
     }
 
@@ -450,12 +478,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     public override void wrong_credentials () {
-        password_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_ERROR);
-        main_box.get_style_context ().add_class ("shake");
+        password_entry.add_css_class (Granite.CssClass.ERROR);
+        main_box.add_css_class ("shake");
 
         Timeout.add (ERROR_SHAKE_DURATION, () => {
-            password_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_ERROR);
-            main_box.get_style_context ().remove_class ("shake");
+            password_entry.remove_css_class (Granite.CssClass.ERROR);
+            main_box.remove_css_class ("shake");
 
             connecting = false;
             password_entry.grab_focus ();
@@ -463,9 +491,13 @@ public class Greeter.UserCard : Greeter.BaseCard {
         });
     }
 
-    private class SelectionCheck : Gtk.Spinner {
+    private class SelectionCheck : Granite.Bin {
         class construct {
-            set_css_name (Gtk.STYLE_CLASS_CHECK);
+            set_css_name ("check");
+        }
+
+        construct {
+            child = new Gtk.Image.from_icon_name ("check-active-symbolic");
         }
     }
 }

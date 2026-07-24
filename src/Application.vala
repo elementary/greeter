@@ -39,10 +39,12 @@ public class Greeter.Application : Gtk.Application {
     protected override void startup () {
         base.startup ();
 
+        Granite.init ();
+
         var css_provider = new Gtk.CssProvider ();
         css_provider.load_from_resource ("/io/elementary/greeter/Application.css");
 
-        Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         GLib.Bus.own_name (
             SESSION,
@@ -106,7 +108,6 @@ public class Greeter.Application : Gtk.Application {
 
     public override void activate () {
         add_window (new Greeter.MainWindow (lightdm_greeter));
-        active_window.show_all ();
         active_window.present ();
     }
 

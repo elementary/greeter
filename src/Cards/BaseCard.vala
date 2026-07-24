@@ -5,7 +5,7 @@
  * Authors: Corentin Noël <corentin@elementary.io>
  */
 
-public abstract class Greeter.BaseCard : Gtk.Bin {
+public abstract class Greeter.BaseCard : Granite.Bin {
     public signal void do_connect (string? credential = null);
     public signal void go_left ();
     public signal void go_right ();
