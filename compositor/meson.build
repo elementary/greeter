@@ -3,6 +3,7 @@
 glib_dep = [dependency('gio-2.0'), dependency('gio-unix-2.0'), dependency('gmodule-2.0')]
 gtk_dep = [dependency('gtk+-3.0'), dependency('gdk-x11-3.0')]
 gee_dep = dependency('gee-0.8')
+gnome_desktop_dep = dependency('gnome-desktop-3.0')
 m_dep = meson.get_compiler('c').find_library('m', required: false)
 posix_dep = meson.get_compiler('vala').find_library('posix', required: false)
 
