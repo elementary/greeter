@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2024 elementary, Inc. (https://elementary.io)
+ * Copyright 2018-2026 elementary, Inc. (https://elementary.io)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -111,6 +111,9 @@ public class Greeter.Application : Gtk.Application {
     }
 
     public static int main (string[] args) {
+        // Connect to UserManager as early as possible
+        Act.UserManager.get_default ();
+
         return new Greeter.Application ().run (args);
     }
 }
