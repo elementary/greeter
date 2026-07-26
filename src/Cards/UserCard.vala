@@ -413,10 +413,16 @@ public class Greeter.UserCard : Greeter.BaseCard {
             wingpanel_settings.set_boolean ("use-transparency", settings_act.wingpanel_use_transparency);
         }
 
-        var wingpanel_power_schema = SettingsSchemaSource.get_default ().lookup ("io.elementary.desktop.wingpanel.power", true);
+        var wingpanel_power_schema = SettingsSchemaSource.get_default ().lookup ("io.elementary.panel.power", true);
         if (wingpanel_power_schema != null && wingpanel_power_schema.has_key ("show-percentage")) {
-            var wingpanel_power_settings = new GLib.Settings ("io.elementary.desktop.wingpanel.power");
+            var wingpanel_power_settings = new GLib.Settings ("io.elementary.panel.power");
             wingpanel_power_settings.set_boolean ("show-percentage", settings_act.wingpanel_show_percentage);
+        } else {
+            wingpanel_power_schema = SettingsSchemaSource.get_default ().lookup ("io.elementary.desktop.wingpanel.power", true);
+            if (wingpanel_power_schema != null && wingpanel_power_schema.has_key ("show-percentage")) {
+                var wingpanel_power_settings = new GLib.Settings ("io.elementary.desktop.wingpanel.power");
+                wingpanel_power_settings.set_boolean ("show-percentage", settings_act.wingpanel_show_percentage);
+            }
         }
     }
 
