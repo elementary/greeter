@@ -4,6 +4,8 @@
  */
 
 window.background {
+    background: transparent;
+    box-shadow: none;
     opacity: 0;
     transition: opacity 1s ease;
 }
@@ -63,7 +65,6 @@ check {
     margin: 2px;
     min-height: 20px;
     min-width: 20px;
-    -gtk-icon-source: -gtk-icontheme("check-active-symbolic");
     -gtk-icon-transform: scale(0.6);
 }
 

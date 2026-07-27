@@ -29,7 +29,7 @@ public class Greeter.PasswordEntry : Gtk.Entry {
         visibility = false;
         input_purpose = Gtk.InputPurpose.PASSWORD;
 
-        icon_press.connect ((pos, event) => {
+        icon_press.connect ((pos) => {
             if (pos == Gtk.EntryIconPosition.SECONDARY) {
                 activate ();
             }
