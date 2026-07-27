@@ -364,7 +364,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         settings.set_value ("xkb-options", options);
     }
 
-    /* 
+    /*
      * When we get string typed settings from our settings daemon account service we might get a null value.
      * In this case we reset the value to avoid criticals and unwanted behaviour.
      */
@@ -423,7 +423,14 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         var background_settings = new GLib.Settings ("org.gnome.desktop.background");
         background_settings.set_enum ("picture-options", settings_act.picture_options);
-        set_or_reset_settings_key (background_settings, "picture-uri", generate_background_image_path ());
+
+        try {
+            var uri = Filename.to_uri (generate_background_image_path (), null);
+            set_or_reset_settings_key (background_settings, "picture-uri", uri);
+        } catch (Error e) {
+            critical ("Failed to set background URI: %s", e.message);
+        }
+
         set_or_reset_settings_key (background_settings, "primary-color", settings_act.primary_color);
     }
 
