@@ -11,8 +11,6 @@ public class Greeter.ManualCard : Greeter.BaseCard {
     private Gtk.Box main_box;
 
     construct {
-        width_request = 350;
-
         var icon = new Gtk.Image () {
             icon_name = "avatar-default",
             pixel_size = 64

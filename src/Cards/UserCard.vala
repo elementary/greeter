@@ -276,7 +276,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
         if (user_is_logged_in) {
             avatar_overlay.add_overlay (logged_in);
             logged_in.show_all ();
-        } else {
+        } else if (logged_in.parent == avatar_overlay) {
             avatar_overlay.remove (logged_in);
         }
     }

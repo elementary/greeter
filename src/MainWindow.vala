@@ -157,7 +157,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 return Gdk.EVENT_PROPAGATE;
             }
 
-            unowned var focused_entry = (Gtk.Entry) get_focus ();
+            unowned var focused_entry = get_focus () as Gtk.Entry;
             if (focused_entry == null || !focused_entry.is_ancestor (current_card) || focused_entry.text != "") {
                 return Gdk.EVENT_PROPAGATE;
             }
