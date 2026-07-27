@@ -19,15 +19,16 @@ compositor/MediaFeedback.vala
 compositor/PointerLocator.vala
 compositor/Utils.vala
 compositor/WindowManager.vala
+
 src/Application.vala
 src/FPrintUtils.vala
 src/MainWindow.vala
 src/PantheonAccountsServicePlugin.vala
 src/Settings.vala
+src/SettingsPortal.vala
 src/Cards/BaseCard.vala
 src/Cards/ManualCard.vala
 src/Cards/UserCard.vala
-src/Widgets/BackgroundImage.vala
 src/Widgets/CapsLockRevealer.vala
 src/Widgets/DateTimeWidget.vala
 src/Widgets/PasswordEntry.vala
