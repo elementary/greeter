@@ -8,17 +8,6 @@
 public class Greeter.Settings : GLib.Object {
     private GLib.KeyFile settings;
 
-    public bool activate_numlock {
-        get {
-            try {
-                return settings.get_boolean ("greeter", "activate-numlock");
-            } catch (Error e) {
-                debug (e.message);
-                return false;
-            }
-        }
-    }
-
     construct {
         settings = new GLib.KeyFile ();
         try {

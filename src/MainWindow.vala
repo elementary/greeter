@@ -184,14 +184,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
 
         maximize ();
 
-        if (settings.activate_numlock) {
-            try {
-                Process.spawn_async (null, { "numlockx", "on" }, null, SpawnFlags.SEARCH_PATH, null, null);
-            } catch (Error e) {
-                warning ("Unable to spawn numlockx to set numlock state");
-            }
-        }
-
         main_box.realize.connect (init_panel);
     }
 
