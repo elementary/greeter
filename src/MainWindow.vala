@@ -9,7 +9,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     public LightDM.Greeter lightdm_greeter { private get; construct; }
 
     private Pantheon.Desktop.Greeter? desktop_greeter;
-    private GLib.Queue<unowned Greeter.UserCard> user_cards;
     private Gtk.SizeGroup card_size_group;
     private Adw.Carousel carousel;
     private Greeter.Settings settings;
@@ -17,6 +16,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private Gtk.Revealer datetime_revealer;
     private Greeter.DateTimeWidget datetime_widget;
 
+    private GLib.List<BaseCard> cards = new GLib.List<BaseCard> ();
     private int current_user_card_index = -1;
     private unowned Greeter.BaseCard? current_card = null;
 
@@ -61,8 +61,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             vexpand = true
         };
 
-        user_cards = new GLib.Queue<unowned Greeter.UserCard> ();
-
         var manual_card = new Greeter.ManualCard ();
 
         carousel = new Adw.Carousel () {
@@ -94,7 +92,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 current_card = manual_card;
             } else {
                 manual_login_stack.visible_child = carousel;
-                current_card = user_cards.peek_nth (current_user_card_index);
+                current_card = cards.nth_data (current_user_card_index);
 
                 try {
                     lightdm_greeter.authenticate (((UserCard) current_card).user.user_name);
@@ -342,15 +340,15 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             var user_to_select = select_user != null ? select_user : gsettings.get_string ("last-user");
 
             bool user_selected = false;
-            user_cards.head.foreach ((card) => {
-                if (card.user.user_name == user_to_select) {
+            cards.foreach ((card) => {
+                if (card is UserCard && ((UserCard) card).user.user_name == user_to_select) {
                     carousel.scroll_to (card, true);
                     user_selected = true;
                 }
             });
 
             if (!user_selected) {
-                carousel.scroll_to (user_cards.peek_head (), true);
+                carousel.scroll_to (cards.first ().data, true);
             }
         } else {
             datetime_revealer.reveal_child = false;
@@ -408,25 +406,25 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         carousel.append (user_card);
 
         card_size_group.add_widget (user_card);
-        user_cards.push_tail (user_card);
+        cards.append (user_card);
     }
 
     private void handle_page_changed (uint index) {
         cancel_authentication ();
 
-        unowned var user_card = user_cards.peek_nth (index);
-        if (user_card == null) {
+        unowned var card = cards.nth_data (index);
+        if (card == null) {
             return;
         }
 
         current_card?.on_deselected ();
 
         current_user_card_index = (int) index;
-        current_card = user_card;
+        current_card = card;
 
-        datetime_widget.is_24h = user_card.is_24h;
+        datetime_widget.is_24h = (card as UserCard)?.is_24h ?? true;
 
-        user_card.on_selected ();
+        card.on_selected ();
     }
 
     private void cancel_authentication () {
@@ -460,24 +458,18 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void go_previous () {
-        if (!carousel.interactive) {
+        if (!carousel.interactive || current_user_card_index == 0) {
             return;
         }
 
-        unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index - 1);
-        if (next_card != null) {
-            carousel.scroll_to (next_card, true);
-        }
+        carousel.scroll_to (cards.nth_data (current_user_card_index - 1), true);
     }
 
     private void go_next () {
-        if (!carousel.interactive) {
+        if (!carousel.interactive || current_user_card_index == cards.length () - 1) {
             return;
         }
 
-        unowned Greeter.UserCard? next_card = user_cards.peek_nth (current_user_card_index + 1);
-        if (next_card != null) {
-            carousel.scroll_to (next_card, true);
-        }
+        carousel.scroll_to (cards.nth_data (current_user_card_index + 1), true);
     }
 }
