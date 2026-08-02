@@ -17,6 +17,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     private Pantheon.AccountsService greeter_act;
     private Pantheon.SettingsDaemon.AccountsService settings_act;
 
+    private Gtk.Label username_label;
     private Gtk.Revealer form_revealer;
     private Gtk.Stack login_stack;
     private Greeter.PasswordEntry password_entry;
@@ -34,7 +35,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
     construct {
         need_password = true;
 
-        var username_label = new Gtk.Label (user.real_name) {
+        username_label = new Gtk.Label (user.real_name) {
             hexpand = true,
             margin_top = 24,
             margin_bottom = 12,
@@ -42,7 +43,6 @@ public class Greeter.UserCard : Greeter.BaseCard {
             margin_end = 24,
         };
         username_label.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
-        user.bind_property ("locked", username_label, "sensitive", SYNC_CREATE | INVERT_BOOLEAN);
 
         password_entry = new Greeter.PasswordEntry ();
         bind_property ("connecting", password_entry, "sensitive", INVERT_BOOLEAN);
@@ -283,6 +283,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
     }
 
     private void update_is_locked_ui () {
+        // for some reason `user.bind_property ("locked", ...)` doesn't work when creating a new user
+        username_label.sensitive = !user.locked;
+
         if (user.locked) {
             login_stack.visible_child_name = "disabled";
         } else if (need_password) {
