@@ -17,6 +17,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     private Gtk.Revealer datetime_revealer;
     private Greeter.DateTimeWidget datetime_widget;
 
+    private string? saved_credential = null;
+
     private int current_user_card_index = -1;
     private unowned Greeter.BaseCard? current_card = null;
 
@@ -268,10 +270,10 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             case Greeter.FPrintUtils.MessageText.FPRINT_TIMEOUT:
             case Greeter.FPrintUtils.MessageText.FPRINT_ERROR:
             case Greeter.FPrintUtils.MessageText.OTHER:
-                current_card.use_fingerprint = false;
                 break;
             default:
                 current_card.use_fingerprint = true;
+                saved_credential = null;
                 break;
         }
     }
@@ -283,6 +285,16 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             } else {
                 ((ManualCard) current_card).wrong_username ();
             }
+        }
+
+        if (saved_credential != null) {
+            try {
+                lightdm_greeter.respond (saved_credential);
+            } catch (Error e) {
+                critical (e.message);
+            }
+        } else {
+            do_connect_username (((UserCard) current_card).lightdm_user.name);
         }
     }
 
@@ -325,6 +337,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 error_dialog.response.connect (error_dialog.destroy);
             }
         }
+
+        saved_credential = null;
 
         if (user_card != null) {
             try {
@@ -489,14 +503,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void do_connect (string? credential) {
-        if (credential != null) {
-            try {
-                lightdm_greeter.respond (credential);
-            } catch (Error e) {
-                critical (e.message);
-            }
-        }
-
+        saved_credential = credential;
         carousel.interactive = false;
         carousel.scroll_to (current_card, true);
     }
