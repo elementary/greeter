@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2024 elementary, Inc. (https://elementary.io)
+ * Copyright 2018-2026 elementary, Inc. (https://elementary.io)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -39,10 +39,7 @@ public class Greeter.Application : Gtk.Application {
     protected override void startup () {
         base.startup ();
 
-        var css_provider = new Gtk.CssProvider ();
-        css_provider.load_from_resource ("/io/elementary/greeter/Application.css");
-
-        Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        Granite.init ();
 
         GLib.Bus.own_name (
             SESSION,
@@ -106,11 +103,13 @@ public class Greeter.Application : Gtk.Application {
 
     public override void activate () {
         add_window (new Greeter.MainWindow (lightdm_greeter));
-        active_window.show_all ();
         active_window.present ();
     }
 
     public static int main (string[] args) {
+        // Connect to UserManager as early as possible
+        Act.UserManager.get_default ();
+
         return new Greeter.Application ().run (args);
     }
 }
