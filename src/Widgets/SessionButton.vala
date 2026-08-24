@@ -6,6 +6,8 @@
  */
 
 public class Greeter.SessionButton : Granite.Bin {
+    public bool single_session { get; private set; }
+
     construct {
         var menu = new GLib.Menu ();
         unowned var application = (Gtk.Application) GLib.Application.get_default ();
@@ -25,5 +27,7 @@ public class Greeter.SessionButton : Granite.Bin {
         };
 
         child = menu_button;
+
+        single_session = menu.get_n_items () == 1;
     }
 }

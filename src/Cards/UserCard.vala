@@ -60,8 +60,11 @@ public class Greeter.UserCard : Greeter.BaseCard {
         };
         password_grid.attach (password_entry, 0, 0);
         password_grid.attach (fingerprint_image, 1, 0);
-        password_grid.attach (password_session_button, 2, 0);
-        password_grid.attach (new Greeter.CapsLockRevealer (), 0, 1, 3);
+        if (!password_session_button.single_session) {
+            password_grid.attach (password_session_button, 2, 0);
+        }
+        password_grid.attach (new Greeter.CapsLockRevealer (),
+            0, 1, password_session_button.single_session ? 2 : 3);
 
         var login_button = new Gtk.Button.with_label (_("Log In"));
         login_button.add_css_class (Granite.CssClass.SUGGESTED);
@@ -73,7 +76,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
 
         var login_box = new Gtk.Box (HORIZONTAL, 6);
         login_box.append (login_button);
-        login_box.append (login_button_session_button);
+        if (!login_button_session_button.single_session) {
+            login_box.append (login_button_session_button);
+        }
 
         var disabled_box = new Gtk.Box (HORIZONTAL, 6) {
             halign = Gtk.Align.CENTER,
