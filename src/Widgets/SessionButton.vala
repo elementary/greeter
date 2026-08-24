@@ -24,6 +24,8 @@ public class Greeter.SessionButton : Granite.Bin {
             has_frame = false
         };
 
+        visible = iter.n_children () > 1;
+
         child = menu_button;
     }
 }
