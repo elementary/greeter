@@ -53,14 +53,18 @@ public class Greeter.UserCard : Greeter.BaseCard {
             vexpand = true
         };
 
-        var password_grid = new Gtk.Grid () {
-            column_spacing = 6,
-            row_spacing = 6
-        };
-        password_grid.attach (password_entry, 0, 0);
-        password_grid.attach (fingerprint_image, 1, 0);
-        password_grid.attach (password_session_button, 2, 0);
-        password_grid.attach (new Greeter.CapsLockRevealer (), 0, 1, 3);
+        /*
+         * Combine two Gtk.Boxes instead of using one Gtk.Grid to avoid column_spacing becomes extra right margin
+         * when only password_entry is visible in the first row.
+         */
+        var password_hbox = new Gtk.Box (HORIZONTAL, 6);
+        password_hbox.append (password_entry);
+        password_hbox.append (fingerprint_image);
+        password_hbox.append (password_session_button);
+
+        var password_box = new Gtk.Box (VERTICAL, 6);
+        password_box.append (password_hbox);
+        password_box.append (new Greeter.CapsLockRevealer ());
 
         var login_button = new Gtk.Button.with_label (_("Log In"));
         login_button.add_css_class (Granite.CssClass.SUGGESTED);
@@ -88,7 +92,7 @@ public class Greeter.UserCard : Greeter.BaseCard {
             margin_start = 24,
             margin_end = 24
         };
-        login_stack.add_named (password_grid, "password");
+        login_stack.add_named (password_box, "password");
         login_stack.add_named (login_button, "button");
         login_stack.add_named (disabled_box, "disabled");
 
