@@ -87,26 +87,12 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         child = main_box;
 
         manual_login_button.toggled.connect (() => {
-            if (manual_login_button.active) {
-                if (lightdm_greeter.in_authentication) {
-                    try {
-                        lightdm_greeter.cancel_authentication ();
-                    } catch (Error e) {
-                        critical (e.message);
-                    }
-                }
+            cancel_authentication ();
 
+            if (manual_login_button.active) {
                 manual_login_stack.visible_child = manual_card;
                 current_card = manual_card;
             } else {
-                if (lightdm_greeter.in_authentication) {
-                    try {
-                        lightdm_greeter.cancel_authentication ();
-                    } catch (Error e) {
-                        critical (e.message);
-                    }
-                }
-
                 manual_login_stack.visible_child = carousel;
                 current_card = user_cards.peek_nth (current_user_card_index);
 
@@ -142,8 +128,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             user_manager.notify["is-loaded"].connect (() => load_users.begin (show_greeter_window));
         }
 
-        manual_card.do_connect_username.connect (do_connect_username);
-        manual_card.do_connect.connect (do_connect);
+        manual_card.start_authentication.connect (do_connect_username);
+        manual_card.provide_credential.connect (do_connect);
 
         var key_controller = new Gtk.EventControllerKey () {
             propagation_phase = CAPTURE
@@ -364,9 +350,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             });
 
             if (!user_selected) {
-                unowned var user_card = user_cards.peek_head ();
-                user_card.show_input = true;
-                carousel.scroll_to (user_card, true);
+                carousel.scroll_to (user_cards.peek_head (), true);
             }
         } else {
             datetime_revealer.reveal_child = false;
@@ -400,15 +384,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         var user_card = new Greeter.UserCard (user);
 
         var click_gesture = new Gtk.GestureClick ();
-        click_gesture.pressed.connect ((gesture, n_press, x, y) => {
-            assert (gesture.widget is UserCard);
-
-            var _user_card = (UserCard) gesture.widget;
-            if (!_user_card.show_input) {
-                carousel.scroll_to (_user_card, true);
-                _user_card.grab_focus ();
-            }
-        });
+        click_gesture.pressed.connect ((gesture, n_press, x, y) => carousel.scroll_to (gesture.widget, true));
         user_card.add_controller (click_gesture);
 
         user_card.go_left.connect (() => {
@@ -426,7 +402,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             }
         });
 
-        user_card.do_connect.connect (do_connect);
+        user_card.start_authentication.connect (do_connect_username);
+        user_card.provide_credential.connect (do_connect);
 
         carousel.append (user_card);
 
@@ -435,51 +412,35 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void handle_page_changed (uint index) {
-        if (index == current_user_card_index) {
-            return;
-        }
+        cancel_authentication ();
 
         unowned var user_card = user_cards.peek_nth (index);
         if (user_card == null) {
             return;
         }
 
-        if (current_card != null && current_card is UserCard) {
-            ((UserCard) current_card).show_input = false;
-        }
+        current_card?.on_deselected ();
 
         current_user_card_index = (int) index;
         current_card = user_card;
 
         datetime_widget.is_24h = user_card.is_24h;
 
-        user_card.set_settings ();
-        user_card.show_input = true;
-        user_card.grab_focus ();
+        user_card.on_selected ();
+    }
 
+    private void cancel_authentication () {
         if (lightdm_greeter.in_authentication) {
             try {
                 lightdm_greeter.cancel_authentication ();
             } catch (Error e) {
                 critical (e.message);
             }
-        }
-
-        try {
-            lightdm_greeter.authenticate (user_card.user.user_name);
-        } catch (Error e) {
-            critical (e.message);
         }
     }
 
     private void do_connect_username (string username) {
-        if (lightdm_greeter.in_authentication) {
-            try {
-                lightdm_greeter.cancel_authentication ();
-            } catch (Error e) {
-                critical (e.message);
-            }
-        }
+        cancel_authentication ();
 
         try {
             lightdm_greeter.authenticate (username);
@@ -488,17 +449,14 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
         }
     }
 
-    private void do_connect (string? credential) {
-        if (credential != null) {
-            try {
-                lightdm_greeter.respond (credential);
-            } catch (Error e) {
-                critical (e.message);
-            }
+    private void do_connect (string credential) {
+        try {
+            lightdm_greeter.respond (credential);
+        } catch (Error e) {
+            critical (e.message);
         }
 
         carousel.interactive = false;
-        carousel.scroll_to (current_card, true);
     }
 
     private void go_previous () {
