@@ -30,8 +30,6 @@ config_header = configure_file (
     configuration: conf_data
 )
 
-add_project_arguments(['--vapidir', join_paths(meson.current_source_dir(), 'vapi')], language: 'vala')
-
 add_global_arguments(
     '-DGETTEXT_PACKAGE="@0@"'.format(meson.project_name()),
     '-DGNOME_DESKTOP_USE_UNSTABLE_API',
@@ -45,14 +43,9 @@ greeter_resources = gnome.compile_resources(
 
 subdir('protocol')
 subdir('src')
-subdir('compositor')
 subdir('session-manager')
 subdir('data')
 subdir('po')
-vapigen = find_program('vapigen', required: false)
-if vapigen.found()
-	subdir('vapi')
-endif
 
 gnome.post_install(
     glib_compile_schemas: true,
