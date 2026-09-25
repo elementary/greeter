@@ -35,6 +35,16 @@ public abstract class Greeter.BaseCard : Granite.Bin {
         return base.focus (direction);
     }
 
+    // Gtk4 does not move focus into the children of a widget that is not focusable
+    public override bool grab_focus () {
+        if (get_focus_child () != null) {
+            return true;
+        }
+
+        // Start from the child: child_focus on this card calls grab_focus on it again
+        return child?.child_focus (TAB_FORWARD) ?? false;
+    }
+
     public virtual void on_selected () {}
     public virtual void on_deselected () {}
 
