@@ -102,6 +102,13 @@ public class Greeter.UserCard : Greeter.BaseCard {
             child = login_stack
         };
 
+        // Focus cannot move into the form until the reveal animation ends
+        form_revealer.notify["child-revealed"].connect (() => {
+            if (form_revealer.child_revealed) {
+                grab_focus ();
+            }
+        });
+
         main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_bottom = 48,
             overflow = HIDDEN // Without this, Gtk.Picture won't have rounded corners
