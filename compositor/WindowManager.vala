@@ -16,8 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Meta;
-
 namespace GreeterCompositor {
 
     public class WindowManager : Meta.Plugin {
@@ -159,35 +157,35 @@ namespace GreeterCompositor {
 
             /*keybindings*/
 
-            KeyBinding.set_custom_handler ("switch-to-workspace-first", () => {});
-            KeyBinding.set_custom_handler ("switch-to-workspace-last", () => {});
-            KeyBinding.set_custom_handler ("move-to-workspace-first", () => {});
-            KeyBinding.set_custom_handler ("move-to-workspace-last", () => {});
-            KeyBinding.set_custom_handler ("cycle-workspaces-next", () => {});
-            KeyBinding.set_custom_handler ("cycle-workspaces-previous", () => {});
+            Meta.KeyBinding.set_custom_handler ("switch-to-workspace-first", () => {});
+            Meta.KeyBinding.set_custom_handler ("switch-to-workspace-last", () => {});
+            Meta.KeyBinding.set_custom_handler ("move-to-workspace-first", () => {});
+            Meta.KeyBinding.set_custom_handler ("move-to-workspace-last", () => {});
+            Meta.KeyBinding.set_custom_handler ("cycle-workspaces-next", () => {});
+            Meta.KeyBinding.set_custom_handler ("cycle-workspaces-previous", () => {});
 
-            KeyBinding.set_custom_handler ("panel-main-menu", () => {});
-            KeyBinding.set_custom_handler ("toggle-recording", () => {});
+            Meta.KeyBinding.set_custom_handler ("panel-main-menu", () => {});
+            Meta.KeyBinding.set_custom_handler ("toggle-recording", () => {});
 
-            KeyBinding.set_custom_handler ("switch-to-workspace-up", () => {});
-            KeyBinding.set_custom_handler ("switch-to-workspace-down", () => {});
-            KeyBinding.set_custom_handler ("switch-to-workspace-left", () => {});
-            KeyBinding.set_custom_handler ("switch-to-workspace-right", () => {});
+            Meta.KeyBinding.set_custom_handler ("switch-to-workspace-up", () => {});
+            Meta.KeyBinding.set_custom_handler ("switch-to-workspace-down", () => {});
+            Meta.KeyBinding.set_custom_handler ("switch-to-workspace-left", () => {});
+            Meta.KeyBinding.set_custom_handler ("switch-to-workspace-right", () => {});
 
-            KeyBinding.set_custom_handler ("move-to-workspace-up", () => {});
-            KeyBinding.set_custom_handler ("move-to-workspace-down", () => {});
-            KeyBinding.set_custom_handler ("move-to-workspace-left", () => {});
-            KeyBinding.set_custom_handler ("move-to-workspace-right", () => {});
+            Meta.KeyBinding.set_custom_handler ("move-to-workspace-up", () => {});
+            Meta.KeyBinding.set_custom_handler ("move-to-workspace-down", () => {});
+            Meta.KeyBinding.set_custom_handler ("move-to-workspace-left", () => {});
+            Meta.KeyBinding.set_custom_handler ("move-to-workspace-right", () => {});
 
-            KeyBinding.set_custom_handler ("switch-group", () => {});
-            KeyBinding.set_custom_handler ("switch-group-backward", () => {});
+            Meta.KeyBinding.set_custom_handler ("switch-group", () => {});
+            Meta.KeyBinding.set_custom_handler ("switch-group-backward", () => {});
 
-            KeyBinding.set_custom_handler ("show-desktop", () => {});
+            Meta.KeyBinding.set_custom_handler ("show-desktop", () => {});
 
-            KeyBinding.set_custom_handler ("toggle-tiled-left", () => {});
-            KeyBinding.set_custom_handler ("toggle-tiled-right", () => {});
-            KeyBinding.set_custom_handler ("minimize", () => {});
-            KeyBinding.set_custom_handler ("toggle-maximized", () => {});
+            Meta.KeyBinding.set_custom_handler ("toggle-tiled-left", () => {});
+            Meta.KeyBinding.set_custom_handler ("toggle-tiled-right", () => {});
+            Meta.KeyBinding.set_custom_handler ("minimize", () => {});
+            Meta.KeyBinding.set_custom_handler ("toggle-maximized", () => {});
 
             zoom = new Zoom (this);
 
@@ -326,28 +324,28 @@ namespace GreeterCompositor {
             size_change_completed (actor);
         }
 
-        public override void minimize (WindowActor actor) {
+        public override void minimize (Meta.WindowActor actor) {
             actor.hide ();
             minimize_completed (actor);
         }
 
-        public override void unminimize (WindowActor actor) {
+        public override void unminimize (Meta.WindowActor actor) {
             actor.show ();
             unminimize_completed (actor);
         }
 
-        public override void map (WindowActor actor) {
+        public override void map (Meta.WindowActor actor) {
             actor.show ();
             map_completed (actor);
         }
 
-        public override void destroy (WindowActor actor) {
+        public override void destroy (Meta.WindowActor actor) {
             destroy_completed (actor);
         }
 
-        public override void kill_window_effects (WindowActor actor) {}
+        public override void kill_window_effects (Meta.WindowActor actor) {}
 
-        public override void switch_workspace (int from, int to, MotionDirection direction) {
+        public override void switch_workspace (int from, int to, Meta.MotionDirection direction) {
             switch_workspace_completed ();
         }
 
