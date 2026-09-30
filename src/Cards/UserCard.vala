@@ -102,10 +102,9 @@ public class Greeter.UserCard : Greeter.BaseCard {
             child = login_stack
         };
 
-        // Focus cannot move into the form until the reveal animation ends
         form_revealer.notify["child-revealed"].connect (() => {
             if (form_revealer.child_revealed) {
-                grab_focus ();
+                password_entry.grab_focus_without_selecting ();
             }
         });
 
