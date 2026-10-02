@@ -352,8 +352,7 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             if (!user_selected) {
                 carousel.scroll_to (user_cards.peek_head (), true);
             }
-        }
-        else {
+        }else {
             datetime_revealer.reveal_child = false;
 
             /* If the user enabled manual login, first setup is not required */
