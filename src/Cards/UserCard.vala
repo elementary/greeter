@@ -102,6 +102,12 @@ public class Greeter.UserCard : Greeter.BaseCard {
             child = login_stack
         };
 
+        form_revealer.notify["child-revealed"].connect (() => {
+            if (form_revealer.child_revealed) {
+                password_entry.grab_focus_without_selecting ();
+            }
+        });
+
         main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_bottom = 48,
             overflow = HIDDEN // Without this, Gtk.Picture won't have rounded corners
