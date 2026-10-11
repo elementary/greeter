@@ -102,7 +102,10 @@ public class Greeter.Application : Gtk.Application {
     }
 
     public override void activate () {
-        add_window (new Greeter.MainWindow (lightdm_greeter));
+        if (active_window == null) {
+            add_window (new Greeter.MainWindow (lightdm_greeter));
+        }
+
         active_window.present ();
     }
 
