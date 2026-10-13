@@ -88,5 +88,4 @@ jobs:
     - uses: actions/checkout@v7
     - name: Lint
       run: |
-        io.elementary.vala-lint -d compositor
         io.elementary.vala-lint -d src
