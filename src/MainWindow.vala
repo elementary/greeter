@@ -352,8 +352,13 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
             if (!user_selected) {
                 carousel.scroll_to (user_cards.peek_head (), true);
             }
-        } else {
+        }else {
             datetime_revealer.reveal_child = false;
+
+            /* If the user enabled manual login, first setup is not required */
+            if (lightdm_greeter.show_manual_login_hint) {
+                return;
+            }
 
             /* We're not certain that scaling factor will change, but try to wait for GSD in case it does */
             Timeout.add (500, () => {
