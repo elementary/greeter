@@ -8,8 +8,17 @@ public class Greeter.CapsLockRevealer : Granite.Bin {
     private Gtk.Image num_lock_image;
     private Gtk.Label lock_label;
     private Gtk.Revealer revealer;
+    private DesktopIntegration desktop_integration;
 
     construct {
+        try {
+            desktop_integration = Bus.get_proxy_sync (BusType.SESSION , "org.pantheon.gala", "/org/pantheon/gala/DesktopInterface");
+            desktop_integration.caps_lock_state_changed.connect (() => update_visibility.begin ());
+            desktop_integration.num_lock_state_changed.connect (() => update_visibility.begin ());
+        } catch (Error e) {
+            warning ("Couldn't connect to DesktopIntegration interface: %s", e.message);
+        }
+
         caps_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-capslock-symbolic");
         num_lock_image = new Gtk.Image.from_icon_name ("input-keyboard-numlock-symbolic");
 
@@ -31,15 +40,21 @@ public class Greeter.CapsLockRevealer : Granite.Bin {
 
         child = revealer;
 
-        var device = Gdk.Display.get_default ().get_default_seat ().get_keyboard ();
-        device.changed.connect (update_visibility);
-
-        update_visibility (device);
+        update_visibility.begin ();
     }
 
-    private void update_visibility (Gdk.Device device) {
-        var caps_lock = device.get_caps_lock_state ();
-        var num_lock = device.get_num_lock_state ();
+    private async void update_visibility () {
+        bool caps_lock = false, num_lock = false;
+
+        if (desktop_integration != null) {
+            try {
+                caps_lock = yield desktop_integration.get_caps_lock_state ();
+                num_lock = yield desktop_integration.get_num_lock_state ();
+            } catch (Error e) {
+                warning ("Couldn't get toggle keys state: %s", e.message);
+                return;
+            }
+        }
 
         revealer.reveal_child = caps_lock || num_lock;
 
