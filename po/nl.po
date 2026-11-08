@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-24 14:50+0000\n"
+"POT-Creation-Date: 2026-11-08 05:41+0000\n"
 "PO-Revision-Date: 2025-12-14 04:55+0000\n"
 "Last-Translator: Bas Ernst <bas@ernstgenova.it>\n"
 "Language-Team: Dutch <https://l10n.elementaryos.org/projects/desktop/greeter/"
@@ -20,46 +20,27 @@ msgstr ""
 "X-Generator: Weblate 5.11.4\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:362
-#, c-format
-msgid "Changes will automatically revert after %i second."
-msgid_plural "Changes will automatically revert after %i seconds."
-msgstr[0] "Wijzigingen worden na %i seconde automatisch teruggedraaid."
-msgstr[1] "Wijzigingen worden na %i seconden automatisch teruggedraaid."
-
-#: compositor/WindowManager.vala:369
-msgid "Keep new display settings?"
-msgstr "Nieuwe weergave-instellingen bewaren?"
-
-#: compositor/WindowManager.vala:373
-msgid "Keep Settings"
-msgstr "Instellingen behouden"
-
-#: compositor/WindowManager.vala:374
-msgid "Use Previous Settings"
-msgstr "Vorige instellingen gebruiken"
-
-#: src/MainWindow.vala:44
+#: src/MainWindow.vala:39
 msgid "Log in as Guest"
 msgstr "Aanmelden als gast"
 
-#: src/MainWindow.vala:45
+#: src/MainWindow.vala:40
 msgid "Manual Login…"
 msgstr "Handmatig inloggen…"
 
-#: src/MainWindow.vala:320
+#: src/MainWindow.vala:304
 msgid "Unable to Log In"
 msgstr "Het is niet mogelijk om in te loggen"
 
-#: src/MainWindow.vala:321
+#: src/MainWindow.vala:305
 msgid "Starting the session has failed."
 msgstr "Het starten van de sessie is mislukt."
 
-#: src/MainWindow.vala:383
+#: src/MainWindow.vala:364
 msgid "Unable to Launch Initial Setup"
 msgstr "Het laden van de instellingen om te beginnen is mislukt"
 
-#: src/MainWindow.vala:388
+#: src/MainWindow.vala:369
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -68,41 +49,56 @@ msgstr ""
 "gebruiker kunt u niet inloggen en moet u waarschijnlijk het "
 "besturingssysteem opnieuw installeren."
 
-#: src/Cards/ManualCard.vala:21
+#: src/Cards/ManualCard.vala:17
 msgid "Manual Login"
 msgstr "Handmatig inloggen"
 
-#: src/Cards/ManualCard.vala:30
+#: src/Cards/ManualCard.vala:26
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: src/Cards/UserCard.vala:63 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:69 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Inloggen"
 
-#: src/Cards/UserCard.vala:81
+#: src/Cards/UserCard.vala:86
 msgid "Account disabled"
 msgstr "Account uitgeschakeld"
 
-#: src/Cards/UserCard.vala:137 src/Cards/UserCard.vala:140
+#: src/Cards/UserCard.vala:309
 msgid "Session cannot be changed while user is logged in"
 msgstr "De sessie kan niet worden gewijzigd terwijl de gebruiker is ingelogd"
 
-#: src/Widgets/CapsLockRevealer.vala:52
+#: src/Widgets/CapsLockRevealer.vala:50
 msgid "Caps Lock & Num Lock are on"
 msgstr "Caps Lock & Num Lock staan aan"
 
-#: src/Widgets/CapsLockRevealer.vala:54
+#: src/Widgets/CapsLockRevealer.vala:52
 msgid "Caps Lock is on"
 msgstr "Caps lock staat aan"
 
-#: src/Widgets/CapsLockRevealer.vala:56
+#: src/Widgets/CapsLockRevealer.vala:54
 msgid "Num Lock is on"
 msgstr "Num Lock staat aan"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Wachtwoord"
+
+#, c-format
+#~ msgid "Changes will automatically revert after %i second."
+#~ msgid_plural "Changes will automatically revert after %i seconds."
+#~ msgstr[0] "Wijzigingen worden na %i seconde automatisch teruggedraaid."
+#~ msgstr[1] "Wijzigingen worden na %i seconden automatisch teruggedraaid."
+
+#~ msgid "Keep new display settings?"
+#~ msgstr "Nieuwe weergave-instellingen bewaren?"
+
+#~ msgid "Keep Settings"
+#~ msgstr "Instellingen behouden"
+
+#~ msgid "Use Previous Settings"
+#~ msgstr "Vorige instellingen gebruiken"
 
 #~ msgid "Classic session automatically selected"
 #~ msgstr "Klassieke sessie automatisch geselecteerd"

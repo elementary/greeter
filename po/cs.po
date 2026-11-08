@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-24 14:50+0000\n"
+"POT-Creation-Date: 2026-11-08 05:41+0000\n"
 "PO-Revision-Date: 2023-07-19 08:07+0000\n"
 "Last-Translator: Jakub Kyzr <jakubkyzr@gmail.com>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/desktop/greeter/cs/"
@@ -20,47 +20,27 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:362
-#, c-format
-msgid "Changes will automatically revert after %i second."
-msgid_plural "Changes will automatically revert after %i seconds."
-msgstr[0] "Změny budou za %i sekundu automaticky vzaty zpět."
-msgstr[1] "Změny budou za %i sekundy automaticky vzaty zpět."
-msgstr[2] "Změny budou za %i sekund automaticky vzaty zpět."
-
-#: compositor/WindowManager.vala:369
-msgid "Keep new display settings?"
-msgstr "Ponechat nová nastavení zobrazení?"
-
-#: compositor/WindowManager.vala:373
-msgid "Keep Settings"
-msgstr "Ponechat nastavení"
-
-#: compositor/WindowManager.vala:374
-msgid "Use Previous Settings"
-msgstr "Použít předchozí nastavení"
-
-#: src/MainWindow.vala:44
+#: src/MainWindow.vala:39
 msgid "Log in as Guest"
 msgstr "Přihlásit se jako host"
 
-#: src/MainWindow.vala:45
+#: src/MainWindow.vala:40
 msgid "Manual Login…"
 msgstr "Ruční přihlášení…"
 
-#: src/MainWindow.vala:320
+#: src/MainWindow.vala:304
 msgid "Unable to Log In"
 msgstr "Nedaří se přihlásit"
 
-#: src/MainWindow.vala:321
+#: src/MainWindow.vala:305
 msgid "Starting the session has failed."
 msgstr "Spuštění relace se nezdařilo."
 
-#: src/MainWindow.vala:383
+#: src/MainWindow.vala:364
 msgid "Unable to Launch Initial Setup"
 msgstr "Nedaří se spustit prvotní nastavení"
 
-#: src/MainWindow.vala:388
+#: src/MainWindow.vala:369
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -68,41 +48,57 @@ msgstr ""
 "Prvotní nastavení pro vás vytvoří uživatelský účet (první v systému). Bez "
 "něj se nebudete moci přihlásit a možná bude třeba systém přeinstalovat."
 
-#: src/Cards/ManualCard.vala:21
+#: src/Cards/ManualCard.vala:17
 msgid "Manual Login"
 msgstr "Ruční přihlášení"
 
-#: src/Cards/ManualCard.vala:30
+#: src/Cards/ManualCard.vala:26
 msgid "Username"
 msgstr "Uživatelské jméno"
 
-#: src/Cards/UserCard.vala:63 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:69 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "Přihlásit se"
 
-#: src/Cards/UserCard.vala:81
+#: src/Cards/UserCard.vala:86
 msgid "Account disabled"
 msgstr "Účet znepřístupněn"
 
-#: src/Cards/UserCard.vala:137 src/Cards/UserCard.vala:140
+#: src/Cards/UserCard.vala:309
 msgid "Session cannot be changed while user is logged in"
 msgstr "Relace nemůže být změněna, pokud je přihlášen uživatel"
 
-#: src/Widgets/CapsLockRevealer.vala:52
+#: src/Widgets/CapsLockRevealer.vala:50
 msgid "Caps Lock & Num Lock are on"
 msgstr "Caps Lock a Num Lock jsou zapnuté"
 
-#: src/Widgets/CapsLockRevealer.vala:54
+#: src/Widgets/CapsLockRevealer.vala:52
 msgid "Caps Lock is on"
 msgstr "Caps Lock je zapnutý"
 
-#: src/Widgets/CapsLockRevealer.vala:56
+#: src/Widgets/CapsLockRevealer.vala:54
 msgid "Num Lock is on"
 msgstr "Num Lock je zapnutý"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "Heslo"
+
+#, c-format
+#~ msgid "Changes will automatically revert after %i second."
+#~ msgid_plural "Changes will automatically revert after %i seconds."
+#~ msgstr[0] "Změny budou za %i sekundu automaticky vzaty zpět."
+#~ msgstr[1] "Změny budou za %i sekundy automaticky vzaty zpět."
+#~ msgstr[2] "Změny budou za %i sekund automaticky vzaty zpět."
+
+#~ msgid "Keep new display settings?"
+#~ msgstr "Ponechat nová nastavení zobrazení?"
+
+#~ msgid "Keep Settings"
+#~ msgstr "Ponechat nastavení"
+
+#~ msgid "Use Previous Settings"
+#~ msgstr "Použít předchozí nastavení"
 
 #~ msgid "Try username"
 #~ msgstr "Vyzkoušet uživatelské jméno"

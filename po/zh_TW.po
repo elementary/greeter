@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pantheon-greeter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-24 14:50+0000\n"
+"POT-Creation-Date: 2026-11-08 05:41+0000\n"
 "PO-Revision-Date: 2025-08-22 15:58+0000\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://"
@@ -20,45 +20,27 @@ msgstr ""
 "X-Generator: Weblate 5.11.4\n"
 "X-Launchpad-Export-Date: 2017-03-09 05:44+0000\n"
 
-#: compositor/WindowManager.vala:362
-#, c-format
-msgid "Changes will automatically revert after %i second."
-msgid_plural "Changes will automatically revert after %i seconds."
-msgstr[0] "變更將會在 %i 秒後自動復原。"
-
-#: compositor/WindowManager.vala:369
-msgid "Keep new display settings?"
-msgstr "要保留新的顯示器設定嗎？"
-
-#: compositor/WindowManager.vala:373
-msgid "Keep Settings"
-msgstr "保留設定"
-
-#: compositor/WindowManager.vala:374
-msgid "Use Previous Settings"
-msgstr "使用先前的設定"
-
-#: src/MainWindow.vala:44
+#: src/MainWindow.vala:39
 msgid "Log in as Guest"
 msgstr "以訪客身份登入"
 
-#: src/MainWindow.vala:45
+#: src/MainWindow.vala:40
 msgid "Manual Login…"
 msgstr "手動登入…"
 
-#: src/MainWindow.vala:320
+#: src/MainWindow.vala:304
 msgid "Unable to Log In"
 msgstr "無法登入"
 
-#: src/MainWindow.vala:321
+#: src/MainWindow.vala:305
 msgid "Starting the session has failed."
 msgstr "啟動工作階段失敗了。"
 
-#: src/MainWindow.vala:383
+#: src/MainWindow.vala:364
 msgid "Unable to Launch Initial Setup"
 msgstr "無法啟動初始設定程式"
 
-#: src/MainWindow.vala:388
+#: src/MainWindow.vala:369
 msgid ""
 "Initial Setup creates your first user. Without it, you will not be able to "
 "log in and may need to reinstall the OS."
@@ -66,41 +48,55 @@ msgstr ""
 "初始設定程式建立您的第一個使用者。若無進行初始設定，您將會無法登入而且可能需"
 "要重新安裝作業系統。"
 
-#: src/Cards/ManualCard.vala:21
+#: src/Cards/ManualCard.vala:17
 msgid "Manual Login"
 msgstr "手動登入"
 
-#: src/Cards/ManualCard.vala:30
+#: src/Cards/ManualCard.vala:26
 msgid "Username"
 msgstr "使用者名稱"
 
-#: src/Cards/UserCard.vala:63 src/Widgets/PasswordEntry.vala:27
+#: src/Cards/UserCard.vala:69 src/Widgets/PasswordEntry.vala:27
 msgid "Log In"
 msgstr "登入"
 
-#: src/Cards/UserCard.vala:81
+#: src/Cards/UserCard.vala:86
 msgid "Account disabled"
 msgstr "帳號已停用"
 
-#: src/Cards/UserCard.vala:137 src/Cards/UserCard.vala:140
+#: src/Cards/UserCard.vala:309
 msgid "Session cannot be changed while user is logged in"
 msgstr "使用者已登入時無法變更工作階段"
 
-#: src/Widgets/CapsLockRevealer.vala:52
+#: src/Widgets/CapsLockRevealer.vala:50
 msgid "Caps Lock & Num Lock are on"
 msgstr "Caps Lock 與 Num Lock 已啟用"
 
-#: src/Widgets/CapsLockRevealer.vala:54
+#: src/Widgets/CapsLockRevealer.vala:52
 msgid "Caps Lock is on"
 msgstr "Caps Lock 已啟用"
 
-#: src/Widgets/CapsLockRevealer.vala:56
+#: src/Widgets/CapsLockRevealer.vala:54
 msgid "Num Lock is on"
 msgstr "Num Lock 已啟用"
 
 #: src/Widgets/PasswordEntry.vala:24
 msgid "Password"
 msgstr "密碼"
+
+#, c-format
+#~ msgid "Changes will automatically revert after %i second."
+#~ msgid_plural "Changes will automatically revert after %i seconds."
+#~ msgstr[0] "變更將會在 %i 秒後自動復原。"
+
+#~ msgid "Keep new display settings?"
+#~ msgstr "要保留新的顯示器設定嗎？"
+
+#~ msgid "Keep Settings"
+#~ msgstr "保留設定"
+
+#~ msgid "Use Previous Settings"
+#~ msgstr "使用先前的設定"
 
 #~ msgid "Classic session automatically selected"
 #~ msgstr "已自動選取經典工作階段"
