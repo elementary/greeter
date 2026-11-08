@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-24 14:50+0000\n"
+"POT-Creation-Date: 2026-11-08 05:41+0000\n"
 "PO-Revision-Date: 2026-09-07 10:01+0000\n"
 "Last-Translator: Chairul Akmal <chairulakmal@protonmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementaryos.org/projects/desktop/"
@@ -67,7 +67,8 @@ msgstr "Cegah potensi masalah pada dialog yang menggunakan portal"
 
 #: data/greeter.metainfo.xml.in:133
 msgid "Fix potential issues with incorrect keyboard layout being set"
-msgstr "Perbaiki potensi masalah saat tata letak papan ketik yang salah disetel"
+msgstr ""
+"Perbaiki potensi masalah saat tata letak papan ketik yang salah disetel"
 
 #: data/greeter.metainfo.xml.in:165
 msgid "Provide panel background color interface"
