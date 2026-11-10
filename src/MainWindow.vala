@@ -195,12 +195,8 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void init_panel () {
-        if (Gdk.Display.get_default () is Gdk.Wayland.Display) {
-            // We have to wrap in Idle otherwise the Meta.Window of the WaylandSurface in Gala is still null
-            Idle.add_once (init_wl);
-        } else {
-            init_x ();
-        }
+        // We have to wrap in Idle otherwise the Meta.Window of the WaylandSurface in Gala is still null
+        Idle.add_once (init_wl);
     }
 
     private static Wl.RegistryListener registry_listener;
@@ -230,21 +226,6 @@ public class Greeter.MainWindow : Gtk.ApplicationWindow {
                 desktop_greeter = desktop_shell.get_greeter (wl_surface);
                 desktop_greeter.make_greeter ();
             }
-        }
-    }
-
-    private void init_x () {
-        var display = Gdk.Display.get_default ();
-        if (display is Gdk.X11.Display) {
-            unowned var xdisplay = ((Gdk.X11.Display) display).get_xdisplay ();
-
-            var window = ((Gdk.X11.Surface) get_surface ()).get_xid ();
-
-            var prop = xdisplay.intern_atom ("_MUTTER_HINTS", false);
-
-            var value = "greeter=1";
-
-            xdisplay.change_property (window, prop, X.XA_STRING, 8, 0, (uchar[]) value, value.length);
         }
     }
 
