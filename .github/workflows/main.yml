@@ -32,7 +32,7 @@ jobs:
     - name: Install Dependencies
       run: |
         apt update
-        apt install -y desktop-file-utils libaccountsservice-dev libgdk-pixbuf-2.0-dev libgnome-desktop-3-dev libgranite-7-dev libgtk-4-dev libadwaita-1-dev libjson-glib-dev liblightdm-gobject-1-dev ${{ matrix.mutter_pkg }} libsoup-3.0-dev libx11-dev ${{ matrix.lightdm_vala }} meson valac
+        apt install -y desktop-file-utils libaccountsservice-dev libgdk-pixbuf-2.0-dev libgnome-desktop-3-dev libgranite-7-dev libgtk-4-dev libadwaita-1-dev libjson-glib-dev liblightdm-gobject-1-dev ${{ matrix.mutter_pkg }} libsoup-3.0-dev ${{ matrix.lightdm_vala }} meson valac
     - name: Build
       env:
         DESTDIR: out
@@ -50,7 +50,7 @@ jobs:
       - uses: actions/checkout@v7
       - name: Install Dependencies
         run: |
-          dnf install -y accountsservice-devel desktop-file-utils gdk-pixbuf2-devel gnome-desktop3-devel granite-7-devel gtk4-devel libadwaita-devel lightdm-gobject-devel mutter-devel libX11-devel meson valac
+          dnf install -y accountsservice-devel desktop-file-utils gdk-pixbuf2-devel gnome-desktop3-devel granite-7-devel gtk4-devel libadwaita-devel lightdm-gobject-devel mutter-devel meson valac
       - name: Build
         env:
           DESTDIR: out
