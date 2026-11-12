@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-11-08 05:41+0000\n"
-"PO-Revision-Date: 2026-10-28 06:12+0000\n"
+"PO-Revision-Date: 2026-11-13 20:04+0000\n"
 "Last-Translator: CodeBeats <nicholai67@hotmail.com>\n"
 "Language-Team: Danish <https://l10n.elementaryos.org/projects/desktop/"
 "greeter-extra/da/>\n"
@@ -49,7 +49,7 @@ msgstr "Opdaterede oversættelser"
 
 #: data/greeter.metainfo.xml.in:107 data/greeter.metainfo.xml.in:163
 msgid "New Features:"
-msgstr ""
+msgstr "Nye Funktioner:"
 
 #: data/greeter.metainfo.xml.in:109
 msgid "Add blurred wallpaper as background"
